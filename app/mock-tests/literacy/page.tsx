@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
+import { Header } from "@/components/header"
+import { Footer } from "@/components/footer"
 import { TestSlotGrid } from "@/components/mock-tests/test-slot-grid"
 import { getSubjectCatalog } from "@/lib/mock-catalog"
 
@@ -53,7 +53,7 @@ export default function LiteracyPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
-      <SiteHeader />
+      <Header />
 
       <main className="container mx-auto px-4 py-10">
         <div className="mx-auto max-w-6xl">
@@ -94,7 +94,7 @@ export default function LiteracyPage() {
         </div>
       </main>
 
-      <SiteFooter />
+      <Footer />
     </div>
   )
 }
