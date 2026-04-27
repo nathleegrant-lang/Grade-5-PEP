@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { getSubjectCatalog } from "@/contexts/mock-catalog"
+import { getSubjectCatalog } from "@/lib/mock-catalog"
 
 function getTotal(subject: "literacy" | "numeracy" | "performance") {
   const catalog = getSubjectCatalog(subject)
