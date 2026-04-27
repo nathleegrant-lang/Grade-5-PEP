@@ -231,10 +231,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     void initialize()
 
     const { data: listener } = supabase.auth.onAuthStateChange(
-      async (_event: AuthChangeEvent, session) => {
+      (_event: AuthChangeEvent, session) => {
         if (!mounted) return
         setIsLoading(true)
-        await loadUser(session)
+
+        setTimeout(() => {
+          if (!mounted) return
+          void loadUser(session)
+        }, 0)
       },
     )
 
@@ -245,8 +249,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [supabase])
 
   const login = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
-    return !error
+    try {
+      const { error } = await supabase.auth.signInWithPassword({ email, password })
+
+      if (error) {
+        console.error("Login failed:", error)
+        return false
+      }
+
+      return true
+    } catch (err) {
+      console.error("Unexpected login error:", err)
+      return false
+    }
   }
 
   const register = async (data: RegisterData): Promise<RegisterResult> => {
