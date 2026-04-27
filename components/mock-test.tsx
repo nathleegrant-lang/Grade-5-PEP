@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { CheckCircle2, XCircle, Clock, ArrowRight, ArrowLeft, RotateCcw, Trophy, AlertCircle } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { updateMockTestScore } from "@/components/progress-tracker"
-import { useAuth } from "@/lib/auth-context"
+import { useAuth } from "@/contexts/auth-context"
 import { Crown, Lock } from "lucide-react"
 import Link from "next/link"
 
