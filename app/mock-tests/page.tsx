@@ -1,8 +1,8 @@
 import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { SiteHeader } from "@/components/header"
-import { SiteFooter } from "@/components/footer"
+import { Header } from "@/components/header"
+import { Footer } from "@/components/footer"
 import { getSubjectCatalog } from "@/lib/mock-catalog"
 
 function getTotal(subject: "literacy" | "numeracy" | "performance") {
@@ -17,7 +17,7 @@ export default function MockTestsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
-      <SiteHeader />
+      <Header />
 
       <main className="container mx-auto px-4 py-10">
         <div className="mx-auto max-w-6xl">
@@ -81,7 +81,7 @@ export default function MockTestsPage() {
         </div>
       </main>
 
-      <SiteFooter />
+      <Footer />
     </div>
   )
 }
