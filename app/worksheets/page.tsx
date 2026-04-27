@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ArrowLeft, FileText, Printer, BookOpen, Calculator, FlaskConical, Globe, Lock, Crown } from "lucide-react"
 import Link from "next/link"
-import { useAuth } from "@/lib/auth-context"
+import { useAuth } from "@/contexts/auth-context"
 
 const worksheets = [
   {
