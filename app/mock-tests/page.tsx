@@ -1,8 +1,8 @@
 import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
+import { SiteHeader } from "@/components/header"
+import { SiteFooter } from "@/components/footer"
 import { getSubjectCatalog } from "@/lib/mock-catalog"
 
 function getTotal(subject: "literacy" | "numeracy" | "performance") {
