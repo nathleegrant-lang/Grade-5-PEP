@@ -7,7 +7,7 @@ import { Footer } from "@/components/footer"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Check, Star, Crown, Zap, Loader2 } from "lucide-react"
-import { useAuth } from "@/lib/auth-context"
+import { useAuth } from "@/contexts/auth-context"
 
 const plans = [
   {
