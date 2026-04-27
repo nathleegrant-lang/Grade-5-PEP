@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { getTestHref, MAX_TEST_SLOTS, type DifficultyKey, type SubjectKey } from "@/contexts/mock-catalog"
+import { getTestHref, MAX_TEST_SLOTS, type DifficultyKey, type SubjectKey } from "@/lib/mock-catalog"
 
 interface TestSlotGridProps {
   subject: SubjectKey
