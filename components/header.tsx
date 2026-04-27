@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Menu, X, User, LogOut, Crown } from "lucide-react"
 import { useState } from "react"
-import { useAuth } from "@/lib/auth-context"
+import { useAuth } from "@/contexts/auth-context"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
