@@ -7,7 +7,7 @@ import { CheckCircle, Crown, Loader2 } from "lucide-react"
 import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { useAuth } from "@/lib/auth-context"
+import { useAuth } from "@/contexts/auth-context"
 
 export default function PaymentSuccessPage() {
   const { refreshUser } = useAuth()
