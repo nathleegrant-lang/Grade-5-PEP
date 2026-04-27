@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { useAuth } from "@/lib/auth-context"
+import { useAuth } from "@/contexts/auth-context"
 import { Eye, EyeOff, Mail, Lock } from "lucide-react"
 
 export default function LoginPage() {
@@ -17,28 +17,38 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+
   const { login } = useAuth()
   const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    if (isLoading) return
+
     setError("")
     setIsLoading(true)
 
-    if (!email || !password) {
-      setError("Please fill in all fields")
-      setIsLoading(false)
-      return
-    }
+    try {
+      if (!email || !password) {
+        setError("Please fill in all fields.")
+        return
+      }
 
-    const success = await login(email, password)
-    
-    if (success) {
-      router.push("/dashboard")
-    } else {
-      setError("Invalid email or password")
+      const success = await login(email, password)
+
+      if (success) {
+        router.push("/mock-tests")
+        return
+      }
+
+      setError("We could not sign you in. Please check your email and password.")
+    } catch (err) {
+      console.error("Login error:", err)
+      setError("We could not sign you in right now. Please try again.")
+    } finally {
+      setIsLoading(false)
     }
-    setIsLoading(false)
   }
 
   return (
@@ -52,11 +62,14 @@ export default function LoginPage() {
               width={80}
               height={80}
               className="w-20 h-20"
+              priority
             />
           </Link>
+
           <CardTitle className="text-2xl text-[#1e3a5f]">Welcome Back!</CardTitle>
           <CardDescription>Sign in to continue your learning journey</CardDescription>
         </CardHeader>
+
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
@@ -76,6 +89,7 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="pl-10"
+                  disabled={isLoading}
                 />
               </div>
             </div>
@@ -91,19 +105,25 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="pl-10 pr-10"
+                  disabled={isLoading}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  disabled={isLoading}
                 >
-                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  {showPassword ? (
+                    <EyeOff className="w-5 h-5" />
+                  ) : (
+                    <Eye className="w-5 h-5" />
+                  )}
                 </button>
               </div>
             </div>
 
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               className="w-full bg-[#0d9488] hover:bg-[#0d7a6f]"
               disabled={isLoading}
             >
