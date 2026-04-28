@@ -1,374 +1,317 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useMemo, useState } from "react"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Check, Star, Crown, Zap, Loader2 } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
 import { useAuth } from "@/contexts/auth-context"
+import {
+  PRICING_TIERS,
+  FREE_EXCLUDED_FEATURES,
+  type PlanCode,
+  type PricingTier,
+} from "@/lib/types"
+import { Check, X, Landmark, MessageCircleMore, Shield, Users } from "lucide-react"
+import { WHATSAPP_DISPLAY, WHATSAPP_NUMBER } from "@/lib/site-config"
+import { getSupabaseBrowserClient } from "@/lib/supabase/client"
 
-const plans = [
-  {
-    id: "free",
-    name: "Free",
-    price: "Free",
-    priceJMD: "",
-    period: "",
-    description: "Get started with basic learning",
-    icon: Zap,
-    color: "bg-gray-500",
-    paypalAmount: 0,
-    features: [
-      "Access to all topic lessons",
-      "1 quiz per topic",
-      "Limited mock test questions",
-      "Basic progress tracking",
-    ],
-    notIncluded: [
-      "Full mock exams",
-      "Printable worksheets",
-      "Writing practice with rubrics",
-      "Certificates",
-      "Priority support",
-    ],
-    popular: false,
-  },
-  {
-    id: "monthly",
-    name: "Monthly",
-    price: "$1,000 JMD",
-    priceJMD: "~$6.50 USD",
-    period: "/month",
-    description: "Full access for one month",
-    icon: Star,
-    color: "bg-[#0d9488]",
-    paypalAmount: 6.50,
-    features: [
-      "Everything in Free, plus:",
-      "Unlimited quizzes",
-      "Full mock exams with analytics",
-      "Printable worksheets (PDF)",
-      "Writing practice with rubrics",
-      "Detailed progress reports",
-      "Achievement certificates",
-    ],
-    notIncluded: [],
-    popular: true,
-  },
-  {
-    id: "yearly",
-    name: "Yearly",
-    price: "$10,000 JMD",
-    priceJMD: "~$65 USD",
-    period: "/year",
-    description: "Best value - 2 months FREE!",
-    icon: Crown,
-    color: "bg-[#f59e0b]",
-    paypalAmount: 65,
-    features: [
-      "Everything in Monthly, plus:",
-      "2 months FREE (save $2,000 JMD)",
-      "Family account (up to 3 children)",
-      "Exclusive bonus content",
-      "Priority email support",
-      "Early access to new features",
-      "Downloadable study guides",
-    ],
-    notIncluded: [],
-    popular: false,
-  },
-]
+type PricingPlanRow = {
+  code: PlanCode
+  grade: "grade4" | "grade5"
+  name: string
+  price_jmd: number
+  period: string
+  description: string | null
+  features: unknown
+  max_students: number
+  badge_text: string | null
+  popular: boolean
+  is_active: boolean
+}
 
-export default function PricingPage() {
-  const router = useRouter()
-  const { user, refreshUser } = useAuth()
-  const [loadingPlan, setLoadingPlan] = useState<string | null>(null)
-  const [error, setError] = useState<string | null>(null)
+function normalizeFeatures(value: unknown): string[] {
+  if (Array.isArray(value)) {
+    return value.filter((item): item is string => typeof item === "string")
+  }
 
-  const handlePayment = async (plan: typeof plans[0]) => {
-    if (!user) {
-      // Redirect to register if not logged in
-      router.push("/register?redirect=pricing")
-      return
-    }
-
-    if (plan.id === "free") {
-      router.push("/register")
-      return
-    }
-
-    setLoadingPlan(plan.id)
-    setError(null)
-
+  if (typeof value === "string") {
     try {
-      // Create PayPal order
-      const createResponse = await fetch("/api/paypal/create-order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ plan: plan.id }),
-      })
-
-      const createData = await createResponse.json()
-
-      if (createData.error) {
-        throw new Error(createData.error)
-      }
-
-      // Open PayPal popup for payment approval
-      const paypalWindow = window.open(
-        `https://www.paypal.com/checkoutnow?token=${createData.orderID}`,
-        "PayPal",
-        "width=500,height=700,scrollbars=yes"
-      )
-
-      // Poll for window close and check payment status
-      const checkPayment = setInterval(async () => {
-        if (paypalWindow?.closed) {
-          clearInterval(checkPayment)
-          
-          // Capture the payment
-          const captureResponse = await fetch("/api/paypal/capture-order", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ 
-              orderID: createData.orderID, 
-              plan: plan.id,
-              userEmail: user.email 
-            }),
-          })
-
-          const captureData = await captureResponse.json()
-
-          if (captureData.success) {
-            // Server already updated subscription in database, just refresh local user state
-            await refreshUser()
-
-            // Redirect to success page
-            router.push("/payment-success")
-          } else {
-            setError("Payment was not completed. Please try again.")
-          }
-          
-          setLoadingPlan(null)
-        }
-      }, 1000)
-
-    } catch (err) {
-      console.error("Payment error:", err)
-      setError("An error occurred. Please try again or contact support.")
-      setLoadingPlan(null)
+      const parsed = JSON.parse(value)
+      return Array.isArray(parsed)
+        ? parsed.filter((item): item is string => typeof item === "string")
+        : []
+    } catch {
+      return []
     }
   }
 
+  return []
+}
+
+function mapPlanRowToTier(row: PricingPlanRow): PricingTier {
+  return {
+    id: row.code,
+    name: row.name,
+    priceJMD: Number(row.price_jmd),
+    period: row.period,
+    description: row.description || "",
+    features: normalizeFeatures(row.features),
+    popular: row.popular,
+    maxStudents: row.max_students,
+    badgeText: row.badge_text,
+  }
+}
+
+export default function PricingPage() {
+  const router = useRouter()
+  const { isAuthenticated, user } = useAuth()
+  const supabase = useMemo(() => getSupabaseBrowserClient(), [])
+
+  const [selectedPlan, setSelectedPlan] = useState<PlanCode | null>(null)
+  const [tiers, setTiers] = useState<PricingTier[]>(PRICING_TIERS)
+  const [isLoadingPlans, setIsLoadingPlans] = useState(true)
+
+  useEffect(() => {
+    const loadPricingPlans = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("pricing_plans")
+          .select(
+            "code, grade, name, price_jmd, period, description, features, max_students, badge_text, popular, is_active",
+          )
+          .eq("grade", "grade5")
+          .eq("is_active", true)
+          .order("price_jmd", { ascending: true })
+
+        if (error) {
+          console.error("Could not load pricing plans:", error)
+          return
+        }
+
+        if (data && data.length > 0) {
+          setTiers((data as PricingPlanRow[]).map(mapPlanRowToTier))
+        }
+      } catch (err) {
+        console.error("Unexpected pricing load error:", err)
+      } finally {
+        setIsLoadingPlans(false)
+      }
+    }
+
+    void loadPricingPlans()
+  }, [supabase])
+
+  const handleSelectPlan = (planId: PlanCode) => {
+    setSelectedPlan(planId)
+
+    if (planId === "free") {
+      router.push(isAuthenticated ? "/dashboard" : "/register")
+      return
+    }
+
+    if (!isAuthenticated) {
+      router.push(`/register?plan=${planId}`)
+      return
+    }
+
+    router.push(`/checkout?plan=${planId}`)
+  }
+
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
       <Header />
-      
-      <main className="flex-1">
-        {/* Hero Section */}
-        <section className="bg-gradient-to-r from-[#0d4a5f] to-[#0d9488] text-white py-16">
-          <div className="max-w-6xl mx-auto px-4 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Invest in Your Child&apos;s Success
-            </h1>
-            <p className="text-xl text-white/90 max-w-2xl mx-auto">
-              Unlock full access to all PEP preparation materials and give your child the best chance to excel
+
+      <main className="container mx-auto px-4 py-10">
+        <div className="max-w-3xl mx-auto text-center mb-10">
+          <h1 className="text-4xl font-bold text-slate-800 mb-4">Grade 5 PEP Pricing</h1>
+          <p className="text-lg text-slate-600">
+            Each Grade 5 plan is sold separately and applies to this Grade 5 programme only.
+            It does not include Grade 4 or future Grade 6 access.
+          </p>
+        </div>
+
+        <div className="max-w-4xl mx-auto mb-8">
+          <Card className="border-amber-300 bg-amber-50 shadow-sm">
+            <CardContent className="p-5 text-center">
+              <p className="text-slate-700 font-medium">
+                Free = sample access only. Paid access starts after payment verification.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        {!isAuthenticated && (
+          <div className="max-w-2xl mx-auto mb-8 p-4 bg-sky-50 border border-sky-200 rounded-lg text-center">
+            <p className="text-sky-800">
+              Please{" "}
+              <Link href="/login" className="font-semibold text-sky-700 hover:underline">
+                sign in
+              </Link>{" "}
+              or{" "}
+              <Link href="/register" className="font-semibold text-sky-700 hover:underline">
+                create an account
+              </Link>{" "}
+              before selecting a paid Grade 5 plan.
             </p>
           </div>
-        </section>
-
-        {/* Error Message */}
-        {error && (
-          <div className="max-w-6xl mx-auto px-4 pt-8">
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
-              {error}
-            </div>
-          </div>
         )}
 
-        {/* Login Prompt */}
-        {!user && (
-          <div className="max-w-6xl mx-auto px-4 pt-8">
-            <div className="bg-blue-50 border border-blue-200 text-blue-700 px-4 py-3 rounded-lg text-center">
-              Please <a href="/login" className="underline font-semibold">sign in</a> or <a href="/register" className="underline font-semibold">create an account</a> first to purchase a subscription.
-            </div>
+        {isLoadingPlans ? (
+          <div className="max-w-3xl mx-auto text-center py-12">
+            <p className="text-slate-600">Loading pricing plans...</p>
           </div>
-        )}
+        ) : (
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4 max-w-6xl mx-auto">
+            {tiers.map((tier) => {
+              const isCurrent = user?.subscriptionTier === tier.id
 
-        {/* Pricing Cards */}
-        <section className="py-16 px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-3 gap-8">
-              {plans.map((plan) => (
-                <Card 
-                  key={plan.id}
-                  className={`relative ${plan.popular ? "border-2 border-[#0d9488] shadow-xl scale-105" : "border border-gray-200"}`}
+              return (
+                <Card
+                  key={tier.id}
+                  className={`relative border-2 ${
+                    tier.popular ? "border-amber-400 shadow-xl" : "border-sky-200"
+                  }`}
                 >
-                  {plan.popular && (
+                  {tier.badgeText && (
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                      <span className="bg-[#0d9488] text-white px-4 py-1 rounded-full text-sm font-semibold">
-                        Most Popular
-                      </span>
+                      <Badge className="bg-amber-500 text-white border-0 px-3 py-1">
+                        {tier.badgeText}
+                      </Badge>
                     </div>
                   )}
-                  <CardHeader className="text-center pb-2">
-                    <div className={`w-14 h-14 ${plan.color} rounded-xl flex items-center justify-center mx-auto mb-4`}>
-                      <plan.icon className="w-7 h-7 text-white" />
-                    </div>
-                    <CardTitle className="text-2xl text-[#1e3a5f]">{plan.name}</CardTitle>
-                    <CardDescription>{plan.description}</CardDescription>
-                    <div className="mt-4">
-                      <span className="text-4xl font-bold text-[#1e3a5f]">{plan.price}</span>
-                      <span className="text-gray-500">{plan.period}</span>
-                      {plan.priceJMD && (
-                        <p className="text-sm text-gray-500 mt-1">{plan.priceJMD}</p>
-                      )}
-                    </div>
+
+                  <CardHeader className="text-center pb-2 pt-6">
+                    <CardTitle className="text-xl text-slate-800">{tier.name}</CardTitle>
+                    <CardDescription>{tier.description}</CardDescription>
                   </CardHeader>
-                  <CardContent>
+
+                  <CardContent className="pt-2">
+                    <div className="text-center mb-6">
+                      <div className="flex items-baseline justify-center gap-1">
+                        <span className="text-4xl font-bold text-slate-800">
+                          {tier.priceJMD === 0 ? "Free" : `$${tier.priceJMD.toLocaleString()}`}
+                        </span>
+                      </div>
+
+                      {tier.priceJMD > 0 && (
+                        <p className="text-sm text-slate-500 mt-1">JMD {tier.period}</p>
+                      )}
+
+                      <p className="text-xs text-slate-500 mt-1 flex items-center justify-center gap-1">
+                        <Users className="h-3 w-3" />
+                        Up to {tier.maxStudents} student{tier.maxStudents === 1 ? "" : "s"}
+                      </p>
+                    </div>
+
                     <ul className="space-y-3 mb-6">
-                      {plan.features.map((feature, index) => (
+                      {tier.features.map((feature, index) => (
                         <li key={index} className="flex items-start gap-2">
-                          <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                          <span className="text-gray-700 text-sm">{feature}</span>
+                          <Check className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                          <span className="text-sm text-slate-600">{feature}</span>
                         </li>
                       ))}
-                      {plan.notIncluded.map((feature, index) => (
-                        <li key={index} className="flex items-start gap-2 opacity-50">
-                          <span className="w-5 h-5 text-gray-400 mt-0.5 flex-shrink-0 text-center">-</span>
-                          <span className="text-gray-500 text-sm line-through">{feature}</span>
-                        </li>
-                      ))}
+
+                      {tier.id === "free" &&
+                        FREE_EXCLUDED_FEATURES.map((feature, index) => (
+                          <li key={`excluded-${index}`} className="flex items-start gap-2">
+                            <X className="h-5 w-5 text-slate-300 flex-shrink-0 mt-0.5" />
+                            <span className="text-sm text-slate-400 line-through">{feature}</span>
+                          </li>
+                        ))}
                     </ul>
 
-                    <Button 
-                      className={`w-full ${plan.id === "free" 
-                        ? "bg-gray-200 text-gray-700 hover:bg-gray-300" 
-                        : plan.popular 
-                          ? "bg-[#0d9488] hover:bg-[#0d7a6f]" 
-                          : "bg-[#1e3a5f] hover:bg-[#15304d]"
+                    <Button
+                      onClick={() => handleSelectPlan(tier.id)}
+                      disabled={selectedPlan === tier.id || isCurrent}
+                      className={`w-full ${
+                        tier.popular
+                          ? "bg-amber-500 hover:bg-amber-600 text-white"
+                          : tier.id === "premium_family_monthly"
+                          ? "bg-sky-600 hover:bg-sky-700 text-white"
+                          : "bg-slate-200 hover:bg-slate-300 text-slate-700"
                       }`}
-                      onClick={() => handlePayment(plan)}
-                      disabled={loadingPlan === plan.id}
                     >
-                      {loadingPlan === plan.id ? (
-                        <>
-                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                          Processing...
-                        </>
-                      ) : plan.id === "free" ? (
-                        "Get Started Free"
-                      ) : (
-                        "Pay with PayPal"
-                      )}
+                      {isCurrent
+                        ? "Current Plan"
+                        : tier.id === "free"
+                        ? isAuthenticated
+                          ? "Go to Dashboard"
+                          : "Start Free"
+                        : `Choose ${tier.name}`}
                     </Button>
                   </CardContent>
                 </Card>
-              ))}
-            </div>
+              )
+            })}
           </div>
-        </section>
+        )}
 
-        {/* Payment Info */}
-        <section className="py-12 px-4 bg-white">
-          <div className="max-w-3xl mx-auto">
-            <Card className="border-2 border-[#0d9488] bg-teal-50">
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold text-[#1e3a5f] mb-4">
-                  Secure Payment with PayPal
-                </h3>
-                <div className="space-y-3 text-gray-700">
-                  <p className="flex items-center gap-2">
-                    <Check className="w-5 h-5 text-green-500" />
-                    Pay with any NCB, Scotiabank, or JMMB Visa/Mastercard
-                  </p>
-                  <p className="flex items-center gap-2">
-                    <Check className="w-5 h-5 text-green-500" />
-                    No PayPal account needed - pay as guest
-                  </p>
-                  <p className="flex items-center gap-2">
-                    <Check className="w-5 h-5 text-green-500" />
-                    Instant account activation after payment
-                  </p>
-                  <p className="flex items-center gap-2">
-                    <Check className="w-5 h-5 text-green-500" />
-                    7-day money-back guarantee
+        <div className="mt-16 max-w-4xl mx-auto">
+          <Card className="border-sky-200 bg-sky-50/70">
+            <CardContent className="p-8">
+              <h3 className="text-xl font-semibold text-slate-800 text-center mb-6">
+                How payment works
+              </h3>
+
+              <div className="grid md:grid-cols-3 gap-5">
+                <div className="rounded-xl bg-white p-5 border border-sky-100">
+                  <div className="flex items-center gap-3 mb-3">
+                    <Landmark className="h-5 w-5 text-sky-600" />
+                    <p className="font-semibold text-slate-800">Secure payment instructions</p>
+                  </div>
+
+                  <div className="text-sm text-slate-600 space-y-2">
+                    <p>
+                      Bank transfer details are shared only after plan selection or direct support
+                      confirmation.
+                    </p>
+                    <p>
+                      For security, banking details are not displayed publicly on this page.
+                    </p>
+                    <p>
+                      Please choose a plan and continue to checkout, or contact us on WhatsApp for
+                      payment assistance.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="rounded-xl bg-white p-5 border border-sky-100">
+                  <div className="flex items-center gap-3 mb-3">
+                    <Shield className="h-5 w-5 text-sky-600" />
+                    <p className="font-semibold text-slate-800">Submit payment</p>
+                  </div>
+                  <p className="text-sm text-slate-600">
+                    Create your free account, select a plan, then submit your payment reference on
+                    the checkout page. Admin approval activates access automatically.
                   </p>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
 
-        {/* FAQ Section */}
-        <section className="py-16 px-4 bg-gray-50">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-[#1e3a5f] text-center mb-12">
-              Frequently Asked Questions
-            </h2>
-            <div className="space-y-6">
-              <div className="border-b pb-6">
-                <h3 className="text-lg font-semibold text-[#1e3a5f] mb-2">
-                  How do I pay from Jamaica?
-                </h3>
-                <p className="text-gray-600">
-                  You can pay using any Visa or MasterCard debit/credit card through PayPal. 
-                  NCB, Scotiabank, JMMB, and other Jamaican bank cards are accepted. You don&apos;t need a PayPal account.
-                </p>
+                <div className="rounded-xl bg-white p-5 border border-sky-100">
+                  <div className="flex items-center gap-3 mb-3">
+                    <MessageCircleMore className="h-5 w-5 text-sky-600" />
+                    <p className="font-semibold text-slate-800">WhatsApp support</p>
+                  </div>
+                  <p className="text-sm text-slate-600 mb-3">
+                    You can still message us on WhatsApp for payment guidance, confirmation, and
+                    support.
+                  </p>
+                  <a
+                    href={`https://wa.me/${WHATSAPP_NUMBER}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-sm font-semibold text-sky-700 hover:underline"
+                  >
+                    WhatsApp: {WHATSAPP_DISPLAY}
+                  </a>
+                </div>
               </div>
-              <div className="border-b pb-6">
-                <h3 className="text-lg font-semibold text-[#1e3a5f] mb-2">
-                  How long does activation take?
-                </h3>
-                <p className="text-gray-600">
-                  Your account is activated instantly after successful payment. You can start using all premium features right away!
-                </p>
-              </div>
-              <div className="border-b pb-6">
-                <h3 className="text-lg font-semibold text-[#1e3a5f] mb-2">
-                  Can I cancel my subscription?
-                </h3>
-                <p className="text-gray-600">
-                  Yes, you can cancel anytime. Your access will continue until the end of your billing period.
-                </p>
-              </div>
-              <div className="border-b pb-6">
-                <h3 className="text-lg font-semibold text-[#1e3a5f] mb-2">
-                  Is there a refund policy?
-                </h3>
-                <p className="text-gray-600">
-                  We offer a 7-day money-back guarantee if you&apos;re not satisfied with the premium features.
-                </p>
-              </div>
-              <div className="border-b pb-6">
-                <h3 className="text-lg font-semibold text-[#1e3a5f] mb-2">
-                  How many children can use one account?
-                </h3>
-                <p className="text-gray-600">
-                  Monthly plans are for 1 child. Yearly plans include a Family Account for up to 3 children.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Contact CTA */}
-        <section className="py-12 px-4 bg-gradient-to-r from-[#0d4a5f] to-[#0d9488] text-white">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-2xl font-bold mb-4">Have Questions?</h2>
-            <p className="mb-6 text-white/90">
-              We&apos;re here to help! Reach out to us for any questions about subscriptions or payment.
-            </p>
-            <Button 
-              className="bg-[#f59e0b] hover:bg-[#d97706] text-white"
-              onClick={() => window.location.href = "mailto:grade5pep@gmail.com"}
-            >
-              Contact Us
-            </Button>
-          </div>
-        </section>
+            </CardContent>
+          </Card>
+        </div>
       </main>
 
       <Footer />
