@@ -10,13 +10,51 @@ import { Badge } from "@/components/ui/badge"
 import { useAuth } from "@/contexts/auth-context"
 import { getSupabaseBrowserClient } from "@/lib/supabase/client"
 import { calculateExpiry, getPlanLabel } from "@/lib/subscriptions"
-import type { PaymentRecord, PlanCode } from "@/lib/types"
+import type { PaymentRecord, PlanCode, PaymentStatus } from "@/lib/types"
 import { ShieldCheck, RefreshCw, CheckCircle2, XCircle } from "lucide-react"
+
+type PaymentRow = {
+  id: string
+  parent_id: string
+  grade: "grade4" | "grade5"
+  plan_code: PlanCode
+  amount_jmd: number
+  method: string
+  reference_code: string | null
+  proof_url: string | null
+  note: string | null
+  status: PaymentStatus
+  submitted_at: string
+  verified_at: string | null
+  rejection_reason: string | null
+  parent_email: string | null
+  parent_name: string | null
+}
 
 type ProfileRow = {
   id: string
   full_name: string | null
   email: string | null
+}
+
+function mapPaymentRow(row: PaymentRow): PaymentRecord {
+  return {
+    id: row.id,
+    parentId: row.parent_id,
+    grade: row.grade,
+    planCode: row.plan_code,
+    amountJmd: Number(row.amount_jmd),
+    method: row.method,
+    referenceCode: row.reference_code,
+    proofUrl: row.proof_url,
+    note: row.note,
+    status: row.status,
+    submittedAt: row.submitted_at,
+    verifiedAt: row.verified_at,
+    rejectionReason: row.rejection_reason,
+    parentEmail: row.parent_email,
+    parentName: row.parent_name,
+  }
 }
 
 function getMaxStudents(planCode: PlanCode) {
@@ -71,10 +109,10 @@ export default function AdminPaymentsPage() {
       return
     }
 
-    const paymentRows = (data || []) as unknown as PaymentRecord[]
-    setPayments(paymentRows)
+    const normalized = ((data || []) as PaymentRow[]).map(mapPaymentRow)
+    setPayments(normalized)
 
-    const parentIds = Array.from(new Set(paymentRows.map((p) => p.parentId).filter(Boolean)))
+    const parentIds = Array.from(new Set(normalized.map((p) => p.parentId).filter(Boolean)))
 
     if (parentIds.length > 0) {
       const { data: profileData } = await supabase
@@ -247,7 +285,7 @@ export default function AdminPaymentsPage() {
                             {getPlanLabel(payment.planCode)}
                           </CardTitle>
                           <CardDescription className="mt-1">
-                            {profile?.full_name || "Unknown parent"} • {profile?.email || payment.parentEmail || payment.parentId}
+                            {profile?.full_name || payment.parentName || "Unknown parent"} • {profile?.email || payment.parentEmail || payment.parentId}
                           </CardDescription>
                         </div>
 
