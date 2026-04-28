@@ -431,7 +431,7 @@ export default function LanguageArtsPage() {
 
         {/* Mock Test Banner */}
         <div className="max-w-6xl mx-auto px-4 pt-8">
-          <Link href="/language-arts/mock-test">
+          <Link href="/mock-test/language-arts">
             <Card className="bg-gradient-to-r from-[#0d4a5f] to-[#0d9488] text-white hover:shadow-xl transition-all cursor-pointer">
               <CardContent className="p-6 flex items-center justify-between">
                 <div className="flex items-center gap-4">
