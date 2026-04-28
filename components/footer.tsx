@@ -13,11 +13,11 @@ export function Footer() {
           <div className="flex flex-col items-center md:items-start gap-4 text-center md:text-left">
             <div className="rounded-2xl bg-black/80 p-3 shadow-lg ring-1 ring-white/10">
               <Image
-                src="/images/logo.png"
-                alt="Grade 5 PEP logo"
-                width={220}
+                src="/images/shazoniques-inspiration-logo.png"
+                alt="Shazonique's Inspiration logo"
+                width={300}
                 height={140}
-                className="h-auto w-[120px] sm:w-[140px]"
+                className="h-auto w-[220px] sm:w-[260px]"
                 priority
               />
             </div>
