@@ -44,7 +44,7 @@ export function Header() {
 
   return (
     <>
-      <header className="bg-navy text-white">
+      <header className="bg-[#1e5b8f] text-white">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
@@ -188,7 +188,7 @@ export function Header() {
         </div>
       </header>
 
-      <nav className="bg-navy-light text-white">
+      <nav className="bg-[#1e5b8f] text-white">
         <div className="container mx-auto px-4 py-2">
           <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             <ul className="flex flex-wrap gap-1">
