@@ -91,11 +91,8 @@ export default function RegisterPageClient() {
         return
       }
 
-      if (result.needsEmailConfirmation) {
-        router.push(`/login?next=${encodeURIComponent(postLoginPath)}`)
-      } else {
-        router.push(postLoginPath)
-      }
+      const successPath = `/register/success?next=${encodeURIComponent(postLoginPath)}`
+      router.push(successPath)
     } catch (err) {
       console.error("Registration error:", err)
       setError("We couldn’t create your account right now. Please try again.")
