@@ -381,7 +381,7 @@ export default function MathematicsPage() {
 
         {/* Mock Test Banner */}
         <div className="max-w-6xl mx-auto px-4 pt-8">
-          <Link href="/mathematics/mock-test">
+          <Link href="/mock-test/mathematics">
             <Card className="bg-gradient-to-r from-[#f59e0b] to-[#ea580c] text-white hover:shadow-xl transition-all cursor-pointer">
               <CardContent className="p-6 flex items-center justify-between">
                 <div className="flex items-center gap-4">
