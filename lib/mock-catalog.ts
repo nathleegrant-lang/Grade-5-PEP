@@ -1,7 +1,13 @@
 import fs from "fs"
 import path from "path"
 
-export type SubjectKey = "literacy" | "numeracy" | "performance"
+export type SubjectKey =
+  | "literacy"
+  | "numeracy"
+  | "performance"
+  | "science"
+  | "social-studies"
+
 export type DifficultyKey = "easy" | "moderate" | "difficult" | "mixed"
 export type SubjectCatalog = Record<DifficultyKey, number[]>
 
