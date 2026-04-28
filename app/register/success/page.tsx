@@ -1,18 +1,27 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
+import { useSearchParams } from "next/navigation"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { CheckCircle2 } from "lucide-react"
 
 export default function RegisterSuccessPage() {
+  const searchParams = useSearchParams()
+  const nextPath = searchParams.get("next")
+  const signInHref = nextPath
+    ? `/login?next=${encodeURIComponent(nextPath)}`
+    : "/login"
+
   return (
     <div className="min-h-screen bg-slate-100 flex flex-col">
       <Header />
 
       <main className="flex-1 container mx-auto px-4 py-10 flex items-center justify-center">
         <div className="w-full max-w-2xl overflow-hidden rounded-2xl border border-sky-200 bg-white shadow-sm">
-          <div className="bg-navy px-6 py-10 flex justify-center">
+          <div className="bg-[#072247] px-6 py-10 flex justify-center">
             <div className="rounded-xl bg-black/80 p-4 shadow-lg">
               <Image
                 src="/images/shazoniques-inspiration-logo.png"
@@ -41,7 +50,7 @@ export default function RegisterSuccessPage() {
             </p>
 
             <div className="mt-8">
-              <Link href="/login">
+              <Link href={signInHref}>
                 <Button className="w-full max-w-md bg-slate-700 hover:bg-slate-800 text-white text-base py-6 rounded-xl">
                   Go to Sign In
                 </Button>
