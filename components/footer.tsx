@@ -21,7 +21,14 @@ export function Footer() {
                 priority
               />
             </div>
-
+<div>
+              <p className="text-sm font-semibold text-white">
+                Managed and owned by Shazonique&apos;s Inspiration
+              </p>
+              <p className="mt-1 text-sm text-slate-300">
+                A heart&apos;s home of hope
+              </p>
+            </div>
             <div>
               <p className="text-sm font-semibold text-white">Grade 5 PEP</p>
               <p className="mt-1 text-sm text-slate-300">
