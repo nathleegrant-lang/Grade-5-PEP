@@ -1,5 +1,11 @@
 import Link from "next/link"
-import { BookOpen, Calculator, FlaskConical, Globe } from "lucide-react"
+import {
+  BookOpen,
+  Calculator,
+  FlaskConical,
+  Globe,
+  FileText,
+} from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -14,24 +20,24 @@ export default function MockTestsPage() {
         <div className="mx-auto max-w-6xl">
           <Link
             href="/"
-            className="inline-flex items-center text-slate-600 hover:text-slate-800 mb-6"
+            className="mb-6 inline-flex items-center text-slate-600 hover:text-slate-800"
           >
             ← Back to Home
           </Link>
 
-          <div className="text-center mb-10">
-            <h1 className="text-4xl font-bold text-slate-800 mb-3">
+          <div className="mb-10 text-center">
+            <h1 className="mb-3 text-4xl font-bold text-slate-800">
               Grade 5 Mock Tests
             </h1>
             <p className="text-slate-600">
-              Choose a subject to open its mock test area.
+              Choose a subject or performance task area to begin practice.
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-5">
             <Card className="shadow-sm">
               <CardHeader>
-                <div className="w-14 h-14 rounded-full bg-sky-100 flex items-center justify-center mb-3">
+                <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-sky-100">
                   <BookOpen className="h-7 w-7 text-sky-600" />
                 </div>
                 <CardTitle className="text-slate-800">Language Arts</CardTitle>
@@ -50,14 +56,14 @@ export default function MockTestsPage() {
 
             <Card className="shadow-sm">
               <CardHeader>
-                <div className="w-14 h-14 rounded-full bg-amber-100 flex items-center justify-center mb-3">
+                <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-amber-100">
                   <Calculator className="h-7 w-7 text-amber-600" />
                 </div>
                 <CardTitle className="text-slate-800">Mathematics</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-sm text-slate-600">
-                  Number operations, measurement, geometry, and data practice for Grade 5.
+                  Number operations, measurement, geometry, and data practice.
                 </p>
                 <Link href="/mock-tests/mathematics">
                   <Button className="w-full bg-slate-800 hover:bg-slate-900">
@@ -69,7 +75,7 @@ export default function MockTestsPage() {
 
             <Card className="shadow-sm">
               <CardHeader>
-                <div className="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center mb-3">
+                <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-green-100">
                   <FlaskConical className="h-7 w-7 text-green-600" />
                 </div>
                 <CardTitle className="text-slate-800">Science</CardTitle>
@@ -88,7 +94,7 @@ export default function MockTestsPage() {
 
             <Card className="shadow-sm">
               <CardHeader>
-                <div className="w-14 h-14 rounded-full bg-purple-100 flex items-center justify-center mb-3">
+                <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-purple-100">
                   <Globe className="h-7 w-7 text-purple-600" />
                 </div>
                 <CardTitle className="text-slate-800">Social Studies</CardTitle>
@@ -100,6 +106,25 @@ export default function MockTestsPage() {
                 <Link href="/mock-tests/social-studies">
                   <Button className="w-full bg-slate-800 hover:bg-slate-900">
                     Open Social Studies
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+
+            <Card className="shadow-sm">
+              <CardHeader>
+                <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-rose-100">
+                  <FileText className="h-7 w-7 text-rose-600" />
+                </div>
+                <CardTitle className="text-slate-800">Performance Task</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-sm text-slate-600">
+                  Source-based reading, evidence, reasoning, and written responses.
+                </p>
+                <Link href="/mock-tests/performance">
+                  <Button className="w-full bg-slate-800 hover:bg-slate-900">
+                    Open Performance Task
                   </Button>
                 </Link>
               </CardContent>
