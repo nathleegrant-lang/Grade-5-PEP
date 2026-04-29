@@ -30,7 +30,7 @@ type SubscriptionRow = {
   created_at: string | null
 }
 
-const TABLE_NAME = "payment"
+const TABLE_NAME = "payments"
 
 function formatDate(value: string | null) {
   if (!value) return "—"
