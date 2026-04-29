@@ -5,10 +5,16 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { useAuth } from "@/contexts/auth-context"
-import { ShieldCheck, CreditCard, Tags } from "lucide-react"
+import { ShieldCheck, CreditCard, Tags, FileText } from "lucide-react"
 
 export default function AdminHomePage() {
   const router = useRouter()
@@ -49,19 +55,22 @@ export default function AdminHomePage() {
               Admin Dashboard
             </h1>
             <p className="text-slate-600 mt-2">
-              Manage Grade 5 payments and pricing from one place.
+              Manage Grade 5 payments, pricing, and subscription reports.
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-3">
             <Card className="border-sky-200 shadow-sm">
               <CardHeader>
                 <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center mb-3">
                   <CreditCard className="h-6 w-6 text-emerald-600" />
                 </div>
-                <CardTitle className="text-slate-800">Payment Management</CardTitle>
+                <CardTitle className="text-slate-800">
+                  Payment Management
+                </CardTitle>
                 <CardDescription>
-                  Review payment submissions, verify payments, and manage approval workflow.
+                  Review payment submissions, verify payments, and manage
+                  approval workflow.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -78,15 +87,40 @@ export default function AdminHomePage() {
                 <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mb-3">
                   <Tags className="h-6 w-6 text-amber-600" />
                 </div>
-                <CardTitle className="text-slate-800">Pricing Management</CardTitle>
+                <CardTitle className="text-slate-800">
+                  Pricing Management
+                </CardTitle>
                 <CardDescription>
-                  Create, edit, activate, or remove pricing plans shown on the public site.
+                  Create, edit, activate, or remove pricing plans shown on the
+                  public site.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <Link href="/admin/pricing">
                   <Button className="w-full bg-amber-500 hover:bg-amber-600 text-white">
                     Open Pricing
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+
+            <Card className="border-sky-200 shadow-sm">
+              <CardHeader>
+                <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mb-3">
+                  <FileText className="h-6 w-6 text-purple-600" />
+                </div>
+                <CardTitle className="text-slate-800">
+                  Subscription Report
+                </CardTitle>
+                <CardDescription>
+                  View parents, email addresses, subscription plans, payment
+                  status, and expiry dates.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Link href="/admin/subscriptions">
+                  <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white">
+                    Open Report
                   </Button>
                 </Link>
               </CardContent>
