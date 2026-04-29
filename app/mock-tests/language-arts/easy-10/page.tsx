@@ -31,319 +31,389 @@ const g5LaEasy10Questions: Question[] = [
     id: 1,
     type: "reading",
     skill: "Main Idea",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
 
 What is this passage MAINLY about?`,
     options: [
-      "Something unrelated",
-      "The topic described in the caring for the environment passage",
-      "A completely different subject",
-      "A character only",
+      "How rubbish collection works",
+      "The importance of caring for the environment and how simple actions can help",
+      "Types of trees that can be planted",
+      "Rivers and how they flow",
     ],
     correctAnswer: 1,
-    explanation: `The passage is centred on caring for the environment — this is the main topic.`
+    explanation: `The passage argues that the environment needs our care and shows how individual actions can make a real difference — this is the main idea.`
   },
   {
     id: 2,
     type: "reading",
     skill: "Detail",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
 
-Which statement is directly supported by details in the passage?`,
+According to the passage, what THREE simple actions can help the environment?`,
     options: [
-      "The passage gives no details",
-      "All details are opinions",
-      "The passage includes specific factual details",
-      "Only one fact is given",
+      "Recycling, swimming, and planting trees",
+      "Putting rubbish in bins, turning off taps, and planting trees",
+      "Picking up litter, buying less, and saving electricity",
+      "Watering plants, sweeping streets, and walking to school",
     ],
-    correctAnswer: 2,
-    explanation: `The passage includes multiple specific details that directly support the topic.`
+    correctAnswer: 1,
+    explanation: `The passage specifically lists 'putting rubbish in bins, turning off taps when not needed, and planting trees.'`
   },
   {
     id: 3,
     type: "reading",
-    skill: "Inference",
-    question: `Read the passage then answer the questions.
+    skill: "Cause and Effect",
+    question: `Read the passage then answer the question.
 
 "The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
 
-What can you INFER from reading this passage?`,
+WHAT HAPPENS when someone drops litter in a river?`,
     options: [
-      "The author has no opinion",
-      "The topic is unimportant",
-      "The author finds the topic significant and wants the reader to understand it",
-      "The passage is unfinished",
+      "The river flows faster",
+      "Nothing happens",
+      "It causes harm to plants, animals, and other people who use that space",
+      "It fertilises the soil",
     ],
     correctAnswer: 2,
-    explanation: `The amount of detail and language used suggest the author finds this topic important.`
+    explanation: `The passage directly states that dropping litter causes 'harm to plants, animals, and other people who use those spaces.'`
   },
   {
     id: 4,
     type: "reading",
     skill: "Vocabulary in Context",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
 
-The word 'unique' most nearly means:`,
+The phrase 'make a real difference' suggests:`,
     options: [
-      "ordinary and common",
-      "found everywhere",
-      "one-of-a-kind and special",
-      "large and impressive",
+      "The actions are difficult and expensive",
+      "Small, everyday actions genuinely have meaningful impact on the environment",
+      "Only large-scale actions matter",
+      "Difference is too slow to notice",
     ],
-    correctAnswer: 2,
-    explanation: `'Unique' means one-of-a-kind — unlike anything else.`
+    correctAnswer: 1,
+    explanation: `'Real difference' emphasises that even simple actions have genuine, meaningful impact — not just symbolic value.`
   },
   {
     id: 5,
     type: "reading",
-    skill: "Cause and Effect",
-    question: `Read the passage then answer the questions.
-
-"The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
-
-What causes the events or situation described in the passage?`,
-    options: [
-      "Nothing — events happen randomly",
-      "Human actions or natural forces described in the passage",
-      "External events not mentioned",
-      "Only luck",
-    ],
-    correctAnswer: 1,
-    explanation: `The passage describes specific causes that lead to the events or situation it discusses.`
-  },
-  {
-    id: 6,
-    type: "reading",
     skill: "Author's Purpose",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
 
 The MAIN purpose of this passage is to:`,
     options: [
-      "Entertain with fiction",
-      "Give instructions",
-      "Inform the reader about the topic",
-      "Advertise a product",
+      "Scare people about environmental disaster",
+      "Entertain with a nature story",
+      "Persuade readers — especially young people — to take responsibility for the environment",
+      "Describe how rubbish collection works",
     ],
     correctAnswer: 2,
-    explanation: `The passage conveys information about a topic in a clear, explanatory way.`
+    explanation: `The passage uses examples of harm and positive actions to persuade readers to adopt environmentally responsible habits.`
+  },
+  {
+    id: 6,
+    type: "reading",
+    skill: "Inference",
+    question: `Read the passage then answer the question.
+
+"The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
+
+What does the phrase 'from an early age' suggest about the author's view of children?`,
+    options: [
+      "Children are too young to care about the environment",
+      "Children only need to focus on school",
+      "Teaching children environmental values while they are young shapes their adult behaviour and decisions",
+      "Only adults can make a difference",
+    ],
+    correctAnswer: 2,
+    explanation: `'From an early age' implies the author believes early learning creates lasting habits — positioning children as future change-makers.`
   },
   {
     id: 7,
     type: "reading",
-    skill: "Summarise",
-    question: `Read the passage then answer the questions.
-
-"The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
-
-Which statement BEST summarises this passage?`,
-    options: [
-      "Only one idea matters",
-      "The passage has no clear message",
-      "The passage conveys information about a specific topic in a structured way",
-      "The passage is too short to summarise",
-    ],
-    correctAnswer: 2,
-    explanation: `A good summary captures the main topic and structure of the passage.`
-  },
-  {
-    id: 8,
-    type: "reading",
     skill: "Tone",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
 
 The tone of this passage is BEST described as:`,
     options: [
-      "Angry",
-      "Informative and thoughtful",
-      "Completely humorous",
-      "Fearful",
+      "Hopeless and despairing",
+      "Urgent and encouraging — calling readers to act",
+      "Humorous and light",
+      "Angry and blaming",
     ],
     correctAnswer: 1,
-    explanation: `The language is measured and purposeful — informative and thoughtful.`
+    explanation: `The language is positive about small actions ('can make a real difference') while creating a sense of urgency about the environment's needs.`
+  },
+  {
+    id: 8,
+    type: "reading",
+    skill: "Text Evidence",
+    question: `Read the passage then answer the question.
+
+"The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
+
+Which phrase BEST supports the idea that children can grow into environmentally responsible adults?`,
+    options: [
+      "Putting rubbish in bins is helpful",
+      "The environment needs our care and attention",
+      "When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet",
+      "Turning off taps saves water",
+    ],
+    correctAnswer: 2,
+    explanation: `This directly states the link between childhood learning and adult decision-making about the environment.`
   },
   {
     id: 9,
     type: "reading",
-    skill: "Text Structure",
-    question: `Read the passage then answer the questions.
+    skill: "Summarise",
+    question: `Read the passage then answer the question.
 
 "The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
 
-How is the information in this passage MAINLY organised?`,
+Which BEST summarises this passage?`,
     options: [
-      "In random order",
-      "By listing unrelated facts",
-      "In a logical sequence that builds understanding",
-      "By arguing two opposite points",
+      "Rivers are important to the environment",
+      "The environment is harmed by litter, but simple daily actions can protect it, and teaching young people environmental values builds a better future",
+      "Trees are important to plant",
+      "Tap water is valuable",
     ],
-    correctAnswer: 2,
-    explanation: `The passage builds information logically, moving from one idea to the next.`
+    correctAnswer: 1,
+    explanation: `This captures both the problem (harm from litter) and the solution (simple actions and early education).`
   },
   {
     id: 10,
     type: "reading",
-    skill: "Literal",
-    question: `Read the passage then answer the questions.
+    skill: "Vocabulary in Context",
+    question: `Read the passage then answer the question.
 
 "The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
 
-What is ONE specific fact stated directly in the passage?`,
+The word 'respects' (as in 'respect the environment') most nearly means:`,
     options: [
-      "An opinion about the topic",
-      "A personal story",
-      "A verifiable detail that appears in the passage",
-      "A prediction about the future",
+      "fears",
+      "avoids",
+      "treats carefully and with consideration, as something valuable",
+      "is indifferent to",
     ],
     correctAnswer: 2,
-    explanation: `The passage contains at least one verifiable, directly stated fact about the topic.`
+    explanation: `To 'respect the environment' means to treat it with care and regard — recognising its value and acting accordingly.`
   },
   {
     id: 11,
     type: "reading",
     skill: "Figurative Language",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
 
-A writer uses vivid descriptions in the passage. This technique helps readers to:`,
+'The environment around us needs our care and attention.' The word 'needs' gives the environment a human quality. This is:`,
     options: [
-      "Feel confused",
-      "Stop reading",
-      "Form a clear mental image",
-      "Focus only on facts",
+      "Alliteration",
+      "Hyperbole",
+      "Personification",
+      "Simile",
     ],
     correctAnswer: 2,
-    explanation: `Vivid descriptions create mental images that help readers engage with and understand the text.`
+    explanation: `Giving the environment the human need for 'care and attention' is personification — treating the environment as a living thing that requires nurturing.`
   },
   {
     id: 12,
     type: "reading",
-    skill: "Vocabulary in Context",
-    question: `Read the passage then answer the questions.
+    skill: "Critical Reading",
+    question: `Read the passage then answer the question.
 
 "The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
 
-The word 'essential' most nearly means:`,
+The passage says simple actions 'can make a real difference.' A sceptical reader might ask:`,
     options: [
-      "unnecessary",
-      "unimportant",
-      "extremely important and needed",
-      "slightly useful",
+      "Why is the environment important?",
+      "Whether one person's actions are truly enough to address large-scale environmental problems",
+      "Why trees are worth planting",
+      "Whether rubbish bins are available everywhere",
     ],
-    correctAnswer: 2,
-    explanation: `'Essential' means absolutely necessary or extremely important.`
+    correctAnswer: 1,
+    explanation: `Critical thinking requires questioning claims: whether individual actions alone can address complex environmental challenges is a valid and important question.`
   },
   {
     id: 13,
     type: "reading",
-    skill: "Inference",
-    question: `Read the passage then answer the questions.
-
-"The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
-
-Based on this passage, what can you conclude about the topic?`,
-    options: [
-      "It is trivial and unimportant",
-      "It is complex but understandable when explained clearly",
-      "It is impossible to understand",
-      "It is only relevant to adults",
-    ],
-    correctAnswer: 1,
-    explanation: `The passage presents a topic in a way that makes it accessible — showing it can be understood when explained well.`
-  },
-  {
-    id: 14,
-    type: "reading",
     skill: "Audience",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
 
 This passage was MOST LIKELY written for:`,
     options: [
-      "Only experts in the field",
-      "Young students studying the topic",
-      "Government officials",
-      "Scientists with advanced degrees",
+      "Industrial companies",
+      "Scientists studying ecosystems",
+      "Young students to inspire environmental responsibility",
+      "Waste management workers",
+    ],
+    correctAnswer: 2,
+    explanation: `The language, examples, and ending reference to students learning 'from an early age' all suggest the audience is young students.`
+  },
+  {
+    id: 14,
+    type: "reading",
+    skill: "Detail",
+    question: `Read the passage then answer the question.
+
+"The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
+
+According to the passage, where can litter cause harm?`,
+    options: [
+      "Only in parks",
+      "In streets or rivers",
+      "Only in the ocean",
+      "Only on school grounds",
     ],
     correctAnswer: 1,
-    explanation: `The language and content are pitched at a student level, suggesting the audience is young learners.`
+    explanation: `The passage mentions 'on the street or in a river' as places where litter causes harm.`
   },
   {
     id: 15,
     type: "reading",
-    skill: "Comparing Ideas",
-    question: `Read the passage then answer the questions.
+    skill: "Implied Meaning",
+    question: `Read the passage then answer the question.
 
 "The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
 
-How are different ideas or details in the passage connected?`,
+When the passage says adults 'make better choices for the planet,' it implies:`,
     options: [
-      "They are unrelated",
-      "They contradict each other",
-      "They all support the main topic",
-      "They are from different sources",
+      "Adults already make perfect choices",
+      "Adults need no guidance",
+      "Environmental choices are not just personal — they affect the entire planet and all who live on it",
+      "Only politicians make important choices",
     ],
     correctAnswer: 2,
-    explanation: `All details and ideas in the passage relate to and support the central topic.`
+    explanation: `'For the planet' extends the scale beyond the individual — environmental choices matter not just personally but globally.`
   },
   {
     id: 16,
     type: "vocabulary",
     skill: "Synonyms",
-    question: `A SYNONYM for 'courageous' is:`,
+    question: `Which word is a SYNONYM for 'protect'?`,
     options: [
-      "fearful",
-      "cowardly",
-      "brave",
-      "timid",
+      "harm",
+      "damage",
+      "safeguard",
+      "ignore",
     ],
     correctAnswer: 2,
-    explanation: `'Brave' and 'courageous' both mean willing to face danger or difficulty.`
+    explanation: `'Safeguard' means to keep something safe from danger — a synonym for 'protect.'`
   },
   {
     id: 17,
     type: "vocabulary",
     skill: "Antonyms",
-    question: `The ANTONYM of 'victory' is:`,
+    question: `The ANTONYM of 'pollute' is:`,
     options: [
-      "success",
-      "triumph",
-      "win",
-      "defeat",
+      "contaminate",
+      "clean",
+      "poison",
+      "dirty",
     ],
-    correctAnswer: 3,
-    explanation: `The opposite of victory (winning) is defeat (losing).`
+    correctAnswer: 1,
+    explanation: `'Clean' (to make or keep pure) is the opposite of 'pollute' (to make dirty or toxic).`
   },
   {
     id: 18,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `The teacher spoke in a HUSHED voice during the test. 'Hushed' means:`,
+    question: `The city implemented SUSTAINABLE waste practices to ensure resources would last for future generations. 'Sustainable' means:`,
     options: [
-      "very loud",
-      "whispering and quiet",
-      "angry and firm",
-      "slow and confused",
+      "expensive and difficult",
+      "temporary and short-term",
+      "able to be maintained long-term without causing harm to natural resources",
+      "very fast",
     ],
-    correctAnswer: 1,
-    explanation: `'Hushed' describes a very quiet, soft voice — appropriate for not disturbing a test.`
+    correctAnswer: 2,
+    explanation: `'Sustainable' describes practices that can continue indefinitely without depleting or damaging resources — linked to long-term wellbeing.`
   },
   {
     id: 19,
     type: "vocabulary",
     skill: "Figurative Language",
-    question: `'Life is a journey.' This is an example of:`,
+    question: `'The river was crying out for help.' This is an example of:`,
+    options: [
+      "Simile",
+      "Hyperbole",
+      "Metaphor",
+      "Personification",
+    ],
+    correctAnswer: 3,
+    explanation: `Giving the river the human ability to 'cry out' is personification — treating it as a living being in distress.`
+  },
+  {
+    id: 20,
+    type: "vocabulary",
+    skill: "Word Meaning",
+    question: `'Conservation' means:`,
+    options: [
+      "the study of animals",
+      "the use of resources without limits",
+      "the careful management and protection of natural resources",
+      "a type of farming",
+    ],
+    correctAnswer: 2,
+    explanation: `Conservation is the careful protection and management of the natural environment and its resources.`
+  },
+  {
+    id: 21,
+    type: "vocabulary",
+    skill: "Multiple Meaning",
+    question: `Which sentence uses 'litter' as a VERB?`,
+    options: [
+      "Please pick up the litter",
+      "A litter of kittens was born",
+      "People who litter face fines",
+      "The litter was left on the bench",
+    ],
+    correctAnswer: 2,
+    explanation: `'Litter' as a verb means to carelessly drop rubbish in a public place — 'people who litter' uses it as a verb.`
+  },
+  {
+    id: 22,
+    type: "vocabulary",
+    skill: "Prefix re-",
+    question: `The prefix 're-' in 'recycle' means:`,
+    options: [
+      "not",
+      "against",
+      "again — to use again",
+      "before",
+    ],
+    correctAnswer: 2,
+    explanation: `'Re-' means again. 'Recycle' = to process materials so they can be used again.`
+  },
+  {
+    id: 23,
+    type: "vocabulary",
+    skill: "Suffix -ment",
+    question: `Adding '-ment' to 'environ' gives 'environment', which means:`,
+    options: [
+      "a verb about nature",
+      "an adjective describing nature",
+      "a noun naming the natural world and conditions around us",
+      "an adverb about nature",
+    ],
+    correctAnswer: 2,
+    explanation: `'-ment' creates a noun. 'Environment' = the surroundings and conditions in which living things exist.`
+  },
+  {
+    id: 24,
+    type: "vocabulary",
+    skill: "Figurative Language",
+    question: `'Every drop of water is a small soldier in the battle against drought.' This is a:`,
     options: [
       "Simile",
       "Metaphor",
@@ -351,301 +421,231 @@ How are different ideas or details in the passage connected?`,
       "Alliteration",
     ],
     correctAnswer: 1,
-    explanation: `A metaphor directly states one thing IS another. Life is directly compared to a journey.`
-  },
-  {
-    id: 20,
-    type: "vocabulary",
-    skill: "Word Meaning",
-    question: `The word 'preserve' means:`,
-    options: [
-      "to destroy",
-      "to forget",
-      "to keep safe and protect",
-      "to ignore completely",
-    ],
-    correctAnswer: 2,
-    explanation: `'Preserve' means to protect or maintain something so it is not lost or damaged.`
-  },
-  {
-    id: 21,
-    type: "vocabulary",
-    skill: "Multiple Meaning",
-    question: `Which sentence uses 'wave' as a VERB?`,
-    options: [
-      "The wave crashed against the rocks",
-      "She gave a little wave goodbye",
-      "He began to wave his hand to get attention",
-      "The wave was enormous",
-    ],
-    correctAnswer: 2,
-    explanation: `In 'began to wave his hand,' 'wave' is a verb — it describes an action.`
-  },
-  {
-    id: 22,
-    type: "vocabulary",
-    skill: "Prefix dis-",
-    question: `The prefix 'dis-' in 'disagree' means:`,
-    options: [
-      "again",
-      "very",
-      "not or opposite",
-      "before",
-    ],
-    correctAnswer: 2,
-    explanation: `'Dis-' means not or the opposite of. Disagree = not agree.`
-  },
-  {
-    id: 23,
-    type: "vocabulary",
-    skill: "Suffix -ly",
-    question: `Adding '-ly' to 'quiet' creates 'quietly', which is:`,
-    options: [
-      "A noun",
-      "An adjective",
-      "A verb",
-      "An adverb",
-    ],
-    correctAnswer: 3,
-    explanation: `The suffix '-ly' typically turns adjectives into adverbs. 'Quietly' tells HOW something is done.`
-  },
-  {
-    id: 24,
-    type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'The old house groaned in the wind.' This is:`,
-    options: [
-      "Simile",
-      "Hyperbole",
-      "Personification",
-      "Metaphor",
-    ],
-    correctAnswer: 2,
-    explanation: `The house is given the human action of groaning — this is personification.`
+    explanation: `It directly (without 'like' or 'as') compares a drop of water to a soldier — a metaphor.`
   },
   {
     id: 25,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `The chef created an ELABORATE meal with many courses. 'Elaborate' means:`,
+    question: `The factory's EMISSIONS were causing serious harm to air quality in the region. 'Emissions' means:`,
     options: [
-      "simple and quick",
-      "very detailed and complex",
-      "plain and tasteless",
-      "small and basic",
+      "products made in the factory",
+      "gases or pollutants released into the atmosphere",
+      "the factory's financial profits",
+      "goods transported from the factory",
     ],
     correctAnswer: 1,
-    explanation: `An elaborate meal is complex, detailed, and carefully prepared — not simple.`
+    explanation: `'Emissions' are gases or substances released into the environment — here, harming air quality.`
   },
   {
     id: 26,
     type: "grammar",
-    skill: "Noun Types",
-    question: `Which word is a COLLECTIVE NOUN?`,
+    skill: "Collective Nouns",
+    question: `Which sentence uses a COLLECTIVE NOUN?`,
     options: [
-      "teacher",
-      "run",
-      "flock",
-      "blue",
+      "The tree fell in the storm",
+      "She planted a new seedling",
+      "A group of volunteers cleaned the beach",
+      "The river flows north",
     ],
     correctAnswer: 2,
-    explanation: `A collective noun names a group. 'Flock' names a group of birds.`
+    explanation: `'Group' is a collective noun — it names a collection of individuals.`
   },
   {
     id: 27,
     type: "grammar",
-    skill: "Verb Types",
-    question: `Which sentence uses a HELPING VERB?`,
+    skill: "Modal Verbs — Obligation",
+    question: `Which modal verb expresses OBLIGATION or DUTY?`,
     options: [
-      "She runs fast",
-      "The bird sings",
-      "He has finished his work",
-      "They played football",
+      "can",
+      "might",
+      "could",
+      "must",
     ],
-    correctAnswer: 2,
-    explanation: `'Has' is the helping (auxiliary) verb. 'Has finished' = helping + main verb.`
+    correctAnswer: 3,
+    explanation: `'Must' expresses a strong obligation or duty — something that has to be done.`
   },
   {
     id: 28,
     type: "grammar",
-    skill: "Adjectives — Superlative",
-    question: `Choose the SUPERLATIVE form of 'good':`,
+    skill: "Adjectives — Comparative",
+    question: `Choose the COMPARATIVE form of 'clean':`,
     options: [
-      "gooder",
-      "more good",
-      "better",
-      "best",
+      "cleanest",
+      "more cleaner",
+      "cleaner",
+      "most clean",
     ],
-    correctAnswer: 3,
-    explanation: `The superlative form of 'good' is 'best' — used to compare three or more things.`
+    correctAnswer: 2,
+    explanation: `For short adjectives, add '-er' to compare two things. 'Cleaner' is the comparative of 'clean.'`
   },
   {
     id: 29,
     type: "grammar",
-    skill: "Adverbs — Frequency",
-    question: `Which word is an ADVERB OF FREQUENCY?`,
+    skill: "Adverbs of Place",
+    question: `Which word is an ADVERB OF PLACE in: 'Students should put their rubbish there.'?`,
     options: [
-      "quickly",
-      "beautiful",
-      "always",
-      "run",
+      "should",
+      "rubbish",
+      "there",
+      "students",
     ],
     correctAnswer: 2,
-    explanation: `Adverbs of frequency say how often something happens. 'Always' tells us frequency.`
+    explanation: `'There' tells WHERE students should put rubbish — it is an adverb of place.`
   },
   {
     id: 30,
     type: "grammar",
-    skill: "Punctuation — Question Mark",
-    question: `Which sentence requires a QUESTION MARK?`,
+    skill: "Punctuation — Semicolons",
+    question: `Which sentence correctly uses a SEMICOLON?`,
     options: [
-      "She went to the shop",
-      "Open the window",
-      "How many books did she read",
-      "What a great day",
+      "Littering harms wildlife; it also spoils public spaces.",
+      "Littering harms wildlife, it also spoils public spaces.",
+      "Littering harms wildlife; but it also spoils public spaces.",
+      "Littering; harms wildlife and spoils public spaces.",
     ],
-    correctAnswer: 2,
-    explanation: `'How many books did she read' is a question — it requires a question mark (?)`
+    correctAnswer: 0,
+    explanation: `A semicolon joins two closely related independent clauses. Option A correctly connects two complete thoughts about littering's harm.`
   },
   {
     id: 31,
     type: "grammar",
-    skill: "Present Perfect Tense",
-    question: `Which sentence is in the PRESENT PERFECT tense?`,
+    skill: "Active Voice",
+    question: `Which sentence is in the ACTIVE VOICE?`,
     options: [
-      "She sang a song",
-      "She has sung a song",
-      "She will sing a song",
-      "She sings a song",
+      "Trees were planted by the students",
+      "The environment was harmed by litter",
+      "The students planted twenty trees",
+      "Rubbish was dropped on the street",
     ],
-    correctAnswer: 1,
-    explanation: `'Has sung' uses the present perfect form: has/have + past participle.`
+    correctAnswer: 2,
+    explanation: `Active voice: subject (students) performs the action (planted). This is clear and direct.`
   },
   {
     id: 32,
     type: "grammar",
-    skill: "Pronouns — Possessive",
-    question: `Which is a POSSESSIVE PRONOUN?`,
+    skill: "Subordinating Conjunctions",
+    question: `Which SUBORDINATING CONJUNCTION shows a TIME relationship?`,
     options: [
-      "I",
-      "me",
-      "mine",
-      "myself",
+      "because",
+      "although",
+      "unless",
+      "when",
     ],
-    correctAnswer: 2,
-    explanation: `Possessive pronouns show ownership without needing a noun: mine, yours, his, hers, ours, theirs.`
+    correctAnswer: 3,
+    explanation: `'When' introduces a time clause. 'Because' = reason; 'although' = contrast; 'unless' = condition.`
   },
   {
     id: 33,
     type: "grammar",
-    skill: "Conjunctions — Subordinating",
-    question: `Which is a SUBORDINATING CONJUNCTION?`,
+    skill: "Possessive Adjectives",
+    question: `Which sentence correctly uses a POSSESSIVE ADJECTIVE?`,
     options: [
-      "and",
-      "or",
-      "but",
-      "because",
+      "The bird lost it's habitat",
+      "The bird lost its habitat",
+      "The bird lost its' habitat",
+      "The bird lost their habitat",
     ],
-    correctAnswer: 3,
-    explanation: `'Because' introduces a subordinate clause explaining why. It is a subordinating conjunction.`
+    correctAnswer: 1,
+    explanation: `'Its' (no apostrophe) is the possessive adjective. 'It's' = it is. 'Its' = belonging to it.`
   },
   {
     id: 34,
     type: "grammar",
-    skill: "Direct Speech",
-    question: `Which sentence correctly punctuates DIRECT SPEECH?`,
+    skill: "Complex Sentence",
+    question: `Which sentence is COMPLEX?`,
     options: [
-      "She said, \"I am ready.\"",
-      "She said \"I am ready\"",
-      "She said, I am ready.",
-      "She said \"I am ready.\"",
+      "The river is polluted",
+      "The river is polluted and fish are dying",
+      "When people litter in rivers, the water becomes polluted and unsafe",
+      "She cleaned up the litter",
     ],
-    correctAnswer: 0,
-    explanation: `Direct speech requires a comma after the reporting verb, and the spoken words are enclosed in quotation marks.`
+    correctAnswer: 2,
+    explanation: `A complex sentence has a main clause + a subordinate clause. 'When people litter in rivers' is the subordinate clause.`
   },
   {
     id: 35,
     type: "grammar",
-    skill: "Sentence Types — Compound",
-    question: `A COMPOUND SENTENCE contains:`,
+    skill: "Sentence Correction",
+    question: `Which sentence is written CORRECTLY?`,
     options: [
-      "One main clause only",
-      "One main clause and one subordinate clause",
-      "Two or more main clauses joined by a conjunction",
-      "A question and a command",
+      "Every students must do their part",
+      "Every student must do their part",
+      "Every student must do his or her parts",
+      "Every students must do his or her part",
     ],
-    correctAnswer: 2,
-    explanation: `A compound sentence joins two or more independent (main) clauses, usually with conjunctions like 'and,' 'but,' or 'so.'`
+    correctAnswer: 1,
+    explanation: `'Every student' is singular. 'Must do their part' uses the singular verb and the inclusive 'their' — correct in modern usage.`
   },
   {
     id: 36,
     type: "writing",
-    skill: "Persuasive Techniques",
-    question: `Which technique is used in PERSUASIVE writing?`,
+    skill: "Persuasive Writing Purpose",
+    question: `A student writes a letter to the school principal asking for an environmental club. The MAIN purpose is to:`,
     options: [
-      "Using only personal stories",
-      "Avoiding any facts",
-      "Presenting evidence and strong reasons to convince the reader",
-      "Describing characters in great detail",
+      "Describe the environment",
+      "Entertain the principal with a story",
+      "Persuade the principal to support and approve the club",
+      "Explain what an environmental club is",
     ],
     correctAnswer: 2,
-    explanation: `Persuasive writing uses evidence, reasons, and arguments to convince the reader to agree with a point of view.`
+    explanation: `Persuasive writing aims to convince a specific audience to take a desired action — here, approving the club.`
   },
   {
     id: 37,
     type: "writing",
-    skill: "Narrative Elements",
-    question: `Which element is NOT part of a narrative?`,
+    skill: "Formal Letter Features",
+    question: `Which feature is ESSENTIAL in a formal letter?`,
     options: [
-      "Characters",
-      "Plot",
-      "Bibliography",
-      "Setting",
+      "A friendly nickname for the recipient",
+      "Slang and casual language",
+      "A formal salutation (Dear Mr./Ms.) and appropriate closing (Yours sincerely/faithfully)",
+      "A drawing or diagram",
     ],
     correctAnswer: 2,
-    explanation: `A bibliography lists sources — it is not part of a narrative. Characters, plot, and setting are narrative elements.`
+    explanation: `A formal letter always includes a proper salutation and closing — these mark the professional register of the communication.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "Conclusion",
-    question: `A well-written conclusion should:`,
+    skill: "Evidence in Persuasive Writing",
+    question: `Which type of evidence would MOST strengthen an argument for environmental action?`,
     options: [
-      "Introduce a brand new idea",
-      "Copy the introduction exactly",
-      "Summarise the main points and leave the reader with a final thought",
-      "List all the facts again in full detail",
+      "A general feeling that the environment is important",
+      "A specific statistic: 'Jamaica loses approximately 1,200 hectares of forest per year'",
+      "A personal story about loving nature",
+      "A claim that everyone agrees",
     ],
-    correctAnswer: 2,
-    explanation: `A conclusion wraps up the writing by summarising key points and offering a closing thought.`
+    correctAnswer: 1,
+    explanation: `Specific, verifiable data (statistics) provides concrete, credible evidence — far more persuasive than vague feelings or claims.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Register",
-    question: `A student writes a formal letter to a company. Which greeting is MOST appropriate?`,
+    skill: "Rhetorical Questions",
+    question: `A student writes: 'If not us, then who? If not now, then when?' These rhetorical questions are used to:`,
     options: [
-      "Hey there!",
-      "Yo, what's up?",
-      "Dear Sir or Madam,",
-      "Hi friend,",
+      "Ask the reader for literal answers",
+      "Add length to the writing",
+      "Create urgency and make readers feel personally responsible for taking action",
+      "Introduce new evidence",
     ],
     correctAnswer: 2,
-    explanation: `'Dear Sir or Madam' is the correct formal greeting for a letter to an unknown recipient.`
+    explanation: `Rhetorical questions engage the reader emotionally and create urgency — they don't need an answer because the answer is obvious: we must act now.`
   },
   {
     id: 40,
     type: "writing",
-    skill: "Purpose of Paragraphs",
-    question: `WHY do writers divide their writing into paragraphs?`,
+    skill: "Call to Action",
+    question: `A persuasive environmental essay BEST ends with:`,
     options: [
-      "To fill more pages",
-      "To confuse the reader",
-      "To organise ideas clearly and make the text easier to read",
-      "To use more words",
+      "A repetition of all the main arguments in full",
+      "A statistic about pollution levels",
+      "A powerful call to action that tells readers specifically what they can do to make a difference",
+      "An apology for the length of the essay",
     ],
     correctAnswer: 2,
-    explanation: `Paragraphs group related ideas together, making writing organised and easier to follow.`
+    explanation: `Ending with a call to action empowers readers and gives persuasive writing a clear purpose beyond just presenting information.`
   }
 ]
 
@@ -790,13 +790,7 @@ export default function G5LaEasy10MockTest() {
                 <div className="rounded-lg bg-gray-50 p-4"><p className={cn("text-2xl font-bold", color)}>{grade}</p><p className="text-sm text-slate-600">Performance</p></div>
                 <div className="rounded-lg bg-gray-50 p-4"><p className="text-sm font-semibold text-slate-700">{new Date().toLocaleDateString()}</p><p className="text-sm text-slate-600">Completed</p></div>
               </div>
-              {!isPremium && (
-                <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
-                  <p className="font-semibold text-amber-800">You completed the free preview.</p>
-                  <p className="text-sm text-amber-700">Upgrade to unlock all 40 questions.</p>
-                  <Link href="/pricing" className="mt-3 inline-block"><Button className="bg-amber-500 hover:bg-amber-600"><Crown className="mr-2 h-4 w-4" />Upgrade</Button></Link>
-                </div>
-              )}
+              {!isPremium && (<div className="rounded-lg border border-amber-200 bg-amber-50 p-4"><p className="font-semibold text-amber-800">You completed the free preview.</p><p className="text-sm text-amber-700">Upgrade to unlock all 40 questions.</p><Link href="/pricing" className="mt-3 inline-block"><Button className="bg-amber-500 hover:bg-amber-600"><Crown className="mr-2 h-4 w-4" />Upgrade</Button></Link></div>)}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {SECTION_CONFIG.map((s) => { const st = getSectionStats(s.type); return (
                   <div key={s.type} className="rounded-xl border border-blue-100 bg-blue-50 p-4">
@@ -810,10 +804,6 @@ export default function G5LaEasy10MockTest() {
                     <p className="text-xs text-slate-500 mt-1">{st.percentage}%</p>
                   </div>
                 )})}
-              </div>
-              <div className="rounded-lg border border-sky-200 bg-sky-50 p-4">
-                <h3 className="mb-2 font-semibold text-sky-800">Teacher-Style Feedback</h3>
-                <p className="text-slate-700">Review each explanation to understand why the correct answer is right. Focus on the sections where your score was lowest — re-reading passages carefully and practising grammar rules will help improve your performance.</p>
               </div>
               <div className="space-y-4">
                 {availableQuestions.map((q, i) => {
@@ -873,12 +863,7 @@ export default function G5LaEasy10MockTest() {
       </div>
       <main className="container mx-auto px-4 py-6">
         <div className="max-w-4xl mx-auto">
-          {!isPremium && (
-            <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
-              <p className="font-semibold text-amber-800">Free Preview: {FREE_QUESTION_LIMIT} of 40 questions</p>
-              <p className="text-sm text-amber-700">Upgrade to Premium to access the full test.</p>
-            </div>
-          )}
+          {!isPremium && (<div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 p-4"><p className="font-semibold text-amber-800">Free Preview: {FREE_QUESTION_LIMIT} of 40 questions</p><p className="text-sm text-amber-700">Upgrade to Premium to access the full test.</p></div>)}
           <Card className="mb-6 border-blue-100">
             <CardHeader className={cn("rounded-t-lg", secColor(q.type))}>
               <div className="flex items-center justify-between">
