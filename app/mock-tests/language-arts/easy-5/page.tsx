@@ -31,621 +31,621 @@ const g5LaEasy5Questions: Question[] = [
     id: 1,
     type: "reading",
     skill: "Main Idea",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
 
 What is this passage MAINLY about?`,
     options: [
-      "Something unrelated",
-      "The topic described in the the market passage",
-      "A completely different subject",
-      "A character only",
+      "The smell of freshly baked bread",
+      "The local market as a place of community, commerce, and connection",
+      "How mangoes are grown",
+      "The best time to buy vegetables",
     ],
     correctAnswer: 1,
-    explanation: `The passage is centred on the market — this is the main topic.`
+    explanation: `The passage describes the market as more than just a shop — it is a place where community gathers and connects. This is the main idea.`
   },
   {
     id: 2,
     type: "reading",
     skill: "Detail",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
 
-Which statement is directly supported by details in the passage?`,
+What do vendors do to attract buyers?`,
     options: [
-      "The passage gives no details",
-      "All details are opinions",
-      "The passage includes specific factual details",
-      "Only one fact is given",
+      "They offer free samples",
+      "They arrange their stalls and call out prices",
+      "They close early",
+      "They only sell vegetables",
     ],
-    correctAnswer: 2,
-    explanation: `The passage includes multiple specific details that directly support the topic.`
+    correctAnswer: 1,
+    explanation: `The passage states vendors 'arrange their stalls carefully, calling out prices to attract buyers.'`
   },
   {
     id: 3,
     type: "reading",
     skill: "Inference",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
 
-What can you INFER from reading this passage?`,
+What can you INFER about the market from the phrase 'more than just a place to shop'?`,
     options: [
-      "The author has no opinion",
-      "The topic is unimportant",
-      "The author finds the topic significant and wants the reader to understand it",
-      "The passage is unfinished",
+      "The market is very expensive",
+      "The market has deep social and community value beyond buying and selling",
+      "The market sells only crafts",
+      "The market is only open on weekdays",
     ],
-    correctAnswer: 2,
-    explanation: `The amount of detail and language used suggest the author finds this topic important.`
+    correctAnswer: 1,
+    explanation: `'More than just a place to shop' implies the market has value beyond commerce — it is central to community life.`
   },
   {
     id: 4,
     type: "reading",
     skill: "Vocabulary in Context",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
 
-The word 'unique' most nearly means:`,
+The word 'mingles' in the passage most nearly means:`,
     options: [
-      "ordinary and common",
-      "found everywhere",
-      "one-of-a-kind and special",
-      "large and impressive",
+      "separates",
+      "disappears",
+      "mixes together",
+      "replaces",
     ],
     correctAnswer: 2,
-    explanation: `'Unique' means one-of-a-kind — unlike anything else.`
+    explanation: `'Mingles' means mixes or blends together. The smells of bread and mango mix in the air.`
   },
   {
     id: 5,
     type: "reading",
-    skill: "Cause and Effect",
-    question: `Read the passage then answer the questions.
+    skill: "Sensory Details",
+    question: `Read the passage then answer the question.
 
 "Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
 
-What causes the events or situation described in the passage?`,
+The author describes smells in the passage. What effect does this have?`,
     options: [
-      "Nothing — events happen randomly",
-      "Human actions or natural forces described in the passage",
-      "External events not mentioned",
-      "Only luck",
+      "It makes the passage about food only",
+      "It helps the reader imagine being at the market through sensory experience",
+      "It tells us the market is a restaurant",
+      "It shows the vendors are good cooks",
     ],
     correctAnswer: 1,
-    explanation: `The passage describes specific causes that lead to the events or situation it discusses.`
+    explanation: `Using sensory details like smell (bread, mango, spices) makes the scene vivid and immersive for the reader.`
   },
   {
     id: 6,
     type: "reading",
-    skill: "Author's Purpose",
-    question: `Read the passage then answer the questions.
-
-"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
-
-The MAIN purpose of this passage is to:`,
-    options: [
-      "Entertain with fiction",
-      "Give instructions",
-      "Inform the reader about the topic",
-      "Advertise a product",
-    ],
-    correctAnswer: 2,
-    explanation: `The passage conveys information about a topic in a clear, explanatory way.`
-  },
-  {
-    id: 7,
-    type: "reading",
-    skill: "Summarise",
-    question: `Read the passage then answer the questions.
-
-"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
-
-Which statement BEST summarises this passage?`,
-    options: [
-      "Only one idea matters",
-      "The passage has no clear message",
-      "The passage conveys information about a specific topic in a structured way",
-      "The passage is too short to summarise",
-    ],
-    correctAnswer: 2,
-    explanation: `A good summary captures the main topic and structure of the passage.`
-  },
-  {
-    id: 8,
-    type: "reading",
-    skill: "Tone",
-    question: `Read the passage then answer the questions.
-
-"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
-
-The tone of this passage is BEST described as:`,
-    options: [
-      "Angry",
-      "Informative and thoughtful",
-      "Completely humorous",
-      "Fearful",
-    ],
-    correctAnswer: 1,
-    explanation: `The language is measured and purposeful — informative and thoughtful.`
-  },
-  {
-    id: 9,
-    type: "reading",
-    skill: "Text Structure",
-    question: `Read the passage then answer the questions.
-
-"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
-
-How is the information in this passage MAINLY organised?`,
-    options: [
-      "In random order",
-      "By listing unrelated facts",
-      "In a logical sequence that builds understanding",
-      "By arguing two opposite points",
-    ],
-    correctAnswer: 2,
-    explanation: `The passage builds information logically, moving from one idea to the next.`
-  },
-  {
-    id: 10,
-    type: "reading",
-    skill: "Literal",
-    question: `Read the passage then answer the questions.
-
-"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
-
-What is ONE specific fact stated directly in the passage?`,
-    options: [
-      "An opinion about the topic",
-      "A personal story",
-      "A verifiable detail that appears in the passage",
-      "A prediction about the future",
-    ],
-    correctAnswer: 2,
-    explanation: `The passage contains at least one verifiable, directly stated fact about the topic.`
-  },
-  {
-    id: 11,
-    type: "reading",
     skill: "Figurative Language",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
 
-A writer uses vivid descriptions in the passage. This technique helps readers to:`,
-    options: [
-      "Feel confused",
-      "Stop reading",
-      "Form a clear mental image",
-      "Focus only on facts",
-    ],
-    correctAnswer: 2,
-    explanation: `Vivid descriptions create mental images that help readers engage with and understand the text.`
-  },
-  {
-    id: 12,
-    type: "reading",
-    skill: "Vocabulary in Context",
-    question: `Read the passage then answer the questions.
-
-"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
-
-The word 'essential' most nearly means:`,
-    options: [
-      "unnecessary",
-      "unimportant",
-      "extremely important and needed",
-      "slightly useful",
-    ],
-    correctAnswer: 2,
-    explanation: `'Essential' means absolutely necessary or extremely important.`
-  },
-  {
-    id: 13,
-    type: "reading",
-    skill: "Inference",
-    question: `Read the passage then answer the questions.
-
-"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
-
-Based on this passage, what can you conclude about the topic?`,
-    options: [
-      "It is trivial and unimportant",
-      "It is complex but understandable when explained clearly",
-      "It is impossible to understand",
-      "It is only relevant to adults",
-    ],
-    correctAnswer: 1,
-    explanation: `The passage presents a topic in a way that makes it accessible — showing it can be understood when explained well.`
-  },
-  {
-    id: 14,
-    type: "reading",
-    skill: "Audience",
-    question: `Read the passage then answer the questions.
-
-"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
-
-This passage was MOST LIKELY written for:`,
-    options: [
-      "Only experts in the field",
-      "Young students studying the topic",
-      "Government officials",
-      "Scientists with advanced degrees",
-    ],
-    correctAnswer: 1,
-    explanation: `The language and content are pitched at a student level, suggesting the audience is young learners.`
-  },
-  {
-    id: 15,
-    type: "reading",
-    skill: "Comparing Ideas",
-    question: `Read the passage then answer the questions.
-
-"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
-
-How are different ideas or details in the passage connected?`,
-    options: [
-      "They are unrelated",
-      "They contradict each other",
-      "They all support the main topic",
-      "They are from different sources",
-    ],
-    correctAnswer: 2,
-    explanation: `All details and ideas in the passage relate to and support the central topic.`
-  },
-  {
-    id: 16,
-    type: "vocabulary",
-    skill: "Synonyms",
-    question: `A SYNONYM for 'courageous' is:`,
-    options: [
-      "fearful",
-      "cowardly",
-      "brave",
-      "timid",
-    ],
-    correctAnswer: 2,
-    explanation: `'Brave' and 'courageous' both mean willing to face danger or difficulty.`
-  },
-  {
-    id: 17,
-    type: "vocabulary",
-    skill: "Antonyms",
-    question: `The ANTONYM of 'victory' is:`,
-    options: [
-      "success",
-      "triumph",
-      "win",
-      "defeat",
-    ],
-    correctAnswer: 3,
-    explanation: `The opposite of victory (winning) is defeat (losing).`
-  },
-  {
-    id: 18,
-    type: "vocabulary",
-    skill: "Context Clues",
-    question: `The teacher spoke in a HUSHED voice during the test. 'Hushed' means:`,
-    options: [
-      "very loud",
-      "whispering and quiet",
-      "angry and firm",
-      "slow and confused",
-    ],
-    correctAnswer: 1,
-    explanation: `'Hushed' describes a very quiet, soft voice — appropriate for not disturbing a test.`
-  },
-  {
-    id: 19,
-    type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'Life is a journey.' This is an example of:`,
+'The market comes alive.' This phrase is an example of:`,
     options: [
       "Simile",
       "Metaphor",
       "Personification",
       "Alliteration",
     ],
+    correctAnswer: 2,
+    explanation: `The market is given the human quality of coming alive — this is personification.`
+  },
+  {
+    id: 7,
+    type: "reading",
+    skill: "Author's Purpose",
+    question: `Read the passage then answer the question.
+
+"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
+
+The author ends with 'it is where the community gathers and connects.' Why?`,
+    options: [
+      "To list all the things sold at the market",
+      "To end with the market's deeper significance — its role as a community hub",
+      "To show the market is crowded",
+      "To advertise the market",
+    ],
     correctAnswer: 1,
-    explanation: `A metaphor directly states one thing IS another. Life is directly compared to a journey.`
+    explanation: `The final sentence shifts from description to meaning — revealing that the author sees the market as a social and cultural heart of the community.`
+  },
+  {
+    id: 8,
+    type: "reading",
+    skill: "Tone",
+    question: `Read the passage then answer the question.
+
+"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
+
+The tone of this passage is BEST described as:`,
+    options: [
+      "Negative and critical",
+      "Warm and celebratory",
+      "Factual and scientific",
+      "Confused and uncertain",
+    ],
+    correctAnswer: 1,
+    explanation: `The rich, colourful description and positive language ('alive,' 'gathers and connects') create a warm, celebratory tone.`
+  },
+  {
+    id: 9,
+    type: "reading",
+    skill: "Summarise",
+    question: `Read the passage then answer the question.
+
+"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
+
+Which BEST summarises this passage?`,
+    options: [
+      "Markets sell food and crafts",
+      "A local Saturday market is a vibrant hub of activity where the community comes together",
+      "Vendors work hard on Saturdays",
+      "Shoppers fill their baskets with vegetables",
+    ],
+    correctAnswer: 1,
+    explanation: `This captures both the surface (market activity) and deeper meaning (community gathering) of the passage.`
+  },
+  {
+    id: 10,
+    type: "reading",
+    skill: "Text Evidence",
+    question: `Read the passage then answer the question.
+
+"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
+
+Which phrase BEST shows the market's importance to the community?`,
+    options: [
+      "Vendors arrange their stalls carefully",
+      "Shoppers move through the narrow lanes",
+      "The market is more than just a place to shop — it is where the community gathers and connects",
+      "The smell of freshly baked bread mingles with spices",
+    ],
+    correctAnswer: 2,
+    explanation: `This phrase directly states the market's community significance — the strongest textual evidence.`
+  },
+  {
+    id: 11,
+    type: "reading",
+    skill: "Sequence",
+    question: `Read the passage then answer the question.
+
+"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
+
+What do shoppers do AFTER moving through the lanes?`,
+    options: [
+      "They go home immediately",
+      "They call out prices",
+      "They fill their baskets with fruits, vegetables, and crafts",
+      "They arrange stalls",
+    ],
+    correctAnswer: 2,
+    explanation: `The passage says shoppers 'move through the narrow lanes, filling their baskets' — filling baskets happens as they move.`
+  },
+  {
+    id: 12,
+    type: "reading",
+    skill: "Vocabulary in Context",
+    question: `Read the passage then answer the question.
+
+"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
+
+The word 'vibrant' would BEST describe the market scene because:`,
+    options: [
+      "The market is dull and quiet",
+      "The market is full of colour, energy, and life",
+      "The market is very expensive",
+      "The market is dangerous",
+    ],
+    correctAnswer: 1,
+    explanation: `'Vibrant' means full of energy and colour — which perfectly describes this busy, colourful, lively market.`
+  },
+  {
+    id: 13,
+    type: "reading",
+    skill: "Fact vs Opinion",
+    question: `Read the passage then answer the question.
+
+"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
+
+Which statement is an OPINION about the market?`,
+    options: [
+      "Vendors call out prices",
+      "The market smells of bread and mangoes",
+      "The market is the best place to spend a Saturday morning",
+      "Shoppers buy fruits and vegetables",
+    ],
+    correctAnswer: 2,
+    explanation: `This is a personal judgement — an opinion. The others are directly stated facts from the passage.`
+  },
+  {
+    id: 14,
+    type: "reading",
+    skill: "Character",
+    question: `Read the passage then answer the question.
+
+"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
+
+Based on the passage, how would you describe the vendors?`,
+    options: [
+      "Lazy and uninterested",
+      "Energetic and engaged in their work",
+      "Quiet and shy",
+      "Angry at the buyers",
+    ],
+    correctAnswer: 1,
+    explanation: `Vendors 'arrange their stalls carefully' and 'call out prices' — showing energy and engagement in their work.`
+  },
+  {
+    id: 15,
+    type: "reading",
+    skill: "Audience",
+    question: `Read the passage then answer the question.
+
+"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
+
+This passage was MOST LIKELY written for:`,
+    options: [
+      "Scientists studying markets",
+      "A general audience, possibly students, to appreciate community and local culture",
+      "Economists studying trade",
+      "Market vendors only",
+    ],
+    correctAnswer: 1,
+    explanation: `The warm, descriptive language and celebration of community life suggest an audience of general readers or students.`
+  },
+  {
+    id: 16,
+    type: "vocabulary",
+    skill: "Synonyms",
+    question: `Which word is a SYNONYM for 'vibrant'?`,
+    options: [
+      "dull",
+      "colourless",
+      "lively",
+      "quiet",
+    ],
+    correctAnswer: 2,
+    explanation: `'Lively' means full of energy and colour — a synonym for 'vibrant.'`
+  },
+  {
+    id: 17,
+    type: "vocabulary",
+    skill: "Antonyms",
+    question: `The ANTONYM of 'plentiful' is:`,
+    options: [
+      "abundant",
+      "scarce",
+      "generous",
+      "rich",
+    ],
+    correctAnswer: 1,
+    explanation: `'Scarce' means in short supply — the opposite of 'plentiful' (abundant).`
+  },
+  {
+    id: 18,
+    type: "vocabulary",
+    skill: "Context Clues",
+    question: `The vendor HAGGLED with the buyer until they agreed on a fair price. 'Haggled' means:`,
+    options: [
+      "shouted angrily",
+      "bargained or negotiated back and forth",
+      "refused to sell",
+      "gave a discount immediately",
+    ],
+    correctAnswer: 1,
+    explanation: `'Haggle' means to negotiate or bargain — going back and forth on a price until both sides agree.`
+  },
+  {
+    id: 19,
+    type: "vocabulary",
+    skill: "Figurative Language",
+    question: `'The market is the heartbeat of our community.' This is an example of:`,
+    options: [
+      "Simile",
+      "Alliteration",
+      "Metaphor",
+      "Personification",
+    ],
+    correctAnswer: 2,
+    explanation: `The market is directly called 'the heartbeat' — comparing it to a vital organ through metaphor, not using 'like' or 'as.'`
   },
   {
     id: 20,
     type: "vocabulary",
     skill: "Word Meaning",
-    question: `The word 'preserve' means:`,
+    question: `The word 'commerce' means:`,
     options: [
-      "to destroy",
-      "to forget",
-      "to keep safe and protect",
-      "to ignore completely",
+      "community events",
+      "buying and selling of goods and services",
+      "cooking and food preparation",
+      "growing crops",
     ],
-    correctAnswer: 2,
-    explanation: `'Preserve' means to protect or maintain something so it is not lost or damaged.`
+    correctAnswer: 1,
+    explanation: `'Commerce' refers to trade — the buying and selling of goods and services.`
   },
   {
     id: 21,
     type: "vocabulary",
     skill: "Multiple Meaning",
-    question: `Which sentence uses 'wave' as a VERB?`,
+    question: `Which sentence uses the word 'stall' to mean a vendor's stand at a market?`,
     options: [
-      "The wave crashed against the rocks",
-      "She gave a little wave goodbye",
-      "He began to wave his hand to get attention",
-      "The wave was enormous",
+      "The engine will stall if you do not keep it moving",
+      "She set up her stall and arranged her mangoes neatly",
+      "The negotiations stalled for three hours",
+      "He tried to stall for time",
     ],
-    correctAnswer: 2,
-    explanation: `In 'began to wave his hand,' 'wave' is a verb — it describes an action.`
+    correctAnswer: 1,
+    explanation: `'Stall' meaning a market stand is a noun. 'She set up her stall' uses this meaning.`
   },
   {
     id: 22,
     type: "vocabulary",
-    skill: "Prefix dis-",
-    question: `The prefix 'dis-' in 'disagree' means:`,
+    skill: "Prefix inter-",
+    question: `The prefix 'inter-' in 'interact' means:`,
     options: [
+      "above",
+      "against",
+      "between or among",
       "again",
-      "very",
-      "not or opposite",
-      "before",
     ],
     correctAnswer: 2,
-    explanation: `'Dis-' means not or the opposite of. Disagree = not agree.`
+    explanation: `'Inter-' means between or among. 'Interact' = act between people — engage with each other.`
   },
   {
     id: 23,
     type: "vocabulary",
-    skill: "Suffix -ly",
-    question: `Adding '-ly' to 'quiet' creates 'quietly', which is:`,
+    skill: "Suffix -ful",
+    question: `Which word uses '-ful' to mean 'full of colour'?`,
     options: [
-      "A noun",
-      "An adjective",
-      "A verb",
-      "An adverb",
+      "colourless",
+      "colourful",
+      "recolour",
+      "colouring",
     ],
-    correctAnswer: 3,
-    explanation: `The suffix '-ly' typically turns adjectives into adverbs. 'Quietly' tells HOW something is done.`
+    correctAnswer: 1,
+    explanation: `'-ful' means full of. 'Colourful' = full of colour.`
   },
   {
     id: 24,
     type: "vocabulary",
     skill: "Figurative Language",
-    question: `'The old house groaned in the wind.' This is:`,
+    question: `'Business was as slow as a tortoise that morning.' This is a:`,
     options: [
+      "Metaphor",
+      "Personification",
       "Simile",
       "Hyperbole",
-      "Personification",
-      "Metaphor",
     ],
     correctAnswer: 2,
-    explanation: `The house is given the human action of groaning — this is personification.`
+    explanation: `It uses 'as...as' to compare business to a tortoise — a simile.`
   },
   {
     id: 25,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `The chef created an ELABORATE meal with many courses. 'Elaborate' means:`,
+    question: `The mango was RIPE — soft, golden-yellow, and dripping with sweet juice. 'Ripe' means:`,
     options: [
-      "simple and quick",
-      "very detailed and complex",
-      "plain and tasteless",
-      "small and basic",
+      "unready for eating",
+      "fully grown and ready to eat",
+      "too old and rotten",
+      "unripe and hard",
     ],
     correctAnswer: 1,
-    explanation: `An elaborate meal is complex, detailed, and carefully prepared — not simple.`
+    explanation: `'Ripe' describes fruit at its peak, ready to eat — supported by 'soft, golden-yellow, and sweet.'`
   },
   {
     id: 26,
     type: "grammar",
-    skill: "Noun Types",
-    question: `Which word is a COLLECTIVE NOUN?`,
+    skill: "Common vs Proper Nouns",
+    question: `Which sentence contains a PROPER NOUN?`,
     options: [
-      "teacher",
-      "run",
-      "flock",
-      "blue",
+      "The dog chased the ball",
+      "She visited the park",
+      "He travelled to Montego Bay for the weekend",
+      "A man walked past the shop",
     ],
     correctAnswer: 2,
-    explanation: `A collective noun names a group. 'Flock' names a group of birds.`
+    explanation: `'Montego Bay' is a proper noun — the specific name of a place. It begins with a capital letter.`
   },
   {
     id: 27,
     type: "grammar",
-    skill: "Verb Types",
-    question: `Which sentence uses a HELPING VERB?`,
+    skill: "Action Verbs",
+    question: `Which sentence contains an ACTION VERB?`,
     options: [
-      "She runs fast",
-      "The bird sings",
-      "He has finished his work",
-      "They played football",
+      "The soup is hot",
+      "She seems nervous",
+      "He jumped over the fence",
+      "The sky looks dark",
     ],
     correctAnswer: 2,
-    explanation: `'Has' is the helping (auxiliary) verb. 'Has finished' = helping + main verb.`
+    explanation: `'Jumped' is an action verb — it describes a physical movement performed by the subject.`
   },
   {
     id: 28,
     type: "grammar",
-    skill: "Adjectives — Superlative",
-    question: `Choose the SUPERLATIVE form of 'good':`,
+    skill: "Adjectives",
+    question: `Which word is an ADJECTIVE in: 'The elderly vendor arranged her colourful stall.'?`,
     options: [
-      "gooder",
-      "more good",
-      "better",
-      "best",
+      "arranged",
+      "vendor",
+      "stall",
+      "colourful",
     ],
     correctAnswer: 3,
-    explanation: `The superlative form of 'good' is 'best' — used to compare three or more things.`
+    explanation: `'Colourful' describes the stall — it is an adjective.`
   },
   {
     id: 29,
     type: "grammar",
-    skill: "Adverbs — Frequency",
-    question: `Which word is an ADVERB OF FREQUENCY?`,
+    skill: "Sentence Types",
+    question: `Which sentence is an EXCLAMATION?`,
     options: [
-      "quickly",
-      "beautiful",
-      "always",
-      "run",
+      "Are you going to the market?",
+      "Buy some mangoes please",
+      "What a beautiful morning it is!",
+      "She sells vegetables every Saturday",
     ],
     correctAnswer: 2,
-    explanation: `Adverbs of frequency say how often something happens. 'Always' tells us frequency.`
+    explanation: `An exclamation expresses strong feeling and ends with an exclamation mark.`
   },
   {
     id: 30,
     type: "grammar",
-    skill: "Punctuation — Question Mark",
-    question: `Which sentence requires a QUESTION MARK?`,
+    skill: "Punctuation",
+    question: `Which sentence is correctly punctuated?`,
     options: [
-      "She went to the shop",
-      "Open the window",
-      "How many books did she read",
-      "What a great day",
+      "The market sells fruit, vegetables, and crafts.",
+      "The market sells fruit vegetables and crafts.",
+      "The market, sells fruit vegetables and crafts.",
+      "The market sells fruit, vegetables and, crafts.",
     ],
-    correctAnswer: 2,
-    explanation: `'How many books did she read' is a question — it requires a question mark (?)`
+    correctAnswer: 0,
+    explanation: `Items in a list are separated by commas. Option A correctly uses commas between all three items.`
   },
   {
     id: 31,
     type: "grammar",
-    skill: "Present Perfect Tense",
-    question: `Which sentence is in the PRESENT PERFECT tense?`,
+    skill: "Simple Past Tense",
+    question: `Choose the correct PAST TENSE: 'Last week, she ___ vegetables at the market.'`,
     options: [
-      "She sang a song",
-      "She has sung a song",
-      "She will sing a song",
-      "She sings a song",
+      "sells",
+      "is selling",
+      "will sell",
+      "sold",
     ],
-    correctAnswer: 1,
-    explanation: `'Has sung' uses the present perfect form: has/have + past participle.`
+    correctAnswer: 3,
+    explanation: `'Last week' signals the simple past tense. 'Sold' is the past tense of 'sell.'`
   },
   {
     id: 32,
     type: "grammar",
-    skill: "Pronouns — Possessive",
-    question: `Which is a POSSESSIVE PRONOUN?`,
+    skill: "Personal Pronouns",
+    question: `Replace 'The vendors' with the correct pronoun: 'The vendors called out to the buyers.'`,
     options: [
-      "I",
-      "me",
-      "mine",
-      "myself",
+      "It",
+      "She",
+      "They",
+      "He",
     ],
     correctAnswer: 2,
-    explanation: `Possessive pronouns show ownership without needing a noun: mine, yours, his, hers, ours, theirs.`
+    explanation: `'The vendors' is plural (more than one person) — replace with 'They.'`
   },
   {
     id: 33,
     type: "grammar",
-    skill: "Conjunctions — Subordinating",
-    question: `Which is a SUBORDINATING CONJUNCTION?`,
+    skill: "Subject-Verb Agreement",
+    question: `Choose the correct verb: 'Every stall at the market ___ a story.'`,
     options: [
-      "and",
-      "or",
-      "but",
-      "because",
+      "tell",
+      "are",
+      "have",
+      "tells",
     ],
     correctAnswer: 3,
-    explanation: `'Because' introduces a subordinate clause explaining why. It is a subordinating conjunction.`
+    explanation: `'Every stall' is singular. Use the singular verb 'tells.'`
   },
   {
     id: 34,
     type: "grammar",
-    skill: "Direct Speech",
-    question: `Which sentence correctly punctuates DIRECT SPEECH?`,
+    skill: "Apostrophe — Possession",
+    question: `Which shows the stall BELONGING to the vendor?`,
     options: [
-      "She said, "I am ready."",
-      "She said "I am ready"",
-      "She said, I am ready.",
-      "She said "I am ready."",
+      "the vendors stall",
+      "the vendor stall",
+      "the vendor's stall",
+      "the vendors' stall",
     ],
-    correctAnswer: 0,
-    explanation: `Direct speech requires a comma after the reporting verb, and the spoken words are enclosed in quotation marks.`
+    correctAnswer: 2,
+    explanation: `For a singular noun (vendor), add apostrophe + s. 'The vendor's stall' is correct.`
   },
   {
     id: 35,
     type: "grammar",
-    skill: "Sentence Types — Compound",
-    question: `A COMPOUND SENTENCE contains:`,
+    skill: "Compound Sentences",
+    question: `Which is a COMPOUND sentence?`,
     options: [
-      "One main clause only",
-      "One main clause and one subordinate clause",
-      "Two or more main clauses joined by a conjunction",
-      "A question and a command",
+      "She sells mangoes at the market.",
+      "She sells mangoes and her sister sells vegetables.",
+      "She sells mangoes because they are in season.",
+      "Selling mangoes is her job.",
     ],
-    correctAnswer: 2,
-    explanation: `A compound sentence joins two or more independent (main) clauses, usually with conjunctions like 'and,' 'but,' or 'so.'`
+    correctAnswer: 1,
+    explanation: `A compound sentence joins two independent clauses with a conjunction. 'She sells mangoes AND her sister sells vegetables' joins two main clauses.`
   },
   {
     id: 36,
     type: "writing",
-    skill: "Persuasive Techniques",
-    question: `Which technique is used in PERSUASIVE writing?`,
+    skill: "Purpose of Descriptive Writing",
+    question: `A student writes a description of a busy market for a travel magazine. The PRIMARY purpose is to:`,
     options: [
-      "Using only personal stories",
-      "Avoiding any facts",
-      "Presenting evidence and strong reasons to convince the reader",
-      "Describing characters in great detail",
+      "Give directions to the market",
+      "Persuade readers not to shop at the market",
+      "Describe the market so vividly that readers feel they are there",
+      "List everything sold at the market",
     ],
     correctAnswer: 2,
-    explanation: `Persuasive writing uses evidence, reasons, and arguments to convince the reader to agree with a point of view.`
+    explanation: `Descriptive travel writing aims to evoke a place so richly that readers feel transported there — creating an experience, not just a list.`
   },
   {
     id: 37,
     type: "writing",
-    skill: "Narrative Elements",
-    question: `Which element is NOT part of a narrative?`,
+    skill: "Sensory Language",
+    question: `Which sentence uses the MOST effective sensory language?`,
     options: [
-      "Characters",
-      "Plot",
-      "Bibliography",
-      "Setting",
+      "The market was big",
+      "There were many people and things",
+      "The air buzzed with vendors' calls, thick with the scent of pepper and ripe mango",
+      "It was a Saturday market",
     ],
     correctAnswer: 2,
-    explanation: `A bibliography lists sources — it is not part of a narrative. Characters, plot, and setting are narrative elements.`
+    explanation: `Effective sensory writing engages multiple senses (sound: 'buzzed,' smell: 'pepper and mango') to create an immersive experience.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "Conclusion",
-    question: `A well-written conclusion should:`,
+    skill: "Topic Sentence",
+    question: `Which would make the BEST topic sentence for a paragraph about why local markets matter?`,
     options: [
-      "Introduce a brand new idea",
-      "Copy the introduction exactly",
-      "Summarise the main points and leave the reader with a final thought",
-      "List all the facts again in full detail",
+      "Markets sell vegetables",
+      "Local markets are busy on Saturdays",
+      "Local markets are vital centres of community life, trade, and cultural identity",
+      "People go to the market to buy food",
     ],
     correctAnswer: 2,
-    explanation: `A conclusion wraps up the writing by summarising key points and offering a closing thought.`
+    explanation: `A strong topic sentence makes a clear, arguable claim about the paragraph's subject. Option C is specific and substantive.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Register",
-    question: `A student writes a formal letter to a company. Which greeting is MOST appropriate?`,
+    skill: "Audience",
+    question: `A student writes a report on local markets for a school newsletter. Which language is MOST appropriate?`,
     options: [
-      "Hey there!",
-      "Yo, what's up?",
-      "Dear Sir or Madam,",
-      "Hi friend,",
+      "Very formal academic language with technical terms",
+      "Casual slang and informal expressions",
+      "Clear, organised, semi-formal language accessible to fellow students and parents",
+      "One very long sentence covering all the facts",
     ],
     correctAnswer: 2,
-    explanation: `'Dear Sir or Madam' is the correct formal greeting for a letter to an unknown recipient.`
+    explanation: `A school newsletter requires language that is clear and accessible to students and parents — not overly formal or too casual.`
   },
   {
     id: 40,
     type: "writing",
-    skill: "Purpose of Paragraphs",
-    question: `WHY do writers divide their writing into paragraphs?`,
+    skill: "Concluding Sentence",
+    question: `Which BEST concludes a paragraph arguing that markets are important community spaces?`,
     options: [
-      "To fill more pages",
-      "To confuse the reader",
-      "To organise ideas clearly and make the text easier to read",
-      "To use more words",
+      "Markets sell many things",
+      "There are different stalls at the market",
+      "Markets are therefore not simply places of commerce — they are the living, breathing heart of community life",
+      "People should visit the market more often",
     ],
     correctAnswer: 2,
-    explanation: `Paragraphs group related ideas together, making writing organised and easier to follow.`
+    explanation: `A concluding sentence wraps up the argument powerfully. This sentence restates the key idea (community heart) in a memorable way.`
   }
 ]
 
@@ -790,13 +790,7 @@ export default function G5LaEasy5MockTest() {
                 <div className="rounded-lg bg-gray-50 p-4"><p className={cn("text-2xl font-bold", color)}>{grade}</p><p className="text-sm text-slate-600">Performance</p></div>
                 <div className="rounded-lg bg-gray-50 p-4"><p className="text-sm font-semibold text-slate-700">{new Date().toLocaleDateString()}</p><p className="text-sm text-slate-600">Completed</p></div>
               </div>
-              {!isPremium && (
-                <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
-                  <p className="font-semibold text-amber-800">You completed the free preview.</p>
-                  <p className="text-sm text-amber-700">Upgrade to unlock all 40 questions.</p>
-                  <Link href="/pricing" className="mt-3 inline-block"><Button className="bg-amber-500 hover:bg-amber-600"><Crown className="mr-2 h-4 w-4" />Upgrade</Button></Link>
-                </div>
-              )}
+              {!isPremium && (<div className="rounded-lg border border-amber-200 bg-amber-50 p-4"><p className="font-semibold text-amber-800">You completed the free preview.</p><p className="text-sm text-amber-700">Upgrade to unlock all 40 questions.</p><Link href="/pricing" className="mt-3 inline-block"><Button className="bg-amber-500 hover:bg-amber-600"><Crown className="mr-2 h-4 w-4" />Upgrade</Button></Link></div>)}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {SECTION_CONFIG.map((s) => { const st = getSectionStats(s.type); return (
                   <div key={s.type} className="rounded-xl border border-blue-100 bg-blue-50 p-4">
@@ -810,10 +804,6 @@ export default function G5LaEasy5MockTest() {
                     <p className="text-xs text-slate-500 mt-1">{st.percentage}%</p>
                   </div>
                 )})}
-              </div>
-              <div className="rounded-lg border border-sky-200 bg-sky-50 p-4">
-                <h3 className="mb-2 font-semibold text-sky-800">Teacher-Style Feedback</h3>
-                <p className="text-slate-700">Review each explanation to understand why the correct answer is right. Focus on the sections where your score was lowest — re-reading passages carefully and practising grammar rules will help improve your performance.</p>
               </div>
               <div className="space-y-4">
                 {availableQuestions.map((q, i) => {
@@ -873,12 +863,7 @@ export default function G5LaEasy5MockTest() {
       </div>
       <main className="container mx-auto px-4 py-6">
         <div className="max-w-4xl mx-auto">
-          {!isPremium && (
-            <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
-              <p className="font-semibold text-amber-800">Free Preview: {FREE_QUESTION_LIMIT} of 40 questions</p>
-              <p className="text-sm text-amber-700">Upgrade to Premium to access the full test.</p>
-            </div>
-          )}
+          {!isPremium && (<div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 p-4"><p className="font-semibold text-amber-800">Free Preview: {FREE_QUESTION_LIMIT} of 40 questions</p><p className="text-sm text-amber-700">Upgrade to Premium to access the full test.</p></div>)}
           <Card className="mb-6 border-blue-100">
             <CardHeader className={cn("rounded-t-lg", secColor(q.type))}>
               <div className="flex items-center justify-between">
