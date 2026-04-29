@@ -30,6 +30,7 @@ const navItems = [
   { href: "/mathematics", label: "Mathematics" },
   { href: "/science", label: "Science" },
   { href: "/social-studies", label: "Social Studies" },
+  { href: "/performance-tasks", label: "Performance Tasks" },
   { href: "/mock-tests", label: "Mock Tests" },
   { href: "/pricing", label: "Pricing" },
   { href: "/about", label: "About" },
