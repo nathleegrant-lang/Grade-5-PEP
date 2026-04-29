@@ -31,439 +31,439 @@ const g5LaEasy6Questions: Question[] = [
     id: 1,
     type: "reading",
     skill: "Main Idea",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
 
 What is this passage MAINLY about?`,
     options: [
-      "Something unrelated",
-      "The topic described in the Donovan's kind act passage",
-      "A completely different subject",
-      "A character only",
+      "Miss Campbell's grocery shopping",
+      "How Donovan showed kindness and felt proud as a result",
+      "Sweet potato pudding",
+      "Elderly people needing help",
     ],
     correctAnswer: 1,
-    explanation: `The passage is centred on Donovan's kind act — this is the main topic.`
+    explanation: `The passage is about Donovan's act of kindness, Miss Campbell's gratitude, and his mother's affirmation — the main idea is kindness and its rewards.`
   },
   {
     id: 2,
     type: "reading",
     skill: "Detail",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
 
-Which statement is directly supported by details in the passage?`,
+What did Donovan notice?`,
     options: [
-      "The passage gives no details",
-      "All details are opinions",
-      "The passage includes specific factual details",
-      "Only one fact is given",
+      "Miss Campbell was cooking",
+      "Miss Campbell was struggling to carry her groceries up the steps",
+      "Miss Campbell had dropped her purse",
+      "Miss Campbell was lost",
     ],
-    correctAnswer: 2,
-    explanation: `The passage includes multiple specific details that directly support the topic.`
+    correctAnswer: 1,
+    explanation: `The passage states 'Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps.'`
   },
   {
     id: 3,
     type: "reading",
     skill: "Inference",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
 
-What can you INFER from reading this passage?`,
+What does 'without being asked' tell us about Donovan?`,
     options: [
-      "The author has no opinion",
-      "The topic is unimportant",
-      "The author finds the topic significant and wants the reader to understand it",
-      "The passage is unfinished",
+      "He was told to help",
+      "He helped only because he wanted food",
+      "He was genuinely kind — he helped spontaneously, not because someone told him to",
+      "He was bored and had nothing to do",
     ],
     correctAnswer: 2,
-    explanation: `The amount of detail and language used suggest the author finds this topic important.`
+    explanation: `Acting without being asked shows that Donovan's kindness was genuine and came from his own values, not external instruction.`
   },
   {
     id: 4,
     type: "reading",
     skill: "Vocabulary in Context",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
 
-The word 'unique' most nearly means:`,
+The phrase 'a glow of pride' suggests Donovan felt:`,
     options: [
-      "ordinary and common",
-      "found everywhere",
-      "one-of-a-kind and special",
-      "large and impressive",
+      "embarrassed",
+      "warm, happy satisfaction in having done something good",
+      "tired and hungry",
+      "nervous and worried",
     ],
-    correctAnswer: 2,
-    explanation: `'Unique' means one-of-a-kind — unlike anything else.`
+    correctAnswer: 1,
+    explanation: `A 'glow of pride' describes a warm inner feeling of satisfaction — Donovan felt good about his kind action.`
   },
   {
     id: 5,
     type: "reading",
     skill: "Cause and Effect",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
 
-What causes the events or situation described in the passage?`,
+BECAUSE Donovan helped Miss Campbell, she:`,
     options: [
-      "Nothing — events happen randomly",
-      "Human actions or natural forces described in the passage",
-      "External events not mentioned",
-      "Only luck",
+      "called his mother",
+      "gave him a slice of sweet potato pudding and thanked him warmly",
+      "carried the groceries herself",
+      "asked him to come back later",
     ],
     correctAnswer: 1,
-    explanation: `The passage describes specific causes that lead to the events or situation it discusses.`
+    explanation: `The passage says Miss Campbell 'thanked him warmly and offered him a slice of sweet potato pudding' as a result of his help.`
   },
   {
     id: 6,
     type: "reading",
-    skill: "Author's Purpose",
-    question: `Read the passage then answer the questions.
+    skill: "Character",
+    question: `Read the passage then answer the question.
 
 "One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
 
-The MAIN purpose of this passage is to:`,
+Based on the passage, how would you describe Donovan?`,
     options: [
-      "Entertain with fiction",
-      "Give instructions",
-      "Inform the reader about the topic",
-      "Advertise a product",
+      "Selfish and uninterested in others",
+      "Kind, helpful, and caring",
+      "Shy and nervous around adults",
+      "Greedy — he only helped for the pudding",
     ],
-    correctAnswer: 2,
-    explanation: `The passage conveys information about a topic in a clear, explanatory way.`
+    correctAnswer: 1,
+    explanation: `Donovan helped without being asked, which shows genuine kindness and care for others.`
   },
   {
     id: 7,
     type: "reading",
-    skill: "Summarise",
-    question: `Read the passage then answer the questions.
+    skill: "Theme",
+    question: `Read the passage then answer the question.
 
 "One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
 
-Which statement BEST summarises this passage?`,
+What theme does this passage MOST clearly express?`,
     options: [
-      "Only one idea matters",
-      "The passage has no clear message",
-      "The passage conveys information about a specific topic in a structured way",
-      "The passage is too short to summarise",
+      "Old people need a lot of help",
+      "Kindness to others brings inner satisfaction and is always the right choice",
+      "Sweet potato pudding is delicious",
+      "Groceries are heavy",
     ],
-    correctAnswer: 2,
-    explanation: `A good summary captures the main topic and structure of the passage.`
+    correctAnswer: 1,
+    explanation: `The passage ends with both Donovan's pride and his mother's affirmation that 'kindness is always the right choice' — this is the clear theme.`
   },
   {
     id: 8,
     type: "reading",
     skill: "Tone",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
 
 The tone of this passage is BEST described as:`,
     options: [
-      "Angry",
-      "Informative and thoughtful",
-      "Completely humorous",
-      "Fearful",
+      "Sad and lonely",
+      "Warm and uplifting",
+      "Humorous and playful",
+      "Tense and frightening",
     ],
     correctAnswer: 1,
-    explanation: `The language is measured and purposeful — informative and thoughtful.`
+    explanation: `The passage describes a heartwarming act of kindness and its positive outcome — creating a warm, uplifting tone.`
   },
   {
     id: 9,
     type: "reading",
-    skill: "Text Structure",
-    question: `Read the passage then answer the questions.
+    skill: "Author's Purpose",
+    question: `Read the passage then answer the question.
 
 "One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
 
-How is the information in this passage MAINLY organised?`,
+The MAIN purpose of this passage is to:`,
     options: [
-      "In random order",
-      "By listing unrelated facts",
-      "In a logical sequence that builds understanding",
-      "By arguing two opposite points",
+      "Entertain readers with an exciting adventure",
+      "Teach readers about grocery shopping",
+      "Show the value and reward of helping others",
+      "Describe the neighbourhood where Donovan lives",
     ],
     correctAnswer: 2,
-    explanation: `The passage builds information logically, moving from one idea to the next.`
+    explanation: `The passage uses a simple narrative to illustrate the value of kindness — its purpose is both to tell a story and to teach.`
   },
   {
     id: 10,
     type: "reading",
-    skill: "Literal",
-    question: `Read the passage then answer the questions.
+    skill: "Vocabulary in Context",
+    question: `Read the passage then answer the question.
 
 "One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
 
-What is ONE specific fact stated directly in the passage?`,
+The word 'elderly' in the passage means:`,
     options: [
-      "An opinion about the topic",
-      "A personal story",
-      "A verifiable detail that appears in the passage",
-      "A prediction about the future",
+      "young",
+      "very tall",
+      "old",
+      "unfriendly",
     ],
     correctAnswer: 2,
-    explanation: `The passage contains at least one verifiable, directly stated fact about the topic.`
+    explanation: `'Elderly' describes someone who is old. Miss Campbell is described as Donovan's elderly neighbour.`
   },
   {
     id: 11,
     type: "reading",
-    skill: "Figurative Language",
-    question: `Read the passage then answer the questions.
+    skill: "Summarise",
+    question: `Read the passage then answer the question.
 
 "One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
 
-A writer uses vivid descriptions in the passage. This technique helps readers to:`,
+Which BEST summarises this passage?`,
     options: [
-      "Feel confused",
-      "Stop reading",
-      "Form a clear mental image",
-      "Focus only on facts",
+      "Donovan is very hungry after school",
+      "An eight-year-old boy spontaneously helps his elderly neighbour with groceries and feels proud after his mother praises his kindness",
+      "Miss Campbell is a good cook",
+      "Donovan's mother likes sweet potato pudding",
     ],
-    correctAnswer: 2,
-    explanation: `Vivid descriptions create mental images that help readers engage with and understand the text.`
+    correctAnswer: 1,
+    explanation: `This captures the key events and the central message — the act of kindness and its reward.`
   },
   {
     id: 12,
     type: "reading",
-    skill: "Vocabulary in Context",
-    question: `Read the passage then answer the questions.
+    skill: "Implied Meaning",
+    question: `Read the passage then answer the question.
 
 "One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
 
-The word 'essential' most nearly means:`,
+When Donovan's mother said 'kindness is always the right choice,' she was:`,
     options: [
-      "unnecessary",
-      "unimportant",
-      "extremely important and needed",
-      "slightly useful",
+      "criticising Donovan for being late",
+      "rewarding him with a gift",
+      "affirming that his kind action was morally correct and praising his character",
+      "telling him to help Miss Campbell again",
     ],
     correctAnswer: 2,
-    explanation: `'Essential' means absolutely necessary or extremely important.`
+    explanation: `The mother's words affirm the moral value of Donovan's action — confirming that kindness matters, regardless of any reward received.`
   },
   {
     id: 13,
     type: "reading",
-    skill: "Inference",
-    question: `Read the passage then answer the questions.
+    skill: "Text Evidence",
+    question: `Read the passage then answer the question.
 
 "One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
 
-Based on this passage, what can you conclude about the topic?`,
+Which detail BEST shows that Miss Campbell was grateful?`,
     options: [
-      "It is trivial and unimportant",
-      "It is complex but understandable when explained clearly",
-      "It is impossible to understand",
-      "It is only relevant to adults",
+      "She gave him pudding and thanked him warmly",
+      "She told Donovan's mother",
+      "She went inside quickly",
+      "She was struggling with her bags",
     ],
-    correctAnswer: 1,
-    explanation: `The passage presents a topic in a way that makes it accessible — showing it can be understood when explained well.`
+    correctAnswer: 0,
+    explanation: `Offering food and thanking him warmly are the direct, explicit signs of Miss Campbell's gratitude.`
   },
   {
     id: 14,
     type: "reading",
-    skill: "Audience",
-    question: `Read the passage then answer the questions.
+    skill: "Inference",
+    question: `Read the passage then answer the question.
 
 "One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
 
-This passage was MOST LIKELY written for:`,
+What does the passage suggest about the relationship between Donovan and Miss Campbell?`,
     options: [
-      "Only experts in the field",
-      "Young students studying the topic",
-      "Government officials",
-      "Scientists with advanced degrees",
+      "They did not know each other",
+      "They were family",
+      "They were neighbours who knew and respected each other",
+      "Miss Campbell was Donovan's teacher",
     ],
-    correctAnswer: 1,
-    explanation: `The language and content are pitched at a student level, suggesting the audience is young learners.`
+    correctAnswer: 2,
+    explanation: `Donovan recognised her and described her as his neighbour — they had an established, respectful neighbourly relationship.`
   },
   {
     id: 15,
     type: "reading",
-    skill: "Comparing Ideas",
-    question: `Read the passage then answer the questions.
+    skill: "Figurative Language",
+    question: `Read the passage then answer the question.
 
 "One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
 
-How are different ideas or details in the passage connected?`,
+'Donovan felt a glow of pride.' This is an example of:`,
     options: [
-      "They are unrelated",
-      "They contradict each other",
-      "They all support the main topic",
-      "They are from different sources",
+      "Simile",
+      "Metaphor",
+      "Alliteration",
+      "Onomatopoeia",
     ],
-    correctAnswer: 2,
-    explanation: `All details and ideas in the passage relate to and support the central topic.`
+    correctAnswer: 1,
+    explanation: `Pride is compared to warmth (a glow) through metaphor — giving an abstract feeling a concrete, sensory quality.`
   },
   {
     id: 16,
     type: "vocabulary",
     skill: "Synonyms",
-    question: `A SYNONYM for 'courageous' is:`,
+    question: `Which word is a SYNONYM for 'generous'?`,
     options: [
-      "fearful",
-      "cowardly",
-      "brave",
-      "timid",
+      "selfish",
+      "stingy",
+      "charitable",
+      "mean",
     ],
     correctAnswer: 2,
-    explanation: `'Brave' and 'courageous' both mean willing to face danger or difficulty.`
+    explanation: `'Charitable' means willing to give or help — a synonym for 'generous.'`
   },
   {
     id: 17,
     type: "vocabulary",
     skill: "Antonyms",
-    question: `The ANTONYM of 'victory' is:`,
+    question: `The ANTONYM of 'grateful' is:`,
     options: [
-      "success",
-      "triumph",
-      "win",
-      "defeat",
+      "thankful",
+      "appreciative",
+      "indifferent",
+      "warm",
     ],
-    correctAnswer: 3,
-    explanation: `The opposite of victory (winning) is defeat (losing).`
+    correctAnswer: 2,
+    explanation: `'Indifferent' means uncaring or unfeeling — the opposite of grateful (appreciative).`
   },
   {
     id: 18,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `The teacher spoke in a HUSHED voice during the test. 'Hushed' means:`,
+    question: `The boy's act of COMPASSION moved everyone in the room to tears. 'Compassion' means:`,
     options: [
-      "very loud",
-      "whispering and quiet",
-      "angry and firm",
-      "slow and confused",
+      "anger and frustration",
+      "indifference and coldness",
+      "deep sympathy and care for others' suffering",
+      "pride and arrogance",
     ],
-    correctAnswer: 1,
-    explanation: `'Hushed' describes a very quiet, soft voice — appropriate for not disturbing a test.`
+    correctAnswer: 2,
+    explanation: `'Compassion' is deep sympathy and a desire to help those who suffer — a warm, caring response.`
   },
   {
     id: 19,
     type: "vocabulary",
     skill: "Figurative Language",
-    question: `'Life is a journey.' This is an example of:`,
+    question: `'Her kindness was a warm blanket on a cold day.' This is a:`,
     options: [
       "Simile",
       "Metaphor",
       "Personification",
-      "Alliteration",
+      "Onomatopoeia",
     ],
     correctAnswer: 1,
-    explanation: `A metaphor directly states one thing IS another. Life is directly compared to a journey.`
+    explanation: `'Was a warm blanket' directly compares kindness to a blanket — a metaphor.`
   },
   {
     id: 20,
     type: "vocabulary",
     skill: "Word Meaning",
-    question: `The word 'preserve' means:`,
+    question: `The word 'volunteer' means:`,
     options: [
-      "to destroy",
-      "to forget",
-      "to keep safe and protect",
-      "to ignore completely",
+      "someone paid to do a job",
+      "someone who helps of their own free will, without being asked or paid",
+      "someone who refuses to help",
+      "a type of community leader",
     ],
-    correctAnswer: 2,
-    explanation: `'Preserve' means to protect or maintain something so it is not lost or damaged.`
+    correctAnswer: 1,
+    explanation: `A 'volunteer' offers help freely and without payment — acting from choice, not obligation.`
   },
   {
     id: 21,
     type: "vocabulary",
     skill: "Multiple Meaning",
-    question: `Which sentence uses 'wave' as a VERB?`,
+    question: `Which sentence uses 'kind' as a NOUN (meaning a type or category)?`,
     options: [
-      "The wave crashed against the rocks",
-      "She gave a little wave goodbye",
-      "He began to wave his hand to get attention",
-      "The wave was enormous",
+      "She was kind to her neighbour",
+      "What kind of mango is this?",
+      "He gave a kind smile",
+      "Kindness matters",
     ],
-    correctAnswer: 2,
-    explanation: `In 'began to wave his hand,' 'wave' is a verb — it describes an action.`
+    correctAnswer: 1,
+    explanation: `'What kind of mango' uses 'kind' as a noun meaning a type or variety.`
   },
   {
     id: 22,
     type: "vocabulary",
-    skill: "Prefix dis-",
-    question: `The prefix 'dis-' in 'disagree' means:`,
+    skill: "Prefix em-",
+    question: `The prefix 'em-' in 'empathy' means:`,
     options: [
-      "again",
-      "very",
-      "not or opposite",
+      "without",
+      "above",
+      "into or within — causing feeling from inside",
       "before",
     ],
     correctAnswer: 2,
-    explanation: `'Dis-' means not or the opposite of. Disagree = not agree.`
+    explanation: `'Em-/en-' puts one inside something. Empathy means feeling INTO another's experience from within.`
   },
   {
     id: 23,
     type: "vocabulary",
-    skill: "Suffix -ly",
-    question: `Adding '-ly' to 'quiet' creates 'quietly', which is:`,
+    skill: "Suffix -ment",
+    question: `Adding '-ment' to 'encourage' creates:`,
     options: [
-      "A noun",
-      "An adjective",
-      "A verb",
-      "An adverb",
+      "encourages",
+      "encouraged",
+      "encouragement",
+      "encouraging",
     ],
-    correctAnswer: 3,
-    explanation: `The suffix '-ly' typically turns adjectives into adverbs. 'Quietly' tells HOW something is done.`
+    correctAnswer: 2,
+    explanation: `'-ment' turns a verb into a noun. 'Encouragement' = the act or result of encouraging.`
   },
   {
     id: 24,
     type: "vocabulary",
     skill: "Figurative Language",
-    question: `'The old house groaned in the wind.' This is:`,
+    question: `'Helping others is planting seeds for tomorrow.' This is a:`,
     options: [
       "Simile",
-      "Hyperbole",
       "Personification",
       "Metaphor",
+      "Hyperbole",
     ],
     correctAnswer: 2,
-    explanation: `The house is given the human action of groaning — this is personification.`
+    explanation: `It directly compares helping to planting seeds — a metaphor suggesting small acts of kindness grow into future benefits.`
   },
   {
     id: 25,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `The chef created an ELABORATE meal with many courses. 'Elaborate' means:`,
+    question: `The crowd ERUPTED in applause when the winner was announced. 'Erupted' means:`,
     options: [
-      "simple and quick",
-      "very detailed and complex",
-      "plain and tasteless",
-      "small and basic",
+      "whispered gently",
+      "disappeared quietly",
+      "burst out suddenly and powerfully",
+      "waited patiently",
     ],
-    correctAnswer: 1,
-    explanation: `An elaborate meal is complex, detailed, and carefully prepared — not simple.`
+    correctAnswer: 2,
+    explanation: `'Erupted' means broke out suddenly and forcefully — like a volcano, the applause was immediate and overwhelming.`
   },
   {
     id: 26,
     type: "grammar",
-    skill: "Noun Types",
-    question: `Which word is a COLLECTIVE NOUN?`,
+    skill: "Abstract Nouns",
+    question: `Which is an ABSTRACT NOUN?`,
     options: [
-      "teacher",
-      "run",
-      "flock",
-      "blue",
+      "pudding",
+      "steps",
+      "kindness",
+      "neighbour",
     ],
     correctAnswer: 2,
-    explanation: `A collective noun names a group. 'Flock' names a group of birds.`
+    explanation: `Abstract nouns name things we cannot physically see or touch. 'Kindness' is a quality — an abstract noun.`
   },
   {
     id: 27,
     type: "grammar",
-    skill: "Verb Types",
-    question: `Which sentence uses a HELPING VERB?`,
+    skill: "Linking Verbs",
+    question: `Which sentence contains a LINKING VERB?`,
     options: [
-      "She runs fast",
-      "The bird sings",
-      "He has finished his work",
-      "They played football",
+      "She ran to the shop",
+      "He kicked the ball",
+      "The pudding smells delicious",
+      "She carried the bags upstairs",
     ],
     correctAnswer: 2,
-    explanation: `'Has' is the helping (auxiliary) verb. 'Has finished' = helping + main verb.`
+    explanation: `'Smells' links the subject (pudding) to a description (delicious) — it is a linking verb.`
   },
   {
     id: 28,
@@ -471,181 +471,181 @@ How are different ideas or details in the passage connected?`,
     skill: "Adjectives — Superlative",
     question: `Choose the SUPERLATIVE form of 'good':`,
     options: [
-      "gooder",
       "more good",
+      "gooder",
       "better",
       "best",
     ],
     correctAnswer: 3,
-    explanation: `The superlative form of 'good' is 'best' — used to compare three or more things.`
+    explanation: `The superlative of 'good' is 'best' — used to compare three or more things.`
   },
   {
     id: 29,
     type: "grammar",
-    skill: "Adverbs — Frequency",
-    question: `Which word is an ADVERB OF FREQUENCY?`,
+    skill: "Adverbs of Manner",
+    question: `Which word is an ADVERB OF MANNER in: 'Donovan ran quickly to help his neighbour.'?`,
     options: [
+      "ran",
+      "neighbour",
+      "Donovan",
       "quickly",
-      "beautiful",
-      "always",
-      "run",
     ],
-    correctAnswer: 2,
-    explanation: `Adverbs of frequency say how often something happens. 'Always' tells us frequency.`
+    correctAnswer: 3,
+    explanation: `'Quickly' tells HOW Donovan ran — it is an adverb of manner.`
   },
   {
     id: 30,
     type: "grammar",
-    skill: "Punctuation — Question Mark",
-    question: `Which sentence requires a QUESTION MARK?`,
+    skill: "Punctuation — Exclamation Mark",
+    question: `Which sentence correctly uses an EXCLAMATION MARK?`,
     options: [
-      "She went to the shop",
-      "Open the window",
-      "How many books did she read",
-      "What a great day",
+      "She helped the neighbour.",
+      "Did you help her?",
+      "What a kind thing to do!",
+      "Go to the shop",
     ],
     correctAnswer: 2,
-    explanation: `'How many books did she read' is a question — it requires a question mark (?)`
+    explanation: `Exclamation marks express strong emotion. 'What a kind thing to do!' expresses admiration or surprise.`
   },
   {
     id: 31,
     type: "grammar",
-    skill: "Present Perfect Tense",
-    question: `Which sentence is in the PRESENT PERFECT tense?`,
+    skill: "Future Tense",
+    question: `Choose the correct FUTURE TENSE form: 'Tomorrow, she ___ her neighbour with the garden.'`,
     options: [
-      "She sang a song",
-      "She has sung a song",
-      "She will sing a song",
-      "She sings a song",
+      "helped",
+      "helps",
+      "will help",
+      "was helping",
     ],
-    correctAnswer: 1,
-    explanation: `'Has sung' uses the present perfect form: has/have + past participle.`
+    correctAnswer: 2,
+    explanation: `'Tomorrow' signals the future. 'Will help' is the simple future tense.`
   },
   {
     id: 32,
     type: "grammar",
-    skill: "Pronouns — Possessive",
-    question: `Which is a POSSESSIVE PRONOUN?`,
+    skill: "Object Pronouns",
+    question: `Choose the correct OBJECT PRONOUN: 'Miss Campbell thanked ___ for his help.'`,
     options: [
-      "I",
-      "me",
-      "mine",
-      "myself",
+      "he",
+      "his",
+      "him",
+      "himself",
     ],
     correctAnswer: 2,
-    explanation: `Possessive pronouns show ownership without needing a noun: mine, yours, his, hers, ours, theirs.`
+    explanation: `After a verb, use an object pronoun. 'Him' is the object pronoun referring to Donovan.`
   },
   {
     id: 33,
     type: "grammar",
-    skill: "Conjunctions — Subordinating",
-    question: `Which is a SUBORDINATING CONJUNCTION?`,
+    skill: "Verb Tense Consistency",
+    question: `Which sentence has CONSISTENT tenses?`,
     options: [
-      "and",
-      "or",
-      "but",
-      "because",
+      "She walked over and offers to help",
+      "She walks over and offered to help",
+      "She walked over and offered to help",
+      "She walks over and offer to help",
     ],
-    correctAnswer: 3,
-    explanation: `'Because' introduces a subordinate clause explaining why. It is a subordinating conjunction.`
+    correctAnswer: 2,
+    explanation: `All verbs must be in the same tense. 'Walked and offered' are both past tense — consistent.`
   },
   {
     id: 34,
     type: "grammar",
-    skill: "Direct Speech",
-    question: `Which sentence correctly punctuates DIRECT SPEECH?`,
+    skill: "Prepositions",
+    question: `Identify the PREPOSITION in: 'Donovan walked home with a warm feeling of pride.'`,
     options: [
-      "She said, \"I am ready.\"",
-      "She said \"I am ready\"",
-      "She said, I am ready.",
-      "She said \"I am ready.\"",
+      "walked",
+      "warm",
+      "with",
+      "feeling",
     ],
-    correctAnswer: 0,
-    explanation: `Direct speech requires a comma after the reporting verb, and the spoken words are enclosed in quotation marks.`
+    correctAnswer: 2,
+    explanation: `A preposition shows a relationship between words. 'With' shows what accompanied Donovan — it is a preposition.`
   },
   {
     id: 35,
     type: "grammar",
-    skill: "Sentence Types — Compound",
-    question: `A COMPOUND SENTENCE contains:`,
+    skill: "Complex Sentences",
+    question: `Which is a COMPLEX sentence?`,
     options: [
-      "One main clause only",
-      "One main clause and one subordinate clause",
-      "Two or more main clauses joined by a conjunction",
-      "A question and a command",
+      "Donovan helped his neighbour",
+      "Donovan helped and Miss Campbell thanked him",
+      "Although he was young, Donovan helped without being asked",
+      "He helped and he was proud",
     ],
     correctAnswer: 2,
-    explanation: `A compound sentence joins two or more independent (main) clauses, usually with conjunctions like 'and,' 'but,' or 'so.'`
+    explanation: `A complex sentence has one main clause + a subordinate clause. 'Although he was young' is the subordinate clause.`
   },
   {
     id: 36,
     type: "writing",
-    skill: "Persuasive Techniques",
-    question: `Which technique is used in PERSUASIVE writing?`,
+    skill: "Narrative Voice",
+    question: `When writing a personal narrative about a kind act, which point of view is MOST common?`,
     options: [
-      "Using only personal stories",
-      "Avoiding any facts",
-      "Presenting evidence and strong reasons to convince the reader",
-      "Describing characters in great detail",
+      "Third person (he/she)",
+      "Second person (you)",
+      "First person (I/me) — the narrator tells their own story",
+      "No particular point of view",
     ],
     correctAnswer: 2,
-    explanation: `Persuasive writing uses evidence, reasons, and arguments to convince the reader to agree with a point of view.`
+    explanation: `Personal narratives are told from the first person (I) — the narrator shares their own experience directly.`
   },
   {
     id: 37,
     type: "writing",
-    skill: "Narrative Elements",
-    question: `Which element is NOT part of a narrative?`,
+    skill: "Show Don't Tell",
+    question: `Which sentence SHOWS the character's feeling rather than just telling us?`,
     options: [
-      "Characters",
-      "Plot",
-      "Bibliography",
-      "Setting",
+      "She was happy",
+      "She felt very good",
+      "Her face broke into a wide smile and her heart felt light as a feather",
+      "She had positive emotions",
     ],
     correctAnswer: 2,
-    explanation: `A bibliography lists sources — it is not part of a narrative. Characters, plot, and setting are narrative elements.`
+    explanation: `'Show don't tell' uses specific actions and physical sensations (smile, heart feeling light) to convey emotion rather than naming it.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "Conclusion",
-    question: `A well-written conclusion should:`,
+    skill: "Beginning of a Story",
+    question: `Which is the MOST effective opening sentence for a story about a kind act?`,
     options: [
-      "Introduce a brand new idea",
-      "Copy the introduction exactly",
-      "Summarise the main points and leave the reader with a final thought",
-      "List all the facts again in full detail",
+      "This story is about kindness",
+      "I will tell you about when I helped someone",
+      "Nobody expected much from an ordinary Tuesday afternoon — until eight-year-old Marcus spotted the old woman struggling at the gate",
+      "Once upon a time there was a boy",
     ],
     correctAnswer: 2,
-    explanation: `A conclusion wraps up the writing by summarising key points and offering a closing thought.`
+    explanation: `A strong narrative opening creates immediate interest through specific detail, a specific time, and a hint of something about to happen.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Register",
-    question: `A student writes a formal letter to a company. Which greeting is MOST appropriate?`,
+    skill: "Building to a Climax",
+    question: `In a narrative, the CLIMAX is:`,
     options: [
-      "Hey there!",
-      "Yo, what's up?",
-      "Dear Sir or Madam,",
-      "Hi friend,",
+      "The beginning of the story",
+      "The background information about characters",
+      "The most exciting or significant moment — when the central action or decision occurs",
+      "The final sentence",
     ],
     correctAnswer: 2,
-    explanation: `'Dear Sir or Madam' is the correct formal greeting for a letter to an unknown recipient.`
+    explanation: `The climax is the turning point or peak of the story — the moment of greatest tension or significance.`
   },
   {
     id: 40,
     type: "writing",
-    skill: "Purpose of Paragraphs",
-    question: `WHY do writers divide their writing into paragraphs?`,
+    skill: "Moral of the Story",
+    question: `When a writer includes a MORAL in a narrative, they are:`,
     options: [
-      "To fill more pages",
-      "To confuse the reader",
-      "To organise ideas clearly and make the text easier to read",
-      "To use more words",
+      "Adding unnecessary extra information",
+      "Only writing for young children",
+      "Using the story to convey a deeper lesson or truth about life",
+      "Ending the story abruptly",
     ],
     correctAnswer: 2,
-    explanation: `Paragraphs group related ideas together, making writing organised and easier to follow.`
+    explanation: `A moral is a lesson conveyed through the story — a truth about life or human values that the narrative illustrates.`
   }
 ]
 
@@ -790,13 +790,7 @@ export default function G5LaEasy6MockTest() {
                 <div className="rounded-lg bg-gray-50 p-4"><p className={cn("text-2xl font-bold", color)}>{grade}</p><p className="text-sm text-slate-600">Performance</p></div>
                 <div className="rounded-lg bg-gray-50 p-4"><p className="text-sm font-semibold text-slate-700">{new Date().toLocaleDateString()}</p><p className="text-sm text-slate-600">Completed</p></div>
               </div>
-              {!isPremium && (
-                <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
-                  <p className="font-semibold text-amber-800">You completed the free preview.</p>
-                  <p className="text-sm text-amber-700">Upgrade to unlock all 40 questions.</p>
-                  <Link href="/pricing" className="mt-3 inline-block"><Button className="bg-amber-500 hover:bg-amber-600"><Crown className="mr-2 h-4 w-4" />Upgrade</Button></Link>
-                </div>
-              )}
+              {!isPremium && (<div className="rounded-lg border border-amber-200 bg-amber-50 p-4"><p className="font-semibold text-amber-800">You completed the free preview.</p><p className="text-sm text-amber-700">Upgrade to unlock all 40 questions.</p><Link href="/pricing" className="mt-3 inline-block"><Button className="bg-amber-500 hover:bg-amber-600"><Crown className="mr-2 h-4 w-4" />Upgrade</Button></Link></div>)}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {SECTION_CONFIG.map((s) => { const st = getSectionStats(s.type); return (
                   <div key={s.type} className="rounded-xl border border-blue-100 bg-blue-50 p-4">
@@ -810,10 +804,6 @@ export default function G5LaEasy6MockTest() {
                     <p className="text-xs text-slate-500 mt-1">{st.percentage}%</p>
                   </div>
                 )})}
-              </div>
-              <div className="rounded-lg border border-sky-200 bg-sky-50 p-4">
-                <h3 className="mb-2 font-semibold text-sky-800">Teacher-Style Feedback</h3>
-                <p className="text-slate-700">Review each explanation to understand why the correct answer is right. Focus on the sections where your score was lowest — re-reading passages carefully and practising grammar rules will help improve your performance.</p>
               </div>
               <div className="space-y-4">
                 {availableQuestions.map((q, i) => {
@@ -873,12 +863,7 @@ export default function G5LaEasy6MockTest() {
       </div>
       <main className="container mx-auto px-4 py-6">
         <div className="max-w-4xl mx-auto">
-          {!isPremium && (
-            <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
-              <p className="font-semibold text-amber-800">Free Preview: {FREE_QUESTION_LIMIT} of 40 questions</p>
-              <p className="text-sm text-amber-700">Upgrade to Premium to access the full test.</p>
-            </div>
-          )}
+          {!isPremium && (<div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 p-4"><p className="font-semibold text-amber-800">Free Preview: {FREE_QUESTION_LIMIT} of 40 questions</p><p className="text-sm text-amber-700">Upgrade to Premium to access the full test.</p></div>)}
           <Card className="mb-6 border-blue-100">
             <CardHeader className={cn("rounded-t-lg", secColor(q.type))}>
               <div className="flex items-center justify-between">
