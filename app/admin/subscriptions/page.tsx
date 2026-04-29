@@ -126,8 +126,9 @@ export default function AdminSubscriptionsPage() {
       setLoadingRows(true)
       setError("")
 
-const { data, error } = await supabase.rpc("admin_payment_report")
+await supabase.auth.getSession()
 
+const { data, error } = await supabase.rpc("admin_payment_report")
       if (error) {
         setError(error.message)
         setRows([])
