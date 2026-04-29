@@ -127,7 +127,7 @@ export default function AdminSubscriptionsPage() {
       setError("")
 
      const { data, error } = await supabase
-  .from(TABLE_NAME)
+ .from("payments")
   .select(
     "id,parent_name,parent_email,plan_code,amount_jmd,method,status,submitted_at,verified_at,created_at",
   )
