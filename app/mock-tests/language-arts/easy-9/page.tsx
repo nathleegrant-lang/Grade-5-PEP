@@ -31,285 +31,285 @@ const g5LaEasy9Questions: Question[] = [
     id: 1,
     type: "reading",
     skill: "Main Idea",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
 
 What is this passage MAINLY about?`,
     options: [
-      "Something unrelated",
-      "The topic described in the sports day passage",
-      "A completely different subject",
-      "A character only",
+      "The 100-metre sprint",
+      "Sports Day at Hillside Primary and the values it promotes",
+      "How to win a relay race",
+      "The importance of physical fitness",
     ],
     correctAnswer: 1,
-    explanation: `The passage is centred on sports day — this is the main topic.`
+    explanation: `The passage describes Sports Day and ends with the insight that HOW you compete matters — this is the main idea about sportsmanship and values.`
   },
   {
     id: 2,
     type: "reading",
     skill: "Detail",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
 
-Which statement is directly supported by details in the passage?`,
+Which events are mentioned in the passage?`,
     options: [
-      "The passage gives no details",
-      "All details are opinions",
-      "The passage includes specific factual details",
-      "Only one fact is given",
+      "Football, cricket, and swimming",
+      "Relay races, long jump, high jump, and 100-metre sprint",
+      "Chess, debate, and spelling",
+      "Only the 100-metre sprint",
     ],
-    correctAnswer: 2,
-    explanation: `The passage includes multiple specific details that directly support the topic.`
+    correctAnswer: 1,
+    explanation: `The passage lists 'relay races, the long jump, the high jump, and the 100-metre sprint.'`
   },
   {
     id: 3,
     type: "reading",
-    skill: "Inference",
-    question: `Read the passage then answer the questions.
+    skill: "Vocabulary in Context",
+    question: `Read the passage then answer the question.
 
 "Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
 
-What can you INFER from reading this passage?`,
+The word 'erupts' in 'the winning house erupts in celebration' suggests:`,
     options: [
-      "The author has no opinion",
-      "The topic is unimportant",
-      "The author finds the topic significant and wants the reader to understand it",
-      "The passage is unfinished",
+      "the house is on fire",
+      "the celebration is sudden, explosive, and overwhelming",
+      "the celebration is quiet and polite",
+      "the students are angry",
     ],
-    correctAnswer: 2,
-    explanation: `The amount of detail and language used suggest the author finds this topic important.`
+    correctAnswer: 1,
+    explanation: `'Erupts' is a volcanic metaphor — it suggests the celebration bursts out suddenly and powerfully, like a volcano.`
   },
   {
     id: 4,
     type: "reading",
-    skill: "Vocabulary in Context",
-    question: `Read the passage then answer the questions.
+    skill: "Inference",
+    question: `Read the passage then answer the question.
 
 "Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
 
-The word 'unique' most nearly means:`,
+What does 'how you compete matters just as much as whether you win' tell us about Hillside Primary's values?`,
     options: [
-      "ordinary and common",
-      "found everywhere",
-      "one-of-a-kind and special",
-      "large and impressive",
+      "Winning is everything",
+      "Only the fastest athletes deserve praise",
+      "Fair play, good sportsmanship, and participation are valued equally with winning",
+      "Only teachers care about behaviour",
     ],
     correctAnswer: 2,
-    explanation: `'Unique' means one-of-a-kind — unlike anything else.`
+    explanation: `This final statement reveals the school's ethos: the process and spirit of competition are as important as the result.`
   },
   {
     id: 5,
     type: "reading",
-    skill: "Cause and Effect",
-    question: `Read the passage then answer the questions.
+    skill: "Author's Purpose",
+    question: `Read the passage then answer the question.
 
 "Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
 
-What causes the events or situation described in the passage?`,
+Why does the author end with the phrase about HOW you compete?`,
     options: [
-      "Nothing — events happen randomly",
-      "Human actions or natural forces described in the passage",
-      "External events not mentioned",
-      "Only luck",
+      "Because the winning house always wins",
+      "To give a moral lesson that elevates the passage beyond just describing an event",
+      "To criticise the losing houses",
+      "To confuse the reader",
     ],
     correctAnswer: 1,
-    explanation: `The passage describes specific causes that lead to the events or situation it discusses.`
+    explanation: `Ending with this reflection lifts the passage from a simple description to a statement about values — a deliberate authorial choice.`
   },
   {
     id: 6,
     type: "reading",
-    skill: "Author's Purpose",
-    question: `Read the passage then answer the questions.
-
-"Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
-
-The MAIN purpose of this passage is to:`,
-    options: [
-      "Entertain with fiction",
-      "Give instructions",
-      "Inform the reader about the topic",
-      "Advertise a product",
-    ],
-    correctAnswer: 2,
-    explanation: `The passage conveys information about a topic in a clear, explanatory way.`
-  },
-  {
-    id: 7,
-    type: "reading",
-    skill: "Summarise",
-    question: `Read the passage then answer the questions.
-
-"Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
-
-Which statement BEST summarises this passage?`,
-    options: [
-      "Only one idea matters",
-      "The passage has no clear message",
-      "The passage conveys information about a specific topic in a structured way",
-      "The passage is too short to summarise",
-    ],
-    correctAnswer: 2,
-    explanation: `A good summary captures the main topic and structure of the passage.`
-  },
-  {
-    id: 8,
-    type: "reading",
     skill: "Tone",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
 
 The tone of this passage is BEST described as:`,
     options: [
-      "Angry",
-      "Informative and thoughtful",
-      "Completely humorous",
-      "Fearful",
+      "Competitive and aggressive",
+      "Warm, energetic, and celebratory — with an underlying message about good sportsmanship",
+      "Sad and reflective",
+      "Boring and factual",
     ],
     correctAnswer: 1,
-    explanation: `The language is measured and purposeful — informative and thoughtful.`
+    explanation: `The vibrant scene (house colours, cheering, celebration) and the values-based ending create an energetic yet thoughtful tone.`
+  },
+  {
+    id: 7,
+    type: "reading",
+    skill: "Text Structure",
+    question: `Read the passage then answer the question.
+
+"Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
+
+How is this passage organised?`,
+    options: [
+      "Randomly, with no clear order",
+      "It describes the event from beginning to end, then ends with a reflection on its values",
+      "It only describes the sporting events",
+      "It begins with the results and works backwards",
+    ],
+    correctAnswer: 1,
+    explanation: `The passage moves through the build-up, the events, the celebration, and ends with a broader reflection — a logical narrative structure.`
+  },
+  {
+    id: 8,
+    type: "reading",
+    skill: "Figurative Language",
+    question: `Read the passage then answer the question.
+
+"Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
+
+'Students in their house colours fill the track.' The image of house colours suggests:`,
+    options: [
+      "Students are wearing paint",
+      "The track is colourful",
+      "A sense of team pride, identity, and belonging — each colour represents a community",
+      "The school has too many students",
+    ],
+    correctAnswer: 2,
+    explanation: `House colours are a symbol of team identity and belonging — their visual presence on the track signals community, loyalty, and pride.`
   },
   {
     id: 9,
     type: "reading",
-    skill: "Text Structure",
-    question: `Read the passage then answer the questions.
+    skill: "Fact vs Opinion",
+    question: `Read the passage then answer the question.
 
 "Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
 
-How is the information in this passage MAINLY organised?`,
+Which is an OPINION about Sports Day?`,
     options: [
-      "In random order",
-      "By listing unrelated facts",
-      "In a logical sequence that builds understanding",
-      "By arguing two opposite points",
+      "Events include the relay race and long jump",
+      "The winning house erupts in celebration",
+      "Sports Day is the most exciting event of the school year",
+      "Teachers and parents line the field",
     ],
     correctAnswer: 2,
-    explanation: `The passage builds information logically, moving from one idea to the next.`
+    explanation: `'Most exciting' is a subjective judgement — an opinion. The others are facts stated in the passage.`
   },
   {
     id: 10,
     type: "reading",
-    skill: "Literal",
-    question: `Read the passage then answer the questions.
+    skill: "Summarise",
+    question: `Read the passage then answer the question.
 
 "Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
 
-What is ONE specific fact stated directly in the passage?`,
+Which BEST summarises this passage?`,
     options: [
-      "An opinion about the topic",
-      "A personal story",
-      "A verifiable detail that appears in the passage",
-      "A prediction about the future",
+      "A school holds various track and field events",
+      "Sports Day at Hillside Primary is an energetic, community event that values not just winning but the spirit in which students compete",
+      "The relay race is the most important event",
+      "Students enjoy cheering for their friends",
     ],
-    correctAnswer: 2,
-    explanation: `The passage contains at least one verifiable, directly stated fact about the topic.`
+    correctAnswer: 1,
+    explanation: `This captures the events, the community spirit, and the key message about values.`
   },
   {
     id: 11,
     type: "reading",
-    skill: "Figurative Language",
-    question: `Read the passage then answer the questions.
+    skill: "Vocabulary in Context",
+    question: `Read the passage then answer the question.
 
 "Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
 
-A writer uses vivid descriptions in the passage. This technique helps readers to:`,
+The word 'gracefully' in 'the other houses applaud gracefully' means:`,
     options: [
-      "Feel confused",
-      "Stop reading",
-      "Form a clear mental image",
-      "Focus only on facts",
+      "reluctantly and bitterly",
+      "loudly and aggressively",
+      "with dignity, good manners, and respect",
+      "quietly and reluctantly",
     ],
     correctAnswer: 2,
-    explanation: `Vivid descriptions create mental images that help readers engage with and understand the text.`
+    explanation: `'Gracefully' suggests the losing houses showed dignity and respect in defeat — an important part of sportsmanship.`
   },
   {
     id: 12,
     type: "reading",
-    skill: "Vocabulary in Context",
-    question: `Read the passage then answer the questions.
+    skill: "Character",
+    question: `Read the passage then answer the question.
 
 "Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
 
-The word 'essential' most nearly means:`,
+How would you describe the students of Hillside Primary based on this passage?`,
     options: [
-      "unnecessary",
-      "unimportant",
-      "extremely important and needed",
-      "slightly useful",
+      "Selfish and competitive only",
+      "Respectful, spirited, and good sports who value both participation and fair play",
+      "Uninterested in sport",
+      "Very quiet and shy",
     ],
-    correctAnswer: 2,
-    explanation: `'Essential' means absolutely necessary or extremely important.`
+    correctAnswer: 1,
+    explanation: `The students cheer for friends, celebrate gracefully, and their school values both competition and how it is conducted — painting them as spirited, respectful students.`
   },
   {
     id: 13,
     type: "reading",
-    skill: "Inference",
-    question: `Read the passage then answer the questions.
+    skill: "Cause and Effect",
+    question: `Read the passage then answer the question.
 
 "Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
 
-Based on this passage, what can you conclude about the topic?`,
+WHY do the other houses applaud gracefully after the results?`,
     options: [
-      "It is trivial and unimportant",
-      "It is complex but understandable when explained clearly",
-      "It is impossible to understand",
-      "It is only relevant to adults",
+      "Because they are forced to",
+      "Because applauding gracefully shows they understand and practise the school's value that how you compete matters more than winning",
+      "Because the winning house told them to",
+      "Because they also won something",
     ],
     correctAnswer: 1,
-    explanation: `The passage presents a topic in a way that makes it accessible — showing it can be understood when explained well.`
+    explanation: `Graceful applause shows the losing houses embody the school's values — sportsmanship over mere winning.`
   },
   {
     id: 14,
     type: "reading",
-    skill: "Audience",
-    question: `Read the passage then answer the questions.
+    skill: "Implied Meaning",
+    question: `Read the passage then answer the question.
 
 "Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
 
-This passage was MOST LIKELY written for:`,
+When the passage says 'how you compete matters just as much as whether you win,' it implies that:`,
     options: [
-      "Only experts in the field",
-      "Young students studying the topic",
-      "Government officials",
-      "Scientists with advanced degrees",
+      "Winning has no value",
+      "Losing teams should not receive prizes",
+      "The values shown during competition — effort, fairness, respect — are as important as the result",
+      "Only fast students deserve praise",
     ],
-    correctAnswer: 1,
-    explanation: `The language and content are pitched at a student level, suggesting the audience is young learners.`
+    correctAnswer: 2,
+    explanation: `The statement elevates effort and character over outcome — implying that the process of competing has intrinsic moral value.`
   },
   {
     id: 15,
     type: "reading",
-    skill: "Comparing Ideas",
-    question: `Read the passage then answer the questions.
+    skill: "Detail",
+    question: `Read the passage then answer the question.
 
 "Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
 
-How are different ideas or details in the passage connected?`,
+Who lines the field to offer encouragement?`,
     options: [
-      "They are unrelated",
-      "They contradict each other",
-      "They all support the main topic",
-      "They are from different sources",
+      "The school principal only",
+      "The judges",
+      "Teachers and parents",
+      "Other students",
     ],
     correctAnswer: 2,
-    explanation: `All details and ideas in the passage relate to and support the central topic.`
+    explanation: `The passage states 'Teachers and parents line the field, calling out encouragement.'`
   },
   {
     id: 16,
     type: "vocabulary",
     skill: "Synonyms",
-    question: `A SYNONYM for 'courageous' is:`,
+    question: `Which word is a SYNONYM for 'compete'?`,
     options: [
-      "fearful",
-      "cowardly",
-      "brave",
-      "timid",
+      "avoid",
+      "withdraw",
+      "contest",
+      "surrender",
     ],
     correctAnswer: 2,
-    explanation: `'Brave' and 'courageous' both mean willing to face danger or difficulty.`
+    explanation: `'Contest' means to engage in competition — a synonym for 'compete.'`
   },
   {
     id: 17,
@@ -317,33 +317,33 @@ How are different ideas or details in the passage connected?`,
     skill: "Antonyms",
     question: `The ANTONYM of 'victory' is:`,
     options: [
-      "success",
       "triumph",
-      "win",
+      "success",
+      "achievement",
       "defeat",
     ],
     correctAnswer: 3,
-    explanation: `The opposite of victory (winning) is defeat (losing).`
+    explanation: `'Defeat' (losing) is the direct opposite of 'victory' (winning).`
   },
   {
     id: 18,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `The teacher spoke in a HUSHED voice during the test. 'Hushed' means:`,
+    question: `The sprinter ran with AGILITY — changing direction instantly without losing speed. 'Agility' means:`,
     options: [
-      "very loud",
-      "whispering and quiet",
-      "angry and firm",
-      "slow and confused",
+      "slowness",
+      "strength alone",
+      "the ability to move quickly and easily with good control",
+      "endurance",
     ],
-    correctAnswer: 1,
-    explanation: `'Hushed' describes a very quiet, soft voice — appropriate for not disturbing a test.`
+    correctAnswer: 2,
+    explanation: `'Agility' is the ability to move nimbly and change direction with control — supported by 'instantly without losing speed.'`
   },
   {
     id: 19,
     type: "vocabulary",
     skill: "Figurative Language",
-    question: `'Life is a journey.' This is an example of:`,
+    question: `'The runners flew around the track.' This is an example of:`,
     options: [
       "Simile",
       "Metaphor",
@@ -351,301 +351,301 @@ How are different ideas or details in the passage connected?`,
       "Alliteration",
     ],
     correctAnswer: 1,
-    explanation: `A metaphor directly states one thing IS another. Life is directly compared to a journey.`
+    explanation: `'Flew' directly (without 'like' or 'as') compares the runners to flying objects — a metaphor suggesting extraordinary speed.`
   },
   {
     id: 20,
     type: "vocabulary",
     skill: "Word Meaning",
-    question: `The word 'preserve' means:`,
+    question: `'Sportsmanship' refers to:`,
     options: [
-      "to destroy",
-      "to forget",
-      "to keep safe and protect",
-      "to ignore completely",
+      "knowing how to throw a ball correctly",
+      "fair, respectful, and gracious behaviour during competition",
+      "only winning graciously",
+      "physical fitness and strength",
     ],
-    correctAnswer: 2,
-    explanation: `'Preserve' means to protect or maintain something so it is not lost or damaged.`
+    correctAnswer: 1,
+    explanation: `Sportsmanship is the quality of being fair, respectful, and gracious — both in winning and in losing.`
   },
   {
     id: 21,
     type: "vocabulary",
     skill: "Multiple Meaning",
-    question: `Which sentence uses 'wave' as a VERB?`,
+    question: `Which sentence uses 'track' to mean the course where races are run?`,
     options: [
-      "The wave crashed against the rocks",
-      "She gave a little wave goodbye",
-      "He began to wave his hand to get attention",
-      "The wave was enormous",
+      "She tracked the package online",
+      "Police tracked the suspect",
+      "The athletes trained on the running track",
+      "The track on the album was popular",
     ],
     correctAnswer: 2,
-    explanation: `In 'began to wave his hand,' 'wave' is a verb — it describes an action.`
+    explanation: `'Running track' uses 'track' as a noun meaning the oval course where races are held.`
   },
   {
     id: 22,
     type: "vocabulary",
-    skill: "Prefix dis-",
-    question: `The prefix 'dis-' in 'disagree' means:`,
+    skill: "Prefix over-",
+    question: `The prefix 'over-' in 'overcome' means:`,
     options: [
-      "again",
-      "very",
-      "not or opposite",
+      "under",
       "before",
+      "above or beyond — to surmount",
+      "again",
     ],
     correctAnswer: 2,
-    explanation: `'Dis-' means not or the opposite of. Disagree = not agree.`
+    explanation: `'Over-' means above or beyond. 'Overcome' = to succeed in dealing with something despite difficulty.`
   },
   {
     id: 23,
     type: "vocabulary",
-    skill: "Suffix -ly",
-    question: `Adding '-ly' to 'quiet' creates 'quietly', which is:`,
+    skill: "Suffix -ship",
+    question: `Adding '-ship' to 'champion' creates 'championship', which refers to:`,
     options: [
-      "A noun",
-      "An adjective",
-      "A verb",
-      "An adverb",
+      "a physical trophy",
+      "the position, status, or contest of being a champion",
+      "a type of sports equipment",
+      "a champion's training routine",
     ],
-    correctAnswer: 3,
-    explanation: `The suffix '-ly' typically turns adjectives into adverbs. 'Quietly' tells HOW something is done.`
+    correctAnswer: 1,
+    explanation: `'-ship' creates a noun meaning a condition, position, or quality. 'Championship' = the state or contest of being a champion.`
   },
   {
     id: 24,
     type: "vocabulary",
     skill: "Figurative Language",
-    question: `'The old house groaned in the wind.' This is:`,
+    question: `'Losing gracefully is a victory of its own.' This is a:`,
     options: [
       "Simile",
-      "Hyperbole",
       "Personification",
-      "Metaphor",
+      "Paradox — it seems contradictory but reveals a truth",
+      "Hyperbole",
     ],
     correctAnswer: 2,
-    explanation: `The house is given the human action of groaning — this is personification.`
+    explanation: `A paradox appears self-contradictory (how can losing be a victory?) but reveals a deeper truth: handling defeat with dignity is itself a kind of triumph.`
   },
   {
     id: 25,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `The chef created an ELABORATE meal with many courses. 'Elaborate' means:`,
+    question: `The athlete showed great PERSEVERANCE — practising every day despite injuries and setbacks. 'Perseverance' means:`,
     options: [
-      "simple and quick",
-      "very detailed and complex",
-      "plain and tasteless",
-      "small and basic",
+      "giving up easily",
+      "natural talent",
+      "continuing steadily despite difficulty or obstacles",
+      "short periods of effort",
     ],
-    correctAnswer: 1,
-    explanation: `An elaborate meal is complex, detailed, and carefully prepared — not simple.`
+    correctAnswer: 2,
+    explanation: `'Perseverance' is the quality of continuing in the face of obstacles — supported by 'practising every day despite injuries.'`
   },
   {
     id: 26,
     type: "grammar",
-    skill: "Noun Types",
-    question: `Which word is a COLLECTIVE NOUN?`,
+    skill: "Nouns",
+    question: `Which sentence contains BOTH a common noun and a proper noun?`,
     options: [
-      "teacher",
-      "run",
-      "flock",
-      "blue",
+      "She won a race",
+      "Athletics is exciting",
+      "Akira won the gold medal at Hillside Primary's Sports Day",
+      "The race was fast",
     ],
     correctAnswer: 2,
-    explanation: `A collective noun names a group. 'Flock' names a group of birds.`
+    explanation: `'Medal' (common noun) and 'Hillside Primary's Sports Day' (proper nouns) appear in the same sentence.`
   },
   {
     id: 27,
     type: "grammar",
-    skill: "Verb Types",
-    question: `Which sentence uses a HELPING VERB?`,
+    skill: "Verb Forms",
+    question: `Which sentence uses the PRESENT PARTICIPLE correctly?`,
     options: [
-      "She runs fast",
-      "The bird sings",
-      "He has finished his work",
-      "They played football",
+      "She was jumping when the whistle blew",
+      "She jumps over the bar",
+      "She have jumped the highest",
+      "She jumping",
     ],
-    correctAnswer: 2,
-    explanation: `'Has' is the helping (auxiliary) verb. 'Has finished' = helping + main verb.`
+    correctAnswer: 0,
+    explanation: `'Was jumping' uses the present participle (-ing) with a past auxiliary — forming the past continuous tense correctly.`
   },
   {
     id: 28,
     type: "grammar",
-    skill: "Adjectives — Superlative",
-    question: `Choose the SUPERLATIVE form of 'good':`,
+    skill: "Adverbs — Degree",
+    question: `Which word is an ADVERB OF DEGREE in: 'She ran extremely fast during the sprint.'?`,
     options: [
-      "gooder",
-      "more good",
-      "better",
-      "best",
+      "ran",
+      "fast",
+      "sprint",
+      "extremely",
     ],
     correctAnswer: 3,
-    explanation: `The superlative form of 'good' is 'best' — used to compare three or more things.`
+    explanation: `'Extremely' tells us to what degree she ran fast — it is an adverb of degree modifying the adverb 'fast.'`
   },
   {
     id: 29,
     type: "grammar",
-    skill: "Adverbs — Frequency",
-    question: `Which word is an ADVERB OF FREQUENCY?`,
+    skill: "Punctuation — Apostrophe (Plural Possessive)",
+    question: `Which correctly shows the TROPHY BELONGING TO THE ATHLETES (plural)?`,
     options: [
-      "quickly",
-      "beautiful",
-      "always",
-      "run",
+      "the athlete's trophy",
+      "the athletes's trophy",
+      "the athletes' trophy",
+      "the athletes trophy",
     ],
     correctAnswer: 2,
-    explanation: `Adverbs of frequency say how often something happens. 'Always' tells us frequency.`
+    explanation: `For a plural noun ending in 's', add only an apostrophe: athletes' trophy.`
   },
   {
     id: 30,
     type: "grammar",
-    skill: "Punctuation — Question Mark",
-    question: `Which sentence requires a QUESTION MARK?`,
+    skill: "Modal Verbs",
+    question: `Which modal verb expresses ABILITY?`,
     options: [
-      "She went to the shop",
-      "Open the window",
-      "How many books did she read",
-      "What a great day",
+      "must",
+      "should",
+      "can",
+      "will",
     ],
     correctAnswer: 2,
-    explanation: `'How many books did she read' is a question — it requires a question mark (?)`
+    explanation: `'Can' expresses the ability to do something. 'Must' = obligation; 'should' = advice; 'will' = future intention.`
   },
   {
     id: 31,
     type: "grammar",
-    skill: "Present Perfect Tense",
-    question: `Which sentence is in the PRESENT PERFECT tense?`,
+    skill: "Gerunds",
+    question: `In 'Winning the race made her very happy,' the word 'Winning' is:`,
     options: [
-      "She sang a song",
-      "She has sung a song",
-      "She will sing a song",
-      "She sings a song",
+      "A verb in the past tense",
+      "A noun (gerund) acting as the subject",
+      "An adjective describing the race",
+      "An adverb",
     ],
     correctAnswer: 1,
-    explanation: `'Has sung' uses the present perfect form: has/have + past participle.`
+    explanation: `'Winning' is a gerund — a verb form (-ing) functioning as a noun. Here it is the subject of the sentence.`
   },
   {
     id: 32,
     type: "grammar",
-    skill: "Pronouns — Possessive",
-    question: `Which is a POSSESSIVE PRONOUN?`,
+    skill: "Conditional Sentences",
+    question: `Which is a ZERO CONDITIONAL sentence (always true)?`,
     options: [
-      "I",
-      "me",
-      "mine",
-      "myself",
+      "If it rains, we will go inside",
+      "If she trained harder, she would win",
+      "If you drop the baton, you lose the relay",
+      "If they had won, they would have celebrated",
     ],
     correctAnswer: 2,
-    explanation: `Possessive pronouns show ownership without needing a noun: mine, yours, his, hers, ours, theirs.`
+    explanation: `Zero conditional: if + present simple, present simple. Used for facts that are always true — dropping the baton always results in losing the relay.`
   },
   {
     id: 33,
     type: "grammar",
-    skill: "Conjunctions — Subordinating",
-    question: `Which is a SUBORDINATING CONJUNCTION?`,
+    skill: "Reported Speech",
+    question: `Change to REPORTED SPEECH: 'I will win the race,' she said.`,
     options: [
-      "and",
-      "or",
-      "but",
-      "because",
+      "She said she will win the race",
+      "She said she would win the race",
+      "She said I would win the race",
+      "She says I will win the race",
     ],
-    correctAnswer: 3,
-    explanation: `'Because' introduces a subordinate clause explaining why. It is a subordinating conjunction.`
+    correctAnswer: 1,
+    explanation: `In reported speech, 'will' becomes 'would' and 'I' becomes 'she.' 'She said she would win the race' is correct.`
   },
   {
     id: 34,
     type: "grammar",
-    skill: "Direct Speech",
-    question: `Which sentence correctly punctuates DIRECT SPEECH?`,
+    skill: "Conjunctions — Concessive",
+    question: `Which conjunction BEST shows a contrast (despite)?`,
     options: [
-      "She said, "I am ready."",
-      "She said "I am ready"",
-      "She said, I am ready.",
-      "She said "I am ready."",
+      "because",
+      "and",
+      "although",
+      "so",
     ],
-    correctAnswer: 0,
-    explanation: `Direct speech requires a comma after the reporting verb, and the spoken words are enclosed in quotation marks.`
+    correctAnswer: 2,
+    explanation: `'Although' is a concessive conjunction — it introduces a contrasting idea: 'Although she was tired, she finished the race.'`
   },
   {
     id: 35,
     type: "grammar",
-    skill: "Sentence Types — Compound",
-    question: `A COMPOUND SENTENCE contains:`,
+    skill: "Sentence Variety",
+    question: `Which technique would MOST improve a paragraph that uses the same sentence structure repeatedly?`,
     options: [
-      "One main clause only",
-      "One main clause and one subordinate clause",
-      "Two or more main clauses joined by a conjunction",
-      "A question and a command",
+      "Adding more adjectives to each sentence",
+      "Making every sentence longer",
+      "Varying sentence length and structure — using simple, compound, and complex sentences",
+      "Removing all conjunctions",
     ],
     correctAnswer: 2,
-    explanation: `A compound sentence joins two or more independent (main) clauses, usually with conjunctions like 'and,' 'but,' or 'so.'`
+    explanation: `Sentence variety through different lengths and structures creates rhythm and maintains reader interest.`
   },
   {
     id: 36,
     type: "writing",
-    skill: "Persuasive Techniques",
-    question: `Which technique is used in PERSUASIVE writing?`,
+    skill: "Speech Writing",
+    question: `A student writes a speech about sportsmanship for the school assembly. Which feature is MOST important?`,
     options: [
-      "Using only personal stories",
-      "Avoiding any facts",
-      "Presenting evidence and strong reasons to convince the reader",
-      "Describing characters in great detail",
+      "Using very long, complicated sentences",
+      "Beginning with an engaging hook that immediately captures the audience's attention",
+      "Reading directly from notes without eye contact",
+      "Using only statistics",
     ],
-    correctAnswer: 2,
-    explanation: `Persuasive writing uses evidence, reasons, and arguments to convince the reader to agree with a point of view.`
+    correctAnswer: 1,
+    explanation: `A speech must immediately engage its audience. A strong opening hook — a question, bold statement, or anecdote — draws the audience in from the start.`
   },
   {
     id: 37,
     type: "writing",
-    skill: "Narrative Elements",
-    question: `Which element is NOT part of a narrative?`,
+    skill: "Persuasive Writing — Emotional Appeal",
+    question: `Which sentence uses EMOTIONAL APPEAL effectively in a persuasive text about sportsmanship?`,
     options: [
-      "Characters",
-      "Plot",
-      "Bibliography",
-      "Setting",
+      "Sportsmanship is statistically beneficial",
+      "Most athletes prefer fair play",
+      "Imagine standing on the track, heart pounding, knowing that your teammates believe in you — and that your actions represent all of them",
+      "Sportsmanship is defined as fair play",
     ],
     correctAnswer: 2,
-    explanation: `A bibliography lists sources — it is not part of a narrative. Characters, plot, and setting are narrative elements.`
+    explanation: `Emotional appeal places the reader in the moment, making abstract values feel personal and urgent — a powerful persuasive technique.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "Conclusion",
-    question: `A well-written conclusion should:`,
+    skill: "Using Examples",
+    question: `Why should a persuasive writer include a CONCRETE EXAMPLE?`,
     options: [
-      "Introduce a brand new idea",
-      "Copy the introduction exactly",
-      "Summarise the main points and leave the reader with a final thought",
-      "List all the facts again in full detail",
+      "To make the writing longer",
+      "To confuse the reader",
+      "To bring the argument to life with a specific, real or realistic illustration that makes the point more convincing",
+      "To avoid having to make a clear argument",
     ],
     correctAnswer: 2,
-    explanation: `A conclusion wraps up the writing by summarising key points and offering a closing thought.`
+    explanation: `Concrete examples make abstract arguments tangible and believable — a specific story or scenario is more persuasive than vague claims.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Register",
-    question: `A student writes a formal letter to a company. Which greeting is MOST appropriate?`,
+    skill: "Repetition for Effect",
+    question: `A writer uses the phrase 'We compete. We fail. We rise. We compete again.' The repetition of short sentences creates:`,
     options: [
-      "Hey there!",
-      "Yo, what's up?",
-      "Dear Sir or Madam,",
-      "Hi friend,",
+      "A boring, monotonous effect",
+      "A powerful, rhythmic emphasis on resilience — the repeated structure mirrors the cycle of competing and rising again",
+      "A grammatical error",
+      "A list of unrelated events",
     ],
-    correctAnswer: 2,
-    explanation: `'Dear Sir or Madam' is the correct formal greeting for a letter to an unknown recipient.`
+    correctAnswer: 1,
+    explanation: `Short, parallel sentences create rhythm and emphasis. The repetition mirrors the cyclic, relentless nature of athletic perseverance.`
   },
   {
     id: 40,
     type: "writing",
-    skill: "Purpose of Paragraphs",
-    question: `WHY do writers divide their writing into paragraphs?`,
+    skill: "Linking Ideas — Discourse Markers",
+    question: `Which discourse marker BEST introduces a contrasting point?`,
     options: [
-      "To fill more pages",
-      "To confuse the reader",
-      "To organise ideas clearly and make the text easier to read",
-      "To use more words",
+      "Furthermore",
+      "In addition",
+      "Similarly",
+      "Nevertheless",
     ],
-    correctAnswer: 2,
-    explanation: `Paragraphs group related ideas together, making writing organised and easier to follow.`
+    correctAnswer: 3,
+    explanation: `'Nevertheless' introduces a contrasting idea while acknowledging the previous point — perfect for presenting nuance in argument.`
   }
 ]
 
@@ -790,13 +790,7 @@ export default function G5LaEasy9MockTest() {
                 <div className="rounded-lg bg-gray-50 p-4"><p className={cn("text-2xl font-bold", color)}>{grade}</p><p className="text-sm text-slate-600">Performance</p></div>
                 <div className="rounded-lg bg-gray-50 p-4"><p className="text-sm font-semibold text-slate-700">{new Date().toLocaleDateString()}</p><p className="text-sm text-slate-600">Completed</p></div>
               </div>
-              {!isPremium && (
-                <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
-                  <p className="font-semibold text-amber-800">You completed the free preview.</p>
-                  <p className="text-sm text-amber-700">Upgrade to unlock all 40 questions.</p>
-                  <Link href="/pricing" className="mt-3 inline-block"><Button className="bg-amber-500 hover:bg-amber-600"><Crown className="mr-2 h-4 w-4" />Upgrade</Button></Link>
-                </div>
-              )}
+              {!isPremium && (<div className="rounded-lg border border-amber-200 bg-amber-50 p-4"><p className="font-semibold text-amber-800">You completed the free preview.</p><p className="text-sm text-amber-700">Upgrade to unlock all 40 questions.</p><Link href="/pricing" className="mt-3 inline-block"><Button className="bg-amber-500 hover:bg-amber-600"><Crown className="mr-2 h-4 w-4" />Upgrade</Button></Link></div>)}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {SECTION_CONFIG.map((s) => { const st = getSectionStats(s.type); return (
                   <div key={s.type} className="rounded-xl border border-blue-100 bg-blue-50 p-4">
@@ -810,10 +804,6 @@ export default function G5LaEasy9MockTest() {
                     <p className="text-xs text-slate-500 mt-1">{st.percentage}%</p>
                   </div>
                 )})}
-              </div>
-              <div className="rounded-lg border border-sky-200 bg-sky-50 p-4">
-                <h3 className="mb-2 font-semibold text-sky-800">Teacher-Style Feedback</h3>
-                <p className="text-slate-700">Review each explanation to understand why the correct answer is right. Focus on the sections where your score was lowest — re-reading passages carefully and practising grammar rules will help improve your performance.</p>
               </div>
               <div className="space-y-4">
                 {availableQuestions.map((q, i) => {
@@ -873,12 +863,7 @@ export default function G5LaEasy9MockTest() {
       </div>
       <main className="container mx-auto px-4 py-6">
         <div className="max-w-4xl mx-auto">
-          {!isPremium && (
-            <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
-              <p className="font-semibold text-amber-800">Free Preview: {FREE_QUESTION_LIMIT} of 40 questions</p>
-              <p className="text-sm text-amber-700">Upgrade to Premium to access the full test.</p>
-            </div>
-          )}
+          {!isPremium && (<div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 p-4"><p className="font-semibold text-amber-800">Free Preview: {FREE_QUESTION_LIMIT} of 40 questions</p><p className="text-sm text-amber-700">Upgrade to Premium to access the full test.</p></div>)}
           <Card className="mb-6 border-blue-100">
             <CardHeader className={cn("rounded-t-lg", secColor(q.type))}>
               <div className="flex items-center justify-between">
