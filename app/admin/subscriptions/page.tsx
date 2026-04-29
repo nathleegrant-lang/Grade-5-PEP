@@ -126,12 +126,12 @@ export default function AdminSubscriptionsPage() {
       setLoadingRows(true)
       setError("")
 
-      const { data, error } = await supabase
-        .from(TABLE_NAME)
-        .select(
-          "id,parent_name,parent_email,plan_code,amount_jmd,method,status,submitted_at,verified_at,created_at",
-        )
-        .order("created_at", { ascending: false })
+     const { data, error } = await supabase
+  .from(TABLE_NAME)
+  .select(
+    "id,parent_name,parent_email,plan_code,amount_jmd,method,status,submitted_at,verified_at,created_at",
+  )
+  .order("created_at", { ascending: false })
 
       if (error) {
         setError(error.message)
