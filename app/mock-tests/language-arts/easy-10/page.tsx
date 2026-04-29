@@ -555,10 +555,10 @@ How are different ideas or details in the passage connected?`,
     skill: "Direct Speech",
     question: `Which sentence correctly punctuates DIRECT SPEECH?`,
     options: [
-      "She said, "I am ready."",
-      "She said "I am ready"",
+      "She said, \"I am ready.\"",
+      "She said \"I am ready\"",
       "She said, I am ready.",
-      "She said "I am ready."",
+      "She said \"I am ready.\"",
     ],
     correctAnswer: 0,
     explanation: `Direct speech requires a comma after the reporting verb, and the spoken words are enclosed in quotation marks.`
