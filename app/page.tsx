@@ -25,8 +25,8 @@ export default function Home() {
               <Image
                 src="/images/home/hero-section1.png"
                 alt="Grade 5 student practising online PEP questions on a laptop"
-                width={900}
-                height={700}
+                width={400}
+                height={200}
                 className="h-full w-full object-cover"
                 priority
               />
@@ -37,18 +37,18 @@ export default function Home() {
                 <Image
                   src="/images/home/parent-support-section.png"
                   alt="Parent supporting child while reviewing online PEP progress"
-                  width={900}
-                  height={700}
+                  width={400}
+                  height={200}
                   className="h-full w-full object-cover"
                 />
               </div>
 
               <div className="relative overflow-hidden rounded-3xl shadow-md">
                 <Image
-                  src="/images/student_withworksheet.png"
+                  src="/images/home/student_withworksheet.png"
                   alt="Grade 5 student completing worksheet beside a tablet"
-                  width={900}
-                  height={700}
+                  width={400}
+                  height={200}
                   className="h-full w-full object-cover"
                 />
               </div>
@@ -73,10 +73,10 @@ export default function Home() {
 
             <div className="relative overflow-hidden rounded-3xl shadow-lg">
               <Image
-                src="/images/student_inclass1.png"
+                src="/images/home/student_inclass1.png"
                 alt="Jamaican students using laptops for online PEP practice in class"
-                width={1200}
-                height={700}
+                width={700}
+                height={200}
                 className="max-h-[520px] w-full object-cover"
               />
             </div>
