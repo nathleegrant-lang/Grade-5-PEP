@@ -17,6 +17,7 @@ import {
   Sparkles,
   BookOpen,
   RotateCcw,
+  Star,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -67,6 +68,8 @@ const writingTasks: WritingTask[] = [
       "I used information from the passage",
     ],
     wordRange: { min: 50, max: 100 },
+    modelAnswer:
+      "Trees help the environment in several ways. First, trees provide oxygen for people and animals to breathe. Second, trees give shade and help to keep the air cool. Third, trees provide homes for animals such as birds and insects. Trees also help to prevent soil erosion because their roots hold the soil together.",
   },
   {
     id: 2,
@@ -95,6 +98,8 @@ const writingTasks: WritingTask[] = [
       "I wrote a concluding sentence",
     ],
     wordRange: { min: 60, max: 120 },
+    modelAnswer:
+      "A survey was done to find the favourite school subjects of 100 Grade 5 students. Mathematics was the most popular subject, with 35 students choosing it. Physical Education was the least popular subject, with only 8 students choosing it. I noticed that more students preferred Mathematics and Language Arts than Social Studies and Physical Education. This shows that many students enjoy academic subjects.",
   },
   {
     id: 3,
@@ -123,6 +128,8 @@ const writingTasks: WritingTask[] = [
       "I signed my name",
     ],
     wordRange: { min: 70, max: 130 },
+    modelAnswer:
+      "Dear Principal,\n\nI believe the recycling program is a good idea for our school. First, it will help to reduce the amount of garbage that goes to landfills. Second, it will teach students how to protect the environment by sorting paper and plastic properly. This program can also help us keep our classrooms and school compound cleaner.\n\nYours respectfully,\nA Grade 5 Student",
   },
   {
     id: 4,
@@ -152,6 +159,8 @@ const writingTasks: WritingTask[] = [
       "My steps are in the correct order",
     ],
     wordRange: { min: 60, max: 120 },
+    modelAnswer:
+      "Plants need sunlight, water, soil, and air to grow. First, a seed is planted in the soil. Then, when the seed gets water and warmth, it begins to sprout. Next, the roots grow down into the soil to get water and nutrients. After that, the stem grows upward toward the light. Finally, leaves appear and use sunlight to make food for the plant.",
   },
 ]
 
@@ -172,6 +181,32 @@ export default function WritingTasksPage() {
   const wordCount = userWriting.trim()
     ? userWriting.trim().split(/\s+/).length
     : 0
+
+  const checkedCount = checklistItems.filter(Boolean).length
+
+  const getFeedback = () => {
+    if (!selectedTask) return null
+
+    const wordCountIsGood =
+      wordCount >= selectedTask.wordRange.min &&
+      wordCount <= selectedTask.wordRange.max
+
+    const totalItems = selectedTask.checklist.length + 1
+    const scoreItems = checkedCount + (wordCountIsGood ? 1 : 0)
+    const score = Math.round((scoreItems / totalItems) * 100)
+
+    let message = "Keep practising. Review the checklist and improve your response."
+
+    if (score >= 90) {
+      message = "Excellent work! Your response includes most of the important parts."
+    } else if (score >= 75) {
+      message = "Very good response! A small improvement could make it even stronger."
+    } else if (score >= 60) {
+      message = "Good effort. Check the missing items and add more details."
+    }
+
+    return { score, message, wordCountIsGood }
+  }
 
   const handleSelectTask = (task: WritingTask) => {
     setSelectedTask(task)
@@ -206,6 +241,8 @@ export default function WritingTasksPage() {
     setSelectedTask(null)
     handleReset()
   }
+
+  const feedback = getFeedback()
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
@@ -434,7 +471,7 @@ export default function WritingTasksPage() {
                   </CardDescription>
                 </CardHeader>
 
-                <CardContent className="space-y-3">
+                <CardContent className="space-y-4">
                   {selectedTask.checklist.map((item, index) => (
                     <button
                       key={index}
@@ -469,26 +506,43 @@ export default function WritingTasksPage() {
                     </button>
                   ))}
 
-                  <div className="border-t border-sky-200 pt-4">
-                    <div className="flex items-center justify-between">
-                      <p className="font-medium text-sky-800">
-                        You checked {checklistItems.filter(Boolean).length} of{" "}
-                        {selectedTask.checklist.length} items
-                      </p>
+                  {feedback && (
+                    <div className="space-y-4 border-t border-sky-200 pt-4">
+                      <div className="rounded-lg border bg-white p-4">
+                        <div className="flex items-center gap-2">
+                          <Star className="h-5 w-5 text-amber-500" />
+                          <p className="font-bold text-slate-800">
+                            Writing Score: {feedback.score}%
+                          </p>
+                        </div>
 
-                      {checklistItems.filter(Boolean).length ===
-                        selectedTask.checklist.length && (
-                        <Badge className="bg-sky-500">Complete!</Badge>
-                      )}
+                        <p className="mt-2 text-sm text-emerald-700">
+                          {feedback.message}
+                        </p>
+
+                        <p className="mt-2 text-sm text-slate-600">
+                          Checklist: {checkedCount} of{" "}
+                          {selectedTask.checklist.length} items checked.
+                        </p>
+
+                        <p className="text-sm text-slate-600">
+                          Word count:{" "}
+                          {feedback.wordCountIsGood
+                            ? "Within the expected range."
+                            : "Outside the expected range."}
+                        </p>
+                      </div>
+
+                      <div className="rounded-lg border border-blue-200 bg-blue-50 p-4">
+                        <h4 className="mb-2 font-bold text-blue-800">
+                          Model Answer
+                        </h4>
+                        <p className="whitespace-pre-line text-blue-700">
+                          {selectedTask.modelAnswer}
+                        </p>
+                      </div>
                     </div>
-
-                    <p className="mt-2 text-sm text-emerald-700">
-                      {checklistItems.filter(Boolean).length ===
-                      selectedTask.checklist.length
-                        ? "Excellent! Your writing includes all the important elements."
-                        : "Look at the unchecked items to see what you might add or improve."}
-                    </p>
-                  </div>
+                  )}
                 </CardContent>
               </Card>
             )}
