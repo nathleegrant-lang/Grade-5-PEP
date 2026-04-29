@@ -126,12 +126,7 @@ export default function AdminSubscriptionsPage() {
       setLoadingRows(true)
       setError("")
 
-     const { data, error } = await supabase
- .from("payments")
-  .select(
-    "id,parent_name,parent_email,plan_code,amount_jmd,method,status,submitted_at,verified_at,created_at",
-  )
-  .order("created_at", { ascending: false })
+const { data, error } = await supabase.rpc("admin_payment_report")
 
       if (error) {
         setError(error.message)
