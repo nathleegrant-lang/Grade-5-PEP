@@ -617,7 +617,7 @@ export default function G5MathEasy1MockTest() {
   if (!testStarted) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
-        <SiteHeader />
+        <Header />
         <main className="container mx-auto px-4 py-10">
           <Link href="/mock-tests/mathematics" className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-6"><ArrowLeft className="h-4 w-4 mr-2" />Back to Mathematics Mock Tests</Link>
           <Card className="max-w-2xl mx-auto shadow-lg">
@@ -671,7 +671,7 @@ export default function G5MathEasy1MockTest() {
     const score = calculateScore(); const percentage = getScorePercentage(); const { grade, color } = getGrade()
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
-        <SiteHeader />
+        <Header />
         <main className="container mx-auto px-4 py-10">
           <Card className="max-w-3xl mx-auto shadow-lg">
             <CardHeader className="text-center bg-blue-50 rounded-t-lg border-b">
@@ -709,7 +709,7 @@ export default function G5MathEasy1MockTest() {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
         <style jsx global>{`@media print { header, footer, .no-print { display: none !important; } body { background: #ffffff !important; } .report-sheet { box-shadow: none !important; border: none !important; } }`}</style>
-        <SiteHeader />
+        <Header />
         <main className="container mx-auto px-4 py-10">
           <Card className="max-w-5xl mx-auto report-sheet shadow-lg">
             <CardHeader className="bg-white border-b rounded-t-lg">
@@ -765,7 +765,7 @@ export default function G5MathEasy1MockTest() {
             <Link href="/mock-tests/mathematics" className="flex-1"><Button variant="outline" className="w-full"><Home className="h-4 w-4 mr-2" />Back to Mathematics Mock Tests</Button></Link>
           </div>
         </main>
-        <SiteFooter />
+        <Footer />
       </div>
     )
   }
