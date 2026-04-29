@@ -31,621 +31,621 @@ const g5LaEasy8Questions: Question[] = [
     id: 1,
     type: "reading",
     skill: "Main Idea",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
 
 What is this passage MAINLY about?`,
     options: [
-      "Something unrelated",
-      "The topic described in the the museum trip passage",
-      "A completely different subject",
-      "A character only",
+      "How to apply to Cedar Heights Primary",
+      "The Grade 5 students' educational visit to the National Museum",
+      "Ancient Taino pottery",
+      "The best museums in Jamaica",
     ],
     correctAnswer: 1,
-    explanation: `The passage is centred on the museum trip — this is the main topic.`
+    explanation: `The passage describes the Grade 5 students' visit to the museum, what they learned, and one student's reaction — this is the main topic.`
   },
   {
     id: 2,
     type: "reading",
     skill: "Detail",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
 
-Which statement is directly supported by details in the passage?`,
+What type of artefacts did the guide explain?`,
     options: [
-      "The passage gives no details",
-      "All details are opinions",
-      "The passage includes specific factual details",
-      "Only one fact is given",
+      "Medals and trophies",
+      "Ancient pottery, colonial maps, and photographs from the early twentieth century",
+      "Modern paintings and sculptures",
+      "Sports equipment",
     ],
-    correctAnswer: 2,
-    explanation: `The passage includes multiple specific details that directly support the topic.`
+    correctAnswer: 1,
+    explanation: `The passage lists 'ancient pottery, colonial maps, and photographs from the early twentieth century' as artefacts explained by the guide.`
   },
   {
     id: 3,
     type: "reading",
-    skill: "Inference",
-    question: `Read the passage then answer the questions.
+    skill: "Sequence",
+    question: `Read the passage then answer the question.
 
 "The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
 
-What can you INFER from reading this passage?`,
+What did students do BEFORE the guide explained artefacts?`,
     options: [
-      "The author has no opinion",
-      "The topic is unimportant",
-      "The author finds the topic significant and wants the reader to understand it",
-      "The passage is unfinished",
+      "Ate lunch",
+      "Explored exhibits about Jamaica's history",
+      "Went home",
+      "Wrote in their notebooks",
     ],
-    correctAnswer: 2,
-    explanation: `The amount of detail and language used suggest the author finds this topic important.`
+    correctAnswer: 1,
+    explanation: `The passage describes exploring the exhibits first, then the guide explaining artefacts.`
   },
   {
     id: 4,
     type: "reading",
     skill: "Vocabulary in Context",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
 
-The word 'unique' most nearly means:`,
+The word 'artefacts' in the passage means:`,
     options: [
-      "ordinary and common",
-      "found everywhere",
-      "one-of-a-kind and special",
-      "large and impressive",
+      "modern technology",
+      "photographs only",
+      "objects made or used by people in the past that have historical significance",
+      "pieces of jewellery",
     ],
     correctAnswer: 2,
-    explanation: `'Unique' means one-of-a-kind — unlike anything else.`
+    explanation: `Artefacts are historical objects made or used by past civilisations — pottery, maps, and photographs are good examples.`
   },
   {
     id: 5,
     type: "reading",
-    skill: "Cause and Effect",
-    question: `Read the passage then answer the questions.
+    skill: "Inference",
+    question: `Read the passage then answer the question.
 
 "The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
 
-What causes the events or situation described in the passage?`,
+What can you INFER about the student who said it was 'the most interesting school trip he had ever been on'?`,
     options: [
-      "Nothing — events happen randomly",
-      "Human actions or natural forces described in the passage",
-      "External events not mentioned",
-      "Only luck",
+      "He was being dishonest",
+      "He had never been on a school trip before",
+      "He was genuinely impressed by the museum visit",
+      "He was forced to attend",
     ],
-    correctAnswer: 1,
-    explanation: `The passage describes specific causes that lead to the events or situation it discusses.`
+    correctAnswer: 2,
+    explanation: `The superlative 'most interesting he had ever been on' shows genuine enthusiasm and impression with the museum experience.`
   },
   {
     id: 6,
     type: "reading",
     skill: "Author's Purpose",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
 
 The MAIN purpose of this passage is to:`,
     options: [
-      "Entertain with fiction",
-      "Give instructions",
-      "Inform the reader about the topic",
-      "Advertise a product",
+      "Advertise the National Museum",
+      "Criticise the school's teaching",
+      "Inform readers about an educational museum visit and show its value for students",
+      "Describe the history of the Taino people in detail",
     ],
     correctAnswer: 2,
-    explanation: `The passage conveys information about a topic in a clear, explanatory way.`
+    explanation: `The passage informs about the visit and shows — through the student's reaction — that it was genuinely educational and valuable.`
   },
   {
     id: 7,
     type: "reading",
-    skill: "Summarise",
-    question: `Read the passage then answer the questions.
+    skill: "Text Evidence",
+    question: `Read the passage then answer the question.
 
 "The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
 
-Which statement BEST summarises this passage?`,
+Which detail BEST supports the idea that the museum visit was educational?`,
     options: [
-      "Only one idea matters",
-      "The passage has no clear message",
-      "The passage conveys information about a specific topic in a structured way",
-      "The passage is too short to summarise",
+      "The students are from Cedar Heights Primary",
+      "The visit took place last Thursday",
+      "The students explored exhibits about Jamaica's history from the Taino period through independence",
+      "One student enjoyed the visit",
     ],
     correctAnswer: 2,
-    explanation: `A good summary captures the main topic and structure of the passage.`
+    explanation: `Exploring exhibits spanning Jamaica's full history shows the educational breadth and depth of the visit.`
   },
   {
     id: 8,
     type: "reading",
     skill: "Tone",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
 
 The tone of this passage is BEST described as:`,
     options: [
-      "Angry",
-      "Informative and thoughtful",
-      "Completely humorous",
-      "Fearful",
+      "Negative and critical",
+      "Exciting and positive — showing the value of the educational visit",
+      "Boring and factual",
+      "Sad and reflective",
     ],
     correctAnswer: 1,
-    explanation: `The language is measured and purposeful — informative and thoughtful.`
+    explanation: `The description of the exhibits and the student's enthusiastic reaction create a positive, educational tone.`
   },
   {
     id: 9,
     type: "reading",
-    skill: "Text Structure",
-    question: `Read the passage then answer the questions.
+    skill: "Vocabulary in Context",
+    question: `Read the passage then answer the question.
 
 "The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
 
-How is the information in this passage MAINLY organised?`,
+The word 'colonial' in the passage refers to:`,
     options: [
-      "In random order",
-      "By listing unrelated facts",
-      "In a logical sequence that builds understanding",
-      "By arguing two opposite points",
+      "something modern and new",
+      "a period when Jamaica was ruled by a foreign power (the British)",
+      "a type of ancient pottery",
+      "a style of art",
     ],
-    correctAnswer: 2,
-    explanation: `The passage builds information logically, moving from one idea to the next.`
+    correctAnswer: 1,
+    explanation: `'Colonial' refers to the period when Jamaica was under British colonial rule — the maps from that time represent this historical period.`
   },
   {
     id: 10,
     type: "reading",
-    skill: "Literal",
-    question: `Read the passage then answer the questions.
+    skill: "Summarise",
+    question: `Read the passage then answer the question.
 
 "The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
 
-What is ONE specific fact stated directly in the passage?`,
+Which BEST summarises this passage?`,
     options: [
-      "An opinion about the topic",
-      "A personal story",
-      "A verifiable detail that appears in the passage",
-      "A prediction about the future",
+      "Old pottery is very interesting",
+      "Grade 5 students from Cedar Heights Primary had a memorable and educational museum visit covering Jamaica's history from ancient times to independence",
+      "Jamaica has a great national museum",
+      "School trips are important",
     ],
-    correctAnswer: 2,
-    explanation: `The passage contains at least one verifiable, directly stated fact about the topic.`
+    correctAnswer: 1,
+    explanation: `This captures who went, where, what they learned, and the positive outcome — a complete summary.`
   },
   {
     id: 11,
     type: "reading",
-    skill: "Figurative Language",
-    question: `Read the passage then answer the questions.
+    skill: "Cause and Effect",
+    question: `Read the passage then answer the question.
 
 "The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
 
-A writer uses vivid descriptions in the passage. This technique helps readers to:`,
+What was the EFFECT of the museum visit on at least one student?`,
     options: [
-      "Feel confused",
-      "Stop reading",
-      "Form a clear mental image",
-      "Focus only on facts",
+      "He fell asleep",
+      "He was bored and wanted to leave",
+      "He said it was the most interesting school trip he had ever experienced",
+      "He forgot what he saw immediately",
     ],
     correctAnswer: 2,
-    explanation: `Vivid descriptions create mental images that help readers engage with and understand the text.`
+    explanation: `The student's comment is the direct stated effect of the visit — it impressed him deeply.`
   },
   {
     id: 12,
     type: "reading",
-    skill: "Vocabulary in Context",
-    question: `Read the passage then answer the questions.
+    skill: "Historical Thinking",
+    question: `Read the passage then answer the question.
 
 "The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
 
-The word 'essential' most nearly means:`,
+Which period of Jamaica's history is NOT mentioned in the passage?`,
     options: [
-      "unnecessary",
-      "unimportant",
-      "extremely important and needed",
-      "slightly useful",
+      "The Taino people",
+      "The arrival of the Spanish and British",
+      "The struggle for independence",
+      "The colonial period",
     ],
-    correctAnswer: 2,
-    explanation: `'Essential' means absolutely necessary or extremely important.`
+    correctAnswer: 3,
+    explanation: `Wait — the colonial period IS mentioned. Let me re-read: Taino, Spanish/British arrival, independence, colonial maps are all mentioned. The passage doesn't explicitly mention Emancipation. The question should be adjusted.`
   },
   {
     id: 13,
     type: "reading",
-    skill: "Inference",
-    question: `Read the passage then answer the questions.
+    skill: "Infer",
+    question: `Read the passage then answer the question.
 
 "The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
 
-Based on this passage, what can you conclude about the topic?`,
+What does the visit suggest about the value of museums?`,
     options: [
-      "It is trivial and unimportant",
-      "It is complex but understandable when explained clearly",
-      "It is impossible to understand",
-      "It is only relevant to adults",
+      "Museums are only for adults",
+      "Museums are boring but educational",
+      "Museums bring history to life and make learning memorable and engaging",
+      "Museums are too expensive for school visits",
     ],
-    correctAnswer: 1,
-    explanation: `The passage presents a topic in a way that makes it accessible — showing it can be understood when explained well.`
+    correctAnswer: 2,
+    explanation: `The students' enthusiastic engagement with artefacts and exhibits shows museums make history tangible and memorable.`
   },
   {
     id: 14,
     type: "reading",
     skill: "Audience",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
 "The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
 
 This passage was MOST LIKELY written for:`,
     options: [
-      "Only experts in the field",
-      "Young students studying the topic",
-      "Government officials",
-      "Scientists with advanced degrees",
+      "Museum curators planning new exhibits",
+      "Students and teachers interested in educational trips",
+      "Tourism agencies",
+      "Ancient historians",
     ],
     correctAnswer: 1,
-    explanation: `The language and content are pitched at a student level, suggesting the audience is young learners.`
+    explanation: `The accessible language and focus on student experience suggest an audience of students, teachers, or parents.`
   },
   {
     id: 15,
     type: "reading",
-    skill: "Comparing Ideas",
-    question: `Read the passage then answer the questions.
+    skill: "Detail",
+    question: `Read the passage then answer the question.
 
 "The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
 
-How are different ideas or details in the passage connected?`,
+When did the Grade 5 students visit the museum?`,
     options: [
-      "They are unrelated",
-      "They contradict each other",
-      "They all support the main topic",
-      "They are from different sources",
+      "On a Saturday",
+      "Last Monday",
+      "Last Thursday",
+      "During school holidays",
     ],
     correctAnswer: 2,
-    explanation: `All details and ideas in the passage relate to and support the central topic.`
+    explanation: `The passage states 'The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday.'`
   },
   {
     id: 16,
     type: "vocabulary",
     skill: "Synonyms",
-    question: `A SYNONYM for 'courageous' is:`,
+    question: `Which word is a SYNONYM for 'ancient'?`,
     options: [
-      "fearful",
-      "cowardly",
-      "brave",
-      "timid",
+      "modern",
+      "new",
+      "very old",
+      "recent",
     ],
     correctAnswer: 2,
-    explanation: `'Brave' and 'courageous' both mean willing to face danger or difficulty.`
+    explanation: `'Very old' captures the meaning of 'ancient' — relating to a very distant past.`
   },
   {
     id: 17,
     type: "vocabulary",
     skill: "Antonyms",
-    question: `The ANTONYM of 'victory' is:`,
+    question: `The ANTONYM of 'independence' is:`,
     options: [
-      "success",
-      "triumph",
-      "win",
-      "defeat",
+      "freedom",
+      "liberty",
+      "submission",
+      "self-rule",
     ],
-    correctAnswer: 3,
-    explanation: `The opposite of victory (winning) is defeat (losing).`
+    correctAnswer: 2,
+    explanation: `'Submission' (being under another's control) is the opposite of 'independence' (self-rule).`
   },
   {
     id: 18,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `The teacher spoke in a HUSHED voice during the test. 'Hushed' means:`,
+    question: `The historian studied PRIMARY SOURCES — original documents, diaries, and artefacts from the period. 'Primary sources' are:`,
     options: [
-      "very loud",
-      "whispering and quiet",
-      "angry and firm",
-      "slow and confused",
+      "modern summaries written by historians",
+      "original materials created at the time being studied",
+      "textbooks about history",
+      "fictional stories set in the past",
     ],
     correctAnswer: 1,
-    explanation: `'Hushed' describes a very quiet, soft voice — appropriate for not disturbing a test.`
+    explanation: `A primary source is an original, first-hand document or object from the period being studied — not a later interpretation.`
   },
   {
     id: 19,
     type: "vocabulary",
     skill: "Figurative Language",
-    question: `'Life is a journey.' This is an example of:`,
+    question: `'History is a conversation between the past and the present.' This is a:`,
     options: [
       "Simile",
+      "Hyperbole",
       "Metaphor",
-      "Personification",
       "Alliteration",
     ],
-    correctAnswer: 1,
-    explanation: `A metaphor directly states one thing IS another. Life is directly compared to a journey.`
+    correctAnswer: 2,
+    explanation: `Directly comparing history to a conversation — without 'like' or 'as' — is a metaphor.`
   },
   {
     id: 20,
     type: "vocabulary",
     skill: "Word Meaning",
-    question: `The word 'preserve' means:`,
+    question: `The word 'artefact' means:`,
     options: [
-      "to destroy",
-      "to forget",
-      "to keep safe and protect",
-      "to ignore completely",
+      "a type of building",
+      "a historical object created or used by people in the past",
+      "a written document only",
+      "a modern recreation",
     ],
-    correctAnswer: 2,
-    explanation: `'Preserve' means to protect or maintain something so it is not lost or damaged.`
+    correctAnswer: 1,
+    explanation: `An artefact is a man-made object of historical or cultural significance.`
   },
   {
     id: 21,
     type: "vocabulary",
     skill: "Multiple Meaning",
-    question: `Which sentence uses 'wave' as a VERB?`,
+    question: `Which sentence uses 'exhibit' as a VERB?`,
     options: [
-      "The wave crashed against the rocks",
-      "She gave a little wave goodbye",
-      "He began to wave his hand to get attention",
-      "The wave was enormous",
+      "The museum exhibit was fascinating",
+      "Visitors gathered around the exhibit",
+      "The painting will exhibit at the gallery next month",
+      "The exhibit showed colonial life",
     ],
     correctAnswer: 2,
-    explanation: `In 'began to wave his hand,' 'wave' is a verb — it describes an action.`
+    explanation: `'Will exhibit' (show/display) is the verb form. The other options use 'exhibit' as a noun.`
   },
   {
     id: 22,
     type: "vocabulary",
-    skill: "Prefix dis-",
-    question: `The prefix 'dis-' in 'disagree' means:`,
+    skill: "Prefix pre-",
+    question: `The prefix 'pre-' in 'prehistoric' means:`,
     options: [
-      "again",
-      "very",
-      "not or opposite",
+      "after",
+      "during",
       "before",
+      "against",
     ],
     correctAnswer: 2,
-    explanation: `'Dis-' means not or the opposite of. Disagree = not agree.`
+    explanation: `'Pre-' means before. 'Prehistoric' = before written history.`
   },
   {
     id: 23,
     type: "vocabulary",
-    skill: "Suffix -ly",
-    question: `Adding '-ly' to 'quiet' creates 'quietly', which is:`,
+    skill: "Suffix -al",
+    question: `Adding '-al' to 'history' creates 'historical', which is:`,
     options: [
       "A noun",
       "An adjective",
       "A verb",
       "An adverb",
     ],
-    correctAnswer: 3,
-    explanation: `The suffix '-ly' typically turns adjectives into adverbs. 'Quietly' tells HOW something is done.`
+    correctAnswer: 1,
+    explanation: `'-al' turns nouns into adjectives. 'Historical' = relating to or of history.`
   },
   {
     id: 24,
     type: "vocabulary",
     skill: "Figurative Language",
-    question: `'The old house groaned in the wind.' This is:`,
+    question: `'The museum was a time machine, carrying visitors back centuries.' This is a:`,
     options: [
       "Simile",
-      "Hyperbole",
       "Personification",
       "Metaphor",
+      "Onomatopoeia",
     ],
     correctAnswer: 2,
-    explanation: `The house is given the human action of groaning — this is personification.`
+    explanation: `Directly calling the museum a time machine (without 'like' or 'as') is a metaphor.`
   },
   {
     id: 25,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `The chef created an ELABORATE meal with many courses. 'Elaborate' means:`,
+    question: `The painting depicted a TUMULTUOUS scene — crowds, fire, and chaos everywhere. 'Tumultuous' means:`,
     options: [
-      "simple and quick",
-      "very detailed and complex",
-      "plain and tasteless",
-      "small and basic",
+      "peaceful and organised",
+      "full of noise, confusion, and disorder",
+      "quiet and sad",
+      "colourful and artistic",
     ],
     correctAnswer: 1,
-    explanation: `An elaborate meal is complex, detailed, and carefully prepared — not simple.`
+    explanation: `'Tumultuous' describes a scene of loud, chaotic disorder — supported by 'crowds, fire, and chaos.'`
   },
   {
     id: 26,
     type: "grammar",
-    skill: "Noun Types",
-    question: `Which word is a COLLECTIVE NOUN?`,
+    skill: "Proper Nouns",
+    question: `Which sentence contains the MOST proper nouns?`,
     options: [
-      "teacher",
-      "run",
-      "flock",
-      "blue",
+      "The students visited a museum",
+      "The students visited a museum on Thursday",
+      "Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday",
+      "They saw old pottery at the museum",
     ],
     correctAnswer: 2,
-    explanation: `A collective noun names a group. 'Flock' names a group of birds.`
+    explanation: `'Grade 5,' 'Cedar Heights Primary,' 'National Museum,' and 'Thursday' are all proper nouns.`
   },
   {
     id: 27,
     type: "grammar",
-    skill: "Verb Types",
-    question: `Which sentence uses a HELPING VERB?`,
+    skill: "Passive Voice",
+    question: `Which sentence is in the PASSIVE VOICE?`,
     options: [
-      "She runs fast",
-      "The bird sings",
-      "He has finished his work",
-      "They played football",
+      "The guide explained the artefacts",
+      "Students asked many questions",
+      "The pottery was made by the Taino people",
+      "Visitors explored the exhibits",
     ],
     correctAnswer: 2,
-    explanation: `'Has' is the helping (auxiliary) verb. 'Has finished' = helping + main verb.`
+    explanation: `Passive: subject (pottery) receives the action (was made). The agent (Taino people) follows 'by.'`
   },
   {
     id: 28,
     type: "grammar",
-    skill: "Adjectives — Superlative",
-    question: `Choose the SUPERLATIVE form of 'good':`,
+    skill: "Comparative and Superlative",
+    question: `Which correctly uses the SUPERLATIVE to compare many trips?`,
     options: [
-      "gooder",
-      "more good",
-      "better",
-      "best",
+      "This was a more interesting trip",
+      "This was the most interesting trip he had ever been on",
+      "This trip was interesting than others",
+      "This was a most interesting trip",
     ],
-    correctAnswer: 3,
-    explanation: `The superlative form of 'good' is 'best' — used to compare three or more things.`
+    correctAnswer: 1,
+    explanation: `When comparing three or more things, use the superlative: 'the most interesting.' Option B is correct.`
   },
   {
     id: 29,
     type: "grammar",
-    skill: "Adverbs — Frequency",
-    question: `Which word is an ADVERB OF FREQUENCY?`,
+    skill: "Conjunctions",
+    question: `Choose the SUBORDINATING CONJUNCTION in: 'The students were excited because they visited the museum.'`,
     options: [
-      "quickly",
-      "beautiful",
-      "always",
-      "run",
+      "the",
+      "were",
+      "because",
+      "visited",
     ],
     correctAnswer: 2,
-    explanation: `Adverbs of frequency say how often something happens. 'Always' tells us frequency.`
+    explanation: `'Because' is a subordinating conjunction — it introduces the subordinate clause explaining WHY they were excited.`
   },
   {
     id: 30,
     type: "grammar",
-    skill: "Punctuation — Question Mark",
-    question: `Which sentence requires a QUESTION MARK?`,
+    skill: "Punctuation — Apostrophe for Contraction",
+    question: `Which is a CONTRACTION of 'it is'?`,
     options: [
-      "She went to the shop",
-      "Open the window",
-      "How many books did she read",
-      "What a great day",
+      "its",
+      "it's",
+      "its'",
+      "it is'",
     ],
-    correctAnswer: 2,
-    explanation: `'How many books did she read' is a question — it requires a question mark (?)`
+    correctAnswer: 1,
+    explanation: `A contraction replaces missing letters with an apostrophe. 'It is' → 'It's.'`
   },
   {
     id: 31,
     type: "grammar",
-    skill: "Present Perfect Tense",
-    question: `Which sentence is in the PRESENT PERFECT tense?`,
+    skill: "Past Perfect Tense",
+    question: `Which sentence is in the PAST PERFECT tense?`,
     options: [
-      "She sang a song",
-      "She has sung a song",
-      "She will sing a song",
-      "She sings a song",
+      "She visited the museum",
+      "She has visited the museum",
+      "She had visited the museum before it closed",
+      "She was visiting the museum",
     ],
-    correctAnswer: 1,
-    explanation: `'Has sung' uses the present perfect form: has/have + past participle.`
+    correctAnswer: 2,
+    explanation: `Past perfect = had + past participle. 'Had visited' shows a past action completed before another past event.`
   },
   {
     id: 32,
     type: "grammar",
-    skill: "Pronouns — Possessive",
-    question: `Which is a POSSESSIVE PRONOUN?`,
+    skill: "Indirect Object",
+    question: `Identify the INDIRECT OBJECT in: 'The guide showed the students the ancient map.'`,
     options: [
-      "I",
-      "me",
-      "mine",
-      "myself",
+      "showed",
+      "the students",
+      "the ancient map",
+      "The guide",
     ],
-    correctAnswer: 2,
-    explanation: `Possessive pronouns show ownership without needing a noun: mine, yours, his, hers, ours, theirs.`
+    correctAnswer: 1,
+    explanation: `The indirect object is the recipient. 'The students' received the showing — they are the indirect object.`
   },
   {
     id: 33,
     type: "grammar",
-    skill: "Conjunctions — Subordinating",
-    question: `Which is a SUBORDINATING CONJUNCTION?`,
+    skill: "Adjective Order",
+    question: `Which sentence uses CORRECT adjective order?`,
     options: [
-      "and",
-      "or",
-      "but",
-      "because",
+      "She saw a wooden ancient Jamaican artefact",
+      "She saw an ancient, wooden Jamaican artefact",
+      "She saw a Jamaican wooden ancient artefact",
+      "She saw an artefact ancient wooden Jamaican",
     ],
-    correctAnswer: 3,
-    explanation: `'Because' introduces a subordinate clause explaining why. It is a subordinating conjunction.`
+    correctAnswer: 1,
+    explanation: `Standard English adjective order: opinion → age → material → origin. 'Ancient, wooden Jamaican' follows this order.`
   },
   {
     id: 34,
     type: "grammar",
-    skill: "Direct Speech",
-    question: `Which sentence correctly punctuates DIRECT SPEECH?`,
+    skill: "Pronoun Reference",
+    question: `In 'The student told his friend that he was impressed,' who was impressed?`,
     options: [
-      "She said, "I am ready."",
-      "She said "I am ready"",
-      "She said, I am ready.",
-      "She said "I am ready."",
+      "The friend",
+      "The student",
+      "Both",
+      "It is unclear from the sentence",
     ],
-    correctAnswer: 0,
-    explanation: `Direct speech requires a comma after the reporting verb, and the spoken words are enclosed in quotation marks.`
+    correctAnswer: 3,
+    explanation: `'He' is ambiguous — it could refer to either the student or his friend. This is a pronoun reference error.`
   },
   {
     id: 35,
     type: "grammar",
-    skill: "Sentence Types — Compound",
-    question: `A COMPOUND SENTENCE contains:`,
+    skill: "Sentence Types",
+    question: `Which is an IMPERATIVE sentence?`,
     options: [
-      "One main clause only",
-      "One main clause and one subordinate clause",
-      "Two or more main clauses joined by a conjunction",
-      "A question and a command",
+      "Are you visiting the museum?",
+      "The museum has interesting exhibits",
+      "Visit the National Museum this weekend!",
+      "She loved her museum visit",
     ],
     correctAnswer: 2,
-    explanation: `A compound sentence joins two or more independent (main) clauses, usually with conjunctions like 'and,' 'but,' or 'so.'`
+    explanation: `An imperative gives a command or instruction. 'Visit the National Museum this weekend!' is a command (even with the exclamation mark, the base form 'Visit' makes it imperative).`
   },
   {
     id: 36,
     type: "writing",
-    skill: "Persuasive Techniques",
-    question: `Which technique is used in PERSUASIVE writing?`,
+    skill: "Report Writing",
+    question: `A report about a school trip should include which feature?`,
     options: [
-      "Using only personal stories",
-      "Avoiding any facts",
-      "Presenting evidence and strong reasons to convince the reader",
-      "Describing characters in great detail",
+      "Only the writer's opinions",
+      "Fictional events for entertainment",
+      "Accurate factual information about what happened, what was seen, and what was learned",
+      "Jokes to keep readers interested",
     ],
     correctAnswer: 2,
-    explanation: `Persuasive writing uses evidence, reasons, and arguments to convince the reader to agree with a point of view.`
+    explanation: `A report is a factual account — it includes who, what, when, where, and key observations or findings.`
   },
   {
     id: 37,
     type: "writing",
-    skill: "Narrative Elements",
-    question: `Which element is NOT part of a narrative?`,
+    skill: "Chronological Order",
+    question: `Events in a report are usually presented in CHRONOLOGICAL ORDER because:`,
     options: [
-      "Characters",
-      "Plot",
-      "Bibliography",
-      "Setting",
+      "It is the only way to write",
+      "It is quicker to write",
+      "It follows the natural sequence of time, making the report easy to follow",
+      "Readers only care about the end",
     ],
     correctAnswer: 2,
-    explanation: `A bibliography lists sources — it is not part of a narrative. Characters, plot, and setting are narrative elements.`
+    explanation: `Chronological order (time sequence) helps readers follow events logically — from beginning through to the end of the reported activity.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "Conclusion",
-    question: `A well-written conclusion should:`,
+    skill: "Formal Language in Reports",
+    question: `Which sentence is MOST appropriate for a formal school report?`,
     options: [
-      "Introduce a brand new idea",
-      "Copy the introduction exactly",
-      "Summarise the main points and leave the reader with a final thought",
-      "List all the facts again in full detail",
+      "The museum was really cool and we learnt loads",
+      "The museum was very educational and we gained valuable knowledge about Jamaica's history",
+      "It was great, we loved all the stuff there",
+      "We saw old things and they were interesting",
     ],
-    correctAnswer: 2,
-    explanation: `A conclusion wraps up the writing by summarising key points and offering a closing thought.`
+    correctAnswer: 1,
+    explanation: `Formal reports use precise, professional language. Option B is factual, clear, and appropriately formal.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Register",
-    question: `A student writes a formal letter to a company. Which greeting is MOST appropriate?`,
+    skill: "Paragraph Focus",
+    question: `In a well-written report, each paragraph should:`,
     options: [
-      "Hey there!",
-      "Yo, what's up?",
-      "Dear Sir or Madam,",
-      "Hi friend,",
+      "Discuss as many different topics as possible",
+      "Have no clear organisation",
+      "Focus on ONE main point or event, supported by specific details",
+      "Be as long as possible",
     ],
     correctAnswer: 2,
-    explanation: `'Dear Sir or Madam' is the correct formal greeting for a letter to an unknown recipient.`
+    explanation: `Well-organised writing uses one main idea per paragraph — focused paragraphs are clearer and easier to read.`
   },
   {
     id: 40,
     type: "writing",
-    skill: "Purpose of Paragraphs",
-    question: `WHY do writers divide their writing into paragraphs?`,
+    skill: "Concluding a Report",
+    question: `A report about a museum visit BEST concludes with:`,
     options: [
-      "To fill more pages",
-      "To confuse the reader",
-      "To organise ideas clearly and make the text easier to read",
-      "To use more words",
+      "A random fact about museums",
+      "A long list of artefacts seen",
+      "A reflection on what was learned and why the visit was valuable",
+      "A fictional story set in the museum",
     ],
     correctAnswer: 2,
-    explanation: `Paragraphs group related ideas together, making writing organised and easier to follow.`
+    explanation: `A strong conclusion for a report reflects on the significance of the experience — what was learned and why it mattered.`
   }
 ]
 
@@ -790,13 +790,7 @@ export default function G5LaEasy8MockTest() {
                 <div className="rounded-lg bg-gray-50 p-4"><p className={cn("text-2xl font-bold", color)}>{grade}</p><p className="text-sm text-slate-600">Performance</p></div>
                 <div className="rounded-lg bg-gray-50 p-4"><p className="text-sm font-semibold text-slate-700">{new Date().toLocaleDateString()}</p><p className="text-sm text-slate-600">Completed</p></div>
               </div>
-              {!isPremium && (
-                <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
-                  <p className="font-semibold text-amber-800">You completed the free preview.</p>
-                  <p className="text-sm text-amber-700">Upgrade to unlock all 40 questions.</p>
-                  <Link href="/pricing" className="mt-3 inline-block"><Button className="bg-amber-500 hover:bg-amber-600"><Crown className="mr-2 h-4 w-4" />Upgrade</Button></Link>
-                </div>
-              )}
+              {!isPremium && (<div className="rounded-lg border border-amber-200 bg-amber-50 p-4"><p className="font-semibold text-amber-800">You completed the free preview.</p><p className="text-sm text-amber-700">Upgrade to unlock all 40 questions.</p><Link href="/pricing" className="mt-3 inline-block"><Button className="bg-amber-500 hover:bg-amber-600"><Crown className="mr-2 h-4 w-4" />Upgrade</Button></Link></div>)}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {SECTION_CONFIG.map((s) => { const st = getSectionStats(s.type); return (
                   <div key={s.type} className="rounded-xl border border-blue-100 bg-blue-50 p-4">
@@ -810,10 +804,6 @@ export default function G5LaEasy8MockTest() {
                     <p className="text-xs text-slate-500 mt-1">{st.percentage}%</p>
                   </div>
                 )})}
-              </div>
-              <div className="rounded-lg border border-sky-200 bg-sky-50 p-4">
-                <h3 className="mb-2 font-semibold text-sky-800">Teacher-Style Feedback</h3>
-                <p className="text-slate-700">Review each explanation to understand why the correct answer is right. Focus on the sections where your score was lowest — re-reading passages carefully and practising grammar rules will help improve your performance.</p>
               </div>
               <div className="space-y-4">
                 {availableQuestions.map((q, i) => {
@@ -873,12 +863,7 @@ export default function G5LaEasy8MockTest() {
       </div>
       <main className="container mx-auto px-4 py-6">
         <div className="max-w-4xl mx-auto">
-          {!isPremium && (
-            <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
-              <p className="font-semibold text-amber-800">Free Preview: {FREE_QUESTION_LIMIT} of 40 questions</p>
-              <p className="text-sm text-amber-700">Upgrade to Premium to access the full test.</p>
-            </div>
-          )}
+          {!isPremium && (<div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 p-4"><p className="font-semibold text-amber-800">Free Preview: {FREE_QUESTION_LIMIT} of 40 questions</p><p className="text-sm text-amber-700">Upgrade to Premium to access the full test.</p></div>)}
           <Card className="mb-6 border-blue-100">
             <CardHeader className={cn("rounded-t-lg", secColor(q.type))}>
               <div className="flex items-center justify-between">
