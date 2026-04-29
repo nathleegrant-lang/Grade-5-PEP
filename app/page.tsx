@@ -1,3 +1,5 @@
+import Image from "next/image"
+import Link from "next/link"
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
 import { WelcomeCard } from "@/components/welcome-card"
@@ -8,33 +10,96 @@ import { Footer } from "@/components/footer"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { PenTool, FileText, ClipboardCheck } from "lucide-react"
-import Link from "next/link"
 
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-white">
       <Header />
+
       <main className="flex-1">
         <HeroSection />
+
+        <section className="max-w-6xl mx-auto px-4 pt-10">
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="relative overflow-hidden rounded-3xl shadow-lg">
+              <Image
+                src="/images/hero-section1.png"
+                alt="Grade 5 student practising online PEP questions on a laptop"
+                width={900}
+                height={700}
+                className="h-full w-full object-cover"
+                priority
+              />
+            </div>
+
+            <div className="grid gap-6">
+              <div className="relative overflow-hidden rounded-3xl shadow-md">
+                <Image
+                  src="/images/parent-support-section.png"
+                  alt="Parent supporting child while reviewing online PEP progress"
+                  width={900}
+                  height={700}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+
+              <div className="relative overflow-hidden rounded-3xl shadow-md">
+                <Image
+                  src="/images/student_withworksheet.png"
+                  alt="Grade 5 student completing worksheet beside a tablet"
+                  width={900}
+                  height={700}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
         <div className="max-w-6xl mx-auto px-4 py-12 space-y-12">
           <WelcomeCard />
           <HowToUse />
           <SubjectCards />
-          
-          {/* Additional Resources Section */}
+
           <section>
-            <h2 className="text-2xl font-bold text-[#1e3a5f] mb-2 text-center">More Practice Resources</h2>
-            <p className="text-gray-600 mb-8 text-center">Additional tools to help you prepare for the PEP examination</p>
-            
+            <div className="mb-8 text-center">
+              <h2 className="text-2xl font-bold text-[#1e3a5f] mb-2">
+                Learning That Feels Real and Supportive
+              </h2>
+              <p className="text-gray-600">
+                Students can practise online, complete worksheets, and review progress with family support.
+              </p>
+            </div>
+
+            <div className="relative overflow-hidden rounded-3xl shadow-lg">
+              <Image
+                src="/images/student_inclass1.png"
+                alt="Jamaican students using laptops for online PEP practice in class"
+                width={1200}
+                height={700}
+                className="max-h-[520px] w-full object-cover"
+              />
+            </div>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-[#1e3a5f] mb-2 text-center">
+              More Practice Resources
+            </h2>
+            <p className="text-gray-600 mb-8 text-center">
+              Additional tools to help you prepare for the PEP examination
+            </p>
+
             <div className="grid md:grid-cols-3 gap-6">
-              {/* Writing Practice */}
               <Link href="/writing-practice">
                 <Card className="border-2 border-gray-200 hover:border-[#0d9488] hover:shadow-lg transition-all cursor-pointer h-full">
                   <CardContent className="p-6 text-center">
                     <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center mx-auto mb-4">
                       <PenTool className="w-8 h-8 text-white" />
                     </div>
-                    <h3 className="text-lg font-bold text-[#1e3a5f] mb-2">Writing Practice</h3>
+                    <h3 className="text-lg font-bold text-[#1e3a5f] mb-2">
+                      Writing Practice
+                    </h3>
                     <p className="text-gray-600 text-sm mb-4">
                       Performance task writing prompts with hints and marking rubrics
                     </p>
@@ -44,15 +109,16 @@ export default function Home() {
                   </CardContent>
                 </Card>
               </Link>
-              
-              {/* Printable Worksheets */}
+
               <Link href="/worksheets">
                 <Card className="border-2 border-gray-200 hover:border-[#f59e0b] hover:shadow-lg transition-all cursor-pointer h-full">
                   <CardContent className="p-6 text-center">
                     <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center mx-auto mb-4">
                       <FileText className="w-8 h-8 text-white" />
                     </div>
-                    <h3 className="text-lg font-bold text-[#1e3a5f] mb-2">Printable Worksheets</h3>
+                    <h3 className="text-lg font-bold text-[#1e3a5f] mb-2">
+                      Printable Worksheets
+                    </h3>
                     <p className="text-gray-600 text-sm mb-4">
                       Download and print worksheets for offline practice
                     </p>
@@ -62,15 +128,16 @@ export default function Home() {
                   </CardContent>
                 </Card>
               </Link>
-              
-              {/* Full Mock Exam */}
+
               <Link href="/full-mock-exam">
                 <Card className="border-2 border-gray-200 hover:border-purple-500 hover:shadow-lg transition-all cursor-pointer h-full">
                   <CardContent className="p-6 text-center">
                     <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center mx-auto mb-4">
                       <ClipboardCheck className="w-8 h-8 text-white" />
                     </div>
-                    <h3 className="text-lg font-bold text-[#1e3a5f] mb-2">Full Mock Exam</h3>
+                    <h3 className="text-lg font-bold text-[#1e3a5f] mb-2">
+                      Full Mock Exam
+                    </h3>
                     <p className="text-gray-600 text-sm mb-4">
                       Complete PEP-style examination covering all subjects
                     </p>
@@ -83,8 +150,10 @@ export default function Home() {
             </div>
           </section>
         </div>
+
         <ColorBar />
       </main>
+
       <Footer />
     </div>
   )
