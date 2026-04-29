@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { createBrowserClient } from "@supabase/ssr"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
@@ -15,6 +14,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { useAuth } from "@/contexts/auth-context"
+import { getSupabaseBrowserClient } from "@/lib/supabase/client"
 import { ArrowLeft, FileText, Search } from "lucide-react"
 
 type SubscriptionRow = {
@@ -29,8 +29,6 @@ type SubscriptionRow = {
   verified_at: string | null
   created_at: string | null
 }
-
-const TABLE_NAME = "payments"
 
 function formatDate(value: string | null) {
   if (!value) return "—"
@@ -54,7 +52,6 @@ function formatMoney(value: number | null) {
 
 function getExpiryDate(row: SubscriptionRow) {
   const startDate = row.verified_at || row.submitted_at || row.created_at
-
   if (!startDate) return "—"
 
   const expiry = new Date(startDate)
@@ -78,17 +75,9 @@ function getExpiryDate(row: SubscriptionRow) {
 function getStatusBadge(status: string | null) {
   const value = status || "unknown"
 
-  if (value === "verified") {
-    return "bg-green-100 text-green-700 border-green-200"
-  }
-
-  if (value === "pending") {
-    return "bg-amber-100 text-amber-700 border-amber-200"
-  }
-
-  if (value === "rejected") {
-    return "bg-red-100 text-red-700 border-red-200"
-  }
+  if (value === "verified") return "bg-green-100 text-green-700 border-green-200"
+  if (value === "pending") return "bg-amber-100 text-amber-700 border-amber-200"
+  if (value === "rejected") return "bg-red-100 text-red-700 border-red-200"
 
   return "bg-slate-100 text-slate-700 border-slate-200"
 }
@@ -96,17 +85,12 @@ function getStatusBadge(status: string | null) {
 export default function AdminSubscriptionsPage() {
   const router = useRouter()
   const { isAuthenticated, isLoading, isAdmin } = useAuth()
+  const supabase = useMemo(() => getSupabaseBrowserClient(), [])
+
   const [rows, setRows] = useState<SubscriptionRow[]>([])
   const [loadingRows, setLoadingRows] = useState(true)
   const [error, setError] = useState("")
   const [search, setSearch] = useState("")
-
-  const supabase = useMemo(() => {
-    return createBrowserClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
-    )
-  }, [])
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
@@ -126,20 +110,23 @@ export default function AdminSubscriptionsPage() {
       setLoadingRows(true)
       setError("")
 
-await supabase.auth.getSession()
+      const { data, error } = await supabase
+        .from("payments")
+        .select("*")
+        .eq("grade", "grade5")
+        .order("submitted_at", { ascending: false })
 
-const { data, error } = await supabase.rpc("admin_payment_report")
       if (error) {
-        setError(error.message)
+        setError(error.message || "Could not load subscription report.")
         setRows([])
       } else {
-        setRows(data || [])
+        setRows((data || []) as SubscriptionRow[])
       }
 
       setLoadingRows(false)
     }
 
-    loadReport()
+    void loadReport()
   }, [isAuthenticated, isAdmin, supabase])
 
   const filteredRows = rows.filter((row) => {
@@ -153,7 +140,7 @@ const { data, error } = await supabase.rpc("admin_payment_report")
     )
   })
 
-  if (isLoading) {
+  if (isLoading || loadingRows) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50 flex items-center justify-center">
         <p className="text-slate-600">Loading subscription report...</p>
@@ -179,20 +166,17 @@ const { data, error } = await supabase.rpc("admin_payment_report")
           <Card className="border-sky-200 shadow-sm">
             <CardHeader>
               <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                <div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
-                      <FileText className="h-6 w-6 text-purple-600" />
-                    </div>
-                    <div>
-                      <CardTitle className="text-2xl text-slate-800">
-                        Subscription Report
-                      </CardTitle>
-                      <CardDescription>
-                        Parents, subscription plan, payment status, and expiry
-                        date.
-                      </CardDescription>
-                    </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
+                    <FileText className="h-6 w-6 text-purple-600" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-2xl text-slate-800">
+                      Subscription Report
+                    </CardTitle>
+                    <CardDescription>
+                      Parents, subscription plan, payment status, and expiry date.
+                    </CardDescription>
                   </div>
                 </div>
 
@@ -209,9 +193,7 @@ const { data, error } = await supabase.rpc("admin_payment_report")
             </CardHeader>
 
             <CardContent>
-              {loadingRows ? (
-                <p className="text-slate-600">Loading report...</p>
-              ) : error ? (
+              {error ? (
                 <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-red-700">
                   {error}
                 </div>
@@ -230,6 +212,7 @@ const { data, error } = await supabase.rpc("admin_payment_report")
                         <th className="px-4 py-3 font-semibold">Amount</th>
                         <th className="px-4 py-3 font-semibold">Method</th>
                         <th className="px-4 py-3 font-semibold">Status</th>
+                        <th className="px-4 py-3 font-semibold">Submitted</th>
                         <th className="px-4 py-3 font-semibold">Verified</th>
                         <th className="px-4 py-3 font-semibold">Expiry</th>
                       </tr>
@@ -264,6 +247,9 @@ const { data, error } = await supabase.rpc("admin_payment_report")
                             >
                               {row.status || "unknown"}
                             </span>
+                          </td>
+                          <td className="px-4 py-3 text-slate-700">
+                            {formatDate(row.submitted_at)}
                           </td>
                           <td className="px-4 py-3 text-slate-700">
                             {formatDate(row.verified_at)}
