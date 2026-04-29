@@ -37,6 +37,7 @@ interface WritingTask {
   guidelines: string[]
   checklist: string[]
   wordRange: { min: number; max: number }
+  modelAnswer: string
 }
 
 const writingTasks: WritingTask[] = [
