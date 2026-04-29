@@ -247,15 +247,17 @@ function CheckoutContent() {
     }
 
     const { error: insertError } = await supabase.from("payments").insert({
-      parent_id: user.id,
-      grade: "grade5",
-      plan_code: plan.id,
-      amount_jmd: plan.priceJMD,
-      method: "bank_transfer",
-      reference_code: referenceCode || null,
-      note: note || null,
-      status: "pending",
-    })
+  parent_id: user.id,
+  grade: "grade5",
+  plan_code: plan.id,
+  amount_jmd: plan.priceJMD,
+  method: "bank_transfer",
+  reference_code: referenceCode || null,
+  note: note || null,
+  status: "pending",
+  parent_name: user.parentName,
+  parent_email: user.email,
+})
 
     if (insertError) {
       if (insertError.code === "23505") {
