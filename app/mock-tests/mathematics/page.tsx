@@ -3,6 +3,12 @@ import { Footer } from "@/components/footer"
 import SubjectLevelCard from "@/components/mock-tests/subject-level-card"
 import { getSubjectCatalog } from "@/lib/mock-catalog"
 
+export const metadata = {
+  title: "Grade 5 PEP Mathematics Mock Tests",
+  description:
+    "Grade 5 PEP Mathematics mock tests with easy, moderate, difficult, and mixed practice levels.",
+}
+
 export default function MathematicsCategoryPage() {
   const catalog = getSubjectCatalog("numeracy")
 
@@ -11,18 +17,20 @@ export default function MathematicsCategoryPage() {
       <Header />
 
       <main className="container mx-auto px-4 py-10">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-10">
-            <h1 className="text-4xl font-bold text-slate-800 mb-3">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-10 text-center">
+            <h1 className="mb-3 text-4xl font-bold text-slate-800">
               Mathematics Mock Tests
             </h1>
             <p className="text-slate-600">
-              Build confidence in number work, measurement, geometry, and data handling with levelled practice.
+              Build confidence in number work, measurement, geometry, and data
+              handling with levelled Grade 5 PEP practice.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <SubjectLevelCard
+              grade="grade5"
               subject="numeracy"
               level="easy"
               availableTests={catalog.easy}
@@ -36,6 +44,7 @@ export default function MathematicsCategoryPage() {
             />
 
             <SubjectLevelCard
+              grade="grade5"
               subject="numeracy"
               level="moderate"
               availableTests={catalog.moderate}
@@ -49,6 +58,7 @@ export default function MathematicsCategoryPage() {
             />
 
             <SubjectLevelCard
+              grade="grade5"
               subject="numeracy"
               level="difficult"
               availableTests={catalog.difficult}
@@ -62,6 +72,7 @@ export default function MathematicsCategoryPage() {
             />
 
             <SubjectLevelCard
+              grade="grade5"
               subject="numeracy"
               level="mixed"
               availableTests={catalog.mixed}
