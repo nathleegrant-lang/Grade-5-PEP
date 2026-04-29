@@ -471,10 +471,10 @@ When the passage says Miss Lou 'insisted that ordinary Jamaican people deserved 
     skill: "Punctuation",
     question: `Which sentence punctuates a DIRECT QUOTE correctly?`,
     options: [
-      "Miss Lou said "I will not apologise for speaking my language".",
-      "Miss Lou said, "I will not apologise for speaking my language."",
-      "Miss Lou said "I will not apologise, for speaking my language."",
-      "Miss Lou said. "I will not apologise for speaking my language"",
+      "Miss Lou said \"I will not apologise for speaking my language\".",
+      "Miss Lou said, \"I will not apologise for speaking my language.\"",
+      "Miss Lou said \"I will not apologise, for speaking my language.\"",
+      "Miss Lou said. \"I will not apologise for speaking my language\"",
     ],
     correctAnswer: 1,
     explanation: `Direct speech: comma after reporting verb, opening quote, capital letter, closing punctuation BEFORE final quote mark.`
