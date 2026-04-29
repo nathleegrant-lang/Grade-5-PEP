@@ -19,7 +19,18 @@ export default function Home() {
       <main className="flex-1">
         <HeroSection />
 
-       
+        <section className="max-w-6xl mx-auto px-4 pt-10">
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="relative overflow-hidden rounded-3xl shadow-lg">
+              <Image
+                src="/images/home/hero-section1.png"
+                alt="Grade 5 student practising online PEP questions on a laptop"
+                width={200}
+                height={100}
+                className="h-full w-full object-cover"
+                priority
+              />
+            </div>
 
             <div className="grid gap-6">
               <div className="relative overflow-hidden rounded-3xl shadow-md">
