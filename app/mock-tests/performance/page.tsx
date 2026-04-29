@@ -1,5 +1,5 @@
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
+import { Header } from "@/components/header"
+import { Footer } from "@/components/footer"
 import SubjectLevelCard from "@/components/mock-tests/subject-level-card"
 import { getSubjectCatalog } from "@/lib/mock-catalog"
 
@@ -14,7 +14,7 @@ export default function PerformanceCategoryPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
-      <SiteHeader />
+      <Header />
 
       <main className="container mx-auto px-4 py-10">
         <div className="mx-auto max-w-5xl">
@@ -88,7 +88,7 @@ export default function PerformanceCategoryPage() {
         </div>
       </main>
 
-      <SiteFooter />
+      <Footer />
     </div>
   )
 }
