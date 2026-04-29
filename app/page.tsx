@@ -19,25 +19,14 @@ export default function Home() {
       <main className="flex-1">
         <HeroSection />
 
-        <section className="max-w-6xl mx-auto px-4 pt-10">
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="relative overflow-hidden rounded-3xl shadow-lg">
-              <Image
-                src="/images/home/hero-section1.png"
-                alt="Grade 5 student practising online PEP questions on a laptop"
-                width={600}
-                height={100}
-                className="h-full w-full object-cover"
-                priority
-              />
-            </div>
+       
 
             <div className="grid gap-6">
               <div className="relative overflow-hidden rounded-3xl shadow-md">
                 <Image
                   src="/images/home/parent-support-section.png"
                   alt="Parent supporting child while reviewing online PEP progress"
-                  width={600}
+                  width={200}
                   height={100}
                   className="h-full w-full object-cover"
                 />
@@ -47,8 +36,8 @@ export default function Home() {
                 <Image
                   src="/images/home/student_withworksheet.png"
                   alt="Grade 5 student completing worksheet beside a tablet"
-                  width={700}
-                  height={200}
+                  width={200}
+                  height={100}
                   className="h-full w-full object-cover"
                 />
               </div>
