@@ -20,42 +20,43 @@ export default function Home() {
         <HeroSection />
 
         <section className="max-w-5xl mx-auto px-4 pt-8">
-         <div className="grid gap-5 md:grid-cols-3 items-stretch">
+  <div className="grid gap-5 md:grid-cols-3 items-stretch">
     <div className="md:col-span-1">
       <WelcomeCard />
     </div>
-           <div className="md:col-span-2 space-y-5">
+
+    <div className="md:col-span-2 space-y-5">
       <div className="grid gap-5 md:grid-cols-2">
-            <div className="relative h-[360px] overflow-hidden rounded-2xl shadow-md">
-              <Image
-                src="/images/student_withworksheet.jpg"
-                alt="Grade 5 student practising online PEP questions on a laptop"
-                width={200}
-                height={400}
-                className="h-full w-full object-cover"
-                priority
-              />
-            </div>
+        <div className="relative h-[360px] overflow-hidden rounded-2xl shadow-md">
+          <Image
+            src="/images/student_withworksheet.jpg"
+            alt="Grade 5 student practising online PEP questions on a laptop"
+            width={200}
+            height={400}
+            className="h-full w-full object-cover"
+            priority
+          />
+        </div>
 
-            <div className="grid gap-6">
-              <div className="relative h-[360px] overflow-hidden rounded-2xl shadow-md">
-                <Image
-                  src="/images/parent-support-section.jpg"
-                  alt="Parent supporting child while reviewing online PEP progress"
-                  width={100}
-                  height={200}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-             </div>
-              <HowToUse />
-            </div>
-          </div>
-        </section>
+        <div className="relative h-[360px] overflow-hidden rounded-2xl shadow-md">
+          <Image
+            src="/images/parent-support-section.jpg"
+            alt="Parent supporting child while reviewing online PEP progress"
+            width={100}
+            height={200}
+            className="h-full w-full object-cover"
+          />
+        </div>
+      </div>
 
-        <div className="max-w-6xl mx-auto px-4 py-12 space-y-12">
-              
-          <SubjectCards />
+      <HowToUse />
+    </div>
+  </div>
+</section>
+
+<div className="max-w-6xl mx-auto px-4 py-12 space-y-12">
+  <SubjectCards />
+</div>
 
           <section>
             <div className="mb-8 text-center">
