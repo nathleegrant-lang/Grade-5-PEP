@@ -19,7 +19,7 @@ export default function Home() {
       <main className="flex-1">
         <HeroSection />
 
-        <section className="max-w-6xl mx-auto px-4 pt-10">
+        <section className="max-w-5xl mx-auto px-4 pt-8">
           <div className="grid gap-6 md:grid-cols-2">
             <div className="relative overflow-hidden rounded-3xl shadow-lg">
               <Image
