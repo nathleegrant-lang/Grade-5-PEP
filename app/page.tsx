@@ -20,7 +20,10 @@ export default function Home() {
         <HeroSection />
 
         <section className="max-w-5xl mx-auto px-4 pt-8">
-          <div className="grid gap-6 md:grid-cols-2">
+         <div className="grid gap-5 md:grid-cols-3 items-stretch">
+    <div className="md:col-span-1">
+      <WelcomeCard />
+    </div>
             <div className="relative h-[360px] overflow-hidden rounded-2xl shadow-md">
               <Image
                 src="/images/student_withworksheet.jpg"
@@ -49,8 +52,7 @@ export default function Home() {
         </section>
 
         <div className="max-w-6xl mx-auto px-4 py-12 space-y-12">
-          <WelcomeCard />
-          <HowToUse />
+               <HowToUse />
           <SubjectCards />
 
           <section>
