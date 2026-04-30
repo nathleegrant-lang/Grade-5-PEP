@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card"
 
 export function WelcomeCard() {
   return (
-    <Card className="border-2 border-gray-200">
+    <Card className="h-full border-2 border-gray-200">
       <CardContent className="p-6 md:p-8">
         <h3 className="text-2xl font-bold text-[#1e3a5f] mb-4">
           Welcome to Grade 5 PEP!
