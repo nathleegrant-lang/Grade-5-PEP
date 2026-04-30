@@ -21,9 +21,11 @@ export default function Home() {
 
         <section className="max-w-5xl mx-auto px-4 pt-8">
   <div className="grid gap-5 md:grid-cols-3 items-stretch">
-    <div className="md:col-span-1">
-      <WelcomeCard />
-    </div>
+    <div className="md:col-span-1 h-full">
+  <div className="h-full">
+    <WelcomeCard />
+  </div>
+</div>
 
     <div className="md:col-span-2 space-y-5">
       <div className="grid gap-5 md:grid-cols-2">
