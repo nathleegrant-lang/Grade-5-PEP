@@ -33,7 +33,7 @@ export default function Home() {
             </div>
 
             <div className="grid gap-6">
-              <div className="relative h-[240px] overflow-hidden rounded-2xl shadow-md">
+              <div className="relative h-[360px] overflow-hidden rounded-2xl shadow-md">
                 <Image
                   src="/images/parent-support-section.jpg"
                   alt="Parent supporting child while reviewing online PEP progress"
@@ -43,15 +43,7 @@ export default function Home() {
                 />
               </div>
 
-              <div className="relative h-[200px] overflow-hidden rounded-2xl shadow-md">
-                <Image
-                  src="/images/hero-section1.jpg"
-                  alt="Grade 5 student completing worksheet beside a tablet"
-                  width={100}
-                  height={200}
-                  className="h-full w-full object-cover"
-                />
-              </div>
+             
             </div>
           </div>
         </section>
