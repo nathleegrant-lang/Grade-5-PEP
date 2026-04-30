@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import { saveStudentTestResult } from "@/lib/student-test-results"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -554,7 +555,7 @@ const SECTION_CONFIG = [
 ]
 
 export default function G5MathEasy1MockTest() {
-  const { isPremium, user } = useAuth()
+  const { isPremium, user, students } = useAuth()
   const [testStarted, setTestStarted] = useState(false)
   const [testCompleted, setTestCompleted] = useState(false)
   const [currentQuestion, setCurrentQuestion] = useState(0)
@@ -562,6 +563,7 @@ export default function G5MathEasy1MockTest() {
   const [timeRemaining, setTimeRemaining] = useState(60 * 60)
   const [showReview, setShowReview] = useState(false)
   const [completedAt, setCompletedAt] = useState("")
+  const [isSavingResult, setIsSavingResult] = useState(false)
 
   const availableQuestions = isPremium ? g5MathEasy1Questions : g5MathEasy1Questions.slice(0, FREE_QUESTION_LIMIT)
   const totalQuestions = availableQuestions.length
@@ -577,11 +579,11 @@ export default function G5MathEasy1MockTest() {
   useEffect(() => {
     if (testStarted && !testCompleted && timeRemaining > 0) {
       const timer = setInterval(() => {
-        setTimeRemaining((prev) => { if (prev <= 1) { setCompletedAt(new Date().toLocaleString()); setTestCompleted(true); return 0 } return prev - 1 })
+        setTimeRemaining((prev) => { if (prev <= 1) { void completeTest(); return 0 } return prev - 1 })
       }, 1000)
       return () => clearInterval(timer)
     }
-  }, [testStarted, testCompleted, timeRemaining])
+  }, [isSavingResult, students, testStarted, testCompleted, timeRemaining, totalQuestions, user?.id])
 
   const handleAnswer = (answerIndex: number) => { const a = [...answers]; a[currentQuestion] = answerIndex; setAnswers(a) }
 
@@ -606,7 +608,44 @@ export default function G5MathEasy1MockTest() {
     return { correct, total, percentage, rating, ratingColor }
   }
 
-  const handleSubmit = () => { setCompletedAt(new Date().toLocaleString()); setTestCompleted(true) }
+  const handleSubmit = () => { void completeTest() }
+
+
+
+  const completeTest = async () => {
+    if (!user?.id || isSavingResult) {
+      setCompletedAt(new Date().toLocaleString())
+      setTestCompleted(true)
+      return
+    }
+
+    setIsSavingResult(true)
+
+    const completedAtIso = new Date().toISOString()
+    const score = calculateScore()
+    const percentage = totalQuestions === 0 ? 0 : Math.round((score / totalQuestions) * 100)
+
+    try {
+      await saveStudentTestResult({
+        parentId: user.id,
+        studentId: students[0]?.id ?? null,
+        grade: "grade5",
+        subject: "mathematics",
+        testName: "Mathematics Easy 1",
+        difficulty: "easy",
+        score,
+        totalQuestions,
+        percentage,
+        completedAt: completedAtIso,
+      })
+    } catch (error) {
+      console.error("Could not save student test result:", error)
+    } finally {
+      setCompletedAt(new Date(completedAtIso).toLocaleString())
+      setTestCompleted(true)
+      setIsSavingResult(false)
+    }
+  }
 
   const restartTest = () => { setTestStarted(false); setTestCompleted(false); setCurrentQuestion(0); setAnswers(new Array(totalQuestions).fill(null)); setTimeRemaining(isPremium ? 60 * 60 : 10 * 60); setShowReview(false); setCompletedAt("") }
 
