@@ -15,8 +15,7 @@ import {
   type PlanCode,
   type PricingTier,
 } from "@/lib/types"
-import { Check, X, Landmark, MessageCircleMore, Shield, Users } from "lucide-react"
-import { WHATSAPP_DISPLAY, WHATSAPP_NUMBER } from "@/lib/site-config"
+import { Check, X, Landmark, Mail, Shield, Users } from "lucide-react"
 import { getSupabaseBrowserClient } from "@/lib/supabase/client"
 
 type PricingPlanRow = {
@@ -32,6 +31,8 @@ type PricingPlanRow = {
   popular: boolean
   is_active: boolean
 }
+
+const SUPPORT_EMAIL = "shazincorps@gmail.com"
 
 function normalizeFeatures(value: unknown): string[] {
   if (Array.isArray(value)) {
@@ -273,8 +274,8 @@ export default function PricingPage() {
                       For security, banking details are not displayed publicly on this page.
                     </p>
                     <p>
-                      Please choose a plan and continue to checkout, or contact us on WhatsApp for
-                      payment assistance.
+                      Please choose a plan and continue to checkout, or email us for payment
+                      assistance.
                     </p>
                   </div>
                 </div>
@@ -292,20 +293,20 @@ export default function PricingPage() {
 
                 <div className="rounded-xl bg-white p-5 border border-sky-100">
                   <div className="flex items-center gap-3 mb-3">
-                    <MessageCircleMore className="h-5 w-5 text-sky-600" />
-                    <p className="font-semibold text-slate-800">WhatsApp support</p>
+                    <Mail className="h-5 w-5 text-sky-600" />
+                    <p className="font-semibold text-slate-800">Email support</p>
                   </div>
+
                   <p className="text-sm text-slate-600 mb-3">
-                    You can still message us on WhatsApp for payment guidance, confirmation, and
-                    support.
+                    For payment guidance, receipt submission, and account support, please email your
+                    receipt along with your child&apos;s name, grade, and selected plan.
                   </p>
+
                   <a
-                    href={`https://wa.me/${WHATSAPP_NUMBER}`}
-                    target="_blank"
-                    rel="noreferrer"
+                    href={`mailto:${SUPPORT_EMAIL}`}
                     className="text-sm font-semibold text-sky-700 hover:underline"
                   >
-                    WhatsApp: {WHATSAPP_DISPLAY}
+                    {SUPPORT_EMAIL}
                   </a>
                 </div>
               </div>
