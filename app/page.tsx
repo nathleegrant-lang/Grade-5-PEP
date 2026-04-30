@@ -21,9 +21,9 @@ export default function Home() {
 
         <section className="max-w-5xl mx-auto px-4 pt-8">
           <div className="grid gap-6 md:grid-cols-2">
-            <div className="relative overflow-hidden rounded-3xl shadow-lg">
+            <div className="relative h-[90px] overflow-hidden rounded-2xl shadow-md">
               <Image
-                src="/images/home/hero-section1.png"
+                src="/images/home/student_withworksheet.png"
                 alt="Grade 5 student practising online PEP questions on a laptop"
                 width={200}
                 height={100}
@@ -33,7 +33,7 @@ export default function Home() {
             </div>
 
             <div className="grid gap-6">
-              <div className="relative overflow-hidden rounded-3xl shadow-md">
+              <div className="relative h-[90px] overflow-hidden rounded-2xl shadow-md">
                 <Image
                   src="/images/home/parent-support-section.png"
                   alt="Parent supporting child while reviewing online PEP progress"
@@ -43,9 +43,9 @@ export default function Home() {
                 />
               </div>
 
-              <div className="relative overflow-hidden rounded-3xl shadow-md">
+              <div className="relative h-[90px] overflow-hidden rounded-2xl shadow-md">
                 <Image
-                  src="/images/home/student_withworksheet.png"
+                  src="/images/home/hero-section1.png"
                   alt="Grade 5 student completing worksheet beside a tablet"
                   width={200}
                   height={100}
