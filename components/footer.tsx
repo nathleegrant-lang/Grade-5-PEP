@@ -1,8 +1,8 @@
 import Image from "next/image"
 import Link from "next/link"
-import { WHATSAPP_DISPLAY, WHATSAPP_NUMBER } from "@/lib/site-config"
 
 const GRADE_4_URL = "https://grade-4-pep.vercel.app/"
+const SUPPORT_EMAIL = "shazincorps@gmail.com"
 
 export function Footer() {
   return (
@@ -21,7 +21,8 @@ export function Footer() {
                 priority
               />
             </div>
-<div>
+
+            <div>
               <p className="text-sm font-semibold text-white">
                 Managed and owned by Shazonique&apos;s Inspiration
               </p>
@@ -29,6 +30,7 @@ export function Footer() {
                 A heart&apos;s home of hope
               </p>
             </div>
+
             <div>
               <p className="text-sm font-semibold text-white">Grade 5 PEP</p>
               <p className="mt-1 text-sm text-slate-300">
@@ -101,16 +103,17 @@ export function Footer() {
             </h3>
             <div className="mt-4 space-y-3 text-sm text-slate-300">
               <p>
-                Grade 5 PEP support and payment confirmation are available by WhatsApp.
+                For Grade 5 PEP support and payment confirmation, please email your
+                receipt along with your child&apos;s name and subject to:
               </p>
+
               <a
-                href={`https://wa.me/${WHATSAPP_NUMBER}`}
-                target="_blank"
-                rel="noreferrer"
+                href={`mailto:${SUPPORT_EMAIL}`}
                 className="inline-block font-medium text-sky-300 hover:text-sky-200 transition-colors"
               >
-                WhatsApp: {WHATSAPP_DISPLAY}
+                {SUPPORT_EMAIL}
               </a>
+
               <p className="text-xs text-slate-400">
                 Each grade programme is sold separately.
               </p>
