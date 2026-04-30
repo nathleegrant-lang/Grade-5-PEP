@@ -1,3 +1,42 @@
+import Link from "next/link"
+import { Card, CardContent } from "@/components/ui/card"
+import { BookOpen, Calculator, FlaskConical, Globe } from "lucide-react"
+
+const subjects = [
+  {
+    title: "Language Arts (Literacy)",
+    description:
+      "Reading comprehension, vocabulary, grammar, and writing skills practice.",
+    icon: BookOpen,
+    href: "/mock-tests/language-arts",
+    iconBg: "bg-[#0d4a5f]",
+  },
+  {
+    title: "Mathematics (Numeracy)",
+    description:
+      "Number operations, problem solving, measurement, and geometry practice.",
+    icon: Calculator,
+    href: "/mock-tests/mathematics",
+    iconBg: "bg-[#f59e0b]",
+  },
+  {
+    title: "Science",
+    description:
+      "Explore living things, matter, energy, and the environment through interactive lessons.",
+    icon: FlaskConical,
+    href: "/mock-tests/science",
+    iconBg: "bg-[#0d9488]",
+  },
+  {
+    title: "Social Studies",
+    description:
+      "Learn about Jamaica, Caribbean history, geography, and civic responsibilities.",
+    icon: Globe,
+    href: "/mock-tests/social-studies",
+    iconBg: "bg-[#6366f1]",
+  },
+]
+
 export function SubjectCards() {
   return (
     <section className="rounded-3xl border border-sky-100 bg-gradient-to-br from-sky-50 via-cyan-50 to-emerald-50 p-6 shadow-sm">
@@ -20,9 +59,11 @@ export function SubjectCards() {
                 >
                   <subject.icon className="w-6 h-6 text-white" />
                 </div>
+
                 <h4 className="text-lg font-bold text-[#0d4a5f] mb-2">
                   {subject.title}
                 </h4>
+
                 <p className="text-gray-600 text-sm">
                   {subject.description}
                 </p>
