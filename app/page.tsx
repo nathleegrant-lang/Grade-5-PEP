@@ -24,6 +24,8 @@ export default function Home() {
     <div className="md:col-span-1">
       <WelcomeCard />
     </div>
+           <div className="md:col-span-2 space-y-5">
+      <div className="grid gap-5 md:grid-cols-2">
             <div className="relative h-[360px] overflow-hidden rounded-2xl shadow-md">
               <Image
                 src="/images/student_withworksheet.jpg"
@@ -46,13 +48,13 @@ export default function Home() {
                 />
               </div>
 
-             
+              <HowToUse />
             </div>
           </div>
         </section>
 
         <div className="max-w-6xl mx-auto px-4 py-12 space-y-12">
-               <HowToUse />
+              
           <SubjectCards />
 
           <section>
