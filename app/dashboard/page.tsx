@@ -214,8 +214,8 @@ export default function DashboardPage() {
                   <Target className="h-5 w-5 text-blue-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-slate-800">{totalQuizzes}</p>
-                  <p className="text-xs text-slate-500">Quizzes Taken</p>
+                  <p className="text-2xl font-bold text-slate-800">{testStats.total}</p>
+<p className="text-xs text-slate-500">Tests Taken</p>
                 </div>
               </div>
             </CardContent>
@@ -228,8 +228,8 @@ export default function DashboardPage() {
                   <FileText className="h-5 w-5 text-purple-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-slate-800">{totalMockTests}</p>
-                  <p className="text-xs text-slate-500">Mock Tests</p>
+                  <p className="text-2xl font-bold text-slate-800">{totalQuizzes}</p>
+<p className="text-xs text-slate-500">Quizzes Taken</p>
                 </div>
               </div>
             </CardContent>
@@ -242,8 +242,8 @@ export default function DashboardPage() {
                   <CheckCircle2 className="h-5 w-5 text-green-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-slate-800">{Math.round(averageScore)}%</p>
-                  <p className="text-xs text-slate-500">Average Score</p>
+                <p className="text-2xl font-bold text-slate-800">{testStats.total}</p>
+<p className="text-xs text-slate-500">Tests Taken</p>
                 </div>
               </div>
             </CardContent>
