@@ -400,6 +400,54 @@ export default function DashboardPage() {
             <Card className="border-sky-200">
               <CardHeader>
                 <CardTitle className="text-slate-800 flex items-center gap-2">
+                  <Award className="h-5 w-5 text-green-600" />
+                  Latest Test Result
+                </CardTitle>
+              </CardHeader>
+
+              <CardContent className="space-y-3 text-sm">
+                {latestTest ? (
+                  <>
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Subject</span>
+                      <span className="text-slate-700">{latestTest.subject}</span>
+                    </div>
+
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Test</span>
+                      <span className="text-slate-700">{latestTest.test_name}</span>
+                    </div>
+
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Score</span>
+                      <span className="text-slate-700">
+                        {latestTest.score}/{latestTest.total_questions}
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Percentage</span>
+                      <span className="text-slate-700">{latestTest.percentage}%</span>
+                    </div>
+
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Completed</span>
+                      <span className="text-slate-700">
+                        {new Date(latestTest.completed_at).toLocaleDateString()}
+                      </span>
+                    </div>
+                  </>
+                ) : (
+                  <p className="text-slate-500 text-center py-4 text-sm">
+                    No test results yet. Start a mock test!
+                  </p>
+                )}
+              </CardContent>
+            </Card>
+            
+            <Card className="border-sky-200">
+              <CardHeader>
+                <CardTitle className="text-slate-800 flex items-center gap-2">
                   <Clock className="h-5 w-5 text-slate-600" />
                   Recent Activity
                 </CardTitle>
