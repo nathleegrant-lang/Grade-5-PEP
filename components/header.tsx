@@ -259,8 +259,8 @@ export function Header() {
               <Image
                 src="/images/logo.png"
                 alt="Grade 5 PEP Logo"
-                width={40}
-                height={40}
+                width={60}
+                height={30}
                 className="h-9 w-auto"
               />
             </div>
