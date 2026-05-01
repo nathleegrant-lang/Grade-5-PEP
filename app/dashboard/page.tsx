@@ -95,6 +95,25 @@ export default function DashboardPage() {
     void loadLatestPayment()
   }, [supabase, user])
 
+  useEffect(() => {
+  const loadLatestTest = async () => {
+    if (!user) return
+
+    const { data } = await supabase
+      .from("student_test_results")
+      .select("*")
+      .eq("parent_id", user.id)
+      .order("completed_at", { ascending: false })
+      .limit(1)
+
+    if (data && data.length > 0) {
+      setLatestTest(data[0])
+    }
+  }
+
+  void loadLatestTest()
+}, [supabase, user])
+  
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50 flex items-center justify-center">
