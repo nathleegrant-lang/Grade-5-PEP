@@ -33,6 +33,17 @@ import {
 } from "lucide-react"
 import { getPlanLabel } from "@/lib/subscriptions"
 
+type StudentTestResult = {
+  id: string
+  subject: string
+  test_name: string
+  difficulty: string | null
+  score: number
+  total_questions: number
+  percentage: number
+  completed_at: string
+}
+
 export default function DashboardPage() {
   const router = useRouter()
   const {
@@ -45,16 +56,18 @@ export default function DashboardPage() {
     addStudent,
     refreshUser,
   } = useAuth()
+
   const { progress, getTopicProgress, getCertificates } = useProgress()
   const supabase = useMemo(() => getSupabaseBrowserClient(), [])
 
   const [latestPayment, setLatestPayment] = useState<PaymentRecord | null>(null)
-  const [latestTest, setLatestTest] = useState<any>(null)
+  const [latestTest, setLatestTest] = useState<StudentTestResult | null>(null)
   const [testStats, setTestStats] = useState({
-  total: 0,
-  average: 0,
-  best: 0,
-})
+    total: 0,
+    average: 0,
+    best: 0,
+  })
+
   const [newStudentName, setNewStudentName] = useState("")
   const [studentMessage, setStudentMessage] = useState("")
   const [studentError, setStudentError] = useState("")
@@ -101,35 +114,39 @@ export default function DashboardPage() {
   }, [supabase, user])
 
   useEffect(() => {
-  const loadLatestTest = async () => {
-    if (!user) return
+    const loadTestResults = async () => {
+      if (!user) return
 
-    const { data } = await supabase
-      .from("student_test_results")
-     .select("score, percentage")
-      .eq("parent_id", user.id)
-      .order("completed_at", { ascending: false })
-      .limit(1)
+      const { data } = await supabase
+        .from("student_test_results")
+        .select("id, subject, test_name, difficulty, score, total_questions, percentage, completed_at")
+        .eq("parent_id", user.id)
+        .order("completed_at", { ascending: false })
 
-    if (data && data.length > 0) {
-  setLatestTest(data[0])
+      const results = (data || []) as StudentTestResult[]
 
-  const total = data.length
-  const average =
-    data.reduce((sum, item) => sum + item.percentage, 0) / total
-  const best = Math.max(...data.map((item) => item.percentage))
+      if (results.length === 0) {
+        setLatestTest(null)
+        setTestStats({ total: 0, average: 0, best: 0 })
+        return
+      }
 
-  setTestStats({
-    total,
-    average: Math.round(average),
-    best,
-  })
-}
-  }
+      setLatestTest(results[0])
 
-  void loadLatestTest()
-}, [supabase, user])
-  
+      const total = results.length
+      const average = results.reduce((sum, item) => sum + Number(item.percentage), 0) / total
+      const best = Math.max(...results.map((item) => Number(item.percentage)))
+
+      setTestStats({
+        total,
+        average: Math.round(average),
+        best: Math.round(best),
+      })
+    }
+
+    void loadTestResults()
+  }, [supabase, user])
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50 flex items-center justify-center">
@@ -155,10 +172,6 @@ export default function DashboardPage() {
 
   const languageArtsProgress = getTopicProgress("language-arts")
   const mathematicsProgress = getTopicProgress("mathematics")
-  const certificates = getCertificates()
-  const totalQuizzes = progress?.totalQuizzesTaken || 0
-  const totalMockTests = progress?.totalMockTestsTaken || 0
-  const averageScore = progress?.averageScore || 0
 
   const handleAddStudent = async () => {
     setStudentMessage("")
@@ -215,7 +228,7 @@ export default function DashboardPage() {
                 </div>
                 <div>
                   <p className="text-2xl font-bold text-slate-800">{testStats.total}</p>
-<p className="text-xs text-slate-500">Tests Taken</p>
+                  <p className="text-xs text-slate-500">Tests Taken</p>
                 </div>
               </div>
             </CardContent>
@@ -228,8 +241,8 @@ export default function DashboardPage() {
                   <FileText className="h-5 w-5 text-purple-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-slate-800">{totalQuizzes}</p>
-<p className="text-xs text-slate-500">Quizzes Taken</p>
+                  <p className="text-2xl font-bold text-slate-800">{testStats.average}%</p>
+                  <p className="text-xs text-slate-500">Average Score</p>
                 </div>
               </div>
             </CardContent>
@@ -242,8 +255,8 @@ export default function DashboardPage() {
                   <CheckCircle2 className="h-5 w-5 text-green-600" />
                 </div>
                 <div>
-                <p className="text-2xl font-bold text-slate-800">{testStats.best}</p>
-<p className="text-xs text-slate-500">Best Score</p>
+                  <p className="text-2xl font-bold text-slate-800">{testStats.best}%</p>
+                  <p className="text-xs text-slate-500">Best Score</p>
                 </div>
               </div>
             </CardContent>
@@ -256,8 +269,8 @@ export default function DashboardPage() {
                   <Award className="h-5 w-5 text-amber-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-slate-800">{certificates.length}</p>
-                  <p className="text-xs text-slate-500">Certificates</p>
+                  <p className="text-2xl font-bold text-slate-800">{latestTest?.percentage ?? 0}%</p>
+                  <p className="text-xs text-slate-500">Latest Score</p>
                 </div>
               </div>
             </CardContent>
@@ -460,7 +473,7 @@ export default function DashboardPage() {
                 )}
               </CardContent>
             </Card>
-            
+
             <Card className="border-sky-200">
               <CardHeader>
                 <CardTitle className="text-slate-800 flex items-center gap-2">
