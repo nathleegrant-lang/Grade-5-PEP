@@ -93,6 +93,7 @@ export default function DashboardPage() {
       if (!data?.[0]) return
 
       const row = data[0]
+
       setLatestPayment({
         id: row.id,
         parentId: row.parent_id,
@@ -172,6 +173,7 @@ export default function DashboardPage() {
 
   const languageArtsProgress = getTopicProgress("language-arts")
   const mathematicsProgress = getTopicProgress("mathematics")
+  const certificates = getCertificates()
 
   const handleAddStudent = async () => {
     setStudentMessage("")
@@ -269,8 +271,8 @@ export default function DashboardPage() {
                   <Award className="h-5 w-5 text-amber-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-slate-800">{latestTest?.percentage ?? 0}%</p>
-                  <p className="text-xs text-slate-500">Latest Score</p>
+                  <p className="text-2xl font-bold text-slate-800">{certificates.length}</p>
+                  <p className="text-xs text-slate-500">Certificates</p>
                 </div>
               </div>
             </CardContent>
@@ -347,85 +349,87 @@ export default function DashboardPage() {
                 </div>
               </CardContent>
             </Card>
+
+            <div className="grid gap-6 md:grid-cols-2">
+              <Card className="border-sky-200">
+                <CardHeader>
+                  <CardTitle className="text-slate-800 flex items-center gap-2">
+                    <Crown className="h-5 w-5 text-amber-500" />
+                    Access Status
+                  </CardTitle>
+                </CardHeader>
+
+                <CardContent className="space-y-4 text-sm">
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-500">Plan</span>
+                    <Badge>{getPlanLabel(user.subscriptionTier)}</Badge>
+                  </div>
+
+                  {activeSubscription?.expiresAt && (
+                    <div className="flex items-center justify-between">
+                      <span className="text-slate-500">Expires</span>
+                      <span className="text-slate-700">
+                        {new Date(activeSubscription.expiresAt).toLocaleDateString()}
+                      </span>
+                    </div>
+                  )}
+
+                  {!isPremium && (
+                    <Link href="/pricing" className="block">
+                      <Button className="w-full bg-amber-500 hover:bg-amber-600 text-white">
+                        Upgrade Access
+                      </Button>
+                    </Link>
+                  )}
+                </CardContent>
+              </Card>
+
+              <Card className="border-sky-200">
+                <CardHeader>
+                  <CardTitle className="text-slate-800 flex items-center gap-2">
+                    <ShieldCheck className="h-5 w-5 text-sky-600" />
+                    Latest Payment
+                  </CardTitle>
+                </CardHeader>
+
+                <CardContent className="space-y-3 text-sm">
+                  {latestPayment ? (
+                    <>
+                      <div className="flex items-center justify-between">
+                        <span className="text-slate-500">Plan</span>
+                        <span className="text-slate-700">{getPlanLabel(latestPayment.planCode)}</span>
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        <span className="text-slate-500">Status</span>
+                        <Badge variant={latestPayment.status === "verified" ? "default" : "secondary"}>
+                          {latestPayment.status}
+                        </Badge>
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        <span className="text-slate-500">Submitted</span>
+                        <span className="text-slate-700">
+                          {new Date(latestPayment.submittedAt).toLocaleDateString()}
+                        </span>
+                      </div>
+
+                      {latestPayment.referenceCode && (
+                        <div>
+                          <span className="text-slate-500 block mb-1">Reference</span>
+                          <span className="text-slate-700">{latestPayment.referenceCode}</span>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <p className="text-slate-600">No payment submitted yet. Choose a plan to start.</p>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
           </div>
 
           <div className="space-y-6">
-            <Card className="border-sky-200">
-              <CardHeader>
-                <CardTitle className="text-slate-800 flex items-center gap-2">
-                  <Crown className="h-5 w-5 text-amber-500" />
-                  Access Status
-                </CardTitle>
-              </CardHeader>
-
-              <CardContent className="space-y-4 text-sm">
-                <div className="flex items-center justify-between">
-                  <span className="text-slate-500">Plan</span>
-                  <Badge>{getPlanLabel(user.subscriptionTier)}</Badge>
-                </div>
-
-                {activeSubscription?.expiresAt && (
-                  <div className="flex items-center justify-between">
-                    <span className="text-slate-500">Expires</span>
-                    <span className="text-slate-700">
-                      {new Date(activeSubscription.expiresAt).toLocaleDateString()}
-                    </span>
-                  </div>
-                )}
-
-                {!isPremium && (
-                  <Link href="/pricing" className="block">
-                    <Button className="w-full bg-amber-500 hover:bg-amber-600 text-white">
-                      Upgrade Access
-                    </Button>
-                  </Link>
-                )}
-              </CardContent>
-            </Card>
-
-            <Card className="border-sky-200">
-              <CardHeader>
-                <CardTitle className="text-slate-800 flex items-center gap-2">
-                  <ShieldCheck className="h-5 w-5 text-sky-600" />
-                  Latest Payment
-                </CardTitle>
-              </CardHeader>
-
-              <CardContent className="space-y-3 text-sm">
-                {latestPayment ? (
-                  <>
-                    <div className="flex items-center justify-between">
-                      <span className="text-slate-500">Plan</span>
-                      <span className="text-slate-700">{getPlanLabel(latestPayment.planCode)}</span>
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <span className="text-slate-500">Status</span>
-                      <Badge variant={latestPayment.status === "verified" ? "default" : "secondary"}>
-                        {latestPayment.status}
-                      </Badge>
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                      <span className="text-slate-500">Submitted</span>
-                      <span className="text-slate-700">
-                        {new Date(latestPayment.submittedAt).toLocaleDateString()}
-                      </span>
-                    </div>
-
-                    {latestPayment.referenceCode && (
-                      <div>
-                        <span className="text-slate-500 block mb-1">Reference</span>
-                        <span className="text-slate-700">{latestPayment.referenceCode}</span>
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <p className="text-slate-600">No payment submitted yet. Choose a plan to start.</p>
-                )}
-              </CardContent>
-            </Card>
-
             <Card className="border-sky-200">
               <CardHeader>
                 <CardTitle className="text-slate-800 flex items-center gap-2">
