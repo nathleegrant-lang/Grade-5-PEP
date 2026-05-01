@@ -112,8 +112,19 @@ export default function DashboardPage() {
       .limit(1)
 
     if (data && data.length > 0) {
-      setLatestTest(data[0])
-    }
+  setLatestTest(data[0])
+
+  const total = data.length
+  const average =
+    data.reduce((sum, item) => sum + item.percentage, 0) / total
+  const best = Math.max(...data.map((item) => item.percentage))
+
+  setTestStats({
+    total,
+    average: Math.round(average),
+    best,
+  })
+}
   }
 
   void loadLatestTest()
