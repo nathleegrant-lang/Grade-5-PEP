@@ -50,6 +50,11 @@ export default function DashboardPage() {
 
   const [latestPayment, setLatestPayment] = useState<PaymentRecord | null>(null)
   const [latestTest, setLatestTest] = useState<any>(null)
+  const [testStats, setTestStats] = useState({
+  total: 0,
+  average: 0,
+  best: 0,
+})
   const [newStudentName, setNewStudentName] = useState("")
   const [studentMessage, setStudentMessage] = useState("")
   const [studentError, setStudentError] = useState("")
