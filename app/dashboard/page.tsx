@@ -106,7 +106,7 @@ export default function DashboardPage() {
 
     const { data } = await supabase
       .from("student_test_results")
-      .select("*")
+     .select("score, percentage")
       .eq("parent_id", user.id)
       .order("completed_at", { ascending: false })
       .limit(1)
