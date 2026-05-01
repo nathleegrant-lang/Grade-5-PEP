@@ -30,6 +30,7 @@ import {
   Crown,
   ShieldCheck,
   Users,
+  BarChart3,
 } from "lucide-react"
 import { getPlanLabel } from "@/lib/subscriptions"
 
@@ -175,6 +176,33 @@ export default function DashboardPage() {
   const mathematicsProgress = getTopicProgress("mathematics")
   const certificates = getCertificates()
 
+  const subjectProgress = [
+    {
+      label: "Language Arts",
+      value: languageArtsProgress.bestScore || 0,
+      bar: "bg-sky-500",
+      bg: "bg-sky-100",
+    },
+    {
+      label: "Mathematics",
+      value: mathematicsProgress.bestScore || 0,
+      bar: "bg-amber-500",
+      bg: "bg-amber-100",
+    },
+    {
+      label: "Science",
+      value: 0,
+      bar: "bg-green-500",
+      bg: "bg-green-100",
+    },
+    {
+      label: "Social Studies",
+      value: 0,
+      bar: "bg-purple-500",
+      bg: "bg-purple-100",
+    },
+  ]
+
   const handleAddStudent = async () => {
     setStudentMessage("")
     setStudentError("")
@@ -281,30 +309,6 @@ export default function DashboardPage() {
 
         <div className="grid lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">
-            <Card className="border-sky-200">
-              <CardHeader>
-                <CardTitle className="text-slate-800">Progress Overview</CardTitle>
-                <CardDescription>
-                  Track your child&apos;s learning progress across Grade 5 topics.
-                </CardDescription>
-              </CardHeader>
-
-              <CardContent className="space-y-5">
-                {[
-                  { label: "Language Arts", value: languageArtsProgress.bestScore || 0 },
-                  { label: "Mathematics", value: mathematicsProgress.bestScore || 0 },
-                ].map((item) => (
-                  <div key={item.label}>
-                    <div className="flex justify-between text-sm mb-2">
-                      <span className="text-slate-700">{item.label}</span>
-                      <span className="text-slate-500">{item.value}% best score</span>
-                    </div>
-                    <Progress value={item.value} className="h-2" />
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-
             <Card className="border-sky-200">
               <CardHeader>
                 <CardTitle className="text-slate-800 flex items-center gap-2">
@@ -475,6 +479,36 @@ export default function DashboardPage() {
                     No test results yet. Start a mock test!
                   </p>
                 )}
+              </CardContent>
+            </Card>
+
+            <Card className="border-sky-200">
+              <CardHeader>
+                <CardTitle className="text-slate-800 flex items-center gap-2">
+                  <BarChart3 className="h-5 w-5 text-sky-600" />
+                  Subject Progress
+                </CardTitle>
+                <CardDescription>
+                  Best score by subject.
+                </CardDescription>
+              </CardHeader>
+
+              <CardContent className="space-y-4">
+                {subjectProgress.map((item) => (
+                  <div key={item.label} className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="font-medium text-slate-700">{item.label}</span>
+                      <span className="text-slate-500">{item.value}%</span>
+                    </div>
+
+                    <div className={`h-3 w-full rounded-full ${item.bg} overflow-hidden`}>
+                      <div
+                        className={`h-full rounded-full ${item.bar}`}
+                        style={{ width: `${item.value}%` }}
+                      />
+                    </div>
+                  </div>
+                ))}
               </CardContent>
             </Card>
 
