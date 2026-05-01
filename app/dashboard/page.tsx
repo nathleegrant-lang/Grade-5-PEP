@@ -243,7 +243,7 @@ export default function DashboardPage() {
                 </div>
                 <div>
                 <p className="text-2xl font-bold text-slate-800">{testStats.best}</p>
-<p className="text-xs text-slate-500">Tests Taken</p>
+<p className="text-xs text-slate-500">Best Score</p>
                 </div>
               </div>
             </CardContent>
