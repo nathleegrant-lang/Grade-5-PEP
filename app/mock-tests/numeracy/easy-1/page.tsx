@@ -606,7 +606,30 @@ export default function G5MathEasy1MockTest() {
     return { correct, total, percentage, rating, ratingColor }
   }
 
-  const handleSubmit = () => { setCompletedAt(new Date().toLocaleString()); setTestCompleted(true) }
+ const handleSubmit = async () => {
+  const now = new Date().toLocaleString()
+  setCompletedAt(now)
+  setTestCompleted(true)
+
+  try {
+    if (user?.id) {
+      await saveStudentTestResult({
+        parentId: user.id,
+        studentId: null,
+        grade: "grade5",
+        subject: "Mathematics",
+        testName: "Easy 1",
+        difficulty: "Easy",
+        score: calculateScore(),
+        totalQuestions: totalQuestions,
+        percentage: getScorePercentage(),
+        completedAt: now,
+      })
+    }
+  } catch (err) {
+    console.error("Error saving result:", err)
+  }
+}
 
   const restartTest = () => { setTestStarted(false); setTestCompleted(false); setCurrentQuestion(0); setAnswers(new Array(totalQuestions).fill(null)); setTimeRemaining(isPremium ? 60 * 60 : 10 * 60); setShowReview(false); setCompletedAt("") }
 
