@@ -242,7 +242,7 @@ export default function DashboardPage() {
                   <CheckCircle2 className="h-5 w-5 text-green-600" />
                 </div>
                 <div>
-                <p className="text-2xl font-bold text-slate-800">{testStats.total}</p>
+                <p className="text-2xl font-bold text-slate-800">{testStats.best}</p>
 <p className="text-xs text-slate-500">Tests Taken</p>
                 </div>
               </div>
