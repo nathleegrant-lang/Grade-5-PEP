@@ -69,31 +69,33 @@ export function Header() {
     <>
       {/* ── Top bar ────────────────────────────────────────────── */}
       <header className="bg-[#1e5b8f] text-white">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between gap-4">
+        <div className="container mx-auto px-3 py-3 lg:px-4 lg:py-4">
+          <div className="flex items-center justify-between gap-3">
 
             {/* Logo + title */}
-            <div className="flex items-center gap-4">
-              <Link href="/" className="block bg-white rounded-lg p-1">
+            <div className="flex items-center gap-3">
+              <Link href="/" className="block bg-white rounded-xl p-1.5 shrink-0">
                 <Image
                   src="/images/logo.png"
                   alt="Grade 5 PEP Logo"
                   width={80}
                   height={80}
-                  className="h-14 w-auto md:h-16"
+                  className="h-16 w-auto lg:h-16"
                   priority
                 />
               </Link>
               <div>
-                <h1 className="text-2xl font-bold tracking-tight md:text-3xl">
+                <h1 className="text-xl font-bold tracking-tight leading-tight lg:text-3xl">
                   Grade 5 PEP
                 </h1>
-                <p className="text-sky-light text-sm">Jamaica Primary Exit Profile</p>
+                <p className="text-sky-200 text-xs lg:text-sm whitespace-nowrap">
+                  Jamaica Primary Exit Profile
+                </p>
               </div>
             </div>
 
             {/* Right-side actions */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
 
               {/* Grade switchers — desktop only */}
               <div className="hidden lg:flex items-center gap-2">
@@ -183,11 +185,13 @@ export function Header() {
                 </DropdownMenu>
               ) : (
                 <div className="flex items-center gap-2">
-                  <Link href="/login">
+                  {/* Sign In hidden on mobile — available in drawer */}
+                  <Link href="/login" className="hidden lg:block">
                     <Button variant="ghost" size="sm" className="text-white hover:bg-white/10">
                       Sign In
                     </Button>
                   </Link>
+                  {/* Sign Up always visible — primary CTA */}
                   <Link href="/register">
                     <Button size="sm" className="bg-amber-500 hover:bg-amber-600 text-white">
                       Sign Up
@@ -259,8 +263,8 @@ export function Header() {
               <Image
                 src="/images/logo.png"
                 alt="Grade 5 PEP Logo"
-                width={60}
-                height={30}
+                width={40}
+                height={40}
                 className="h-9 w-auto"
               />
             </div>
