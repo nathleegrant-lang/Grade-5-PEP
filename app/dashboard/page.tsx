@@ -230,8 +230,7 @@ export default function DashboardPage() {
     { href: "/mathematics", icon: Calculator, label: "Mathematics", color: "bg-amber-100 text-amber-600" },
     { href: "/science", icon: FlaskConical, label: "Science", color: "bg-green-100 text-green-600" },
     { href: "/social-studies", icon: Globe, label: "Social Studies", color: "bg-purple-100 text-purple-600" },
-    { href: "/performance-tasks", icon: FileText, label: "Performance Tasks", color: "bg-rose-100 text-rose-600",
-},
+    
   ]
 
   const premiumLinks = [
@@ -350,7 +349,7 @@ export default function DashboardPage() {
         </div>
 
         {/* ── Stat cards ── */}
-        <div className="grid gap-4 grid-cols-2 lg:grid-cols-5 mb-8">
+        <div className="grid gap-4 grid-cols-2 lg:grid-cols-4 mb-8">
           <Card className="border-sky-200">
             <CardContent className="p-4">
               <div className="flex items-center gap-3">
