@@ -614,6 +614,7 @@ export default function G5MathEasy2MockTest() {
     if (!testCompleted || !user?.id || hasSavedResult.current) return
 
     hasSavedResult.current = true
+    const completedAtIso = new Date().toISOString()
     void saveStudentTestResult({
       parentId: user.id,
       studentName: user?.childName ?? "Student",
@@ -624,7 +625,7 @@ export default function G5MathEasy2MockTest() {
       score: calculateScore(),
       totalQuestions,
       percentage: getScorePercentage(),
-      completedAt: new Date().toISOString(),
+      completedAt: completedAtIso,
     }).catch(() => {
       hasSavedResult.current = false
     })

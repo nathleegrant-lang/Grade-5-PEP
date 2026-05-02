@@ -607,8 +607,9 @@ export default function G5MathEasy1MockTest() {
   }
 
  const handleSubmit = async () => {
-  const now = new Date().toLocaleString()
-  setCompletedAt(now)
+  const completedAtIso = new Date().toISOString()
+  const completedAtDisplay = new Date(completedAtIso).toLocaleString()
+  setCompletedAt(completedAtDisplay)
   setTestCompleted(true)
 
   try {
@@ -624,7 +625,7 @@ export default function G5MathEasy1MockTest() {
         score: calculateScore(),
         totalQuestions: totalQuestions,
         percentage: getScorePercentage(),
-        completedAt: now,
+        completedAt: completedAtIso,
       })
     }
   } catch (err) {
