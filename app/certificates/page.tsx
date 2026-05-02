@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/auth-context";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
-import {Header} from "@/components/Header";
-import {Footer} from "@/components/Footer";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
 
 interface Certificate {
   id: string;
