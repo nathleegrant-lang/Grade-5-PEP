@@ -180,7 +180,7 @@ export default function DashboardPage() {
   const mathBestScore = testResults.length > 0
     ? Math.max(
         ...testResults
-          .filter((r) => r.subject.toLowerCase() === "mathematics")
+          .filter((r) => r.subject === "Mathematics")
           .map((r) => Number(r.percentage)),
         0,
       )
@@ -322,131 +322,6 @@ export default function DashboardPage() {
             <Card className="border-sky-200">
               <CardHeader>
                 <CardTitle className="text-slate-800 flex items-center gap-2">
-                  <Users className="h-5 w-5 text-sky-600" />
-                  Student Profiles
-                </CardTitle>
-                <CardDescription>Add students up to your plan limit.</CardDescription>
-              </CardHeader>
-
-              <CardContent className="space-y-4">
-                <div className="grid md:grid-cols-2 gap-4">
-                  {students.map((student) => (
-                    <div key={student.id} className="rounded-lg border border-slate-200 p-4 bg-white">
-                      <p className="font-medium text-slate-800">{student.fullName}</p>
-                      <p className="text-sm text-slate-500">Grade {student.gradeLevel}</p>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="rounded-lg bg-slate-50 border border-slate-200 p-4 space-y-3">
-                  <p className="text-sm text-slate-700">
-                    Current limit: <span className="font-semibold">{user.maxStudents}</span> student
-                    {user.maxStudents === 1 ? "" : "s"}
-                  </p>
-
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <Input
-                      value={newStudentName}
-                      onChange={(e) => setNewStudentName(e.target.value)}
-                      placeholder="Enter another student name"
-                    />
-                    <Button
-                      onClick={() => void handleAddStudent()}
-                      className="bg-slate-800 hover:bg-slate-900 text-white"
-                    >
-                      Add Student
-                    </Button>
-                  </div>
-
-                  {studentMessage && <p className="text-sm text-green-700">{studentMessage}</p>}
-                  {studentError && <p className="text-sm text-red-700">{studentError}</p>}
-                </div>
-              </CardContent>
-            </Card>
-
-            <div className="grid gap-6 md:grid-cols-2">
-              <Card className="border-sky-200">
-                <CardHeader>
-                  <CardTitle className="text-slate-800 flex items-center gap-2">
-                    <Crown className="h-5 w-5 text-amber-500" />
-                    Access Status
-                  </CardTitle>
-                </CardHeader>
-
-                <CardContent className="space-y-4 text-sm">
-                  <div className="flex items-center justify-between">
-                    <span className="text-slate-500">Plan</span>
-                    <Badge>{getPlanLabel(user.subscriptionTier)}</Badge>
-                  </div>
-
-                  {activeSubscription?.expiresAt && (
-                    <div className="flex items-center justify-between">
-                      <span className="text-slate-500">Expires</span>
-                      <span className="text-slate-700">
-                        {new Date(activeSubscription.expiresAt).toLocaleDateString()}
-                      </span>
-                    </div>
-                  )}
-
-                  {!isPremium && (
-                    <Link href="/pricing" className="block">
-                      <Button className="w-full bg-amber-500 hover:bg-amber-600 text-white">
-                        Upgrade Access
-                      </Button>
-                    </Link>
-                  )}
-                </CardContent>
-              </Card>
-
-              <Card className="border-sky-200">
-                <CardHeader>
-                  <CardTitle className="text-slate-800 flex items-center gap-2">
-                    <ShieldCheck className="h-5 w-5 text-sky-600" />
-                    Latest Payment
-                  </CardTitle>
-                </CardHeader>
-
-                <CardContent className="space-y-3 text-sm">
-                  {latestPayment ? (
-                    <>
-                      <div className="flex items-center justify-between">
-                        <span className="text-slate-500">Plan</span>
-                        <span className="text-slate-700">{getPlanLabel(latestPayment.planCode)}</span>
-                      </div>
-
-                      <div className="flex items-center justify-between">
-                        <span className="text-slate-500">Status</span>
-                        <Badge variant={latestPayment.status === "verified" ? "default" : "secondary"}>
-                          {latestPayment.status}
-                        </Badge>
-                      </div>
-
-                      <div className="flex items-center justify-between">
-                        <span className="text-slate-500">Submitted</span>
-                        <span className="text-slate-700">
-                          {new Date(latestPayment.submittedAt).toLocaleDateString()}
-                        </span>
-                      </div>
-
-                      {latestPayment.referenceCode && (
-                        <div>
-                          <span className="text-slate-500 block mb-1">Reference</span>
-                          <span className="text-slate-700">{latestPayment.referenceCode}</span>
-                        </div>
-                      )}
-                    </>
-                  ) : (
-                    <p className="text-slate-600">No payment submitted yet. Choose a plan to start.</p>
-                  )}
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-
-          <div className="space-y-6">
-            <Card className="border-sky-200">
-              <CardHeader>
-                <CardTitle className="text-slate-800 flex items-center gap-2">
                   <Award className="h-5 w-5 text-green-600" />
                   Latest Test Result
                 </CardTitle>
@@ -553,6 +428,129 @@ export default function DashboardPage() {
                   </div>
                 ) : (
                   <p className="text-slate-500 text-center py-4 text-sm">No tests taken yet.</p>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="space-y-6">
+            <Card className="border-sky-200">
+              <CardHeader>
+                <CardTitle className="text-slate-800 flex items-center gap-2">
+                  <Users className="h-5 w-5 text-sky-600" />
+                  Student Profiles
+                </CardTitle>
+                <CardDescription>Add students up to your plan limit.</CardDescription>
+              </CardHeader>
+
+              <CardContent className="space-y-4">
+                <div className="grid md:grid-cols-2 gap-4">
+                  {students.map((student) => (
+                    <div key={student.id} className="rounded-lg border border-slate-200 p-4 bg-white">
+                      <p className="font-medium text-slate-800">{student.fullName}</p>
+                      <p className="text-sm text-slate-500">Grade {student.gradeLevel}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="rounded-lg bg-slate-50 border border-slate-200 p-4 space-y-3">
+                  <p className="text-sm text-slate-700">
+                    Current limit: <span className="font-semibold">{user.maxStudents}</span> student
+                    {user.maxStudents === 1 ? "" : "s"}
+                  </p>
+
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Input
+                      value={newStudentName}
+                      onChange={(e) => setNewStudentName(e.target.value)}
+                      placeholder="Enter another student name"
+                    />
+                    <Button
+                      onClick={() => void handleAddStudent()}
+                      className="bg-slate-800 hover:bg-slate-900 text-white"
+                    >
+                      Add Student
+                    </Button>
+                  </div>
+
+                  {studentMessage && <p className="text-sm text-green-700">{studentMessage}</p>}
+                  {studentError && <p className="text-sm text-red-700">{studentError}</p>}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-sky-200">
+              <CardHeader>
+                <CardTitle className="text-slate-800 flex items-center gap-2">
+                  <Crown className="h-5 w-5 text-amber-500" />
+                  Access Status
+                </CardTitle>
+              </CardHeader>
+
+              <CardContent className="space-y-4 text-sm">
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-500">Plan</span>
+                  <Badge>{getPlanLabel(user.subscriptionTier)}</Badge>
+                </div>
+
+                {activeSubscription?.expiresAt && (
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-500">Expires</span>
+                    <span className="text-slate-700">
+                      {new Date(activeSubscription.expiresAt).toLocaleDateString()}
+                    </span>
+                  </div>
+                )}
+
+                {!isPremium && (
+                  <Link href="/pricing" className="block">
+                    <Button className="w-full bg-amber-500 hover:bg-amber-600 text-white">
+                      Upgrade Access
+                    </Button>
+                  </Link>
+                )}
+              </CardContent>
+            </Card>
+
+            <Card className="border-sky-200">
+              <CardHeader>
+                <CardTitle className="text-slate-800 flex items-center gap-2">
+                  <ShieldCheck className="h-5 w-5 text-sky-600" />
+                  Latest Payment
+                </CardTitle>
+              </CardHeader>
+
+              <CardContent className="space-y-3 text-sm">
+                {latestPayment ? (
+                  <>
+                    <div className="flex items-center justify-between">
+                      <span className="text-slate-500">Plan</span>
+                      <span className="text-slate-700">{getPlanLabel(latestPayment.planCode)}</span>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <span className="text-slate-500">Status</span>
+                      <Badge variant={latestPayment.status === "verified" ? "default" : "secondary"}>
+                        {latestPayment.status}
+                      </Badge>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <span className="text-slate-500">Submitted</span>
+                      <span className="text-slate-700">
+                        {new Date(latestPayment.submittedAt).toLocaleDateString()}
+                      </span>
+                    </div>
+
+                    {latestPayment.referenceCode && (
+                      <div>
+                        <span className="text-slate-500 block mb-1">Reference</span>
+                        <span className="text-slate-700">{latestPayment.referenceCode}</span>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <p className="text-slate-600">No payment submitted yet. Choose a plan to start.</p>
                 )}
               </CardContent>
             </Card>
