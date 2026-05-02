@@ -8,7 +8,7 @@ const subjects = [
     description:
       "Reading comprehension, vocabulary, grammar, and writing skills practice.",
     icon: BookOpen,
-    href: "/mock-tests/language-arts",
+    href: "/language-arts",
     iconBg: "bg-[#0d4a5f]",
   },
   {
@@ -16,7 +16,7 @@ const subjects = [
     description:
       "Number operations, problem solving, measurement, and geometry practice.",
     icon: Calculator,
-    href: "/mock-tests/mathematics",
+    href: "/mathematics",
     iconBg: "bg-[#f59e0b]",
   },
   {
@@ -24,7 +24,7 @@ const subjects = [
     description:
       "Explore living things, matter, energy, and the environment through interactive lessons.",
     icon: FlaskConical,
-    href: "/mock-tests/science",
+    href: "/science",
     iconBg: "bg-[#0d9488]",
   },
   {
@@ -32,7 +32,7 @@ const subjects = [
     description:
       "Learn about Jamaica, Caribbean history, geography, and civic responsibilities.",
     icon: Globe,
-    href: "/mock-tests/social-studies",
+    href: "/social-studies",
     iconBg: "bg-[#6366f1]",
   },
 ]
