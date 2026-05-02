@@ -77,6 +77,15 @@ function isLangSubject(subject: string): boolean {
   return s === "language arts" || s === "language-arts" || s === "literacy"
 }
 
+function isScienceSubject(subject: string): boolean {
+  return subject.toLowerCase() === "science"
+}
+
+function isSocialStudiesSubject(subject: string): boolean {
+  const s = subject.toLowerCase()
+  return s === "social studies" || s === "social-studies"
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 export default function DashboardPage() {
   const router = useRouter()
@@ -245,6 +254,18 @@ export default function DashboardPage() {
       ? Math.max(...mathResults.map((r) => Number(r.percentage)))
       : 0
 
+  const scienceResults = testResults.filter((r) => isScienceSubject(r.subject))
+  const scienceBestScore =
+    scienceResults.length > 0
+      ? Math.max(...scienceResults.map((r) => Number(r.percentage)))
+      : 0
+
+  const socialStudiesResults = testResults.filter((r) => isSocialStudiesSubject(r.subject))
+  const socialStudiesBestScore =
+    socialStudiesResults.length > 0
+      ? Math.max(...socialStudiesResults.map((r) => Number(r.percentage)))
+      : 0
+
   const subjectProgress = [
     {
       label: "Language Arts",
@@ -260,13 +281,13 @@ export default function DashboardPage() {
     },
     {
       label: "Science",
-      value: 0,
+      value: scienceBestScore,
       bar: "bg-green-500",
       bg: "bg-green-100",
     },
     {
       label: "Social Studies",
-      value: 0,
+      value: socialStudiesBestScore,
       bar: "bg-purple-500",
       bg: "bg-purple-100",
     },
