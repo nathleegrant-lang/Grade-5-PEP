@@ -33,6 +33,16 @@ import {
 } from "lucide-react"
 import { getPlanLabel } from "@/lib/subscriptions"
 
+// ── Normalises raw DB subject values to clean display labels ──────────────────
+function displaySubject(subject: string): string {
+  if (!subject) return subject
+  const s = subject.toLowerCase()
+  if (s === "numeracy" || s === "mathematics") return "Mathematics"
+  if (s === "literacy" || s === "language arts" || s === "language-arts") return "Language Arts"
+  return subject
+}
+
+// ── Types ─────────────────────────────────────────────────────────────────────
 type StudentTestResult = {
   id: string
   subject: string
@@ -56,6 +66,18 @@ type CertificateRecord = {
   issued_at: string
 }
 
+// ── Helpers for subject-progress filters ──────────────────────────────────────
+function isMathSubject(subject: string): boolean {
+  const s = subject.toLowerCase()
+  return s === "mathematics" || s === "numeracy"
+}
+
+function isLangSubject(subject: string): boolean {
+  const s = subject.toLowerCase()
+  return s === "language arts" || s === "language-arts" || s === "literacy"
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 export default function DashboardPage() {
   const router = useRouter()
   const {
@@ -82,10 +104,12 @@ export default function DashboardPage() {
   const [studentMessage, setStudentMessage] = useState("")
   const [studentError, setStudentError] = useState("")
 
+  // ── Auth guard ──────────────────────────────────────────────────────────────
   useEffect(() => {
     if (!isLoading && !isAuthenticated) router.push("/login")
   }, [isLoading, isAuthenticated, router])
 
+  // ── Fetch latest payment ────────────────────────────────────────────────────
   useEffect(() => {
     const loadLatestPayment = async () => {
       if (!user) return
@@ -124,6 +148,7 @@ export default function DashboardPage() {
     void loadLatestPayment()
   }, [supabase, user])
 
+  // ── Fetch test results ──────────────────────────────────────────────────────
   useEffect(() => {
     const loadTestResults = async () => {
       if (!user) return
@@ -160,6 +185,7 @@ export default function DashboardPage() {
     void loadTestResults()
   }, [supabase, user])
 
+  // ── Fetch certificates ──────────────────────────────────────────────────────
   useEffect(() => {
     const loadCertificates = async () => {
       if (!user) return
@@ -178,6 +204,7 @@ export default function DashboardPage() {
     void loadCertificates()
   }, [supabase, user])
 
+  // ── Loading / auth states ───────────────────────────────────────────────────
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50 flex items-center justify-center">
@@ -188,6 +215,7 @@ export default function DashboardPage() {
 
   if (!user) return null
 
+  // ── Static nav data ─────────────────────────────────────────────────────────
   const quickLinks = [
     { href: "/language-arts", icon: BookOpen, label: "Language Arts", color: "bg-sky-100 text-sky-600" },
     { href: "/mathematics", icon: Calculator, label: "Mathematics", color: "bg-amber-100 text-amber-600" },
@@ -201,22 +229,26 @@ export default function DashboardPage() {
     { href: "/certificates", icon: Award, label: "Certificates", color: "bg-purple-100 text-purple-600" },
   ]
 
+  // ── Subject progress ────────────────────────────────────────────────────────
+  // Language Arts: fall back to context best score if no DB results yet
   const languageArtsProgress = getTopicProgress("language-arts")
 
+  const langResultsFromDB = testResults.filter((r) => isLangSubject(r.subject))
+  const langBestScore =
+    langResultsFromDB.length > 0
+      ? Math.max(...langResultsFromDB.map((r) => Number(r.percentage)))
+      : languageArtsProgress.bestScore || 0
+
+  const mathResults = testResults.filter((r) => isMathSubject(r.subject))
   const mathBestScore =
-    testResults.length > 0
-      ? Math.max(
-          ...testResults
-            .filter((r) => r.subject === "Mathematics")
-            .map((r) => Number(r.percentage)),
-          0,
-        )
+    mathResults.length > 0
+      ? Math.max(...mathResults.map((r) => Number(r.percentage)))
       : 0
 
   const subjectProgress = [
     {
       label: "Language Arts",
-      value: languageArtsProgress.bestScore || 0,
+      value: langBestScore,
       bar: "bg-sky-500",
       bg: "bg-sky-100",
     },
@@ -240,6 +272,7 @@ export default function DashboardPage() {
     },
   ]
 
+  // ── Add student handler ─────────────────────────────────────────────────────
   const handleAddStudent = async () => {
     setStudentMessage("")
     setStudentError("")
@@ -256,6 +289,7 @@ export default function DashboardPage() {
     await refreshUser()
   }
 
+  // ── Render ──────────────────────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
       <Header />
@@ -371,7 +405,8 @@ export default function DashboardPage() {
                   <>
                     <div className="flex justify-between">
                       <span className="text-slate-500">Subject</span>
-                      <span className="text-slate-700">{latestTest.subject}</span>
+                      {/* displaySubject normalises "Numeracy" → "Mathematics" etc. */}
+                      <span className="text-slate-700">{displaySubject(latestTest.subject)}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-500">Test</span>
@@ -416,6 +451,7 @@ export default function DashboardPage() {
                 {subjectProgress.map((item) => (
                   <div key={item.label} className="space-y-2">
                     <div className="flex justify-between text-sm">
+                      {/* Labels are already canonical ("Mathematics", "Language Arts") */}
                       <span className="font-medium text-slate-700">{item.label}</span>
                       <span className="text-slate-500">{item.value}%</span>
                     </div>
@@ -455,7 +491,8 @@ export default function DashboardPage() {
                             }`}
                           />
                           <span className="text-slate-700">
-                            {result.subject} — {result.test_name}
+                            {/* displaySubject applied to raw DB value */}
+                            {displaySubject(result.subject)} — {result.test_name}
                           </span>
                         </div>
                         <span className="text-slate-500">{result.percentage}%</span>
@@ -548,7 +585,8 @@ export default function DashboardPage() {
                       </p>
                       <p className="text-xs text-slate-600">{cert.student_name}</p>
                       <p className="text-xs text-slate-500">
-                        {cert.subject} — {cert.test_name}
+                        {/* displaySubject normalises raw subject from DB */}
+                        {displaySubject(cert.subject)} — {cert.test_name}
                       </p>
                       <div className="flex items-center justify-between">
                         <span className="text-xs font-medium text-amber-700">
