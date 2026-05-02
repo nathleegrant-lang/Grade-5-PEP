@@ -180,7 +180,7 @@ export default function DashboardPage() {
   const mathBestScore = testResults.length > 0
     ? Math.max(
         ...testResults
-          .filter((r) => r.subject === "Mathematics")
+          .filter((r) => r.subject.toLowerCase() === "mathematics")
           .map((r) => Number(r.percentage)),
         0,
       )
