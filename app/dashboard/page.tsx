@@ -44,6 +44,18 @@ type StudentTestResult = {
   completed_at: string
 }
 
+type CertificateRecord = {
+  id: string
+  student_name: string
+  subject: string
+  test_name: string
+  score: number
+  total_questions: number
+  percentage: number
+  certificate_title: string
+  issued_at: string
+}
+
 export default function DashboardPage() {
   const router = useRouter()
   const {
@@ -57,17 +69,14 @@ export default function DashboardPage() {
     refreshUser,
   } = useAuth()
 
-  const { progress, getTopicProgress, getCertificates } = useProgress()
+  const { getTopicProgress } = useProgress()
   const supabase = useMemo(() => getSupabaseBrowserClient(), [])
 
   const [latestPayment, setLatestPayment] = useState<PaymentRecord | null>(null)
   const [latestTest, setLatestTest] = useState<StudentTestResult | null>(null)
   const [testResults, setTestResults] = useState<StudentTestResult[]>([])
-  const [testStats, setTestStats] = useState({
-    total: 0,
-    average: 0,
-    best: 0,
-  })
+  const [testStats, setTestStats] = useState({ total: 0, average: 0, best: 0 })
+  const [earnedCertificates, setEarnedCertificates] = useState<CertificateRecord[]>([])
 
   const [newStudentName, setNewStudentName] = useState("")
   const [studentMessage, setStudentMessage] = useState("")
@@ -151,6 +160,24 @@ export default function DashboardPage() {
     void loadTestResults()
   }, [supabase, user])
 
+  useEffect(() => {
+    const loadCertificates = async () => {
+      if (!user) return
+
+      const { data } = await supabase
+        .from("certificates")
+        .select(
+          "id, student_name, subject, test_name, score, total_questions, percentage, certificate_title, issued_at",
+        )
+        .eq("parent_id", user.id)
+        .order("issued_at", { ascending: false })
+
+      setEarnedCertificates((data || []) as CertificateRecord[])
+    }
+
+    void loadCertificates()
+  }, [supabase, user])
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50 flex items-center justify-center">
@@ -175,16 +202,16 @@ export default function DashboardPage() {
   ]
 
   const languageArtsProgress = getTopicProgress("language-arts")
-  const certificates = getCertificates()
 
-  const mathBestScore = testResults.length > 0
-    ? Math.max(
-        ...testResults
-          .filter((r) => r.subject === "Mathematics")
-          .map((r) => Number(r.percentage)),
-        0,
-      )
-    : 0
+  const mathBestScore =
+    testResults.length > 0
+      ? Math.max(
+          ...testResults
+            .filter((r) => r.subject === "Mathematics")
+            .map((r) => Number(r.percentage)),
+          0,
+        )
+      : 0
 
   const subjectProgress = [
     {
@@ -234,6 +261,8 @@ export default function DashboardPage() {
       <Header />
 
       <main className="container mx-auto px-4 py-10">
+
+        {/* ── Welcome header ── */}
         <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 rounded-full bg-sky-100 flex items-center justify-center">
@@ -254,11 +283,16 @@ export default function DashboardPage() {
                 : "bg-slate-100 text-slate-700"
             }
           >
-            {isPremium ? <Crown className="h-4 w-4 mr-1" /> : <ShieldCheck className="h-4 w-4 mr-1" />}
+            {isPremium ? (
+              <Crown className="h-4 w-4 mr-1" />
+            ) : (
+              <ShieldCheck className="h-4 w-4 mr-1" />
+            )}
             {getPlanLabel(user.subscriptionTier)}
           </Badge>
         </div>
 
+        {/* ── Stat cards ── */}
         <div className="grid gap-4 grid-cols-2 lg:grid-cols-4 mb-8">
           <Card className="border-sky-200">
             <CardContent className="p-4">
@@ -309,7 +343,7 @@ export default function DashboardPage() {
                   <Award className="h-5 w-5 text-amber-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-slate-800">{certificates.length}</p>
+                  <p className="text-2xl font-bold text-slate-800">{earnedCertificates.length}</p>
                   <p className="text-xs text-slate-500">Certificates</p>
                 </div>
               </div>
@@ -317,8 +351,13 @@ export default function DashboardPage() {
           </Card>
         </div>
 
+        {/* ── Main two-column grid ── */}
         <div className="grid lg:grid-cols-3 gap-6">
+
+          {/* ── Left col (span-2): test data cards ── */}
           <div className="lg:col-span-2 space-y-6">
+
+            {/* Latest Test Result */}
             <Card className="border-sky-200">
               <CardHeader>
                 <CardTitle className="text-slate-800 flex items-center gap-2">
@@ -334,24 +373,20 @@ export default function DashboardPage() {
                       <span className="text-slate-500">Subject</span>
                       <span className="text-slate-700">{latestTest.subject}</span>
                     </div>
-
                     <div className="flex justify-between">
                       <span className="text-slate-500">Test</span>
                       <span className="text-slate-700">{latestTest.test_name}</span>
                     </div>
-
                     <div className="flex justify-between">
                       <span className="text-slate-500">Score</span>
                       <span className="text-slate-700">
                         {latestTest.score}/{latestTest.total_questions}
                       </span>
                     </div>
-
                     <div className="flex justify-between">
                       <span className="text-slate-500">Percentage</span>
                       <span className="text-slate-700">{latestTest.percentage}%</span>
                     </div>
-
                     <div className="flex justify-between">
                       <span className="text-slate-500">Completed</span>
                       <span className="text-slate-700">
@@ -367,6 +402,7 @@ export default function DashboardPage() {
               </CardContent>
             </Card>
 
+            {/* Subject Progress */}
             <Card className="border-sky-200">
               <CardHeader>
                 <CardTitle className="text-slate-800 flex items-center gap-2">
@@ -383,7 +419,6 @@ export default function DashboardPage() {
                       <span className="font-medium text-slate-700">{item.label}</span>
                       <span className="text-slate-500">{item.value}%</span>
                     </div>
-
                     <div className={`h-3 w-full rounded-full ${item.bg} overflow-hidden`}>
                       <div
                         className={`h-full rounded-full ${item.bar}`}
@@ -395,6 +430,7 @@ export default function DashboardPage() {
               </CardContent>
             </Card>
 
+            {/* Recent Activity */}
             <Card className="border-sky-200">
               <CardHeader>
                 <CardTitle className="text-slate-800 flex items-center gap-2">
@@ -433,7 +469,10 @@ export default function DashboardPage() {
             </Card>
           </div>
 
+          {/* ── Right col (span-1): admin / profile cards ── */}
           <div className="space-y-6">
+
+            {/* Student Profiles */}
             <Card className="border-sky-200">
               <CardHeader>
                 <CardTitle className="text-slate-800 flex items-center gap-2">
@@ -446,7 +485,10 @@ export default function DashboardPage() {
               <CardContent className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
                   {students.map((student) => (
-                    <div key={student.id} className="rounded-lg border border-slate-200 p-4 bg-white">
+                    <div
+                      key={student.id}
+                      className="rounded-lg border border-slate-200 p-4 bg-white"
+                    >
                       <p className="font-medium text-slate-800">{student.fullName}</p>
                       <p className="text-sm text-slate-500">Grade {student.gradeLevel}</p>
                     </div>
@@ -455,7 +497,8 @@ export default function DashboardPage() {
 
                 <div className="rounded-lg bg-slate-50 border border-slate-200 p-4 space-y-3">
                   <p className="text-sm text-slate-700">
-                    Current limit: <span className="font-semibold">{user.maxStudents}</span> student
+                    Current limit:{" "}
+                    <span className="font-semibold">{user.maxStudents}</span> student
                     {user.maxStudents === 1 ? "" : "s"}
                   </p>
 
@@ -473,12 +516,68 @@ export default function DashboardPage() {
                     </Button>
                   </div>
 
-                  {studentMessage && <p className="text-sm text-green-700">{studentMessage}</p>}
-                  {studentError && <p className="text-sm text-red-700">{studentError}</p>}
+                  {studentMessage && (
+                    <p className="text-sm text-green-700">{studentMessage}</p>
+                  )}
+                  {studentError && (
+                    <p className="text-sm text-red-700">{studentError}</p>
+                  )}
                 </div>
               </CardContent>
             </Card>
 
+            {/* Certificates Earned */}
+            <Card className="border-sky-200">
+              <CardHeader>
+                <CardTitle className="text-slate-800 flex items-center gap-2">
+                  <Award className="h-5 w-5 text-amber-500" />
+                  Certificates Earned
+                </CardTitle>
+                <CardDescription>Your most recent achievements.</CardDescription>
+              </CardHeader>
+
+              <CardContent className="space-y-4">
+                {earnedCertificates.length > 0 ? (
+                  earnedCertificates.slice(0, 3).map((cert) => (
+                    <div
+                      key={cert.id}
+                      className="rounded-lg border border-amber-100 bg-amber-50 p-4 space-y-2"
+                    >
+                      <p className="font-semibold text-slate-800 text-sm leading-snug">
+                        {cert.certificate_title}
+                      </p>
+                      <p className="text-xs text-slate-600">{cert.student_name}</p>
+                      <p className="text-xs text-slate-500">
+                        {cert.subject} — {cert.test_name}
+                      </p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-medium text-amber-700">
+                          {cert.percentage}%
+                        </span>
+                        <span className="text-xs text-slate-400">
+                          {new Date(cert.issued_at).toLocaleDateString()}
+                        </span>
+                      </div>
+                      <Link href="/certificates">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="w-full mt-1 border-amber-300 text-amber-700 hover:bg-amber-100"
+                        >
+                          View Certificate
+                        </Button>
+                      </Link>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-slate-500 text-sm text-center py-4">
+                    No certificates earned yet. Score 80% or higher on a full mock test to earn one.
+                  </p>
+                )}
+              </CardContent>
+            </Card>
+
+            {/* Access Status */}
             <Card className="border-sky-200">
               <CardHeader>
                 <CardTitle className="text-slate-800 flex items-center gap-2">
@@ -512,6 +611,7 @@ export default function DashboardPage() {
               </CardContent>
             </Card>
 
+            {/* Latest Payment */}
             <Card className="border-sky-200">
               <CardHeader>
                 <CardTitle className="text-slate-800 flex items-center gap-2">
@@ -525,23 +625,24 @@ export default function DashboardPage() {
                   <>
                     <div className="flex items-center justify-between">
                       <span className="text-slate-500">Plan</span>
-                      <span className="text-slate-700">{getPlanLabel(latestPayment.planCode)}</span>
+                      <span className="text-slate-700">
+                        {getPlanLabel(latestPayment.planCode)}
+                      </span>
                     </div>
-
                     <div className="flex items-center justify-between">
                       <span className="text-slate-500">Status</span>
-                      <Badge variant={latestPayment.status === "verified" ? "default" : "secondary"}>
+                      <Badge
+                        variant={latestPayment.status === "verified" ? "default" : "secondary"}
+                      >
                         {latestPayment.status}
                       </Badge>
                     </div>
-
                     <div className="flex items-center justify-between">
                       <span className="text-slate-500">Submitted</span>
                       <span className="text-slate-700">
                         {new Date(latestPayment.submittedAt).toLocaleDateString()}
                       </span>
                     </div>
-
                     {latestPayment.referenceCode && (
                       <div>
                         <span className="text-slate-500 block mb-1">Reference</span>
@@ -550,20 +651,25 @@ export default function DashboardPage() {
                     )}
                   </>
                 ) : (
-                  <p className="text-slate-600">No payment submitted yet. Choose a plan to start.</p>
+                  <p className="text-slate-600">
+                    No payment submitted yet. Choose a plan to start.
+                  </p>
                 )}
               </CardContent>
             </Card>
           </div>
         </div>
 
+        {/* ── Continue Learning ── */}
         <h2 className="text-xl font-semibold text-slate-800 mt-10 mb-4">Continue Learning</h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {quickLinks.map((link) => (
             <Link key={link.href} href={link.href}>
               <Card className="border-sky-200 hover:border-sky-400 hover:shadow-md transition-all cursor-pointer h-full">
                 <CardContent className="p-6 flex items-center gap-4">
-                  <div className={`w-12 h-12 rounded-full ${link.color} flex items-center justify-center`}>
+                  <div
+                    className={`w-12 h-12 rounded-full ${link.color} flex items-center justify-center`}
+                  >
                     <link.icon className="h-6 w-6" />
                   </div>
                   <div className="flex-1">
@@ -576,10 +682,10 @@ export default function DashboardPage() {
           ))}
         </div>
 
+        {/* ── Paid Resources ── */}
         <h2 className="text-xl font-semibold text-slate-800 mt-10 mb-4 flex items-center gap-2">
           Paid Resources {!isPremium && <Lock className="h-4 w-4 text-slate-400" />}
         </h2>
-
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {premiumLinks.map((link) => (
             <Link key={link.href} href={link.href}>
@@ -589,7 +695,9 @@ export default function DashboardPage() {
                 }`}
               >
                 <CardContent className="p-6 flex items-center gap-4">
-                  <div className={`w-12 h-12 rounded-full ${link.color} flex items-center justify-center`}>
+                  <div
+                    className={`w-12 h-12 rounded-full ${link.color} flex items-center justify-center`}
+                  >
                     <link.icon className="h-6 w-6" />
                   </div>
                   <div className="flex-1">
