@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -13,6 +13,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/auth-context"
+import { saveStudentTestResult } from "@/lib/student-test-results"
 
 const FREE_QUESTION_LIMIT = 5
 
@@ -617,12 +618,13 @@ const SECTION_CONFIG = [
 ]
 
 export default function G5LaEasy1MockTest() {
-  const { isPremium } = useAuth()
+  const { isPremium, user } = useAuth()
   const [started, setStarted]             = useState(false)
   const [showResults, setShowResults]     = useState(false)
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]             = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]           = useState(60 * 60)
+  const hasSavedResult = useRef(false)
 
   const availableQuestions = isPremium ? g5LaEasy1Questions : g5LaEasy1Questions.slice(0, FREE_QUESTION_LIMIT)
   const totalQuestions = availableQuestions.length
@@ -647,6 +649,26 @@ export default function G5LaEasy1MockTest() {
   const calcScore  = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct   = () => Math.round((calcScore() / totalQuestions) * 100)
 
+  useEffect(() => {
+    if (!showResults || !user?.id || hasSavedResult.current) return
+
+    hasSavedResult.current = true
+    void saveStudentTestResult({
+      parentId: user.id,
+      studentName: user?.childName ?? "Student",
+      grade: "grade5",
+      subject: "Literacy",
+      testName: "Easy 1",
+      difficulty: "Easy",
+      score: calcScore(),
+      totalQuestions,
+      percentage: scorePct(),
+      completedAt: new Date().toISOString(),
+    }).catch(() => {
+      hasSavedResult.current = false
+    })
+  }, [showResults, user?.id, user?.childName, totalQuestions, answers])
+
   const getGrade = () => {
     const p = scorePct()
     if (p >= 85) return { grade: "Excellent",         color: "text-green-600" }
@@ -667,7 +689,7 @@ export default function G5LaEasy1MockTest() {
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60); hasSavedResult.current = false
   }
 
   const q = availableQuestions[currentQuestion]

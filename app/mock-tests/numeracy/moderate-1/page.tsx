@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { useAuth } from "@/contexts/auth-context"
+import { saveStudentTestResult } from "@/lib/student-test-results"
 import {
   ArrowLeft,
   Clock,
@@ -23,7 +24,7 @@ const FREE_QUESTIONS_LIMIT = 5
 const questions = [/* KEEP YOUR CURRENT QUESTIONS */]
 
 export default function Page() {
-  const { isPremium } = useAuth()
+  const { isPremium, user } = useAuth()
 
   const [started, setStarted] = useState(false)
   const [current, setCurrent] = useState(0)
@@ -31,6 +32,7 @@ export default function Page() {
   const [time, setTime] = useState(3600)
   const [done, setDone] = useState(false)
   const [score, setScore] = useState(0)
+  const hasSavedResult = useRef(false)
 
   const qList = isPremium ? questions : questions.slice(0, 5)
   const q = qList[current]
@@ -41,7 +43,7 @@ export default function Page() {
       setTime((p) => {
         if (p <= 1) {
           clearInterval(t)
-          submit()
+          void submit()
           return 0
         }
         return p - 1
@@ -56,12 +58,40 @@ export default function Page() {
     setAnswers(copy)
   }
 
-  const submit = () => {
+  const calculateScore = () => {
     let s = 0
     qList.forEach((q, i) => {
       if (answers[i] === q.answer) s++
     })
+    return s
+  }
+
+  const getScorePercentage = () => Math.round((calculateScore() / qList.length) * 100)
+
+  const submit = async () => {
+    const s = calculateScore()
     setScore(s)
+
+    if (user?.id && !hasSavedResult.current) {
+      hasSavedResult.current = true
+      try {
+        await saveStudentTestResult({
+          parentId: user.id,
+          studentName: user?.childName ?? "Student",
+          grade: "grade5",
+          subject: "Numeracy",
+          testName: "Moderate 1",
+          difficulty: "Moderate",
+          score: s,
+          totalQuestions: qList.length,
+          percentage: getScorePercentage(),
+          completedAt: new Date().toISOString(),
+        })
+      } catch {
+        hasSavedResult.current = false
+      }
+    }
+
     setDone(true)
   }
 
@@ -120,7 +150,7 @@ export default function Page() {
         </Button>
 
         {current === qList.length - 1 ? (
-          <Button onClick={submit}>Submit</Button>
+          <Button onClick={() => void submit()}>Submit</Button>
         ) : (
           <Button onClick={() => setCurrent((p) => p + 1)}>
             Next <ChevronRight />

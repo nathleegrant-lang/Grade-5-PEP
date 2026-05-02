@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -11,6 +11,7 @@ import { Footer } from "@/components/footer"
 import { Clock, ChevronLeft, ChevronRight, Flag, CheckCircle, XCircle, Calculator, RotateCcw, Home, Lock, Crown, ArrowLeft, Printer } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/auth-context"
+import { saveStudentTestResult } from "@/lib/student-test-results"
 
 const FREE_QUESTION_LIMIT = 5
 
@@ -562,6 +563,7 @@ export default function G5MathEasy2MockTest() {
   const [timeRemaining, setTimeRemaining] = useState(60 * 60)
   const [showReview, setShowReview] = useState(false)
   const [completedAt, setCompletedAt] = useState("")
+  const hasSavedResult = useRef(false)
 
   const availableQuestions = isPremium ? g5MathEasy2Questions : g5MathEasy2Questions.slice(0, FREE_QUESTION_LIMIT)
   const totalQuestions = availableQuestions.length
@@ -608,7 +610,28 @@ export default function G5MathEasy2MockTest() {
 
   const handleSubmit = () => { setCompletedAt(new Date().toLocaleString()); setTestCompleted(true) }
 
-  const restartTest = () => { setTestStarted(false); setTestCompleted(false); setCurrentQuestion(0); setAnswers(new Array(totalQuestions).fill(null)); setTimeRemaining(isPremium ? 60 * 60 : 10 * 60); setShowReview(false); setCompletedAt("") }
+  useEffect(() => {
+    if (!testCompleted || !user?.id || hasSavedResult.current) return
+
+    hasSavedResult.current = true
+    void saveStudentTestResult({
+      parentId: user.id,
+      studentName: user?.childName ?? "Student",
+      grade: "grade5",
+      subject: "Numeracy",
+      testName: "Easy 2",
+      difficulty: "Easy",
+      score: calculateScore(),
+      totalQuestions,
+      percentage: getScorePercentage(),
+      completedAt: new Date().toISOString(),
+    }).catch(() => {
+      hasSavedResult.current = false
+    })
+  }, [testCompleted, user?.id, user?.childName, totalQuestions, answers])
+
+
+  const restartTest = () => { setTestStarted(false); setTestCompleted(false); setCurrentQuestion(0); setAnswers(new Array(totalQuestions).fill(null)); setTimeRemaining(isPremium ? 60 * 60 : 10 * 60); setShowReview(false); setCompletedAt(""); hasSavedResult.current = false }
 
   const question = availableQuestions[currentQuestion]
   const answeredCount = answers.filter((a) => a !== null).length
