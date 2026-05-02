@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { useAuth } from "@/contexts/auth-context";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import { Header } from "@/components/header";
@@ -21,7 +22,7 @@ interface Certificate {
 }
 
 export default function CertificatesPage() {
-  const { user, isloading: authLoading } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const router = useRouter();
   const [certificates, setCertificates] = useState<Certificate[]>([]);
   const [loading, setLoading] = useState(true);
@@ -182,6 +183,17 @@ export default function CertificatesPage() {
                   <div className="relative z-10 px-10 py-10 sm:px-16 sm:py-14">
                     {/* Brand & Title */}
                     <div className="text-center mb-8">
+                      <div className="flex justify-center mb-4">
+                        <Image
+                          src="/images/shazoniques-inspiration-logo.png"
+                          alt="Shazonique's Inspiration logo"
+                          width={180}
+                          height={80}
+                          className="h-auto w-[160px]"
+                          priority
+                        />
+                      </div>
+
                       <p className="text-xs uppercase tracking-[0.3em] text-amber-600 font-semibold mb-1">
                         Shazonique's Inspiration
                       </p>
