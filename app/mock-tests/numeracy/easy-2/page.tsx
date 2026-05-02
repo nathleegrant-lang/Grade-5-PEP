@@ -619,7 +619,7 @@ export default function G5MathEasy2MockTest() {
       parentId: user.id,
       studentName: user?.childName ?? "Student",
       grade: "grade5",
-      subject: "Numeracy",
+      subject: "Mathematics",
       testName: "Easy 2",
       difficulty: "Easy",
       score: calculateScore(),

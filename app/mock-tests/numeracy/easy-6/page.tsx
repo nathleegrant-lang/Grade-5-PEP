@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import { saveStudentTestResult } from "@/lib/student-test-results"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"

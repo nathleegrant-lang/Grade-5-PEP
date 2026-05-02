@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import { saveStudentTestResult } from "@/lib/student-test-results"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -597,7 +598,7 @@ const SECTION_CONFIG = [
 ]
 
 export default function G5MathMixed4MockTest() {
-  const { isPremium } = useAuth()
+  const { isPremium, user } = useAuth()
   const [started, setStarted] = useState(false)
   const [showResults, setShowResults] = useState(false)
   const [currentQuestion, setCurrentQuestion] = useState(0)
