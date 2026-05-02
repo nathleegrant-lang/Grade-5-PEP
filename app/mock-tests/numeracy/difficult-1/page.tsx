@@ -35,7 +35,7 @@ const questions: Question[] = [
 ]
 
 export default function NumeracyDifficult1Page() {
-  const { isPremium } = useAuth()
+  const { isPremium, user } = useAuth()
 
   const [started, setStarted] = useState(false)
   const [timeLeft, setTimeLeft] = useState(60 * 60)

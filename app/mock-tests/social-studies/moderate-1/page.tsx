@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import { saveStudentTestResult } from "@/lib/student-test-results"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -597,7 +598,7 @@ const SECTION_CONFIG = [
 ]
 
 export default function G5SsMod1MockTest() {
-  const { isPremium } = useAuth()
+  const { isPremium, user } = useAuth()
   const [started, setStarted]                 = useState(false)
   const [showResults, setShowResults]         = useState(false)
   const [currentQuestion, setCurrentQuestion] = useState(0)
@@ -625,6 +626,29 @@ export default function G5SsMod1MockTest() {
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
+
+  const handleSubmit = async () => {
+    setShowResults(true)
+
+    if (!user?.id) return
+
+    try {
+      await saveStudentTestResult({
+        parentId: user.id,
+        studentName: user?.childName ?? "Student",
+        grade: "grade5",
+        subject: "Social Studies",
+        testName: "Moderate 1",
+        difficulty: "Moderate",
+        score: calcScore(),
+        totalQuestions,
+        percentage: scorePct(),
+        completedAt: new Date().toISOString(),
+      })
+    } catch (error) {
+      console.error("Failed to save test result:", error)
+    }
+  }
 
   const getGrade = () => {
     const p = scorePct()
@@ -823,7 +847,7 @@ export default function G5SsMod1MockTest() {
           <div className="flex items-center justify-between mb-6">
             <Button variant="outline" onClick={() => setCurrentQuestion((p) => p - 1)} disabled={currentQuestion === 0}><ChevronLeft className="h-4 w-4 mr-2" />Previous</Button>
             {currentQuestion === totalQuestions - 1
-              ? <Button onClick={() => setShowResults(true)} className="bg-green-700 hover:bg-green-800"><Flag className="h-4 w-4 mr-2" />Submit Test</Button>
+              ? <Button onClick={handleSubmit} className="bg-green-700 hover:bg-green-800"><Flag className="h-4 w-4 mr-2" />Submit Test</Button>
               : <Button onClick={() => setCurrentQuestion((p) => p + 1)} className="bg-green-700 hover:bg-green-800">Next<ChevronRight className="h-4 w-4 ml-2" /></Button>}
           </div>
           <Card className="border-green-100">

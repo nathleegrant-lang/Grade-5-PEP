@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import { saveStudentTestResult } from "@/lib/student-test-results"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -597,7 +598,7 @@ const SECTION_CONFIG = [
 ]
 
 export default function G5MathMod6MockTest() {
-  const { isPremium } = useAuth()
+  const { isPremium, user } = useAuth()
   const [started, setStarted]             = useState(false)
   const [showResults, setShowResults]     = useState(false)
   const [currentQuestion, setCurrentQuestion] = useState(0)
@@ -626,6 +627,29 @@ export default function G5MathMod6MockTest() {
 
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
+
+  const handleSubmit = async () => {
+    setShowResults(true)
+
+    if (!user?.id) return
+
+    try {
+      await saveStudentTestResult({
+        parentId: user.id,
+        studentName: user?.childName ?? "Student",
+        grade: "grade5",
+        subject: "Mathematics",
+        testName: "Moderate 6",
+        difficulty: "Moderate",
+        score: calcScore(),
+        totalQuestions,
+        percentage: scorePct(),
+        completedAt: new Date().toISOString(),
+      })
+    } catch (error) {
+      console.error("Failed to save test result:", error)
+    }
+  }
 
   const getGrade = () => {
     const p = scorePct()

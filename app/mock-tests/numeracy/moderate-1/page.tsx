@@ -80,7 +80,7 @@ export default function Page() {
           parentId: user.id,
           studentName: user?.childName ?? "Student",
           grade: "grade5",
-          subject: "Numeracy",
+          subject: "Mathematics",
           testName: "Moderate 1",
           difficulty: "Moderate",
           score: s,
