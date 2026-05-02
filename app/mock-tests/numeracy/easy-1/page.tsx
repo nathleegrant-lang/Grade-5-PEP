@@ -615,6 +615,7 @@ export default function G5MathEasy1MockTest() {
     if (user?.id) {
       await saveStudentTestResult({
         parentId: user.id,
+        studentName: user?.childName ?? "Student",
         studentId: null,
         grade: "grade5",
         subject: "Mathematics",
