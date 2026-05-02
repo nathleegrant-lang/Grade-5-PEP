@@ -9,25 +9,24 @@ const steps = [
 
 export function HowToUse() {
   return (
-    <div className="space-y-3">
-      <h3 className="text-lg font-bold text-[#1e3a5f] text-center">
-        How to Use This Site
-      </h3>
-
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {steps.map((step) => (
-          <Card key={step.number} className="border border-gray-200">
-            <CardContent className="p-3 text-center">
-              <div className="w-8 h-8 rounded-full bg-[#f59e0b] text-white flex items-center justify-center text-sm font-bold mx-auto mb-2">
+    <Card className="border border-gray-200">
+      <CardContent className="p-5">
+        <h3 className="text-lg font-bold text-[#1e3a5f] mb-4">
+          How to Use This Site
+        </h3>
+        <div className="space-y-4">
+          {steps.map((step) => (
+            <div key={step.number} className="flex items-start gap-3">
+              <div className="w-7 h-7 rounded-full bg-[#f59e0b] text-white flex items-center justify-center text-sm font-bold shrink-0">
                 {step.number}
               </div>
-              <p className="text-gray-600 text-xs leading-tight">
+              <p className="text-gray-600 text-sm leading-snug pt-0.5">
                 {step.text}
               </p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </div>
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
   )
 }
