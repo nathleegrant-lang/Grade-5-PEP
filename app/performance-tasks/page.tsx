@@ -200,7 +200,7 @@ export default function PerformanceTasksPage() {
               all Performance Tasks topics.
             </p>
 
-            <Link href="/mock-tests/performance">
+            <Link href="/mock-tests/performance/language-arts">
               <Button className="bg-gold text-navy hover:bg-gold/80">
                 Start Sample Task
               </Button>
