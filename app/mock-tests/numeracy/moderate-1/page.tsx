@@ -74,6 +74,7 @@ export default function Page() {
 
     if (user?.id && !hasSavedResult.current) {
       hasSavedResult.current = true
+      const completedAtIso = new Date().toISOString()
       try {
         await saveStudentTestResult({
           parentId: user.id,
@@ -85,7 +86,7 @@ export default function Page() {
           score: s,
           totalQuestions: qList.length,
           percentage: getScorePercentage(),
-          completedAt: new Date().toISOString(),
+          completedAt: completedAtIso,
         })
       } catch {
         hasSavedResult.current = false
