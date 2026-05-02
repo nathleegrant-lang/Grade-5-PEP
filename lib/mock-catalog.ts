@@ -25,6 +25,10 @@ function emptyCatalog(): SubjectCatalog {
 }
 
 function getSubjectBasePath(subject: SubjectKey) {
+  if (subject === "performance") {
+    return path.join(process.cwd(), "app", "mock-tests", "performance", "language-arts")
+  }
+
   return path.join(process.cwd(), "app", "mock-tests", subject)
 }
 
@@ -62,5 +66,9 @@ export function getSubjectCatalog(subject: SubjectKey): SubjectCatalog {
 }
 
 export function getTestHref(subject: SubjectKey, difficulty: DifficultyKey, testNumber: number) {
+  if (subject === "performance") {
+    return `/mock-tests/performance/language-arts/${difficulty}-${testNumber}`
+  }
+
   return `/mock-tests/${subject}/${difficulty}-${testNumber}`
 }

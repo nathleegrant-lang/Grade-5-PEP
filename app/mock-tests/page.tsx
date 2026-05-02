@@ -122,7 +122,7 @@ export default function MockTestsPage() {
                 <p className="text-sm text-slate-600">
                   Source-based reading, evidence, reasoning, and written responses.
                 </p>
-                <Link href="/mock-tests/performance">
+                <Link href="/mock-tests/performance/language-arts">
                   <Button className="w-full bg-slate-800 hover:bg-slate-900">
                     Open Performance Task
                   </Button>

@@ -143,7 +143,7 @@ export default function PerformanceDifficult3Page() {
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
         <Header />
         <main className="container mx-auto px-4 py-10">
-          <Link href="/mock-tests/performance">
+          <Link href="/mock-tests/performance/language-arts">
             <Button variant="ghost" className="mb-6">
               <ArrowLeft className="mr-2 h-4 w-4" />Back to Performance Task Mock Tests
             </Button>
@@ -257,7 +257,7 @@ Prepared by a Grade 5 Student</p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button onClick={() => window.print()} className="flex-1 bg-amber-500 hover:bg-amber-600"><Printer className="mr-2 h-4 w-4" />Print / Save Report</Button>
                 <Button onClick={() => { setStarted(false); setShowResults(false); setAnswers([]); setScore(0); setTimeLeft(60 * 60) }} variant="outline" className="flex-1">Try Again</Button>
-                <Link href="/mock-tests/performance" className="flex-1"><Button variant="outline" className="w-full">Back to Performance Tasks</Button></Link>
+                <Link href="/mock-tests/performance/language-arts" className="flex-1"><Button variant="outline" className="w-full">Back to Performance Tasks</Button></Link>
               </div>
             </CardContent>
           </Card>
