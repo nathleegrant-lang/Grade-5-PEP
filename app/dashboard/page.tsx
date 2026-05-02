@@ -7,7 +7,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
-import { Progress } from "@/components/ui/progress"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { useAuth } from "@/contexts/auth-context"
@@ -63,6 +62,7 @@ export default function DashboardPage() {
 
   const [latestPayment, setLatestPayment] = useState<PaymentRecord | null>(null)
   const [latestTest, setLatestTest] = useState<StudentTestResult | null>(null)
+  const [testResults, setTestResults] = useState<StudentTestResult[]>([])
   const [testStats, setTestStats] = useState({
     total: 0,
     average: 0,
@@ -127,6 +127,8 @@ export default function DashboardPage() {
 
       const results = (data || []) as StudentTestResult[]
 
+      setTestResults(results)
+
       if (results.length === 0) {
         setLatestTest(null)
         setTestStats({ total: 0, average: 0, best: 0 })
@@ -173,8 +175,16 @@ export default function DashboardPage() {
   ]
 
   const languageArtsProgress = getTopicProgress("language-arts")
-  const mathematicsProgress = getTopicProgress("mathematics")
   const certificates = getCertificates()
+
+  const mathBestScore = testResults.length > 0
+    ? Math.max(
+        ...testResults
+          .filter((r) => r.subject === "Mathematics")
+          .map((r) => Number(r.percentage)),
+        0,
+      )
+    : 0
 
   const subjectProgress = [
     {
@@ -185,7 +195,7 @@ export default function DashboardPage() {
     },
     {
       label: "Mathematics",
-      value: mathematicsProgress.bestScore || 0,
+      value: mathBestScore,
       bar: "bg-amber-500",
       bg: "bg-amber-100",
     },
@@ -488,9 +498,7 @@ export default function DashboardPage() {
                   <BarChart3 className="h-5 w-5 text-sky-600" />
                   Subject Progress
                 </CardTitle>
-                <CardDescription>
-                  Best score by subject.
-                </CardDescription>
+                <CardDescription>Best score by subject.</CardDescription>
               </CardHeader>
 
               <CardContent className="space-y-4">
@@ -521,33 +529,30 @@ export default function DashboardPage() {
               </CardHeader>
 
               <CardContent>
-                {progress && progress.quizAttempts.length > 0 ? (
+                {testResults.length > 0 ? (
                   <div className="space-y-3">
-                    {progress.quizAttempts
-                      .slice(-5)
-                      .reverse()
-                      .map((attempt) => (
-                        <div key={attempt.id} className="flex items-center justify-between text-sm">
-                          <div className="flex items-center gap-2">
-                            <CheckCircle2
-                              className={`h-4 w-4 ${
-                                attempt.percentage >= 80
-                                  ? "text-green-500"
-                                  : attempt.percentage >= 60
-                                  ? "text-amber-500"
-                                  : "text-red-500"
-                              }`}
-                            />
-                            <span className="text-slate-700">{attempt.topic}</span>
-                          </div>
-                          <span className="text-slate-500">{attempt.percentage}%</span>
+                    {testResults.slice(0, 5).map((result) => (
+                      <div key={result.id} className="flex items-center justify-between text-sm">
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2
+                            className={`h-4 w-4 ${
+                              result.percentage >= 80
+                                ? "text-green-500"
+                                : result.percentage >= 60
+                                ? "text-amber-500"
+                                : "text-red-500"
+                            }`}
+                          />
+                          <span className="text-slate-700">
+                            {result.subject} — {result.test_name}
+                          </span>
                         </div>
-                      ))}
+                        <span className="text-slate-500">{result.percentage}%</span>
+                      </div>
+                    ))}
                   </div>
                 ) : (
-                  <p className="text-slate-500 text-center py-4 text-sm">
-                    No activity yet. Start a quiz!
-                  </p>
+                  <p className="text-slate-500 text-center py-4 text-sm">No tests taken yet.</p>
                 )}
               </CardContent>
             </Card>
