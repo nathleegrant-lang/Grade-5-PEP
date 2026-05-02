@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/auth-context";
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import {Header} from "@/components/Header";
+import {Footer} from "@/components/Footer";
 
 interface Certificate {
   id: string;
@@ -21,7 +21,7 @@ interface Certificate {
 }
 
 export default function CertificatesPage() {
-  const { user, loading: authLoading } = useAuth();
+  const { user, isloading: authLoading } = useAuth();
   const router = useRouter();
   const [certificates, setCertificates] = useState<Certificate[]>([]);
   const [loading, setLoading] = useState(true);
