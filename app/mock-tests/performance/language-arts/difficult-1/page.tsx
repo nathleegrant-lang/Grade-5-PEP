@@ -1,5 +1,3 @@
-"use client"
-
 // AI Marking types
 interface ShortAnswerFb {
   score: number
@@ -31,16 +29,19 @@ interface AiResult {
   extendedWriting: ExtWritingFb
 }
 
+"use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { getSupabaseBrowserClient } from "@/lib/supabase/client"
+import { Progress } from "@/components/ui/progress"
+import { createClient } from "@/utils/supabase/client"
 import {
   ArrowLeft,
+  Clock,
   CheckCircle,
   XCircle,
   Printer,
@@ -123,8 +124,9 @@ const shortAnswers: ShortAnswer[] = [
 
 export default function PerformanceDifficult1Page() {
   const [started, setStarted] = useState(false)
+  const [timeLeft, setTimeLeft] = useState(60 * 60)
   const [answers, setAnswers] = useState<number[]>([])
-  const [submitted, setSubmitted] = useState(false)
+  const [showResults, setShowResults] = useState(false)
   const [score, setScore] = useState(0)
   const [saTexts, setSaTexts] = useState<string[]>(["",""])
   const [ewText, setEwText] = useState("")
@@ -134,6 +136,22 @@ export default function PerformanceDifficult1Page() {
   const sourceBodyText = `Local government in Jamaica operates through Parish Councils, which are responsible for services that directly affect daily life: road maintenance, waste collection, markets, parks, and issuing licences for businesses and events. The fourteen Parish Councils are elected by residents of each parish, meaning that local government is directly accountable to the communities it serves. When councils perform their duties effectively, communities are cleaner, safer, and better connected. The relationship between citizens and their local government is built on participation. Residents who attend council meetings, submit petitions, vote in local elections, and engage with their councillors are more likely to see their concerns addressed. Research shows that communities with higher rates of civic participation tend to have better-maintained infrastructure and more responsive services than those where residents are passive recipients of government decisions. Young people have an increasingly recognised role in local governance. Several Parish Councils have established youth advisory bodies that give young residents a formal voice in community decisions. These bodies allow youth to propose community projects, comment on council plans, and develop civic leadership skills. When young people engage with local government, they gain practical experience of how democracy works — and councils gain fresh perspectives on issues that affect younger community members most directly.`
   const writingPromptText = `Write a proposal to the St. Andrew Parish Council recommending the establishment of a Youth Advisory Body for students aged 10–17. Explain why youth voices are important in local governance, describe TWO specific activities the advisory body could undertake, and explain how both young people and the council would benefit. Use evidence from the source to support your proposal.`
 
+  useEffect(() => {
+    if (!started || showResults) return
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) { clearInterval(timer); setShowResults(true); return 0 }
+        return prev - 1
+      })
+    }, 1000)
+    return () => clearInterval(timer)
+  }, [started, showResults])
+
+  const formatTime = (seconds: number) => {
+    const m = Math.floor(seconds / 60)
+    const s = seconds % 60
+    return `${m}:${s.toString().padStart(2, "0")}`
+  }
 
   const handleSelect = (qIndex: number, optionIndex: number) => {
     const updated = [...answers]
@@ -141,12 +159,18 @@ export default function PerformanceDifficult1Page() {
     setAnswers(updated)
   }
 
+  const calculateScore = () => {
+    let total = 0
+    mcqs.forEach((q, i) => { if (answers[i] === q.answer) total++ })
+    setScore(total)
+  }
+
   const handleSubmit = async () => {
     let total = 0
     mcqs.forEach((q, i) => { if (answers[i] === q.answer) total++ })
     setScore(total)
     setAiLoading(true)
-    setSubmitted(true)
+    setShowResults(true)
     try {
       const label = shortAnswers[0]?.question?.substring(0, 40) ?? "Task"
       const [sa1, sa2, ew] = await Promise.all([
@@ -157,7 +181,7 @@ export default function PerformanceDifficult1Page() {
       setAiResult({ shortAnswers: [sa1, sa2], extendedWriting: ew })
       // Save result to Supabase after marking completes
       try {
-        const supabase = getSupabaseBrowserClient()
+        const supabase = createClient()
         const { data: { user } } = await supabase.auth.getUser()
         if (user) {
           const totalScore = mcqTotal + (sa1?.score ?? 0) + (sa2?.score ?? 0) + (ew?.totalScore ?? 0)
@@ -193,7 +217,7 @@ export default function PerformanceDifficult1Page() {
           </Link>
           <Card className="mx-auto max-w-3xl border-amber-200 shadow-lg">
             <CardHeader className="bg-amber-50 text-center">
-              <CardTitle className="text-2xl text-amber-800">Grade 5 Language Arts Performance Task - Difficult 1</CardTitle>
+              <CardTitle className="text-2xl text-amber-800">Grade 5 Language Arts Performance Task Difficult 1</CardTitle>
               <p className="text-slate-600">Topic: The Role of Local Government in Community Development</p>
             </CardHeader>
             <CardContent className="space-y-6 p-6">
@@ -245,7 +269,7 @@ export default function PerformanceDifficult1Page() {
     </div>
   )
 
-  if (submitted) {
+  if (showResults) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
         <Header />
@@ -254,7 +278,7 @@ export default function PerformanceDifficult1Page() {
             <CardHeader className="bg-amber-50 text-center">
               <CheckCircle className="mx-auto mb-4 h-14 w-14 text-amber-600" />
               <CardTitle className="text-2xl text-amber-800">Performance Task Completed</CardTitle>
-              <p className="text-slate-600">Grade 5 Language Arts Performance Task - Difficult 1</p>
+              <p className="text-slate-600">Grade 5 Language Arts Performance Task Difficult 1</p>
             </CardHeader>
             <CardContent className="space-y-6 p-6">
               <div className="rounded-lg bg-gray-50 p-6 text-center">
@@ -370,6 +394,16 @@ export default function PerformanceDifficult1Page() {
       <Header />
       <main className="container mx-auto px-4 py-8">
         <div className="mx-auto max-w-4xl space-y-6">
+          <div className="flex items-center justify-between rounded-lg bg-slate-800 p-4 text-white">
+            <div>
+              <h1 className="font-bold">Grade 5 Language Arts Performance Task Difficult 1</h1>
+              <p className="text-sm text-slate-200">The Role of Local Government in Community Development</p>
+            </div>
+            <div className="flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 font-mono">
+              <Clock className="h-5 w-5" />{formatTime(timeLeft)}
+            </div>
+          </div>
+          <Progress value={(answers.filter((a) => a !== undefined).length / mcqs.length) * 100} className="h-2" />
           <Card className="border-blue-200">
             <CardHeader className="bg-blue-50">
               <CardTitle className="text-blue-800">Source Information</CardTitle>
