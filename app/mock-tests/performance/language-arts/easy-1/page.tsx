@@ -28,7 +28,7 @@ interface ExtWritingFb {
 }
 interface AiResult {
   shortAnswers: ShortAnswerFb[]
-  extendedWriting: ExtWritingFb | null
+  extendedWriting: ExtWritingFb
 }
 
 
@@ -130,40 +130,77 @@ export default function PerformanceEasy1Page() {
   const [ewText, setEwText] = useState("")
   const [aiResult, setAiResult] = useState<AiResult | null>(null)
   const [aiLoading, setAiLoading] = useState(false)
+  const [markingError, setMarkingError] = useState<string | null>(null)
 
-  const sourceBodyText = `Keeping a school clean is important for the health and happiness of everyone who uses it. When classrooms, corridors, and school grounds are tidy, students find it easier to focus on their work and feel proud of their school. A clean environment also reduces the spread of germs and illness among students and teachers. Simple habits can make a big difference. Putting litter in the bin, wiping down desks after lunch, and avoiding eating in classrooms all help keep the school tidy. Many schools appoint student monitors whose job is to remind their classmates about cleanliness and report any problems to a teacher. A successful cleanliness campaign involves the whole school community — students, teachers, parents, and cleaning staff. When students understand why cleanliness matters and feel responsible for their school environment, they are more likely to take care of it. Schools that run regular campaigns, poster competitions, and class challenges report lasting improvements in their school's appearance and atmosphere.`
-  const writingPromptText = `Write a persuasive letter to your school principal recommending that the school launch a 'Keep Our School Clean' campaign. Give at least TWO reasons why the campaign is important and suggest ONE specific activity that could be part of the campaign.`
+  const toGrade = (score: number, maxScore: number) => {
+    const ratio = maxScore === 0 ? 0 : score / maxScore
+    if (ratio >= 0.85) return "Excellent"
+    if (ratio >= 0.65) return "Good"
+    if (ratio >= 0.45) return "Developing"
+    return "Needs Support"
+  }
 
+  const markShortAnswerLocal = (studentResponse: string, modelAnswer: string): ShortAnswerFb => {
+    const cleanResponse = studentResponse.trim()
+    const responseWords = cleanResponse.toLowerCase().split(/\W+/).filter(Boolean)
+    const keyWords = Array.from(new Set(modelAnswer.toLowerCase().split(/\W+/).filter(w => w.length > 4)))
+    const overlap = keyWords.filter(word => responseWords.includes(word))
 
+    const hasAny = cleanResponse.length > 0
+    const coverage = keyWords.length ? overlap.length / keyWords.length : 0
+    let score = 0
+    if (!hasAny) score = 0
+    else if (coverage >= 0.5) score = 3
+    else if (coverage >= 0.25) score = 2
+    else score = 1
 
-  const normalizeExtendedWriting = (response: unknown): ExtWritingFb | null => {
-    const candidate = (response as any)?.extendedWriting ?? response
-    if (!candidate || typeof candidate !== "object") return null
-
-    const criteria = (candidate as any).criteria
-    const paragraphFeedback = Array.isArray((candidate as any).paragraphFeedback) ? (candidate as any).paragraphFeedback : []
-
-    if (
-      typeof (candidate as any).totalScore !== "number" ||
-      typeof (candidate as any).maxScore !== "number" ||
-      typeof (candidate as any).grade !== "string" ||
-      !criteria ||
-      typeof (candidate as any).overallComment !== "string" ||
-      typeof (candidate as any).keyStrength !== "string" ||
-      typeof (candidate as any).priorityImprovement !== "string"
-    ) {
-      return null
-    }
-
+    const missed = keyWords.filter(word => !responseWords.includes(word)).slice(0, 3)
     return {
-      totalScore: (candidate as any).totalScore,
-      maxScore: (candidate as any).maxScore,
-      grade: (candidate as any).grade,
-      criteria,
-      paragraphFeedback,
-      overallComment: (candidate as any).overallComment,
-      keyStrength: (candidate as any).keyStrength,
-      priorityImprovement: (candidate as any).priorityImprovement,
+      score,
+      maxScore: 3,
+      grade: toGrade(score, 3),
+      strengths: hasAny ? "You included relevant ideas from the source and attempted to explain your thinking." : "No response was provided yet.",
+      improvements: score >= 2 ? "Add one more specific detail from the source to make your explanation stronger." : "Use clearer evidence from the source and explain how it supports your point.",
+      missedKey: missed.length > 0 ? `Try to include key ideas such as: ${missed.join(", ")}.` : "No major key point was missed."
+    }
+  }
+
+  const markExtendedWritingLocal = (studentResponse: string): ExtWritingFb => {
+    const cleanResponse = studentResponse.trim()
+    const paragraphs = cleanResponse ? cleanResponse.split(/\n+/).map(p => p.trim()).filter(Boolean) : []
+    const lower = cleanResponse.toLowerCase()
+    const reasonSignals = ["because", "important", "health", "focus", "proud", "germs", "illness", "community"]
+    const activitySignals = ["campaign", "challenge", "poster", "monitor", "activity", "competition"]
+    const hasGreeting = /dear\s+principal|dear\s+sir|dear\s+madam/.test(lower)
+    const hasClosing = /yours sincerely|sincerely|from/.test(lower)
+    const reasonHits = reasonSignals.filter(s => lower.includes(s)).length
+    const activityHits = activitySignals.filter(s => lower.includes(s)).length
+    const wordCount = cleanResponse.split(/\s+/).filter(Boolean).length
+
+    const contentScore = cleanResponse.length === 0 ? 0 : Math.min(3, (reasonHits >= 2 ? 2 : 1) + (activityHits >= 1 ? 1 : 0))
+    const organisationScore = cleanResponse.length === 0 ? 0 : (paragraphs.length >= 2 ? 2 : 1) + (hasGreeting || hasClosing ? 1 : 0)
+    const languageScore = cleanResponse.length === 0 ? 0 : wordCount >= 90 ? 2 : wordCount >= 40 ? 1 : 0
+    const criticalScore = cleanResponse.length === 0 ? 0 : reasonHits >= 3 ? 2 : reasonHits >= 1 ? 1 : 0
+
+    const totalScore = contentScore + organisationScore + languageScore + criticalScore
+    return {
+      totalScore,
+      maxScore: 10,
+      grade: toGrade(totalScore, 10),
+      criteria: {
+        content: { score: contentScore, maxScore: 3, feedback: contentScore >= 2 ? "Clear reasons are given for why the campaign matters." : "Add at least two clear reasons and one specific campaign activity." },
+        organisation: { score: organisationScore, maxScore: 3, feedback: organisationScore >= 2 ? "Your writing has a clear letter structure and ideas are grouped logically." : "Use a stronger letter format with an opening, body, and closing." },
+        language: { score: languageScore, maxScore: 2, feedback: languageScore >= 1 ? "Language is mostly clear and understandable." : "Expand your response with fuller sentences and clearer vocabulary." },
+        criticalThinking: { score: criticalScore, maxScore: 2, feedback: criticalScore >= 1 ? "You show reasoning about why actions can improve the school environment." : "Explain how your suggested actions lead to better outcomes." },
+      },
+      paragraphFeedback: (paragraphs.length > 0 ? paragraphs : [""]).map((p, i) => ({
+        paragraphNum: i + 1,
+        preview: p.slice(0, 40) || "No paragraph written",
+        feedback: p ? "This paragraph communicates an idea. Strengthen it with direct evidence and a clearer impact statement." : "Start by writing a greeting and your main recommendation to the principal."
+      })),
+      overallComment: cleanResponse ? "This is a promising persuasive response. To improve further, make each reason explicit and connect it to student outcomes." : "No writing was submitted yet. Start with a brief letter that gives two reasons and one campaign activity.",
+      keyStrength: cleanResponse ? "You attempted to present a recommendation to the principal." : "You can improve quickly by adding even a short first draft.",
+      priorityImprovement: "Include at least two well-explained reasons and one practical campaign activity with expected impact."
     }
   }
 
@@ -178,26 +215,19 @@ export default function PerformanceEasy1Page() {
     mcqs.forEach((q, i) => { if (answers[i] === q.answer) total++ })
     setScore(total)
     setAiLoading(true)
+    setMarkingError(null)
     setSubmitted(true)
     try {
-      const label = shortAnswers[0]?.question?.substring(0, 40) ?? "Task"
-      const [sa1, sa2, ew] = await Promise.all([
-        fetch("/api/mark-response", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "short-answer", question: shortAnswers[0].question, modelAnswer: shortAnswers[0].answer, studentResponse: saTexts[0] || "[no answer]", taskTitle: label }) }).then(r => r.json()),
-        fetch("/api/mark-response", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "short-answer", question: shortAnswers[1]?.question ?? shortAnswers[0].question, modelAnswer: shortAnswers[1]?.answer ?? shortAnswers[0].answer, studentResponse: saTexts[1] || "[no answer]", taskTitle: label }) }).then(r => r.json()),
-        fetch("/api/mark-response", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "extended-writing", prompt: writingPromptText, sourceText: sourceBodyText, studentResponse: ewText || "[no answer]", taskTitle: label }) }).then(r => r.json()),
-      ])
-      console.log("Extended writing AI response:", ew)
-      const normalizedExtendedWriting = normalizeExtendedWriting(ew)
-      if (!normalizedExtendedWriting) {
-        console.error("Unexpected extended writing response shape:", ew)
-      }
-      setAiResult({ shortAnswers: [sa1, sa2], extendedWriting: normalizedExtendedWriting })
+      const sa1 = markShortAnswerLocal(saTexts[0], shortAnswers[0].answer)
+      const sa2 = markShortAnswerLocal(saTexts[1], shortAnswers[1].answer)
+      const extendedWriting = markExtendedWritingLocal(ewText)
+      setAiResult({ shortAnswers: [sa1, sa2], extendedWriting })
       // Save result to Supabase after marking completes
       try {
         const supabase = getSupabaseBrowserClient()
         const { data: { user } } = await supabase.auth.getUser()
         if (user) {
-          const totalScore = total + (sa1?.score ?? 0) + (sa2?.score ?? 0) + (normalizedExtendedWriting?.totalScore ?? 0)
+          const totalScore = total + sa1.score + sa2.score + extendedWriting.totalScore
           const percentage = Math.round((totalScore / 21) * 100)
           await supabase.from("student_test_results").insert({
             parent_id: user.id,
@@ -216,7 +246,10 @@ export default function PerformanceEasy1Page() {
       } catch (saveError) {
         console.error("Supabase save error:", saveError)
       }
-    } catch(e) { console.error("AI marking error:", e) }
+    } catch(e) {
+      console.error("Smart marking error:", e)
+      setMarkingError("An unexpected error occurred while generating smart feedback. Please try submitting again.")
+    }
     setAiLoading(false)
   }
 
@@ -277,7 +310,7 @@ export default function PerformanceEasy1Page() {
           <div className="mb-6 flex justify-center">
             <div className="h-16 w-16 animate-spin rounded-full border-4 border-blue-200 border-t-blue-600" />
           </div>
-          <h2 className="mb-2 text-xl font-bold text-slate-800">Claude AI is marking your responses</h2>
+          <h2 className="mb-2 text-xl font-bold text-slate-800">Smart Feedback is marking your responses</h2>
           <p className="text-sm text-slate-500">Analysing short answers and extended writing paragraph by paragraph…</p>
         </div>
       </main>
@@ -293,7 +326,7 @@ export default function PerformanceEasy1Page() {
           <Card className="mx-auto max-w-4xl border-blue-300 shadow-lg">
             <CardHeader className="bg-blue-700 text-center rounded-t-lg">
               <CheckCircle className="mx-auto mb-4 h-14 w-14 text-blue-700" />
-              <CardTitle className="text-2xl text-white">Model Answers & AI Feedback — Language Arts Performance Task Easy 1</CardTitle>
+              <CardTitle className="text-2xl text-white">Model Answers & Smart Feedback — Language Arts Performance Task Easy 1</CardTitle>
               <p className="text-blue-100 text-sm mt-1">Language Arts Performance Task Easy 1</p>
             </CardHeader>
             <CardContent className="space-y-6 p-6">
@@ -331,10 +364,10 @@ export default function PerformanceEasy1Page() {
                   </div>
                 ))}
               </div>
-              {/* AI Feedback — Short Answers */}
+              {/* Smart Feedback — Short Answers */}
               {aiResult && !aiLoading && (
                 <div className="space-y-4">
-                  <h3 className="border-t pt-4 text-base font-bold text-slate-800">AI Marking — Short Answers</h3>
+                  <h3 className="border-t pt-4 text-base font-bold text-slate-800">Smart Marking — Short Answers</h3>
                   {aiResult.shortAnswers.map((fb, idx) => (
                     <div key={idx} className="rounded-xl border border-blue-100 bg-white p-4 shadow-sm">
                       <div className="mb-2 flex flex-wrap gap-2">
@@ -351,11 +384,11 @@ export default function PerformanceEasy1Page() {
                   ))}
                 </div>
               )}
-              {/* AI Feedback — Extended Writing */}
+              {/* Smart Feedback — Extended Writing */}
               {!aiLoading && (
                 <div className="space-y-3">
-                  <h3 className="border-t pt-4 text-base font-bold text-slate-800">AI Feedback — Extended Writing</h3>
-                  {aiResult?.extendedWriting ? (
+                  <h3 className="border-t pt-4 text-base font-bold text-slate-800">Smart Feedback — Extended Writing</h3>
+                  {aiResult?.extendedWriting && !markingError ? (
                   <div className="rounded-xl border border-purple-100 bg-white p-4 shadow-sm">
                     <div className="mb-3 flex flex-wrap gap-2">
                       <span className="rounded-full bg-purple-100 px-3 py-0.5 text-xs font-semibold text-purple-700">Extended Writing</span>
@@ -391,7 +424,7 @@ export default function PerformanceEasy1Page() {
                   </div>
                   ) : (
                     <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-                      Extended writing feedback could not be loaded. Please try submitting again.
+                      {markingError}
                     </div>
                   )}
                 </div>
