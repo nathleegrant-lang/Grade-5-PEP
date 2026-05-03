@@ -130,7 +130,6 @@ export default function PerformanceEasy1Page() {
   const [ewText, setEwText] = useState("")
   const [aiResult, setAiResult] = useState<AiResult | null>(null)
   const [aiLoading, setAiLoading] = useState(false)
-  const [extendedWritingError, setExtendedWritingError] = useState<string | null>(null)
 
   const sourceBodyText = `Keeping a school clean is important for the health and happiness of everyone who uses it. When classrooms, corridors, and school grounds are tidy, students find it easier to focus on their work and feel proud of their school. A clean environment also reduces the spread of germs and illness among students and teachers. Simple habits can make a big difference. Putting litter in the bin, wiping down desks after lunch, and avoiding eating in classrooms all help keep the school tidy. Many schools appoint student monitors whose job is to remind their classmates about cleanliness and report any problems to a teacher. A successful cleanliness campaign involves the whole school community — students, teachers, parents, and cleaning staff. When students understand why cleanliness matters and feel responsible for their school environment, they are more likely to take care of it. Schools that run regular campaigns, poster competitions, and class challenges report lasting improvements in their school's appearance and atmosphere.`
   const writingPromptText = `Write a persuasive letter to your school principal recommending that the school launch a 'Keep Our School Clean' campaign. Give at least TWO reasons why the campaign is important and suggest ONE specific activity that could be part of the campaign.`
@@ -180,7 +179,6 @@ export default function PerformanceEasy1Page() {
     setScore(total)
     setAiLoading(true)
     setSubmitted(true)
-    setExtendedWritingError(null)
     try {
       const label = shortAnswers[0]?.question?.substring(0, 40) ?? "Task"
       const [sa1, sa2, ew] = await Promise.all([
@@ -188,10 +186,10 @@ export default function PerformanceEasy1Page() {
         fetch("/api/mark-response", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "short-answer", question: shortAnswers[1]?.question ?? shortAnswers[0].question, modelAnswer: shortAnswers[1]?.answer ?? shortAnswers[0].answer, studentResponse: saTexts[1] || "[no answer]", taskTitle: label }) }).then(r => r.json()),
         fetch("/api/mark-response", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ type: "extended-writing", prompt: writingPromptText, sourceText: sourceBodyText, studentResponse: ewText || "[no answer]", taskTitle: label }) }).then(r => r.json()),
       ])
+      console.log("Extended writing AI response:", ew)
       const normalizedExtendedWriting = normalizeExtendedWriting(ew)
       if (!normalizedExtendedWriting) {
         console.error("Unexpected extended writing response shape:", ew)
-        setExtendedWritingError("Extended writing feedback could not be loaded. Please try again.")
       }
       setAiResult({ shortAnswers: [sa1, sa2], extendedWriting: normalizedExtendedWriting })
       // Save result to Supabase after marking completes
@@ -354,14 +352,10 @@ export default function PerformanceEasy1Page() {
                 </div>
               )}
               {/* AI Feedback — Extended Writing */}
-              {extendedWritingError && !aiLoading && (
-                <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-                  {extendedWritingError}
-                </div>
-              )}
-              {aiResult?.extendedWriting && !aiLoading && (
+              {!aiLoading && (
                 <div className="space-y-3">
-                  <h3 className="border-t pt-4 text-base font-bold text-slate-800">AI Marking — Extended Writing</h3>
+                  <h3 className="border-t pt-4 text-base font-bold text-slate-800">AI Feedback — Extended Writing</h3>
+                  {aiResult?.extendedWriting ? (
                   <div className="rounded-xl border border-purple-100 bg-white p-4 shadow-sm">
                     <div className="mb-3 flex flex-wrap gap-2">
                       <span className="rounded-full bg-purple-100 px-3 py-0.5 text-xs font-semibold text-purple-700">Extended Writing</span>
@@ -395,6 +389,11 @@ export default function PerformanceEasy1Page() {
                     {aiResult.extendedWriting.keyStrength && <p className="mb-1 text-xs"><span className="font-semibold text-green-700">Key strength: </span><span className="text-blue-100 text-sm mt-1">{aiResult.extendedWriting.keyStrength}</span></p>}
                     {aiResult.extendedWriting.priorityImprovement && <p className="text-xs"><span className="font-semibold text-blue-700">Priority improvement: </span><span className="text-blue-100 text-sm mt-1">{aiResult.extendedWriting.priorityImprovement}</span></p>}
                   </div>
+                  ) : (
+                    <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+                      Extended writing feedback could not be loaded. Please try submitting again.
+                    </div>
+                  )}
                 </div>
               )}
 
