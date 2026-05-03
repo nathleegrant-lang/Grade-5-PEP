@@ -210,14 +210,15 @@ export default function PerformanceEasy1Page() {
                   <li>Creativity: suggesting useful ways to improve the initiative</li>
                 </ul>
               </div>
-              <div className="grid grid-cols-2 gap-4 text-center">
-                <div className="rounded-lg bg-gray-50 p-4">
-                  <p className="text-2xl font-bold text-blue-700">{mcqs.length}</p>
-                  <p className="text-sm text-blue-100 text-sm mt-1">Multiple Choice</p>
+              <div className="grid grid-cols-3 gap-3 text-center text-sm">
+                <div className="rounded-lg bg-gray-50 p-3">
+                  <p className="font-bold text-blue-700 text-xl">{mcqs.length} MCQs</p>
                 </div>
-                <div className="rounded-lg bg-gray-50 p-4">
-                  <p className="text-2xl font-bold text-blue-700">60</p>
-                  <p className="text-sm text-blue-100 text-sm mt-1">Minutes</p>
+                <div className="rounded-lg bg-gray-50 p-3">
+                  <p className="font-bold text-blue-700 text-xl">{shortAnswers.length} Short Answers</p>
+                </div>
+                <div className="rounded-lg bg-gray-50 p-3">
+                  <p className="font-bold text-blue-700 text-xl">1 Extended Writing</p>
                 </div>
               </div>
               <Button onClick={() => setStarted(true)} className="w-full bg-blue-700 hover:bg-blue-800 py-6 text-lg">Start Task</Button>
