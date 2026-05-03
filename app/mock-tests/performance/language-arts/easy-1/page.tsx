@@ -160,7 +160,7 @@ export default function PerformanceEasy1Page() {
         const supabase = getSupabaseBrowserClient()
         const { data: { user } } = await supabase.auth.getUser()
         if (user) {
-          const totalScore = mcqTotal + (sa1?.score ?? 0) + (sa2?.score ?? 0) + (ew?.totalScore ?? 0)
+          const totalScore = total + (sa1?.score ?? 0) + (sa2?.score ?? 0) + (ew?.totalScore ?? 0)
           const percentage = Math.round((totalScore / 21) * 100)
           await supabase.from("student_test_results").insert({
             student_id: user.id,
