@@ -372,9 +372,9 @@ export default function PerformanceEasy1Page() {
       <Header />
       <main className="container mx-auto px-4 pb-8 pt-32 lg:pt-8">
         <div className="mx-auto max-w-4xl space-y-6">
-          <Card className="border-blue-300">
-            <CardHeader className="bg-blue-700">
-              <CardTitle className="text-white">Source Information</CardTitle>
+          <Card className="overflow-hidden rounded-2xl border border-blue-200 bg-white shadow-sm">
+            <CardHeader className="rounded-t-2xl border-b border-blue-100 bg-blue-50/90 py-4">
+              <CardTitle className="text-blue-800">Source Information</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 p-6 text-slate-700">
               <p>Keeping a school clean is important for the health and happiness of everyone who uses it. When classrooms, corridors, and school grounds are tidy, students find it easier to focus on their work and feel proud of their school. A clean environment also reduces the spread of germs and illness among students and teachers.</p>
@@ -382,9 +382,9 @@ export default function PerformanceEasy1Page() {
               <p>A successful cleanliness campaign involves the whole school community — students, teachers, parents, and cleaning staff. When students understand why cleanliness matters and feel responsible for their school environment, they are more likely to take care of it. Schools that run regular campaigns, poster competitions, and class challenges report lasting improvements in their school's appearance and atmosphere.</p>
             </CardContent>
           </Card>
-          <Card className="border-blue-300">
-            <CardHeader className="bg-blue-700">
-              <CardTitle className="text-white">Multiple-Choice Questions</CardTitle>
+          <Card className="overflow-hidden rounded-2xl border border-amber-200 bg-white shadow-sm">
+            <CardHeader className="rounded-t-2xl border-b border-amber-100 bg-amber-50 py-4">
+              <CardTitle className="text-amber-800">Multiple-Choice Questions</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6 p-6">
               {mcqs.map((q, qIndex) => (
@@ -401,9 +401,9 @@ export default function PerformanceEasy1Page() {
               ))}
             </CardContent>
           </Card>
-          <Card className="border-blue-300">
-            <CardHeader className="bg-blue-700">
-              <CardTitle className="text-amber-800">Short Response Practice</CardTitle>
+          <Card className="overflow-hidden rounded-2xl border border-sky-200 bg-white shadow-sm">
+            <CardHeader className="rounded-t-2xl border-b border-sky-100 bg-sky-50 py-4">
+              <CardTitle className="text-sky-800">Short Response Practice</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 p-6">
               {shortAnswers.map((item, index) => (
@@ -414,9 +414,9 @@ export default function PerformanceEasy1Page() {
               ))}
             </CardContent>
           </Card>
-          <Card className="border-blue-300">
-            <CardHeader className="bg-blue-700">
-              <CardTitle className="text-white">Extended Writing Task</CardTitle>
+          <Card className="overflow-hidden rounded-2xl border border-purple-200 bg-white shadow-sm">
+            <CardHeader className="rounded-t-2xl border-b border-purple-100 bg-purple-50 py-4">
+              <CardTitle className="text-purple-800">Extended Writing Task</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 p-6">
               <p className="text-slate-700">Write a persuasive letter to your school principal recommending that the school launch a 'Keep Our School Clean' campaign. Give at least TWO reasons why the campaign is important and suggest ONE specific activity that could be part of the campaign.</p>
