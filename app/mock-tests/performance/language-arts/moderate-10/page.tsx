@@ -32,17 +32,15 @@ interface AiResult {
 }
 
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
 import { getSupabaseBrowserClient } from "@/lib/supabase/client"
 import {
   ArrowLeft,
-  Clock,
   CheckCircle,
   XCircle,
   Printer,
@@ -125,9 +123,8 @@ const shortAnswers: ShortAnswer[] = [
 
 export default function PerformanceModerate10Page() {
   const [started, setStarted] = useState(false)
-  const [timeLeft, setTimeLeft] = useState(60 * 60)
   const [answers, setAnswers] = useState<number[]>([])
-  const [showResults, setShowResults] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
   const [score, setScore] = useState(0)
   const [saTexts, setSaTexts] = useState<string[]>(["",""])
   const [ewText, setEwText] = useState("")
@@ -137,22 +134,6 @@ export default function PerformanceModerate10Page() {
   const sourceBodyText = `A safe school environment is one where every student feels respected, included, and free from bullying, harassment, or physical danger. Research shows that students learn more effectively when they feel safe and supported. A positive school climate — one that values kindness, fairness, and mutual respect — benefits not only individual students but also the overall academic performance of the entire school. Schools can create a safer environment through several strategies. Clear anti-bullying policies, counselling services for students in need, and a system for reporting concerns confidentially all help students feel protected. Training teachers to recognise signs of distress and respond compassionately is equally important. Peer support programmes — where older students mentor younger ones — can also reduce isolation and improve wellbeing across the school. Students themselves play a powerful role in shaping the school's climate. When students speak up against unkind behaviour, include classmates who may feel left out, and model respectful behaviour, they create a culture where everyone feels they belong. Schools that hold regular discussions about respect and values, and that celebrate students who demonstrate kindness and leadership, reinforce these positive norms continuously.`
   const writingPromptText = `Write a proposal to your school council recommending TWO specific changes that would make the school a safer and more welcoming place for all students. Explain why each change is important and describe how students, teachers, and parents can each contribute to creating a better school environment.`
 
-  useEffect(() => {
-    if (!started || showResults) return
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) { clearInterval(timer); setShowResults(true); return 0 }
-        return prev - 1
-      })
-    }, 1000)
-    return () => clearInterval(timer)
-  }, [started, showResults])
-
-  const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60)
-    const s = seconds % 60
-    return `${m}:${s.toString().padStart(2, "0")}`
-  }
 
   const handleSelect = (qIndex: number, optionIndex: number) => {
     const updated = [...answers]
@@ -160,18 +141,12 @@ export default function PerformanceModerate10Page() {
     setAnswers(updated)
   }
 
-  const calculateScore = () => {
-    let total = 0
-    mcqs.forEach((q, i) => { if (answers[i] === q.answer) total++ })
-    setScore(total)
-  }
-
   const handleSubmit = async () => {
     let total = 0
     mcqs.forEach((q, i) => { if (answers[i] === q.answer) total++ })
     setScore(total)
     setAiLoading(true)
-    setShowResults(true)
+    setSubmitted(true)
     try {
       const label = shortAnswers[0]?.question?.substring(0, 40) ?? "Task"
       const [sa1, sa2, ew] = await Promise.all([
@@ -270,7 +245,7 @@ export default function PerformanceModerate10Page() {
     </div>
   )
 
-  if (showResults) {
+  if (submitted) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
         <Header />
@@ -395,16 +370,6 @@ export default function PerformanceModerate10Page() {
       <Header />
       <main className="container mx-auto px-4 py-8">
         <div className="mx-auto max-w-4xl space-y-6">
-          <div className="flex items-center justify-between rounded-lg bg-slate-800 p-4 text-white">
-            <div>
-              <h1 className="font-bold">Grade 5 Language Arts Performance Task Moderate 10</h1>
-              <p className="text-sm text-slate-200">Creating a Safer School Environment</p>
-            </div>
-            <div className="flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 font-mono">
-              <Clock className="h-5 w-5" />{formatTime(timeLeft)}
-            </div>
-          </div>
-          <Progress value={(answers.filter((a) => a !== undefined).length / mcqs.length) * 100} className="h-2" />
           <Card className="border-blue-200">
             <CardHeader className="bg-blue-50">
               <CardTitle className="text-blue-800">Source Information</CardTitle>

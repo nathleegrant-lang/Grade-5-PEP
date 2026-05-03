@@ -32,17 +32,15 @@ interface AiResult {
 }
 
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
 import { getSupabaseBrowserClient } from "@/lib/supabase/client"
 import {
   ArrowLeft,
-  Clock,
   CheckCircle,
   XCircle,
   Printer,
@@ -105,9 +103,8 @@ const shortAnswers: ShortAnswer[] = [
 
 export default function PerformanceEasy6Page() {
   const [started, setStarted] = useState(false)
-  const [timeLeft, setTimeLeft] = useState(60 * 60)
   const [answers, setAnswers] = useState<number[]>([])
-  const [showResults, setShowResults] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
   const [score, setScore] = useState(0)
   const [saTexts, setSaTexts] = useState<string[]>(["",""])
   const [ewText, setEwText] = useState("")
@@ -117,22 +114,6 @@ export default function PerformanceEasy6Page() {
   const sourceBodyText = `Jamaica has seven National Heroes who are honoured for their courage, leadership, and sacrifice. They include Nanny of the Maroons, Samuel Sharpe, Paul Bogle, George William Gordon, Marcus Garvey, Norman Manley, and Alexander Bustamante. Each hero made a contribution that helped shape the nation. Nanny of the Maroons was a skilled military leader who helped enslaved Africans escape to freedom in the mountains of Jamaica. Samuel Sharpe led a non-violent strike for freedom in 1831, and Paul Bogle marched for justice for poor Jamaicans in 1865. Marcus Garvey inspired Black people around the world to take pride in their heritage. National Heroes Day is celebrated every October to remind Jamaicans of these important figures and the values they stood for — justice, freedom, dignity, and equality. Schools celebrate the day with speeches, art projects, and lessons about each hero's life and legacy.`
   const writingPromptText = `Write a short speech to be delivered at your school's National Heroes Day assembly. Choose ONE National Hero, explain who they were, what they did, and what lesson their life teaches students today.`
 
-  useEffect(() => {
-    if (!started || showResults) return
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) { clearInterval(timer); setShowResults(true); return 0 }
-        return prev - 1
-      })
-    }, 1000)
-    return () => clearInterval(timer)
-  }, [started, showResults])
-
-  const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60)
-    const s = seconds % 60
-    return `${m}:${s.toString().padStart(2, "0")}`
-  }
 
   const handleSelect = (qIndex: number, optionIndex: number) => {
     const updated = [...answers]
@@ -140,18 +121,12 @@ export default function PerformanceEasy6Page() {
     setAnswers(updated)
   }
 
-  const calculateScore = () => {
-    let total = 0
-    mcqs.forEach((q, i) => { if (answers[i] === q.answer) total++ })
-    setScore(total)
-  }
-
   const handleSubmit = async () => {
     let total = 0
     mcqs.forEach((q, i) => { if (answers[i] === q.answer) total++ })
     setScore(total)
     setAiLoading(true)
-    setShowResults(true)
+    setSubmitted(true)
     try {
       const label = shortAnswers[0]?.question?.substring(0, 40) ?? "Task"
       const [sa1, sa2, ew] = await Promise.all([
@@ -251,7 +226,7 @@ export default function PerformanceEasy6Page() {
     </div>
   )
 
-  if (showResults) {
+  if (submitted) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
         <Header />
@@ -376,7 +351,7 @@ Let us honour Marcus Garvey and all our National Heroes by being the best Jamaic
                 <Button onClick={() => window.print()} className="flex-1 bg-amber-500 hover:bg-amber-600">
                   <Printer className="mr-2 h-4 w-4" />Print / Save Report
                 </Button>
-                <Button onClick={() => { setStarted(false); setShowResults(false); setAnswers([]); setScore(0); setTimeLeft(60 * 60) }} variant="outline" className="flex-1">Try Again</Button>
+                <Button onClick={() => { setStarted(false); setSubmitted(false); setAnswers([]); setScore(0) }} variant="outline" className="flex-1">Try Again</Button>
                 <Link href="/mock-tests/performance/language-arts" className="flex-1"><Button variant="outline" className="w-full">Back to Performance Tasks</Button></Link>
               </div>
             </CardContent>
@@ -392,16 +367,6 @@ Let us honour Marcus Garvey and all our National Heroes by being the best Jamaic
       <Header />
       <main className="container mx-auto px-4 py-10">
         <div className="mx-auto max-w-4xl space-y-6">
-          <div className="flex items-center justify-between rounded-lg bg-slate-800 p-4 text-white">
-            <div>
-              <h1 className="font-bold">Grade 5 Language Arts Performance Task Easy 6</h1>
-              <p className="text-sm text-slate-200">Jamaica's National Heroes</p>
-            </div>
-            <div className="flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 font-mono">
-              <Clock className="h-5 w-5" />{formatTime(timeLeft)}
-            </div>
-          </div>
-          <Progress value={(answers.filter((a) => a !== undefined).length / mcqs.length) * 100} className="h-2" />
           <Card className="border-blue-200">
             <CardHeader className="bg-blue-50">
               <CardTitle className="text-blue-800">Source Information</CardTitle>

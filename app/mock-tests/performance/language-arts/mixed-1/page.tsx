@@ -32,17 +32,15 @@ interface AiResult {
 }
 
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
 import { getSupabaseBrowserClient } from "@/lib/supabase/client"
 import {
   ArrowLeft,
-  Clock,
   CheckCircle,
   XCircle,
   Printer,
@@ -115,9 +113,8 @@ const shortAnswers: ShortAnswer[] = [
 
 export default function PerformanceMixed1Page() {
   const [started, setStarted] = useState(false)
-  const [timeLeft, setTimeLeft] = useState(60 * 60)
   const [answers, setAnswers] = useState<number[]>([])
-  const [showResults, setShowResults] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
   const [score, setScore] = useState(0)
   const [saTexts, setSaTexts] = useState<string[]>(["",""])
   const [ewText, setEwText] = useState("")
@@ -127,22 +124,6 @@ export default function PerformanceMixed1Page() {
   const sourceBodyText = `Rainwater harvesting is the collection and storage of rainwater for later use. Simple systems involve gutters on a roof that direct rainwater into a large tank or barrel. This stored water can be used for watering plants, cleaning, and — after proper treatment — for drinking. In Jamaica, some areas experience water shortages during the dry season. Rainwater harvesting can reduce dependence on pipe-borne water and help families and schools save money on water bills. Schools that collect rainwater can use it to maintain gardens and keep bathrooms clean even when water pressure is low. Setting up a rainwater harvesting system requires an initial investment in gutters and storage tanks. However, the long-term savings and environmental benefits make it a worthwhile project. Students can contribute by learning how the system works, maintaining it, and teaching others in the community about its benefits.`
   const writingPromptText = `Write a short letter to your school principal recommending that the school install a rainwater harvesting system. Give TWO reasons why the project is a good idea and suggest ONE way students can be involved.`
 
-  useEffect(() => {
-    if (!started || showResults) return
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) { clearInterval(timer); setShowResults(true); return 0 }
-        return prev - 1
-      })
-    }, 1000)
-    return () => clearInterval(timer)
-  }, [started, showResults])
-
-  const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60)
-    const s = seconds % 60
-    return `${m}:${s.toString().padStart(2, "0")}`
-  }
 
   const handleSelect = (qIndex: number, optionIndex: number) => {
     const updated = [...answers]
@@ -150,18 +131,12 @@ export default function PerformanceMixed1Page() {
     setAnswers(updated)
   }
 
-  const calculateScore = () => {
-    let total = 0
-    mcqs.forEach((q, i) => { if (answers[i] === q.answer) total++ })
-    setScore(total)
-  }
-
   const handleSubmit = async () => {
     let total = 0
     mcqs.forEach((q, i) => { if (answers[i] === q.answer) total++ })
     setScore(total)
     setAiLoading(true)
-    setShowResults(true)
+    setSubmitted(true)
     try {
       const label = shortAnswers[0]?.question?.substring(0, 40) ?? "Task"
       const [sa1, sa2, ew] = await Promise.all([
@@ -260,7 +235,7 @@ export default function PerformanceMixed1Page() {
     </div>
   )
 
-  if (showResults) {
+  if (submitted) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
         <Header />
@@ -386,7 +361,7 @@ A Grade 5 Student</p>
 
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button onClick={() => window.print()} className="flex-1 bg-amber-500 hover:bg-amber-600"><Printer className="mr-2 h-4 w-4" />Print / Save Report</Button>
-                <Button onClick={() => { setStarted(false); setShowResults(false); setAnswers([]); setScore(0); setTimeLeft(60 * 60) }} variant="outline" className="flex-1">Try Again</Button>
+                <Button onClick={() => { setStarted(false); setSubmitted(false); setAnswers([]); setScore(0) }} variant="outline" className="flex-1">Try Again</Button>
                 <Link href="/mock-tests/performance/language-arts" className="flex-1"><Button variant="outline" className="w-full">Back to Performance Tasks</Button></Link>
               </div>
             </CardContent>
@@ -402,16 +377,6 @@ A Grade 5 Student</p>
       <Header />
       <main className="container mx-auto px-4 py-10">
         <div className="mx-auto max-w-4xl space-y-6">
-          <div className="flex items-center justify-between rounded-lg bg-slate-800 p-4 text-white">
-            <div>
-              <h1 className="font-bold">Grade 5 Language Arts Performance Task Mixed 1</h1>
-              <p className="text-sm text-slate-200">Rainwater Harvesting</p>
-            </div>
-            <div className="flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 font-mono">
-              <Clock className="h-5 w-5" />{formatTime(timeLeft)}
-            </div>
-          </div>
-          <Progress value={(answers.filter((a) => a !== undefined).length / mcqs.length) * 100} className="h-2" />
           <Card className="border-blue-200">
             <CardHeader className="bg-blue-50">
               <CardTitle className="text-blue-800">Source Information</CardTitle>

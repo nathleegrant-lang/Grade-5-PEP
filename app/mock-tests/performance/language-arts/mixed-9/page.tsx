@@ -32,17 +32,15 @@ interface AiResult {
 }
 
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
 import { getSupabaseBrowserClient } from "@/lib/supabase/client"
 import {
   ArrowLeft,
-  Clock,
   CheckCircle,
   XCircle,
   Printer,
@@ -125,9 +123,8 @@ const shortAnswers: ShortAnswer[] = [
 
 export default function PerformanceMixed9Page() {
   const [started, setStarted] = useState(false)
-  const [timeLeft, setTimeLeft] = useState(60 * 60)
   const [answers, setAnswers] = useState<number[]>([])
-  const [showResults, setShowResults] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
   const [score, setScore] = useState(0)
   const [saTexts, setSaTexts] = useState<string[]>(["",""])
   const [ewText, setEwText] = useState("")
@@ -137,22 +134,6 @@ export default function PerformanceMixed9Page() {
   const sourceBodyText = `Entrepreneurship — the ability to identify opportunities, take initiative, and create value through business or community projects — is an increasingly important skill for young Jamaicans. Jamaica's economy benefits greatly from small and medium-sized businesses that provide employment and drive innovation. Teaching entrepreneurship skills at school gives students practical experience with planning, budgeting, communication, and problem-solving that will be useful throughout their lives, regardless of whether they eventually run their own businesses. Young entrepreneurs in Jamaica have found success in areas such as food production, craft-making, graphic design, tutoring services, and content creation for social media. Many began with very small amounts of money — sometimes as little as a few hundred dollars — and grew their businesses by identifying needs in their community and offering creative solutions. Key skills include the ability to research the market, manage money carefully, communicate effectively with customers, and adapt when things do not go as planned. Schools can nurture entrepreneurial talent by creating safe spaces to practise business skills. Junior Achievement programmes, school business fairs, and enterprise projects — where students create, market, and sell a product or service — teach practical skills in an enjoyable, low-risk environment. Mentorship from local business owners and entrepreneurs provides real-world insight and inspiration. Students who participate in these programmes develop confidence, creativity, and the resilience needed to handle challenges.`
   const writingPromptText = `Write a proposal to your school principal recommending the creation of a Young Entrepreneurs' Club. Explain why developing entrepreneurship skills is important for students, describe TWO activities the club could run, and suggest how local business owners could be involved. Use information from the source to support your proposal.`
 
-  useEffect(() => {
-    if (!started || showResults) return
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) { clearInterval(timer); setShowResults(true); return 0 }
-        return prev - 1
-      })
-    }, 1000)
-    return () => clearInterval(timer)
-  }, [started, showResults])
-
-  const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60)
-    const s = seconds % 60
-    return `${m}:${s.toString().padStart(2, "0")}`
-  }
 
   const handleSelect = (qIndex: number, optionIndex: number) => {
     const updated = [...answers]
@@ -160,18 +141,12 @@ export default function PerformanceMixed9Page() {
     setAnswers(updated)
   }
 
-  const calculateScore = () => {
-    let total = 0
-    mcqs.forEach((q, i) => { if (answers[i] === q.answer) total++ })
-    setScore(total)
-  }
-
   const handleSubmit = async () => {
     let total = 0
     mcqs.forEach((q, i) => { if (answers[i] === q.answer) total++ })
     setScore(total)
     setAiLoading(true)
-    setShowResults(true)
+    setSubmitted(true)
     try {
       const label = shortAnswers[0]?.question?.substring(0, 40) ?? "Task"
       const [sa1, sa2, ew] = await Promise.all([
@@ -270,7 +245,7 @@ export default function PerformanceMixed9Page() {
     </div>
   )
 
-  if (showResults) {
+  if (submitted) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
         <Header />
@@ -395,16 +370,6 @@ export default function PerformanceMixed9Page() {
       <Header />
       <main className="container mx-auto px-4 py-8">
         <div className="mx-auto max-w-4xl space-y-6">
-          <div className="flex items-center justify-between rounded-lg bg-slate-800 p-4 text-white">
-            <div>
-              <h1 className="font-bold">Grade 5 Language Arts Performance Task Mixed 9</h1>
-              <p className="text-sm text-slate-200">Entrepreneurship and Youth in Jamaica</p>
-            </div>
-            <div className="flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 font-mono">
-              <Clock className="h-5 w-5" />{formatTime(timeLeft)}
-            </div>
-          </div>
-          <Progress value={(answers.filter((a) => a !== undefined).length / mcqs.length) * 100} className="h-2" />
           <Card className="border-blue-200">
             <CardHeader className="bg-blue-50">
               <CardTitle className="text-blue-800">Source Information</CardTitle>

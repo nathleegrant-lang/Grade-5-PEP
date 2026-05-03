@@ -32,17 +32,15 @@ interface AiResult {
 }
 
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
 import { getSupabaseBrowserClient } from "@/lib/supabase/client"
 import {
   ArrowLeft,
-  Clock,
   CheckCircle,
   XCircle,
   Printer,
@@ -125,9 +123,8 @@ const shortAnswers: ShortAnswer[] = [
 
 export default function PerformanceModerate1Page() {
   const [started, setStarted] = useState(false)
-  const [timeLeft, setTimeLeft] = useState(60 * 60)
   const [answers, setAnswers] = useState<number[]>([])
-  const [showResults, setShowResults] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
   const [score, setScore] = useState(0)
   const [saTexts, setSaTexts] = useState<string[]>(["",""])
   const [ewText, setEwText] = useState("")
@@ -137,22 +134,6 @@ export default function PerformanceModerate1Page() {
   const sourceBodyText = `Air quality refers to the cleanliness of the air we breathe. Poor air quality — caused by vehicle emissions, burning of garbage, dust from construction, and industrial pollution — can lead to serious health problems including asthma, allergies, and respiratory infections. Children are especially vulnerable because their lungs are still developing and they spend more time outdoors. Communities can improve air quality through a combination of individual actions and collective effort. Planting trees along roadsides provides a natural barrier that absorbs pollutants and produces oxygen. Avoiding the burning of garbage and encouraging proper waste management reduces smoke pollution. Communities that advocate for improved public transport reduce the number of private vehicles on the road, which significantly lowers emissions. Schools have an important role in educating young people about air quality. When students learn about the causes and effects of air pollution, they become advocates for change — encouraging their families to adopt cleaner practices and holding community leaders accountable for environmental decisions. Schools that run science projects measuring local air quality, and that share results with the Parish Council, provide valuable data that can lead to policy improvements.`
   const writingPromptText = `Write a letter to your Parish Councillor explaining why air quality in your community is a concern, identifying TWO causes of the problem and recommending TWO specific actions the council should take to improve it. Use evidence from the source to support your recommendations.`
 
-  useEffect(() => {
-    if (!started || showResults) return
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) { clearInterval(timer); setShowResults(true); return 0 }
-        return prev - 1
-      })
-    }, 1000)
-    return () => clearInterval(timer)
-  }, [started, showResults])
-
-  const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60)
-    const s = seconds % 60
-    return `${m}:${s.toString().padStart(2, "0")}`
-  }
 
   const handleSelect = (qIndex: number, optionIndex: number) => {
     const updated = [...answers]
@@ -160,18 +141,12 @@ export default function PerformanceModerate1Page() {
     setAnswers(updated)
   }
 
-  const calculateScore = () => {
-    let total = 0
-    mcqs.forEach((q, i) => { if (answers[i] === q.answer) total++ })
-    setScore(total)
-  }
-
   const handleSubmit = async () => {
     let total = 0
     mcqs.forEach((q, i) => { if (answers[i] === q.answer) total++ })
     setScore(total)
     setAiLoading(true)
-    setShowResults(true)
+    setSubmitted(true)
     try {
       const label = shortAnswers[0]?.question?.substring(0, 40) ?? "Task"
       const [sa1, sa2, ew] = await Promise.all([
@@ -270,7 +245,7 @@ export default function PerformanceModerate1Page() {
     </div>
   )
 
-  if (showResults) {
+  if (submitted) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
         <Header />
@@ -395,16 +370,6 @@ export default function PerformanceModerate1Page() {
       <Header />
       <main className="container mx-auto px-4 py-8">
         <div className="mx-auto max-w-4xl space-y-6">
-          <div className="flex items-center justify-between rounded-lg bg-slate-800 p-4 text-white">
-            <div>
-              <h1 className="font-bold">Grade 5 Language Arts Performance Task Moderate 1</h1>
-              <p className="text-sm text-slate-200">Improving Air Quality in Our Community</p>
-            </div>
-            <div className="flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 font-mono">
-              <Clock className="h-5 w-5" />{formatTime(timeLeft)}
-            </div>
-          </div>
-          <Progress value={(answers.filter((a) => a !== undefined).length / mcqs.length) * 100} className="h-2" />
           <Card className="border-blue-200">
             <CardHeader className="bg-blue-50">
               <CardTitle className="text-blue-800">Source Information</CardTitle>

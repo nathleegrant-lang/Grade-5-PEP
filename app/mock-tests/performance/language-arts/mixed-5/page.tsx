@@ -32,17 +32,15 @@ interface AiResult {
 }
 
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
 import { getSupabaseBrowserClient } from "@/lib/supabase/client"
 import {
   ArrowLeft,
-  Clock,
   CheckCircle,
   XCircle,
   Printer,
@@ -125,9 +123,8 @@ const shortAnswers: ShortAnswer[] = [
 
 export default function PerformanceMixed5Page() {
   const [started, setStarted] = useState(false)
-  const [timeLeft, setTimeLeft] = useState(60 * 60)
   const [answers, setAnswers] = useState<number[]>([])
-  const [showResults, setShowResults] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
   const [score, setScore] = useState(0)
   const [saTexts, setSaTexts] = useState<string[]>(["",""])
   const [ewText, setEwText] = useState("")
@@ -137,22 +134,6 @@ export default function PerformanceMixed5Page() {
   const sourceBodyText = `A Green School is one that actively works to reduce its environmental impact through sustainable practices in energy use, water conservation, waste management, and the promotion of biodiversity. Green Schools teach students that environmental responsibility is not just a lesson in a textbook — it is a way of living and making decisions every day. In Jamaica, the government and several non-governmental organisations support schools in adopting green practices. Simple steps can significantly reduce a school's environmental footprint. Switching to LED lighting reduces electricity consumption by up to 80%. Rainwater tanks can supply water for toilets and gardens, reducing dependence on piped water. A composting system turns food waste from the cafeteria into rich soil for a school garden. Each of these changes also teaches students practical science, technology, and environmental stewardship. The greatest benefit of becoming a Green School is the long-term cultural change it creates. When students practise recycling, conserving water, and caring for plants every day at school, these habits extend to their homes and communities. Schools can track and celebrate progress — such as the tonnes of waste diverted from landfill or the litres of rainwater harvested — making environmental stewardship visible, measurable, and rewarding for the entire school community.`
   const writingPromptText = `Write a proposal to your school board recommending THREE specific Green School changes your school should make. For each change, explain what it involves, why it is important for the environment, and what students will learn from it. Use information from the source to support your recommendations.`
 
-  useEffect(() => {
-    if (!started || showResults) return
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) { clearInterval(timer); setShowResults(true); return 0 }
-        return prev - 1
-      })
-    }, 1000)
-    return () => clearInterval(timer)
-  }, [started, showResults])
-
-  const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60)
-    const s = seconds % 60
-    return `${m}:${s.toString().padStart(2, "0")}`
-  }
 
   const handleSelect = (qIndex: number, optionIndex: number) => {
     const updated = [...answers]
@@ -160,18 +141,12 @@ export default function PerformanceMixed5Page() {
     setAnswers(updated)
   }
 
-  const calculateScore = () => {
-    let total = 0
-    mcqs.forEach((q, i) => { if (answers[i] === q.answer) total++ })
-    setScore(total)
-  }
-
   const handleSubmit = async () => {
     let total = 0
     mcqs.forEach((q, i) => { if (answers[i] === q.answer) total++ })
     setScore(total)
     setAiLoading(true)
-    setShowResults(true)
+    setSubmitted(true)
     try {
       const label = shortAnswers[0]?.question?.substring(0, 40) ?? "Task"
       const [sa1, sa2, ew] = await Promise.all([
@@ -270,7 +245,7 @@ export default function PerformanceMixed5Page() {
     </div>
   )
 
-  if (showResults) {
+  if (submitted) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
         <Header />
@@ -395,16 +370,6 @@ export default function PerformanceMixed5Page() {
       <Header />
       <main className="container mx-auto px-4 py-8">
         <div className="mx-auto max-w-4xl space-y-6">
-          <div className="flex items-center justify-between rounded-lg bg-slate-800 p-4 text-white">
-            <div>
-              <h1 className="font-bold">Grade 5 Language Arts Performance Task Mixed 5</h1>
-              <p className="text-sm text-slate-200">Making Our School More Environmentally Friendly</p>
-            </div>
-            <div className="flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 font-mono">
-              <Clock className="h-5 w-5" />{formatTime(timeLeft)}
-            </div>
-          </div>
-          <Progress value={(answers.filter((a) => a !== undefined).length / mcqs.length) * 100} className="h-2" />
           <Card className="border-blue-200">
             <CardHeader className="bg-blue-50">
               <CardTitle className="text-blue-800">Source Information</CardTitle>

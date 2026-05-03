@@ -32,17 +32,15 @@ interface AiResult {
 }
 
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
 import { getSupabaseBrowserClient } from "@/lib/supabase/client"
 import {
   ArrowLeft,
-  Clock,
   CheckCircle,
   XCircle,
   Printer,
@@ -125,9 +123,8 @@ const shortAnswers: ShortAnswer[] = [
 
 export default function PerformanceMixed8Page() {
   const [started, setStarted] = useState(false)
-  const [timeLeft, setTimeLeft] = useState(60 * 60)
   const [answers, setAnswers] = useState<number[]>([])
-  const [showResults, setShowResults] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
   const [score, setScore] = useState(0)
   const [saTexts, setSaTexts] = useState<string[]>(["",""])
   const [ewText, setEwText] = useState("")
@@ -137,22 +134,6 @@ export default function PerformanceMixed8Page() {
   const sourceBodyText = `Mental health is as important as physical health, yet it is often less discussed in schools. Children and teenagers experience a range of emotional challenges — stress from academic pressure, friendship difficulties, family problems, and anxiety about the future. When these challenges go unaddressed, they can affect a student's ability to concentrate, attend school regularly, and engage with learning. Schools that address mental health proactively create environments where all students can thrive. Schools can support student mental health in practical ways. Providing access to a trained school counsellor gives students a confidential space to discuss their concerns. Mindfulness activities — such as breathing exercises or short periods of calm at the beginning of the day — can help students manage stress. Teaching students to recognise their emotions, ask for help when they need it, and support friends who may be struggling builds emotional resilience across the school community. Reducing stigma around mental health is equally important. When teachers and school leaders talk openly and matter-of-factly about mental health — just as they would discuss physical illness — students feel more comfortable seeking support. Schools that organise mental health awareness days, display information about available support, and celebrate students' courage in seeking help send a powerful message: caring for your mental health is a sign of strength, not weakness.`
   const writingPromptText = `Write a proposal to your school principal recommending TWO initiatives to improve mental health awareness and support at your school. For each initiative, explain what it would involve, why it is important, and how teachers, students, and parents could each contribute to making it successful.`
 
-  useEffect(() => {
-    if (!started || showResults) return
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) { clearInterval(timer); setShowResults(true); return 0 }
-        return prev - 1
-      })
-    }, 1000)
-    return () => clearInterval(timer)
-  }, [started, showResults])
-
-  const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60)
-    const s = seconds % 60
-    return `${m}:${s.toString().padStart(2, "0")}`
-  }
 
   const handleSelect = (qIndex: number, optionIndex: number) => {
     const updated = [...answers]
@@ -160,18 +141,12 @@ export default function PerformanceMixed8Page() {
     setAnswers(updated)
   }
 
-  const calculateScore = () => {
-    let total = 0
-    mcqs.forEach((q, i) => { if (answers[i] === q.answer) total++ })
-    setScore(total)
-  }
-
   const handleSubmit = async () => {
     let total = 0
     mcqs.forEach((q, i) => { if (answers[i] === q.answer) total++ })
     setScore(total)
     setAiLoading(true)
-    setShowResults(true)
+    setSubmitted(true)
     try {
       const label = shortAnswers[0]?.question?.substring(0, 40) ?? "Task"
       const [sa1, sa2, ew] = await Promise.all([
@@ -271,7 +246,7 @@ export default function PerformanceMixed8Page() {
     </div>
   )
 
-  if (showResults) {
+  if (submitted) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
         <Header />
@@ -396,16 +371,6 @@ export default function PerformanceMixed8Page() {
       <Header />
       <main className="container mx-auto px-4 py-8">
         <div className="mx-auto max-w-4xl space-y-6">
-          <div className="flex items-center justify-between rounded-lg bg-slate-800 p-4 text-white">
-            <div>
-              <h1 className="font-bold">Grade 5 Language Arts Performance Task Mixed 8</h1>
-              <p className="text-sm text-slate-200">Improving Mental Health Awareness at School</p>
-            </div>
-            <div className="flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 font-mono">
-              <Clock className="h-5 w-5" />{formatTime(timeLeft)}
-            </div>
-          </div>
-          <Progress value={(answers.filter((a) => a !== undefined).length / mcqs.length) * 100} className="h-2" />
           <Card className="border-blue-200">
             <CardHeader className="bg-blue-50">
               <CardTitle className="text-blue-800">Source Information</CardTitle>

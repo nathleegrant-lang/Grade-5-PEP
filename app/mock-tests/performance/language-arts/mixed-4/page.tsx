@@ -32,17 +32,15 @@ interface AiResult {
 }
 
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
 import { getSupabaseBrowserClient } from "@/lib/supabase/client"
 import {
   ArrowLeft,
-  Clock,
   CheckCircle,
   XCircle,
   Printer,
@@ -125,9 +123,8 @@ const shortAnswers: ShortAnswer[] = [
 
 export default function PerformanceMixed4Page() {
   const [started, setStarted] = useState(false)
-  const [timeLeft, setTimeLeft] = useState(60 * 60)
   const [answers, setAnswers] = useState<number[]>([])
-  const [showResults, setShowResults] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
   const [score, setScore] = useState(0)
   const [saTexts, setSaTexts] = useState<string[]>(["",""])
   const [ewText, setEwText] = useState("")
@@ -137,22 +134,6 @@ export default function PerformanceMixed4Page() {
   const sourceBodyText = `Jamaica's seven National Heroes — Nanny of the Maroons, Samuel Sharpe, Paul Bogle, George William Gordon, Marcus Garvey, Norman Washington Manley, and Alexander Bustamante — were recognised for their extraordinary contributions to the freedom, dignity, and development of the Jamaican people. Each hero lived in a different era and used different methods, but all were united by their commitment to justice and the wellbeing of ordinary Jamaicans. National Heroes Day, celebrated on the third Monday in October during Heritage Month, provides an ideal opportunity for schools to reflect on the values of courage, sacrifice, and service that these leaders embodied. Schools can organise exhibitions, creative projects, dramatic performances, and debates to bring the heroes' stories to life and help students connect their legacy to modern Jamaica. Understanding the past helps young Jamaicans appreciate how much was sacrificed to build the nation they live in today. Studying the National Heroes also teaches critical thinking: why is each person considered a hero? What qualities did they demonstrate? Are there people in today's Jamaica who show similar qualities? Encouraging students to explore these questions helps them understand that heroism is not just a historical concept — it is a set of values and actions that any person can aspire to, regardless of age or background. Schools that celebrate their heroes inspire the next generation of leaders.`
   const writingPromptText = `Write a speech you could deliver at your school's National Heroes Day assembly. Choose ONE National Hero to focus on, explain their contribution to Jamaica, and describe what values from their life young Jamaicans should apply today. Use specific details from your knowledge and the source.`
 
-  useEffect(() => {
-    if (!started || showResults) return
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) { clearInterval(timer); setShowResults(true); return 0 }
-        return prev - 1
-      })
-    }, 1000)
-    return () => clearInterval(timer)
-  }, [started, showResults])
-
-  const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60)
-    const s = seconds % 60
-    return `${m}:${s.toString().padStart(2, "0")}`
-  }
 
   const handleSelect = (qIndex: number, optionIndex: number) => {
     const updated = [...answers]
@@ -160,18 +141,12 @@ export default function PerformanceMixed4Page() {
     setAnswers(updated)
   }
 
-  const calculateScore = () => {
-    let total = 0
-    mcqs.forEach((q, i) => { if (answers[i] === q.answer) total++ })
-    setScore(total)
-  }
-
   const handleSubmit = async () => {
     let total = 0
     mcqs.forEach((q, i) => { if (answers[i] === q.answer) total++ })
     setScore(total)
     setAiLoading(true)
-    setShowResults(true)
+    setSubmitted(true)
     try {
       const label = shortAnswers[0]?.question?.substring(0, 40) ?? "Task"
       const [sa1, sa2, ew] = await Promise.all([
@@ -270,7 +245,7 @@ export default function PerformanceMixed4Page() {
     </div>
   )
 
-  if (showResults) {
+  if (submitted) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
         <Header />
@@ -395,16 +370,6 @@ export default function PerformanceMixed4Page() {
       <Header />
       <main className="container mx-auto px-4 py-8">
         <div className="mx-auto max-w-4xl space-y-6">
-          <div className="flex items-center justify-between rounded-lg bg-slate-800 p-4 text-white">
-            <div>
-              <h1 className="font-bold">Grade 5 Language Arts Performance Task Mixed 4</h1>
-              <p className="text-sm text-slate-200">Celebrating Our National Heroes</p>
-            </div>
-            <div className="flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 font-mono">
-              <Clock className="h-5 w-5" />{formatTime(timeLeft)}
-            </div>
-          </div>
-          <Progress value={(answers.filter((a) => a !== undefined).length / mcqs.length) * 100} className="h-2" />
           <Card className="border-blue-200">
             <CardHeader className="bg-blue-50">
               <CardTitle className="text-blue-800">Source Information</CardTitle>

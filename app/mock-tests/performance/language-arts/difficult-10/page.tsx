@@ -32,17 +32,15 @@ interface AiResult {
 }
 
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
 import { getSupabaseBrowserClient } from "@/lib/supabase/client"
 import {
   ArrowLeft,
-  Clock,
   CheckCircle,
   XCircle,
   Printer,
@@ -135,9 +133,8 @@ const shortAnswers: ShortAnswer[] = [
 
 export default function PerformanceDifficult10Page() {
   const [started, setStarted] = useState(false)
-  const [timeLeft, setTimeLeft] = useState(60 * 60)
   const [answers, setAnswers] = useState<number[]>([])
-  const [showResults, setShowResults] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
   const [score, setScore] = useState(0)
   const [saTexts, setSaTexts] = useState<string[]>(["",""])
   const [ewText, setEwText] = useState("")
@@ -147,22 +144,6 @@ export default function PerformanceDifficult10Page() {
   const sourceBodyText = `Media literacy is the ability to access, analyse, evaluate, and create media in different forms. In today's digital world, students encounter information through social media, websites, videos, and messaging apps. Not all of this information is accurate or trustworthy, making media literacy an essential skill for the 21st century. Misinformation is false or inaccurate information that is shared, sometimes unknowingly, by people who believe it to be true. Disinformation is false information that is deliberately created and spread to mislead people. Both can have serious consequences — from causing people to make poor health decisions to spreading harmful stereotypes or influencing elections. Students can develop media literacy by questioning the source of information, checking facts using trusted websites, looking for evidence to support claims, and considering whether a message is trying to persuade rather than inform. These critical thinking skills are not only useful online — they apply to all areas of learning and life. Schools have an important role in teaching media literacy. When students learn to evaluate information carefully, they become more responsible digital citizens. They are less likely to share false information and more likely to contribute positively to online and real-world communities.`
   const writingPromptText = `Write a guide for younger students (Grade 3 or 4) explaining what media literacy is, why it matters, and giving THREE simple steps they can follow to check if information online is true. Use clear language and make it engaging for a younger audience.`
 
-  useEffect(() => {
-    if (!started || showResults) return
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) { clearInterval(timer); setShowResults(true); return 0 }
-        return prev - 1
-      })
-    }, 1000)
-    return () => clearInterval(timer)
-  }, [started, showResults])
-
-  const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60)
-    const s = seconds % 60
-    return `${m}:${s.toString().padStart(2, "0")}`
-  }
 
   const handleSelect = (qIndex: number, optionIndex: number) => {
     const updated = [...answers]
@@ -170,18 +151,12 @@ export default function PerformanceDifficult10Page() {
     setAnswers(updated)
   }
 
-  const calculateScore = () => {
-    let total = 0
-    mcqs.forEach((q, i) => { if (answers[i] === q.answer) total++ })
-    setScore(total)
-  }
-
   const handleSubmit = async () => {
     let total = 0
     mcqs.forEach((q, i) => { if (answers[i] === q.answer) total++ })
     setScore(total)
     setAiLoading(true)
-    setShowResults(true)
+    setSubmitted(true)
     try {
       const label = shortAnswers[0]?.question?.substring(0, 40) ?? "Task"
       const [sa1, sa2, ew] = await Promise.all([
@@ -281,7 +256,7 @@ export default function PerformanceDifficult10Page() {
     </div>
   )
 
-  if (showResults) {
+  if (submitted) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
         <Header />
@@ -420,7 +395,7 @@ Written by a Grade 5 Student</p>
 
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button onClick={() => window.print()} className="flex-1 bg-amber-500 hover:bg-amber-600"><Printer className="mr-2 h-4 w-4" />Print / Save Report</Button>
-                <Button onClick={() => { setStarted(false); setShowResults(false); setAnswers([]); setScore(0); setTimeLeft(60 * 60) }} variant="outline" className="flex-1">Try Again</Button>
+                <Button onClick={() => { setStarted(false); setSubmitted(false); setAnswers([]); setScore(0) }} variant="outline" className="flex-1">Try Again</Button>
                 <Link href="/mock-tests/performance/language-arts" className="flex-1"><Button variant="outline" className="w-full">Back to Performance Tasks</Button></Link>
               </div>
             </CardContent>
@@ -436,16 +411,6 @@ Written by a Grade 5 Student</p>
       <Header />
       <main className="container mx-auto px-4 py-10">
         <div className="mx-auto max-w-4xl space-y-6">
-          <div className="flex items-center justify-between rounded-lg bg-slate-800 p-4 text-white">
-            <div>
-              <h1 className="font-bold">Grade 5 Language Arts Performance Task Difficult 10</h1>
-              <p className="text-sm text-slate-200">Media Literacy and Information in the Digital Age</p>
-            </div>
-            <div className="flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 font-mono">
-              <Clock className="h-5 w-5" />{formatTime(timeLeft)}
-            </div>
-          </div>
-          <Progress value={(answers.filter((a) => a !== undefined).length / mcqs.length) * 100} className="h-2" />
           <Card className="border-blue-200">
             <CardHeader className="bg-blue-50">
               <CardTitle className="text-blue-800">Source Information</CardTitle>

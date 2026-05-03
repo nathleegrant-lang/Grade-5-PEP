@@ -32,17 +32,15 @@ interface AiResult {
 }
 
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
 import { getSupabaseBrowserClient } from "@/lib/supabase/client"
 import {
   ArrowLeft,
-  Clock,
   CheckCircle,
   XCircle,
   Printer,
@@ -135,9 +133,8 @@ const shortAnswers: ShortAnswer[] = [
 
 export default function PerformanceDifficult9Page() {
   const [started, setStarted] = useState(false)
-  const [timeLeft, setTimeLeft] = useState(60 * 60)
   const [answers, setAnswers] = useState<number[]>([])
-  const [showResults, setShowResults] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
   const [score, setScore] = useState(0)
   const [saTexts, setSaTexts] = useState<string[]>(["",""])
   const [ewText, setEwText] = useState("")
@@ -147,22 +144,6 @@ export default function PerformanceDifficult9Page() {
   const sourceBodyText = `Civic responsibility means understanding and fulfilling one's duties as a member of a community or country. This includes respecting the law, participating in democratic processes, caring for public spaces, and helping others. In Jamaica, civic responsibility is considered an essential part of good citizenship from an early age. Young people have historically played important roles in community change. During the Civil Rights Movement and in post-independence Jamaica, young people organised, marched, and advocated for justice and equality. Today, students can make a difference through school councils, community projects, environmental campaigns, and youth parliaments. Leadership skills such as communication, problem-solving, empathy, and decision-making can be developed through practice. Schools that provide students with opportunities to lead — through house captains, prefects, class representatives, and project committees — are building the next generation of community leaders. However, youth leadership is not without challenges. Young people are sometimes not taken seriously by adults, may lack experience, or may not have access to resources and mentors. Supportive adults, meaningful opportunities, and genuine respect for young people's ideas are essential to developing youth leadership effectively.`
   const writingPromptText = `Write a speech to be delivered at a Youth Leadership Conference. Explain what civic responsibility means, give TWO examples of how young Jamaicans can lead in their communities, and address ONE challenge young leaders face. End with an inspiring call to action.`
 
-  useEffect(() => {
-    if (!started || showResults) return
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) { clearInterval(timer); setShowResults(true); return 0 }
-        return prev - 1
-      })
-    }, 1000)
-    return () => clearInterval(timer)
-  }, [started, showResults])
-
-  const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60)
-    const s = seconds % 60
-    return `${m}:${s.toString().padStart(2, "0")}`
-  }
 
   const handleSelect = (qIndex: number, optionIndex: number) => {
     const updated = [...answers]
@@ -170,18 +151,12 @@ export default function PerformanceDifficult9Page() {
     setAnswers(updated)
   }
 
-  const calculateScore = () => {
-    let total = 0
-    mcqs.forEach((q, i) => { if (answers[i] === q.answer) total++ })
-    setScore(total)
-  }
-
   const handleSubmit = async () => {
     let total = 0
     mcqs.forEach((q, i) => { if (answers[i] === q.answer) total++ })
     setScore(total)
     setAiLoading(true)
-    setShowResults(true)
+    setSubmitted(true)
     try {
       const label = shortAnswers[0]?.question?.substring(0, 40) ?? "Task"
       const [sa1, sa2, ew] = await Promise.all([
@@ -280,7 +255,7 @@ export default function PerformanceDifficult9Page() {
     </div>
   )
 
-  if (showResults) {
+  if (submitted) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
         <Header />
@@ -411,7 +386,7 @@ Damaris, Grade 5 Student</p>
 
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button onClick={() => window.print()} className="flex-1 bg-amber-500 hover:bg-amber-600"><Printer className="mr-2 h-4 w-4" />Print / Save Report</Button>
-                <Button onClick={() => { setStarted(false); setShowResults(false); setAnswers([]); setScore(0); setTimeLeft(60 * 60) }} variant="outline" className="flex-1">Try Again</Button>
+                <Button onClick={() => { setStarted(false); setSubmitted(false); setAnswers([]); setScore(0) }} variant="outline" className="flex-1">Try Again</Button>
                 <Link href="/mock-tests/performance/language-arts" className="flex-1"><Button variant="outline" className="w-full">Back to Performance Tasks</Button></Link>
               </div>
             </CardContent>
@@ -427,16 +402,6 @@ Damaris, Grade 5 Student</p>
       <Header />
       <main className="container mx-auto px-4 py-10">
         <div className="mx-auto max-w-4xl space-y-6">
-          <div className="flex items-center justify-between rounded-lg bg-slate-800 p-4 text-white">
-            <div>
-              <h1 className="font-bold">Grade 5 Language Arts Performance Task Difficult 9</h1>
-              <p className="text-sm text-slate-200">Youth Leadership and Civic Responsibility</p>
-            </div>
-            <div className="flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 font-mono">
-              <Clock className="h-5 w-5" />{formatTime(timeLeft)}
-            </div>
-          </div>
-          <Progress value={(answers.filter((a) => a !== undefined).length / mcqs.length) * 100} className="h-2" />
           <Card className="border-blue-200">
             <CardHeader className="bg-blue-50">
               <CardTitle className="text-blue-800">Source Information</CardTitle>
