@@ -186,6 +186,7 @@ export default function PerformanceEasy1Page() {
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
         <Header />
         <main className="container mx-auto px-4 py-10">
+          <h1 className="mb-4 text-center text-3xl font-extrabold text-red-600">AI VERSION TEST - EASY 1</h1>
           <Link href="/mock-tests/performance/language-arts">
             <Button variant="ghost" className="mb-6">
               <ArrowLeft className="mr-2 h-4 w-4" />Back to Language Arts Performance Task Mock Tests
