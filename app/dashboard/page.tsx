@@ -12,6 +12,7 @@ import { Footer } from "@/components/footer"
 import { useAuth } from "@/contexts/auth-context"
 import { useProgress } from "@/contexts/progress-context"
 import { getSupabaseBrowserClient } from "@/lib/supabase/client"
+import { fetchCompletedStudentResults, normalizeSubject } from "@/lib/student-results"
 import type { PaymentRecord } from "@/lib/types"
 import {
   BookOpen,
@@ -32,15 +33,6 @@ import {
   BarChart3,
 } from "lucide-react"
 import { getPlanLabel } from "@/lib/subscriptions"
-
-// ── Normalises raw DB subject values to clean display labels ──────────────────
-function displaySubject(subject: string): string {
-  if (!subject) return subject
-  const s = subject.toLowerCase()
-  if (s === "numeracy" || s === "mathematics") return "Mathematics"
-  if (s === "literacy" || s === "language arts" || s === "language-arts") return "Language Arts"
-  return subject
-}
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 type StudentTestResult = {
@@ -69,22 +61,19 @@ type CertificateRecord = {
 
 // ── Helpers for subject-progress filters ──────────────────────────────────────
 function isMathSubject(subject: string): boolean {
-  const s = subject.toLowerCase()
-  return s === "mathematics" || s === "numeracy"
+  return normalizeSubject(subject) === "Mathematics"
 }
 
 function isLangSubject(subject: string): boolean {
-  const s = subject.toLowerCase()
-  return s === "language arts" || s === "language-arts" || s === "literacy"
+  return normalizeSubject(subject) === "Language Arts"
 }
 
 function isScienceSubject(subject: string): boolean {
-  return subject.toLowerCase() === "science"
+  return normalizeSubject(subject) === "Science"
 }
 
 function isSocialStudiesSubject(subject: string): boolean {
-  const s = subject.toLowerCase()
-  return s === "social studies" || s === "social-studies"
+  return normalizeSubject(subject) === "Social Studies"
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -163,13 +152,7 @@ export default function DashboardPage() {
     const loadTestResults = async () => {
       if (!user) return
 
-      const { data } = await supabase
-        .from("student_test_results")
-        .select("id, subject, test_name, difficulty, score, total_questions, percentage, completed_at, category")
-        .eq("parent_id", user.id)
-        .order("completed_at", { ascending: false })
-
-      const results = (data || []) as StudentTestResult[]
+      const results = (await fetchCompletedStudentResults(supabase, user.id)) as StudentTestResult[]
 
       setTestResults(results)
 
@@ -200,15 +183,19 @@ export default function DashboardPage() {
     const loadCertificates = async () => {
       if (!user) return
 
-      const { data } = await supabase
-        .from("certificates")
-        .select(
-          "id, student_name, subject, test_name, score, total_questions, percentage, certificate_title, issued_at",
-        )
-        .eq("parent_id", user.id)
-        .order("issued_at", { ascending: false })
-
-      setEarnedCertificates((data || []) as CertificateRecord[])
+      const results = await fetchCompletedStudentResults(supabase, user.id)
+      const earned = results.filter((r) => Number(r.percentage) >= 80).map((r) => ({
+        id: r.id,
+        student_name: "Student",
+        subject: r.subject,
+        test_name: r.test_name,
+        score: r.score,
+        total_questions: r.total_questions,
+        percentage: r.percentage,
+        certificate_title: `${normalizeSubject(r.subject)} Excellence Certificate`,
+        issued_at: r.completed_at,
+      }))
+      setEarnedCertificates(earned as CertificateRecord[])
     }
 
     void loadCertificates()
@@ -439,7 +426,7 @@ export default function DashboardPage() {
                     <div className="flex justify-between">
                       <span className="text-slate-500">Subject</span>
                       {/* displaySubject normalises "Numeracy" → "Mathematics" etc. */}
-                      <span className="text-slate-700">{displaySubject(latestTest.subject)}</span>
+                      <span className="text-slate-700">{normalizeSubject(latestTest.subject)}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-500">Test</span>
@@ -525,7 +512,7 @@ export default function DashboardPage() {
                           />
                           <span className="text-slate-700">
                             {/* displaySubject applied to raw DB value */}
-                            {displaySubject(result.subject)} — {result.test_name}
+                            {normalizeSubject(result.subject)} — {result.test_name}
                           </span>
                         </div>
                         <span className="text-slate-500">{result.percentage}%</span>
@@ -619,7 +606,7 @@ export default function DashboardPage() {
                       <p className="text-xs text-slate-600">{cert.student_name}</p>
                       <p className="text-xs text-slate-500">
                         {/* displaySubject normalises raw subject from DB */}
-                        {displaySubject(cert.subject)} — {cert.test_name}
+                        {normalizeSubject(cert.subject)} — {cert.test_name}
                       </p>
                       <div className="flex items-center justify-between">
                         <span className="text-xs font-medium text-amber-700">

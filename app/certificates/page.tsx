@@ -10,16 +10,8 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { useAuth } from "@/contexts/auth-context"
 import { getSupabaseBrowserClient } from "@/lib/supabase/client"
+import { fetchCompletedStudentResults, normalizeSubject } from "@/lib/student-results"
 import { Award, ArrowLeft, Printer, Star } from "lucide-react"
-
-// ── Normalises raw DB subject values to clean display labels ──────────────────
-function displaySubject(subject: string): string {
-  if (!subject) return subject
-  const s = subject.toLowerCase()
-  if (s === "numeracy" || s === "mathematics") return "Mathematics"
-  if (s === "literacy" || s === "language arts" || s === "language-arts") return "Language Arts"
-  return subject
-}
 
 // ── Type ──────────────────────────────────────────────────────────────────────
 type CertificateRecord = {
@@ -36,7 +28,7 @@ type CertificateRecord = {
 
 // ── Colour accent per subject ─────────────────────────────────────────────────
 function subjectAccent(subject: string): { border: string; badge: string; text: string } {
-  const label = displaySubject(subject)
+  const label = normalizeSubject(subject)
   switch (label) {
     case "Mathematics":
       return { border: "border-amber-300", badge: "bg-amber-100 text-amber-700", text: "text-amber-700" }
@@ -83,8 +75,7 @@ function CertificatePrintView({ cert }: { cert: CertificateRecord }) {
       </p>
 
       <div className="space-y-1">
-        {/* displaySubject applied — "Numeracy" → "Mathematics" etc. */}
-        <p className="text-lg font-semibold text-slate-700">{displaySubject(cert.subject)}</p>
+        <p className="text-lg font-semibold text-slate-700">{normalizeSubject(cert.subject)}</p>
         <p className="text-slate-500 text-sm">{cert.test_name}</p>
       </div>
 
@@ -138,15 +129,22 @@ export default function CertificatesPage() {
       if (!user) return
       setFetching(true)
 
-      const { data } = await supabase
-        .from("certificates")
-        .select(
-          "id, student_name, subject, test_name, score, total_questions, percentage, certificate_title, issued_at",
-        )
-        .eq("parent_id", user.id)
-        .order("issued_at", { ascending: false })
+      const results = await fetchCompletedStudentResults(supabase, user.id)
+      const certs = results
+        .filter((r) => Number(r.percentage) >= 80)
+        .map((r) => ({
+          id: r.id,
+          student_name: "Student",
+          subject: r.subject,
+          test_name: r.test_name,
+          score: r.score,
+          total_questions: r.total_questions,
+          percentage: r.percentage,
+          certificate_title: `${normalizeSubject(r.subject)} Excellence Certificate`,
+          issued_at: r.completed_at,
+        }))
 
-      setCertificates((data || []) as CertificateRecord[])
+      setCertificates(certs as CertificateRecord[])
       setFetching(false)
     }
 
@@ -283,7 +281,7 @@ export default function CertificatesPage() {
                     {/* Subject + test — displaySubject applied */}
                     <div className="space-y-1">
                       <Badge className={`${accent.badge} text-xs`}>
-                        {displaySubject(cert.subject)}
+                        {normalizeSubject(cert.subject)}
                       </Badge>
                       <p className="text-xs text-slate-500">{cert.test_name}</p>
                     </div>
