@@ -388,11 +388,11 @@ export default function PerformanceEasy1Page() {
             </CardHeader>
             <CardContent className="space-y-6 p-6">
               {mcqs.map((q, qIndex) => (
-                <div key={qIndex} className="space-y-3">
-                  <p className="font-semibold text-slate-800">{qIndex + 1}. {q.question}</p>
+                <div key={qIndex} className="space-y-4 rounded-xl border border-amber-100 bg-amber-50/50 p-4">
+                  <p className="text-lg font-bold text-slate-900">{qIndex + 1}. {q.question}</p>
                   <div className="grid gap-3">
                     {q.options.map((option, optionIndex) => (
-                      <button key={optionIndex} onClick={() => handleSelect(qIndex, optionIndex)} className={`rounded-lg border-2 p-3 text-left transition ${answers[qIndex] === optionIndex ? "border-amber-500 bg-blue-50" : "border-gray-200 hover:border-blue-300"}`}>
+                      <button key={optionIndex} onClick={() => handleSelect(qIndex, optionIndex)} className={`rounded-lg border p-3 text-left transition ${answers[qIndex] === optionIndex ? "border-amber-500 bg-amber-100 ring-2 ring-amber-300" : "border-slate-200 bg-white hover:border-amber-300"}`}>
                         <span className="mr-2 font-bold text-blue-700">{String.fromCharCode(65 + optionIndex)}.</span>{option}
                       </button>
                     ))}
