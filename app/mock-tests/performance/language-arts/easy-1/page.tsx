@@ -185,7 +185,7 @@ export default function PerformanceEasy1Page() {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
         <Header />
-        <main className="container mx-auto px-4 py-10">
+        <main className="container mx-auto px-4 pb-10 pt-32 lg:pt-10">
           <Link href="/mock-tests/performance/language-arts">
             <Button variant="ghost" className="mb-6">
               <ArrowLeft className="mr-2 h-4 w-4" />Back to Language Arts Performance Task Mock Tests
@@ -232,7 +232,7 @@ export default function PerformanceEasy1Page() {
   if (aiLoading) return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
       <Header />
-      <main className="container mx-auto px-4 py-20 text-center">
+      <main className="container mx-auto px-4 pb-20 pt-32 text-center lg:pt-20">
         <div className="mx-auto max-w-sm">
           <div className="mb-6 flex justify-center">
             <div className="h-16 w-16 animate-spin rounded-full border-4 border-blue-200 border-t-blue-600" />
@@ -249,7 +249,7 @@ export default function PerformanceEasy1Page() {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
         <Header />
-        <main className="container mx-auto px-4 py-10">
+        <main className="container mx-auto px-4 pb-10 pt-32 lg:pt-10">
           <Card className="mx-auto max-w-4xl border-amber-200 shadow-lg">
             <CardHeader className="bg-amber-50 text-center">
               <CheckCircle className="mx-auto mb-4 h-14 w-14 text-amber-600" />
@@ -369,7 +369,7 @@ export default function PerformanceEasy1Page() {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
       <Header />
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 pb-8 pt-32 lg:pt-8">
         <div className="mx-auto max-w-4xl space-y-6">
           <Card className="border-blue-200">
             <CardHeader className="bg-blue-50">
