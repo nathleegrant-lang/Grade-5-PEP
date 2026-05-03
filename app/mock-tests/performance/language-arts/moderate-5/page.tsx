@@ -39,7 +39,7 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
-import { createClient } from "@/utils/supabase/client"
+import { getSupabaseBrowserClient } from "@/lib/supabase/client"
 import {
   ArrowLeft,
   Clock,
@@ -182,7 +182,7 @@ export default function PerformanceModerate5Page() {
       setAiResult({ shortAnswers: [sa1, sa2], extendedWriting: ew })
       // Save result to Supabase after marking completes
       try {
-        const supabase = createClient()
+        const supabase = getSupabaseBrowserClient()
         const { data: { user } } = await supabase.auth.getUser()
         if (user) {
           const totalScore = mcqTotal + (sa1?.score ?? 0) + (sa2?.score ?? 0) + (ew?.totalScore ?? 0)
