@@ -1,3 +1,5 @@
+"use client"
+
 // AI Marking types
 interface ShortAnswerFb {
   score: number
@@ -29,7 +31,7 @@ interface AiResult {
   extendedWriting: ExtWritingFb
 }
 
-"use client"
+
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
