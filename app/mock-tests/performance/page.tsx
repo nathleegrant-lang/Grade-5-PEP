@@ -1,89 +1,81 @@
+import Link from "next/link"
+import { BookOpen, Calculator } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import SubjectLevelCard from "@/components/mock-tests/subject-level-card"
-import { getSubjectCatalog } from "@/lib/mock-catalog"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 
 export const metadata = {
   title: "Grade 5 PEP Performance Task Mock Tests",
   description:
-    "Grade 5 PEP Performance Task practice with easy, moderate, difficult, and mixed levels.",
+    "Choose Language Arts or Mathematics performance tasks for Grade 5 PEP practice.",
 }
 
 export default function PerformanceCategoryPage() {
-  const catalog = getSubjectCatalog("performance")
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
       <Header />
 
       <main className="container mx-auto px-4 py-10">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-6xl">
+          <Link
+            href="/mock-tests"
+            className="mb-6 inline-flex items-center text-slate-600 hover:text-slate-800"
+          >
+            ← Back to Mock Tests
+          </Link>
+
           <div className="mb-10 text-center">
             <h1 className="mb-3 text-4xl font-bold text-slate-800">
               Performance Task Mock Tests
             </h1>
             <p className="text-slate-600">
-              Build reading, evidence, reasoning, and writing skills through
-              levelled Grade 5 PEP performance tasks.
+              Choose a subject area to start child-friendly performance task practice.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <SubjectLevelCard
-              grade="grade5"
-              subject="performance"
-              level="easy"
-              availableTests={catalog.easy}
-              questions={1}
-              minutes={90}
-              description={[
-                "Stronger focus on direct information",
-                "Guided short responses",
-                "Simple structured writing",
-              ]}
-            />
+          <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
+            <Card className="shadow-sm">
+              <CardHeader>
+                <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-sky-100">
+                  <BookOpen className="h-7 w-7 text-sky-600" />
+                </div>
+                <CardTitle className="text-slate-800">
+                  Language Arts Performance Tasks
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-sm text-slate-600">
+                  Practice reading sources, finding evidence, and writing clear responses.
+                </p>
+                <Link href="/mock-tests/performance/language-arts">
+                  <Button className="w-full bg-slate-800 hover:bg-slate-900">
+                    Open Language Arts Tasks
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
 
-            <SubjectLevelCard
-              grade="grade5"
-              subject="performance"
-              level="moderate"
-              availableTests={catalog.moderate}
-              questions={1}
-              minutes={90}
-              description={[
-                "Closer to standard Grade 5 PEP level",
-                "Evidence from sources",
-                "More developed written responses",
-              ]}
-            />
-
-            <SubjectLevelCard
-              grade="grade5"
-              subject="performance"
-              level="difficult"
-              availableTests={catalog.difficult}
-              questions={1}
-              minutes={90}
-              description={[
-                "More reasoning-based responses",
-                "Stronger use of evidence",
-                "More careful organization and writing",
-              ]}
-            />
-
-            <SubjectLevelCard
-              grade="grade5"
-              subject="performance"
-              level="mixed"
-              availableTests={catalog.mixed}
-              questions={1}
-              minutes={90}
-              description={[
-                "Blend of easy, moderate, and difficult skills",
-                "Best exam-style simulation",
-                "Strong preparation for formal assessment",
-              ]}
-            />
+            <Card className="shadow-sm">
+              <CardHeader>
+                <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-amber-100">
+                  <Calculator className="h-7 w-7 text-amber-600" />
+                </div>
+                <CardTitle className="text-slate-800">
+                  Mathematics Performance Tasks
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-sm text-slate-600">
+                  Solve real-world math problems and explain your thinking step by step.
+                </p>
+                <Link href="/mock-tests/performance/mathematics">
+                  <Button className="w-full bg-slate-800 hover:bg-slate-900">
+                    Open Mathematics Tasks
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </main>
