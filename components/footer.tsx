@@ -1,6 +1,8 @@
 import Image from "next/image"
 import Link from "next/link"
 
+import { VisitorCounter } from "@/components/visitor-counter"
+
 const GRADE_4_URL = "https://grade-4-pep.vercel.app/"
 const SUPPORT_EMAIL = "shazincorps@gmail.com"
 
@@ -121,8 +123,9 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-white/10 pt-5 text-center text-xs text-slate-400">
-          © {new Date().getFullYear()} Grade 5 PEP. All rights reserved.
+        <div className="mt-8 border-t border-white/10 pt-5 text-center text-xs text-slate-400 space-y-2">
+          <p>© {new Date().getFullYear()} Grade 5 PEP. All rights reserved.</p>
+          <VisitorCounter />
         </div>
       </div>
     </footer>
