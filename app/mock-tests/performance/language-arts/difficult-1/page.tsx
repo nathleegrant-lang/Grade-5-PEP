@@ -193,7 +193,7 @@ export default function PerformanceDifficult1Page() {
           </Link>
           <Card className="mx-auto max-w-3xl border-amber-200 shadow-lg">
             <CardHeader className="bg-amber-50 text-center">
-              <CardTitle className="text-2xl text-amber-800">Grade 5 Language Arts Performance Task Difficult 1</CardTitle>
+              <CardTitle className="text-2xl text-amber-800">Grade 5 Language Arts Performance Task - Difficult 1</CardTitle>
               <p className="text-slate-600">Topic: The Role of Local Government in Community Development</p>
             </CardHeader>
             <CardContent className="space-y-6 p-6">
@@ -254,7 +254,7 @@ export default function PerformanceDifficult1Page() {
             <CardHeader className="bg-amber-50 text-center">
               <CheckCircle className="mx-auto mb-4 h-14 w-14 text-amber-600" />
               <CardTitle className="text-2xl text-amber-800">Performance Task Completed</CardTitle>
-              <p className="text-slate-600">Grade 5 Language Arts Performance Task Difficult 1</p>
+              <p className="text-slate-600">Grade 5 Language Arts Performance Task - Difficult 1</p>
             </CardHeader>
             <CardContent className="space-y-6 p-6">
               <div className="rounded-lg bg-gray-50 p-6 text-center">

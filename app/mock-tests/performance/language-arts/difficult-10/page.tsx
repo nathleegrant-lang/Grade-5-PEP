@@ -203,7 +203,7 @@ export default function PerformanceDifficult10Page() {
           </Link>
           <Card className="mx-auto max-w-3xl border-amber-200 shadow-lg">
             <CardHeader className="bg-amber-50 text-center">
-              <CardTitle className="text-2xl text-amber-800">Grade 5 Language Arts Performance Task Difficult 10</CardTitle>
+              <CardTitle className="text-2xl text-amber-800">Grade 5 Language Arts Performance Task - Difficult 10</CardTitle>
               <p className="text-slate-600">Topic: Media Literacy and Information in the Digital Age</p>
               <p className="mt-2 rounded-lg bg-amber-50 border border-amber-200 px-3 py-2 text-xs text-amber-800 font-medium">ℹ️ Supplementary / Emerging NSC Content — Media literacy is an increasingly important 21st-century skill. This task extends the NSC Technology strand.</p>
             </CardHeader>
@@ -265,7 +265,7 @@ export default function PerformanceDifficult10Page() {
             <CardHeader className="bg-amber-50 text-center">
               <CheckCircle className="mx-auto mb-4 h-14 w-14 text-amber-600" />
               <CardTitle className="text-2xl text-amber-800">Performance Task Completed</CardTitle>
-              <p className="text-slate-600">Grade 5 Language Arts Performance Task Difficult 10</p>
+              <p className="text-slate-600">Grade 5 Language Arts Performance Task - Difficult 10</p>
             </CardHeader>
             <CardContent className="space-y-6 p-6">
               <div className="rounded-lg bg-gray-50 p-6 text-center">
