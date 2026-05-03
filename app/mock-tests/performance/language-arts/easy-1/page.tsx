@@ -365,8 +365,9 @@ export default function PerformanceEasy1Page() {
     )
   }
 
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
+  if (started && !submitted) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
       <Header />
       <main className="container mx-auto px-4 py-8">
         <div className="mx-auto max-w-4xl space-y-6">
@@ -426,5 +427,6 @@ export default function PerformanceEasy1Page() {
       </main>
       <Footer />
     </div>
-  )
+    )
+  }
 }
