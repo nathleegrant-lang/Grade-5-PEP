@@ -52,6 +52,7 @@ type StudentTestResult = {
   total_questions: number
   percentage: number
   completed_at: string
+  category?: string | null
 }
 
 type CertificateRecord = {
@@ -164,7 +165,7 @@ export default function DashboardPage() {
 
       const { data } = await supabase
         .from("student_test_results")
-        .select("id, subject, test_name, difficulty, score, total_questions, percentage, completed_at")
+        .select("id, subject, test_name, difficulty, score, total_questions, percentage, completed_at, category")
         .eq("parent_id", user.id)
         .order("completed_at", { ascending: false })
 
@@ -266,6 +267,16 @@ export default function DashboardPage() {
     socialStudiesResults.length > 0
       ? Math.max(...socialStudiesResults.map((r) => Number(r.percentage)))
       : 0
+
+
+  const certificateCount = testResults.filter((result) => {
+    const hasPassingScore = Number(result.percentage) >= 80
+    const isCertificateSubject = isLangSubject(result.subject) || isMathSubject(result.subject)
+    const isMockTestResult = Number(result.total_questions) >= 40
+    const isPerformanceTaskResult = result.category === "performance-task"
+
+    return hasPassingScore && isCertificateSubject && (isMockTestResult || isPerformanceTaskResult)
+  }).length
 
   const subjectProgress = [
     {
@@ -399,7 +410,7 @@ export default function DashboardPage() {
                   <Award className="h-5 w-5 text-amber-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-slate-800">{earnedCertificates.length}</p>
+                  <p className="text-2xl font-bold text-slate-800">{certificateCount}</p>
                   <p className="text-xs text-slate-500">Certificates</p>
                 </div>
               </div>

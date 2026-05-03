@@ -163,13 +163,15 @@ export default function PerformanceEasy1Page() {
           const totalScore = total + (sa1?.score ?? 0) + (sa2?.score ?? 0) + (ew?.totalScore ?? 0)
           const percentage = Math.round((totalScore / 21) * 100)
           await supabase.from("student_test_results").insert({
+            parent_id: user.id,
             student_id: user.id,
             subject: "Language Arts",
             test_name: "Performance Task - Easy 1",
+            difficulty: "Easy",
             score: percentage,
             total_questions: 1,
             correct_answers: percentage,
-            difficulty: "Easy",
+            percentage,
             category: "performance-task",
             completed_at: new Date().toISOString(),
           })
