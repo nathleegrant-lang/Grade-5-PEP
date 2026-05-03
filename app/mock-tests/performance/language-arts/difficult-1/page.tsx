@@ -40,7 +40,7 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
-import { createClient } from "@/utils/supabase/client"
+import { getSupabaseBrowserClient } from "@/lib/supabase/client"
 import {
   ArrowLeft,
   Clock,
