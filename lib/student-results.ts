@@ -1,4 +1,5 @@
 import type { SupabaseClient } from "@supabase/supabase-js"
+import { normalizeName } from "@/lib/result-matching"
 
 export type CompletedResult = {
   id: string
@@ -26,20 +27,37 @@ export async function fetchCompletedStudentResults(
   options: { userId: string; studentId?: string | null; studentName?: string | null },
 ): Promise<CompletedResult[]> {
   const filters = [`parent_id.eq.${options.userId}`]
-
-  if (options.studentId) {
-    filters.push(`student_id.eq.${options.studentId}`)
-  } else if (options.studentName) {
-    filters.push(`student_name.eq.${options.studentName}`)
-  }
+  if (options.studentId) filters.push(`student_id.eq.${options.studentId}`)
+  if (options.studentName) filters.push(`student_name.eq.${options.studentName}`, `name.eq.${options.studentName}`, `full_name.eq.${options.studentName}`)
 
   const { data } = await supabase
     .from("student_test_results")
-    .select("id, subject, test_name, difficulty, score, total_questions, percentage, completed_at, category")
+    .select("*")
     .or(filters.join(","))
     .order("completed_at", { ascending: false })
 
-  return ((data || []) as any[]).map((r) => {
+  const rows = (data || []) as any[]
+  const selectedName = options.studentName ? normalizeName(options.studentName) : null
+
+  const filteredRows = rows.filter((r) => {
+    if (options.studentId && r.student_id === options.studentId) return true
+    if (r.parent_id === options.userId) {
+      if (!selectedName) return true
+      const rowName = normalizeName(String(r.student_name || r.full_name || r.name || ""))
+      return !rowName || rowName === selectedName
+    }
+    if (selectedName) {
+      const rowName = normalizeName(String(r.student_name || r.full_name || r.name || ""))
+      return rowName === selectedName
+    }
+    return false
+  })
+
+  console.log("[Dashboard] student_test_results sample row:", rows[0] ?? null)
+  console.log("[Dashboard] matched student name/id:", options.studentName ?? null, options.studentId ?? null)
+  console.log("[Dashboard] matched results count:", filteredRows.length)
+
+  return filteredRows.map((r) => {
     const pct = Number(r.percentage)
     const fallback = Number(r.score)
 
