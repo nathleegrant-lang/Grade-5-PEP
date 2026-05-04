@@ -156,6 +156,49 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       const pendingChild = authUser.email ? readPendingChild(authUser.email) : null
 
+
+      if (resolvedStudents.length === 0) {
+        const [{ data: resultNameRows }, { data: certificateNameRows }] = await Promise.all([
+          supabase
+            .from("student_test_results")
+            .select("student_name")
+            .eq("parent_id", authUser.id)
+            .not("student_name", "is", null),
+          supabase
+            .from("certificates")
+            .select("student_name")
+            .eq("parent_id", authUser.id)
+            .not("student_name", "is", null),
+        ])
+
+        const names = new Set<string>()
+        for (const row of [...(resultNameRows ?? []), ...(certificateNameRows ?? [])] as Array<{ student_name?: string | null }>) {
+          const trimmed = row.student_name?.trim()
+          if (trimmed) names.add(trimmed)
+        }
+
+        if (names.size > 0) {
+          const { data: insertedStudents, error: insertBackfillError } = await supabase
+            .from("students")
+            .insert(
+              Array.from(names).map((name) => ({
+                parent_id: authUser.id,
+                full_name: name,
+                grade_level: 5,
+              })),
+            )
+            .select("id, full_name, grade_level, subscription_id, created_at")
+
+          if (insertBackfillError) {
+            console.error("Could not backfill students from existing records:", insertBackfillError)
+          }
+
+          if (insertedStudents?.length) {
+            resolvedStudents = insertedStudents.map((row) => mapStudent(row as SupabaseStudentRow))
+          }
+        }
+      }
+
       if (resolvedStudents.length === 0 && pendingChild) {
         const { data: insertedStudent, error: insertStudentError } = await supabase
           .from("students")
