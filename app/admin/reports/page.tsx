@@ -61,25 +61,40 @@ export default function AdminReportsPage() {
         accessMap.set(parentId, getString(payment, ["status"], "unknown"))
       }
       const studentsById = new Map<string, GenericRow>()
+      const studentsByNameAndParent = new Map<string, string>()
       for (const [index, student] of studentRows.entries()) {
         const sid = getId(student, ["id", "student_id"], "student", index)
         studentsById.set(sid, student)
         const parentId = getString(student, ["parent_id"]) || "MISSING_PARENT_ID"
+        const normalizedName = getString(student, ["full_name", "name", "student_name"]).toLowerCase()
+        if (normalizedName && parentId) studentsByNameAndParent.set(`${parentId}::${normalizedName}`, sid)
         const parent = parentMap.get(parentId)
         if (parent) parent.studentsCount += 1
       }
       const studentResultCount = new Map<string, number>()
       const studentCertCount = new Map<string, number>()
       const studentLatestResult = new Map<string, string>()
+      const syntheticStudents: GenericRow[] = []
+      const ensureSyntheticStudent = (parentId: string, studentName: string) => {
+        const normalized = studentName.toLowerCase()
+        const key = `${parentId}::${normalized}`
+        const existingId = studentsByNameAndParent.get(key)
+        if (existingId) return existingId
+
+        const syntheticId = `synthetic-${parentId}-${normalized.replace(/[^a-z0-9]+/g, "-")}`
+        const synthetic = { id: syntheticId, parent_id: parentId, full_name: studentName, grade_level: 5 }
+        syntheticStudents.push(synthetic)
+        studentsById.set(syntheticId, synthetic)
+        studentsByNameAndParent.set(key, syntheticId)
+        if (parentMap.has(parentId)) parentMap.get(parentId)!.studentsCount += 1
+        return syntheticId
+      }
       for (const result of resultRows) {
         const sid = getString(result, ["student_id"])
         const pid = getString(result, ["parent_id"])
         const studentName = getString(result, ["student_name", "name"])
         let matchedStudentId = sid
-        if (!matchedStudentId && studentName) {
-          const byName = studentRows.find((s) => getString(s, ["name", "student_name"]).toLowerCase() === studentName.toLowerCase())
-          matchedStudentId = byName ? getId(byName, ["id", "student_id"], "student", 0) : ""
-        }
+        if (!matchedStudentId && studentName && pid) matchedStudentId = ensureSyntheticStudent(pid, studentName)
         if (matchedStudentId) {
           studentResultCount.set(matchedStudentId, (studentResultCount.get(matchedStudentId) || 0) + 1)
           const createdAt = getString(result, ["created_at", "submitted_at", "taken_at"])
@@ -94,23 +109,21 @@ export default function AdminReportsPage() {
         const pid = getString(cert, ["parent_id"])
         const studentName = getString(cert, ["student_name", "name"])
         let matchedStudentId = sid
-        if (!matchedStudentId && studentName) {
-          const byName = studentRows.find((s) => getString(s, ["name", "student_name"]).toLowerCase() === studentName.toLowerCase())
-          matchedStudentId = byName ? getId(byName, ["id", "student_id"], "student", 0) : ""
-        }
+        if (!matchedStudentId && studentName && pid) matchedStudentId = ensureSyntheticStudent(pid, studentName)
         if (matchedStudentId) studentCertCount.set(matchedStudentId, (studentCertCount.get(matchedStudentId) || 0) + 1)
         const parentId = pid || (matchedStudentId ? getString(studentsById.get(matchedStudentId) || {}, ["parent_id"]) : "")
         if (parentId && parentMap.has(parentId)) parentMap.get(parentId)!.certificatesCount += 1
       }
       for (const parent of parentMap.values()) parent.accessStatus = accessMap.get(parent.id) || parent.accessStatus
-      const studentReports: StudentReport[] = studentRows.map((student, index) => {
+      const reportStudentRows = [...studentRows, ...syntheticStudents]
+      const studentReports: StudentReport[] = reportStudentRows.map((student, index) => {
         const id = getId(student, ["id", "student_id"], "student", index)
         const parentId = getString(student, ["parent_id"], "MISSING_PARENT_ID")
-        return { id, name: getString(student, ["name", "student_name"], "Unknown student"), grade: getString(student, ["grade"], "Unknown"), parentId, resultsCount: studentResultCount.get(id) || 0, certificatesCount: studentCertCount.get(id) || 0, latestResult: formatDateTime(studentLatestResult.get(id)), missingParentId: parentId === "MISSING_PARENT_ID" }
+        return { id, name: getString(student, ["full_name", "name", "student_name"], "Unknown student"), grade: getString(student, ["grade", "grade_level"], "Unknown"), parentId, resultsCount: studentResultCount.get(id) || 0, certificatesCount: studentCertCount.get(id) || 0, latestResult: formatDateTime(studentLatestResult.get(id)), missingParentId: parentId === "MISSING_PARENT_ID" }
       })
       setParents(Array.from(parentMap.values()))
       setStudents(studentReports)
-      setSummary({ totalParents: parentMap.size, totalStudents: studentRows.length, totalResults: resultRows.length, totalCertificates: certRows.length })
+      setSummary({ totalParents: parentMap.size, totalStudents: reportStudentRows.length, totalResults: resultRows.length, totalCertificates: certRows.length })
       setLoadingData(false)
     }
     if (!isLoading && isAuthenticated && isAdmin) void loadData()

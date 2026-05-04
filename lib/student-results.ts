@@ -25,10 +25,13 @@ export async function fetchCompletedStudentResults(
   supabase: SupabaseClient,
   options: { userId: string; studentId?: string | null; studentName?: string | null },
 ): Promise<CompletedResult[]> {
-  const filters = [`parent_id.eq.${options.userId}`, `student_id.eq.${options.userId}`]
+  const filters = [`parent_id.eq.${options.userId}`]
 
-  if (options.studentId) filters.push(`student_id.eq.${options.studentId}`)
-  if (options.studentName) filters.push(`student_name.eq.${options.studentName}`)
+  if (options.studentId) {
+    filters.push(`student_id.eq.${options.studentId}`)
+  } else if (options.studentName) {
+    filters.push(`student_name.eq.${options.studentName}`)
+  }
 
   const { data } = await supabase
     .from("student_test_results")
