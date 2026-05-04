@@ -11,13 +11,12 @@ import { Badge } from "@/components/ui/badge"
 import { useAuth } from "@/contexts/auth-context"
 import { getSupabaseBrowserClient } from "@/lib/supabase/client"
 import { ArrowLeft, FileText } from "lucide-react"
+import { getId, getString, resolveResultStudentMatch } from "@/lib/result-matching"
 
 type GenericRow = Record<string, unknown>
 type ParentReport = { id: string; name: string; email: string; accessStatus: string; studentsCount: number; resultsCount: number; certificatesCount: number }
 type StudentReport = { id: string; name: string; grade: string; parentId: string; resultsCount: number; certificatesCount: number; latestResult: string; missingParentId: boolean }
 
-const getString = (row: GenericRow, keys: string[], fallback = "") => { for (const key of keys) { const value = row[key]; if (typeof value === "string" && value.trim()) return value.trim() } return fallback }
-const getId = (row: GenericRow, keys: string[], fallbackPrefix: string, index: number) => getString(row, keys) || `${fallbackPrefix}-${index}`
 const formatDateTime = (value: unknown) => { if (typeof value !== "string") return "—"; const date = new Date(value); if (Number.isNaN(date.getTime())) return "—"; return date.toLocaleString() }
 
 export default function AdminReportsPage() {
@@ -89,18 +88,26 @@ export default function AdminReportsPage() {
         if (parentMap.has(parentId)) parentMap.get(parentId)!.studentsCount += 1
         return syntheticId
       }
+      console.log("[AdminReports] student_test_results columns:", resultRows[0] ? Object.keys(resultRows[0]) : [])
+      console.log("[AdminReports] student_test_results sample row:", resultRows[0] ?? null)
+
       for (const result of resultRows) {
-        const sid = getString(result, ["student_id"])
         const pid = getString(result, ["parent_id"])
-        const studentName = getString(result, ["student_name", "name"])
-        let matchedStudentId = sid
-        if (!matchedStudentId && studentName && pid) matchedStudentId = ensureSyntheticStudent(pid, studentName)
+        const fallbackName = getString(result, ["student_name", "full_name", "name", "student", "learner_name"])
+        const matched = resolveResultStudentMatch(result, studentsById, studentsByNameAndParent)
+        let matchedStudentId = matched?.matchedStudentId || ""
+
+        if (!matchedStudentId && pid && fallbackName) {
+          matchedStudentId = ensureSyntheticStudent(pid, fallbackName)
+        }
+
         if (matchedStudentId) {
           studentResultCount.set(matchedStudentId, (studentResultCount.get(matchedStudentId) || 0) + 1)
-          const createdAt = getString(result, ["created_at", "submitted_at", "taken_at"])
+          const createdAt = getString(result, ["created_at", "submitted_at", "taken_at", "completed_at"])
           const currentLatest = studentLatestResult.get(matchedStudentId)
           if (!currentLatest || new Date(createdAt) > new Date(currentLatest)) studentLatestResult.set(matchedStudentId, createdAt)
         }
+
         const parentId = pid || (matchedStudentId ? getString(studentsById.get(matchedStudentId) || {}, ["parent_id"]) : "")
         if (parentId && parentMap.has(parentId)) parentMap.get(parentId)!.resultsCount += 1
       }
@@ -119,7 +126,10 @@ export default function AdminReportsPage() {
       const studentReports: StudentReport[] = reportStudentRows.map((student, index) => {
         const id = getId(student, ["id", "student_id"], "student", index)
         const parentId = getString(student, ["parent_id"], "MISSING_PARENT_ID")
-        return { id, name: getString(student, ["full_name", "name", "student_name"], "Unknown student"), grade: getString(student, ["grade", "grade_level"], "Unknown"), parentId, resultsCount: studentResultCount.get(id) || 0, certificatesCount: studentCertCount.get(id) || 0, latestResult: formatDateTime(studentLatestResult.get(id)), missingParentId: parentId === "MISSING_PARENT_ID" }
+        const name = getString(student, ["full_name", "name", "student_name"], "Unknown student")
+        const resultsCount = studentResultCount.get(id) || 0
+        console.log("[AdminReports] matched student name/id/results:", name, id, resultsCount)
+        return { id, name, grade: getString(student, ["grade", "grade_level"], "Unknown"), parentId, resultsCount, certificatesCount: studentCertCount.get(id) || 0, latestResult: formatDateTime(studentLatestResult.get(id)), missingParentId: parentId === "MISSING_PARENT_ID" }
       })
       setParents(Array.from(parentMap.values()))
       setStudents(studentReports)
