@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { useAuth } from "@/contexts/auth-context"
-import { ShieldCheck, CreditCard, Tags, FileText } from "lucide-react"
+import { ShieldCheck, CreditCard, Tags, FileText, Users } from "lucide-react"
 
 export default function AdminHomePage() {
   const router = useRouter()
@@ -121,6 +121,27 @@ export default function AdminHomePage() {
                 <Link href="/admin/subscriptions">
                   <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white">
                     Open Report
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+
+            <Card className="border-sky-200 shadow-sm">
+              <CardHeader>
+                <div className="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center mb-3">
+                  <Users className="h-6 w-6 text-indigo-600" />
+                </div>
+                <CardTitle className="text-slate-800">
+                  Parent & Student Reports
+                </CardTitle>
+                <CardDescription>
+                  View parent, student, test result, and certificate summaries.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Link href="/admin/reports">
+                  <Button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white">
+                    Open Reports
                   </Button>
                 </Link>
               </CardContent>
