@@ -103,6 +103,12 @@ export default function DashboardPage() {
   const [studentMessage, setStudentMessage] = useState("")
   const [studentError, setStudentError] = useState("")
   const selectedStudent = students[0] ?? null
+  const selectedStudentName =
+    selectedStudent?.fullName ??
+    (selectedStudent as { full_name?: string } | null)?.full_name ??
+    (selectedStudent as { name?: string } | null)?.name ??
+    (selectedStudent as { student_name?: string } | null)?.student_name ??
+    null
 
   // ── Auth guard ──────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -153,7 +159,7 @@ export default function DashboardPage() {
     if (!user) return
     console.log("[Dashboard] auth user id:", user.id)
     console.log("[Dashboard] selected student id:", selectedStudent?.id ?? null)
-    console.log("[Dashboard] selected student name:", selectedStudent?.fullName ?? null)
+    console.log("[Dashboard] selected student name:", selectedStudentName)
   }, [user, selectedStudent])
 
   useEffect(() => {
@@ -163,7 +169,7 @@ export default function DashboardPage() {
       const results = (await fetchCompletedStudentResults(supabase, {
         userId: user.id,
         studentId: selectedStudent?.id ?? null,
-        studentName: selectedStudent?.fullName ?? null,
+        studentName: selectedStudentName,
       })) as StudentTestResult[]
 
       setTestResults(results)
@@ -189,7 +195,7 @@ export default function DashboardPage() {
     }
 
     void loadTestResults()
-  }, [supabase, user, selectedStudent])
+  }, [supabase, user, selectedStudent, selectedStudentName])
 
   // ── Fetch certificates ──────────────────────────────────────────────────────
   useEffect(() => {
@@ -197,7 +203,7 @@ export default function DashboardPage() {
       if (!user) return
       const filters = [`parent_id.eq.${user.id}`, `student_id.eq.${user.id}`]
       if (selectedStudent?.id) filters.push(`student_id.eq.${selectedStudent.id}`)
-      if (selectedStudent?.fullName) filters.push(`student_name.eq.${selectedStudent.fullName}`)
+      if (selectedStudentName) filters.push(`student_name.eq.${selectedStudentName}`)
 
       const { data } = await supabase
         .from("certificates")
@@ -210,7 +216,7 @@ export default function DashboardPage() {
     }
 
     void loadCertificates()
-  }, [supabase, user, selectedStudent])
+  }, [supabase, user, selectedStudent, selectedStudentName])
 
   // ── Loading / auth states ───────────────────────────────────────────────────
   if (isLoading) {

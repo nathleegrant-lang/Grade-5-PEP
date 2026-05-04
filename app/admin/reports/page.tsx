@@ -65,7 +65,7 @@ export default function AdminReportsPage() {
         const sid = getId(student, ["id", "student_id"], "student", index)
         studentsById.set(sid, student)
         const parentId = getString(student, ["parent_id"]) || "MISSING_PARENT_ID"
-        const normalizedName = getString(student, ["full_name", "name", "student_name"]).toLowerCase()
+        const normalizedName = getString(student, ["full_name", "student_name", "name"]).toLowerCase()
         if (normalizedName && parentId) studentsByNameAndParent.set(`${parentId}::${normalizedName}`, sid)
         const parent = parentMap.get(parentId)
         if (parent) parent.studentsCount += 1
@@ -126,7 +126,7 @@ export default function AdminReportsPage() {
       const studentReports: StudentReport[] = reportStudentRows.map((student, index) => {
         const id = getId(student, ["id", "student_id"], "student", index)
         const parentId = getString(student, ["parent_id"], "MISSING_PARENT_ID")
-        const name = getString(student, ["full_name", "name", "student_name"], "Unknown student")
+        const name = getString(student, ["full_name", "student_name", "name"], "Unknown student")
         const resultsCount = studentResultCount.get(id) || 0
         console.log("[AdminReports] matched student name/id/results:", name, id, resultsCount)
         return { id, name, grade: getString(student, ["grade", "grade_level"], "Unknown"), parentId, resultsCount, certificatesCount: studentCertCount.get(id) || 0, latestResult: formatDateTime(studentLatestResult.get(id)), missingParentId: parentId === "MISSING_PARENT_ID" }
