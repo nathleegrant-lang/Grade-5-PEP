@@ -102,6 +102,7 @@ export default function DashboardPage() {
   const [newStudentName, setNewStudentName] = useState("")
   const [studentMessage, setStudentMessage] = useState("")
   const [studentError, setStudentError] = useState("")
+  const selectedStudent = students[0] ?? null
 
   // ── Auth guard ──────────────────────────────────────────────────────────────
   useEffect(() => {
@@ -149,12 +150,24 @@ export default function DashboardPage() {
 
   // ── Fetch test results ──────────────────────────────────────────────────────
   useEffect(() => {
+    if (!user) return
+    console.log("[Dashboard] auth user id:", user.id)
+    console.log("[Dashboard] selected student id:", selectedStudent?.id ?? null)
+    console.log("[Dashboard] selected student name:", selectedStudent?.fullName ?? null)
+  }, [user, selectedStudent])
+
+  useEffect(() => {
     const loadTestResults = async () => {
       if (!user) return
 
-      const results = (await fetchCompletedStudentResults(supabase, user.id)) as StudentTestResult[]
+      const results = (await fetchCompletedStudentResults(supabase, {
+        userId: user.id,
+        studentId: selectedStudent?.id ?? null,
+        studentName: selectedStudent?.fullName ?? null,
+      })) as StudentTestResult[]
 
       setTestResults(results)
+      console.log("[Dashboard] student_test_results found:", results.length)
 
       if (results.length === 0) {
         setLatestTest(null)
@@ -176,30 +189,28 @@ export default function DashboardPage() {
     }
 
     void loadTestResults()
-  }, [supabase, user])
+  }, [supabase, user, selectedStudent])
 
   // ── Fetch certificates ──────────────────────────────────────────────────────
   useEffect(() => {
     const loadCertificates = async () => {
       if (!user) return
+      const filters = [`parent_id.eq.${user.id}`, `student_id.eq.${user.id}`]
+      if (selectedStudent?.id) filters.push(`student_id.eq.${selectedStudent.id}`)
+      if (selectedStudent?.fullName) filters.push(`student_name.eq.${selectedStudent.fullName}`)
 
-      const results = await fetchCompletedStudentResults(supabase, user.id)
-      const earned = results.filter((r) => Number(r.percentage) >= 80).map((r) => ({
-        id: r.id,
-        student_name: "Student",
-        subject: r.subject,
-        test_name: r.test_name,
-        score: r.score,
-        total_questions: r.total_questions,
-        percentage: r.percentage,
-        certificate_title: `${normalizeSubject(r.subject)} Excellence Certificate`,
-        issued_at: r.completed_at,
-      }))
-      setEarnedCertificates(earned as CertificateRecord[])
+      const { data } = await supabase
+        .from("certificates")
+        .select("id, student_name, subject, test_name, score, total_questions, percentage, certificate_title, issued_at")
+        .or(filters.join(","))
+        .order("issued_at", { ascending: false })
+
+      setEarnedCertificates((data ?? []) as CertificateRecord[])
+      console.log("[Dashboard] certificates found:", data?.length ?? 0)
     }
 
     void loadCertificates()
-  }, [supabase, user])
+  }, [supabase, user, selectedStudent])
 
   // ── Loading / auth states ───────────────────────────────────────────────────
   if (isLoading) {
