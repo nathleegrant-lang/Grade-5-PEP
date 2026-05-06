@@ -51,8 +51,10 @@ export async function fetchCompletedStudentResults(
     }
 
     if (r.parent_id === options.userId) {
+      // If row has only parent_id and no name, still count it for this parent's selected student.
+      if (!rowName) return true
       if (!selectedName) return true
-      return !rowName || rowName === selectedName
+      return rowName === selectedName
     }
 
     if (selectedName) return rowName === selectedName
