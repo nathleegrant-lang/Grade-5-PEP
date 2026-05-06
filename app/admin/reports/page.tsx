@@ -26,6 +26,7 @@ export default function AdminReportsPage() {
   const [loadingData, setLoadingData] = useState(true)
   const [parents, setParents] = useState<ParentReport[]>([])
   const [students, setStudents] = useState<StudentReport[]>([])
+  const [resultDebugRows, setResultDebugRows] = useState<GenericRow[]>([])
   const [summary, setSummary] = useState({ totalParents: 0, totalStudents: 0, totalResults: 0, totalCertificates: 0 })
 
   useEffect(() => {
@@ -61,12 +62,14 @@ export default function AdminReportsPage() {
       }
       const studentsById = new Map<string, GenericRow>()
       const studentsByNameAndParent = new Map<string, string>()
+      const studentIdsByParent = new Map<string, string[]>()
       for (const [index, student] of studentRows.entries()) {
         const sid = getId(student, ["id", "student_id"], "student", index)
         studentsById.set(sid, student)
         const parentId = getString(student, ["parent_id"]) || "MISSING_PARENT_ID"
         const normalizedName = getString(student, ["full_name", "student_name", "name"]).toLowerCase()
         if (normalizedName && parentId) studentsByNameAndParent.set(`${parentId}::${normalizedName}`, sid)
+        if (parentId) studentIdsByParent.set(parentId, [...(studentIdsByParent.get(parentId) || []), sid])
         const parent = parentMap.get(parentId)
         if (parent) parent.studentsCount += 1
       }
@@ -90,6 +93,7 @@ export default function AdminReportsPage() {
       }
       console.log("[AdminReports] student_test_results columns:", resultRows[0] ? Object.keys(resultRows[0]) : [])
       console.log("[AdminReports] student_test_results sample row:", resultRows[0] ?? null)
+      setResultDebugRows(resultRows.slice(0, 5))
 
       for (const result of resultRows) {
         const pid = getString(result, ["parent_id"])
@@ -99,6 +103,10 @@ export default function AdminReportsPage() {
 
         if (!matchedStudentId && pid && fallbackName) {
           matchedStudentId = ensureSyntheticStudent(pid, fallbackName)
+        }
+        if (!matchedStudentId && pid) {
+          const candidates = studentIdsByParent.get(pid) || []
+          if (candidates.length === 1) matchedStudentId = candidates[0]
         }
 
         if (matchedStudentId) {
@@ -142,5 +150,5 @@ export default function AdminReportsPage() {
   if (isLoading || loadingData) return <div className="min-h-screen flex items-center justify-center">Loading reports...</div>
   if (!isAuthenticated || !isAdmin) return null
 
-  return <div className="min-h-screen bg-sky-50"><Header /><main className="container mx-auto px-4 py-10 max-w-7xl space-y-6"><Link href="/admin"><Button variant="ghost"><ArrowLeft className="mr-2 h-4 w-4" />Back</Button></Link><div className="flex items-center gap-3"><FileText className="text-sky-600" /><h1 className="text-3xl font-bold text-slate-800">Parent & Student Reports</h1></div><div className="grid md:grid-cols-4 gap-4"><Card><CardContent className="p-4 text-center">Total Parents<br /><b>{summary.totalParents}</b></CardContent></Card><Card><CardContent className="p-4 text-center">Total Students<br /><b>{summary.totalStudents}</b></CardContent></Card><Card><CardContent className="p-4 text-center">Total Test Results<br /><b>{summary.totalResults}</b></CardContent></Card><Card><CardContent className="p-4 text-center">Total Certificates<br /><b>{summary.totalCertificates}</b></CardContent></Card></div><Card><CardHeader><CardTitle>Parents</CardTitle></CardHeader><CardContent className="overflow-x-auto"><table className="w-full text-sm"><thead><tr className="text-left border-b"><th>Parent Name</th><th>Parent Email</th><th>Plan/Access Status</th><th># Students</th><th># Test Results</th><th># Certificates</th></tr></thead><tbody>{parents.map((parent) => <tr key={parent.id} className="border-b"><td>{parent.name}</td><td>{parent.email}</td><td><Badge>{parent.accessStatus}</Badge></td><td>{parent.studentsCount}</td><td>{parent.resultsCount}</td><td>{parent.certificatesCount}</td></tr>)}</tbody></table></CardContent></Card><Card><CardHeader><CardTitle>Students</CardTitle></CardHeader><CardContent className="overflow-x-auto"><table className="w-full text-sm"><thead><tr className="text-left border-b"><th>Student Name</th><th>Grade</th><th>Parent ID</th><th># Results</th><th># Certificates</th><th>Latest Result</th></tr></thead><tbody>{students.map((student) => <tr key={student.id} className="border-b"><td>{student.name}</td><td>{student.grade}</td><td>{student.parentId}{student.missingParentId && <span className="ml-2 text-xs text-red-600 font-semibold">Missing parent_id</span>}</td><td>{student.resultsCount}</td><td>{student.certificatesCount}</td><td>{student.latestResult}</td></tr>)}</tbody></table></CardContent></Card></main><Footer /></div>
+  return <div className="min-h-screen bg-sky-50"><Header /><main className="container mx-auto px-4 py-10 max-w-7xl space-y-6"><Link href="/admin"><Button variant="ghost"><ArrowLeft className="mr-2 h-4 w-4" />Back</Button></Link><div className="flex items-center gap-3"><FileText className="text-sky-600" /><h1 className="text-3xl font-bold text-slate-800">Parent & Student Reports</h1></div><div className="grid md:grid-cols-4 gap-4"><Card><CardContent className="p-4 text-center">Total Parents<br /><b>{summary.totalParents}</b></CardContent></Card><Card><CardContent className="p-4 text-center">Total Students<br /><b>{summary.totalStudents}</b></CardContent></Card><Card><CardContent className="p-4 text-center">Total Test Results<br /><b>{summary.totalResults}</b></CardContent></Card><Card><CardContent className="p-4 text-center">Total Certificates<br /><b>{summary.totalCertificates}</b></CardContent></Card></div><Card><CardHeader><CardTitle>student_test_results debug (first 5)</CardTitle></CardHeader><CardContent className="overflow-x-auto"><table className="w-full text-xs"><thead><tr className="text-left border-b"><th>id</th><th>parent_id</th><th>student_id</th><th>student_name</th><th>full_name</th><th>name</th><th>learner_name</th><th>subject</th><th>test_name</th><th>score</th><th>percentage</th></tr></thead><tbody>{resultDebugRows.map((row, i) => <tr key={`${getString(row, ["id"], String(i))}-${i}`} className="border-b"><td>{getString(row, ["id"], "—")}</td><td>{getString(row, ["parent_id"], "—")}</td><td>{getString(row, ["student_id"], "—")}</td><td>{getString(row, ["student_name"], "—")}</td><td>{getString(row, ["full_name"], "—")}</td><td>{getString(row, ["name"], "—")}</td><td>{getString(row, ["learner_name"], "—")}</td><td>{getString(row, ["subject"], "—")}</td><td>{getString(row, ["test_name"], "—")}</td><td>{getString(row, ["score"], "—")}</td><td>{getString(row, ["percentage"], "—")}</td></tr>)}</tbody></table></CardContent></Card><Card><CardHeader><CardTitle>Parents</CardTitle></CardHeader><CardContent className="overflow-x-auto"><table className="w-full text-sm"><thead><tr className="text-left border-b"><th>Parent Name</th><th>Parent Email</th><th>Plan/Access Status</th><th># Students</th><th># Test Results</th><th># Certificates</th></tr></thead><tbody>{parents.map((parent) => <tr key={parent.id} className="border-b"><td>{parent.name}</td><td>{parent.email}</td><td><Badge>{parent.accessStatus}</Badge></td><td>{parent.studentsCount}</td><td>{parent.resultsCount}</td><td>{parent.certificatesCount}</td></tr>)}</tbody></table></CardContent></Card><Card><CardHeader><CardTitle>Students</CardTitle></CardHeader><CardContent className="overflow-x-auto"><table className="w-full text-sm"><thead><tr className="text-left border-b"><th>Student Name</th><th>Grade</th><th>Parent ID</th><th># Results</th><th># Certificates</th><th>Latest Result</th></tr></thead><tbody>{students.map((student) => <tr key={student.id} className="border-b"><td>{student.name}</td><td>{student.grade}</td><td>{student.parentId}{student.missingParentId && <span className="ml-2 text-xs text-red-600 font-semibold">Missing parent_id</span>}</td><td>{student.resultsCount}</td><td>{student.certificatesCount}</td><td>{student.latestResult}</td></tr>)}</tbody></table></CardContent></Card></main><Footer /></div>
 }

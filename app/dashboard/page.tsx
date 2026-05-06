@@ -160,6 +160,14 @@ export default function DashboardPage() {
     console.log("[Dashboard] auth user id:", user.id)
     console.log("[Dashboard] selected student id:", selectedStudent?.id ?? null)
     console.log("[Dashboard] selected student name:", selectedStudentName)
+    console.log("[Dashboard] matching keys:", {
+      student_id: selectedStudent?.id ?? null,
+      parent_id: user.id,
+      student_name: selectedStudentName,
+      full_name: selectedStudentName,
+      name: selectedStudentName,
+      learner_name: selectedStudentName,
+    })
   }, [user, selectedStudent])
 
   useEffect(() => {
