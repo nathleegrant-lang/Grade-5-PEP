@@ -38,7 +38,7 @@ export default function AdminReportsPage() {
     async function loadData() {
       setLoadingData(true)
       const [profilesRes, studentsRes, resultsRes, certsRes, paymentsRes] = await Promise.all([
-        supabase.from("profiles").select("*"),
+        supabase.from("profiles").select("*").eq("role", "parent"),
         supabase.from("students").select("*"),
         supabase.from("student_test_results").select("*"),
         supabase.from("certificates").select("*"),
@@ -51,7 +51,7 @@ export default function AdminReportsPage() {
       const paymentRows = (paymentsRes.data || []) as GenericRow[]
       const parentMap = new Map<string, ParentReport>()
       for (const [i, profile] of profileRows.entries()) {
-        const id = getId(profile, ["id", "user_id", "parent_id"], "profile", i)
+        const id = getId(profile, ["id"], "profile", i)
         parentMap.set(id, { id, name: getString(profile, ["full_name", "name", "parent_name"], "Unknown parent"), email: getString(profile, ["email"], "No email"), accessStatus: "No payment", studentsCount: 0, resultsCount: 0, certificatesCount: 0 })
       }
       const accessMap = new Map<string, string>()
