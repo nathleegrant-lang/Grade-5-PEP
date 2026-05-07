@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server"
-import { createClient as createSupabaseServerClient } from "@/lib/supabase/server"
+import { NextRequest, NextResponse } from "next/server"
+import { createClient } from "@supabase/supabase-js"
 import { getSupabaseAdminClient } from "@/lib/supabase/admin"
 import { getId, getString, resolveResultStudentMatch } from "@/lib/result-matching"
 
@@ -38,14 +38,38 @@ const formatDateTime = (value: unknown) => {
   return date.toISOString()
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    const serverClient = await createSupabaseServerClient()
+    const authHeader = request.headers.get("authorization")
+    const token = authHeader?.replace("Bearer ", "")
+
+    if (!token) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    }
+
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL
+    const anonKey =
+      process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+    if (!url || !anonKey) {
+      return NextResponse.json(
+        { error: "Supabase public environment variables are missing" },
+        { status: 500 },
+      )
+    }
+
+    const authClient = createClient(url, anonKey, {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+      },
+    })
 
     const {
       data: { user },
       error: userError,
-    } = await serverClient.auth.getUser()
+    } = await authClient.auth.getUser(token)
 
     if (userError || !user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
@@ -89,8 +113,7 @@ export async function GET() {
     const parentMap = new Map<string, ParentReport>()
 
     for (const [i, profileRow] of profileRows.entries()) {
-      const role = getString(profileRow, ["role"])
-      if (role !== "parent") continue
+      if (getString(profileRow, ["role"]) !== "parent") continue
 
       const id = getId(profileRow, ["id"], "profile", i)
 
@@ -109,9 +132,7 @@ export async function GET() {
 
     for (const payment of paymentRows) {
       const parentId = getString(payment, ["parent_id", "user_id"])
-      if (parentId) {
-        accessMap.set(parentId, getString(payment, ["status"], "unknown"))
-      }
+      if (parentId) accessMap.set(parentId, getString(payment, ["status"], "unknown"))
     }
 
     for (const subscription of subscriptionRows) {
@@ -168,13 +189,10 @@ export async function GET() {
         "taken_at",
       ])
 
-      // Count parent result totals
       if (resultParentId && parentMap.has(resultParentId)) {
         parentMap.get(resultParentId)!.resultsCount += 1
       }
 
-      // Fallback: historical results may only have parent_id.
-      // If the parent has exactly one student, assign the result to that student.
       if (!resultStudentId && resultParentId) {
         const studentIdsForParent = studentIdsByParent.get(resultParentId) || []
         if (studentIdsForParent.length === 1) {
@@ -189,7 +207,6 @@ export async function GET() {
         )
 
         const currentLatest = studentLatestResult.get(resultStudentId)
-
         if (!currentLatest || new Date(createdAt) > new Date(currentLatest)) {
           studentLatestResult.set(resultStudentId, createdAt)
         }
