@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { createClient as createSupabaseServerClient } from "@/lib/supabase/server"
+import { createClient } from "@/lib/supabase/server"
 import { getSupabaseAdminClient } from "@/lib/supabase/admin"
 import { getId, getString, resolveResultStudentMatch } from "@/lib/result-matching"
 
@@ -18,11 +18,11 @@ const formatDateTime = (value: unknown) => {
 
 export async function GET() {
   try {
-    const serverClient = await createSupabaseServerClient()
+    const supabase = await createClient()
     const {
       data: { user },
       error: userError,
-    } = await serverClient.auth.getUser()
+    } = await supabase.auth.getUser()
 
     console.log("[admin/reports] auth user id", user?.id ?? null)
 
