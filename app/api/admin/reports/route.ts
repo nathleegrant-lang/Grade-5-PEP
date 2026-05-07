@@ -7,6 +7,8 @@ type GenericRow = Record<string, unknown>
 type ParentReport = { id: string; name: string; email: string; accessStatus: string; studentsCount: number; resultsCount: number; certificatesCount: number }
 type StudentReport = { id: string; name: string; grade: string; parentId: string; resultsCount: number; certificatesCount: number; latestResult: string; missingParentId: boolean }
 
+type AdminProfile = { id: string; role: string | null }
+
 const formatDateTime = (value: unknown) => {
   if (typeof value !== "string") return "—"
   const date = new Date(value)
@@ -17,17 +19,31 @@ const formatDateTime = (value: unknown) => {
 export async function GET() {
   try {
     const serverClient = await createSupabaseServerClient()
-    const { data: { user }, error: userError } = await serverClient.auth.getUser()
-    if (userError || !user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    const {
+      data: { user },
+      error: userError,
+    } = await serverClient.auth.getUser()
 
-    const { data: profile, error: profileError } = await serverClient
+    console.log("[admin/reports] auth user id", user?.id ?? null)
+
+    if (userError || !user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    }
+
+    const db = getSupabaseAdminClient()
+    const { data: profile, error: profileError } = await db
       .from("profiles")
       .select("id, role")
       .eq("id", user.id)
-      .maybeSingle<{ id: string; role: string }>()
-    if (profileError || profile?.role !== "admin") return NextResponse.json({ error: "Forbidden" }, { status: 403 })
+      .maybeSingle<AdminProfile>()
 
-    const db = getSupabaseAdminClient()
+    console.log("[admin/reports] fetched profile", profile ?? null)
+    console.log("[admin/reports] detected role", profile?.role ?? null)
+
+    if (profileError || !profile || profile.role !== "admin") {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 })
+    }
+
     const [profilesRes, studentsRes, resultsRes, certsRes, paymentsRes, subscriptionsRes] = await Promise.all([
       db.from("profiles").select("*"),
       db.from("students").select("*"),
