@@ -12,7 +12,7 @@ import { Footer } from "@/components/footer"
 import { useAuth } from "@/contexts/auth-context"
 import { useProgress } from "@/contexts/progress-context"
 import { getSupabaseBrowserClient } from "@/lib/supabase/client"
-import { fetchCompletedStudentResults, normalizeSubject } from "@/lib/student-results"
+import { normalizeSubject } from "@/lib/student-results"
 import type { PaymentRecord } from "@/lib/types"
 import {
   BookOpen,
@@ -34,7 +34,6 @@ import {
 } from "lucide-react"
 import { getPlanLabel } from "@/lib/subscriptions"
 
-// ── Types ─────────────────────────────────────────────────────────────────────
 type StudentTestResult = {
   id: string
   subject: string
@@ -59,7 +58,6 @@ type CertificateRecord = {
   issued_at: string
 }
 
-// ── Helpers for subject-progress filters ──────────────────────────────────────
 function isMathSubject(subject: string): boolean {
   return normalizeSubject(subject) === "Mathematics"
 }
@@ -76,7 +74,6 @@ function isSocialStudiesSubject(subject: string): boolean {
   return normalizeSubject(subject) === "Social Studies"
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
 export default function DashboardPage() {
   const router = useRouter()
   const {
@@ -102,20 +99,11 @@ export default function DashboardPage() {
   const [newStudentName, setNewStudentName] = useState("")
   const [studentMessage, setStudentMessage] = useState("")
   const [studentError, setStudentError] = useState("")
-  const selectedStudent = students[0] ?? null
-  const selectedStudentName =
-    selectedStudent?.fullName ??
-    (selectedStudent as { full_name?: string } | null)?.full_name ??
-    (selectedStudent as { name?: string } | null)?.name ??
-    (selectedStudent as { student_name?: string } | null)?.student_name ??
-    null
 
-  // ── Auth guard ──────────────────────────────────────────────────────────────
   useEffect(() => {
     if (!isLoading && !isAuthenticated) router.push("/login")
   }, [isLoading, isAuthenticated, router])
 
-  // ── Fetch latest payment ────────────────────────────────────────────────────
   useEffect(() => {
     const loadLatestPayment = async () => {
       if (!user) return
@@ -154,79 +142,70 @@ export default function DashboardPage() {
     void loadLatestPayment()
   }, [supabase, user])
 
-  // ── Fetch test results ──────────────────────────────────────────────────────
   useEffect(() => {
-    if (!user) return
-    console.log("[Dashboard] auth user id:", user.id)
-    console.log("[Dashboard] selected student id:", selectedStudent?.id ?? null)
-    console.log("[Dashboard] selected student name:", selectedStudentName)
-    console.log("[Dashboard] matching keys:", {
-      student_id: selectedStudent?.id ?? null,
-      parent_id: user.id,
-      student_name: selectedStudentName,
-      full_name: selectedStudentName,
-      name: selectedStudentName,
-      learner_name: selectedStudentName,
-    })
-  }, [user, selectedStudent])
-
-  useEffect(() => {
-    const loadTestResults = async () => {
+    const loadDashboardResults = async () => {
       if (!user) return
 
-      const results = (await fetchCompletedStudentResults(supabase, {
-        userId: user.id,
-        studentId: selectedStudent?.id ?? null,
-        studentName: selectedStudentName,
-      })) as StudentTestResult[]
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession()
 
-      setTestResults(results)
-      console.log("[Dashboard] student_test_results found:", results.length)
+        const token = session?.access_token
 
-      if (results.length === 0) {
+        if (!token) {
+          throw new Error("No session token found")
+        }
+
+        const response = await fetch("/api/dashboard/results", {
+          method: "GET",
+          cache: "no-store",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+
+        if (!response.ok) {
+          throw new Error(`Failed with ${response.status}`)
+        }
+
+        const data = await response.json()
+        const results = (data.testResults || []) as StudentTestResult[]
+        const certificates = (data.earnedCertificates || []) as CertificateRecord[]
+
+        setTestResults(results)
+        setEarnedCertificates(certificates)
+
+        if (results.length === 0) {
+          setLatestTest(null)
+          setTestStats({ total: 0, average: 0, best: 0 })
+          return
+        }
+
+        setLatestTest(results[0])
+
+        const total = results.length
+        const average = results.reduce((sum, item) => sum + Number(item.percentage), 0) / total
+        const best = Math.max(...results.map((item) => Number(item.percentage)))
+
+        setTestStats({
+          total,
+          average: Math.round(average),
+          best: Math.round(best),
+        })
+      } catch (error) {
+        console.error("Failed loading dashboard results:", error)
+
+        setTestResults([])
+        setEarnedCertificates([])
         setLatestTest(null)
         setTestStats({ total: 0, average: 0, best: 0 })
-        return
       }
-
-      setLatestTest(results[0])
-
-      const total = results.length
-      const average = results.reduce((sum, item) => sum + Number(item.percentage), 0) / total
-      const best = Math.max(...results.map((item) => Number(item.percentage)))
-
-      setTestStats({
-        total,
-        average: Math.round(average),
-        best: Math.round(best),
-      })
     }
 
-    void loadTestResults()
-  }, [supabase, user, selectedStudent, selectedStudentName])
+    void loadDashboardResults()
+  }, [supabase, user])
 
-  // ── Fetch certificates ──────────────────────────────────────────────────────
-  useEffect(() => {
-    const loadCertificates = async () => {
-      if (!user) return
-      const filters = [`parent_id.eq.${user.id}`, `student_id.eq.${user.id}`]
-      if (selectedStudent?.id) filters.push(`student_id.eq.${selectedStudent.id}`)
-      if (selectedStudentName) filters.push(`student_name.eq.${selectedStudentName}`)
-
-      const { data } = await supabase
-        .from("certificates")
-        .select("id, student_name, subject, test_name, score, total_questions, percentage, certificate_title, issued_at")
-        .or(filters.join(","))
-        .order("issued_at", { ascending: false })
-
-      setEarnedCertificates((data ?? []) as CertificateRecord[])
-      console.log("[Dashboard] certificates found:", data?.length ?? 0)
-    }
-
-    void loadCertificates()
-  }, [supabase, user, selectedStudent, selectedStudentName])
-
-  // ── Loading / auth states ───────────────────────────────────────────────────
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50 flex items-center justify-center">
@@ -237,13 +216,11 @@ export default function DashboardPage() {
 
   if (!user) return null
 
-  // ── Static nav data ─────────────────────────────────────────────────────────
   const quickLinks = [
     { href: "/language-arts", icon: BookOpen, label: "Language Arts", color: "bg-sky-100 text-sky-600" },
     { href: "/mathematics", icon: Calculator, label: "Mathematics", color: "bg-amber-100 text-amber-600" },
     { href: "/science", icon: FlaskConical, label: "Science", color: "bg-green-100 text-green-600" },
     { href: "/social-studies", icon: Globe, label: "Social Studies", color: "bg-purple-100 text-purple-600" },
-    
   ]
 
   const premiumLinks = [
@@ -252,8 +229,6 @@ export default function DashboardPage() {
     { href: "/certificates", icon: Award, label: "Certificates", color: "bg-purple-100 text-purple-600" },
   ]
 
-  // ── Subject progress ────────────────────────────────────────────────────────
-  // Language Arts: fall back to context best score if no DB results yet
   const languageArtsProgress = getTopicProgress("language-arts")
 
   const langResultsFromDB = testResults.filter((r) => isLangSubject(r.subject))
@@ -280,15 +255,7 @@ export default function DashboardPage() {
       ? Math.max(...socialStudiesResults.map((r) => Number(r.percentage)))
       : 0
 
-
-  const certificateCount = testResults.filter((result) => {
-    const hasPassingScore = Number(result.percentage) >= 80
-    const isCertificateSubject = isLangSubject(result.subject) || isMathSubject(result.subject)
-    const isMockTestResult = Number(result.total_questions) >= 40
-    const isPerformanceTaskResult = result.category === "performance-task"
-
-    return hasPassingScore && isCertificateSubject && (isMockTestResult || isPerformanceTaskResult)
-  }).length
+  const certificateCount = earnedCertificates.length
 
   const subjectProgress = [
     {
@@ -317,7 +284,6 @@ export default function DashboardPage() {
     },
   ]
 
-  // ── Add student handler ─────────────────────────────────────────────────────
   const handleAddStudent = async () => {
     setStudentMessage("")
     setStudentError("")
@@ -334,14 +300,11 @@ export default function DashboardPage() {
     await refreshUser()
   }
 
-  // ── Render ──────────────────────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
       <Header />
 
       <main className="container mx-auto px-4 py-10">
-
-        {/* ── Welcome header ── */}
         <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <div className="w-16 h-16 rounded-full bg-sky-100 flex items-center justify-center">
@@ -371,7 +334,6 @@ export default function DashboardPage() {
           </Badge>
         </div>
 
-        {/* ── Stat cards ── */}
         <div className="grid gap-4 grid-cols-2 lg:grid-cols-4 mb-8">
           <Card className="border-sky-200">
             <CardContent className="p-4">
@@ -430,13 +392,8 @@ export default function DashboardPage() {
           </Card>
         </div>
 
-        {/* ── Main two-column grid ── */}
         <div className="grid lg:grid-cols-3 gap-6">
-
-          {/* ── Left col (span-2): test data cards ── */}
           <div className="lg:col-span-2 space-y-6">
-
-            {/* Latest Test Result */}
             <Card className="border-sky-200">
               <CardHeader>
                 <CardTitle className="text-slate-800 flex items-center gap-2">
@@ -450,7 +407,6 @@ export default function DashboardPage() {
                   <>
                     <div className="flex justify-between">
                       <span className="text-slate-500">Subject</span>
-                      {/* displaySubject normalises "Numeracy" → "Mathematics" etc. */}
                       <span className="text-slate-700">{normalizeSubject(latestTest.subject)}</span>
                     </div>
                     <div className="flex justify-between">
@@ -482,7 +438,6 @@ export default function DashboardPage() {
               </CardContent>
             </Card>
 
-            {/* Subject Progress */}
             <Card className="border-sky-200">
               <CardHeader>
                 <CardTitle className="text-slate-800 flex items-center gap-2">
@@ -496,7 +451,6 @@ export default function DashboardPage() {
                 {subjectProgress.map((item) => (
                   <div key={item.label} className="space-y-2">
                     <div className="flex justify-between text-sm">
-                      {/* Labels are already canonical ("Mathematics", "Language Arts") */}
                       <span className="font-medium text-slate-700">{item.label}</span>
                       <span className="text-slate-500">{item.value}%</span>
                     </div>
@@ -511,7 +465,6 @@ export default function DashboardPage() {
               </CardContent>
             </Card>
 
-            {/* Recent Activity */}
             <Card className="border-sky-200">
               <CardHeader>
                 <CardTitle className="text-slate-800 flex items-center gap-2">
@@ -531,12 +484,11 @@ export default function DashboardPage() {
                               result.percentage >= 80
                                 ? "text-green-500"
                                 : result.percentage >= 60
-                                ? "text-amber-500"
-                                : "text-red-500"
+                                  ? "text-amber-500"
+                                  : "text-red-500"
                             }`}
                           />
                           <span className="text-slate-700">
-                            {/* displaySubject applied to raw DB value */}
                             {normalizeSubject(result.subject)} — {result.test_name}
                           </span>
                         </div>
@@ -551,10 +503,7 @@ export default function DashboardPage() {
             </Card>
           </div>
 
-          {/* ── Right col (span-1): admin / profile cards ── */}
           <div className="space-y-6">
-
-            {/* Student Profiles */}
             <Card className="border-sky-200">
               <CardHeader>
                 <CardTitle className="text-slate-800 flex items-center gap-2">
@@ -608,7 +557,6 @@ export default function DashboardPage() {
               </CardContent>
             </Card>
 
-            {/* Certificates Earned */}
             <Card className="border-sky-200">
               <CardHeader>
                 <CardTitle className="text-slate-800 flex items-center gap-2">
@@ -630,7 +578,6 @@ export default function DashboardPage() {
                       </p>
                       <p className="text-xs text-slate-600">{cert.student_name}</p>
                       <p className="text-xs text-slate-500">
-                        {/* displaySubject normalises raw subject from DB */}
                         {normalizeSubject(cert.subject)} — {cert.test_name}
                       </p>
                       <div className="flex items-center justify-between">
@@ -660,7 +607,6 @@ export default function DashboardPage() {
               </CardContent>
             </Card>
 
-            {/* Access Status */}
             <Card className="border-sky-200">
               <CardHeader>
                 <CardTitle className="text-slate-800 flex items-center gap-2">
@@ -694,7 +640,6 @@ export default function DashboardPage() {
               </CardContent>
             </Card>
 
-            {/* Latest Payment */}
             <Card className="border-sky-200">
               <CardHeader>
                 <CardTitle className="text-slate-800 flex items-center gap-2">
@@ -743,7 +688,6 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* ── Continue Learning ── */}
         <h2 className="text-xl font-semibold text-slate-800 mt-10 mb-4">Continue Learning</h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {quickLinks.map((link) => (
@@ -765,7 +709,6 @@ export default function DashboardPage() {
           ))}
         </div>
 
-        {/* ── Paid Resources ── */}
         <h2 className="text-xl font-semibold text-slate-800 mt-10 mb-4 flex items-center gap-2">
           Paid Resources {!isPremium && <Lock className="h-4 w-4 text-slate-400" />}
         </h2>
