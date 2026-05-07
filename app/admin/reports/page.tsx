@@ -38,7 +38,7 @@ export default function AdminReportsPage() {
     async function loadData() {
       setLoadingData(true)
       const [profilesRes, studentsRes, resultsRes, certsRes, paymentsRes] = await Promise.all([
-        supabase.from("profiles").select("*").eq("role", "parent"),
+        supabase.from("profiles").select("*"),
         supabase.from("students").select("*"),
         supabase.from("student_test_results").select("*"),
         supabase.from("certificates").select("*"),
@@ -52,6 +52,8 @@ export default function AdminReportsPage() {
       const parentMap = new Map<string, ParentReport>()
       for (const [i, profile] of profileRows.entries()) {
         const id = getId(profile, ["id"], "profile", i)
+        const role = getString(profile, ["role"])
+        if (role && role !== "parent") continue
         parentMap.set(id, { id, name: getString(profile, ["full_name", "name", "parent_name"], "Unknown parent"), email: getString(profile, ["email"], "No email"), accessStatus: "No payment", studentsCount: 0, resultsCount: 0, certificatesCount: 0 })
       }
       const accessMap = new Map<string, string>()
@@ -62,6 +64,7 @@ export default function AdminReportsPage() {
       }
       const studentsById = new Map<string, GenericRow>()
       const studentsByNameAndParent = new Map<string, string>()
+      const studentIdsByName = new Map<string, string[]>()
       const studentIdsByParent = new Map<string, string[]>()
       for (const [index, student] of studentRows.entries()) {
         const sid = getId(student, ["id", "student_id"], "student", index)
@@ -69,6 +72,7 @@ export default function AdminReportsPage() {
         const parentId = getString(student, ["parent_id"]) || "MISSING_PARENT_ID"
         const normalizedName = getString(student, ["full_name", "student_name", "name"]).toLowerCase()
         if (normalizedName && parentId) studentsByNameAndParent.set(`${parentId}::${normalizedName}`, sid)
+        if (normalizedName) studentIdsByName.set(normalizedName, [...(studentIdsByName.get(normalizedName) || []), sid])
         if (parentId) studentIdsByParent.set(parentId, [...(studentIdsByParent.get(parentId) || []), sid])
         const parent = parentMap.get(parentId)
         if (parent) parent.studentsCount += 1
@@ -96,38 +100,52 @@ export default function AdminReportsPage() {
       setResultDebugRows(resultRows.slice(0, 5))
 
       for (const result of resultRows) {
-        const pid = getString(result, ["parent_id"])
-        const fallbackName = getString(result, ["student_name", "full_name", "name", "student", "learner_name"])
+        const resultParentId = getString(result, ["parent_id"])
         const matched = resolveResultStudentMatch(result, studentsById, studentsByNameAndParent)
-        let matchedStudentId = matched?.matchedStudentId || ""
+        const resultStudentId = matched?.matchedStudentId || getString(result, ["student_id"])
+        const createdAt = getString(result, ["created_at", "submitted_at", "taken_at", "completed_at"])
 
-        if (!matchedStudentId && pid && fallbackName) {
-          matchedStudentId = ensureSyntheticStudent(pid, fallbackName)
-        }
-        if (!matchedStudentId && pid) {
-          const candidates = studentIdsByParent.get(pid) || []
-          if (candidates.length === 1) matchedStudentId = candidates[0]
-        }
-
-        if (matchedStudentId) {
-          studentResultCount.set(matchedStudentId, (studentResultCount.get(matchedStudentId) || 0) + 1)
-          const createdAt = getString(result, ["created_at", "submitted_at", "taken_at", "completed_at"])
-          const currentLatest = studentLatestResult.get(matchedStudentId)
-          if (!currentLatest || new Date(createdAt) > new Date(currentLatest)) studentLatestResult.set(matchedStudentId, createdAt)
+        for (const [parentId, parent] of parentMap.entries()) {
+          const parentStudentIds = studentIdsByParent.get(parentId) || []
+          const countedForParent = resultParentId === parentId || (resultStudentId && parentStudentIds.includes(resultStudentId))
+          if (countedForParent) parent.resultsCount += 1
         }
 
-        const parentId = pid || (matchedStudentId ? getString(studentsById.get(matchedStudentId) || {}, ["parent_id"]) : "")
-        if (parentId && parentMap.has(parentId)) parentMap.get(parentId)!.resultsCount += 1
+        if (resultStudentId) {
+          studentResultCount.set(resultStudentId, (studentResultCount.get(resultStudentId) || 0) + 1)
+          const currentLatest = studentLatestResult.get(resultStudentId)
+          if (!currentLatest || new Date(createdAt) > new Date(currentLatest)) studentLatestResult.set(resultStudentId, createdAt)
+        } else if (resultParentId) {
+          const fallbackName = getString(result, ["student_name", "full_name", "name", "student", "learner_name"])
+          if (fallbackName) {
+            const syntheticId = ensureSyntheticStudent(resultParentId, fallbackName)
+            studentResultCount.set(syntheticId, (studentResultCount.get(syntheticId) || 0) + 1)
+            const currentLatest = studentLatestResult.get(syntheticId)
+            if (!currentLatest || new Date(createdAt) > new Date(currentLatest)) studentLatestResult.set(syntheticId, createdAt)
+          }
+        }
       }
       for (const cert of certRows) {
-        const sid = getString(cert, ["student_id"])
-        const pid = getString(cert, ["parent_id"])
-        const studentName = getString(cert, ["student_name", "name"])
-        let matchedStudentId = sid
-        if (!matchedStudentId && studentName && pid) matchedStudentId = ensureSyntheticStudent(pid, studentName)
+        const certStudentId = getString(cert, ["student_id"])
+        const certParentId = getString(cert, ["parent_id"])
+        const certStudentName = getString(cert, ["student_name", "name"]).toLowerCase()
+
+        for (const [parentId, parent] of parentMap.entries()) {
+          const parentStudentIds = studentIdsByParent.get(parentId) || []
+          const matchedByName = certStudentName
+            ? parentStudentIds.some((sid) => getString(studentsById.get(sid) || {}, ["full_name", "student_name", "name"]).toLowerCase() === certStudentName)
+            : false
+          const countedForParent = certParentId === parentId || (certStudentId && parentStudentIds.includes(certStudentId)) || matchedByName
+          if (countedForParent) parent.certificatesCount += 1
+        }
+
+        let matchedStudentId = certStudentId
+        if (!matchedStudentId && certStudentName) {
+          const candidates = studentIdsByName.get(certStudentName) || []
+          if (candidates.length === 1) matchedStudentId = candidates[0]
+        }
+        if (!matchedStudentId && certStudentName && certParentId) matchedStudentId = ensureSyntheticStudent(certParentId, certStudentName)
         if (matchedStudentId) studentCertCount.set(matchedStudentId, (studentCertCount.get(matchedStudentId) || 0) + 1)
-        const parentId = pid || (matchedStudentId ? getString(studentsById.get(matchedStudentId) || {}, ["parent_id"]) : "")
-        if (parentId && parentMap.has(parentId)) parentMap.get(parentId)!.certificatesCount += 1
       }
       for (const parent of parentMap.values()) parent.accessStatus = accessMap.get(parent.id) || parent.accessStatus
       const reportStudentRows = [...studentRows, ...syntheticStudents]
