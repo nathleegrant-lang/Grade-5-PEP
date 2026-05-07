@@ -187,50 +187,7 @@ export default function AdminReportsPage() {
           </Card>
         </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>student_test_results debug (first 5)</CardTitle>
-          </CardHeader>
-          <CardContent className="overflow-x-auto">
-            <table className="w-full text-xs">
-              <thead>
-                <tr className="border-b text-left">
-                  <th>id</th>
-                  <th>parent_id</th>
-                  <th>student_id</th>
-                  <th>student_name</th>
-                  <th>full_name</th>
-                  <th>name</th>
-                  <th>learner_name</th>
-                  <th>subject</th>
-                  <th>test_name</th>
-                  <th>score</th>
-                  <th>percentage</th>
-                </tr>
-              </thead>
-              <tbody>
-                {resultDebugRows.map((row, i) => (
-                  <tr
-                    key={`${getString(row, ["id"], String(i))}-${i}`}
-                    className="border-b"
-                  >
-                    <td>{getString(row, ["id"], "—")}</td>
-                    <td>{getString(row, ["parent_id"], "—")}</td>
-                    <td>{getString(row, ["student_id"], "—")}</td>
-                    <td>{getString(row, ["student_name"], "—")}</td>
-                    <td>{getString(row, ["full_name"], "—")}</td>
-                    <td>{getString(row, ["name"], "—")}</td>
-                    <td>{getString(row, ["learner_name"], "—")}</td>
-                    <td>{getString(row, ["subject"], "—")}</td>
-                    <td>{getString(row, ["test_name"], "—")}</td>
-                    <td>{getString(row, ["score"], "—")}</td>
-                    <td>{getString(row, ["percentage"], "—")}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </CardContent>
-        </Card>
+       
 
         <Card>
           <CardHeader>
