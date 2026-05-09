@@ -260,44 +260,33 @@ export default function PerformanceEasy1Page() {
 
   const savePerformanceResult = async (percentage: number) => {
     const supabase = getSupabaseBrowserClient()
-    const {
-      data: { user },
-      error: userError,
-    } = await supabase.auth.getUser()
 
-    if (userError || !user) {
+    const {
+      data: { session },
+      error: sessionError,
+    } = await supabase.auth.getSession()
+
+    if (sessionError || !session?.access_token) {
       throw new Error("You must be logged in to save this result.")
     }
 
-    const { data: student, error: studentError } = await supabase
-      .from("students")
-      .select("id, full_name")
-      .eq("parent_id", user.id)
-      .limit(1)
-      .maybeSingle()
-
-    if (studentError) {
-      console.error("Student lookup error:", studentError)
-    }
-
-    const { error } = await supabase.from("student_test_results").insert({
-      parent_id: user.id,
-      student_id: student?.id ?? null,
-      student_name: student?.full_name ?? null,
-      grade: "grade5",
-      subject: "Language Arts",
-      test_name: "Performance Task - Easy 1",
-      difficulty: "Easy",
-      score: percentage,
-      total_questions: 1,
-      correct_answers: percentage,
-      percentage,
-      category: "performance-task",
-      completed_at: new Date().toISOString(),
+    const response = await fetch("/api/performance/save-result", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${session.access_token}`,
+      },
+      body: JSON.stringify({
+        subject: "Language Arts",
+        test_name: "Performance Task - Easy 1",
+        difficulty: "Easy",
+        percentage,
+      }),
     })
 
-    if (error) {
-      throw error
+    if (!response.ok) {
+      const errorBody = await response.json().catch(() => null)
+      throw new Error(errorBody?.error || `Save failed with status ${response.status}`)
     }
   }
 
