@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
 
     const { data: student } = await db
       .from("students")
-      .select("id, full_name")
+      .select("id")
       .eq("parent_id", user.id)
       .limit(1)
       .maybeSingle()
@@ -56,11 +56,10 @@ export async function POST(request: NextRequest) {
       .insert({
         parent_id: user.id,
         student_id: student?.id ?? null,
-        student_name: student?.full_name ?? null,
         grade: "grade5",
-        subject: body.subject,
-        test_name: body.test_name,
-        difficulty: body.difficulty,
+        subject: body.subject || "Language Arts",
+        test_name: body.test_name || "Performance Task - Easy 1",
+        difficulty: body.difficulty || "Easy",
         score: percentage,
         total_questions: 1,
         correct_answers: percentage,
