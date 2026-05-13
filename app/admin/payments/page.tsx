@@ -117,16 +117,31 @@ export default function AdminPaymentsPage() {
         })
         .eq("id", payment.id)
 
-      await supabase.from("subscriptions").insert({
+      const { data: existingSubscription } = await supabase
+        .from("subscriptions")
+        .select("id")
+        .eq("parent_id", payment.parentId)
+        .eq("grade", "grade5")
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .maybeSingle()
+
+      const subscriptionPayload = {
         parent_id: payment.parentId,
-        grade: "grade5",
+        grade: "grade5" as const,
         plan_code: payment.planCode,
-        status: "active",
+        status: "active" as const,
         starts_at: now.toISOString(),
         expires_at: expiresAt?.toISOString() || null,
         max_students: getMaxStudents(payment.planCode),
         payment_id: payment.id,
-      })
+      }
+
+      if (existingSubscription?.id) {
+        await supabase.from("subscriptions").update(subscriptionPayload).eq("id", existingSubscription.id)
+      } else {
+        await supabase.from("subscriptions").insert(subscriptionPayload)
+      }
 
       setMessage("Payment approved and access activated.")
       await loadPayments()
