@@ -284,9 +284,10 @@ export default function PerformanceEasy1Page() {
       }),
     })
 
+    const saveData = await response.json().catch(() => null)
+
     if (!response.ok) {
-      const errorBody = await response.json().catch(() => null)
-      throw new Error(errorBody?.error || `Save failed with status ${response.status}`)
+      throw new Error(saveData?.error || `Save failed with status ${response.status}`)
     }
   }
 
@@ -317,7 +318,11 @@ export default function PerformanceEasy1Page() {
         setSaved(true)
       } catch (saveResultError) {
         console.error("Performance task save error:", saveResultError)
-        setSaveError("Your task was marked, but the result was not saved. Please try again or contact support.")
+        setSaveError(
+          saveResultError instanceof Error
+            ? saveResultError.message
+            : "Your task was marked, but the result was not saved.",
+        )
       }
     } catch (error) {
       console.error("Smart marking error:", error)
