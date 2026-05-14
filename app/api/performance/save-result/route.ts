@@ -64,7 +64,6 @@ export async function POST(request: NextRequest) {
         total_questions: 1,
         correct_answers: percentage,
         percentage,
-        category: "performance-task",
         completed_at: new Date().toISOString(),
       })
       .select()
