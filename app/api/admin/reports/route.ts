@@ -101,6 +101,7 @@ export async function GET(request: NextRequest) {
       db.from("certificates").select("*"),
       db.from("payments").select("*"),
       db.from("subscriptions").select("*"),
+      db.from("site_visits").select("*"),
     ])
 
     const profileRows = (profilesRes.data || []) as GenericRow[]
