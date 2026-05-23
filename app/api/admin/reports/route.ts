@@ -111,6 +111,9 @@ export async function GET(request: NextRequest) {
     const certRows = (certsRes.data || []) as GenericRow[]
     const paymentRows = (paymentsRes.data || []) as GenericRow[]
     const subscriptionRows = (subscriptionsRes.data || []) as GenericRow[]
+    const visitRows = ((visitsRes.data || []) as GenericRow[]).filter(
+  (visit) => !String(visit.page_path || "").startsWith("/admin"),
+)
 
     const parentMap = new Map<string, ParentReport>()
 
