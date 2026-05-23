@@ -11,9 +11,6 @@ import { Badge } from "@/components/ui/badge"
 import { useAuth } from "@/contexts/auth-context"
 import { getSupabaseBrowserClient } from "@/lib/supabase/client"
 import { ArrowLeft, FileText } from "lucide-react"
-import { getString } from "@/lib/result-matching"
-
-type GenericRow = Record<string, unknown>
 
 type ParentReport = {
   id: string
@@ -59,17 +56,18 @@ export default function AdminReportsPage() {
   const [loadingData, setLoadingData] = useState(true)
   const [parents, setParents] = useState<ParentReport[]>([])
   const [students, setStudents] = useState<StudentReport[]>([])
-  const [resultDebugRows, setResultDebugRows] = useState<GenericRow[]>([])
+  const [recentVisits, setRecentVisits] = useState<Visit[]>([])
+  const [visitorSummary, setVisitorSummary] = useState<VisitorSummary[]>([])
+
   const [summary, setSummary] = useState({
     totalParents: 0,
     totalStudents: 0,
     totalResults: 0,
     totalCertificates: 0,
+    totalVisits: 0,
+    uniqueVisitors: 0,
   })
-  const [recentVisits, setRecentVisits] = useState<Visit[]>([])
-const [visitorSummary, setVisitorSummary] = useState<VisitorSummary[]>([])
-const [recentVisits, setRecentVisits] = useState<Visit[]>([])
-const [visitorSummary, setVisitorSummary] = useState<VisitorSummary[]>([])
+
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
       router.push("/login?next=/admin/reports")
@@ -111,26 +109,32 @@ const [visitorSummary, setVisitorSummary] = useState<VisitorSummary[]>([])
 
         setParents(data.parents || [])
         setStudents(data.students || [])
-        setResultDebugRows(data.debug?.resultRows || [])
+        setRecentVisits(data.recentVisits || [])
+        setVisitorSummary(data.visitorSummary || [])
 
         setSummary({
           totalParents: data.totalParents || 0,
           totalStudents: data.totalStudents || 0,
           totalResults: data.totalTestResults || 0,
           totalCertificates: data.totalCertificates || 0,
+          totalVisits: data.totalVisits || 0,
+          uniqueVisitors: data.uniqueVisitors || 0,
         })
       } catch (error) {
         console.error("Failed loading admin report data:", error)
 
         setParents([])
         setStudents([])
-        setResultDebugRows([])
+        setRecentVisits([])
+        setVisitorSummary([])
 
         setSummary({
           totalParents: 0,
           totalStudents: 0,
           totalResults: 0,
           totalCertificates: 0,
+          totalVisits: 0,
+          uniqueVisitors: 0,
         })
       } finally {
         setLoadingData(false)
@@ -167,11 +171,11 @@ const [visitorSummary, setVisitorSummary] = useState<VisitorSummary[]>([])
         <div className="flex items-center gap-3">
           <FileText className="text-sky-600" />
           <h1 className="text-3xl font-bold text-slate-800">
-            Parent & Student Reports
+            Parent, Student & Visitor Reports
           </h1>
         </div>
 
-        <div className="grid gap-4 md:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-6">
           <Card>
             <CardContent className="p-4 text-center">
               Total Parents
@@ -203,9 +207,89 @@ const [visitorSummary, setVisitorSummary] = useState<VisitorSummary[]>([])
               <b>{summary.totalCertificates}</b>
             </CardContent>
           </Card>
+
+          <Card>
+            <CardContent className="p-4 text-center">
+              Total Visits
+              <br />
+              <b>{summary.totalVisits}</b>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardContent className="p-4 text-center">
+              Unique Visitors
+              <br />
+              <b>{summary.uniqueVisitors}</b>
+            </CardContent>
+          </Card>
         </div>
 
-       
+        <Card>
+          <CardHeader>
+            <CardTitle>Unique Visitor Summary</CardTitle>
+          </CardHeader>
+          <CardContent className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b text-left">
+                  <th>Last Seen</th>
+                  <th>Total Views</th>
+                  <th>Last Page Viewed</th>
+                  <th>Session</th>
+                </tr>
+              </thead>
+              <tbody>
+                {visitorSummary.map((visitor) => (
+                  <tr key={visitor.session_id} className="border-b">
+                    <td>{new Date(visitor.last_seen_at).toLocaleString()}</td>
+                    <td className="font-semibold">{visitor.total_views}</td>
+                    <td>{visitor.last_page}</td>
+                    <td className="text-xs text-slate-500">{visitor.session_id}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            {visitorSummary.length === 0 && (
+              <p className="py-4 text-sm text-slate-500">
+                No visitor summary available yet.
+              </p>
+            )}
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Recent Visits</CardTitle>
+          </CardHeader>
+          <CardContent className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b text-left">
+                  <th>Time</th>
+                  <th>Page</th>
+                  <th>Session</th>
+                </tr>
+              </thead>
+              <tbody>
+                {recentVisits.map((visit) => (
+                  <tr key={visit.id} className="border-b">
+                    <td>{new Date(visit.created_at).toLocaleString()}</td>
+                    <td>{visit.page_path}</td>
+                    <td className="text-xs text-slate-500">{visit.session_id}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            {recentVisits.length === 0 && (
+              <p className="py-4 text-sm text-slate-500">
+                No visits recorded yet.
+              </p>
+            )}
+          </CardContent>
+        </Card>
 
         <Card>
           <CardHeader>
