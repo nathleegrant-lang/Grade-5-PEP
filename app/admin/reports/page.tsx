@@ -36,6 +36,21 @@ type StudentReport = {
   missingParentId: boolean
 }
 
+type Visit = {
+  id: string
+  page_path: string
+  session_id: string
+  user_agent: string | null
+  created_at: string
+}
+
+type VisitorSummary = {
+  session_id: string
+  total_views: number
+  last_page: string
+  last_seen_at: string
+}
+
 export default function AdminReportsPage() {
   const router = useRouter()
   const { isAuthenticated, isLoading, isAdmin } = useAuth()
