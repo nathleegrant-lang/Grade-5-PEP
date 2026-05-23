@@ -66,7 +66,8 @@ export default function AdminReportsPage() {
     totalResults: 0,
     totalCertificates: 0,
   })
-
+const [recentVisits, setRecentVisits] = useState<Visit[]>([])
+const [visitorSummary, setVisitorSummary] = useState<VisitorSummary[]>([])
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
       router.push("/login?next=/admin/reports")
