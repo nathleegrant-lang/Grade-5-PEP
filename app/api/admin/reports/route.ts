@@ -87,22 +87,23 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 })
     }
 
-    const [
-      profilesRes,
-      studentsRes,
-      resultsRes,
-      certsRes,
-      paymentsRes,
-      subscriptionsRes,
-    ] = await Promise.all([
-      db.from("profiles").select("*"),
-      db.from("students").select("*"),
-      db.from("student_test_results").select("*"),
-      db.from("certificates").select("*"),
-      db.from("payments").select("*"),
-      db.from("subscriptions").select("*"),
-      db.from("site_visits").select("*"),
-    ])
+   const [
+  profilesRes,
+  studentsRes,
+  resultsRes,
+  certsRes,
+  paymentsRes,
+  subscriptionsRes,
+  visitsRes,
+] = await Promise.all([
+  db.from("profiles").select("*"),
+  db.from("students").select("*"),
+  db.from("student_test_results").select("*"),
+  db.from("certificates").select("*"),
+  db.from("payments").select("*"),
+  db.from("subscriptions").select("*"),
+  db.from("site_visits").select("*"),
+])
 
     const profileRows = (profilesRes.data || []) as GenericRow[]
     const studentRows = (studentsRes.data || []) as GenericRow[]
