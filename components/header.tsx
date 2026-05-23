@@ -78,8 +78,8 @@ export function Header() {
                 <Image
                   src="/images/Shazonique-oval2-logo.png"
                   alt="Grade 5 PEP Logo"
-                  width={80}
-                  height={80}
+                  width={140}
+                  height={70}
                   className="h-16 w-auto lg:h-16"
                   priority
                 />
