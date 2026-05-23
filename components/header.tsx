@@ -74,7 +74,7 @@ export function Header() {
 
             {/* Logo + title */}
             <div className="flex items-center gap-3">
-              <Link href="/" className="block bg-white rounded-xl p-1.5 shrink-0">
+              <Link href="/" className="block rounded-xl p-1.5 shrink-0">
                 <Image
                   src="/images/Shazonique-trans-logo.png"
                   alt="Grade 5 PEP Logo"
