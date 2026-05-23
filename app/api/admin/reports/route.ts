@@ -273,12 +273,54 @@ export async function GET(request: NextRequest) {
         missingParentId: parentId === "MISSING_PARENT_ID",
       }
     })
+    const totalVisits = visitRows.length
+
+const uniqueVisitors = new Set(
+  visitRows.map((visit) => String(visit.session_id || "")),
+).size
+
+const visitorSummary = Object.values(
+  visitRows.reduce<Record<string, {
+    session_id: string
+    total_views: number
+    last_page: string
+    last_seen_at: string
+  }>>((acc, visit) => {
+    const key = String(visit.session_id || "unknown")
+
+    if (!acc[key]) {
+      acc[key] = {
+        session_id: key,
+        total_views: 0,
+        last_page: String(visit.page_path || "/"),
+        last_seen_at: String(visit.created_at || new Date().toISOString()),
+      }
+    }
+
+    acc[key].total_views += 1
+
+    if (new Date(String(visit.created_at)) > new Date(acc[key].last_seen_at)) {
+      acc[key].last_page = String(visit.page_path || "/")
+      acc[key].last_seen_at = String(visit.created_at || new Date().toISOString())
+    }
+
+    return acc
+  }, {}),
+).sort(
+  (a, b) =>
+    new Date(b.last_seen_at).getTime() -
+    new Date(a.last_seen_at).getTime(),
+)
 
     return NextResponse.json({
       totalParents: parentMap.size,
       totalStudents: studentRows.length,
       totalTestResults: resultRows.length,
       totalCertificates: certRows.length,
+      totalVisits,
+uniqueVisitors,
+recentVisits: visitRows.slice(0, 20),
+visitorSummary,
       parents: Array.from(parentMap.values()),
       students: studentReports,
       debug: {
