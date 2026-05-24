@@ -39,11 +39,11 @@ const g5LaEasy1Questions: Question[] = [
 What is the MAIN idea of this passage?`,
     options: [
       "Students enjoy eating vegetables",
-      "Students at Meadowbrook Primary started and maintained a school garden",
       "The cook uses fresh vegetables in the canteen",
+      "A school garden was started and cared for by students",
       "Weeding is an important skill",
     ],
-    correctAnswer: 1,
+    correctAnswer: 2,
     explanation: `The passage is about students starting a school garden — this is the central topic of the whole text.`
   },
   {
@@ -56,12 +56,12 @@ What is the MAIN idea of this passage?`,
 
 Where was the garden started?`,
     options: [
-      "In the school canteen",
-      "Near the front gate",
       "Near the back of the school",
+      "Near the front gate",
+      "In the school canteen",
       "In a classroom",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `The passage states the students 'cleared a patch of land near the back of the school.'`
   },
   {
@@ -75,11 +75,11 @@ Where was the garden started?`,
 What did the students do FIRST when starting the garden?`,
     options: [
       "Planted vegetables",
-      "Watered the plants",
       "Cleared a patch of land",
+      "Watered the plants",
       "Pulled out weeds",
     ],
-    correctAnswer: 2,
+    correctAnswer: 1,
     explanation: `The passage says they first 'cleared a patch of land' before planting.`
   },
   {
@@ -110,12 +110,12 @@ What can you INFER about the students who watered the plants each morning?`,
 
 The word 'producing' in the passage most nearly means:`,
     options: [
-      "destroying",
-      "selling",
       "growing and giving",
+      "selling",
+      "destroying",
       "planting only",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `In this context, 'producing' means the garden was growing and giving food — tomatoes, callaloo, and peppers.`
   },
   {
@@ -140,10 +140,10 @@ The word 'producing' in the passage most nearly means:`,
     options: [
       "The garden was beautiful",
       "Gardening is the best hobby",
-      "Within three months the garden produced tomatoes, callaloo, and peppers",
       "The students were very talented",
+      "Within three months the garden produced tomatoes, callaloo, and peppers",
     ],
-    correctAnswer: 2,
+    correctAnswer: 3,
     explanation: `This is a fact stated directly in the passage. The others are opinions or judgements.`
   },
   {
@@ -152,12 +152,12 @@ The word 'producing' in the passage most nearly means:`,
     skill: "Text Structure",
     question: `How is the passage mainly organised?`,
     options: [
-      "By listing problems and solutions",
       "By giving reasons for and against gardening",
       "By describing events in the order they happened",
+      "By listing problems and solutions",
       "By comparing different types of gardens",
     ],
-    correctAnswer: 2,
+    correctAnswer: 1,
     explanation: `The passage follows a sequence — clear land, plant, water, then harvest — showing chronological order.`
   },
   {
@@ -195,11 +195,11 @@ The word 'producing' in the passage most nearly means:`,
     question: `What was the EFFECT of the students watering the plants daily?`,
     options: [
       "The weeds grew faster",
-      "The cook started gardening",
       "Within three months the garden produced fresh vegetables",
+      "The cook started gardening",
       "The school canteen was renovated",
     ],
-    correctAnswer: 2,
+    correctAnswer: 1,
     explanation: `The cause (daily care) led directly to the effect — within three months the garden was producing vegetables.`
   },
   {
@@ -208,12 +208,12 @@ The word 'producing' in the passage most nearly means:`,
     skill: "Audience",
     question: `This passage was MOST LIKELY written for:`,
     options: [
-      "Young students learning about environmental responsibility",
       "Adults learning to start a farm",
       "Canteen cooks learning new recipes",
+      "Students learning about teamwork and responsibility",
       "Scientists studying plant growth",
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation: `The topic, language, and focus on a school setting suggest it is aimed at young students.`
   },
   {
@@ -223,11 +223,11 @@ The word 'producing' in the passage most nearly means:`,
     question: `Which sentence BEST summarises the passage?`,
     options: [
       "The canteen cook likes fresh vegetables",
-      "Students planted a school garden that produced vegetables used in the school canteen",
       "Weeding and watering are difficult tasks",
+      "Students created a garden and grew food for the canteen",
       "Herbs grow faster than fruit trees",
     ],
-    correctAnswer: 1,
+    correctAnswer: 2,
     explanation: `This sentence captures the who, what, and result — the essential elements of a good summary.`
   },
   {
@@ -237,11 +237,11 @@ The word 'producing' in the passage most nearly means:`,
     question: `Which vegetables are mentioned in the passage?`,
     options: [
       "Carrots, yam, breadfruit",
-      "Tomatoes, callaloo, peppers",
       "Corn, potatoes, peas",
       "Lettuce, onions, thyme",
+      "Tomatoes, callaloo, peppers",
     ],
-    correctAnswer: 1,
+    correctAnswer: 3,
     explanation: `The passage directly names 'fresh tomatoes, callaloo, and peppers.'`
   },
   {
@@ -250,12 +250,12 @@ The word 'producing' in the passage most nearly means:`,
     skill: "Tone",
     question: `The tone of this passage is BEST described as:`,
     options: [
-      "Angry and critical",
-      "Sad and disappointed",
       "Positive and informative",
+      "Sad and disappointed",
+      "Angry and critical",
       "Humorous and playful",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `The passage describes a successful, cooperative project in a straightforward and positive way.`
   },
   {
@@ -292,12 +292,12 @@ The word 'producing' in the passage most nearly means:`,
     skill: "Context Clues",
     question: `The teacher was very PATIENT with the students who were learning slowly. What does 'patient' mean in this sentence?`,
     options: [
-      "In a hurry",
-      "Calm and willing to wait",
       "Strict and firm",
+      "In a hurry",
       "Confused",
+      "Calm and willing to wait",
     ],
-    correctAnswer: 1,
+    correctAnswer: 3,
     explanation: `'Patient' here means staying calm and not rushing students who needed more time.`
   },
   {
@@ -321,11 +321,11 @@ The word 'producing' in the passage most nearly means:`,
     question: `The word 'enormous' means:`,
     options: [
       "Very small",
-      "Extremely large",
       "Slightly warm",
+      "Extremely large",
       "Quite loud",
     ],
-    correctAnswer: 1,
+    correctAnswer: 2,
     explanation: `'Enormous' means extremely large or huge.`
   },
   {
@@ -335,11 +335,11 @@ The word 'producing' in the passage most nearly means:`,
     question: `Which sentence uses the word 'bank' to mean a place that holds money?`,
     options: [
       "She sat on the bank of the river",
-      "He went to the bank to deposit his savings",
-      "The aircraft made a steep bank to the left",
       "They bank on winning the match",
+      "The aircraft made a steep bank to the left",
+      "He went to the bank to deposit his savings",
     ],
-    correctAnswer: 1,
+    correctAnswer: 3,
     explanation: `In this sentence, 'bank' refers to a financial institution where money is kept.`
   },
   {
@@ -376,12 +376,12 @@ The word 'producing' in the passage most nearly means:`,
     skill: "Figurative Language",
     question: `'The stars danced in the night sky.' What type of figurative language is used?`,
     options: [
-      "Simile",
-      "Metaphor",
       "Personification",
+      "Metaphor",
+      "Simile",
       "Alliteration",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `Personification gives human qualities (dancing) to non-human things (stars).`
   },
   {
@@ -391,11 +391,11 @@ The word 'producing' in the passage most nearly means:`,
     question: `The new student felt ANXIOUS before her first day at school. 'Anxious' means:`,
     options: [
       "Very excited",
-      "Worried and nervous",
       "Bored and uninterested",
+      "Worried and nervous",
       "Happy and confident",
     ],
-    correctAnswer: 1,
+    correctAnswer: 2,
     explanation: `'Anxious' describes a feeling of worry or nervousness about something that is going to happen.`
   },
   {
@@ -474,12 +474,12 @@ The word 'producing' in the passage most nearly means:`,
     skill: "Tense",
     question: `Change to PAST TENSE: 'She walks to school every day.'`,
     options: [
-      "She will walk to school every day",
-      "She walked to school every day",
       "She walking to school every day",
       "She is walking to school every day",
+      "She walked to school every day",
+      "She will walk to school every day",
     ],
-    correctAnswer: 1,
+    correctAnswer: 2,
     explanation: `The past tense of 'walks' is 'walked.' Past tense refers to actions already completed.`
   },
   {
@@ -502,12 +502,12 @@ The word 'producing' in the passage most nearly means:`,
     skill: "Subject-Verb Agreement",
     question: `Choose the correct verb: 'The group of students ___ ready to begin.'`,
     options: [
-      "are",
-      "were",
       "is",
+      "were",
+      "are",
       "have",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `'Group' is a singular collective noun. Use the singular verb 'is.' (The group IS ready.)`
   },
   {
@@ -516,12 +516,12 @@ The word 'producing' in the passage most nearly means:`,
     skill: "Apostrophe",
     question: `Which sentence correctly uses an APOSTROPHE to show possession?`,
     options: [
-      "The girls' book is red",
       "The girls's book is red",
+      "The girls' book is red",
       "The girl book is red",
       "The girls book's is red",
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation: `For possession: add apostrophe + s for singular ('girl's'), or just apostrophe after s for plural ('girls'). 'The girls' book' correctly shows the book belongs to the girls.`
   },
   {
@@ -545,11 +545,11 @@ The word 'producing' in the passage most nearly means:`,
     question: `A student wants to convince her principal to start a school library. What type of writing should she use?`,
     options: [
       "Narrative writing",
-      "Descriptive writing",
       "Persuasive writing",
+      "Descriptive writing",
       "Expository writing",
     ],
-    correctAnswer: 2,
+    correctAnswer: 1,
     explanation: `Persuasive writing is used to convince someone to agree with your point of view or take action.`
   },
   {
@@ -572,12 +572,12 @@ The word 'producing' in the passage most nearly means:`,
     skill: "Topic Sentence",
     question: `Which sentence would make the BEST topic sentence for a paragraph about exercise?`,
     options: [
-      "I like running",
-      "There are many types of exercise",
-      "Regular exercise is important for keeping the body healthy",
       "Exercise includes running and swimming",
+      "There are many types of exercise",
+      "I like running",
+      "Regular exercise helps keep the body healthy",
     ],
-    correctAnswer: 2,
+    correctAnswer: 3,
     explanation: `A topic sentence states the main idea clearly and broadly. Option C does this best.`
   },
   {
@@ -601,11 +601,11 @@ The word 'producing' in the passage most nearly means:`,
     question: `A writer describes the smell, sound, and colour of a morning market in detail. This technique is called:`,
     options: [
       "Summarising",
-      "Persuading",
       "Descriptive writing",
+      "Persuading",
       "Comparing",
     ],
-    correctAnswer: 2,
+    correctAnswer: 1,
     explanation: `Using sensory details (smell, sound, colour) is a characteristic of descriptive writing.`
   }
 ]
