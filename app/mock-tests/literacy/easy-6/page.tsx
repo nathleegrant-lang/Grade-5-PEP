@@ -715,6 +715,10 @@ export default function G5LaEasy6MockTest() {
     setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
   }
 
+  const handleSubmit = () => {
+    setShowResults(true)
+  }
+
   const q = availableQuestions[currentQuestion]
   const answeredCount = answers.filter((a) => a !== null).length
 
@@ -911,10 +915,10 @@ export default function G5LaEasy6MockTest() {
             </CardContent>
           </Card>
           <div className="flex items-center justify-between mb-6">
-            <Button variant="outline" onClick={() => setCurrentQuestion((p) => p - 1)} disabled={currentQuestion === 0}><ChevronLeft className="h-4 w-4 mr-2" />Previous</Button>
+            <Button variant="outline" onClick={() => setCurrentQuestion((p) => Math.max(p - 1, 0))} disabled={currentQuestion === 0}><ChevronLeft className="h-4 w-4 mr-2" />Previous</Button>
             {currentQuestion === totalQuestions - 1
               ? <Button onClick={handleSubmit} className="bg-blue-600 hover:bg-blue-700"><Flag className="h-4 w-4 mr-2" />Submit Test</Button>
-              : <Button onClick={() => setCurrentQuestion((p) => p + 1)} className="bg-blue-600 hover:bg-blue-700">Next<ChevronRight className="h-4 w-4 ml-2" /></Button>}
+              : <Button onClick={() => setCurrentQuestion((p) => Math.min(p + 1, totalQuestions - 1))} className="bg-blue-600 hover:bg-blue-700">Next<ChevronRight className="h-4 w-4 ml-2" /></Button>}
           </div>
           <Card className="border-blue-100">
             <CardHeader className="py-3"><CardTitle className="text-sm text-blue-700">Question Navigator</CardTitle></CardHeader>
