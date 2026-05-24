@@ -672,6 +672,10 @@ export default function G5LaEasy5MockTest() {
     if (answers.length !== totalQuestions) setAnswers(new Array(totalQuestions).fill(null))
   }, [totalQuestions, answers.length])
 
+  useEffect(() => {
+    setCurrentQuestion((prev) => Math.min(prev, Math.max(totalQuestions - 1, 0)))
+  }, [totalQuestions])
+
   const formatTime = useCallback((s: number) => {
     const m = Math.floor(s / 60)
     return `${m.toString().padStart(2, "0")}:${(s % 60).toString().padStart(2, "0")}`
@@ -713,6 +717,27 @@ export default function G5LaEasy5MockTest() {
 
   const q = availableQuestions[currentQuestion]
   const answeredCount = answers.filter((a) => a !== null).length
+
+  if (!q) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
+        <Header />
+        <main className="container mx-auto px-4 py-10">
+          <Card className="mx-auto max-w-xl border-amber-200">
+            <CardHeader className="bg-amber-50"><CardTitle className="text-amber-800">Preview Complete</CardTitle></CardHeader>
+            <CardContent className="space-y-4 p-6">
+              <p className="text-slate-700">You completed the free preview for this test. Upgrade to Premium to unlock all 40 questions.</p>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/pricing"><Button className="bg-amber-500 hover:bg-amber-600"><Crown className="mr-2 h-4 w-4" />Upgrade to Premium</Button></Link>
+                <Link href="/mock-tests/language-arts"><Button variant="outline">Back to Language Arts Tests</Button></Link>
+              </div>
+            </CardContent>
+          </Card>
+        </main>
+        <Footer />
+      </div>
+    )
+  }
   const secLabel = (t: Question["type"]) =>
     t === "reading" ? "Reading Comprehension" : t === "vocabulary" ? "Vocabulary & Word Study"
     : t === "grammar" ? "Grammar & Language Use" : "Writing Skills"
