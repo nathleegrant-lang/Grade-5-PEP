@@ -32,582 +32,571 @@ const g5LaEasy1Questions: Question[] = [
     id: 1,
     type: "reading",
     skill: "Main Idea",
-    question: `Read the passage then answer the questions.
+    question: `Read Passage 1 then answer the question.
 
-"The students at Meadowbrook Primary decided to start a school garden. They cleared a patch of land near the back of the school and planted vegetables, herbs, and fruit trees. Every morning before class, a small group of students watered the plants and pulled out weeds. Within three months, the garden was producing fresh tomatoes, callaloo, and peppers, which the cook used in the school canteen."
+"On Thursday, Class 5 at Seaview Primary visited the fishing beach in Old Harbour Bay. Mr. Grant, a local fisherman, showed them how he checks his nets at sunrise. He explained that small fish are returned to the sea so they can grow. The students recorded notes and later made posters about protecting sea life."
 
-What is the MAIN idea of this passage?`,
+What is the MAIN idea of Passage 1?`,
     options: [
-      "Students enjoy eating vegetables",
-      "The cook uses fresh vegetables in the canteen",
-      "A school garden was started and cared for by students",
-      "Weeding is an important skill",
+      "Class 5 learned about responsible fishing at the beach",
+      "Old Harbour Bay has many large fishing boats",
+      "Students preferred drawing posters to taking notes",
+      "Mr. Grant only fishes at night",
     ],
-    correctAnswer: 2,
-    explanation: `The passage is about students starting a school garden — this is the central topic of the whole text.`
+    correctAnswer: 0,
+    explanation: `The passage mainly explains a learning trip about responsible fishing and sea-life protection.`
   },
   {
     id: 2,
     type: "reading",
     skill: "Detail",
-    question: `Read the passage then answer the questions.
-
-"The students at Meadowbrook Primary decided to start a school garden. They cleared a patch of land near the back of the school and planted vegetables, herbs, and fruit trees. Every morning before class, a small group of students watered the plants and pulled out weeds. Within three months, the garden was producing fresh tomatoes, callaloo, and peppers, which the cook used in the school canteen."
-
-Where was the garden started?`,
+    question: `Using Passage 1, what did Mr. Grant do at sunrise?`,
     options: [
-      "Near the back of the school",
-      "Near the front gate",
-      "In the school canteen",
-      "In a classroom",
+      "Sold fish at the market",
+      "Checked his nets",
+      "Painted his boat",
+      "Taught in a classroom",
     ],
-    correctAnswer: 0,
-    explanation: `The passage states the students 'cleared a patch of land near the back of the school.'`
+    correctAnswer: 1,
+    explanation: `The passage states that he showed them how he checks his nets at sunrise.`
   },
   {
     id: 3,
     type: "reading",
-    skill: "Sequence",
-    question: `Read the passage then answer the questions.
-
-"The students at Meadowbrook Primary decided to start a school garden. They cleared a patch of land near the back of the school and planted vegetables, herbs, and fruit trees. Every morning before class, a small group of students watered the plants and pulled out weeds. Within three months, the garden was producing fresh tomatoes, callaloo, and peppers, which the cook used in the school canteen."
-
-What did the students do FIRST when starting the garden?`,
+    skill: "Cause and Effect",
+    question: `In Passage 1, why are small fish returned to the sea?`,
     options: [
-      "Planted vegetables",
-      "Cleared a patch of land",
-      "Watered the plants",
-      "Pulled out weeds",
+      "To keep the nets clean",
+      "To reduce boat fuel use",
+      "So the fish can grow",
+      "So students can count them",
     ],
-    correctAnswer: 1,
-    explanation: `The passage says they first 'cleared a patch of land' before planting.`
+    correctAnswer: 2,
+    explanation: `Mr. Grant explained that small fish are returned so they can grow.`
   },
   {
     id: 4,
     type: "reading",
-    skill: "Inference",
-    question: `Read the passage then answer the questions.
-
-"The students at Meadowbrook Primary decided to start a school garden. They cleared a patch of land near the back of the school and planted vegetables, herbs, and fruit trees. Every morning before class, a small group of students watered the plants and pulled out weeds. Within three months, the garden was producing fresh tomatoes, callaloo, and peppers, which the cook used in the school canteen."
-
-What can you INFER about the students who watered the plants each morning?`,
+    skill: "Sequence",
+    question: `Which happened LAST in Passage 1?`,
     options: [
-      "They were forced to water the plants",
-      "They were dedicated and responsible",
-      "They only came on Fridays",
-      "They disliked gardening",
+      "Class 5 arrived at school",
+      "Mr. Grant checked his nets",
+      "Students visited Old Harbour Bay",
+      "Students made posters about protecting sea life",
     ],
-    correctAnswer: 1,
-    explanation: `Coming every morning before class to water and weed suggests the students were dedicated and responsible.`
+    correctAnswer: 3,
+    explanation: `After taking notes, students later created posters, which was the final event mentioned.`
   },
   {
     id: 5,
     type: "reading",
     skill: "Vocabulary in Context",
-    question: `Read the passage then answer the questions.
-
-"The students at Meadowbrook Primary decided to start a school garden. They cleared a patch of land near the back of the school and planted vegetables, herbs, and fruit trees. Every morning before class, a small group of students watered the plants and pulled out weeds. Within three months, the garden was producing fresh tomatoes, callaloo, and peppers, which the cook used in the school canteen."
-
-The word 'producing' in the passage most nearly means:`,
+    question: `In Passage 1, the word "recorded" most nearly means:`,
     options: [
-      "growing and giving",
-      "selling",
-      "destroying",
-      "planting only",
+      "wrote down",
+      "threw away",
+      "sang loudly",
+      "argued about",
     ],
     correctAnswer: 0,
-    explanation: `In this context, 'producing' means the garden was growing and giving food — tomatoes, callaloo, and peppers.`
+    explanation: `Here, "recorded notes" means students wrote down information.`
   },
   {
     id: 6,
     type: "reading",
-    skill: "Purpose",
-    question: `Why does the author mention that the cook used the vegetables in the school canteen?`,
+    skill: "Inference",
+    question: `What can you infer about Mr. Grant from Passage 1?`,
     options: [
-      "To show that the canteen was very large",
-      "To show that the garden was successful and useful",
-      "To explain how to cook callaloo",
-      "To describe the canteen menu",
+      "He dislikes children visiting the beach",
+      "He cares about protecting sea life",
+      "He wants students to stop fishing",
+      "He only works during storms",
     ],
     correctAnswer: 1,
-    explanation: `Mentioning the cook using the produce shows the garden was productive and benefiting the school community.`
+    explanation: `Returning small fish to the sea suggests he fishes responsibly and cares for marine life.`
   },
   {
     id: 7,
     type: "reading",
-    skill: "Fact vs Opinion",
-    question: `Which statement from the passage is a FACT?`,
+    skill: "Author's Purpose",
+    question: `Why did the author most likely include Passage 1?`,
     options: [
-      "The garden was beautiful",
-      "Gardening is the best hobby",
-      "The students were very talented",
-      "Within three months the garden produced tomatoes, callaloo, and peppers",
+      "To entertain with a beach mystery",
+      "To compare beaches in Jamaica",
+      "To inform readers about a class learning experience",
+      "To advertise fish for sale",
     ],
-    correctAnswer: 3,
-    explanation: `This is a fact stated directly in the passage. The others are opinions or judgements.`
+    correctAnswer: 2,
+    explanation: `The passage gives factual information about what students learned on the trip.`
   },
   {
     id: 8,
     type: "reading",
-    skill: "Text Structure",
-    question: `How is the passage mainly organised?`,
+    skill: "Fact and Opinion",
+    question: `Which statement is an OPINION about Passage 1?`,
     options: [
-      "By giving reasons for and against gardening",
-      "By describing events in the order they happened",
-      "By listing problems and solutions",
-      "By comparing different types of gardens",
+      "Class 5 visited Old Harbour Bay",
+      "Students made posters later",
+      "Mr. Grant checked nets at sunrise",
+      "The beach trip was the most exciting lesson of the term",
     ],
-    correctAnswer: 1,
-    explanation: `The passage follows a sequence — clear land, plant, water, then harvest — showing chronological order.`
+    correctAnswer: 3,
+    explanation: `"Most exciting" is a personal judgement, not a provable fact.`
   },
   {
     id: 9,
     type: "reading",
-    skill: "Character",
-    question: `Based on the passage, how would you describe the students involved in the garden?`,
+    skill: "Theme",
+    question: `Which theme best fits Passage 1?`,
     options: [
-      "Lazy and uninterested",
-      "Hardworking and committed",
-      "Selfish and unkind",
-      "Confused and unsure",
+      "Teamwork and caring for nature",
+      "Winning every competition",
+      "Avoiding all ocean activities",
+      "Keeping schoolwork secret",
     ],
-    correctAnswer: 1,
-    explanation: `The students cleared land, planted, watered daily, and pulled weeds — all evidence of hardworking, committed behaviour.`
+    correctAnswer: 0,
+    explanation: `Students learned together and focused on protecting sea life.`
   },
   {
     id: 10,
     type: "reading",
-    skill: "Context",
-    question: `The phrase 'pulling out weeds' in the passage means:`,
+    skill: "Text Evidence",
+    question: `Which detail from Passage 1 best supports the idea of conservation?`,
     options: [
-      "Planting new seeds",
-      "Removing unwanted plants",
-      "Watering the garden",
-      "Cutting the herbs",
+      "The visit happened on Thursday",
+      "Small fish were returned to the sea",
+      "The class travelled by bus",
+      "Students used coloured markers",
     ],
     correctAnswer: 1,
-    explanation: `Weeds are unwanted plants, and 'pulling them out' means removing them from the garden.`
+    explanation: `Returning small fish directly shows protection of future sea life.`
   },
   {
     id: 11,
     type: "reading",
-    skill: "Cause and Effect",
-    question: `What was the EFFECT of the students watering the plants daily?`,
+    skill: "Main Idea",
+    question: `Read Passage 2 then answer the question.
+
+"At Riverside Basic School, the Grade 5 students started a 'Reading Buddy' programme with Grade 1. Every Tuesday afternoon, each older student sat with a younger child to read short storybooks. At first, some little ones struggled with new words, but the older buddies used pictures and sound clues to help. By the end of the month, the younger children were reading with more confidence."
+
+What is the MAIN idea of Passage 2?`,
     options: [
-      "The weeds grew faster",
-      "Within three months the garden produced fresh vegetables",
-      "The cook started gardening",
-      "The school canteen was renovated",
+      "Grade 5 students only read to each other",
+      "Tuesday is the busiest day at Riverside",
+      "A buddy programme helped younger children read better",
+      "Storybooks should have fewer pictures",
     ],
-    correctAnswer: 1,
-    explanation: `The cause (daily care) led directly to the effect — within three months the garden was producing vegetables.`
+    correctAnswer: 2,
+    explanation: `The passage focuses on how the Reading Buddy programme improved younger students' reading confidence.`
   },
   {
     id: 12,
     type: "reading",
-    skill: "Audience",
-    question: `This passage was MOST LIKELY written for:`,
+    skill: "Detail",
+    question: `How often did the Reading Buddy programme take place?`,
     options: [
-      "Adults learning to start a farm",
-      "Canteen cooks learning new recipes",
-      "Students learning about teamwork and responsibility",
-      "Scientists studying plant growth",
+      "Every Tuesday afternoon",
+      "Every school morning",
+      "Twice each month",
+      "Only at exam time",
     ],
-    correctAnswer: 2,
-    explanation: `The topic, language, and focus on a school setting suggest it is aimed at young students.`
+    correctAnswer: 0,
+    explanation: `The passage clearly says the sessions happened every Tuesday afternoon.`
   },
   {
     id: 13,
     type: "reading",
-    skill: "Summarise",
-    question: `Which sentence BEST summarises the passage?`,
+    skill: "Problem and Solution",
+    question: `What problem is described in Passage 2?`,
     options: [
-      "The canteen cook likes fresh vegetables",
-      "Weeding and watering are difficult tasks",
-      "Students created a garden and grew food for the canteen",
-      "Herbs grow faster than fruit trees",
+      "Older students arrived late",
+      "The library was closed",
+      "Some younger children struggled with new words",
+      "Teachers cancelled story time",
     ],
     correctAnswer: 2,
-    explanation: `This sentence captures the who, what, and result — the essential elements of a good summary.`
+    explanation: `The text states that some little ones had difficulty with new words.`
   },
   {
     id: 14,
     type: "reading",
-    skill: "Literal Comprehension",
-    question: `Which vegetables are mentioned in the passage?`,
+    skill: "Inference",
+    question: `What can you infer about the Grade 5 buddies?`,
     options: [
-      "Carrots, yam, breadfruit",
-      "Corn, potatoes, peas",
-      "Lettuce, onions, thyme",
-      "Tomatoes, callaloo, peppers",
+      "They were unwilling to help",
+      "They preferred only sports activities",
+      "They finished quickly and left early",
+      "They were patient and supportive readers",
     ],
     correctAnswer: 3,
-    explanation: `The passage directly names 'fresh tomatoes, callaloo, and peppers.'`
+    explanation: `Using pictures and sound clues to help younger readers shows patience and support.`
   },
   {
     id: 15,
     type: "reading",
-    skill: "Tone",
-    question: `The tone of this passage is BEST described as:`,
+    skill: "Summarise",
+    question: `Which sentence best summarises Passage 2?`,
     options: [
-      "Positive and informative",
-      "Sad and disappointed",
-      "Angry and critical",
-      "Humorous and playful",
+      "Grade 5 students helped Grade 1 readers improve through weekly buddy sessions",
+      "Riverside Basic School changed all its textbooks this month",
+      "Grade 1 students read faster than Grade 5 students",
+      "Teachers replaced reading with spelling games",
     ],
     correctAnswer: 0,
-    explanation: `The passage describes a successful, cooperative project in a straightforward and positive way.`
+    explanation: `This option includes the key people, activity, and result from the passage.`
   },
   {
     id: 16,
     type: "vocabulary",
-    skill: "Synonyms",
-    question: `Which word is a SYNONYM for 'happy'?`,
+    skill: "Context Clues",
+    question: `The coach told the team to be "alert" during the match. What does "alert" mean here?`,
     options: [
-      "Sad",
-      "Joyful",
-      "Angry",
-      "Tired",
+      "Asleep",
+      "Ready and watchful",
+      "Very noisy",
+      "Late for practice",
     ],
     correctAnswer: 1,
-    explanation: `A synonym is a word with a similar meaning. 'Joyful' means very happy.`
+    explanation: `In this context, "alert" means paying close attention and being ready.`
   },
   {
     id: 17,
     type: "vocabulary",
-    skill: "Antonyms",
-    question: `Which word is an ANTONYM for 'ancient'?`,
+    skill: "Synonyms",
+    question: `Choose the word that is closest in meaning to "rapid."`,
     options: [
-      "Old",
-      "Traditional",
-      "Modern",
-      "Historical",
+      "slow",
+      "quiet",
+      "fast",
+      "rough",
     ],
     correctAnswer: 2,
-    explanation: `An antonym is a word with the opposite meaning. 'Modern' is the opposite of 'ancient.'`
+    explanation: `"Rapid" and "fast" have similar meanings.`
   },
   {
     id: 18,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `The teacher was very PATIENT with the students who were learning slowly. What does 'patient' mean in this sentence?`,
+    skill: "Antonyms",
+    question: `Which word is the opposite of "generous"?`,
     options: [
-      "Strict and firm",
-      "In a hurry",
-      "Confused",
-      "Calm and willing to wait",
+      "kind",
+      "helpful",
+      "friendly",
+      "selfish",
     ],
     correctAnswer: 3,
-    explanation: `'Patient' here means staying calm and not rushing students who needed more time.`
+    explanation: `"Selfish" is the antonym of "generous."`
   },
   {
     id: 19,
     type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'The rain fell like a curtain of silver.' What type of figurative language is this?`,
+    skill: "Word Relationships",
+    question: `Bread is to bakery as medicine is to:`,
     options: [
-      "Metaphor",
-      "Simile",
-      "Personification",
-      "Hyperbole",
+      "pharmacy",
+      "stadium",
+      "harbour",
+      "museum",
     ],
-    correctAnswer: 1,
-    explanation: `A simile compares two things using 'like' or 'as.' The rain is compared to a curtain using 'like.'`
+    correctAnswer: 0,
+    explanation: `A bakery is where bread is sold or made, and a pharmacy is where medicine is sold.`
   },
   {
     id: 20,
     type: "vocabulary",
-    skill: "Word Meaning",
-    question: `The word 'enormous' means:`,
+    skill: "Prefixes",
+    question: `What does the prefix "re-" mean in the word "rewrite"?`,
     options: [
-      "Very small",
-      "Slightly warm",
-      "Extremely large",
-      "Quite loud",
+      "without",
+      "again",
+      "before",
+      "under",
     ],
-    correctAnswer: 2,
-    explanation: `'Enormous' means extremely large or huge.`
+    correctAnswer: 1,
+    explanation: `The prefix "re-" means again, so "rewrite" means write again.`
   },
   {
     id: 21,
     type: "vocabulary",
-    skill: "Multiple Meaning",
-    question: `Which sentence uses the word 'bank' to mean a place that holds money?`,
+    skill: "Suffixes",
+    question: `Adding "-ful" to "care" forms "careful." What does "careful" mean?`,
     options: [
-      "She sat on the bank of the river",
-      "They bank on winning the match",
-      "The aircraft made a steep bank to the left",
-      "He went to the bank to deposit his savings",
+      "full of care",
+      "without care",
+      "care from long ago",
+      "care that is broken",
     ],
-    correctAnswer: 3,
-    explanation: `In this sentence, 'bank' refers to a financial institution where money is kept.`
+    correctAnswer: 0,
+    explanation: `The suffix "-ful" means full of, so "careful" means showing care.`
   },
   {
     id: 22,
     type: "vocabulary",
-    skill: "Prefixes",
-    question: `The prefix 'un-' in the word 'unhappy' means:`,
+    skill: "Multiple Meaning Words",
+    question: `Which sentence uses "light" to mean "not heavy"?`,
     options: [
-      "very",
-      "again",
-      "not",
-      "before",
+      "Please light the candle.",
+      "The light from the lamp is bright.",
+      "We will light fireworks tonight.",
+      "Her bag is light, so she can carry it easily.",
     ],
-    correctAnswer: 2,
-    explanation: `The prefix 'un-' means not. 'Unhappy' = not happy.`
+    correctAnswer: 3,
+    explanation: `In option B, "light" describes weight.`
   },
   {
     id: 23,
     type: "vocabulary",
-    skill: "Suffixes",
-    question: `Adding '-ness' to the word 'kind' creates:`,
+    skill: "Figurative Language",
+    question: `"My backpack is as heavy as a rock." This is an example of:`,
     options: [
-      "unkind",
-      "kindly",
-      "kindness",
-      "kinder",
+      "metaphor",
+      "personification",
+      "simile",
+      "alliteration",
     ],
     correctAnswer: 2,
-    explanation: `The suffix '-ness' changes an adjective into a noun. 'Kindness' = the quality of being kind.`
+    explanation: `A simile compares two things using "as" or "like."`
   },
   {
     id: 24,
     type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'The stars danced in the night sky.' What type of figurative language is used?`,
+    skill: "Context Clues",
+    question: `"The hall was silent during the performance." What does "silent" mean?`,
     options: [
-      "Personification",
-      "Metaphor",
-      "Simile",
-      "Alliteration",
+      "crowded",
+      "colourful",
+      "moving",
+      "quiet",
     ],
-    correctAnswer: 0,
-    explanation: `Personification gives human qualities (dancing) to non-human things (stars).`
+    correctAnswer: 3,
+    explanation: `"Silent" means very quiet with little or no sound.`
   },
   {
     id: 25,
     type: "vocabulary",
-    skill: "Vocabulary in Context",
-    question: `The new student felt ANXIOUS before her first day at school. 'Anxious' means:`,
+    skill: "Shades of Meaning",
+    question: `Which word shows a stronger feeling than "tired"?`,
     options: [
-      "Very excited",
-      "Bored and uninterested",
-      "Worried and nervous",
-      "Happy and confident",
+      "exhausted",
+      "sleepy",
+      "calm",
+      "steady",
     ],
-    correctAnswer: 2,
-    explanation: `'Anxious' describes a feeling of worry or nervousness about something that is going to happen.`
+    correctAnswer: 0,
+    explanation: `"Exhausted" means extremely tired, so it is stronger than "tired."`
   },
   {
     id: 26,
     type: "grammar",
-    skill: "Nouns",
-    question: `Which word in this sentence is a NOUN? 'The children played in the park.'`,
+    skill: "Sentence Correction",
+    question: `Choose the sentence with correct subject-verb agreement.`,
     options: [
-      "played",
-      "the",
-      "children",
-      "in",
+      "The players on the field runs quickly.",
+      "The players on the field run quickly.",
+      "The players on the field is running quickly.",
+      "The players on the field was quick.",
     ],
-    correctAnswer: 2,
-    explanation: `A noun names a person, place, thing, or idea. 'Children' names the people; 'park' names the place. Both are nouns, but 'children' is the subject noun.`
+    correctAnswer: 1,
+    explanation: `"Players" is plural, so the correct verb is "run."`
   },
   {
     id: 27,
     type: "grammar",
-    skill: "Verbs",
-    question: `Which word is the VERB in this sentence? 'Maria runs to school every morning.'`,
+    skill: "Punctuation",
+    question: `Which sentence uses end punctuation correctly?`,
     options: [
-      "Maria",
-      "every",
-      "school",
-      "runs",
+      "What time does the bus leave.",
+      "Please pack your lunch?",
+      "Our class visited the museum.",
+      "Watch out for that puddle,",
     ],
-    correctAnswer: 3,
-    explanation: `A verb shows action or state. 'Runs' is the action verb in this sentence.`
+    correctAnswer: 2,
+    explanation: `Option C is a complete statement ending with a period.`
   },
   {
     id: 28,
     type: "grammar",
-    skill: "Adjectives",
-    question: `Which word is an ADJECTIVE in this sentence? 'The tall boy kicked the red ball.'`,
+    skill: "Pronouns",
+    question: `Choose the correct pronoun: "Keisha and ___ will present the project."`,
     options: [
-      "kicked",
-      "boy",
-      "tall",
-      "ball",
+      "me",
+      "my",
+      "mine",
+      "I",
     ],
-    correctAnswer: 2,
-    explanation: `An adjective describes a noun. 'Tall' describes what kind of boy.`
+    correctAnswer: 3,
+    explanation: `The pronoun is part of the subject, so "I" is correct.`
   },
   {
     id: 29,
     type: "grammar",
-    skill: "Sentence Types",
-    question: `Which sentence is a QUESTION?`,
+    skill: "Tense",
+    question: `Select the sentence in past tense.`,
     options: [
-      "Close the door please",
-      "The dog barked loudly",
-      "Did you finish your homework",
-      "What a beautiful sunset",
+      "We visited Devon House last Saturday.",
+      "We visit Devon House each term.",
+      "We are visiting Devon House now.",
+      "We will visit Devon House next term.",
     ],
-    correctAnswer: 2,
-    explanation: `A question ends with a question mark and asks for information. Only option C does this.`
+    correctAnswer: 0,
+    explanation: `"Visited" shows an action completed in the past.`
   },
   {
     id: 30,
     type: "grammar",
-    skill: "Punctuation",
-    question: `Which sentence uses a COMMA correctly?`,
+    skill: "Commas in a Series",
+    question: `Which sentence uses commas correctly in a list?`,
     options: [
-      "We bought bread milk and eggs.",
-      "We bought bread, milk, and eggs.",
-      "We, bought bread milk and eggs.",
-      "We bought bread milk, and, eggs.",
+      "I packed pencils erasers and a ruler.",
+      "I packed pencils, erasers, and a ruler.",
+      "I packed, pencils erasers and a ruler.",
+      "I packed pencils, erasers and, a ruler.",
     ],
     correctAnswer: 1,
-    explanation: `Commas are used to separate items in a list. Option B correctly separates the three items.`
+    explanation: `Items in a list should be separated clearly by commas.`
   },
   {
     id: 31,
     type: "grammar",
-    skill: "Tense",
-    question: `Change to PAST TENSE: 'She walks to school every day.'`,
+    skill: "Contractions",
+    question: `Which word correctly completes the sentence? "They ___ coming after lunch."`,
     options: [
-      "She walking to school every day",
-      "She is walking to school every day",
-      "She walked to school every day",
-      "She will walk to school every day",
+      "theyre",
+      "their",
+      "they're",
+      "there",
     ],
     correctAnswer: 2,
-    explanation: `The past tense of 'walks' is 'walked.' Past tense refers to actions already completed.`
+    explanation: `"They're" is the contraction of "they are."`
   },
   {
     id: 32,
     type: "grammar",
-    skill: "Pronoun",
-    question: `Choose the correct PRONOUN: 'Marcus and ___ went to the library.'`,
+    skill: "Capitalisation",
+    question: `Which sentence is capitalised correctly?`,
     options: [
-      "me",
-      "I",
-      "my",
-      "him",
+      "on monday we visited spanish town.",
+      "On monday we visited Spanish town.",
+      "on Monday we visited spanish Town.",
+      "On Monday we visited Spanish Town.",
     ],
-    correctAnswer: 1,
-    explanation: `When a pronoun is used as the subject of a sentence, use 'I' not 'me.' (Marcus and I = two subjects.)`
+    correctAnswer: 3,
+    explanation: `Days of the week and place names must begin with capital letters.`
   },
   {
     id: 33,
     type: "grammar",
-    skill: "Subject-Verb Agreement",
-    question: `Choose the correct verb: 'The group of students ___ ready to begin.'`,
+    skill: "Apostrophes",
+    question: `Which sentence uses an apostrophe correctly to show possession?`,
     options: [
-      "is",
-      "were",
-      "are",
-      "have",
+      "The teachers book is on the desk.",
+      "The teacher's book is on the desk.",
+      "The teachers' book is on the desk" ,
+      "The teacher book's is on the desk.",
     ],
-    correctAnswer: 0,
-    explanation: `'Group' is a singular collective noun. Use the singular verb 'is.' (The group IS ready.)`
+    correctAnswer: 1,
+    explanation: `"Teacher's" correctly shows that one teacher owns the book.`
   },
   {
     id: 34,
     type: "grammar",
-    skill: "Apostrophe",
-    question: `Which sentence correctly uses an APOSTROPHE to show possession?`,
+    skill: "Adjectives",
+    question: `Choose the adjective in this sentence: "The bright kite flew high."`,
     options: [
-      "The girls's book is red",
-      "The girls' book is red",
-      "The girl book is red",
-      "The girls book's is red",
+      "flew",
+      "high",
+      "kite",
+      "bright",
     ],
-    correctAnswer: 1,
-    explanation: `For possession: add apostrophe + s for singular ('girl's'), or just apostrophe after s for plural ('girls'). 'The girls' book' correctly shows the book belongs to the girls.`
+    correctAnswer: 3,
+    explanation: `"Bright" describes the noun "kite," so it is the adjective.`
   },
   {
     id: 35,
     type: "grammar",
-    skill: "Sentence Correction",
-    question: `Which sentence is written CORRECTLY?`,
+    skill: "Run-on Sentences",
+    question: `Which option fixes this run-on sentence? "The rain stopped we went outside."`,
     options: [
-      "He don't know the answer",
-      "They was very happy",
-      "She plays football every Friday",
-      "Us went to the market",
+      "The rain stopped, we went outside.",
+      "The rain stopped and we went outside.",
+      "The rain stopped we, went outside.",
+      "The rain, stopped we went outside.",
     ],
-    correctAnswer: 2,
-    explanation: `Subject-verb agreement: 'She plays' is correct. The others have errors: don't→doesn't, was→were, Us→We.`
+    correctAnswer: 1,
+    explanation: `Adding "and" joins the two complete thoughts correctly for this level.`
   },
   {
     id: 36,
     type: "writing",
     skill: "Purpose",
-    question: `A student wants to convince her principal to start a school library. What type of writing should she use?`,
+    question: `Your class wants cleaner bathrooms at school. Which writing purpose fits a letter to the principal?`,
     options: [
-      "Narrative writing",
-      "Persuasive writing",
-      "Descriptive writing",
-      "Expository writing",
+      "to persuade",
+      "to entertain",
+      "to retell a story",
+      "to describe a football match",
     ],
-    correctAnswer: 1,
-    explanation: `Persuasive writing is used to convince someone to agree with your point of view or take action.`
+    correctAnswer: 0,
+    explanation: `A letter asking for change should persuade the reader to act.`
   },
   {
     id: 37,
     type: "writing",
-    skill: "Audience",
-    question: `Which opening sentence is BEST suited for a letter to a younger child?`,
+    skill: "Topic Sentence",
+    question: `Which is the BEST topic sentence for a paragraph about healthy lunches?`,
     options: [
-      "As per the statistical data, literacy rates indicate...",
-      "Have you ever wondered why reading is so much fun?",
-      "The aforementioned evidence supports the assertion...",
-      "In conclusion, one may surmise that...",
+      "My lunchbox is blue and wide.",
+      "Healthy lunches help students learn and stay active.",
+      "Yesterday I traded my juice for water.",
+      "Chicken patties are sold near the gate.",
     ],
     correctAnswer: 1,
-    explanation: `Simple, engaging language like a question suits a young child reader. The other options are too formal or complex.`
+    explanation: `A good topic sentence states the main idea of the whole paragraph.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "Topic Sentence",
-    question: `Which sentence would make the BEST topic sentence for a paragraph about exercise?`,
+    skill: "Supporting Details",
+    question: `Which detail BEST supports this idea: "Reading daily improves vocabulary"?`,
     options: [
-      "Exercise includes running and swimming",
-      "There are many types of exercise",
-      "I like running",
-      "Regular exercise helps keep the body healthy",
+      "My cousin prefers cricket to netball.",
+      "Our classroom walls are painted cream.",
+      "Daily reading introduces readers to many new words.",
+      "Some books have glossy covers.",
     ],
-    correctAnswer: 3,
-    explanation: `A topic sentence states the main idea clearly and broadly. Option C does this best.`
+    correctAnswer: 2,
+    explanation: `This detail directly explains how daily reading can build vocabulary.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Paragraph Structure",
-    question: `What should come AFTER the topic sentence in a well-written paragraph?`,
+    skill: "Audience",
+    question: `You are writing instructions for Grade 1 students. Which sentence is most suitable?`,
     options: [
-      "Another topic sentence",
-      "Supporting details and examples",
-      "A title",
-      "A new paragraph immediately",
+      "Commence the procedure by securing required materials.",
+      "It is incumbent upon pupils to comply immediately.",
+      "First, take your pencil and write your name.",
+      "The aforementioned sequence should then be executed.",
     ],
-    correctAnswer: 1,
-    explanation: `After the topic sentence, supporting details and examples provide evidence and explanation of the main idea.`
+    correctAnswer: 2,
+    explanation: `This option uses clear, simple words appropriate for younger readers.`
   },
   {
     id: 40,
     type: "writing",
-    skill: "Writing Technique",
-    question: `A writer describes the smell, sound, and colour of a morning market in detail. This technique is called:`,
+    skill: "Conclusion",
+    question: `Which concluding sentence best ends a paragraph about saving water at school?`,
     options: [
-      "Summarising",
-      "Descriptive writing",
-      "Persuading",
-      "Comparing",
+      "Water flows through pipes under the road.",
+      "My friend forgot his bottle yesterday.",
+      "Some taps are silver and some are white.",
+      "If we all save water, our school and community will benefit.",
     ],
-    correctAnswer: 1,
-    explanation: `Using sensory details (smell, sound, colour) is a characteristic of descriptive writing.`
+    correctAnswer: 3,
+    explanation: `A conclusion should wrap up the main idea and leave a clear final thought.`
   }
+
 ]
 
 const SECTION_CONFIG = [
