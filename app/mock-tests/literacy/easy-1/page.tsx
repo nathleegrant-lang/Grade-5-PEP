@@ -615,6 +615,26 @@ What is the MAIN purpose of the letter?`,
 
 ]
 
+
+const shuffleAnswerOptions = (questions: Question[]): Question[] => {
+  return questions.map((question) => {
+    const optionsWithOriginalIndex = question.options.map((option, index) => ({ option, index }))
+
+    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [optionsWithOriginalIndex[j], optionsWithOriginalIndex[i]]
+    }
+
+    const correctAnswer = optionsWithOriginalIndex.findIndex((item) => item.index === question.correctAnswer)
+
+    return {
+      ...question,
+      options: optionsWithOriginalIndex.map((item) => item.option),
+      correctAnswer,
+    }
+  })
+}
+
 const SECTION_CONFIG = [
   { type: "reading" as const,    label: "Reading Comprehension",  note: "main idea, inference, author's purpose, tone, text structure" },
   { type: "vocabulary" as const, label: "Vocabulary & Word Study", note: "context clues, synonyms, antonyms, figurative language, word meaning" },
@@ -629,9 +649,11 @@ export default function G5LaEasy1MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]             = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]           = useState(60 * 60)
+  const [randomizedQuestions, setRandomizedQuestions] = useState<Question[]>([])
   const hasSavedResult = useRef(false)
 
-  const availableQuestions = isPremium ? g5LaEasy1Questions : g5LaEasy1Questions.slice(0, FREE_QUESTION_LIMIT)
+  const sourceQuestions = isPremium ? g5LaEasy1Questions : g5LaEasy1Questions.slice(0, FREE_QUESTION_LIMIT)
+  const availableQuestions = randomizedQuestions.length > 0 ? randomizedQuestions : sourceQuestions
   const totalQuestions = availableQuestions.length
 
   useEffect(() => {
@@ -693,9 +715,21 @@ export default function G5LaEasy1MockTest() {
     return { correct, total, percentage: pct, rating, ratingColor: color }
   }
 
+  const startTest = () => {
+    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions)
+    setRandomizedQuestions(shuffledQuestions)
+    setAnswers(new Array(shuffledQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    hasSavedResult.current = false
+    setStarted(true)
+  }
+
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60); hasSavedResult.current = false
+    setRandomizedQuestions([])
+    setAnswers(new Array(sourceQuestions.length).fill(null)); setTimeLeft(60 * 60); hasSavedResult.current = false
   }
 
   const q = availableQuestions[currentQuestion]
@@ -748,7 +782,7 @@ export default function G5LaEasy1MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-blue-600">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-blue-600">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-blue-600 py-6 text-lg hover:bg-blue-700">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-blue-600 py-6 text-lg hover:bg-blue-700">Start Test</Button>
           </CardContent>
         </Card>
       </main>
