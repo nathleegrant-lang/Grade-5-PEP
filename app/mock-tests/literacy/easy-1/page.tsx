@@ -504,7 +504,7 @@ What does the prefix "re-" help the reader understand?`,
     options: [
       "The teachers book is on the desk.",
       "The teacher's book is on the desk.",
-      "The teachers' book is on the desk" ,
+      "The teachers' book is on the desk",
       "The teacher book's is on the desk.",
     ],
     correctAnswer: 1,
