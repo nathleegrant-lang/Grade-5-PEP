@@ -650,6 +650,26 @@ When the passage says adults 'make better choices for the planet,' it implies:`,
   }
 ]
 
+
+const shuffleAnswerOptions = (questions: Question[]): Question[] => {
+  return questions.map((question) => {
+    const optionsWithOriginalIndex = question.options.map((option, index) => ({ option, index }))
+
+    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [optionsWithOriginalIndex[j], optionsWithOriginalIndex[i]]
+    }
+
+    const correctAnswer = optionsWithOriginalIndex.findIndex((item) => item.index === question.correctAnswer)
+
+    return {
+      ...question,
+      options: optionsWithOriginalIndex.map((item) => item.option),
+      correctAnswer,
+    }
+  })
+}
+
 const SECTION_CONFIG = [
   { type: "reading" as const,    label: "Reading Comprehension",  note: "main idea, inference, author's purpose, tone, text structure" },
   { type: "vocabulary" as const, label: "Vocabulary & Word Study", note: "context clues, synonyms, antonyms, figurative language, word meaning" },
@@ -664,8 +684,10 @@ export default function G5LaEasy10MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]             = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]           = useState(60 * 60)
+  const [randomizedQuestions, setRandomizedQuestions] = useState<Question[]>([])
 
-  const availableQuestions = isPremium ? g5LaEasy10Questions : g5LaEasy10Questions.slice(0, FREE_QUESTION_LIMIT)
+  const sourceQuestions = isPremium ? g5LaEasy10Questions : g5LaEasy10Questions.slice(0, FREE_QUESTION_LIMIT)
+  const availableQuestions = randomizedQuestions.length > 0 ? randomizedQuestions : sourceQuestions
   const totalQuestions = availableQuestions.length
 
   useEffect(() => {
@@ -710,9 +732,20 @@ export default function G5LaEasy10MockTest() {
     return { correct, total, percentage: pct, rating, ratingColor: color }
   }
 
+  const startTest = () => {
+    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions)
+    setRandomizedQuestions(shuffledQuestions)
+    setAnswers(new Array(shuffledQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    setStarted(true)
+  }
+
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setRandomizedQuestions([])
+    setAnswers(new Array(sourceQuestions.length).fill(null)); setTimeLeft(60 * 60)
   }
 
   const handleSubmit = () => {
@@ -790,7 +823,7 @@ export default function G5LaEasy10MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-blue-600">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-blue-600">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-blue-600 py-6 text-lg hover:bg-blue-700">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-blue-600 py-6 text-lg hover:bg-blue-700">Start Test</Button>
           </CardContent>
         </Card>
       </main>
@@ -925,7 +958,7 @@ export default function G5LaEasy10MockTest() {
             <CardContent className="pb-4">
               <div className="grid grid-cols-10 gap-2">
                 {availableQuestions.map((_, idx) => (
-                  <button key={idx} onClick={() => setCurrentQuestion(idx)}
+                  <button key={idx} onClick={() => setCurrentQuestion(Math.min(Math.max(idx, 0), totalQuestions - 1))}
                     className={cn("w-8 h-8 rounded text-sm font-medium transition-colors",
                       currentQuestion === idx ? "bg-blue-600 text-white"
                       : answers[idx] !== null ? "bg-blue-100 text-blue-700"
