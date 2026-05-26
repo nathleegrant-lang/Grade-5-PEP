@@ -263,30 +263,38 @@ What is the MAIN idea of Passage 2?`,
   {
     id: 17,
     type: "vocabulary",
-    skill: "Synonyms",
-    question: `Choose the word that is closest in meaning to "rapid."`,
+    skill: "Context Clues",
+    question: `Read the sentence.
+
+"The rain clouds moved rapidly across the sky, and within minutes the field was covered in shade."
+
+What does "rapidly" mean in this sentence?`,
     options: [
-      "slow",
-      "quiet",
-      "fast",
-      "rough",
+      "quietly",
+      "quickly",
+      "carefully",
+      "brightly",
     ],
-    correctAnswer: 2,
-    explanation: `"Rapid" and "fast" have similar meanings.`
+    correctAnswer: 1,
+    explanation: `"Rapidly" means quickly. The phrase "within minutes" helps show that the clouds moved fast.`
   },
   {
     id: 18,
     type: "vocabulary",
-    skill: "Antonyms",
-    question: `Which word is the opposite of "generous"?`,
+    skill: "Antonyms in Context",
+    question: `Read the sentence.
+
+"Although Janelle usually shares her snacks, today she kept everything for herself."
+
+Which word BEST describes Janelle's behaviour today?`,
     options: [
-      "kind",
-      "helpful",
-      "friendly",
+      "generous",
+      "careful",
       "selfish",
+      "patient",
     ],
-    correctAnswer: 3,
-    explanation: `"Selfish" is the antonym of "generous."`
+    correctAnswer: 2,
+    explanation: `Keeping everything for herself shows selfish behaviour, which is the opposite of generous.`
   },
   {
     id: 19,
@@ -306,15 +314,19 @@ What is the MAIN idea of Passage 2?`,
     id: 20,
     type: "vocabulary",
     skill: "Prefixes",
-    question: `What does the prefix "re-" mean in the word "rewrite"?`,
+    question: `Read the sentence.
+
+"After spotting three mistakes, Malik had to rewrite the paragraph."
+
+What does the prefix "re-" help the reader understand?`,
     options: [
-      "without",
-      "again",
-      "before",
-      "under",
+      "Malik wrote it again",
+      "Malik wrote it neatly",
+      "Malik wrote it before class",
+      "Malik wrote it without help",
     ],
-    correctAnswer: 1,
-    explanation: `The prefix "re-" means again, so "rewrite" means write again.`
+    correctAnswer: 0,
+    explanation: `The prefix "re-" means again, so "rewrite" means to write again.`
   },
   {
     id: 21,
@@ -342,7 +354,7 @@ What is the MAIN idea of Passage 2?`,
       "Her bag is light, so she can carry it easily.",
     ],
     correctAnswer: 3,
-    explanation: `In option B, "light" describes weight.`
+    explanation: `In this sentence, "light" means not heavy, so it describes the bag's weight.`
   },
   {
     id: 23,
@@ -501,16 +513,18 @@ What is the MAIN idea of Passage 2?`,
   {
     id: 34,
     type: "grammar",
-    skill: "Adjectives",
-    question: `Choose the adjective in this sentence: "The bright kite flew high."`,
+    skill: "Adjectives in Context",
+    question: `Choose the word that best completes the sentence.
+
+"The students followed the ___ path to reach the school garden."`,
     options: [
-      "flew",
-      "high",
-      "kite",
-      "bright",
+      "walked",
+      "narrow",
+      "quickly",
+      "garden",
     ],
-    correctAnswer: 3,
-    explanation: `"Bright" describes the noun "kite," so it is the adjective.`
+    correctAnswer: 1,
+    explanation: `"Narrow" is an adjective because it describes the noun "path."`
   },
   {
     id: 35,
@@ -530,15 +544,17 @@ What is the MAIN idea of Passage 2?`,
     id: 36,
     type: "writing",
     skill: "Purpose",
-    question: `Your class wants cleaner bathrooms at school. Which writing purpose fits a letter to the principal?`,
+    question: `A student writes a letter explaining why the school should place more bins near the tuck shop.
+
+What is the MAIN purpose of the letter?`,
     options: [
-      "to persuade",
-      "to entertain",
-      "to retell a story",
-      "to describe a football match",
+      "to persuade the school to make a change",
+      "to describe the colour of the tuck shop",
+      "to retell a story about break time",
+      "to list every item sold at school",
     ],
     correctAnswer: 0,
-    explanation: `A letter asking for change should persuade the reader to act.`
+    explanation: `The letter gives reasons for the school to take action, so its purpose is to persuade.`
   },
   {
     id: 37,
