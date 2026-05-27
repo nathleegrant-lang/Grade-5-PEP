@@ -32,649 +32,483 @@ const g5LaEasy2Questions: Question[] = [
     id: 1,
     type: "reading",
     skill: "Main Idea",
-    question: `Read the passage then answer the questions.
+    question: `Read Passage 1 then answer the question.
 
-"Last Saturday, Kezia and her family drove to a beach in St. Mary. The water was a brilliant shade of turquoise, and the white sand sparkled in the sunshine. Kezia waded into the warm sea and watched tiny silver fish dart between her feet. Her younger brother built sandcastles near the shore while her parents relaxed under a palm tree. On the drive home, Kezia said it was the best day of her holiday."
+"On Monday morning, Grade 5 students at Hopefield Primary prepared a display for Jamaica Day. One group arranged pictures of national heroes, while another labelled traditional foods such as ackee, bammy, and festival. Their teacher reminded them that the display should help younger students learn about Jamaican culture. By lunchtime, many children had stopped to read the labels and ask questions."
 
-What is the MAIN idea of this passage?`,
+What is the MAIN idea of Passage 1?`,
     options: [
-      "The beach is dangerous",
-      "Kezia and her family enjoyed a wonderful day at the beach",
-      "Kezia's brother loves building sandcastles",
-      "St. Mary is the best parish in Jamaica",
+      "Students prepared a display about Jamaican culture",
+      "Jamaica Day is always held on a Monday",
+      "Younger students prefer food displays",
+      "Teachers should decorate classrooms daily",
     ],
-    correctAnswer: 1,
-    explanation: `The passage is mainly about the family's enjoyable day at the beach.`
+    correctAnswer: 0,
+    explanation: `The passage mainly describes students preparing a Jamaica Day display to teach others about culture.`
   },
   {
     id: 2,
     type: "reading",
     skill: "Detail",
-    question: `Read the passage then answer the questions.
-
-"Last Saturday, Kezia and her family drove to a beach in St. Mary. The water was a brilliant shade of turquoise, and the white sand sparkled in the sunshine. Kezia waded into the warm sea and watched tiny silver fish dart between her feet. Her younger brother built sandcastles near the shore while her parents relaxed under a palm tree. On the drive home, Kezia said it was the best day of her holiday."
-
-What colour was the water at the beach?`,
+    question: `Using Passage 1, what did one group of students arrange?`,
     options: [
-      "Deep blue",
-      "Bright green",
-      "Turquoise",
-      "Dark grey",
+      "Traditional foods",
+      "Pictures of national heroes",
+      "Reading books",
+      "Sports equipment",
     ],
-    correctAnswer: 2,
-    explanation: `The passage states the water was 'a brilliant shade of turquoise.'`
+    correctAnswer: 1,
+    explanation: `The passage states that one group arranged pictures of national heroes.`
   },
   {
     id: 3,
     type: "reading",
-    skill: "Inference",
-    question: `Read the passage then answer the questions.
-
-"Last Saturday, Kezia and her family drove to a beach in St. Mary. The water was a brilliant shade of turquoise, and the white sand sparkled in the sunshine. Kezia waded into the warm sea and watched tiny silver fish dart between her feet. Her younger brother built sandcastles near the shore while her parents relaxed under a palm tree. On the drive home, Kezia said it was the best day of her holiday."
-
-What can you INFER about how Kezia felt at the end of the day?`,
+    skill: "Author's Purpose",
+    question: `Why did the teacher want the display to be clear and helpful?`,
     options: [
-      "She was bored and tired",
-      "She was grateful and happy",
-      "She was sad to leave",
-      "She was angry with her brother",
+      "So parents could buy food",
+      "So younger students could learn",
+      "So the class could leave early",
+      "So the labels could be removed",
     ],
     correctAnswer: 1,
-    explanation: `Kezia said it was the best day of her holiday — this shows she felt grateful and happy.`
+    explanation: `The teacher wanted the display to help younger students learn about Jamaican culture.`
   },
   {
     id: 4,
     type: "reading",
-    skill: "Vocabulary in Context",
-    question: `Read the passage then answer the questions.
-
-"Last Saturday, Kezia and her family drove to a beach in St. Mary. The water was a brilliant shade of turquoise, and the white sand sparkled in the sunshine. Kezia waded into the warm sea and watched tiny silver fish dart between her feet. Her younger brother built sandcastles near the shore while her parents relaxed under a palm tree. On the drive home, Kezia said it was the best day of her holiday."
-
-The word 'waded' in the passage means:`,
+    skill: "Inference",
+    question: `What can you infer from the fact that many children stopped to read the labels?`,
     options: [
-      "swam underwater",
-      "jumped in quickly",
-      "walked through shallow water",
-      "ran along the shore",
+      "The display caught their interest",
+      "The labels were too difficult",
+      "The children were late for class",
+      "The teacher gave them a test",
     ],
-    correctAnswer: 2,
-    explanation: `To 'wade' means to walk through shallow water.`
+    correctAnswer: 0,
+    explanation: `If many children stopped to read and ask questions, the display likely interested them.`
   },
   {
     id: 5,
     type: "reading",
-    skill: "Sequence",
-    question: `Read the passage then answer the questions.
-
-"Last Saturday, Kezia and her family drove to a beach in St. Mary. The water was a brilliant shade of turquoise, and the white sand sparkled in the sunshine. Kezia waded into the warm sea and watched tiny silver fish dart between her feet. Her younger brother built sandcastles near the shore while her parents relaxed under a palm tree. On the drive home, Kezia said it was the best day of her holiday."
-
-What did Kezia do AFTER entering the sea?`,
+    skill: "Vocabulary in Context",
+    question: `In Passage 1, the word "labelled" most nearly means:`,
     options: [
-      "She built sandcastles",
-      "She relaxed under a palm tree",
-      "She watched tiny fish between her feet",
-      "She drove home",
+      "tasted",
+      "named",
+      "carried",
+      "hidden",
     ],
-    correctAnswer: 2,
-    explanation: `After wading in, Kezia 'watched tiny silver fish dart between her feet.'`
+    correctAnswer: 1,
+    explanation: `To label items means to name or identify them clearly.`
   },
   {
     id: 6,
     type: "reading",
-    skill: "Setting",
-    question: `Read the passage then answer the questions.
-
-"Last Saturday, Kezia and her family drove to a beach in St. Mary. The water was a brilliant shade of turquoise, and the white sand sparkled in the sunshine. Kezia waded into the warm sea and watched tiny silver fish dart between her feet. Her younger brother built sandcastles near the shore while her parents relaxed under a palm tree. On the drive home, Kezia said it was the best day of her holiday."
-
-Where did the family go?`,
+    skill: "Text Evidence",
+    question: `Which detail best shows that the display was educational?`,
     options: [
-      "A river in Portland",
-      "A beach in St. Mary",
-      "A pool in Kingston",
-      "A lake in the Blue Mountains",
+      "It was prepared on Monday morning",
+      "It included labels children could read",
+      "It was finished before lunchtime",
+      "It was placed in a quiet corner",
     ],
     correctAnswer: 1,
-    explanation: `The passage says 'Kezia and her family drove to a beach in St. Mary.'`
+    explanation: `Labels helped students read information and learn from the display.`
   },
   {
     id: 7,
     type: "reading",
-    skill: "Character",
-    question: `Read the passage then answer the questions.
-
-"Last Saturday, Kezia and her family drove to a beach in St. Mary. The water was a brilliant shade of turquoise, and the white sand sparkled in the sunshine. Kezia waded into the warm sea and watched tiny silver fish dart between her feet. Her younger brother built sandcastles near the shore while her parents relaxed under a palm tree. On the drive home, Kezia said it was the best day of her holiday."
-
-What was Kezia's brother doing while she was in the sea?`,
+    skill: "Sequence",
+    question: `Which happened LAST in Passage 1?`,
     options: [
-      "Playing with fish",
-      "Building sandcastles",
-      "Swimming",
-      "Relaxing under a tree",
+      "Students arranged pictures",
+      "Students labelled foods",
+      "Children stopped to ask questions",
+      "The teacher gave instructions",
     ],
-    correctAnswer: 1,
-    explanation: `'Her younger brother built sandcastles near the shore.'`
+    correctAnswer: 2,
+    explanation: `The passage ends with children stopping to read and ask questions by lunchtime.`
   },
   {
     id: 8,
     type: "reading",
-    skill: "Tone",
-    question: `Read the passage then answer the questions.
-
-"Last Saturday, Kezia and her family drove to a beach in St. Mary. The water was a brilliant shade of turquoise, and the white sand sparkled in the sunshine. Kezia waded into the warm sea and watched tiny silver fish dart between her feet. Her younger brother built sandcastles near the shore while her parents relaxed under a palm tree. On the drive home, Kezia said it was the best day of her holiday."
-
-The tone of the passage is BEST described as:`,
+    skill: "Theme",
+    question: `Which theme best fits Passage 1?`,
     options: [
-      "Fearful",
-      "Joyful and descriptive",
-      "Informative and scientific",
-      "Sad and reflective",
+      "Learning can be shared with others",
+      "Food should never be displayed",
+      "School work is always difficult",
+      "Questions should be avoided",
     ],
-    correctAnswer: 1,
-    explanation: `The vivid descriptions and Kezia's happy ending create a joyful, descriptive tone.`
+    correctAnswer: 0,
+    explanation: `The students created a display to share learning about culture with younger students.`
   },
   {
     id: 9,
     type: "reading",
-    skill: "Figurative Language",
-    question: `Read the passage then answer the questions.
-
-"Last Saturday, Kezia and her family drove to a beach in St. Mary. The water was a brilliant shade of turquoise, and the white sand sparkled in the sunshine. Kezia waded into the warm sea and watched tiny silver fish dart between her feet. Her younger brother built sandcastles near the shore while her parents relaxed under a palm tree. On the drive home, Kezia said it was the best day of her holiday."
-
-'The white sand sparkled in the sunshine.' What does this description help you to imagine?`,
+    skill: "Fact and Opinion",
+    question: `Which statement is a FACT from Passage 1?`,
     options: [
-      "The sand was very hot",
-      "The sand shone and glittered in the light",
-      "The sand was wet and sticky",
-      "The sand was dark and rough",
+      "Jamaica Day is the best school event",
+      "Ackee is more delicious than festival",
+      "Students labelled traditional foods",
+      "Every child loved the display",
     ],
-    correctAnswer: 1,
-    explanation: `'Sparkled' paints a picture of the sand shining and glittering in sunlight.`
+    correctAnswer: 2,
+    explanation: `The passage directly states that students labelled traditional foods.`
   },
   {
     id: 10,
     type: "reading",
-    skill: "Cause and Effect",
-    question: `Read the passage then answer the questions.
-
-"Last Saturday, Kezia and her family drove to a beach in St. Mary. The water was a brilliant shade of turquoise, and the white sand sparkled in the sunshine. Kezia waded into the warm sea and watched tiny silver fish dart between her feet. Her younger brother built sandcastles near the shore while her parents relaxed under a palm tree. On the drive home, Kezia said it was the best day of her holiday."
-
-WHY did the parents relax under a palm tree?`,
+    skill: "Summary",
+    question: `Which sentence best summarises Passage 1?`,
     options: [
-      "They were bored",
-      "They wanted shade from the sun",
-      "They were watching the children swim",
-      "The passage does not say why",
+      "A class created a cultural display that helped other students learn",
+      "A teacher prepared food for a school celebration",
+      "Younger students asked questions about their homework",
+      "National heroes visited Hopefield Primary on Jamaica Day",
     ],
-    correctAnswer: 3,
-    explanation: `The passage does not give a specific reason for this — only describes what they did.`
+    correctAnswer: 0,
+    explanation: `This summary includes the main action and purpose of the passage.`
   },
   {
     id: 11,
     type: "reading",
-    skill: "Summarise",
-    question: `Read the passage then answer the questions.
+    skill: "Main Idea",
+    question: `Read Passage 2 then answer the question.
 
-"Last Saturday, Kezia and her family drove to a beach in St. Mary. The water was a brilliant shade of turquoise, and the white sand sparkled in the sunshine. Kezia waded into the warm sea and watched tiny silver fish dart between her feet. Her younger brother built sandcastles near the shore while her parents relaxed under a palm tree. On the drive home, Kezia said it was the best day of her holiday."
+"During the dry season, the principal at Willow Park Primary spoke to students about saving water. She explained that taps should be turned off tightly after use and that students should report leaking pipes quickly. The school also placed buckets near outdoor pipes to collect water for the garden. Within two weeks, the school was using less water each day."
 
-Which sentence BEST summarises this passage?`,
+What is the MAIN idea of Passage 2?`,
     options: [
-      "The beach in St. Mary is the most beautiful in Jamaica",
-      "A family had an enjoyable beach day full of swimming, playing, and relaxing",
-      "Kezia is afraid of fish",
-      "Sandcastles are difficult to build",
+      "The school garden needed new flowers",
+      "Students learned ways to save water at school",
+      "The principal wanted fewer outdoor pipes",
+      "Buckets should be kept in every classroom",
     ],
     correctAnswer: 1,
-    explanation: `This captures the key events and the overall experience of the family's day.`
+    explanation: `The passage focuses on actions taken at school to save water.`
   },
   {
     id: 12,
     type: "reading",
-    skill: "Inference",
-    question: `Read the passage then answer the questions.
-
-"Last Saturday, Kezia and her family drove to a beach in St. Mary. The water was a brilliant shade of turquoise, and the white sand sparkled in the sunshine. Kezia waded into the warm sea and watched tiny silver fish dart between her feet. Her younger brother built sandcastles near the shore while her parents relaxed under a palm tree. On the drive home, Kezia said it was the best day of her holiday."
-
-Based on the passage, how would you describe Kezia's family?`,
+    skill: "Detail",
+    question: `According to Passage 2, what should students report quickly?`,
     options: [
-      "Sad and quiet",
-      "Fun-loving and close",
-      "Loud and argumentative",
-      "Serious and busy",
+      "Leaking pipes",
+      "Empty buckets",
+      "Garden flowers",
+      "Quiet classrooms",
     ],
-    correctAnswer: 1,
-    explanation: `The family spent the day together enjoying the beach and each other's company — suggesting a loving, fun family.`
+    correctAnswer: 0,
+    explanation: `The principal said students should report leaking pipes quickly.`
   },
   {
     id: 13,
     type: "reading",
-    skill: "Author's Purpose",
-    question: `Read the passage then answer the questions.
-
-"Last Saturday, Kezia and her family drove to a beach in St. Mary. The water was a brilliant shade of turquoise, and the white sand sparkled in the sunshine. Kezia waded into the warm sea and watched tiny silver fish dart between her feet. Her younger brother built sandcastles near the shore while her parents relaxed under a palm tree. On the drive home, Kezia said it was the best day of her holiday."
-
-Why did the author include the detail that the fish were 'tiny and silver'?`,
+    skill: "Cause and Effect",
+    question: `What was one effect of the school’s water-saving actions?`,
     options: [
-      "To confuse the reader",
-      "To make the description more vivid and interesting",
-      "To teach the reader about marine life",
-      "To show Kezia was afraid",
+      "The garden stopped growing",
+      "The school used less water each day",
+      "Students stopped washing their hands",
+      "The dry season ended immediately",
     ],
     correctAnswer: 1,
-    explanation: `Specific sensory details like 'tiny and silver' make the description more vivid and engaging.`
+    explanation: `The passage states that within two weeks the school was using less water each day.`
   },
   {
     id: 14,
     type: "reading",
-    skill: "Vocabulary in Context",
-    question: `Read the passage then answer the questions.
-
-"Last Saturday, Kezia and her family drove to a beach in St. Mary. The water was a brilliant shade of turquoise, and the white sand sparkled in the sunshine. Kezia waded into the warm sea and watched tiny silver fish dart between her feet. Her younger brother built sandcastles near the shore while her parents relaxed under a palm tree. On the drive home, Kezia said it was the best day of her holiday."
-
-The word 'brilliant' as used in the passage means:`,
+    skill: "Inference",
+    question: `What can you infer about the principal?`,
     options: [
-      "Very intelligent",
-      "Bright and vivid",
-      "Quiet and calm",
-      "Large and deep",
+      "She wanted students to waste water",
+      "She cared about responsible water use",
+      "She disliked the school garden",
+      "She wanted to close the school",
     ],
     correctAnswer: 1,
-    explanation: `'A brilliant shade of turquoise' means a bright, vivid blue-green colour.`
+    explanation: `Her advice and school actions show that she cared about saving water responsibly.`
   },
   {
     id: 15,
     type: "reading",
-    skill: "Text Feature",
-    question: `Read the passage then answer the questions.
-
-"Last Saturday, Kezia and her family drove to a beach in St. Mary. The water was a brilliant shade of turquoise, and the white sand sparkled in the sunshine. Kezia waded into the warm sea and watched tiny silver fish dart between her feet. Her younger brother built sandcastles near the shore while her parents relaxed under a palm tree. On the drive home, Kezia said it was the best day of her holiday."
-
-The passage ends with Kezia speaking. What does this add?`,
+    skill: "Problem and Solution",
+    question: `What problem is Passage 2 mainly responding to?`,
     options: [
-      "It creates confusion",
-      "It ends the passage abruptly",
-      "It shows her feelings directly, making the story more personal",
-      "It is unnecessary",
+      "Too many students were absent",
+      "The school needed to save water",
+      "The garden had too many buckets",
+      "The classrooms had no posters",
     ],
-    correctAnswer: 2,
-    explanation: `Ending with Kezia's own words gives the reader a direct sense of her feelings, making the story more personal.`
+    correctAnswer: 1,
+    explanation: `The dry season created a need for the school to use water carefully.`
   },
   {
     id: 16,
     type: "vocabulary",
-    skill: "Synonyms",
-    question: `Which word is a SYNONYM for 'brave'?`,
-    options: [
-      "Fearful",
-      "Timid",
-      "Courageous",
-      "Weak",
-    ],
-    correctAnswer: 2,
-    explanation: `'Courageous' means having bravery. It is a synonym for 'brave.'`
+    skill: "Context Clues",
+    question: `Read the sentence.
+
+"The students waited patiently while the librarian searched for the missing book."
+
+What does "patiently" mean in this sentence?`,
+    options: ["without rushing", "with anger", "in a loud way", "without listening"],
+    correctAnswer: 0,
+    explanation: `Waiting patiently means waiting calmly without rushing or complaining.`
   },
   {
     id: 17,
     type: "vocabulary",
-    skill: "Antonyms",
-    question: `The ANTONYM of 'generous' is:`,
-    options: [
-      "Kind",
-      "Giving",
-      "Selfish",
-      "Warm",
-    ],
-    correctAnswer: 2,
-    explanation: `An antonym is the opposite. 'Selfish' is the opposite of 'generous.'`
+    skill: "Context Clues",
+    question: `Read the sentence.
+
+"After the heavy rain, the football field was muddy, so the players moved cautiously."
+
+What does "cautiously" mean?`,
+    options: ["carelessly", "carefully", "quickly", "angrily"],
+    correctAnswer: 1,
+    explanation: `The muddy field could be slippery, so the players moved carefully.`
   },
   {
     id: 18,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `The athlete SPRINTED across the finish line. What does 'sprinted' most likely mean?`,
-    options: [
-      "Walked slowly",
-      "Stopped suddenly",
-      "Ran very fast",
-      "Jumped high",
-    ],
-    correctAnswer: 2,
-    explanation: `'Sprinted' means running at full speed. The context of finishing a race supports this.`
+    skill: "Multiple Meaning Words",
+    question: `Which sentence uses "bank" to mean land beside water?`,
+    options: ["Maya saved her money in the bank.", "The goat stood near the river bank.", "The bank opened at nine o'clock.", "Dad used his bank card at the shop."],
+    correctAnswer: 1,
+    explanation: `A river bank is the land along the side of a river.`
   },
   {
     id: 19,
     type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'Her voice was music to my ears.' This is an example of:`,
-    options: [
-      "Simile",
-      "Metaphor",
-      "Personification",
-      "Alliteration",
-    ],
-    correctAnswer: 1,
-    explanation: `This is a metaphor — it directly states her voice WAS music, without using 'like' or 'as.'`
+    skill: "Prefixes",
+    question: `Read the sentence.
+
+"The teacher asked Andre to reread the instruction before answering."
+
+What does "reread" mean?`,
+    options: ["read again", "read aloud", "read quickly", "read silently"],
+    correctAnswer: 0,
+    explanation: `The prefix "re-" means again, so reread means to read again.`
   },
   {
     id: 20,
     type: "vocabulary",
-    skill: "Word Meaning",
-    question: `The word 'investigate' means:`,
-    options: [
-      "To ignore something",
-      "To examine or look into something carefully",
-      "To destroy something",
-      "To celebrate something",
-    ],
+    skill: "Figurative Language",
+    question: `"The classroom buzzed like a busy hive before the quiz began."
+
+What type of figurative language is used?`,
+    options: ["metaphor", "simile", "personification", "contraction"],
     correctAnswer: 1,
-    explanation: `To 'investigate' means to examine carefully, often to find out the truth.`
+    explanation: `The sentence compares the classroom to a busy hive using "like," so it is a simile.`
   },
   {
     id: 21,
     type: "vocabulary",
-    skill: "Multiple Meaning",
-    question: `Which sentence uses the word 'light' to describe weight?`,
-    options: [
-      "She turned on the light",
-      "The feather was so light it floated away",
-      "The light from the sun is warm",
-      "He needs a light to see in the dark",
-    ],
-    correctAnswer: 1,
-    explanation: `In this sentence, 'light' means not heavy — describing the feather's weight.`
+    skill: "Word Meaning in Context",
+    question: `Read the sentence.
+
+"The teacher gave clear instructions so everyone understood the task."
+
+What does "clear" mean in this sentence?`,
+    options: ["easy to understand", "made of glass", "completely empty", "very quiet"],
+    correctAnswer: 0,
+    explanation: `Clear instructions are easy to understand.`
   },
   {
     id: 22,
     type: "vocabulary",
-    skill: "Prefix un-",
-    question: `The prefix 'un-' changes a word to mean its opposite. Which word means NOT comfortable?`,
-    options: [
-      "recomfort",
-      "comfort",
-      "uncomfortable",
-      "comforting",
-    ],
+    skill: "Suffixes",
+    question: `What does the suffix "-ful" help tell the reader in the word "helpful"?`,
+    options: ["without", "again", "full of", "before"],
     correctAnswer: 2,
-    explanation: `Un + comfortable = uncomfortable = not comfortable.`
+    explanation: `The suffix "-ful" means full of, so helpful means full of help or useful.`
   },
   {
     id: 23,
     type: "vocabulary",
-    skill: "Suffix -ful",
-    question: `Adding '-ful' to 'colour' creates 'colourful', which means:`,
-    options: [
-      "without colour",
-      "having lots of colour",
-      "becoming coloured",
-      "colouring again",
-    ],
+    skill: "Antonyms in Context",
+    question: `Read the sentence.
+
+"Although Malik felt nervous before the race, his sister remained calm."
+
+Which word is the opposite of "nervous"?`,
+    options: ["worried", "calm", "excited", "active"],
     correctAnswer: 1,
-    explanation: `The suffix '-ful' means full of or having a lot of. Colourful = having lots of colour.`
+    explanation: `The sentence shows calm as the opposite of nervous.`
   },
   {
     id: 24,
     type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'The thunder roared like an angry lion.' This is a:`,
-    options: [
-      "Metaphor",
-      "Simile",
-      "Hyperbole",
-      "Personification",
-    ],
-    correctAnswer: 1,
-    explanation: `It uses 'like' to compare thunder to a lion, making it a simile.`
+    skill: "Shades of Meaning",
+    question: `Which word suggests the STRONGEST feeling of happiness?`,
+    options: ["pleased", "content", "delighted", "fine"],
+    correctAnswer: 2,
+    explanation: `Delighted suggests a stronger feeling of happiness than the other choices.`
   },
   {
     id: 25,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `The playground was DESERTED after the storm. 'Deserted' means:`,
-    options: [
-      "full of children",
-      "flooded with water",
-      "completely empty",
-      "very noisy",
-    ],
-    correctAnswer: 2,
-    explanation: `'Deserted' means abandoned or completely empty — supported by the storm context.`
+    question: `Read the sentence.
+
+"The abandoned house stood silent at the end of the road."
+
+What does "abandoned" most likely mean?`,
+    options: ["newly painted", "left empty", "carefully protected", "filled with people"],
+    correctAnswer: 1,
+    explanation: `Abandoned means left empty or no longer in use.`
   },
   {
     id: 26,
     type: "grammar",
-    skill: "Proper Nouns",
-    question: `Which word is a PROPER NOUN?`,
-    options: [
-      "city",
-      "school",
-      "Jamaica",
-      "teacher",
-    ],
-    correctAnswer: 2,
-    explanation: `A proper noun names a specific person, place, or thing and begins with a capital letter. 'Jamaica' is a specific country.`
+    skill: "Sentence Editing",
+    question: `Which sentence is written correctly?`,
+    options: ["The children was waiting outside.", "The children were waiting outside.", "The children is waiting outside.", "The children be waiting outside."],
+    correctAnswer: 1,
+    explanation: `"Children" is plural, so "were" is the correct verb.`
   },
   {
     id: 27,
     type: "grammar",
-    skill: "Verbs",
-    question: `Which sentence contains an ACTION VERB?`,
-    options: [
-      "The sky is blue",
-      "She seems tired",
-      "The dog chased the ball",
-      "It is very hot today",
-    ],
-    correctAnswer: 2,
-    explanation: `'Chased' is an action verb — it shows what the dog did.`
+    skill: "Punctuation",
+    question: `Which sentence uses punctuation correctly?`,
+    options: ["We bought mangoes bananas and oranges.", "We bought mangoes, bananas, and oranges.", "We bought, mangoes bananas and oranges.", "We bought mangoes bananas, and oranges,"],
+    correctAnswer: 1,
+    explanation: `Commas correctly separate items in a list.`
   },
   {
     id: 28,
     type: "grammar",
-    skill: "Adjectives",
-    question: `Choose the sentence that contains TWO adjectives.`,
-    options: [
-      "The dog ran fast",
-      "The tall, thin man walked slowly",
-      "She laughed loudly",
-      "He carried the box",
-    ],
+    skill: "Pronouns in Context",
+    question: `Choose the word that best completes the sentence.
+
+"Simone and ___ are preparing the poster."`,
+    options: ["me", "I", "my", "mine"],
     correctAnswer: 1,
-    explanation: `'Tall' and 'thin' both describe the man. These are two adjectives.`
+    explanation: `"I" is the correct subject pronoun in this sentence.`
   },
   {
     id: 29,
     type: "grammar",
-    skill: "Sentence Types",
-    question: `Which sentence is an EXCLAMATION?`,
-    options: [
-      "Are you coming to the party?",
-      "Come inside right now",
-      "What a wonderful surprise!",
-      "I like mango juice",
-    ],
+    skill: "Verb Tense",
+    question: `Choose the correct verb.
+
+"Yesterday, the class ___ a science experiment."`,
+    options: ["conduct", "conducts", "conducted", "conducting"],
     correctAnswer: 2,
-    explanation: `An exclamation expresses strong emotion and ends with an exclamation mark. 'What a wonderful surprise!' does this.`
+    explanation: `"Yesterday" signals past tense, so "conducted" is correct.`
   },
   {
     id: 30,
     type: "grammar",
-    skill: "Full Stops",
-    question: `Which sentence is correctly punctuated?`,
-    options: [
-      "We went to market on Saturday.",
-      "We went to market on Saturday",
-      "We, went to market on Saturday.",
-      "We went to market on Saturday!",
-    ],
-    correctAnswer: 0,
-    explanation: `A statement ends with a full stop. Option A is correctly punctuated.`
+    skill: "Capitalisation",
+    question: `Which sentence is written correctly?`,
+    options: ["We visited kingston during the holiday.", "We visited Kingston during the holiday.", "We visited kingston During the holiday.", "we visited Kingston during the holiday."],
+    correctAnswer: 1,
+    explanation: `Kingston is a proper noun and must begin with a capital letter.`
   },
   {
     id: 31,
     type: "grammar",
-    skill: "Past Tense",
-    question: `Choose the correct PAST TENSE form: 'Yesterday, the children ___ in the park.'`,
-    options: [
-      "plays",
-      "playing",
-      "played",
-      "will play",
-    ],
-    correctAnswer: 2,
-    explanation: `Yesterday indicates past tense. 'Played' is the simple past of 'play.'`
+    skill: "Sentence Completion",
+    question: `Choose the best word to complete the sentence.
+
+"The teacher smiled ___ the students completed the task."`,
+    options: ["because", "under", "slowly", "between"],
+    correctAnswer: 0,
+    explanation: `"Because" correctly explains the reason for the smile.`
   },
   {
     id: 32,
     type: "grammar",
-    skill: "Pronouns",
-    question: `Which pronoun correctly replaces the underlined words? 'John and Mary went to the shop.'`,
-    options: [
-      "They",
-      "Them",
-      "Their",
-      "We",
-    ],
-    correctAnswer: 0,
-    explanation: `'John and Mary' refers to two people (third-person plural). Replace with 'They.'`
+    skill: "Apostrophes",
+    question: `Which sentence shows possession correctly?`,
+    options: ["The boys bag was torn.", "The boy's bag was torn.", "The boys's bag was torn.", "The boys bag was torn."],
+    correctAnswer: 1,
+    explanation: `The apostrophe shows that the bag belongs to the boy.`
   },
   {
     id: 33,
     type: "grammar",
-    skill: "Subject-Verb Agreement",
-    question: `Choose the correct verb: 'The books on the shelf ___ very old.'`,
-    options: [
-      "is",
-      "was",
-      "are",
-      "has",
-    ],
+    skill: "Contractions",
+    question: `Which word is the correct contraction for "they are"?`,
+    options: ["their", "theyre", "they're", "there"],
     correctAnswer: 2,
-    explanation: `'Books' is plural, so use the plural verb 'are.'`
+    explanation: `"They are" becomes "they're."`
   },
   {
     id: 34,
     type: "grammar",
-    skill: "Apostrophe Contraction",
-    question: `Which word is a CONTRACTION of 'do not'?`,
-    options: [
-      "dont",
-      "do'nt",
-      "don't",
-      "doesn't",
-    ],
+    skill: "Complete Sentences",
+    question: `Which option is a complete sentence?`,
+    options: ["Running across the field.", "Because the rain started suddenly.", "The students packed their bags and left.", "After finishing the worksheet."],
     correctAnswer: 2,
-    explanation: `A contraction removes letters and replaces them with an apostrophe. 'Do not' → 'don't.'`
+    explanation: `A complete sentence has a subject and a complete thought.`
   },
   {
     id: 35,
     type: "grammar",
-    skill: "Sentence Correction",
-    question: `Which sentence is CORRECT?`,
-    options: [
-      "Him and me went swimming",
-      "He and I went swimming",
-      "He and me went swimming",
-      "Him and I went swimming",
-    ],
-    correctAnswer: 1,
-    explanation: `Use subject pronouns (I, he) when they are the subject. 'He and I went swimming' is correct.`
+    skill: "Word Choice",
+    question: `Choose the best word.
+
+"The principal asked students to speak ___ in the library."`,
+    options: ["quietly", "quiet", "quieter", "quietness"],
+    correctAnswer: 0,
+    explanation: `An adverb is needed to describe how students should speak.`
   },
   {
     id: 36,
     type: "writing",
-    skill: "Planning",
-    question: `Before writing a story, which step helps a writer organise their ideas?`,
-    options: [
-      "Writing the conclusion first",
-      "Making a plan or mind map",
-      "Choosing a title only",
-      "Starting immediately without thinking",
-    ],
+    skill: "Purpose",
+    question: `A student writes a letter asking the principal for more shade in the play area.
+
+What is the MAIN purpose of the letter?`,
+    options: ["to entertain", "to persuade", "to describe a game", "to retell a story"],
     correctAnswer: 1,
-    explanation: `Planning or creating a mind map helps organise ideas before writing, making the writing clearer.`
+    explanation: `The student is trying to convince the principal to make a change.`
   },
   {
     id: 37,
     type: "writing",
-    skill: "Descriptive Writing",
-    question: `Which sentence uses the BEST descriptive language?`,
-    options: [
-      "The dog ran.",
-      "The dog moved.",
-      "The shaggy golden dog sprinted joyfully across the green lawn.",
-      "There was a dog.",
-    ],
-    correctAnswer: 2,
-    explanation: `Descriptive writing uses specific adjectives and adverbs to create a vivid image. Option C is far more descriptive.`
+    skill: "Audience",
+    question: `A safety notice about wet floors is mainly written for:`,
+    options: ["school visitors and students", "only librarians", "radio presenters", "shop owners"],
+    correctAnswer: 0,
+    explanation: `Anyone walking through the area needs the warning.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "Topic Sentence",
-    question: `Which makes the BEST topic sentence for a paragraph about recycling?`,
-    options: [
-      "Some things can be recycled",
-      "Recycling helps to protect the environment and reduce waste",
-      "I have a blue recycling bin",
-      "Paper is one thing you can recycle",
-    ],
+    skill: "Supporting Details",
+    question: `Which detail best supports the topic sentence:
+
+"Reading every day improves learning."`,
+    options: ["Books come in many colours.", "Daily reading helps students build vocabulary and understanding.", "Some libraries close early.", "My favourite chair is blue."],
     correctAnswer: 1,
-    explanation: `This clearly states the main idea of a paragraph about recycling.`
+    explanation: `This directly supports the idea that daily reading improves learning.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Audience",
-    question: `A student is writing a warning notice about strong currents at a beach. The BEST audience for this notice is:`,
-    options: [
-      "Scientists studying ocean currents",
-      "Beach visitors who need to stay safe",
-      "Teachers in a classroom",
-      "Historians studying the sea",
-    ],
-    correctAnswer: 1,
-    explanation: `A warning notice about beach currents is most useful to visitors who need to know how to stay safe.`
+    skill: "Paragraph Organisation",
+    question: `What should usually come after a topic sentence in a paragraph?`,
+    options: ["supporting details", "a new title", "an unrelated joke", "another topic sentence"],
+    correctAnswer: 0,
+    explanation: `Supporting details explain and develop the main idea.`
   },
   {
     id: 40,
     type: "writing",
-    skill: "Coherence",
-    question: `In a well-written paragraph, all sentences should:`,
-    options: [
-      "Be very long and detailed",
-      "Include dialogue",
-      "Relate to the main idea stated in the topic sentence",
-      "Use rhyme",
-    ],
-    correctAnswer: 2,
-    explanation: `A coherent paragraph has all sentences supporting the topic sentence — the main idea.`
-  }
-]
-
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({ option, index }))
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [optionsWithOriginalIndex[j], optionsWithOriginalIndex[i]]
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex((item) => item.index === question.correctAnswer)
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    }
-  })
-}
-
-const SECTION_CONFIG = [
-  { type: "reading" as const,    label: "Reading Comprehension",  note: "main idea, inference, author's purpose, tone, text structure" },
-  { type: "vocabulary" as const, label: "Vocabulary & Word Study", note: "context clues, synonyms, antonyms, figurative language, word meaning" },
-  { type: "grammar" as const,    label: "Grammar & Language Use",  note: "parts of speech, sentence structure, punctuation, tense, agreement" },
-  { type: "writing" as const,    label: "Writing Skills",          note: "paragraph structure, purpose, audience, techniques, planning" },
+    skill: "Descriptive Writing",
+    question: `Which sentence uses the strongest descriptive language?`,
+    options: ["The bird flew away.", "The bright blue bird soared gracefully across the sky.", "There was a bird.", "A bird moved."],
+    correctAnswer: 1,
+    explanation: `Strong descriptive writing uses vivid details and precise word choice.`
+  },
 ]
 
 export default function G5LaEasy2MockTest() {
