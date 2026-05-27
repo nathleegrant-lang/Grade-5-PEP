@@ -649,6 +649,25 @@ The passage ends with Kezia speaking. What does this add?`,
   }
 ]
 
+const shuffleAnswerOptions = (questions: Question[]): Question[] => {
+  return questions.map((question) => {
+    const optionsWithOriginalIndex = question.options.map((option, index) => ({ option, index }))
+
+    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [optionsWithOriginalIndex[j], optionsWithOriginalIndex[i]]
+    }
+
+    const correctAnswer = optionsWithOriginalIndex.findIndex((item) => item.index === question.correctAnswer)
+
+    return {
+      ...question,
+      options: optionsWithOriginalIndex.map((item) => item.option),
+      correctAnswer,
+    }
+  })
+}
+
 const SECTION_CONFIG = [
   { type: "reading" as const,    label: "Reading Comprehension",  note: "main idea, inference, author's purpose, tone, text structure" },
   { type: "vocabulary" as const, label: "Vocabulary & Word Study", note: "context clues, synonyms, antonyms, figurative language, word meaning" },
