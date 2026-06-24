@@ -120,7 +120,7 @@ What can you infer from the club making a schedule before leaving?`,
   },
   {
     id: 6,
-    type: `vocabulary`,
+    type: `reading`,
     skill: `Vocabulary in Context`,
     question: `Read the passage then answer the question.
 
@@ -138,7 +138,7 @@ In the passage, the word "moist" most nearly means:`,
   },
   {
     id: 7,
-    type: `vocabulary`,
+    type: `reading`,
     skill: `Vocabulary in Context`,
     question: `Read the passage then answer the question.
 
@@ -156,7 +156,7 @@ In the passage, the word "loosen" most nearly means:`,
   },
   {
     id: 8,
-    type: `vocabulary`,
+    type: `reading`,
     skill: `Vocabulary in Context`,
     question: `Read the passage then answer the question.
 
@@ -354,8 +354,8 @@ In the passage, "gathered" most nearly means:`,
   },
   {
     id: 19,
-    type: `reading`,
-    skill: `Cause and Effect`,
+    type: `vocabulary`,
+    skill: `Vocabulary in Context`,
     question: `Read the passage then answer the question.
 
 "On Saturday, families gathered at the community centre for Clean-Up Day. Mr. Brown handed out gloves, garbage bags, and rakes. Teams swept the sidewalks, removed plastic bottles from the drain, and planted bright flowers near the bus stop. By noon, the area looked neat and welcoming. The volunteers promised to keep working together so the community would stay clean."
@@ -372,8 +372,8 @@ What happened because the teams cleaned and planted flowers?`,
   },
   {
     id: 20,
-    type: `reading`,
-    skill: `Theme`,
+    type: `vocabulary`,
+    skill: `Vocabulary in Context`,
     question: `Read the passage then answer the question.
 
 "On Saturday, families gathered at the community centre for Clean-Up Day. Mr. Brown handed out gloves, garbage bags, and rakes. Teams swept the sidewalks, removed plastic bottles from the drain, and planted bright flowers near the bus stop. By noon, the area looked neat and welcoming. The volunteers promised to keep working together so the community would stay clean."
@@ -390,73 +390,73 @@ Which lesson best fits the passage?`,
   },
   {
     id: 21,
-    type: `grammar`,
-    skill: `Subject-Verb Agreement`,
-    question: `Choose the sentence with correct subject-verb agreement.`,
+    type: `vocabulary`,
+    skill: `Synonyms`,
+    question: `Which word is closest in meaning to "protect" in this sentence? The club wanted to protect the young trees.`,
     options: [
-      `The pupils waters the trees.`,
-      `The pupils water the trees.`,
-      `The pupils watering the trees.`,
-      `The pupils is water the trees.`,
+      `Guard`,
+      `Forget`,
+      `Damage`,
+      `Hide`,
     ],
-    correctAnswer: 1,
-    explanation: `"Pupils" is plural, so it needs the plural verb "water."`,
+    correctAnswer: 0,
+    explanation: `To protect something means to guard it or keep it safe.`,
   },
   {
     id: 22,
-    type: `grammar`,
-    skill: `Verb Tense`,
-    question: `Choose the sentence written in the past tense.`,
+    type: `vocabulary`,
+    skill: `Antonyms`,
+    question: `Which word is the opposite of "clean"?`,
     options: [
-      `The families gather at the centre.`,
-      `The families will gather at the centre.`,
-      `The families gathered at the centre.`,
-      `The families are gathering at the centre.`,
+      `Neat`,
+      `Dirty`,
+      `Fresh`,
+      `Tidy`,
     ],
-    correctAnswer: 2,
-    explanation: `"Gathered" is the past-tense form of the verb.`,
+    correctAnswer: 1,
+    explanation: `Dirty is the opposite of clean.`,
   },
   {
     id: 23,
-    type: `grammar`,
-    skill: `Pronouns`,
-    question: `Choose the best pronoun to complete the sentence: Mrs. Reid showed the pupils how to plant trees, and ___ listened carefully.`,
+    type: `vocabulary`,
+    skill: `Word Meaning`,
+    question: `What does "recycle" mean?`,
     options: [
-      `they`,
-      `he`,
-      `it`,
-      `she`,
+      `To throw useful materials into the sea`,
+      `To use materials again in a new way`,
+      `To leave litter on the ground`,
+      `To cut down every tree`,
     ],
-    correctAnswer: 0,
-    explanation: `The pronoun "they" correctly refers to the plural noun "pupils."`,
+    correctAnswer: 1,
+    explanation: `Recycle means to process or use materials again instead of wasting them.`,
   },
   {
     id: 24,
-    type: `grammar`,
-    skill: `Capitalization`,
-    question: `Choose the sentence with correct capitalization.`,
+    type: `vocabulary`,
+    skill: `Context Clues`,
+    question: `Choose the best meaning of "supplies" in this sentence: Mr. Brown handed out supplies such as gloves and garbage bags.`,
     options: [
-      `on saturday, families gathered at the community centre.`,
-      `On saturday, families gathered at the community centre.`,
-      `On Saturday, families gathered at the community centre.`,
-      `on Saturday, Families gathered at the community centre.`,
+      `Things needed for a job`,
+      `Songs for a programme`,
+      `Places to visit`,
+      `Rules for a race`,
     ],
-    correctAnswer: 2,
-    explanation: `The first word of a sentence and the day of the week, "Saturday," must be capitalized.`,
+    correctAnswer: 0,
+    explanation: `Gloves and garbage bags are things the volunteers needed for the clean-up job.`,
   },
   {
     id: 25,
-    type: `grammar`,
-    skill: `Punctuation`,
-    question: `Choose the sentence with correct punctuation.`,
+    type: `vocabulary`,
+    skill: `Multiple Meaning Words`,
+    question: `In the sentence "The class will check the trees each week," what does "check" mean?`,
     options: [
-      `Mr. Brown handed out gloves garbage bags and rakes.`,
-      `Mr. Brown handed out gloves, garbage bags, and rakes.`,
-      `Mr Brown handed out gloves, garbage bags and rakes`,
-      `Mr. Brown handed out, gloves garbage bags, and rakes.`,
+      `To examine or look at carefully`,
+      `A mark on a paper`,
+      `A bill at a restaurant`,
+      `To stop playing`,
     ],
-    correctAnswer: 1,
-    explanation: `Commas correctly separate the items in the list, and the sentence ends with a period.`,
+    correctAnswer: 0,
+    explanation: `Here, check means to examine the trees to see how they are growing.`,
   },
   {
     id: 26,
@@ -530,73 +530,73 @@ Which lesson best fits the passage?`,
   },
   {
     id: 31,
-    type: `writing`,
-    skill: `Topic Sentence`,
-    question: `Which is the best topic sentence for a paragraph about the School Environmental Club?`,
+    type: `grammar`,
+    skill: `Subject-Verb Agreement`,
+    question: `Choose the sentence with correct subject-verb agreement.`,
     options: [
-      `The School Environmental Club helped make the school grounds cleaner and greener.`,
-      `Mrs. Reid wore a blue shirt on Friday.`,
-      `Some trees are taller than houses.`,
-      `I like lunch more than recess.`,
+      `The volunteers collects litter near the drain.`,
+      `The volunteers collect litter near the drain.`,
+      `The volunteers collecting litter near the drain.`,
+      `The volunteers has collect litter near the drain.`,
     ],
-    correctAnswer: 0,
-    explanation: `The best topic sentence clearly introduces the main idea of the club improving the school grounds.`,
+    correctAnswer: 1,
+    explanation: `The plural subject "volunteers" agrees with the verb "collect."`,
   },
   {
     id: 32,
-    type: `writing`,
-    skill: `Supporting Detail`,
-    question: `Which sentence best supports this topic: Clean-Up Day improved the community area.`,
+    type: `grammar`,
+    skill: `Verb Tense`,
+    question: `Choose the sentence written in the future tense.`,
     options: [
-      `Teams swept the sidewalks and removed plastic bottles from the drain.`,
-      `My cousin has a red bicycle.`,
-      `Saturday is after Friday.`,
-      `Some people enjoy watching television.`,
+      `The club watered the trees yesterday.`,
+      `The club waters the trees every Friday.`,
+      `The club will water the trees tomorrow.`,
+      `The club is watering the trees now.`,
     ],
-    correctAnswer: 0,
-    explanation: `Sweeping sidewalks and removing bottles directly supports the idea that Clean-Up Day improved the area.`,
+    correctAnswer: 2,
+    explanation: `The words "will water" show an action that is going to happen in the future.`,
   },
   {
     id: 33,
-    type: `writing`,
-    skill: `Concluding Sentence`,
-    question: `Which is the best concluding sentence for a paragraph about volunteers cleaning a community?`,
+    type: `grammar`,
+    skill: `Pronouns`,
+    question: `Choose the best pronoun to complete the sentence: Amara and Jayden picked up litter, and ___ placed it in a bag.`,
     options: [
-      `Their teamwork showed that everyone can help keep the community clean.`,
-      `Mr. Brown handed out gloves first.`,
-      `The bus stop is near the road.`,
-      `Garbage bags can be black or white.`,
+      `he`,
+      `she`,
+      `they`,
+      `it`,
     ],
-    correctAnswer: 0,
-    explanation: `A concluding sentence should wrap up the paragraph’s main idea about teamwork and keeping the community clean.`,
+    correctAnswer: 2,
+    explanation: `"They" correctly refers to the two people, Amara and Jayden.`,
   },
   {
     id: 34,
-    type: `writing`,
-    skill: `Sentence Combining`,
-    question: `Which sentence best combines these ideas? The pupils watered the trees. The pupils added dry leaves around them.`,
+    type: `grammar`,
+    skill: `Commas in a Series`,
+    question: `Choose the sentence with commas used correctly in a series.`,
     options: [
-      `The pupils watered the trees and added dry leaves around them.`,
-      `The pupils watered the trees, the pupils added.`,
-      `Added dry leaves around them the pupils watered.`,
-      `The trees watered the pupils and dry leaves.`,
+      `The students brought gloves bags and rakes.`,
+      `The students brought gloves, bags, and rakes.`,
+      `The students brought, gloves bags, and rakes.`,
+      `The students, brought gloves bags and rakes.`,
     ],
-    correctAnswer: 0,
-    explanation: `The best combined sentence joins the two related actions clearly with "and."`,
+    correctAnswer: 1,
+    explanation: `Commas separate the items in the list: gloves, bags, and rakes.`,
   },
   {
     id: 35,
-    type: `writing`,
-    skill: `Best Word Choice`,
-    question: `Which word best completes the sentence? The volunteers worked ___ to finish the clean-up by noon.`,
+    type: `grammar`,
+    skill: `Adverbs`,
+    question: `Which word is an adverb in this sentence? The volunteers worked carefully near the busy road.`,
     options: [
-      `carelessly`,
-      `together`,
-      `sleepily`,
-      `rudely`,
+      `volunteers`,
+      `worked`,
+      `carefully`,
+      `road`,
     ],
-    correctAnswer: 1,
-    explanation: `"Together" best fits because the passage emphasizes teams and volunteers working as a group.`,
+    correctAnswer: 2,
+    explanation: `"Carefully" is an adverb because it tells how the volunteers worked.`,
   },
   {
     id: 36,
@@ -670,6 +670,33 @@ Which lesson best fits the passage?`,
   },
 ]
 
+
+const shuffleAnswerOptions = (questions: Question[]): Question[] => {
+  return questions.map((question) => {
+    const optionsWithOriginalIndex = question.options.map((option, index) => ({ option, index }))
+
+    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [optionsWithOriginalIndex[j], optionsWithOriginalIndex[i]]
+    }
+
+    const correctAnswer = optionsWithOriginalIndex.findIndex((item) => item.index === question.correctAnswer)
+
+    return {
+      ...question,
+      options: optionsWithOriginalIndex.map((item) => item.option),
+      correctAnswer,
+    }
+  })
+}
+
+const SECTION_CONFIG = [
+  { type: "reading" as const,    label: "Reading Comprehension",  note: "main idea, inference, author's purpose, tone, text structure" },
+  { type: "vocabulary" as const, label: "Vocabulary & Word Study", note: "context clues, synonyms, antonyms, figurative language, word meaning" },
+  { type: "grammar" as const,    label: "Grammar & Language Use",  note: "parts of speech, sentence structure, punctuation, tense, agreement" },
+  { type: "writing" as const,    label: "Writing Skills",          note: "paragraph structure, purpose, audience, techniques, planning" },
+]
+
 export default function G5LaEasy6MockTest() {
   const { isPremium, user } = useAuth()
   const [started, setStarted]             = useState(false)
@@ -707,7 +734,6 @@ export default function G5LaEasy6MockTest() {
 
   const calcScore  = () => answers.reduce<number>((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct   = () => Math.round((calcScore() / totalQuestions) * 100)
-
 
   useEffect(() => {
     if (!showResults || !user?.id || hasSavedResult.current) return
