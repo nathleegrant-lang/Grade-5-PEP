@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -695,6 +695,7 @@ export default function G5LaEasy3MockTest() {
   const [answers, setAnswers]             = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]           = useState(60 * 60)
   const [randomizedQuestions, setRandomizedQuestions] = useState<Question[]>([])
+  const hasSavedResult = useRef(false)
 
   const sourceQuestions = isPremium ? g5LaEasy3Questions : g5LaEasy3Questions.slice(0, FREE_QUESTION_LIMIT)
   const availableQuestions = randomizedQuestions.length > 0 ? randomizedQuestions : sourceQuestions
@@ -724,6 +725,27 @@ export default function G5LaEasy3MockTest() {
   const calcScore  = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct   = () => Math.round((calcScore() / totalQuestions) * 100)
 
+  useEffect(() => {
+    if (!showResults || !user?.id || hasSavedResult.current) return
+
+    hasSavedResult.current = true
+    const completedAtIso = new Date().toISOString()
+    void saveStudentTestResult({
+      parentId: user.id,
+      studentName: user?.childName ?? "Student",
+      grade: "grade5",
+      subject: "Literacy",
+      testName: "Easy 3",
+      difficulty: "Easy",
+      score: calcScore(),
+      totalQuestions,
+      percentage: scorePct(),
+      completedAt: completedAtIso,
+    }).catch(() => {
+      hasSavedResult.current = false
+    })
+  }, [showResults, user?.id, user?.childName, totalQuestions, answers])
+
   const getGrade = () => {
     const p = scorePct()
     if (p >= 85) return { grade: "Excellent",         color: "text-green-600" }
@@ -749,13 +771,14 @@ export default function G5LaEasy3MockTest() {
     setCurrentQuestion(0)
     setTimeLeft(60 * 60)
     setShowResults(false)
+    hasSavedResult.current = false
     setStarted(true)
   }
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
     setRandomizedQuestions([])
-    setAnswers(new Array(sourceQuestions.length).fill(null)); setTimeLeft(60 * 60)
+    setAnswers(new Array(sourceQuestions.length).fill(null)); setTimeLeft(60 * 60); hasSavedResult.current = false
   }
 
   const handleSubmit = () => {
