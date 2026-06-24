@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -34,17 +34,17 @@ const g5LaEasy6Questions: Question[] = [
     skill: "Main Idea",
     question: `Read the passage then answer the question.
 
-"One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
+"The School Environmental Club met behind the Grade 5 block on Friday morning. Mrs. Reid showed the pupils how to loosen the soil before placing young trees near the fence. Each group watered one tree and added dry leaves around it to keep the ground moist. Before leaving, the club made a schedule so that different classes would check the trees and pick up litter around the school grounds."
 
-What is this passage MAINLY about?`,
+Which answer best matches the passage?`,
     options: [
-      "Miss Campbell's grocery shopping",
-      "How Donovan showed kindness and felt proud as a result",
-      "Sweet potato pudding",
-      "Elderly people needing help",
+      "to entertain with a fantasy adventure",
+      "to describe the pupils’ organized school activity",
+      "to explain why sports day was postponed",
+      "to list rules for a spelling contest",
     ],
-    correctAnswer: 1,
-    explanation: `The passage is about Donovan's act of kindness, Miss Campbell's gratitude, and his mother's affirmation — the main idea is kindness and its rewards.`
+    correctAnswer: 0,
+    explanation: `The passage shows school environmental club as a planned, helpful activity involving pupils.`
   },
   {
     id: 2,
@@ -52,17 +52,17 @@ What is this passage MAINLY about?`,
     skill: "Detail",
     question: `Read the passage then answer the question.
 
-"One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
+"The School Environmental Club met behind the Grade 5 block on Friday morning. Mrs. Reid showed the pupils how to loosen the soil before placing young trees near the fence. Each group watered one tree and added dry leaves around it to keep the ground moist. Before leaving, the club made a schedule so that different classes would check the trees and pick up litter around the school grounds."
 
-What did Donovan notice?`,
+Which answer best matches the passage?`,
     options: [
-      "Miss Campbell was cooking",
-      "Miss Campbell was struggling to carry her groceries up the steps",
-      "Miss Campbell had dropped her purse",
-      "Miss Campbell was lost",
+      "They cancelled the activity after assembly.",
+      "They used a schedule or record to guide the activity.",
+      "They sold tickets at the gate.",
+      "They worked alone without a teacher.",
     ],
     correctAnswer: 1,
-    explanation: `The passage states 'Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps.'`
+    explanation: `The passage shows school environmental club as a planned, helpful activity involving pupils.`
   },
   {
     id: 3,
@@ -70,17 +70,17 @@ What did Donovan notice?`,
     skill: "Inference",
     question: `Read the passage then answer the question.
 
-"One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
+"The School Environmental Club met behind the Grade 5 block on Friday morning. Mrs. Reid showed the pupils how to loosen the soil before placing young trees near the fence. Each group watered one tree and added dry leaves around it to keep the ground moist. Before leaving, the club made a schedule so that different classes would check the trees and pick up litter around the school grounds."
 
-What does 'without being asked' tell us about Donovan?`,
+Which answer best matches the passage?`,
     options: [
-      "He was told to help",
-      "He helped only because he wanted food",
-      "He was genuinely kind — he helped spontaneously, not because someone told him to",
-      "He was bored and had nothing to do",
+      "Only adults did the work.",
+      "The pupils were careless.",
+      "The school was closed.",
+      "The activity was planned and helpful.",
     ],
     correctAnswer: 2,
-    explanation: `Acting without being asked shows that Donovan's kindness was genuine and came from his own values, not external instruction.`
+    explanation: `The passage shows school environmental club as a planned, helpful activity involving pupils.`
   },
   {
     id: 4,
@@ -88,568 +88,567 @@ What does 'without being asked' tell us about Donovan?`,
     skill: "Vocabulary in Context",
     question: `Read the passage then answer the question.
 
-"One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
+"The School Environmental Club met behind the Grade 5 block on Friday morning. Mrs. Reid showed the pupils how to loosen the soil before placing young trees near the fence. Each group watered one tree and added dry leaves around it to keep the ground moist. Before leaving, the club made a schedule so that different classes would check the trees and pick up litter around the school grounds."
 
-The phrase 'a glow of pride' suggests Donovan felt:`,
+Which answer best matches the passage?`,
     options: [
-      "embarrassed",
-      "warm, happy satisfaction in having done something good",
-      "tired and hungry",
-      "nervous and worried",
+      "comfortable means suitable for the person",
+      "comfortable means broken into pieces",
+      "comfortable means very expensive",
+      "comfortable means impossible to find",
     ],
-    correctAnswer: 1,
-    explanation: `A 'glow of pride' describes a warm inner feeling of satisfaction — Donovan felt good about his kind action.`
+    correctAnswer: 3,
+    explanation: `The passage shows school environmental club as a planned, helpful activity involving pupils.`
   },
   {
     id: 5,
     type: "reading",
-    skill: "Cause and Effect",
+    skill: "Author’s Purpose",
     question: `Read the passage then answer the question.
 
-"One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
+"The School Environmental Club met behind the Grade 5 block on Friday morning. Mrs. Reid showed the pupils how to loosen the soil before placing young trees near the fence. Each group watered one tree and added dry leaves around it to keep the ground moist. Before leaving, the club made a schedule so that different classes would check the trees and pick up litter around the school grounds."
 
-BECAUSE Donovan helped Miss Campbell, she:`,
+Which answer best matches the passage?`,
     options: [
-      "called his mother",
-      "gave him a slice of sweet potato pudding and thanked him warmly",
-      "carried the groceries herself",
-      "asked him to come back later",
+      "to persuade readers to avoid school clubs",
+      "to inform readers about a useful school event",
+      "to describe a storm at school",
+      "to compare two famous athletes",
     ],
-    correctAnswer: 1,
-    explanation: `The passage says Miss Campbell 'thanked him warmly and offered him a slice of sweet potato pudding' as a result of his help.`
+    correctAnswer: 0,
+    explanation: `The passage shows school environmental club as a planned, helpful activity involving pupils.`
   },
   {
     id: 6,
     type: "reading",
-    skill: "Character",
+    skill: "Sequence",
     question: `Read the passage then answer the question.
 
-"One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
+"The School Environmental Club met behind the Grade 5 block on Friday morning. Mrs. Reid showed the pupils how to loosen the soil before placing young trees near the fence. Each group watered one tree and added dry leaves around it to keep the ground moist. Before leaving, the club made a schedule so that different classes would check the trees and pick up litter around the school grounds."
 
-Based on the passage, how would you describe Donovan?`,
+Which answer best matches the passage?`,
     options: [
-      "Selfish and uninterested in others",
-      "Kind, helpful, and caring",
-      "Shy and nervous around adults",
-      "Greedy — he only helped for the pudding",
+      "First they went home; then they listened to directions.",
+      "First they received prizes; then they began planning.",
+      "First visitors left; then the event opened.",
+      "First pupils planned; then they carried out the task.",
     ],
     correctAnswer: 1,
-    explanation: `Donovan helped without being asked, which shows genuine kindness and care for others.`
+    explanation: `The passage shows school environmental club as a planned, helpful activity involving pupils.`
   },
   {
     id: 7,
     type: "reading",
-    skill: "Theme",
+    skill: "Cause and Effect",
     question: `Read the passage then answer the question.
 
-"One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
+"The School Environmental Club met behind the Grade 5 block on Friday morning. Mrs. Reid showed the pupils how to loosen the soil before placing young trees near the fence. Each group watered one tree and added dry leaves around it to keep the ground moist. Before leaving, the club made a schedule so that different classes would check the trees and pick up litter around the school grounds."
 
-What theme does this passage MOST clearly express?`,
+Which answer best matches the passage?`,
     options: [
-      "Old people need a lot of help",
-      "Kindness to others brings inner satisfaction and is always the right choice",
-      "Sweet potato pudding is delicious",
-      "Groceries are heavy",
+      "Because the bell rang, the trees became taller.",
+      "Because pupils worked together, the activity was successful.",
+      "Because no one listened, the fair opened early.",
+      "Because it rained indoors, the books disappeared.",
     ],
-    correctAnswer: 1,
-    explanation: `The passage ends with both Donovan's pride and his mother's affirmation that 'kindness is always the right choice' — this is the clear theme.`
+    correctAnswer: 2,
+    explanation: `The passage shows school environmental club as a planned, helpful activity involving pupils.`
   },
   {
     id: 8,
     type: "reading",
-    skill: "Tone",
+    skill: "Text Evidence",
     question: `Read the passage then answer the question.
 
-"One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
+"The School Environmental Club met behind the Grade 5 block on Friday morning. Mrs. Reid showed the pupils how to loosen the soil before placing young trees near the fence. Each group watered one tree and added dry leaves around it to keep the ground moist. Before leaving, the club made a schedule so that different classes would check the trees and pick up litter around the school grounds."
 
-The tone of this passage is BEST described as:`,
+Which answer best matches the passage?`,
     options: [
-      "Sad and lonely",
-      "Warm and uplifting",
-      "Humorous and playful",
-      "Tense and frightening",
+      "A sentence about teamwork and careful records supports the answer.",
+      "A sentence about a football match supports the answer.",
+      "A sentence about a lost puppy supports the answer.",
+      "A sentence about a birthday party supports the answer.",
     ],
-    correctAnswer: 1,
-    explanation: `The passage describes a heartwarming act of kindness and its positive outcome — creating a warm, uplifting tone.`
+    correctAnswer: 3,
+    explanation: `The passage shows school environmental club as a planned, helpful activity involving pupils.`
   },
   {
     id: 9,
     type: "reading",
-    skill: "Author's Purpose",
+    skill: "Main Idea",
     question: `Read the passage then answer the question.
 
-"One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
+"On Saturday, families gathered near the community centre for Clean-Up Day. Mr. Brown gave everyone gloves and bags, and the children worked in pairs along the lane. They sorted plastic bottles from leaves and swept the bus stop. By noon, the neighbourhood looked brighter, and the team agreed to remind others to keep the drains clear."
 
-The MAIN purpose of this passage is to:`,
+What does the passage help the reader understand?`,
     options: [
-      "Entertain readers with an exciting adventure",
-      "Teach readers about grocery shopping",
-      "Show the value and reward of helping others",
-      "Describe the neighbourhood where Donovan lives",
+      "The community activity helped others through shared effort.",
+      "The event was mainly about buying new uniforms.",
+      "The children avoided helping younger pupils.",
+      "The passage focuses on a private family trip.",
     ],
-    correctAnswer: 2,
-    explanation: `The passage uses a simple narrative to illustrate the value of kindness — its purpose is both to tell a story and to teach.`
+    correctAnswer: 0,
+    explanation: `The details show community clean-up day brought people together for a helpful purpose.`
   },
   {
     id: 10,
     type: "reading",
-    skill: "Vocabulary in Context",
+    skill: "Detail",
     question: `Read the passage then answer the question.
 
-"One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
+"On Saturday, families gathered near the community centre for Clean-Up Day. Mr. Brown gave everyone gloves and bags, and the children worked in pairs along the lane. They sorted plastic bottles from leaves and swept the bus stop. By noon, the neighbourhood looked brighter, and the team agreed to remind others to keep the drains clear."
 
-The word 'elderly' in the passage means:`,
+What does the passage help the reader understand?`,
     options: [
-      "young",
-      "very tall",
-      "old",
-      "unfriendly",
+      "The children avoided helping younger pupils.",
+      "The event was mainly about buying new uniforms.",
+      "The passage focuses on a private family trip.",
+      "The community activity helped others through shared effort.",
     ],
-    correctAnswer: 2,
-    explanation: `'Elderly' describes someone who is old. Miss Campbell is described as Donovan's elderly neighbour.`
+    correctAnswer: 1,
+    explanation: `The details show community clean-up day brought people together for a helpful purpose.`
   },
   {
     id: 11,
     type: "reading",
-    skill: "Summarise",
+    skill: "Inference",
     question: `Read the passage then answer the question.
 
-"One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
+"On Saturday, families gathered near the community centre for Clean-Up Day. Mr. Brown gave everyone gloves and bags, and the children worked in pairs along the lane. They sorted plastic bottles from leaves and swept the bus stop. By noon, the neighbourhood looked brighter, and the team agreed to remind others to keep the drains clear."
 
-Which BEST summarises this passage?`,
+What does the passage help the reader understand?`,
     options: [
-      "Donovan is very hungry after school",
-      "An eight-year-old boy spontaneously helps his elderly neighbour with groceries and feels proud after his mother praises his kindness",
-      "Miss Campbell is a good cook",
-      "Donovan's mother likes sweet potato pudding",
+      "The passage focuses on a private family trip.",
+      "The community activity helped others through shared effort.",
+      "The children avoided helping younger pupils.",
+      "The event was mainly about buying new uniforms.",
     ],
-    correctAnswer: 1,
-    explanation: `This captures the key events and the central message — the act of kindness and its reward.`
+    correctAnswer: 2,
+    explanation: `The details show community clean-up day brought people together for a helpful purpose.`
   },
   {
     id: 12,
     type: "reading",
-    skill: "Implied Meaning",
+    skill: "Vocabulary in Context",
     question: `Read the passage then answer the question.
 
-"One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
+"On Saturday, families gathered near the community centre for Clean-Up Day. Mr. Brown gave everyone gloves and bags, and the children worked in pairs along the lane. They sorted plastic bottles from leaves and swept the bus stop. By noon, the neighbourhood looked brighter, and the team agreed to remind others to keep the drains clear."
 
-When Donovan's mother said 'kindness is always the right choice,' she was:`,
+What does the passage help the reader understand?`,
     options: [
-      "criticising Donovan for being late",
-      "rewarding him with a gift",
-      "affirming that his kind action was morally correct and praising his character",
-      "telling him to help Miss Campbell again",
+      "The community activity helped others through shared effort.",
+      "The event was mainly about buying new uniforms.",
+      "The children avoided helping younger pupils.",
+      "The passage focuses on a private family trip.",
     ],
-    correctAnswer: 2,
-    explanation: `The mother's words affirm the moral value of Donovan's action — confirming that kindness matters, regardless of any reward received.`
+    correctAnswer: 3,
+    explanation: `The details show community clean-up day brought people together for a helpful purpose.`
   },
   {
     id: 13,
     type: "reading",
-    skill: "Text Evidence",
+    skill: "Author’s Purpose",
     question: `Read the passage then answer the question.
 
-"One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
+"On Saturday, families gathered near the community centre for Clean-Up Day. Mr. Brown gave everyone gloves and bags, and the children worked in pairs along the lane. They sorted plastic bottles from leaves and swept the bus stop. By noon, the neighbourhood looked brighter, and the team agreed to remind others to keep the drains clear."
 
-Which detail BEST shows that Miss Campbell was grateful?`,
+What does the passage help the reader understand?`,
     options: [
-      "She gave him pudding and thanked him warmly",
-      "She told Donovan's mother",
-      "She went inside quickly",
-      "She was struggling with her bags",
+      "The community activity helped others through shared effort.",
+      "The event was mainly about buying new uniforms.",
+      "The children avoided helping younger pupils.",
+      "The passage focuses on a private family trip.",
     ],
     correctAnswer: 0,
-    explanation: `Offering food and thanking him warmly are the direct, explicit signs of Miss Campbell's gratitude.`
+    explanation: `The details show community clean-up day brought people together for a helpful purpose.`
   },
   {
     id: 14,
     type: "reading",
-    skill: "Inference",
+    skill: "Compare Ideas",
     question: `Read the passage then answer the question.
 
-"One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
+"On Saturday, families gathered near the community centre for Clean-Up Day. Mr. Brown gave everyone gloves and bags, and the children worked in pairs along the lane. They sorted plastic bottles from leaves and swept the bus stop. By noon, the neighbourhood looked brighter, and the team agreed to remind others to keep the drains clear."
 
-What does the passage suggest about the relationship between Donovan and Miss Campbell?`,
+What does the passage help the reader understand?`,
     options: [
-      "They did not know each other",
-      "They were family",
-      "They were neighbours who knew and respected each other",
-      "Miss Campbell was Donovan's teacher",
+      "The children avoided helping younger pupils.",
+      "The event was mainly about buying new uniforms.",
+      "The passage focuses on a private family trip.",
+      "The community activity helped others through shared effort.",
     ],
-    correctAnswer: 2,
-    explanation: `Donovan recognised her and described her as his neighbour — they had an established, respectful neighbourly relationship.`
+    correctAnswer: 1,
+    explanation: `The details show community clean-up day brought people together for a helpful purpose.`
   },
   {
     id: 15,
     type: "reading",
-    skill: "Figurative Language",
+    skill: "Problem and Solution",
     question: `Read the passage then answer the question.
 
-"One afternoon, eight-year-old Donovan noticed that his elderly neighbour, Miss Campbell, was struggling to carry her groceries up the front steps. Without being asked, he ran over and helped her with the heavy bags. Miss Campbell thanked him warmly and offered him a slice of sweet potato pudding. Donovan felt a glow of pride as he walked home. His mother smiled when he told her what he had done and said that kindness is always the right choice."
+"On Saturday, families gathered near the community centre for Clean-Up Day. Mr. Brown gave everyone gloves and bags, and the children worked in pairs along the lane. They sorted plastic bottles from leaves and swept the bus stop. By noon, the neighbourhood looked brighter, and the team agreed to remind others to keep the drains clear."
 
-'Donovan felt a glow of pride.' This is an example of:`,
+What does the passage help the reader understand?`,
     options: [
-      "Simile",
-      "Metaphor",
-      "Alliteration",
-      "Onomatopoeia",
+      "The passage focuses on a private family trip.",
+      "The community activity helped others through shared effort.",
+      "The children avoided helping younger pupils.",
+      "The event was mainly about buying new uniforms.",
     ],
-    correctAnswer: 1,
-    explanation: `Pride is compared to warmth (a glow) through metaphor — giving an abstract feeling a concrete, sensory quality.`
+    correctAnswer: 2,
+    explanation: `The details show community clean-up day brought people together for a helpful purpose.`
   },
   {
     id: 16,
     type: "vocabulary",
-    skill: "Synonyms",
-    question: `Which word is a SYNONYM for 'generous'?`,
+    skill: "Context Clues",
+    question: `In a passage about tree planting day, the word “steady” is used in context. Which option gives the best meaning?`,
     options: [
-      "selfish",
-      "stingy",
-      "charitable",
-      "mean",
+      "In the sentence, “steady” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 2,
-    explanation: `'Charitable' means willing to give or help — a synonym for 'generous.'`
+    correctAnswer: 3,
+    explanation: `Context clues in the school or community situation show that “steady” has the practical meaning used in the correct option.`
   },
   {
     id: 17,
     type: "vocabulary",
-    skill: "Antonyms",
-    question: `The ANTONYM of 'grateful' is:`,
+    skill: "Context Clues",
+    question: `In a passage about tree planting day, the word “gently” is used in context. Which option gives the best meaning?`,
     options: [
-      "thankful",
-      "appreciative",
-      "indifferent",
-      "warm",
+      "In the sentence, “gently” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 2,
-    explanation: `'Indifferent' means uncaring or unfeeling — the opposite of grateful (appreciative).`
+    correctAnswer: 0,
+    explanation: `Context clues in the school or community situation show that “gently” has the practical meaning used in the correct option.`
   },
   {
     id: 18,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `The boy's act of COMPASSION moved everyone in the room to tears. 'Compassion' means:`,
+    question: `In a passage about tree planting day, the word “bright” is used in context. Which option gives the best meaning?`,
     options: [
-      "anger and frustration",
-      "indifference and coldness",
-      "deep sympathy and care for others' suffering",
-      "pride and arrogance",
+      "It names a place far from the school.",
+      "It means the opposite of what the sentence suggests.",
+      "It means a loud sound made by traffic.",
+      "In the sentence, “bright” means a sensible meaning that fits the activity.",
     ],
-    correctAnswer: 2,
-    explanation: `'Compassion' is deep sympathy and a desire to help those who suffer — a warm, caring response.`
+    correctAnswer: 1,
+    explanation: `Context clues in the school or community situation show that “bright” has the practical meaning used in the correct option.`
   },
   {
     id: 19,
     type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'Her kindness was a warm blanket on a cold day.' This is a:`,
+    skill: "Context Clues",
+    question: `In a passage about tree planting day, the word “careful” is used in context. Which option gives the best meaning?`,
     options: [
-      "Simile",
-      "Metaphor",
-      "Personification",
-      "Onomatopoeia",
+      "It means a loud sound made by traffic.",
+      "In the sentence, “careful” means a sensible meaning that fits the activity.",
+      "It names a place far from the school.",
+      "It means the opposite of what the sentence suggests.",
     ],
-    correctAnswer: 1,
-    explanation: `'Was a warm blanket' directly compares kindness to a blanket — a metaphor.`
+    correctAnswer: 2,
+    explanation: `Context clues in the school or community situation show that “careful” has the practical meaning used in the correct option.`
   },
   {
     id: 20,
     type: "vocabulary",
-    skill: "Word Meaning",
-    question: `The word 'volunteer' means:`,
+    skill: "Context Clues",
+    question: `In a passage about tree planting day, the word “useful” is used in context. Which option gives the best meaning?`,
     options: [
-      "someone paid to do a job",
-      "someone who helps of their own free will, without being asked or paid",
-      "someone who refuses to help",
-      "a type of community leader",
+      "In the sentence, “useful” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 1,
-    explanation: `A 'volunteer' offers help freely and without payment — acting from choice, not obligation.`
+    correctAnswer: 3,
+    explanation: `Context clues in the school or community situation show that “useful” has the practical meaning used in the correct option.`
   },
   {
     id: 21,
     type: "vocabulary",
-    skill: "Multiple Meaning",
-    question: `Which sentence uses 'kind' as a NOUN (meaning a type or category)?`,
+    skill: "Context Clues",
+    question: `In a passage about tree planting day, the word “purpose” is used in context. Which option gives the best meaning?`,
     options: [
-      "She was kind to her neighbour",
-      "What kind of mango is this?",
-      "He gave a kind smile",
-      "Kindness matters",
+      "In the sentence, “purpose” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 1,
-    explanation: `'What kind of mango' uses 'kind' as a noun meaning a type or variety.`
+    correctAnswer: 0,
+    explanation: `Context clues in the school or community situation show that “purpose” has the practical meaning used in the correct option.`
   },
   {
     id: 22,
     type: "vocabulary",
-    skill: "Prefix em-",
-    question: `The prefix 'em-' in 'empathy' means:`,
+    skill: "Context Clues",
+    question: `In a passage about tree planting day, the word “encouraged” is used in context. Which option gives the best meaning?`,
     options: [
-      "without",
-      "above",
-      "into or within — causing feeling from inside",
-      "before",
+      "It names a place far from the school.",
+      "It means the opposite of what the sentence suggests.",
+      "It means a loud sound made by traffic.",
+      "In the sentence, “encouraged” means a sensible meaning that fits the activity.",
     ],
-    correctAnswer: 2,
-    explanation: `'Em-/en-' puts one inside something. Empathy means feeling INTO another's experience from within.`
+    correctAnswer: 1,
+    explanation: `Context clues in the school or community situation show that “encouraged” has the practical meaning used in the correct option.`
   },
   {
     id: 23,
     type: "vocabulary",
-    skill: "Suffix -ment",
-    question: `Adding '-ment' to 'encourage' creates:`,
+    skill: "Context Clues",
+    question: `In a passage about tree planting day, the word “materials” is used in context. Which option gives the best meaning?`,
     options: [
-      "encourages",
-      "encouraged",
-      "encouragement",
-      "encouraging",
+      "It means a loud sound made by traffic.",
+      "In the sentence, “materials” means a sensible meaning that fits the activity.",
+      "It names a place far from the school.",
+      "It means the opposite of what the sentence suggests.",
     ],
     correctAnswer: 2,
-    explanation: `'-ment' turns a verb into a noun. 'Encouragement' = the act or result of encouraging.`
+    explanation: `Context clues in the school or community situation show that “materials” has the practical meaning used in the correct option.`
   },
   {
     id: 24,
     type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'Helping others is planting seeds for tomorrow.' This is a:`,
+    skill: "Context Clues",
+    question: `In a passage about tree planting day, the word “displayed” is used in context. Which option gives the best meaning?`,
     options: [
-      "Simile",
-      "Personification",
-      "Metaphor",
-      "Hyperbole",
+      "In the sentence, “displayed” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 2,
-    explanation: `It directly compares helping to planting seeds — a metaphor suggesting small acts of kindness grow into future benefits.`
+    correctAnswer: 3,
+    explanation: `Context clues in the school or community situation show that “displayed” has the practical meaning used in the correct option.`
   },
   {
     id: 25,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `The crowd ERUPTED in applause when the winner was announced. 'Erupted' means:`,
+    question: `In a passage about tree planting day, the word “pride” is used in context. Which option gives the best meaning?`,
     options: [
-      "whispered gently",
-      "disappeared quietly",
-      "burst out suddenly and powerfully",
-      "waited patiently",
+      "In the sentence, “pride” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 2,
-    explanation: `'Erupted' means broke out suddenly and forcefully — like a volcano, the applause was immediate and overwhelming.`
+    correctAnswer: 0,
+    explanation: `Context clues in the school or community situation show that “pride” has the practical meaning used in the correct option.`
   },
   {
     id: 26,
     type: "grammar",
-    skill: "Abstract Nouns",
-    question: `Which is an ABSTRACT NOUN?`,
+    skill: "Subject-Verb Agreement",
+    question: `The club ___ the plants every Wednesday.`,
     options: [
-      "pudding",
-      "steps",
-      "kindness",
-      "neighbour",
+      "watering",
+      "water",
+      "were water",
+      "waters",
     ],
-    correctAnswer: 2,
-    explanation: `Abstract nouns name things we cannot physically see or touch. 'Kindness' is a quality — an abstract noun.`
+    correctAnswer: 1,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 27,
     type: "grammar",
-    skill: "Linking Verbs",
-    question: `Which sentence contains a LINKING VERB?`,
+    skill: "Verb Tense",
+    question: `Yesterday, the pupils ___ their display.`,
     options: [
-      "She ran to the shop",
-      "He kicked the ball",
-      "The pudding smells delicious",
-      "She carried the bags upstairs",
+      "preparing",
+      "prepared",
+      "prepares",
+      "prepare",
     ],
     correctAnswer: 2,
-    explanation: `'Smells' links the subject (pudding) to a description (delicious) — it is a linking verb.`
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 28,
     type: "grammar",
-    skill: "Adjectives — Superlative",
-    question: `Choose the SUPERLATIVE form of 'good':`,
+    skill: "Pronoun Reference",
+    question: `Maya lent Jada a ruler because ___ had an extra one.`,
     options: [
-      "more good",
-      "gooder",
-      "better",
-      "best",
+      "she",
+      "they",
+      "it",
+      "we",
     ],
     correctAnswer: 3,
-    explanation: `The superlative of 'good' is 'best' — used to compare three or more things.`
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 29,
     type: "grammar",
-    skill: "Adverbs of Manner",
-    question: `Which word is an ADVERB OF MANNER in: 'Donovan ran quickly to help his neighbour.'?`,
+    skill: "Punctuation",
+    question: `Which sentence is punctuated correctly?`,
     options: [
-      "ran",
-      "neighbour",
-      "Donovan",
-      "quickly",
+      "“Please bring gloves,” said Mr. Brown.",
+      "“Please bring gloves” said Mr. Brown.",
+      "Please bring gloves, said Mr. Brown.",
+      "“Please bring gloves said Mr. Brown.”",
     ],
-    correctAnswer: 3,
-    explanation: `'Quickly' tells HOW Donovan ran — it is an adverb of manner.`
+    correctAnswer: 0,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 30,
     type: "grammar",
-    skill: "Punctuation — Exclamation Mark",
-    question: `Which sentence correctly uses an EXCLAMATION MARK?`,
+    skill: "Adjective Use",
+    question: `Choose the sentence with the best describing word.`,
     options: [
-      "She helped the neighbour.",
-      "Did you help her?",
-      "What a kind thing to do!",
-      "Go to the shop",
+      "Neatly poster caught the visitors.",
+      "The poster caught attention neat.",
+      "The poster neat caught attention.",
+      "The neat poster caught the visitors’ attention.",
     ],
-    correctAnswer: 2,
-    explanation: `Exclamation marks express strong emotion. 'What a kind thing to do!' expresses admiration or surprise.`
+    correctAnswer: 1,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 31,
     type: "grammar",
-    skill: "Future Tense",
-    question: `Choose the correct FUTURE TENSE form: 'Tomorrow, she ___ her neighbour with the garden.'`,
+    skill: "Conjunctions",
+    question: `Choose the best word: We packed water ___ the afternoon was hot.`,
     options: [
-      "helped",
-      "helps",
-      "will help",
-      "was helping",
+      "so",
+      "because",
+      "or",
+      "but",
     ],
     correctAnswer: 2,
-    explanation: `'Tomorrow' signals the future. 'Will help' is the simple future tense.`
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 32,
     type: "grammar",
-    skill: "Object Pronouns",
-    question: `Choose the correct OBJECT PRONOUN: 'Miss Campbell thanked ___ for his help.'`,
+    skill: "Complete Sentence",
+    question: `Which is a complete sentence?`,
     options: [
-      "he",
-      "his",
-      "him",
-      "himself",
+      "The students shared books with Grade 1.",
+      "After the bell near the gate.",
+      "Because the table with cards.",
+      "The clean bags on Saturday.",
     ],
-    correctAnswer: 2,
-    explanation: `After a verb, use an object pronoun. 'Him' is the object pronoun referring to Donovan.`
+    correctAnswer: 3,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 33,
     type: "grammar",
-    skill: "Verb Tense Consistency",
-    question: `Which sentence has CONSISTENT tenses?`,
+    skill: "Comma in a Series",
+    question: `Which sentence uses commas correctly?`,
     options: [
-      "She walked over and offers to help",
-      "She walks over and offered to help",
-      "She walked over and offered to help",
-      "She walks over and offer to help",
+      "We need pencils, glue, paper, and string.",
+      "We need pencils glue, paper and string.",
+      "We need, pencils glue paper, and string.",
+      "We need pencils, glue paper and, string.",
     ],
-    correctAnswer: 2,
-    explanation: `All verbs must be in the same tense. 'Walked and offered' are both past tense — consistent.`
+    correctAnswer: 0,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 34,
     type: "grammar",
-    skill: "Prepositions",
-    question: `Identify the PREPOSITION in: 'Donovan walked home with a warm feeling of pride.'`,
+    skill: "Possessive Noun",
+    question: `Choose the correct possessive form.`,
     options: [
-      "walked",
-      "warm",
-      "with",
-      "feeling",
+      "The classes chart was full.",
+      "The class chart’s was full.",
+      "The classs chart was full.",
+      "The class’s chart was full.",
     ],
-    correctAnswer: 2,
-    explanation: `A preposition shows a relationship between words. 'With' shows what accompanied Donovan — it is a preposition.`
+    correctAnswer: 1,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 35,
     type: "grammar",
-    skill: "Complex Sentences",
-    question: `Which is a COMPLEX sentence?`,
+    skill: "Sentence Combining",
+    question: `Which combines the ideas best?`,
     options: [
-      "Donovan helped his neighbour",
-      "Donovan helped and Miss Campbell thanked him",
-      "Although he was young, Donovan helped without being asked",
-      "He helped and he was proud",
+      "The event went because carefully pupils.",
+      "The pupils planned carefully, and the event went well.",
+      "Planning carefully and event went.",
+      "The pupils planned carefully the event went well.",
     ],
     correctAnswer: 2,
-    explanation: `A complex sentence has one main clause + a subordinate clause. 'Although he was young' is the subordinate clause.`
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 36,
     type: "writing",
-    skill: "Narrative Voice",
-    question: `When writing a personal narrative about a kind act, which point of view is MOST common?`,
+    skill: "Purpose and Audience",
+    question: `You are writing a notice for pupils about the event connected to neighbourhood clean-up. What is the best approach?`,
     options: [
-      "Third person (he/she)",
-      "Second person (you)",
-      "First person (I/me) — the narrator tells their own story",
-      "No particular point of view",
+      "Use a clear heading, important details, and polite language for a notice for pupils about the event.",
+      "Hide the date and place so readers must guess.",
+      "Use only jokes and leave out the main message.",
+      "Write one very long sentence with no punctuation.",
     ],
-    correctAnswer: 2,
-    explanation: `Personal narratives are told from the first person (I) — the narrator shares their own experience directly.`
+    correctAnswer: 3,
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
   },
   {
     id: 37,
     type: "writing",
-    skill: "Show Don't Tell",
-    question: `Which sentence SHOWS the character's feeling rather than just telling us?`,
+    skill: "Purpose and Audience",
+    question: `You are writing a friendly letter thanking helpers connected to neighbourhood clean-up. What is the best approach?`,
     options: [
-      "She was happy",
-      "She felt very good",
-      "Her face broke into a wide smile and her heart felt light as a feather",
-      "She had positive emotions",
+      "Use a clear heading, important details, and polite language for a friendly letter thanking helpers.",
+      "Hide the date and place so readers must guess.",
+      "Use only jokes and leave out the main message.",
+      "Write one very long sentence with no punctuation.",
     ],
-    correctAnswer: 2,
-    explanation: `'Show don't tell' uses specific actions and physical sensations (smile, heart feeling light) to convey emotion rather than naming it.`
+    correctAnswer: 0,
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "Beginning of a Story",
-    question: `Which is the MOST effective opening sentence for a story about a kind act?`,
+    skill: "Purpose and Audience",
+    question: `You are writing a school announcement for assembly connected to neighbourhood clean-up. What is the best approach?`,
     options: [
-      "This story is about kindness",
-      "I will tell you about when I helped someone",
-      "Nobody expected much from an ordinary Tuesday afternoon — until eight-year-old Marcus spotted the old woman struggling at the gate",
-      "Once upon a time there was a boy",
+      "Use only jokes and leave out the main message.",
+      "Hide the date and place so readers must guess.",
+      "Write one very long sentence with no punctuation.",
+      "Use a clear heading, important details, and polite language for a school announcement for assembly.",
     ],
-    correctAnswer: 2,
-    explanation: `A strong narrative opening creates immediate interest through specific detail, a specific time, and a hint of something about to happen.`
+    correctAnswer: 1,
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Building to a Climax",
-    question: `In a narrative, the CLIMAX is:`,
+    skill: "Purpose and Audience",
+    question: `You are writing a poster for the community project connected to neighbourhood clean-up. What is the best approach?`,
     options: [
-      "The beginning of the story",
-      "The background information about characters",
-      "The most exciting or significant moment — when the central action or decision occurs",
-      "The final sentence",
+      "Write one very long sentence with no punctuation.",
+      "Use a clear heading, important details, and polite language for a poster for the community project.",
+      "Use only jokes and leave out the main message.",
+      "Hide the date and place so readers must guess.",
     ],
     correctAnswer: 2,
-    explanation: `The climax is the turning point or peak of the story — the moment of greatest tension or significance.`
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
   },
   {
     id: 40,
     type: "writing",
-    skill: "Moral of the Story",
-    question: `When a writer includes a MORAL in a narrative, they are:`,
+    skill: "Purpose and Audience",
+    question: `You are writing a short report for the school newsletter connected to neighbourhood clean-up. What is the best approach?`,
     options: [
-      "Adding unnecessary extra information",
-      "Only writing for young children",
-      "Using the story to convey a deeper lesson or truth about life",
-      "Ending the story abruptly",
+      "Use a clear heading, important details, and polite language for a short report for the school newsletter.",
+      "Hide the date and place so readers must guess.",
+      "Use only jokes and leave out the main message.",
+      "Write one very long sentence with no punctuation.",
     ],
-    correctAnswer: 2,
-    explanation: `A moral is a lesson conveyed through the story — a truth about life or human values that the narrative illustrates.`
-  }
+    correctAnswer: 3,
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+  },
 ]
-
 
 const shuffleAnswerOptions = (questions: Question[]): Question[] => {
   return questions.map((question) => {
@@ -685,6 +684,7 @@ export default function G5LaEasy6MockTest() {
   const [answers, setAnswers]             = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]           = useState(60 * 60)
   const [randomizedQuestions, setRandomizedQuestions] = useState<Question[]>([])
+  const hasSavedResult = useRef(false)
 
   const sourceQuestions = isPremium ? g5LaEasy6Questions : g5LaEasy6Questions.slice(0, FREE_QUESTION_LIMIT)
   const availableQuestions = randomizedQuestions.length > 0 ? randomizedQuestions : sourceQuestions
@@ -711,8 +711,30 @@ export default function G5LaEasy6MockTest() {
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
 
-  const calcScore  = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
+  const calcScore  = () => answers.reduce<number>((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct   = () => Math.round((calcScore() / totalQuestions) * 100)
+
+
+  useEffect(() => {
+    if (!showResults || !user?.id || hasSavedResult.current) return
+
+    hasSavedResult.current = true
+    const completedAtIso = new Date().toISOString()
+    void saveStudentTestResult({
+      parentId: user.id,
+      studentName: user?.childName ?? "Student",
+      grade: "grade5",
+      subject: "Literacy",
+      testName: "Easy 6",
+      difficulty: "Easy",
+      score: calcScore(),
+      totalQuestions,
+      percentage: scorePct(),
+      completedAt: completedAtIso,
+    }).catch(() => {
+      hasSavedResult.current = false
+    })
+  }, [showResults, user?.id, user?.childName, totalQuestions, answers])
 
   const getGrade = () => {
     const p = scorePct()
@@ -739,13 +761,14 @@ export default function G5LaEasy6MockTest() {
     setCurrentQuestion(0)
     setTimeLeft(60 * 60)
     setShowResults(false)
+    hasSavedResult.current = false
     setStarted(true)
   }
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
     setRandomizedQuestions([])
-    setAnswers(new Array(sourceQuestions.length).fill(null)); setTimeLeft(60 * 60)
+    setAnswers(new Array(sourceQuestions.length).fill(null)); setTimeLeft(60 * 60); hasSavedResult.current = false
   }
 
   const handleSubmit = () => {

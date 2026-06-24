@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -34,17 +34,17 @@ const g5LaEasy10Questions: Question[] = [
     skill: "Main Idea",
     question: `Read the passage then answer the question.
 
-"The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
+"At the School Science Fair, Grade 5 pupils displayed projects on magnets, plants, water filters, and weather instruments. Each group explained its question, materials, method, and results on a neat board. Visitors asked questions, so the pupils had to speak clearly and use evidence from their tests. The fair helped everyone see that science begins with curiosity."
 
-What is this passage MAINLY about?`,
+Which answer best matches the passage?`,
     options: [
-      "How rubbish collection works",
-      "The importance of caring for the environment and how simple actions can help",
-      "Types of trees that can be planted",
-      "Rivers and how they flow",
+      "to entertain with a fantasy adventure",
+      "to describe the pupils’ organized school activity",
+      "to explain why sports day was postponed",
+      "to list rules for a spelling contest",
     ],
-    correctAnswer: 1,
-    explanation: `The passage argues that the environment needs our care and shows how individual actions can make a real difference — this is the main idea.`
+    correctAnswer: 0,
+    explanation: `The passage shows school science fair as a planned, helpful activity involving pupils.`
   },
   {
     id: 2,
@@ -52,35 +52,35 @@ What is this passage MAINLY about?`,
     skill: "Detail",
     question: `Read the passage then answer the question.
 
-"The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
+"At the School Science Fair, Grade 5 pupils displayed projects on magnets, plants, water filters, and weather instruments. Each group explained its question, materials, method, and results on a neat board. Visitors asked questions, so the pupils had to speak clearly and use evidence from their tests. The fair helped everyone see that science begins with curiosity."
 
-According to the passage, what THREE simple actions can help the environment?`,
+Which answer best matches the passage?`,
     options: [
-      "Recycling, swimming, and planting trees",
-      "Putting rubbish in bins, turning off taps, and planting trees",
-      "Picking up litter, buying less, and saving electricity",
-      "Watering plants, sweeping streets, and walking to school",
+      "They cancelled the activity after assembly.",
+      "They used a schedule or record to guide the activity.",
+      "They sold tickets at the gate.",
+      "They worked alone without a teacher.",
     ],
     correctAnswer: 1,
-    explanation: `The passage specifically lists 'putting rubbish in bins, turning off taps when not needed, and planting trees.'`
+    explanation: `The passage shows school science fair as a planned, helpful activity involving pupils.`
   },
   {
     id: 3,
     type: "reading",
-    skill: "Cause and Effect",
+    skill: "Inference",
     question: `Read the passage then answer the question.
 
-"The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
+"At the School Science Fair, Grade 5 pupils displayed projects on magnets, plants, water filters, and weather instruments. Each group explained its question, materials, method, and results on a neat board. Visitors asked questions, so the pupils had to speak clearly and use evidence from their tests. The fair helped everyone see that science begins with curiosity."
 
-WHAT HAPPENS when someone drops litter in a river?`,
+Which answer best matches the passage?`,
     options: [
-      "The river flows faster",
-      "Nothing happens",
-      "It causes harm to plants, animals, and other people who use that space",
-      "It fertilises the soil",
+      "Only adults did the work.",
+      "The pupils were careless.",
+      "The school was closed.",
+      "The activity was planned and helpful.",
     ],
     correctAnswer: 2,
-    explanation: `The passage directly states that dropping litter causes 'harm to plants, animals, and other people who use those spaces.'`
+    explanation: `The passage shows school science fair as a planned, helpful activity involving pupils.`
   },
   {
     id: 4,
@@ -88,71 +88,71 @@ WHAT HAPPENS when someone drops litter in a river?`,
     skill: "Vocabulary in Context",
     question: `Read the passage then answer the question.
 
-"The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
+"At the School Science Fair, Grade 5 pupils displayed projects on magnets, plants, water filters, and weather instruments. Each group explained its question, materials, method, and results on a neat board. Visitors asked questions, so the pupils had to speak clearly and use evidence from their tests. The fair helped everyone see that science begins with curiosity."
 
-The phrase 'make a real difference' suggests:`,
+Which answer best matches the passage?`,
     options: [
-      "The actions are difficult and expensive",
-      "Small, everyday actions genuinely have meaningful impact on the environment",
-      "Only large-scale actions matter",
-      "Difference is too slow to notice",
+      "comfortable means suitable for the person",
+      "comfortable means broken into pieces",
+      "comfortable means very expensive",
+      "comfortable means impossible to find",
     ],
-    correctAnswer: 1,
-    explanation: `'Real difference' emphasises that even simple actions have genuine, meaningful impact — not just symbolic value.`
+    correctAnswer: 3,
+    explanation: `The passage shows school science fair as a planned, helpful activity involving pupils.`
   },
   {
     id: 5,
     type: "reading",
-    skill: "Author's Purpose",
+    skill: "Author’s Purpose",
     question: `Read the passage then answer the question.
 
-"The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
+"At the School Science Fair, Grade 5 pupils displayed projects on magnets, plants, water filters, and weather instruments. Each group explained its question, materials, method, and results on a neat board. Visitors asked questions, so the pupils had to speak clearly and use evidence from their tests. The fair helped everyone see that science begins with curiosity."
 
-The MAIN purpose of this passage is to:`,
+Which answer best matches the passage?`,
     options: [
-      "Scare people about environmental disaster",
-      "Entertain with a nature story",
-      "Persuade readers — especially young people — to take responsibility for the environment",
-      "Describe how rubbish collection works",
+      "to persuade readers to avoid school clubs",
+      "to inform readers about a useful school event",
+      "to describe a storm at school",
+      "to compare two famous athletes",
     ],
-    correctAnswer: 2,
-    explanation: `The passage uses examples of harm and positive actions to persuade readers to adopt environmentally responsible habits.`
+    correctAnswer: 0,
+    explanation: `The passage shows school science fair as a planned, helpful activity involving pupils.`
   },
   {
     id: 6,
     type: "reading",
-    skill: "Inference",
+    skill: "Sequence",
     question: `Read the passage then answer the question.
 
-"The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
+"At the School Science Fair, Grade 5 pupils displayed projects on magnets, plants, water filters, and weather instruments. Each group explained its question, materials, method, and results on a neat board. Visitors asked questions, so the pupils had to speak clearly and use evidence from their tests. The fair helped everyone see that science begins with curiosity."
 
-What does the phrase 'from an early age' suggest about the author's view of children?`,
+Which answer best matches the passage?`,
     options: [
-      "Children are too young to care about the environment",
-      "Children only need to focus on school",
-      "Teaching children environmental values while they are young shapes their adult behaviour and decisions",
-      "Only adults can make a difference",
+      "First they went home; then they listened to directions.",
+      "First they received prizes; then they began planning.",
+      "First visitors left; then the event opened.",
+      "First pupils planned; then they carried out the task.",
     ],
-    correctAnswer: 2,
-    explanation: `'From an early age' implies the author believes early learning creates lasting habits — positioning children as future change-makers.`
+    correctAnswer: 1,
+    explanation: `The passage shows school science fair as a planned, helpful activity involving pupils.`
   },
   {
     id: 7,
     type: "reading",
-    skill: "Tone",
+    skill: "Cause and Effect",
     question: `Read the passage then answer the question.
 
-"The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
+"At the School Science Fair, Grade 5 pupils displayed projects on magnets, plants, water filters, and weather instruments. Each group explained its question, materials, method, and results on a neat board. Visitors asked questions, so the pupils had to speak clearly and use evidence from their tests. The fair helped everyone see that science begins with curiosity."
 
-The tone of this passage is BEST described as:`,
+Which answer best matches the passage?`,
     options: [
-      "Hopeless and despairing",
-      "Urgent and encouraging — calling readers to act",
-      "Humorous and light",
-      "Angry and blaming",
+      "Because the bell rang, the trees became taller.",
+      "Because pupils worked together, the activity was successful.",
+      "Because no one listened, the fair opened early.",
+      "Because it rained indoors, the books disappeared.",
     ],
-    correctAnswer: 1,
-    explanation: `The language is positive about small actions ('can make a real difference') while creating a sense of urgency about the environment's needs.`
+    correctAnswer: 2,
+    explanation: `The passage shows school science fair as a planned, helpful activity involving pupils.`
   },
   {
     id: 8,
@@ -160,496 +160,495 @@ The tone of this passage is BEST described as:`,
     skill: "Text Evidence",
     question: `Read the passage then answer the question.
 
-"The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
+"At the School Science Fair, Grade 5 pupils displayed projects on magnets, plants, water filters, and weather instruments. Each group explained its question, materials, method, and results on a neat board. Visitors asked questions, so the pupils had to speak clearly and use evidence from their tests. The fair helped everyone see that science begins with curiosity."
 
-Which phrase BEST supports the idea that children can grow into environmentally responsible adults?`,
+Which answer best matches the passage?`,
     options: [
-      "Putting rubbish in bins is helpful",
-      "The environment needs our care and attention",
-      "When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet",
-      "Turning off taps saves water",
+      "A sentence about teamwork and careful records supports the answer.",
+      "A sentence about a football match supports the answer.",
+      "A sentence about a lost puppy supports the answer.",
+      "A sentence about a birthday party supports the answer.",
     ],
-    correctAnswer: 2,
-    explanation: `This directly states the link between childhood learning and adult decision-making about the environment.`
+    correctAnswer: 3,
+    explanation: `The passage shows school science fair as a planned, helpful activity involving pupils.`
   },
   {
     id: 9,
     type: "reading",
-    skill: "Summarise",
+    skill: "Main Idea",
     question: `Read the passage then answer the question.
 
-"The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
+"The guidance counsellor launched a Healthy Eating and Wellness Campaign during assembly. Pupils learned how fruits, vegetables, water, rest, and exercise help the body work well. At break time, the canteen displayed colourful lunch choices, and the prefects led a short stretching activity. The campaign encouraged small habits that pupils could practise every day."
 
-Which BEST summarises this passage?`,
+What does the passage help the reader understand?`,
     options: [
-      "Rivers are important to the environment",
-      "The environment is harmed by litter, but simple daily actions can protect it, and teaching young people environmental values builds a better future",
-      "Trees are important to plant",
-      "Tap water is valuable",
+      "The community activity helped others through shared effort.",
+      "The event was mainly about buying new uniforms.",
+      "The children avoided helping younger pupils.",
+      "The passage focuses on a private family trip.",
     ],
-    correctAnswer: 1,
-    explanation: `This captures both the problem (harm from litter) and the solution (simple actions and early education).`
+    correctAnswer: 0,
+    explanation: `The details show healthy eating campaign brought people together for a helpful purpose.`
   },
   {
     id: 10,
     type: "reading",
-    skill: "Vocabulary in Context",
+    skill: "Detail",
     question: `Read the passage then answer the question.
 
-"The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
+"The guidance counsellor launched a Healthy Eating and Wellness Campaign during assembly. Pupils learned how fruits, vegetables, water, rest, and exercise help the body work well. At break time, the canteen displayed colourful lunch choices, and the prefects led a short stretching activity. The campaign encouraged small habits that pupils could practise every day."
 
-The word 'respects' (as in 'respect the environment') most nearly means:`,
+What does the passage help the reader understand?`,
     options: [
-      "fears",
-      "avoids",
-      "treats carefully and with consideration, as something valuable",
-      "is indifferent to",
+      "The children avoided helping younger pupils.",
+      "The event was mainly about buying new uniforms.",
+      "The passage focuses on a private family trip.",
+      "The community activity helped others through shared effort.",
     ],
-    correctAnswer: 2,
-    explanation: `To 'respect the environment' means to treat it with care and regard — recognising its value and acting accordingly.`
+    correctAnswer: 1,
+    explanation: `The details show healthy eating campaign brought people together for a helpful purpose.`
   },
   {
     id: 11,
     type: "reading",
-    skill: "Figurative Language",
+    skill: "Inference",
     question: `Read the passage then answer the question.
 
-"The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
+"The guidance counsellor launched a Healthy Eating and Wellness Campaign during assembly. Pupils learned how fruits, vegetables, water, rest, and exercise help the body work well. At break time, the canteen displayed colourful lunch choices, and the prefects led a short stretching activity. The campaign encouraged small habits that pupils could practise every day."
 
-'The environment around us needs our care and attention.' The word 'needs' gives the environment a human quality. This is:`,
+What does the passage help the reader understand?`,
     options: [
-      "Alliteration",
-      "Hyperbole",
-      "Personification",
-      "Simile",
+      "The passage focuses on a private family trip.",
+      "The community activity helped others through shared effort.",
+      "The children avoided helping younger pupils.",
+      "The event was mainly about buying new uniforms.",
     ],
     correctAnswer: 2,
-    explanation: `Giving the environment the human need for 'care and attention' is personification — treating the environment as a living thing that requires nurturing.`
+    explanation: `The details show healthy eating campaign brought people together for a helpful purpose.`
   },
   {
     id: 12,
     type: "reading",
-    skill: "Critical Reading",
+    skill: "Vocabulary in Context",
     question: `Read the passage then answer the question.
 
-"The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
+"The guidance counsellor launched a Healthy Eating and Wellness Campaign during assembly. Pupils learned how fruits, vegetables, water, rest, and exercise help the body work well. At break time, the canteen displayed colourful lunch choices, and the prefects led a short stretching activity. The campaign encouraged small habits that pupils could practise every day."
 
-The passage says simple actions 'can make a real difference.' A sceptical reader might ask:`,
+What does the passage help the reader understand?`,
     options: [
-      "Why is the environment important?",
-      "Whether one person's actions are truly enough to address large-scale environmental problems",
-      "Why trees are worth planting",
-      "Whether rubbish bins are available everywhere",
+      "The community activity helped others through shared effort.",
+      "The event was mainly about buying new uniforms.",
+      "The children avoided helping younger pupils.",
+      "The passage focuses on a private family trip.",
     ],
-    correctAnswer: 1,
-    explanation: `Critical thinking requires questioning claims: whether individual actions alone can address complex environmental challenges is a valid and important question.`
+    correctAnswer: 3,
+    explanation: `The details show healthy eating campaign brought people together for a helpful purpose.`
   },
   {
     id: 13,
     type: "reading",
-    skill: "Audience",
+    skill: "Author’s Purpose",
     question: `Read the passage then answer the question.
 
-"The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
+"The guidance counsellor launched a Healthy Eating and Wellness Campaign during assembly. Pupils learned how fruits, vegetables, water, rest, and exercise help the body work well. At break time, the canteen displayed colourful lunch choices, and the prefects led a short stretching activity. The campaign encouraged small habits that pupils could practise every day."
 
-This passage was MOST LIKELY written for:`,
+What does the passage help the reader understand?`,
     options: [
-      "Industrial companies",
-      "Scientists studying ecosystems",
-      "Young students to inspire environmental responsibility",
-      "Waste management workers",
+      "The community activity helped others through shared effort.",
+      "The event was mainly about buying new uniforms.",
+      "The children avoided helping younger pupils.",
+      "The passage focuses on a private family trip.",
     ],
-    correctAnswer: 2,
-    explanation: `The language, examples, and ending reference to students learning 'from an early age' all suggest the audience is young students.`
+    correctAnswer: 0,
+    explanation: `The details show healthy eating campaign brought people together for a helpful purpose.`
   },
   {
     id: 14,
     type: "reading",
-    skill: "Detail",
+    skill: "Compare Ideas",
     question: `Read the passage then answer the question.
 
-"The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
+"The guidance counsellor launched a Healthy Eating and Wellness Campaign during assembly. Pupils learned how fruits, vegetables, water, rest, and exercise help the body work well. At break time, the canteen displayed colourful lunch choices, and the prefects led a short stretching activity. The campaign encouraged small habits that pupils could practise every day."
 
-According to the passage, where can litter cause harm?`,
+What does the passage help the reader understand?`,
     options: [
-      "Only in parks",
-      "In streets or rivers",
-      "Only in the ocean",
-      "Only on school grounds",
+      "The children avoided helping younger pupils.",
+      "The event was mainly about buying new uniforms.",
+      "The passage focuses on a private family trip.",
+      "The community activity helped others through shared effort.",
     ],
     correctAnswer: 1,
-    explanation: `The passage mentions 'on the street or in a river' as places where litter causes harm.`
+    explanation: `The details show healthy eating campaign brought people together for a helpful purpose.`
   },
   {
     id: 15,
     type: "reading",
-    skill: "Implied Meaning",
+    skill: "Problem and Solution",
     question: `Read the passage then answer the question.
 
-"The environment around us needs our care and attention. Every time someone drops litter on the street or in a river, they cause harm to plants, animals, and other people who use those spaces. Simple actions — like putting rubbish in bins, turning off taps when they are not needed, and planting trees — can make a real difference. When students learn to respect the environment from an early age, they grow into adults who make better choices for the planet."
+"The guidance counsellor launched a Healthy Eating and Wellness Campaign during assembly. Pupils learned how fruits, vegetables, water, rest, and exercise help the body work well. At break time, the canteen displayed colourful lunch choices, and the prefects led a short stretching activity. The campaign encouraged small habits that pupils could practise every day."
 
-When the passage says adults 'make better choices for the planet,' it implies:`,
+What does the passage help the reader understand?`,
     options: [
-      "Adults already make perfect choices",
-      "Adults need no guidance",
-      "Environmental choices are not just personal — they affect the entire planet and all who live on it",
-      "Only politicians make important choices",
+      "The passage focuses on a private family trip.",
+      "The community activity helped others through shared effort.",
+      "The children avoided helping younger pupils.",
+      "The event was mainly about buying new uniforms.",
     ],
     correctAnswer: 2,
-    explanation: `'For the planet' extends the scale beyond the individual — environmental choices matter not just personally but globally.`
+    explanation: `The details show healthy eating campaign brought people together for a helpful purpose.`
   },
   {
     id: 16,
     type: "vocabulary",
-    skill: "Synonyms",
-    question: `Which word is a SYNONYM for 'protect'?`,
+    skill: "Context Clues",
+    question: `In a passage about science fair, the word “steady” is used in context. Which option gives the best meaning?`,
     options: [
-      "harm",
-      "damage",
-      "safeguard",
-      "ignore",
+      "In the sentence, “steady” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 2,
-    explanation: `'Safeguard' means to keep something safe from danger — a synonym for 'protect.'`
+    correctAnswer: 3,
+    explanation: `Context clues in the school or community situation show that “steady” has the practical meaning used in the correct option.`
   },
   {
     id: 17,
     type: "vocabulary",
-    skill: "Antonyms",
-    question: `The ANTONYM of 'pollute' is:`,
+    skill: "Context Clues",
+    question: `In a passage about science fair, the word “gently” is used in context. Which option gives the best meaning?`,
     options: [
-      "contaminate",
-      "clean",
-      "poison",
-      "dirty",
+      "In the sentence, “gently” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 1,
-    explanation: `'Clean' (to make or keep pure) is the opposite of 'pollute' (to make dirty or toxic).`
+    correctAnswer: 0,
+    explanation: `Context clues in the school or community situation show that “gently” has the practical meaning used in the correct option.`
   },
   {
     id: 18,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `The city implemented SUSTAINABLE waste practices to ensure resources would last for future generations. 'Sustainable' means:`,
+    question: `In a passage about science fair, the word “bright” is used in context. Which option gives the best meaning?`,
     options: [
-      "expensive and difficult",
-      "temporary and short-term",
-      "able to be maintained long-term without causing harm to natural resources",
-      "very fast",
+      "It names a place far from the school.",
+      "It means the opposite of what the sentence suggests.",
+      "It means a loud sound made by traffic.",
+      "In the sentence, “bright” means a sensible meaning that fits the activity.",
     ],
-    correctAnswer: 2,
-    explanation: `'Sustainable' describes practices that can continue indefinitely without depleting or damaging resources — linked to long-term wellbeing.`
+    correctAnswer: 1,
+    explanation: `Context clues in the school or community situation show that “bright” has the practical meaning used in the correct option.`
   },
   {
     id: 19,
     type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'The river was crying out for help.' This is an example of:`,
+    skill: "Context Clues",
+    question: `In a passage about science fair, the word “careful” is used in context. Which option gives the best meaning?`,
     options: [
-      "Simile",
-      "Hyperbole",
-      "Metaphor",
-      "Personification",
+      "It means a loud sound made by traffic.",
+      "In the sentence, “careful” means a sensible meaning that fits the activity.",
+      "It names a place far from the school.",
+      "It means the opposite of what the sentence suggests.",
     ],
-    correctAnswer: 3,
-    explanation: `Giving the river the human ability to 'cry out' is personification — treating it as a living being in distress.`
+    correctAnswer: 2,
+    explanation: `Context clues in the school or community situation show that “careful” has the practical meaning used in the correct option.`
   },
   {
     id: 20,
     type: "vocabulary",
-    skill: "Word Meaning",
-    question: `'Conservation' means:`,
+    skill: "Context Clues",
+    question: `In a passage about science fair, the word “useful” is used in context. Which option gives the best meaning?`,
     options: [
-      "the study of animals",
-      "the use of resources without limits",
-      "the careful management and protection of natural resources",
-      "a type of farming",
+      "In the sentence, “useful” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 2,
-    explanation: `Conservation is the careful protection and management of the natural environment and its resources.`
+    correctAnswer: 3,
+    explanation: `Context clues in the school or community situation show that “useful” has the practical meaning used in the correct option.`
   },
   {
     id: 21,
     type: "vocabulary",
-    skill: "Multiple Meaning",
-    question: `Which sentence uses 'litter' as a VERB?`,
+    skill: "Context Clues",
+    question: `In a passage about science fair, the word “purpose” is used in context. Which option gives the best meaning?`,
     options: [
-      "Please pick up the litter",
-      "A litter of kittens was born",
-      "People who litter face fines",
-      "The litter was left on the bench",
+      "In the sentence, “purpose” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 2,
-    explanation: `'Litter' as a verb means to carelessly drop rubbish in a public place — 'people who litter' uses it as a verb.`
+    correctAnswer: 0,
+    explanation: `Context clues in the school or community situation show that “purpose” has the practical meaning used in the correct option.`
   },
   {
     id: 22,
     type: "vocabulary",
-    skill: "Prefix re-",
-    question: `The prefix 're-' in 'recycle' means:`,
+    skill: "Context Clues",
+    question: `In a passage about science fair, the word “encouraged” is used in context. Which option gives the best meaning?`,
     options: [
-      "not",
-      "against",
-      "again — to use again",
-      "before",
+      "It names a place far from the school.",
+      "It means the opposite of what the sentence suggests.",
+      "It means a loud sound made by traffic.",
+      "In the sentence, “encouraged” means a sensible meaning that fits the activity.",
     ],
-    correctAnswer: 2,
-    explanation: `'Re-' means again. 'Recycle' = to process materials so they can be used again.`
+    correctAnswer: 1,
+    explanation: `Context clues in the school or community situation show that “encouraged” has the practical meaning used in the correct option.`
   },
   {
     id: 23,
     type: "vocabulary",
-    skill: "Suffix -ment",
-    question: `Adding '-ment' to 'environ' gives 'environment', which means:`,
+    skill: "Context Clues",
+    question: `In a passage about science fair, the word “materials” is used in context. Which option gives the best meaning?`,
     options: [
-      "a verb about nature",
-      "an adjective describing nature",
-      "a noun naming the natural world and conditions around us",
-      "an adverb about nature",
+      "It means a loud sound made by traffic.",
+      "In the sentence, “materials” means a sensible meaning that fits the activity.",
+      "It names a place far from the school.",
+      "It means the opposite of what the sentence suggests.",
     ],
     correctAnswer: 2,
-    explanation: `'-ment' creates a noun. 'Environment' = the surroundings and conditions in which living things exist.`
+    explanation: `Context clues in the school or community situation show that “materials” has the practical meaning used in the correct option.`
   },
   {
     id: 24,
     type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'Every drop of water is a small soldier in the battle against drought.' This is a:`,
+    skill: "Context Clues",
+    question: `In a passage about science fair, the word “displayed” is used in context. Which option gives the best meaning?`,
     options: [
-      "Simile",
-      "Metaphor",
-      "Personification",
-      "Alliteration",
+      "In the sentence, “displayed” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 1,
-    explanation: `It directly (without 'like' or 'as') compares a drop of water to a soldier — a metaphor.`
+    correctAnswer: 3,
+    explanation: `Context clues in the school or community situation show that “displayed” has the practical meaning used in the correct option.`
   },
   {
     id: 25,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `The factory's EMISSIONS were causing serious harm to air quality in the region. 'Emissions' means:`,
+    question: `In a passage about science fair, the word “pride” is used in context. Which option gives the best meaning?`,
     options: [
-      "products made in the factory",
-      "gases or pollutants released into the atmosphere",
-      "the factory's financial profits",
-      "goods transported from the factory",
+      "In the sentence, “pride” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 1,
-    explanation: `'Emissions' are gases or substances released into the environment — here, harming air quality.`
+    correctAnswer: 0,
+    explanation: `Context clues in the school or community situation show that “pride” has the practical meaning used in the correct option.`
   },
   {
     id: 26,
     type: "grammar",
-    skill: "Collective Nouns",
-    question: `Which sentence uses a COLLECTIVE NOUN?`,
+    skill: "Subject-Verb Agreement",
+    question: `The club ___ the plants every Wednesday.`,
     options: [
-      "The tree fell in the storm",
-      "She planted a new seedling",
-      "A group of volunteers cleaned the beach",
-      "The river flows north",
+      "watering",
+      "water",
+      "were water",
+      "waters",
     ],
-    correctAnswer: 2,
-    explanation: `'Group' is a collective noun — it names a collection of individuals.`
+    correctAnswer: 1,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 27,
     type: "grammar",
-    skill: "Modal Verbs — Obligation",
-    question: `Which modal verb expresses OBLIGATION or DUTY?`,
+    skill: "Verb Tense",
+    question: `Yesterday, the pupils ___ their display.`,
     options: [
-      "can",
-      "might",
-      "could",
-      "must",
+      "preparing",
+      "prepared",
+      "prepares",
+      "prepare",
     ],
-    correctAnswer: 3,
-    explanation: `'Must' expresses a strong obligation or duty — something that has to be done.`
+    correctAnswer: 2,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 28,
     type: "grammar",
-    skill: "Adjectives — Comparative",
-    question: `Choose the COMPARATIVE form of 'clean':`,
+    skill: "Pronoun Reference",
+    question: `Maya lent Jada a ruler because ___ had an extra one.`,
     options: [
-      "cleanest",
-      "more cleaner",
-      "cleaner",
-      "most clean",
+      "she",
+      "they",
+      "it",
+      "we",
     ],
-    correctAnswer: 2,
-    explanation: `For short adjectives, add '-er' to compare two things. 'Cleaner' is the comparative of 'clean.'`
+    correctAnswer: 3,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 29,
     type: "grammar",
-    skill: "Adverbs of Place",
-    question: `Which word is an ADVERB OF PLACE in: 'Students should put their rubbish there.'?`,
+    skill: "Punctuation",
+    question: `Which sentence is punctuated correctly?`,
     options: [
-      "should",
-      "rubbish",
-      "there",
-      "students",
+      "“Please bring gloves,” said Mr. Brown.",
+      "“Please bring gloves” said Mr. Brown.",
+      "Please bring gloves, said Mr. Brown.",
+      "“Please bring gloves said Mr. Brown.”",
     ],
-    correctAnswer: 2,
-    explanation: `'There' tells WHERE students should put rubbish — it is an adverb of place.`
+    correctAnswer: 0,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 30,
     type: "grammar",
-    skill: "Punctuation — Semicolons",
-    question: `Which sentence correctly uses a SEMICOLON?`,
+    skill: "Adjective Use",
+    question: `Choose the sentence with the best describing word.`,
     options: [
-      "Littering harms wildlife; it also spoils public spaces.",
-      "Littering harms wildlife, it also spoils public spaces.",
-      "Littering harms wildlife; but it also spoils public spaces.",
-      "Littering; harms wildlife and spoils public spaces.",
+      "Neatly poster caught the visitors.",
+      "The poster caught attention neat.",
+      "The poster neat caught attention.",
+      "The neat poster caught the visitors’ attention.",
     ],
-    correctAnswer: 0,
-    explanation: `A semicolon joins two closely related independent clauses. Option A correctly connects two complete thoughts about littering's harm.`
+    correctAnswer: 1,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 31,
     type: "grammar",
-    skill: "Active Voice",
-    question: `Which sentence is in the ACTIVE VOICE?`,
+    skill: "Conjunctions",
+    question: `Choose the best word: We packed water ___ the afternoon was hot.`,
     options: [
-      "Trees were planted by the students",
-      "The environment was harmed by litter",
-      "The students planted twenty trees",
-      "Rubbish was dropped on the street",
+      "so",
+      "because",
+      "or",
+      "but",
     ],
     correctAnswer: 2,
-    explanation: `Active voice: subject (students) performs the action (planted). This is clear and direct.`
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 32,
     type: "grammar",
-    skill: "Subordinating Conjunctions",
-    question: `Which SUBORDINATING CONJUNCTION shows a TIME relationship?`,
+    skill: "Complete Sentence",
+    question: `Which is a complete sentence?`,
     options: [
-      "because",
-      "although",
-      "unless",
-      "when",
+      "The students shared books with Grade 1.",
+      "After the bell near the gate.",
+      "Because the table with cards.",
+      "The clean bags on Saturday.",
     ],
     correctAnswer: 3,
-    explanation: `'When' introduces a time clause. 'Because' = reason; 'although' = contrast; 'unless' = condition.`
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 33,
     type: "grammar",
-    skill: "Possessive Adjectives",
-    question: `Which sentence correctly uses a POSSESSIVE ADJECTIVE?`,
+    skill: "Comma in a Series",
+    question: `Which sentence uses commas correctly?`,
     options: [
-      "The bird lost it's habitat",
-      "The bird lost its habitat",
-      "The bird lost its' habitat",
-      "The bird lost their habitat",
+      "We need pencils, glue, paper, and string.",
+      "We need pencils glue, paper and string.",
+      "We need, pencils glue paper, and string.",
+      "We need pencils, glue paper and, string.",
     ],
-    correctAnswer: 1,
-    explanation: `'Its' (no apostrophe) is the possessive adjective. 'It's' = it is. 'Its' = belonging to it.`
+    correctAnswer: 0,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 34,
     type: "grammar",
-    skill: "Complex Sentence",
-    question: `Which sentence is COMPLEX?`,
+    skill: "Possessive Noun",
+    question: `Choose the correct possessive form.`,
     options: [
-      "The river is polluted",
-      "The river is polluted and fish are dying",
-      "When people litter in rivers, the water becomes polluted and unsafe",
-      "She cleaned up the litter",
+      "The classes chart was full.",
+      "The class chart’s was full.",
+      "The classs chart was full.",
+      "The class’s chart was full.",
     ],
-    correctAnswer: 2,
-    explanation: `A complex sentence has a main clause + a subordinate clause. 'When people litter in rivers' is the subordinate clause.`
+    correctAnswer: 1,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 35,
     type: "grammar",
-    skill: "Sentence Correction",
-    question: `Which sentence is written CORRECTLY?`,
+    skill: "Sentence Combining",
+    question: `Which combines the ideas best?`,
     options: [
-      "Every students must do their part",
-      "Every student must do their part",
-      "Every student must do his or her parts",
-      "Every students must do his or her part",
+      "The event went because carefully pupils.",
+      "The pupils planned carefully, and the event went well.",
+      "Planning carefully and event went.",
+      "The pupils planned carefully the event went well.",
     ],
-    correctAnswer: 1,
-    explanation: `'Every student' is singular. 'Must do their part' uses the singular verb and the inclusive 'their' — correct in modern usage.`
+    correctAnswer: 2,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 36,
     type: "writing",
-    skill: "Persuasive Writing Purpose",
-    question: `A student writes a letter to the school principal asking for an environmental club. The MAIN purpose is to:`,
+    skill: "Purpose and Audience",
+    question: `You are writing a notice for pupils about the event connected to wellness campaign. What is the best approach?`,
     options: [
-      "Describe the environment",
-      "Entertain the principal with a story",
-      "Persuade the principal to support and approve the club",
-      "Explain what an environmental club is",
+      "Use a clear heading, important details, and polite language for a notice for pupils about the event.",
+      "Hide the date and place so readers must guess.",
+      "Use only jokes and leave out the main message.",
+      "Write one very long sentence with no punctuation.",
     ],
-    correctAnswer: 2,
-    explanation: `Persuasive writing aims to convince a specific audience to take a desired action — here, approving the club.`
+    correctAnswer: 3,
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
   },
   {
     id: 37,
     type: "writing",
-    skill: "Formal Letter Features",
-    question: `Which feature is ESSENTIAL in a formal letter?`,
+    skill: "Purpose and Audience",
+    question: `You are writing a friendly letter thanking helpers connected to wellness campaign. What is the best approach?`,
     options: [
-      "A friendly nickname for the recipient",
-      "Slang and casual language",
-      "A formal salutation (Dear Mr./Ms.) and appropriate closing (Yours sincerely/faithfully)",
-      "A drawing or diagram",
+      "Use a clear heading, important details, and polite language for a friendly letter thanking helpers.",
+      "Hide the date and place so readers must guess.",
+      "Use only jokes and leave out the main message.",
+      "Write one very long sentence with no punctuation.",
     ],
-    correctAnswer: 2,
-    explanation: `A formal letter always includes a proper salutation and closing — these mark the professional register of the communication.`
+    correctAnswer: 0,
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "Evidence in Persuasive Writing",
-    question: `Which type of evidence would MOST strengthen an argument for environmental action?`,
+    skill: "Purpose and Audience",
+    question: `You are writing a school announcement for assembly connected to wellness campaign. What is the best approach?`,
     options: [
-      "A general feeling that the environment is important",
-      "A specific statistic: 'Jamaica loses approximately 1,200 hectares of forest per year'",
-      "A personal story about loving nature",
-      "A claim that everyone agrees",
+      "Use only jokes and leave out the main message.",
+      "Hide the date and place so readers must guess.",
+      "Write one very long sentence with no punctuation.",
+      "Use a clear heading, important details, and polite language for a school announcement for assembly.",
     ],
     correctAnswer: 1,
-    explanation: `Specific, verifiable data (statistics) provides concrete, credible evidence — far more persuasive than vague feelings or claims.`
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Rhetorical Questions",
-    question: `A student writes: 'If not us, then who? If not now, then when?' These rhetorical questions are used to:`,
+    skill: "Purpose and Audience",
+    question: `You are writing a poster for the community project connected to wellness campaign. What is the best approach?`,
     options: [
-      "Ask the reader for literal answers",
-      "Add length to the writing",
-      "Create urgency and make readers feel personally responsible for taking action",
-      "Introduce new evidence",
+      "Write one very long sentence with no punctuation.",
+      "Use a clear heading, important details, and polite language for a poster for the community project.",
+      "Use only jokes and leave out the main message.",
+      "Hide the date and place so readers must guess.",
     ],
     correctAnswer: 2,
-    explanation: `Rhetorical questions engage the reader emotionally and create urgency — they don't need an answer because the answer is obvious: we must act now.`
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
   },
   {
     id: 40,
     type: "writing",
-    skill: "Call to Action",
-    question: `A persuasive environmental essay BEST ends with:`,
+    skill: "Purpose and Audience",
+    question: `You are writing a short report for the school newsletter connected to wellness campaign. What is the best approach?`,
     options: [
-      "A repetition of all the main arguments in full",
-      "A statistic about pollution levels",
-      "A powerful call to action that tells readers specifically what they can do to make a difference",
-      "An apology for the length of the essay",
+      "Use a clear heading, important details, and polite language for a short report for the school newsletter.",
+      "Hide the date and place so readers must guess.",
+      "Use only jokes and leave out the main message.",
+      "Write one very long sentence with no punctuation.",
     ],
-    correctAnswer: 2,
-    explanation: `Ending with a call to action empowers readers and gives persuasive writing a clear purpose beyond just presenting information.`
-  }
+    correctAnswer: 3,
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+  },
 ]
-
 
 const shuffleAnswerOptions = (questions: Question[]): Question[] => {
   return questions.map((question) => {
@@ -685,6 +684,7 @@ export default function G5LaEasy10MockTest() {
   const [answers, setAnswers]             = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]           = useState(60 * 60)
   const [randomizedQuestions, setRandomizedQuestions] = useState<Question[]>([])
+  const hasSavedResult = useRef(false)
 
   const sourceQuestions = isPremium ? g5LaEasy10Questions : g5LaEasy10Questions.slice(0, FREE_QUESTION_LIMIT)
   const availableQuestions = randomizedQuestions.length > 0 ? randomizedQuestions : sourceQuestions
@@ -711,8 +711,30 @@ export default function G5LaEasy10MockTest() {
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
 
-  const calcScore  = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
+  const calcScore  = () => answers.reduce<number>((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct   = () => Math.round((calcScore() / totalQuestions) * 100)
+
+
+  useEffect(() => {
+    if (!showResults || !user?.id || hasSavedResult.current) return
+
+    hasSavedResult.current = true
+    const completedAtIso = new Date().toISOString()
+    void saveStudentTestResult({
+      parentId: user.id,
+      studentName: user?.childName ?? "Student",
+      grade: "grade5",
+      subject: "Literacy",
+      testName: "Easy 10",
+      difficulty: "Easy",
+      score: calcScore(),
+      totalQuestions,
+      percentage: scorePct(),
+      completedAt: completedAtIso,
+    }).catch(() => {
+      hasSavedResult.current = false
+    })
+  }, [showResults, user?.id, user?.childName, totalQuestions, answers])
 
   const getGrade = () => {
     const p = scorePct()
@@ -739,13 +761,14 @@ export default function G5LaEasy10MockTest() {
     setCurrentQuestion(0)
     setTimeLeft(60 * 60)
     setShowResults(false)
+    hasSavedResult.current = false
     setStarted(true)
   }
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
     setRandomizedQuestions([])
-    setAnswers(new Array(sourceQuestions.length).fill(null)); setTimeLeft(60 * 60)
+    setAnswers(new Array(sourceQuestions.length).fill(null)); setTimeLeft(60 * 60); hasSavedResult.current = false
   }
 
   const handleSubmit = () => {

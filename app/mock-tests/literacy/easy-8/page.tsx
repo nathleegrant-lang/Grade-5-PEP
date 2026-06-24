@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -34,17 +34,17 @@ const g5LaEasy8Questions: Question[] = [
     skill: "Main Idea",
     question: `Read the passage then answer the question.
 
-"The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
+"For Jamaica Heritage Day, Grade 5 decorated the hall with drawings of national heroes, traditional foods, and musical instruments. During the programme, groups performed poems, dances, and short speeches about customs from different parishes. Miss Lewis reminded the pupils that heritage is not only about the past; it also guides how people show respect and pride today."
 
-What is this passage MAINLY about?`,
+Which answer best matches the passage?`,
     options: [
-      "How to apply to Cedar Heights Primary",
-      "The Grade 5 students' educational visit to the National Museum",
-      "Ancient Taino pottery",
-      "The best museums in Jamaica",
+      "to entertain with a fantasy adventure",
+      "to describe the pupils’ organized school activity",
+      "to explain why sports day was postponed",
+      "to list rules for a spelling contest",
     ],
-    correctAnswer: 1,
-    explanation: `The passage describes the Grade 5 students' visit to the museum, what they learned, and one student's reaction — this is the main topic.`
+    correctAnswer: 0,
+    explanation: `The passage shows jamaica heritage day as a planned, helpful activity involving pupils.`
   },
   {
     id: 2,
@@ -52,35 +52,35 @@ What is this passage MAINLY about?`,
     skill: "Detail",
     question: `Read the passage then answer the question.
 
-"The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
+"For Jamaica Heritage Day, Grade 5 decorated the hall with drawings of national heroes, traditional foods, and musical instruments. During the programme, groups performed poems, dances, and short speeches about customs from different parishes. Miss Lewis reminded the pupils that heritage is not only about the past; it also guides how people show respect and pride today."
 
-What type of artefacts did the guide explain?`,
+Which answer best matches the passage?`,
     options: [
-      "Medals and trophies",
-      "Ancient pottery, colonial maps, and photographs from the early twentieth century",
-      "Modern paintings and sculptures",
-      "Sports equipment",
+      "They cancelled the activity after assembly.",
+      "They used a schedule or record to guide the activity.",
+      "They sold tickets at the gate.",
+      "They worked alone without a teacher.",
     ],
     correctAnswer: 1,
-    explanation: `The passage lists 'ancient pottery, colonial maps, and photographs from the early twentieth century' as artefacts explained by the guide.`
+    explanation: `The passage shows jamaica heritage day as a planned, helpful activity involving pupils.`
   },
   {
     id: 3,
     type: "reading",
-    skill: "Sequence",
+    skill: "Inference",
     question: `Read the passage then answer the question.
 
-"The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
+"For Jamaica Heritage Day, Grade 5 decorated the hall with drawings of national heroes, traditional foods, and musical instruments. During the programme, groups performed poems, dances, and short speeches about customs from different parishes. Miss Lewis reminded the pupils that heritage is not only about the past; it also guides how people show respect and pride today."
 
-What did students do BEFORE the guide explained artefacts?`,
+Which answer best matches the passage?`,
     options: [
-      "Ate lunch",
-      "Explored exhibits about Jamaica's history",
-      "Went home",
-      "Wrote in their notebooks",
+      "Only adults did the work.",
+      "The pupils were careless.",
+      "The school was closed.",
+      "The activity was planned and helpful.",
     ],
-    correctAnswer: 1,
-    explanation: `The passage describes exploring the exhibits first, then the guide explaining artefacts.`
+    correctAnswer: 2,
+    explanation: `The passage shows jamaica heritage day as a planned, helpful activity involving pupils.`
   },
   {
     id: 4,
@@ -88,568 +88,567 @@ What did students do BEFORE the guide explained artefacts?`,
     skill: "Vocabulary in Context",
     question: `Read the passage then answer the question.
 
-"The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
+"For Jamaica Heritage Day, Grade 5 decorated the hall with drawings of national heroes, traditional foods, and musical instruments. During the programme, groups performed poems, dances, and short speeches about customs from different parishes. Miss Lewis reminded the pupils that heritage is not only about the past; it also guides how people show respect and pride today."
 
-The word 'artefacts' in the passage means:`,
+Which answer best matches the passage?`,
     options: [
-      "modern technology",
-      "photographs only",
-      "objects made or used by people in the past that have historical significance",
-      "pieces of jewellery",
+      "comfortable means suitable for the person",
+      "comfortable means broken into pieces",
+      "comfortable means very expensive",
+      "comfortable means impossible to find",
     ],
-    correctAnswer: 2,
-    explanation: `Artefacts are historical objects made or used by past civilisations — pottery, maps, and photographs are good examples.`
+    correctAnswer: 3,
+    explanation: `The passage shows jamaica heritage day as a planned, helpful activity involving pupils.`
   },
   {
     id: 5,
     type: "reading",
-    skill: "Inference",
+    skill: "Author’s Purpose",
     question: `Read the passage then answer the question.
 
-"The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
+"For Jamaica Heritage Day, Grade 5 decorated the hall with drawings of national heroes, traditional foods, and musical instruments. During the programme, groups performed poems, dances, and short speeches about customs from different parishes. Miss Lewis reminded the pupils that heritage is not only about the past; it also guides how people show respect and pride today."
 
-What can you INFER about the student who said it was 'the most interesting school trip he had ever been on'?`,
+Which answer best matches the passage?`,
     options: [
-      "He was being dishonest",
-      "He had never been on a school trip before",
-      "He was genuinely impressed by the museum visit",
-      "He was forced to attend",
+      "to persuade readers to avoid school clubs",
+      "to inform readers about a useful school event",
+      "to describe a storm at school",
+      "to compare two famous athletes",
     ],
-    correctAnswer: 2,
-    explanation: `The superlative 'most interesting he had ever been on' shows genuine enthusiasm and impression with the museum experience.`
+    correctAnswer: 0,
+    explanation: `The passage shows jamaica heritage day as a planned, helpful activity involving pupils.`
   },
   {
     id: 6,
     type: "reading",
-    skill: "Author's Purpose",
+    skill: "Sequence",
     question: `Read the passage then answer the question.
 
-"The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
+"For Jamaica Heritage Day, Grade 5 decorated the hall with drawings of national heroes, traditional foods, and musical instruments. During the programme, groups performed poems, dances, and short speeches about customs from different parishes. Miss Lewis reminded the pupils that heritage is not only about the past; it also guides how people show respect and pride today."
 
-The MAIN purpose of this passage is to:`,
+Which answer best matches the passage?`,
     options: [
-      "Advertise the National Museum",
-      "Criticise the school's teaching",
-      "Inform readers about an educational museum visit and show its value for students",
-      "Describe the history of the Taino people in detail",
+      "First they went home; then they listened to directions.",
+      "First they received prizes; then they began planning.",
+      "First visitors left; then the event opened.",
+      "First pupils planned; then they carried out the task.",
     ],
-    correctAnswer: 2,
-    explanation: `The passage informs about the visit and shows — through the student's reaction — that it was genuinely educational and valuable.`
+    correctAnswer: 1,
+    explanation: `The passage shows jamaica heritage day as a planned, helpful activity involving pupils.`
   },
   {
     id: 7,
     type: "reading",
-    skill: "Text Evidence",
+    skill: "Cause and Effect",
     question: `Read the passage then answer the question.
 
-"The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
+"For Jamaica Heritage Day, Grade 5 decorated the hall with drawings of national heroes, traditional foods, and musical instruments. During the programme, groups performed poems, dances, and short speeches about customs from different parishes. Miss Lewis reminded the pupils that heritage is not only about the past; it also guides how people show respect and pride today."
 
-Which detail BEST supports the idea that the museum visit was educational?`,
+Which answer best matches the passage?`,
     options: [
-      "The students are from Cedar Heights Primary",
-      "The visit took place last Thursday",
-      "The students explored exhibits about Jamaica's history from the Taino period through independence",
-      "One student enjoyed the visit",
+      "Because the bell rang, the trees became taller.",
+      "Because pupils worked together, the activity was successful.",
+      "Because no one listened, the fair opened early.",
+      "Because it rained indoors, the books disappeared.",
     ],
     correctAnswer: 2,
-    explanation: `Exploring exhibits spanning Jamaica's full history shows the educational breadth and depth of the visit.`
+    explanation: `The passage shows jamaica heritage day as a planned, helpful activity involving pupils.`
   },
   {
     id: 8,
     type: "reading",
-    skill: "Tone",
+    skill: "Text Evidence",
     question: `Read the passage then answer the question.
 
-"The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
+"For Jamaica Heritage Day, Grade 5 decorated the hall with drawings of national heroes, traditional foods, and musical instruments. During the programme, groups performed poems, dances, and short speeches about customs from different parishes. Miss Lewis reminded the pupils that heritage is not only about the past; it also guides how people show respect and pride today."
 
-The tone of this passage is BEST described as:`,
+Which answer best matches the passage?`,
     options: [
-      "Negative and critical",
-      "Exciting and positive — showing the value of the educational visit",
-      "Boring and factual",
-      "Sad and reflective",
+      "A sentence about teamwork and careful records supports the answer.",
+      "A sentence about a football match supports the answer.",
+      "A sentence about a lost puppy supports the answer.",
+      "A sentence about a birthday party supports the answer.",
     ],
-    correctAnswer: 1,
-    explanation: `The description of the exhibits and the student's enthusiastic reaction create a positive, educational tone.`
+    correctAnswer: 3,
+    explanation: `The passage shows jamaica heritage day as a planned, helpful activity involving pupils.`
   },
   {
     id: 9,
     type: "reading",
-    skill: "Vocabulary in Context",
+    skill: "Main Idea",
     question: `Read the passage then answer the question.
 
-"The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
+"The class visited a small museum near the town square. A guide showed them old tools, photographs, and a model of a market from long ago. The pupils asked careful questions and sketched one object in their notebooks. On the bus ride back, they discussed how museums protect stories that might otherwise be forgotten."
 
-The word 'colonial' in the passage refers to:`,
+What does the passage help the reader understand?`,
     options: [
-      "something modern and new",
-      "a period when Jamaica was ruled by a foreign power (the British)",
-      "a type of ancient pottery",
-      "a style of art",
+      "The community activity helped others through shared effort.",
+      "The event was mainly about buying new uniforms.",
+      "The children avoided helping younger pupils.",
+      "The passage focuses on a private family trip.",
     ],
-    correctAnswer: 1,
-    explanation: `'Colonial' refers to the period when Jamaica was under British colonial rule — the maps from that time represent this historical period.`
+    correctAnswer: 0,
+    explanation: `The details show museum visit brought people together for a helpful purpose.`
   },
   {
     id: 10,
     type: "reading",
-    skill: "Summarise",
+    skill: "Detail",
     question: `Read the passage then answer the question.
 
-"The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
+"The class visited a small museum near the town square. A guide showed them old tools, photographs, and a model of a market from long ago. The pupils asked careful questions and sketched one object in their notebooks. On the bus ride back, they discussed how museums protect stories that might otherwise be forgotten."
 
-Which BEST summarises this passage?`,
+What does the passage help the reader understand?`,
     options: [
-      "Old pottery is very interesting",
-      "Grade 5 students from Cedar Heights Primary had a memorable and educational museum visit covering Jamaica's history from ancient times to independence",
-      "Jamaica has a great national museum",
-      "School trips are important",
+      "The children avoided helping younger pupils.",
+      "The event was mainly about buying new uniforms.",
+      "The passage focuses on a private family trip.",
+      "The community activity helped others through shared effort.",
     ],
     correctAnswer: 1,
-    explanation: `This captures who went, where, what they learned, and the positive outcome — a complete summary.`
+    explanation: `The details show museum visit brought people together for a helpful purpose.`
   },
   {
     id: 11,
     type: "reading",
-    skill: "Cause and Effect",
+    skill: "Inference",
     question: `Read the passage then answer the question.
 
-"The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
+"The class visited a small museum near the town square. A guide showed them old tools, photographs, and a model of a market from long ago. The pupils asked careful questions and sketched one object in their notebooks. On the bus ride back, they discussed how museums protect stories that might otherwise be forgotten."
 
-What was the EFFECT of the museum visit on at least one student?`,
+What does the passage help the reader understand?`,
     options: [
-      "He fell asleep",
-      "He was bored and wanted to leave",
-      "He said it was the most interesting school trip he had ever experienced",
-      "He forgot what he saw immediately",
+      "The passage focuses on a private family trip.",
+      "The community activity helped others through shared effort.",
+      "The children avoided helping younger pupils.",
+      "The event was mainly about buying new uniforms.",
     ],
     correctAnswer: 2,
-    explanation: `The student's comment is the direct stated effect of the visit — it impressed him deeply.`
+    explanation: `The details show museum visit brought people together for a helpful purpose.`
   },
   {
     id: 12,
     type: "reading",
-    skill: "Historical Thinking",
+    skill: "Vocabulary in Context",
     question: `Read the passage then answer the question.
 
-"The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
+"The class visited a small museum near the town square. A guide showed them old tools, photographs, and a model of a market from long ago. The pupils asked careful questions and sketched one object in their notebooks. On the bus ride back, they discussed how museums protect stories that might otherwise be forgotten."
 
-Which period of Jamaica's history is NOT mentioned in the passage?`,
+What does the passage help the reader understand?`,
     options: [
-      "The Taino people",
-      "The arrival of the Spanish and British",
-      "The struggle for independence",
-      "The colonial period",
+      "The community activity helped others through shared effort.",
+      "The event was mainly about buying new uniforms.",
+      "The children avoided helping younger pupils.",
+      "The passage focuses on a private family trip.",
     ],
     correctAnswer: 3,
-    explanation: `Wait — the colonial period IS mentioned. Let me re-read: Taino, Spanish/British arrival, independence, colonial maps are all mentioned. The passage doesn't explicitly mention Emancipation. The question should be adjusted.`
+    explanation: `The details show museum visit brought people together for a helpful purpose.`
   },
   {
     id: 13,
     type: "reading",
-    skill: "Infer",
+    skill: "Author’s Purpose",
     question: `Read the passage then answer the question.
 
-"The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
+"The class visited a small museum near the town square. A guide showed them old tools, photographs, and a model of a market from long ago. The pupils asked careful questions and sketched one object in their notebooks. On the bus ride back, they discussed how museums protect stories that might otherwise be forgotten."
 
-What does the visit suggest about the value of museums?`,
+What does the passage help the reader understand?`,
     options: [
-      "Museums are only for adults",
-      "Museums are boring but educational",
-      "Museums bring history to life and make learning memorable and engaging",
-      "Museums are too expensive for school visits",
+      "The community activity helped others through shared effort.",
+      "The event was mainly about buying new uniforms.",
+      "The children avoided helping younger pupils.",
+      "The passage focuses on a private family trip.",
     ],
-    correctAnswer: 2,
-    explanation: `The students' enthusiastic engagement with artefacts and exhibits shows museums make history tangible and memorable.`
+    correctAnswer: 0,
+    explanation: `The details show museum visit brought people together for a helpful purpose.`
   },
   {
     id: 14,
     type: "reading",
-    skill: "Audience",
+    skill: "Compare Ideas",
     question: `Read the passage then answer the question.
 
-"The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
+"The class visited a small museum near the town square. A guide showed them old tools, photographs, and a model of a market from long ago. The pupils asked careful questions and sketched one object in their notebooks. On the bus ride back, they discussed how museums protect stories that might otherwise be forgotten."
 
-This passage was MOST LIKELY written for:`,
+What does the passage help the reader understand?`,
     options: [
-      "Museum curators planning new exhibits",
-      "Students and teachers interested in educational trips",
-      "Tourism agencies",
-      "Ancient historians",
+      "The children avoided helping younger pupils.",
+      "The event was mainly about buying new uniforms.",
+      "The passage focuses on a private family trip.",
+      "The community activity helped others through shared effort.",
     ],
     correctAnswer: 1,
-    explanation: `The accessible language and focus on student experience suggest an audience of students, teachers, or parents.`
+    explanation: `The details show museum visit brought people together for a helpful purpose.`
   },
   {
     id: 15,
     type: "reading",
-    skill: "Detail",
+    skill: "Problem and Solution",
     question: `Read the passage then answer the question.
 
-"The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday. They explored exhibits about Jamaica's history, from the Taino people who first lived on the island to the arrival of the Spanish and British and the struggle for independence. Their guide explained artefacts including ancient pottery, colonial maps, and photographs from the early twentieth century. One student said it was the most interesting school trip he had ever been on."
+"The class visited a small museum near the town square. A guide showed them old tools, photographs, and a model of a market from long ago. The pupils asked careful questions and sketched one object in their notebooks. On the bus ride back, they discussed how museums protect stories that might otherwise be forgotten."
 
-When did the Grade 5 students visit the museum?`,
+What does the passage help the reader understand?`,
     options: [
-      "On a Saturday",
-      "Last Monday",
-      "Last Thursday",
-      "During school holidays",
+      "The passage focuses on a private family trip.",
+      "The community activity helped others through shared effort.",
+      "The children avoided helping younger pupils.",
+      "The event was mainly about buying new uniforms.",
     ],
     correctAnswer: 2,
-    explanation: `The passage states 'The Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday.'`
+    explanation: `The details show museum visit brought people together for a helpful purpose.`
   },
   {
     id: 16,
     type: "vocabulary",
-    skill: "Synonyms",
-    question: `Which word is a SYNONYM for 'ancient'?`,
+    skill: "Context Clues",
+    question: `In a passage about heritage celebration, the word “steady” is used in context. Which option gives the best meaning?`,
     options: [
-      "modern",
-      "new",
-      "very old",
-      "recent",
+      "In the sentence, “steady” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 2,
-    explanation: `'Very old' captures the meaning of 'ancient' — relating to a very distant past.`
+    correctAnswer: 3,
+    explanation: `Context clues in the school or community situation show that “steady” has the practical meaning used in the correct option.`
   },
   {
     id: 17,
     type: "vocabulary",
-    skill: "Antonyms",
-    question: `The ANTONYM of 'independence' is:`,
+    skill: "Context Clues",
+    question: `In a passage about heritage celebration, the word “gently” is used in context. Which option gives the best meaning?`,
     options: [
-      "freedom",
-      "liberty",
-      "submission",
-      "self-rule",
+      "In the sentence, “gently” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 2,
-    explanation: `'Submission' (being under another's control) is the opposite of 'independence' (self-rule).`
+    correctAnswer: 0,
+    explanation: `Context clues in the school or community situation show that “gently” has the practical meaning used in the correct option.`
   },
   {
     id: 18,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `The historian studied PRIMARY SOURCES — original documents, diaries, and artefacts from the period. 'Primary sources' are:`,
+    question: `In a passage about heritage celebration, the word “bright” is used in context. Which option gives the best meaning?`,
     options: [
-      "modern summaries written by historians",
-      "original materials created at the time being studied",
-      "textbooks about history",
-      "fictional stories set in the past",
+      "It names a place far from the school.",
+      "It means the opposite of what the sentence suggests.",
+      "It means a loud sound made by traffic.",
+      "In the sentence, “bright” means a sensible meaning that fits the activity.",
     ],
     correctAnswer: 1,
-    explanation: `A primary source is an original, first-hand document or object from the period being studied — not a later interpretation.`
+    explanation: `Context clues in the school or community situation show that “bright” has the practical meaning used in the correct option.`
   },
   {
     id: 19,
     type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'History is a conversation between the past and the present.' This is a:`,
+    skill: "Context Clues",
+    question: `In a passage about heritage celebration, the word “careful” is used in context. Which option gives the best meaning?`,
     options: [
-      "Simile",
-      "Hyperbole",
-      "Metaphor",
-      "Alliteration",
+      "It means a loud sound made by traffic.",
+      "In the sentence, “careful” means a sensible meaning that fits the activity.",
+      "It names a place far from the school.",
+      "It means the opposite of what the sentence suggests.",
     ],
     correctAnswer: 2,
-    explanation: `Directly comparing history to a conversation — without 'like' or 'as' — is a metaphor.`
+    explanation: `Context clues in the school or community situation show that “careful” has the practical meaning used in the correct option.`
   },
   {
     id: 20,
     type: "vocabulary",
-    skill: "Word Meaning",
-    question: `The word 'artefact' means:`,
+    skill: "Context Clues",
+    question: `In a passage about heritage celebration, the word “useful” is used in context. Which option gives the best meaning?`,
     options: [
-      "a type of building",
-      "a historical object created or used by people in the past",
-      "a written document only",
-      "a modern recreation",
+      "In the sentence, “useful” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 1,
-    explanation: `An artefact is a man-made object of historical or cultural significance.`
+    correctAnswer: 3,
+    explanation: `Context clues in the school or community situation show that “useful” has the practical meaning used in the correct option.`
   },
   {
     id: 21,
     type: "vocabulary",
-    skill: "Multiple Meaning",
-    question: `Which sentence uses 'exhibit' as a VERB?`,
+    skill: "Context Clues",
+    question: `In a passage about heritage celebration, the word “purpose” is used in context. Which option gives the best meaning?`,
     options: [
-      "The museum exhibit was fascinating",
-      "Visitors gathered around the exhibit",
-      "The painting will exhibit at the gallery next month",
-      "The exhibit showed colonial life",
+      "In the sentence, “purpose” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 2,
-    explanation: `'Will exhibit' (show/display) is the verb form. The other options use 'exhibit' as a noun.`
+    correctAnswer: 0,
+    explanation: `Context clues in the school or community situation show that “purpose” has the practical meaning used in the correct option.`
   },
   {
     id: 22,
     type: "vocabulary",
-    skill: "Prefix pre-",
-    question: `The prefix 'pre-' in 'prehistoric' means:`,
+    skill: "Context Clues",
+    question: `In a passage about heritage celebration, the word “encouraged” is used in context. Which option gives the best meaning?`,
     options: [
-      "after",
-      "during",
-      "before",
-      "against",
+      "It names a place far from the school.",
+      "It means the opposite of what the sentence suggests.",
+      "It means a loud sound made by traffic.",
+      "In the sentence, “encouraged” means a sensible meaning that fits the activity.",
     ],
-    correctAnswer: 2,
-    explanation: `'Pre-' means before. 'Prehistoric' = before written history.`
+    correctAnswer: 1,
+    explanation: `Context clues in the school or community situation show that “encouraged” has the practical meaning used in the correct option.`
   },
   {
     id: 23,
     type: "vocabulary",
-    skill: "Suffix -al",
-    question: `Adding '-al' to 'history' creates 'historical', which is:`,
+    skill: "Context Clues",
+    question: `In a passage about heritage celebration, the word “materials” is used in context. Which option gives the best meaning?`,
     options: [
-      "A noun",
-      "An adjective",
-      "A verb",
-      "An adverb",
+      "It means a loud sound made by traffic.",
+      "In the sentence, “materials” means a sensible meaning that fits the activity.",
+      "It names a place far from the school.",
+      "It means the opposite of what the sentence suggests.",
     ],
-    correctAnswer: 1,
-    explanation: `'-al' turns nouns into adjectives. 'Historical' = relating to or of history.`
+    correctAnswer: 2,
+    explanation: `Context clues in the school or community situation show that “materials” has the practical meaning used in the correct option.`
   },
   {
     id: 24,
     type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'The museum was a time machine, carrying visitors back centuries.' This is a:`,
+    skill: "Context Clues",
+    question: `In a passage about heritage celebration, the word “displayed” is used in context. Which option gives the best meaning?`,
     options: [
-      "Simile",
-      "Personification",
-      "Metaphor",
-      "Onomatopoeia",
+      "In the sentence, “displayed” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 2,
-    explanation: `Directly calling the museum a time machine (without 'like' or 'as') is a metaphor.`
+    correctAnswer: 3,
+    explanation: `Context clues in the school or community situation show that “displayed” has the practical meaning used in the correct option.`
   },
   {
     id: 25,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `The painting depicted a TUMULTUOUS scene — crowds, fire, and chaos everywhere. 'Tumultuous' means:`,
+    question: `In a passage about heritage celebration, the word “pride” is used in context. Which option gives the best meaning?`,
     options: [
-      "peaceful and organised",
-      "full of noise, confusion, and disorder",
-      "quiet and sad",
-      "colourful and artistic",
+      "In the sentence, “pride” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 1,
-    explanation: `'Tumultuous' describes a scene of loud, chaotic disorder — supported by 'crowds, fire, and chaos.'`
+    correctAnswer: 0,
+    explanation: `Context clues in the school or community situation show that “pride” has the practical meaning used in the correct option.`
   },
   {
     id: 26,
     type: "grammar",
-    skill: "Proper Nouns",
-    question: `Which sentence contains the MOST proper nouns?`,
+    skill: "Subject-Verb Agreement",
+    question: `The club ___ the plants every Wednesday.`,
     options: [
-      "The students visited a museum",
-      "The students visited a museum on Thursday",
-      "Grade 5 students from Cedar Heights Primary visited the National Museum last Thursday",
-      "They saw old pottery at the museum",
+      "watering",
+      "water",
+      "were water",
+      "waters",
     ],
-    correctAnswer: 2,
-    explanation: `'Grade 5,' 'Cedar Heights Primary,' 'National Museum,' and 'Thursday' are all proper nouns.`
+    correctAnswer: 1,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 27,
     type: "grammar",
-    skill: "Passive Voice",
-    question: `Which sentence is in the PASSIVE VOICE?`,
+    skill: "Verb Tense",
+    question: `Yesterday, the pupils ___ their display.`,
     options: [
-      "The guide explained the artefacts",
-      "Students asked many questions",
-      "The pottery was made by the Taino people",
-      "Visitors explored the exhibits",
+      "preparing",
+      "prepared",
+      "prepares",
+      "prepare",
     ],
     correctAnswer: 2,
-    explanation: `Passive: subject (pottery) receives the action (was made). The agent (Taino people) follows 'by.'`
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 28,
     type: "grammar",
-    skill: "Comparative and Superlative",
-    question: `Which correctly uses the SUPERLATIVE to compare many trips?`,
+    skill: "Pronoun Reference",
+    question: `Maya lent Jada a ruler because ___ had an extra one.`,
     options: [
-      "This was a more interesting trip",
-      "This was the most interesting trip he had ever been on",
-      "This trip was interesting than others",
-      "This was a most interesting trip",
+      "she",
+      "they",
+      "it",
+      "we",
     ],
-    correctAnswer: 1,
-    explanation: `When comparing three or more things, use the superlative: 'the most interesting.' Option B is correct.`
+    correctAnswer: 3,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 29,
     type: "grammar",
-    skill: "Conjunctions",
-    question: `Choose the SUBORDINATING CONJUNCTION in: 'The students were excited because they visited the museum.'`,
+    skill: "Punctuation",
+    question: `Which sentence is punctuated correctly?`,
     options: [
-      "the",
-      "were",
-      "because",
-      "visited",
+      "“Please bring gloves,” said Mr. Brown.",
+      "“Please bring gloves” said Mr. Brown.",
+      "Please bring gloves, said Mr. Brown.",
+      "“Please bring gloves said Mr. Brown.”",
     ],
-    correctAnswer: 2,
-    explanation: `'Because' is a subordinating conjunction — it introduces the subordinate clause explaining WHY they were excited.`
+    correctAnswer: 0,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 30,
     type: "grammar",
-    skill: "Punctuation — Apostrophe for Contraction",
-    question: `Which is a CONTRACTION of 'it is'?`,
+    skill: "Adjective Use",
+    question: `Choose the sentence with the best describing word.`,
     options: [
-      "its",
-      "it's",
-      "its'",
-      "it is'",
+      "Neatly poster caught the visitors.",
+      "The poster caught attention neat.",
+      "The poster neat caught attention.",
+      "The neat poster caught the visitors’ attention.",
     ],
     correctAnswer: 1,
-    explanation: `A contraction replaces missing letters with an apostrophe. 'It is' → 'It's.'`
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 31,
     type: "grammar",
-    skill: "Past Perfect Tense",
-    question: `Which sentence is in the PAST PERFECT tense?`,
+    skill: "Conjunctions",
+    question: `Choose the best word: We packed water ___ the afternoon was hot.`,
     options: [
-      "She visited the museum",
-      "She has visited the museum",
-      "She had visited the museum before it closed",
-      "She was visiting the museum",
+      "so",
+      "because",
+      "or",
+      "but",
     ],
     correctAnswer: 2,
-    explanation: `Past perfect = had + past participle. 'Had visited' shows a past action completed before another past event.`
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 32,
     type: "grammar",
-    skill: "Indirect Object",
-    question: `Identify the INDIRECT OBJECT in: 'The guide showed the students the ancient map.'`,
+    skill: "Complete Sentence",
+    question: `Which is a complete sentence?`,
     options: [
-      "showed",
-      "the students",
-      "the ancient map",
-      "The guide",
+      "The students shared books with Grade 1.",
+      "After the bell near the gate.",
+      "Because the table with cards.",
+      "The clean bags on Saturday.",
     ],
-    correctAnswer: 1,
-    explanation: `The indirect object is the recipient. 'The students' received the showing — they are the indirect object.`
+    correctAnswer: 3,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 33,
     type: "grammar",
-    skill: "Adjective Order",
-    question: `Which sentence uses CORRECT adjective order?`,
+    skill: "Comma in a Series",
+    question: `Which sentence uses commas correctly?`,
     options: [
-      "She saw a wooden ancient Jamaican artefact",
-      "She saw an ancient, wooden Jamaican artefact",
-      "She saw a Jamaican wooden ancient artefact",
-      "She saw an artefact ancient wooden Jamaican",
+      "We need pencils, glue, paper, and string.",
+      "We need pencils glue, paper and string.",
+      "We need, pencils glue paper, and string.",
+      "We need pencils, glue paper and, string.",
     ],
-    correctAnswer: 1,
-    explanation: `Standard English adjective order: opinion → age → material → origin. 'Ancient, wooden Jamaican' follows this order.`
+    correctAnswer: 0,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 34,
     type: "grammar",
-    skill: "Pronoun Reference",
-    question: `In 'The student told his friend that he was impressed,' who was impressed?`,
+    skill: "Possessive Noun",
+    question: `Choose the correct possessive form.`,
     options: [
-      "The friend",
-      "The student",
-      "Both",
-      "It is unclear from the sentence",
+      "The classes chart was full.",
+      "The class chart’s was full.",
+      "The classs chart was full.",
+      "The class’s chart was full.",
     ],
-    correctAnswer: 3,
-    explanation: `'He' is ambiguous — it could refer to either the student or his friend. This is a pronoun reference error.`
+    correctAnswer: 1,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 35,
     type: "grammar",
-    skill: "Sentence Types",
-    question: `Which is an IMPERATIVE sentence?`,
+    skill: "Sentence Combining",
+    question: `Which combines the ideas best?`,
     options: [
-      "Are you visiting the museum?",
-      "The museum has interesting exhibits",
-      "Visit the National Museum this weekend!",
-      "She loved her museum visit",
+      "The event went because carefully pupils.",
+      "The pupils planned carefully, and the event went well.",
+      "Planning carefully and event went.",
+      "The pupils planned carefully the event went well.",
     ],
     correctAnswer: 2,
-    explanation: `An imperative gives a command or instruction. 'Visit the National Museum this weekend!' is a command (even with the exclamation mark, the base form 'Visit' makes it imperative).`
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 36,
     type: "writing",
-    skill: "Report Writing",
-    question: `A report about a school trip should include which feature?`,
+    skill: "Purpose and Audience",
+    question: `You are writing a notice for pupils about the event connected to local historical site visit. What is the best approach?`,
     options: [
-      "Only the writer's opinions",
-      "Fictional events for entertainment",
-      "Accurate factual information about what happened, what was seen, and what was learned",
-      "Jokes to keep readers interested",
+      "Use a clear heading, important details, and polite language for a notice for pupils about the event.",
+      "Hide the date and place so readers must guess.",
+      "Use only jokes and leave out the main message.",
+      "Write one very long sentence with no punctuation.",
     ],
-    correctAnswer: 2,
-    explanation: `A report is a factual account — it includes who, what, when, where, and key observations or findings.`
+    correctAnswer: 3,
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
   },
   {
     id: 37,
     type: "writing",
-    skill: "Chronological Order",
-    question: `Events in a report are usually presented in CHRONOLOGICAL ORDER because:`,
+    skill: "Purpose and Audience",
+    question: `You are writing a friendly letter thanking helpers connected to local historical site visit. What is the best approach?`,
     options: [
-      "It is the only way to write",
-      "It is quicker to write",
-      "It follows the natural sequence of time, making the report easy to follow",
-      "Readers only care about the end",
+      "Use a clear heading, important details, and polite language for a friendly letter thanking helpers.",
+      "Hide the date and place so readers must guess.",
+      "Use only jokes and leave out the main message.",
+      "Write one very long sentence with no punctuation.",
     ],
-    correctAnswer: 2,
-    explanation: `Chronological order (time sequence) helps readers follow events logically — from beginning through to the end of the reported activity.`
+    correctAnswer: 0,
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "Formal Language in Reports",
-    question: `Which sentence is MOST appropriate for a formal school report?`,
+    skill: "Purpose and Audience",
+    question: `You are writing a school announcement for assembly connected to local historical site visit. What is the best approach?`,
     options: [
-      "The museum was really cool and we learnt loads",
-      "The museum was very educational and we gained valuable knowledge about Jamaica's history",
-      "It was great, we loved all the stuff there",
-      "We saw old things and they were interesting",
+      "Use only jokes and leave out the main message.",
+      "Hide the date and place so readers must guess.",
+      "Write one very long sentence with no punctuation.",
+      "Use a clear heading, important details, and polite language for a school announcement for assembly.",
     ],
     correctAnswer: 1,
-    explanation: `Formal reports use precise, professional language. Option B is factual, clear, and appropriately formal.`
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Paragraph Focus",
-    question: `In a well-written report, each paragraph should:`,
+    skill: "Purpose and Audience",
+    question: `You are writing a poster for the community project connected to local historical site visit. What is the best approach?`,
     options: [
-      "Discuss as many different topics as possible",
-      "Have no clear organisation",
-      "Focus on ONE main point or event, supported by specific details",
-      "Be as long as possible",
+      "Write one very long sentence with no punctuation.",
+      "Use a clear heading, important details, and polite language for a poster for the community project.",
+      "Use only jokes and leave out the main message.",
+      "Hide the date and place so readers must guess.",
     ],
     correctAnswer: 2,
-    explanation: `Well-organised writing uses one main idea per paragraph — focused paragraphs are clearer and easier to read.`
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
   },
   {
     id: 40,
     type: "writing",
-    skill: "Concluding a Report",
-    question: `A report about a museum visit BEST concludes with:`,
+    skill: "Purpose and Audience",
+    question: `You are writing a short report for the school newsletter connected to local historical site visit. What is the best approach?`,
     options: [
-      "A random fact about museums",
-      "A long list of artefacts seen",
-      "A reflection on what was learned and why the visit was valuable",
-      "A fictional story set in the museum",
+      "Use a clear heading, important details, and polite language for a short report for the school newsletter.",
+      "Hide the date and place so readers must guess.",
+      "Use only jokes and leave out the main message.",
+      "Write one very long sentence with no punctuation.",
     ],
-    correctAnswer: 2,
-    explanation: `A strong conclusion for a report reflects on the significance of the experience — what was learned and why it mattered.`
-  }
+    correctAnswer: 3,
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+  },
 ]
-
 
 const shuffleAnswerOptions = (questions: Question[]): Question[] => {
   return questions.map((question) => {
@@ -685,6 +684,7 @@ export default function G5LaEasy8MockTest() {
   const [answers, setAnswers]             = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]           = useState(60 * 60)
   const [randomizedQuestions, setRandomizedQuestions] = useState<Question[]>([])
+  const hasSavedResult = useRef(false)
 
   const sourceQuestions = isPremium ? g5LaEasy8Questions : g5LaEasy8Questions.slice(0, FREE_QUESTION_LIMIT)
   const availableQuestions = randomizedQuestions.length > 0 ? randomizedQuestions : sourceQuestions
@@ -711,8 +711,30 @@ export default function G5LaEasy8MockTest() {
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
 
-  const calcScore  = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
+  const calcScore  = () => answers.reduce<number>((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct   = () => Math.round((calcScore() / totalQuestions) * 100)
+
+
+  useEffect(() => {
+    if (!showResults || !user?.id || hasSavedResult.current) return
+
+    hasSavedResult.current = true
+    const completedAtIso = new Date().toISOString()
+    void saveStudentTestResult({
+      parentId: user.id,
+      studentName: user?.childName ?? "Student",
+      grade: "grade5",
+      subject: "Literacy",
+      testName: "Easy 8",
+      difficulty: "Easy",
+      score: calcScore(),
+      totalQuestions,
+      percentage: scorePct(),
+      completedAt: completedAtIso,
+    }).catch(() => {
+      hasSavedResult.current = false
+    })
+  }, [showResults, user?.id, user?.childName, totalQuestions, answers])
 
   const getGrade = () => {
     const p = scorePct()
@@ -739,13 +761,14 @@ export default function G5LaEasy8MockTest() {
     setCurrentQuestion(0)
     setTimeLeft(60 * 60)
     setShowResults(false)
+    hasSavedResult.current = false
     setStarted(true)
   }
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
     setRandomizedQuestions([])
-    setAnswers(new Array(sourceQuestions.length).fill(null)); setTimeLeft(60 * 60)
+    setAnswers(new Array(sourceQuestions.length).fill(null)); setTimeLeft(60 * 60); hasSavedResult.current = false
   }
 
   const handleSubmit = () => {
