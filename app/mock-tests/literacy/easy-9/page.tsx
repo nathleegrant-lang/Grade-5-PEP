@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -34,17 +34,17 @@ const g5LaEasy9Questions: Question[] = [
     skill: "Main Idea",
     question: `Read the passage then answer the question.
 
-"Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
+"Grade 5 prepared for the Junior Entrepreneurship Fair by planning small businesses in teams. One group made bookmarks, another mixed fruit cups, and a third designed greeting cards. Before the fair opened, each team counted its costs and decided on fair prices. The pupils learned that a good business needs planning, teamwork, and polite service."
 
-What is this passage MAINLY about?`,
+Which answer best matches the passage?`,
     options: [
-      "The 100-metre sprint",
-      "Sports Day at Hillside Primary and the values it promotes",
-      "How to win a relay race",
-      "The importance of physical fitness",
+      "to entertain with a fantasy adventure",
+      "to describe the pupils’ organized school activity",
+      "to explain why sports day was postponed",
+      "to list rules for a spelling contest",
     ],
-    correctAnswer: 1,
-    explanation: `The passage describes Sports Day and ends with the insight that HOW you compete matters — this is the main idea about sportsmanship and values.`
+    correctAnswer: 0,
+    explanation: `The passage shows junior entrepreneurship fair as a planned, helpful activity involving pupils.`
   },
   {
     id: 2,
@@ -52,604 +52,603 @@ What is this passage MAINLY about?`,
     skill: "Detail",
     question: `Read the passage then answer the question.
 
-"Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
+"Grade 5 prepared for the Junior Entrepreneurship Fair by planning small businesses in teams. One group made bookmarks, another mixed fruit cups, and a third designed greeting cards. Before the fair opened, each team counted its costs and decided on fair prices. The pupils learned that a good business needs planning, teamwork, and polite service."
 
-Which events are mentioned in the passage?`,
+Which answer best matches the passage?`,
     options: [
-      "Football, cricket, and swimming",
-      "Relay races, long jump, high jump, and 100-metre sprint",
-      "Chess, debate, and spelling",
-      "Only the 100-metre sprint",
+      "They cancelled the activity after assembly.",
+      "They used a schedule or record to guide the activity.",
+      "They sold tickets at the gate.",
+      "They worked alone without a teacher.",
     ],
     correctAnswer: 1,
-    explanation: `The passage lists 'relay races, the long jump, the high jump, and the 100-metre sprint.'`
+    explanation: `The passage shows junior entrepreneurship fair as a planned, helpful activity involving pupils.`
   },
   {
     id: 3,
     type: "reading",
-    skill: "Vocabulary in Context",
+    skill: "Inference",
     question: `Read the passage then answer the question.
 
-"Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
+"Grade 5 prepared for the Junior Entrepreneurship Fair by planning small businesses in teams. One group made bookmarks, another mixed fruit cups, and a third designed greeting cards. Before the fair opened, each team counted its costs and decided on fair prices. The pupils learned that a good business needs planning, teamwork, and polite service."
 
-The word 'erupts' in 'the winning house erupts in celebration' suggests:`,
+Which answer best matches the passage?`,
     options: [
-      "the house is on fire",
-      "the celebration is sudden, explosive, and overwhelming",
-      "the celebration is quiet and polite",
-      "the students are angry",
+      "Only adults did the work.",
+      "The pupils were careless.",
+      "The school was closed.",
+      "The activity was planned and helpful.",
     ],
-    correctAnswer: 1,
-    explanation: `'Erupts' is a volcanic metaphor — it suggests the celebration bursts out suddenly and powerfully, like a volcano.`
+    correctAnswer: 2,
+    explanation: `The passage shows junior entrepreneurship fair as a planned, helpful activity involving pupils.`
   },
   {
     id: 4,
     type: "reading",
-    skill: "Inference",
+    skill: "Vocabulary in Context",
     question: `Read the passage then answer the question.
 
-"Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
+"Grade 5 prepared for the Junior Entrepreneurship Fair by planning small businesses in teams. One group made bookmarks, another mixed fruit cups, and a third designed greeting cards. Before the fair opened, each team counted its costs and decided on fair prices. The pupils learned that a good business needs planning, teamwork, and polite service."
 
-What does 'how you compete matters just as much as whether you win' tell us about Hillside Primary's values?`,
+Which answer best matches the passage?`,
     options: [
-      "Winning is everything",
-      "Only the fastest athletes deserve praise",
-      "Fair play, good sportsmanship, and participation are valued equally with winning",
-      "Only teachers care about behaviour",
+      "comfortable means suitable for the person",
+      "comfortable means broken into pieces",
+      "comfortable means very expensive",
+      "comfortable means impossible to find",
     ],
-    correctAnswer: 2,
-    explanation: `This final statement reveals the school's ethos: the process and spirit of competition are as important as the result.`
+    correctAnswer: 3,
+    explanation: `The passage shows junior entrepreneurship fair as a planned, helpful activity involving pupils.`
   },
   {
     id: 5,
     type: "reading",
-    skill: "Author's Purpose",
+    skill: "Author’s Purpose",
     question: `Read the passage then answer the question.
 
-"Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
+"Grade 5 prepared for the Junior Entrepreneurship Fair by planning small businesses in teams. One group made bookmarks, another mixed fruit cups, and a third designed greeting cards. Before the fair opened, each team counted its costs and decided on fair prices. The pupils learned that a good business needs planning, teamwork, and polite service."
 
-Why does the author end with the phrase about HOW you compete?`,
+Which answer best matches the passage?`,
     options: [
-      "Because the winning house always wins",
-      "To give a moral lesson that elevates the passage beyond just describing an event",
-      "To criticise the losing houses",
-      "To confuse the reader",
+      "to persuade readers to avoid school clubs",
+      "to inform readers about a useful school event",
+      "to describe a storm at school",
+      "to compare two famous athletes",
     ],
-    correctAnswer: 1,
-    explanation: `Ending with this reflection lifts the passage from a simple description to a statement about values — a deliberate authorial choice.`
+    correctAnswer: 0,
+    explanation: `The passage shows junior entrepreneurship fair as a planned, helpful activity involving pupils.`
   },
   {
     id: 6,
     type: "reading",
-    skill: "Tone",
+    skill: "Sequence",
     question: `Read the passage then answer the question.
 
-"Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
+"Grade 5 prepared for the Junior Entrepreneurship Fair by planning small businesses in teams. One group made bookmarks, another mixed fruit cups, and a third designed greeting cards. Before the fair opened, each team counted its costs and decided on fair prices. The pupils learned that a good business needs planning, teamwork, and polite service."
 
-The tone of this passage is BEST described as:`,
+Which answer best matches the passage?`,
     options: [
-      "Competitive and aggressive",
-      "Warm, energetic, and celebratory — with an underlying message about good sportsmanship",
-      "Sad and reflective",
-      "Boring and factual",
+      "First they went home; then they listened to directions.",
+      "First they received prizes; then they began planning.",
+      "First visitors left; then the event opened.",
+      "First pupils planned; then they carried out the task.",
     ],
     correctAnswer: 1,
-    explanation: `The vibrant scene (house colours, cheering, celebration) and the values-based ending create an energetic yet thoughtful tone.`
+    explanation: `The passage shows junior entrepreneurship fair as a planned, helpful activity involving pupils.`
   },
   {
     id: 7,
     type: "reading",
-    skill: "Text Structure",
+    skill: "Cause and Effect",
     question: `Read the passage then answer the question.
 
-"Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
+"Grade 5 prepared for the Junior Entrepreneurship Fair by planning small businesses in teams. One group made bookmarks, another mixed fruit cups, and a third designed greeting cards. Before the fair opened, each team counted its costs and decided on fair prices. The pupils learned that a good business needs planning, teamwork, and polite service."
 
-How is this passage organised?`,
+Which answer best matches the passage?`,
     options: [
-      "Randomly, with no clear order",
-      "It describes the event from beginning to end, then ends with a reflection on its values",
-      "It only describes the sporting events",
-      "It begins with the results and works backwards",
+      "Because the bell rang, the trees became taller.",
+      "Because pupils worked together, the activity was successful.",
+      "Because no one listened, the fair opened early.",
+      "Because it rained indoors, the books disappeared.",
     ],
-    correctAnswer: 1,
-    explanation: `The passage moves through the build-up, the events, the celebration, and ends with a broader reflection — a logical narrative structure.`
+    correctAnswer: 2,
+    explanation: `The passage shows junior entrepreneurship fair as a planned, helpful activity involving pupils.`
   },
   {
     id: 8,
     type: "reading",
-    skill: "Figurative Language",
+    skill: "Text Evidence",
     question: `Read the passage then answer the question.
 
-"Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
+"Grade 5 prepared for the Junior Entrepreneurship Fair by planning small businesses in teams. One group made bookmarks, another mixed fruit cups, and a third designed greeting cards. Before the fair opened, each team counted its costs and decided on fair prices. The pupils learned that a good business needs planning, teamwork, and polite service."
 
-'Students in their house colours fill the track.' The image of house colours suggests:`,
+Which answer best matches the passage?`,
     options: [
-      "Students are wearing paint",
-      "The track is colourful",
-      "A sense of team pride, identity, and belonging — each colour represents a community",
-      "The school has too many students",
+      "A sentence about teamwork and careful records supports the answer.",
+      "A sentence about a football match supports the answer.",
+      "A sentence about a lost puppy supports the answer.",
+      "A sentence about a birthday party supports the answer.",
     ],
-    correctAnswer: 2,
-    explanation: `House colours are a symbol of team identity and belonging — their visual presence on the track signals community, loyalty, and pride.`
+    correctAnswer: 3,
+    explanation: `The passage shows junior entrepreneurship fair as a planned, helpful activity involving pupils.`
   },
   {
     id: 9,
     type: "reading",
-    skill: "Fact vs Opinion",
+    skill: "Main Idea",
     question: `Read the passage then answer the question.
 
-"Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
+"For their charity project, students created simple products to sell after school. They made bead bracelets, small plant pots, and paper gift bags from clean materials. A sign explained that the money would help buy art supplies for a nearby children's home. Customers were pleased because the products were useful and the purpose was kind."
 
-Which is an OPINION about Sports Day?`,
+What does the passage help the reader understand?`,
     options: [
-      "Events include the relay race and long jump",
-      "The winning house erupts in celebration",
-      "Sports Day is the most exciting event of the school year",
-      "Teachers and parents line the field",
+      "The community activity helped others through shared effort.",
+      "The event was mainly about buying new uniforms.",
+      "The children avoided helping younger pupils.",
+      "The passage focuses on a private family trip.",
     ],
-    correctAnswer: 2,
-    explanation: `'Most exciting' is a subjective judgement — an opinion. The others are facts stated in the passage.`
+    correctAnswer: 0,
+    explanation: `The details show charity products project brought people together for a helpful purpose.`
   },
   {
     id: 10,
     type: "reading",
-    skill: "Summarise",
+    skill: "Detail",
     question: `Read the passage then answer the question.
 
-"Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
+"For their charity project, students created simple products to sell after school. They made bead bracelets, small plant pots, and paper gift bags from clean materials. A sign explained that the money would help buy art supplies for a nearby children's home. Customers were pleased because the products were useful and the purpose was kind."
 
-Which BEST summarises this passage?`,
+What does the passage help the reader understand?`,
     options: [
-      "A school holds various track and field events",
-      "Sports Day at Hillside Primary is an energetic, community event that values not just winning but the spirit in which students compete",
-      "The relay race is the most important event",
-      "Students enjoy cheering for their friends",
+      "The children avoided helping younger pupils.",
+      "The event was mainly about buying new uniforms.",
+      "The passage focuses on a private family trip.",
+      "The community activity helped others through shared effort.",
     ],
     correctAnswer: 1,
-    explanation: `This captures the events, the community spirit, and the key message about values.`
+    explanation: `The details show charity products project brought people together for a helpful purpose.`
   },
   {
     id: 11,
     type: "reading",
-    skill: "Vocabulary in Context",
+    skill: "Inference",
     question: `Read the passage then answer the question.
 
-"Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
+"For their charity project, students created simple products to sell after school. They made bead bracelets, small plant pots, and paper gift bags from clean materials. A sign explained that the money would help buy art supplies for a nearby children's home. Customers were pleased because the products were useful and the purpose was kind."
 
-The word 'gracefully' in 'the other houses applaud gracefully' means:`,
+What does the passage help the reader understand?`,
     options: [
-      "reluctantly and bitterly",
-      "loudly and aggressively",
-      "with dignity, good manners, and respect",
-      "quietly and reluctantly",
+      "The passage focuses on a private family trip.",
+      "The community activity helped others through shared effort.",
+      "The children avoided helping younger pupils.",
+      "The event was mainly about buying new uniforms.",
     ],
     correctAnswer: 2,
-    explanation: `'Gracefully' suggests the losing houses showed dignity and respect in defeat — an important part of sportsmanship.`
+    explanation: `The details show charity products project brought people together for a helpful purpose.`
   },
   {
     id: 12,
     type: "reading",
-    skill: "Character",
+    skill: "Vocabulary in Context",
     question: `Read the passage then answer the question.
 
-"Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
+"For their charity project, students created simple products to sell after school. They made bead bracelets, small plant pots, and paper gift bags from clean materials. A sign explained that the money would help buy art supplies for a nearby children's home. Customers were pleased because the products were useful and the purpose was kind."
 
-How would you describe the students of Hillside Primary based on this passage?`,
+What does the passage help the reader understand?`,
     options: [
-      "Selfish and competitive only",
-      "Respectful, spirited, and good sports who value both participation and fair play",
-      "Uninterested in sport",
-      "Very quiet and shy",
+      "The community activity helped others through shared effort.",
+      "The event was mainly about buying new uniforms.",
+      "The children avoided helping younger pupils.",
+      "The passage focuses on a private family trip.",
     ],
-    correctAnswer: 1,
-    explanation: `The students cheer for friends, celebrate gracefully, and their school values both competition and how it is conducted — painting them as spirited, respectful students.`
+    correctAnswer: 3,
+    explanation: `The details show charity products project brought people together for a helpful purpose.`
   },
   {
     id: 13,
     type: "reading",
-    skill: "Cause and Effect",
+    skill: "Author’s Purpose",
     question: `Read the passage then answer the question.
 
-"Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
+"For their charity project, students created simple products to sell after school. They made bead bracelets, small plant pots, and paper gift bags from clean materials. A sign explained that the money would help buy art supplies for a nearby children's home. Customers were pleased because the products were useful and the purpose was kind."
 
-WHY do the other houses applaud gracefully after the results?`,
+What does the passage help the reader understand?`,
     options: [
-      "Because they are forced to",
-      "Because applauding gracefully shows they understand and practise the school's value that how you compete matters more than winning",
-      "Because the winning house told them to",
-      "Because they also won something",
+      "The community activity helped others through shared effort.",
+      "The event was mainly about buying new uniforms.",
+      "The children avoided helping younger pupils.",
+      "The passage focuses on a private family trip.",
     ],
-    correctAnswer: 1,
-    explanation: `Graceful applause shows the losing houses embody the school's values — sportsmanship over mere winning.`
+    correctAnswer: 0,
+    explanation: `The details show charity products project brought people together for a helpful purpose.`
   },
   {
     id: 14,
     type: "reading",
-    skill: "Implied Meaning",
+    skill: "Compare Ideas",
     question: `Read the passage then answer the question.
 
-"Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
+"For their charity project, students created simple products to sell after school. They made bead bracelets, small plant pots, and paper gift bags from clean materials. A sign explained that the money would help buy art supplies for a nearby children's home. Customers were pleased because the products were useful and the purpose was kind."
 
-When the passage says 'how you compete matters just as much as whether you win,' it implies that:`,
+What does the passage help the reader understand?`,
     options: [
-      "Winning has no value",
-      "Losing teams should not receive prizes",
-      "The values shown during competition — effort, fairness, respect — are as important as the result",
-      "Only fast students deserve praise",
+      "The children avoided helping younger pupils.",
+      "The event was mainly about buying new uniforms.",
+      "The passage focuses on a private family trip.",
+      "The community activity helped others through shared effort.",
     ],
-    correctAnswer: 2,
-    explanation: `The statement elevates effort and character over outcome — implying that the process of competing has intrinsic moral value.`
+    correctAnswer: 1,
+    explanation: `The details show charity products project brought people together for a helpful purpose.`
   },
   {
     id: 15,
     type: "reading",
-    skill: "Detail",
+    skill: "Problem and Solution",
     question: `Read the passage then answer the question.
 
-"Sports Day at Hillside Primary is the most exciting event of the school year. Students in their house colours fill the track, cheering for their friends and teammates. Events include relay races, the long jump, the high jump, and the 100-metre sprint. Teachers and parents line the field, calling out encouragement. When the final results are announced, the winning house erupts in celebration, while the other houses applaud gracefully — because at Hillside Primary, how you compete matters just as much as whether you win."
+"For their charity project, students created simple products to sell after school. They made bead bracelets, small plant pots, and paper gift bags from clean materials. A sign explained that the money would help buy art supplies for a nearby children's home. Customers were pleased because the products were useful and the purpose was kind."
 
-Who lines the field to offer encouragement?`,
+What does the passage help the reader understand?`,
     options: [
-      "The school principal only",
-      "The judges",
-      "Teachers and parents",
-      "Other students",
+      "The passage focuses on a private family trip.",
+      "The community activity helped others through shared effort.",
+      "The children avoided helping younger pupils.",
+      "The event was mainly about buying new uniforms.",
     ],
     correctAnswer: 2,
-    explanation: `The passage states 'Teachers and parents line the field, calling out encouragement.'`
+    explanation: `The details show charity products project brought people together for a helpful purpose.`
   },
   {
     id: 16,
     type: "vocabulary",
-    skill: "Synonyms",
-    question: `Which word is a SYNONYM for 'compete'?`,
+    skill: "Context Clues",
+    question: `In a passage about student business fair, the word “steady” is used in context. Which option gives the best meaning?`,
     options: [
-      "avoid",
-      "withdraw",
-      "contest",
-      "surrender",
+      "In the sentence, “steady” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 2,
-    explanation: `'Contest' means to engage in competition — a synonym for 'compete.'`
+    correctAnswer: 3,
+    explanation: `Context clues in the school or community situation show that “steady” has the practical meaning used in the correct option.`
   },
   {
     id: 17,
     type: "vocabulary",
-    skill: "Antonyms",
-    question: `The ANTONYM of 'victory' is:`,
+    skill: "Context Clues",
+    question: `In a passage about student business fair, the word “gently” is used in context. Which option gives the best meaning?`,
     options: [
-      "triumph",
-      "success",
-      "achievement",
-      "defeat",
+      "In the sentence, “gently” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 3,
-    explanation: `'Defeat' (losing) is the direct opposite of 'victory' (winning).`
+    correctAnswer: 0,
+    explanation: `Context clues in the school or community situation show that “gently” has the practical meaning used in the correct option.`
   },
   {
     id: 18,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `The sprinter ran with AGILITY — changing direction instantly without losing speed. 'Agility' means:`,
+    question: `In a passage about student business fair, the word “bright” is used in context. Which option gives the best meaning?`,
     options: [
-      "slowness",
-      "strength alone",
-      "the ability to move quickly and easily with good control",
-      "endurance",
+      "It names a place far from the school.",
+      "It means the opposite of what the sentence suggests.",
+      "It means a loud sound made by traffic.",
+      "In the sentence, “bright” means a sensible meaning that fits the activity.",
     ],
-    correctAnswer: 2,
-    explanation: `'Agility' is the ability to move nimbly and change direction with control — supported by 'instantly without losing speed.'`
+    correctAnswer: 1,
+    explanation: `Context clues in the school or community situation show that “bright” has the practical meaning used in the correct option.`
   },
   {
     id: 19,
     type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'The runners flew around the track.' This is an example of:`,
+    skill: "Context Clues",
+    question: `In a passage about student business fair, the word “careful” is used in context. Which option gives the best meaning?`,
     options: [
-      "Simile",
-      "Metaphor",
-      "Personification",
-      "Alliteration",
+      "It means a loud sound made by traffic.",
+      "In the sentence, “careful” means a sensible meaning that fits the activity.",
+      "It names a place far from the school.",
+      "It means the opposite of what the sentence suggests.",
     ],
-    correctAnswer: 1,
-    explanation: `'Flew' directly (without 'like' or 'as') compares the runners to flying objects — a metaphor suggesting extraordinary speed.`
+    correctAnswer: 2,
+    explanation: `Context clues in the school or community situation show that “careful” has the practical meaning used in the correct option.`
   },
   {
     id: 20,
     type: "vocabulary",
-    skill: "Word Meaning",
-    question: `'Sportsmanship' refers to:`,
+    skill: "Context Clues",
+    question: `In a passage about student business fair, the word “useful” is used in context. Which option gives the best meaning?`,
     options: [
-      "knowing how to throw a ball correctly",
-      "fair, respectful, and gracious behaviour during competition",
-      "only winning graciously",
-      "physical fitness and strength",
+      "In the sentence, “useful” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 1,
-    explanation: `Sportsmanship is the quality of being fair, respectful, and gracious — both in winning and in losing.`
+    correctAnswer: 3,
+    explanation: `Context clues in the school or community situation show that “useful” has the practical meaning used in the correct option.`
   },
   {
     id: 21,
     type: "vocabulary",
-    skill: "Multiple Meaning",
-    question: `Which sentence uses 'track' to mean the course where races are run?`,
+    skill: "Context Clues",
+    question: `In a passage about student business fair, the word “purpose” is used in context. Which option gives the best meaning?`,
     options: [
-      "She tracked the package online",
-      "Police tracked the suspect",
-      "The athletes trained on the running track",
-      "The track on the album was popular",
+      "In the sentence, “purpose” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 2,
-    explanation: `'Running track' uses 'track' as a noun meaning the oval course where races are held.`
+    correctAnswer: 0,
+    explanation: `Context clues in the school or community situation show that “purpose” has the practical meaning used in the correct option.`
   },
   {
     id: 22,
     type: "vocabulary",
-    skill: "Prefix over-",
-    question: `The prefix 'over-' in 'overcome' means:`,
+    skill: "Context Clues",
+    question: `In a passage about student business fair, the word “encouraged” is used in context. Which option gives the best meaning?`,
     options: [
-      "under",
-      "before",
-      "above or beyond — to surmount",
-      "again",
+      "It names a place far from the school.",
+      "It means the opposite of what the sentence suggests.",
+      "It means a loud sound made by traffic.",
+      "In the sentence, “encouraged” means a sensible meaning that fits the activity.",
     ],
-    correctAnswer: 2,
-    explanation: `'Over-' means above or beyond. 'Overcome' = to succeed in dealing with something despite difficulty.`
+    correctAnswer: 1,
+    explanation: `Context clues in the school or community situation show that “encouraged” has the practical meaning used in the correct option.`
   },
   {
     id: 23,
     type: "vocabulary",
-    skill: "Suffix -ship",
-    question: `Adding '-ship' to 'champion' creates 'championship', which refers to:`,
+    skill: "Context Clues",
+    question: `In a passage about student business fair, the word “materials” is used in context. Which option gives the best meaning?`,
     options: [
-      "a physical trophy",
-      "the position, status, or contest of being a champion",
-      "a type of sports equipment",
-      "a champion's training routine",
+      "It means a loud sound made by traffic.",
+      "In the sentence, “materials” means a sensible meaning that fits the activity.",
+      "It names a place far from the school.",
+      "It means the opposite of what the sentence suggests.",
     ],
-    correctAnswer: 1,
-    explanation: `'-ship' creates a noun meaning a condition, position, or quality. 'Championship' = the state or contest of being a champion.`
+    correctAnswer: 2,
+    explanation: `Context clues in the school or community situation show that “materials” has the practical meaning used in the correct option.`
   },
   {
     id: 24,
     type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'Losing gracefully is a victory of its own.' This is a:`,
+    skill: "Context Clues",
+    question: `In a passage about student business fair, the word “displayed” is used in context. Which option gives the best meaning?`,
     options: [
-      "Simile",
-      "Personification",
-      "Paradox — it seems contradictory but reveals a truth",
-      "Hyperbole",
+      "In the sentence, “displayed” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 2,
-    explanation: `A paradox appears self-contradictory (how can losing be a victory?) but reveals a deeper truth: handling defeat with dignity is itself a kind of triumph.`
+    correctAnswer: 3,
+    explanation: `Context clues in the school or community situation show that “displayed” has the practical meaning used in the correct option.`
   },
   {
     id: 25,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `The athlete showed great PERSEVERANCE — practising every day despite injuries and setbacks. 'Perseverance' means:`,
+    question: `In a passage about student business fair, the word “pride” is used in context. Which option gives the best meaning?`,
     options: [
-      "giving up easily",
-      "natural talent",
-      "continuing steadily despite difficulty or obstacles",
-      "short periods of effort",
+      "In the sentence, “pride” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 2,
-    explanation: `'Perseverance' is the quality of continuing in the face of obstacles — supported by 'practising every day despite injuries.'`
+    correctAnswer: 0,
+    explanation: `Context clues in the school or community situation show that “pride” has the practical meaning used in the correct option.`
   },
   {
     id: 26,
     type: "grammar",
-    skill: "Nouns",
-    question: `Which sentence contains BOTH a common noun and a proper noun?`,
+    skill: "Subject-Verb Agreement",
+    question: `The club ___ the plants every Wednesday.`,
     options: [
-      "She won a race",
-      "Athletics is exciting",
-      "Akira won the gold medal at Hillside Primary's Sports Day",
-      "The race was fast",
+      "watering",
+      "water",
+      "were water",
+      "waters",
     ],
-    correctAnswer: 2,
-    explanation: `'Medal' (common noun) and 'Hillside Primary's Sports Day' (proper nouns) appear in the same sentence.`
+    correctAnswer: 1,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 27,
     type: "grammar",
-    skill: "Verb Forms",
-    question: `Which sentence uses the PRESENT PARTICIPLE correctly?`,
+    skill: "Verb Tense",
+    question: `Yesterday, the pupils ___ their display.`,
     options: [
-      "She was jumping when the whistle blew",
-      "She jumps over the bar",
-      "She have jumped the highest",
-      "She jumping",
+      "preparing",
+      "prepared",
+      "prepares",
+      "prepare",
     ],
-    correctAnswer: 0,
-    explanation: `'Was jumping' uses the present participle (-ing) with a past auxiliary — forming the past continuous tense correctly.`
+    correctAnswer: 2,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 28,
     type: "grammar",
-    skill: "Adverbs — Degree",
-    question: `Which word is an ADVERB OF DEGREE in: 'She ran extremely fast during the sprint.'?`,
+    skill: "Pronoun Reference",
+    question: `Maya lent Jada a ruler because ___ had an extra one.`,
     options: [
-      "ran",
-      "fast",
-      "sprint",
-      "extremely",
+      "she",
+      "they",
+      "it",
+      "we",
     ],
     correctAnswer: 3,
-    explanation: `'Extremely' tells us to what degree she ran fast — it is an adverb of degree modifying the adverb 'fast.'`
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 29,
     type: "grammar",
-    skill: "Punctuation — Apostrophe (Plural Possessive)",
-    question: `Which correctly shows the TROPHY BELONGING TO THE ATHLETES (plural)?`,
+    skill: "Punctuation",
+    question: `Which sentence is punctuated correctly?`,
     options: [
-      "the athlete's trophy",
-      "the athletes's trophy",
-      "the athletes' trophy",
-      "the athletes trophy",
+      "“Please bring gloves,” said Mr. Brown.",
+      "“Please bring gloves” said Mr. Brown.",
+      "Please bring gloves, said Mr. Brown.",
+      "“Please bring gloves said Mr. Brown.”",
     ],
-    correctAnswer: 2,
-    explanation: `For a plural noun ending in 's', add only an apostrophe: athletes' trophy.`
+    correctAnswer: 0,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 30,
     type: "grammar",
-    skill: "Modal Verbs",
-    question: `Which modal verb expresses ABILITY?`,
+    skill: "Adjective Use",
+    question: `Choose the sentence with the best describing word.`,
     options: [
-      "must",
-      "should",
-      "can",
-      "will",
+      "Neatly poster caught the visitors.",
+      "The poster caught attention neat.",
+      "The poster neat caught attention.",
+      "The neat poster caught the visitors’ attention.",
     ],
-    correctAnswer: 2,
-    explanation: `'Can' expresses the ability to do something. 'Must' = obligation; 'should' = advice; 'will' = future intention.`
+    correctAnswer: 1,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 31,
     type: "grammar",
-    skill: "Gerunds",
-    question: `In 'Winning the race made her very happy,' the word 'Winning' is:`,
+    skill: "Conjunctions",
+    question: `Choose the best word: We packed water ___ the afternoon was hot.`,
     options: [
-      "A verb in the past tense",
-      "A noun (gerund) acting as the subject",
-      "An adjective describing the race",
-      "An adverb",
+      "so",
+      "because",
+      "or",
+      "but",
     ],
-    correctAnswer: 1,
-    explanation: `'Winning' is a gerund — a verb form (-ing) functioning as a noun. Here it is the subject of the sentence.`
+    correctAnswer: 2,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 32,
     type: "grammar",
-    skill: "Conditional Sentences",
-    question: `Which is a ZERO CONDITIONAL sentence (always true)?`,
+    skill: "Complete Sentence",
+    question: `Which is a complete sentence?`,
     options: [
-      "If it rains, we will go inside",
-      "If she trained harder, she would win",
-      "If you drop the baton, you lose the relay",
-      "If they had won, they would have celebrated",
+      "The students shared books with Grade 1.",
+      "After the bell near the gate.",
+      "Because the table with cards.",
+      "The clean bags on Saturday.",
     ],
-    correctAnswer: 2,
-    explanation: `Zero conditional: if + present simple, present simple. Used for facts that are always true — dropping the baton always results in losing the relay.`
+    correctAnswer: 3,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 33,
     type: "grammar",
-    skill: "Reported Speech",
-    question: `Change to REPORTED SPEECH: 'I will win the race,' she said.`,
+    skill: "Comma in a Series",
+    question: `Which sentence uses commas correctly?`,
     options: [
-      "She said she will win the race",
-      "She said she would win the race",
-      "She said I would win the race",
-      "She says I will win the race",
+      "We need pencils, glue, paper, and string.",
+      "We need pencils glue, paper and string.",
+      "We need, pencils glue paper, and string.",
+      "We need pencils, glue paper and, string.",
     ],
-    correctAnswer: 1,
-    explanation: `In reported speech, 'will' becomes 'would' and 'I' becomes 'she.' 'She said she would win the race' is correct.`
+    correctAnswer: 0,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 34,
     type: "grammar",
-    skill: "Conjunctions — Concessive",
-    question: `Which conjunction BEST shows a contrast (despite)?`,
+    skill: "Possessive Noun",
+    question: `Choose the correct possessive form.`,
     options: [
-      "because",
-      "and",
-      "although",
-      "so",
+      "The classes chart was full.",
+      "The class chart’s was full.",
+      "The classs chart was full.",
+      "The class’s chart was full.",
     ],
-    correctAnswer: 2,
-    explanation: `'Although' is a concessive conjunction — it introduces a contrasting idea: 'Although she was tired, she finished the race.'`
+    correctAnswer: 1,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 35,
     type: "grammar",
-    skill: "Sentence Variety",
-    question: `Which technique would MOST improve a paragraph that uses the same sentence structure repeatedly?`,
+    skill: "Sentence Combining",
+    question: `Which combines the ideas best?`,
     options: [
-      "Adding more adjectives to each sentence",
-      "Making every sentence longer",
-      "Varying sentence length and structure — using simple, compound, and complex sentences",
-      "Removing all conjunctions",
+      "The event went because carefully pupils.",
+      "The pupils planned carefully, and the event went well.",
+      "Planning carefully and event went.",
+      "The pupils planned carefully the event went well.",
     ],
     correctAnswer: 2,
-    explanation: `Sentence variety through different lengths and structures creates rhythm and maintains reader interest.`
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 36,
     type: "writing",
-    skill: "Speech Writing",
-    question: `A student writes a speech about sportsmanship for the school assembly. Which feature is MOST important?`,
+    skill: "Purpose and Audience",
+    question: `You are writing a notice for pupils about the event connected to selling simple products for charity. What is the best approach?`,
     options: [
-      "Using very long, complicated sentences",
-      "Beginning with an engaging hook that immediately captures the audience's attention",
-      "Reading directly from notes without eye contact",
-      "Using only statistics",
+      "Use a clear heading, important details, and polite language for a notice for pupils about the event.",
+      "Hide the date and place so readers must guess.",
+      "Use only jokes and leave out the main message.",
+      "Write one very long sentence with no punctuation.",
     ],
-    correctAnswer: 1,
-    explanation: `A speech must immediately engage its audience. A strong opening hook — a question, bold statement, or anecdote — draws the audience in from the start.`
+    correctAnswer: 3,
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
   },
   {
     id: 37,
     type: "writing",
-    skill: "Persuasive Writing — Emotional Appeal",
-    question: `Which sentence uses EMOTIONAL APPEAL effectively in a persuasive text about sportsmanship?`,
+    skill: "Purpose and Audience",
+    question: `You are writing a friendly letter thanking helpers connected to selling simple products for charity. What is the best approach?`,
     options: [
-      "Sportsmanship is statistically beneficial",
-      "Most athletes prefer fair play",
-      "Imagine standing on the track, heart pounding, knowing that your teammates believe in you — and that your actions represent all of them",
-      "Sportsmanship is defined as fair play",
+      "Use a clear heading, important details, and polite language for a friendly letter thanking helpers.",
+      "Hide the date and place so readers must guess.",
+      "Use only jokes and leave out the main message.",
+      "Write one very long sentence with no punctuation.",
     ],
-    correctAnswer: 2,
-    explanation: `Emotional appeal places the reader in the moment, making abstract values feel personal and urgent — a powerful persuasive technique.`
+    correctAnswer: 0,
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "Using Examples",
-    question: `Why should a persuasive writer include a CONCRETE EXAMPLE?`,
+    skill: "Purpose and Audience",
+    question: `You are writing a school announcement for assembly connected to selling simple products for charity. What is the best approach?`,
     options: [
-      "To make the writing longer",
-      "To confuse the reader",
-      "To bring the argument to life with a specific, real or realistic illustration that makes the point more convincing",
-      "To avoid having to make a clear argument",
+      "Use only jokes and leave out the main message.",
+      "Hide the date and place so readers must guess.",
+      "Write one very long sentence with no punctuation.",
+      "Use a clear heading, important details, and polite language for a school announcement for assembly.",
     ],
-    correctAnswer: 2,
-    explanation: `Concrete examples make abstract arguments tangible and believable — a specific story or scenario is more persuasive than vague claims.`
+    correctAnswer: 1,
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Repetition for Effect",
-    question: `A writer uses the phrase 'We compete. We fail. We rise. We compete again.' The repetition of short sentences creates:`,
+    skill: "Purpose and Audience",
+    question: `You are writing a poster for the community project connected to selling simple products for charity. What is the best approach?`,
     options: [
-      "A boring, monotonous effect",
-      "A powerful, rhythmic emphasis on resilience — the repeated structure mirrors the cycle of competing and rising again",
-      "A grammatical error",
-      "A list of unrelated events",
+      "Write one very long sentence with no punctuation.",
+      "Use a clear heading, important details, and polite language for a poster for the community project.",
+      "Use only jokes and leave out the main message.",
+      "Hide the date and place so readers must guess.",
     ],
-    correctAnswer: 1,
-    explanation: `Short, parallel sentences create rhythm and emphasis. The repetition mirrors the cyclic, relentless nature of athletic perseverance.`
+    correctAnswer: 2,
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
   },
   {
     id: 40,
     type: "writing",
-    skill: "Linking Ideas — Discourse Markers",
-    question: `Which discourse marker BEST introduces a contrasting point?`,
+    skill: "Purpose and Audience",
+    question: `You are writing a short report for the school newsletter connected to selling simple products for charity. What is the best approach?`,
     options: [
-      "Furthermore",
-      "In addition",
-      "Similarly",
-      "Nevertheless",
+      "Use a clear heading, important details, and polite language for a short report for the school newsletter.",
+      "Hide the date and place so readers must guess.",
+      "Use only jokes and leave out the main message.",
+      "Write one very long sentence with no punctuation.",
     ],
     correctAnswer: 3,
-    explanation: `'Nevertheless' introduces a contrasting idea while acknowledging the previous point — perfect for presenting nuance in argument.`
-  }
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+  },
 ]
-
 
 const shuffleAnswerOptions = (questions: Question[]): Question[] => {
   return questions.map((question) => {
@@ -685,6 +684,7 @@ export default function G5LaEasy9MockTest() {
   const [answers, setAnswers]             = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]           = useState(60 * 60)
   const [randomizedQuestions, setRandomizedQuestions] = useState<Question[]>([])
+  const hasSavedResult = useRef(false)
 
   const sourceQuestions = isPremium ? g5LaEasy9Questions : g5LaEasy9Questions.slice(0, FREE_QUESTION_LIMIT)
   const availableQuestions = randomizedQuestions.length > 0 ? randomizedQuestions : sourceQuestions
@@ -711,8 +711,30 @@ export default function G5LaEasy9MockTest() {
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
 
-  const calcScore  = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
+  const calcScore  = () => answers.reduce<number>((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct   = () => Math.round((calcScore() / totalQuestions) * 100)
+
+
+  useEffect(() => {
+    if (!showResults || !user?.id || hasSavedResult.current) return
+
+    hasSavedResult.current = true
+    const completedAtIso = new Date().toISOString()
+    void saveStudentTestResult({
+      parentId: user.id,
+      studentName: user?.childName ?? "Student",
+      grade: "grade5",
+      subject: "Literacy",
+      testName: "Easy 9",
+      difficulty: "Easy",
+      score: calcScore(),
+      totalQuestions,
+      percentage: scorePct(),
+      completedAt: completedAtIso,
+    }).catch(() => {
+      hasSavedResult.current = false
+    })
+  }, [showResults, user?.id, user?.childName, totalQuestions, answers])
 
   const getGrade = () => {
     const p = scorePct()
@@ -739,13 +761,14 @@ export default function G5LaEasy9MockTest() {
     setCurrentQuestion(0)
     setTimeLeft(60 * 60)
     setShowResults(false)
+    hasSavedResult.current = false
     setStarted(true)
   }
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
     setRandomizedQuestions([])
-    setAnswers(new Array(sourceQuestions.length).fill(null)); setTimeLeft(60 * 60)
+    setAnswers(new Array(sourceQuestions.length).fill(null)); setTimeLeft(60 * 60); hasSavedResult.current = false
   }
 
   const handleSubmit = () => {

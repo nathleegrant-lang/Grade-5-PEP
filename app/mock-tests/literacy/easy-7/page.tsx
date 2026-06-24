@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -34,17 +34,17 @@ const g5LaEasy7Questions: Question[] = [
     skill: "Main Idea",
     question: `Read the passage then answer the question.
 
-"Jamaica is home to many unique animals found nowhere else on Earth. The Jamaican hutia is a small rodent that lives in forested areas, and the Yellow-billed Parrot is a rare and colourful bird found mainly in the island's mountains. The Jamaican boa, sometimes called the yellow snake, is the largest snake on the island and is harmless to humans. Protecting these animals and their habitats is important so that future generations can enjoy Jamaica's natural heritage."
+"At Monday devotion, the librarian announced a School Library Reading Challenge. Each Grade 5 pupil chose a book at a comfortable level and recorded reading minutes on a chart. Friends recommended stories to one another, but everyone had to write a short comment after finishing a book. At the end of the month, the class with the most steady reading would receive a new set of novels."
 
-What is this passage MAINLY about?`,
+Which answer best matches the passage?`,
     options: [
-      "The Jamaican hutia's diet",
-      "Jamaica's unique wildlife and the importance of protecting it",
-      "The largest snake in the world",
-      "How to become a wildlife ranger",
+      "to entertain with a fantasy adventure",
+      "to describe the pupils’ organized school activity",
+      "to explain why sports day was postponed",
+      "to list rules for a spelling contest",
     ],
-    correctAnswer: 1,
-    explanation: `The passage introduces several unique Jamaican animals and argues for the importance of protecting them — this is the main idea.`
+    correctAnswer: 0,
+    explanation: `The passage shows school library reading challenge as a planned, helpful activity involving pupils.`
   },
   {
     id: 2,
@@ -52,161 +52,161 @@ What is this passage MAINLY about?`,
     skill: "Detail",
     question: `Read the passage then answer the question.
 
-"Jamaica is home to many unique animals found nowhere else on Earth. The Jamaican hutia is a small rodent that lives in forested areas, and the Yellow-billed Parrot is a rare and colourful bird found mainly in the island's mountains. The Jamaican boa, sometimes called the yellow snake, is the largest snake on the island and is harmless to humans. Protecting these animals and their habitats is important so that future generations can enjoy Jamaica's natural heritage."
+"At Monday devotion, the librarian announced a School Library Reading Challenge. Each Grade 5 pupil chose a book at a comfortable level and recorded reading minutes on a chart. Friends recommended stories to one another, but everyone had to write a short comment after finishing a book. At the end of the month, the class with the most steady reading would receive a new set of novels."
 
-Where is the Yellow-billed Parrot mainly found?`,
+Which answer best matches the passage?`,
     options: [
-      "In coastal areas",
-      "In the island's mountains",
-      "Near rivers and lakes",
-      "In residential gardens",
+      "They cancelled the activity after assembly.",
+      "They used a schedule or record to guide the activity.",
+      "They sold tickets at the gate.",
+      "They worked alone without a teacher.",
     ],
     correctAnswer: 1,
-    explanation: `The passage states the Yellow-billed Parrot is 'found mainly in the island's mountains.'`
+    explanation: `The passage shows school library reading challenge as a planned, helpful activity involving pupils.`
   },
   {
     id: 3,
     type: "reading",
-    skill: "Vocabulary in Context",
+    skill: "Inference",
     question: `Read the passage then answer the question.
 
-"Jamaica is home to many unique animals found nowhere else on Earth. The Jamaican hutia is a small rodent that lives in forested areas, and the Yellow-billed Parrot is a rare and colourful bird found mainly in the island's mountains. The Jamaican boa, sometimes called the yellow snake, is the largest snake on the island and is harmless to humans. Protecting these animals and their habitats is important so that future generations can enjoy Jamaica's natural heritage."
+"At Monday devotion, the librarian announced a School Library Reading Challenge. Each Grade 5 pupil chose a book at a comfortable level and recorded reading minutes on a chart. Friends recommended stories to one another, but everyone had to write a short comment after finishing a book. At the end of the month, the class with the most steady reading would receive a new set of novels."
 
-The word 'unique' in the passage means:`,
+Which answer best matches the passage?`,
     options: [
-      "common and widespread",
-      "found everywhere in the world",
-      "one-of-a-kind, found nowhere else",
-      "dangerous and rare",
+      "Only adults did the work.",
+      "The pupils were careless.",
+      "The school was closed.",
+      "The activity was planned and helpful.",
     ],
     correctAnswer: 2,
-    explanation: `'Unique' means one-of-a-kind. The passage uses it to explain that these animals are found nowhere else on Earth.`
+    explanation: `The passage shows school library reading challenge as a planned, helpful activity involving pupils.`
   },
   {
     id: 4,
     type: "reading",
-    skill: "Inference",
+    skill: "Vocabulary in Context",
     question: `Read the passage then answer the question.
 
-"Jamaica is home to many unique animals found nowhere else on Earth. The Jamaican hutia is a small rodent that lives in forested areas, and the Yellow-billed Parrot is a rare and colourful bird found mainly in the island's mountains. The Jamaican boa, sometimes called the yellow snake, is the largest snake on the island and is harmless to humans. Protecting these animals and their habitats is important so that future generations can enjoy Jamaica's natural heritage."
+"At Monday devotion, the librarian announced a School Library Reading Challenge. Each Grade 5 pupil chose a book at a comfortable level and recorded reading minutes on a chart. Friends recommended stories to one another, but everyone had to write a short comment after finishing a book. At the end of the month, the class with the most steady reading would receive a new set of novels."
 
-Why does the author include the detail that the Jamaican boa is 'harmless to humans'?`,
+Which answer best matches the passage?`,
     options: [
-      "To prove snakes are friendly",
-      "To correct a common fear — many people are scared of snakes, but this one is not dangerous",
-      "To encourage people to keep snakes as pets",
-      "To show the snake is weak",
+      "comfortable means suitable for the person",
+      "comfortable means broken into pieces",
+      "comfortable means very expensive",
+      "comfortable means impossible to find",
     ],
-    correctAnswer: 1,
-    explanation: `Mentioning it is harmless addresses likely reader fear and encourages protection rather than avoidance or killing of the snake.`
+    correctAnswer: 3,
+    explanation: `The passage shows school library reading challenge as a planned, helpful activity involving pupils.`
   },
   {
     id: 5,
     type: "reading",
-    skill: "Cause and Effect",
+    skill: "Author’s Purpose",
     question: `Read the passage then answer the question.
 
-"Jamaica is home to many unique animals found nowhere else on Earth. The Jamaican hutia is a small rodent that lives in forested areas, and the Yellow-billed Parrot is a rare and colourful bird found mainly in the island's mountains. The Jamaican boa, sometimes called the yellow snake, is the largest snake on the island and is harmless to humans. Protecting these animals and their habitats is important so that future generations can enjoy Jamaica's natural heritage."
+"At Monday devotion, the librarian announced a School Library Reading Challenge. Each Grade 5 pupil chose a book at a comfortable level and recorded reading minutes on a chart. Friends recommended stories to one another, but everyone had to write a short comment after finishing a book. At the end of the month, the class with the most steady reading would receive a new set of novels."
 
-According to the passage, WHY is it important to protect Jamaica's animals?`,
+Which answer best matches the passage?`,
     options: [
-      "So that tourists will visit",
-      "So that scientists can study them",
-      "So that future generations can enjoy Jamaica's natural heritage",
-      "So that they can be kept in zoos",
+      "to persuade readers to avoid school clubs",
+      "to inform readers about a useful school event",
+      "to describe a storm at school",
+      "to compare two famous athletes",
     ],
-    correctAnswer: 2,
-    explanation: `The passage directly states the importance of protection 'so that future generations can enjoy Jamaica's natural heritage.'`
+    correctAnswer: 0,
+    explanation: `The passage shows school library reading challenge as a planned, helpful activity involving pupils.`
   },
   {
     id: 6,
     type: "reading",
-    skill: "Author's Purpose",
+    skill: "Sequence",
     question: `Read the passage then answer the question.
 
-"Jamaica is home to many unique animals found nowhere else on Earth. The Jamaican hutia is a small rodent that lives in forested areas, and the Yellow-billed Parrot is a rare and colourful bird found mainly in the island's mountains. The Jamaican boa, sometimes called the yellow snake, is the largest snake on the island and is harmless to humans. Protecting these animals and their habitats is important so that future generations can enjoy Jamaica's natural heritage."
+"At Monday devotion, the librarian announced a School Library Reading Challenge. Each Grade 5 pupil chose a book at a comfortable level and recorded reading minutes on a chart. Friends recommended stories to one another, but everyone had to write a short comment after finishing a book. At the end of the month, the class with the most steady reading would receive a new set of novels."
 
-The MAIN purpose of this passage is to:`,
+Which answer best matches the passage?`,
     options: [
-      "Scare readers about snakes",
-      "Entertain readers with animal stories",
-      "Inform readers about unique Jamaican animals and persuade them that conservation is important",
-      "Provide a scientific classification of animals",
+      "First they went home; then they listened to directions.",
+      "First they received prizes; then they began planning.",
+      "First visitors left; then the event opened.",
+      "First pupils planned; then they carried out the task.",
     ],
-    correctAnswer: 2,
-    explanation: `The passage informs readers about unique animals and makes a case for their protection — informative and persuasive.`
+    correctAnswer: 1,
+    explanation: `The passage shows school library reading challenge as a planned, helpful activity involving pupils.`
   },
   {
     id: 7,
     type: "reading",
-    skill: "Text Structure",
+    skill: "Cause and Effect",
     question: `Read the passage then answer the question.
 
-"Jamaica is home to many unique animals found nowhere else on Earth. The Jamaican hutia is a small rodent that lives in forested areas, and the Yellow-billed Parrot is a rare and colourful bird found mainly in the island's mountains. The Jamaican boa, sometimes called the yellow snake, is the largest snake on the island and is harmless to humans. Protecting these animals and their habitats is important so that future generations can enjoy Jamaica's natural heritage."
+"At Monday devotion, the librarian announced a School Library Reading Challenge. Each Grade 5 pupil chose a book at a comfortable level and recorded reading minutes on a chart. Friends recommended stories to one another, but everyone had to write a short comment after finishing a book. At the end of the month, the class with the most steady reading would receive a new set of novels."
 
-How is this passage mainly organised?`,
+Which answer best matches the passage?`,
     options: [
-      "As a story with a beginning, middle, and end",
-      "By comparing Jamaican animals to animals in other countries",
-      "By describing animals one by one and ending with a broader argument for conservation",
-      "As a list of instructions",
+      "Because the bell rang, the trees became taller.",
+      "Because pupils worked together, the activity was successful.",
+      "Because no one listened, the fair opened early.",
+      "Because it rained indoors, the books disappeared.",
     ],
     correctAnswer: 2,
-    explanation: `The passage introduces three animals, then broadens to a general argument about protecting all of them — a logical, purposeful structure.`
+    explanation: `The passage shows school library reading challenge as a planned, helpful activity involving pupils.`
   },
   {
     id: 8,
     type: "reading",
-    skill: "Vocabulary in Context",
+    skill: "Text Evidence",
     question: `Read the passage then answer the question.
 
-"Jamaica is home to many unique animals found nowhere else on Earth. The Jamaican hutia is a small rodent that lives in forested areas, and the Yellow-billed Parrot is a rare and colourful bird found mainly in the island's mountains. The Jamaican boa, sometimes called the yellow snake, is the largest snake on the island and is harmless to humans. Protecting these animals and their habitats is important so that future generations can enjoy Jamaica's natural heritage."
+"At Monday devotion, the librarian announced a School Library Reading Challenge. Each Grade 5 pupil chose a book at a comfortable level and recorded reading minutes on a chart. Friends recommended stories to one another, but everyone had to write a short comment after finishing a book. At the end of the month, the class with the most steady reading would receive a new set of novels."
 
-The word 'heritage' in the passage most nearly means:`,
+Which answer best matches the passage?`,
     options: [
-      "government rules",
-      "the natural and cultural legacy passed from one generation to the next",
-      "a type of animal habitat",
-      "a national park",
+      "A sentence about teamwork and careful records supports the answer.",
+      "A sentence about a football match supports the answer.",
+      "A sentence about a lost puppy supports the answer.",
+      "A sentence about a birthday party supports the answer.",
     ],
-    correctAnswer: 1,
-    explanation: `Heritage refers to what is passed on from previous generations — here, Jamaica's natural world is described as a heritage for future generations.`
+    correctAnswer: 3,
+    explanation: `The passage shows school library reading challenge as a planned, helpful activity involving pupils.`
   },
   {
     id: 9,
     type: "reading",
-    skill: "Fact vs Opinion",
+    skill: "Main Idea",
     question: `Read the passage then answer the question.
 
-"Jamaica is home to many unique animals found nowhere else on Earth. The Jamaican hutia is a small rodent that lives in forested areas, and the Yellow-billed Parrot is a rare and colourful bird found mainly in the island's mountains. The Jamaican boa, sometimes called the yellow snake, is the largest snake on the island and is harmless to humans. Protecting these animals and their habitats is important so that future generations can enjoy Jamaica's natural heritage."
+"The student council organized a Book Donation Drive for the infant department. Pupils brought gently used picture books and wiped the covers before sorting them by topic. On Friday, Grade 5 volunteers read aloud to younger children and helped them choose books to keep in their classroom corner. The drive showed that sharing books can make reading enjoyable for everyone."
 
-Which statement is a FACT from the passage?`,
+What does the passage help the reader understand?`,
     options: [
-      "The Jamaican boa is the most beautiful snake on the island",
-      "The hutia is the most interesting rodent in the Caribbean",
-      "The Yellow-billed Parrot is found mainly in the island's mountains",
-      "Jamaica's animals are the most unique in the world",
+      "The community activity helped others through shared effort.",
+      "The event was mainly about buying new uniforms.",
+      "The children avoided helping younger pupils.",
+      "The passage focuses on a private family trip.",
     ],
-    correctAnswer: 2,
-    explanation: `This is a directly stated, verifiable fact from the passage. The other options are opinions.`
+    correctAnswer: 0,
+    explanation: `The details show book donation drive brought people together for a helpful purpose.`
   },
   {
     id: 10,
     type: "reading",
-    skill: "Tone",
+    skill: "Detail",
     question: `Read the passage then answer the question.
 
-"Jamaica is home to many unique animals found nowhere else on Earth. The Jamaican hutia is a small rodent that lives in forested areas, and the Yellow-billed Parrot is a rare and colourful bird found mainly in the island's mountains. The Jamaican boa, sometimes called the yellow snake, is the largest snake on the island and is harmless to humans. Protecting these animals and their habitats is important so that future generations can enjoy Jamaica's natural heritage."
+"The student council organized a Book Donation Drive for the infant department. Pupils brought gently used picture books and wiped the covers before sorting them by topic. On Friday, Grade 5 volunteers read aloud to younger children and helped them choose books to keep in their classroom corner. The drive showed that sharing books can make reading enjoyable for everyone."
 
-The tone of this passage is BEST described as:`,
+What does the passage help the reader understand?`,
     options: [
-      "Fearful and alarming",
-      "Informative and conservationist — encouraging care for wildlife",
-      "Humorous and playful",
-      "Critical of people who harm animals",
+      "The children avoided helping younger pupils.",
+      "The event was mainly about buying new uniforms.",
+      "The passage focuses on a private family trip.",
+      "The community activity helped others through shared effort.",
     ],
     correctAnswer: 1,
-    explanation: `The language is informative about the animals and ends with a clear, caring message about conservation.`
+    explanation: `The details show book donation drive brought people together for a helpful purpose.`
   },
   {
     id: 11,
@@ -214,442 +214,441 @@ The tone of this passage is BEST described as:`,
     skill: "Inference",
     question: `Read the passage then answer the question.
 
-"Jamaica is home to many unique animals found nowhere else on Earth. The Jamaican hutia is a small rodent that lives in forested areas, and the Yellow-billed Parrot is a rare and colourful bird found mainly in the island's mountains. The Jamaican boa, sometimes called the yellow snake, is the largest snake on the island and is harmless to humans. Protecting these animals and their habitats is important so that future generations can enjoy Jamaica's natural heritage."
+"The student council organized a Book Donation Drive for the infant department. Pupils brought gently used picture books and wiped the covers before sorting them by topic. On Friday, Grade 5 volunteers read aloud to younger children and helped them choose books to keep in their classroom corner. The drive showed that sharing books can make reading enjoyable for everyone."
 
-What can you infer about the Jamaican hutia's habitat?`,
+What does the passage help the reader understand?`,
     options: [
-      "It lives in open grasslands",
-      "It lives in the sea",
-      "It lives in forested areas, so deforestation would threaten it",
-      "It lives underground only",
+      "The passage focuses on a private family trip.",
+      "The community activity helped others through shared effort.",
+      "The children avoided helping younger pupils.",
+      "The event was mainly about buying new uniforms.",
     ],
     correctAnswer: 2,
-    explanation: `The passage says the hutia 'lives in forested areas' — so if those areas are destroyed, the hutia would lose its home.`
+    explanation: `The details show book donation drive brought people together for a helpful purpose.`
   },
   {
     id: 12,
     type: "reading",
-    skill: "Summarise",
+    skill: "Vocabulary in Context",
     question: `Read the passage then answer the question.
 
-"Jamaica is home to many unique animals found nowhere else on Earth. The Jamaican hutia is a small rodent that lives in forested areas, and the Yellow-billed Parrot is a rare and colourful bird found mainly in the island's mountains. The Jamaican boa, sometimes called the yellow snake, is the largest snake on the island and is harmless to humans. Protecting these animals and their habitats is important so that future generations can enjoy Jamaica's natural heritage."
+"The student council organized a Book Donation Drive for the infant department. Pupils brought gently used picture books and wiped the covers before sorting them by topic. On Friday, Grade 5 volunteers read aloud to younger children and helped them choose books to keep in their classroom corner. The drive showed that sharing books can make reading enjoyable for everyone."
 
-Which BEST summarises this passage?`,
+What does the passage help the reader understand?`,
     options: [
-      "Jamaica has many types of birds",
-      "Three unique Jamaican animals — the hutia, the Yellow-billed Parrot, and the boa — are introduced, and the passage argues for their conservation",
-      "Snakes are harmless to humans",
-      "Jamaica is a popular tourist destination",
+      "The community activity helped others through shared effort.",
+      "The event was mainly about buying new uniforms.",
+      "The children avoided helping younger pupils.",
+      "The passage focuses on a private family trip.",
     ],
-    correctAnswer: 1,
-    explanation: `This captures both the informational content (three animals) and the argument (conservation).`
+    correctAnswer: 3,
+    explanation: `The details show book donation drive brought people together for a helpful purpose.`
   },
   {
     id: 13,
     type: "reading",
-    skill: "Character of Author",
+    skill: "Author’s Purpose",
     question: `Read the passage then answer the question.
 
-"Jamaica is home to many unique animals found nowhere else on Earth. The Jamaican hutia is a small rodent that lives in forested areas, and the Yellow-billed Parrot is a rare and colourful bird found mainly in the island's mountains. The Jamaican boa, sometimes called the yellow snake, is the largest snake on the island and is harmless to humans. Protecting these animals and their habitats is important so that future generations can enjoy Jamaica's natural heritage."
+"The student council organized a Book Donation Drive for the infant department. Pupils brought gently used picture books and wiped the covers before sorting them by topic. On Friday, Grade 5 volunteers read aloud to younger children and helped them choose books to keep in their classroom corner. The drive showed that sharing books can make reading enjoyable for everyone."
 
-Based on the passage, how does the author feel about Jamaica's wildlife?`,
+What does the passage help the reader understand?`,
     options: [
-      "Indifferent and uninterested",
-      "Afraid of the animals",
-      "Proud and concerned — wanting readers to value and protect Jamaica's natural heritage",
-      "Angry at people who visit the island",
+      "The community activity helped others through shared effort.",
+      "The event was mainly about buying new uniforms.",
+      "The children avoided helping younger pupils.",
+      "The passage focuses on a private family trip.",
     ],
-    correctAnswer: 1,
-    explanation: `The celebratory language ('unique,' 'natural heritage') and the conservation argument show the author's pride in and concern for Jamaica's wildlife.`
+    correctAnswer: 0,
+    explanation: `The details show book donation drive brought people together for a helpful purpose.`
   },
   {
     id: 14,
     type: "reading",
-    skill: "Vocabulary in Context",
+    skill: "Compare Ideas",
     question: `Read the passage then answer the question.
 
-"Jamaica is home to many unique animals found nowhere else on Earth. The Jamaican hutia is a small rodent that lives in forested areas, and the Yellow-billed Parrot is a rare and colourful bird found mainly in the island's mountains. The Jamaican boa, sometimes called the yellow snake, is the largest snake on the island and is harmless to humans. Protecting these animals and their habitats is important so that future generations can enjoy Jamaica's natural heritage."
+"The student council organized a Book Donation Drive for the infant department. Pupils brought gently used picture books and wiped the covers before sorting them by topic. On Friday, Grade 5 volunteers read aloud to younger children and helped them choose books to keep in their classroom corner. The drive showed that sharing books can make reading enjoyable for everyone."
 
-The phrase 'found nowhere else on Earth' is used to emphasise:`,
+What does the passage help the reader understand?`,
     options: [
-      "that the animals are very old",
-      "that Jamaica is a very small island",
-      "just how special and irreplaceable Jamaica's unique animals are",
-      "that scientists have not explored other countries",
+      "The children avoided helping younger pupils.",
+      "The event was mainly about buying new uniforms.",
+      "The passage focuses on a private family trip.",
+      "The community activity helped others through shared effort.",
     ],
-    correctAnswer: 2,
-    explanation: `The phrase highlights the uniqueness and irreplaceability of Jamaica's endemic species — making the case for conservation more urgent.`
+    correctAnswer: 1,
+    explanation: `The details show book donation drive brought people together for a helpful purpose.`
   },
   {
     id: 15,
     type: "reading",
-    skill: "Detail",
+    skill: "Problem and Solution",
     question: `Read the passage then answer the question.
 
-"Jamaica is home to many unique animals found nowhere else on Earth. The Jamaican hutia is a small rodent that lives in forested areas, and the Yellow-billed Parrot is a rare and colourful bird found mainly in the island's mountains. The Jamaican boa, sometimes called the yellow snake, is the largest snake on the island and is harmless to humans. Protecting these animals and their habitats is important so that future generations can enjoy Jamaica's natural heritage."
+"The student council organized a Book Donation Drive for the infant department. Pupils brought gently used picture books and wiped the covers before sorting them by topic. On Friday, Grade 5 volunteers read aloud to younger children and helped them choose books to keep in their classroom corner. The drive showed that sharing books can make reading enjoyable for everyone."
 
-According to the passage, what is another name for the Jamaican boa?`,
+What does the passage help the reader understand?`,
     options: [
-      "The green snake",
-      "The mountain snake",
-      "The yellow snake",
-      "The island serpent",
+      "The passage focuses on a private family trip.",
+      "The community activity helped others through shared effort.",
+      "The children avoided helping younger pupils.",
+      "The event was mainly about buying new uniforms.",
     ],
     correctAnswer: 2,
-    explanation: `The passage states the boa is 'sometimes called the yellow snake.'`
+    explanation: `The details show book donation drive brought people together for a helpful purpose.`
   },
   {
     id: 16,
     type: "vocabulary",
-    skill: "Synonyms",
-    question: `Which word is a SYNONYM for 'preserve'?`,
+    skill: "Context Clues",
+    question: `In a passage about reading challenge, the word “steady” is used in context. Which option gives the best meaning?`,
     options: [
-      "destroy",
-      "abandon",
-      "protect",
-      "ignore",
+      "In the sentence, “steady” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 2,
-    explanation: `'Protect' means to keep safe from harm — a synonym for 'preserve.'`
+    correctAnswer: 3,
+    explanation: `Context clues in the school or community situation show that “steady” has the practical meaning used in the correct option.`
   },
   {
     id: 17,
     type: "vocabulary",
-    skill: "Antonyms",
-    question: `The ANTONYM of 'harmless' is:`,
+    skill: "Context Clues",
+    question: `In a passage about reading challenge, the word “gently” is used in context. Which option gives the best meaning?`,
     options: [
-      "safe",
-      "gentle",
-      "dangerous",
-      "friendly",
+      "In the sentence, “gently” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 2,
-    explanation: `'Dangerous' means causing harm — the opposite of 'harmless.'`
+    correctAnswer: 0,
+    explanation: `Context clues in the school or community situation show that “gently” has the practical meaning used in the correct option.`
   },
   {
     id: 18,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `The bird was ENDEMIC to the island — no other place on Earth was its home. 'Endemic' means:`,
+    question: `In a passage about reading challenge, the word “bright” is used in context. Which option gives the best meaning?`,
     options: [
-      "common everywhere",
-      "naturally restricted to a specific geographic area",
-      "recently introduced from another country",
-      "protected by law",
+      "It names a place far from the school.",
+      "It means the opposite of what the sentence suggests.",
+      "It means a loud sound made by traffic.",
+      "In the sentence, “bright” means a sensible meaning that fits the activity.",
     ],
     correctAnswer: 1,
-    explanation: `'Endemic' means found naturally in only one specific place — the island is the bird's only home.`
+    explanation: `Context clues in the school or community situation show that “bright” has the practical meaning used in the correct option.`
   },
   {
     id: 19,
     type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'The forest is the lungs of the Earth.' This metaphor suggests forests:`,
+    skill: "Context Clues",
+    question: `In a passage about reading challenge, the word “careful” is used in context. Which option gives the best meaning?`,
     options: [
-      "look like lungs",
-      "are underground",
-      "breathe oxygen in and carbon dioxide out, keeping the planet healthy",
-      "are dangerous to enter",
+      "It means a loud sound made by traffic.",
+      "In the sentence, “careful” means a sensible meaning that fits the activity.",
+      "It names a place far from the school.",
+      "It means the opposite of what the sentence suggests.",
     ],
     correctAnswer: 2,
-    explanation: `Like lungs, forests take in carbon dioxide and release oxygen — the metaphor highlights their life-giving, respiratory function for the planet.`
+    explanation: `Context clues in the school or community situation show that “careful” has the practical meaning used in the correct option.`
   },
   {
     id: 20,
     type: "vocabulary",
-    skill: "Word Meaning",
-    question: `The word 'habitat' means:`,
+    skill: "Context Clues",
+    question: `In a passage about reading challenge, the word “useful” is used in context. Which option gives the best meaning?`,
     options: [
-      "a type of animal",
-      "the natural environment where an organism lives and thrives",
-      "a kind of food",
-      "a protective covering",
+      "In the sentence, “useful” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 1,
-    explanation: `'Habitat' is the natural home environment of an animal or plant — where it finds food, shelter, and mates.`
+    correctAnswer: 3,
+    explanation: `Context clues in the school or community situation show that “useful” has the practical meaning used in the correct option.`
   },
   {
     id: 21,
     type: "vocabulary",
-    skill: "Multiple Meaning",
-    question: `Which sentence uses 'reserve' to mean a protected wildlife area?`,
+    skill: "Context Clues",
+    question: `In a passage about reading challenge, the word “purpose” is used in context. Which option gives the best meaning?`,
     options: [
-      "Please reserve a table for us",
-      "She has no money in reserve",
-      "Visitors must stay on the path in the nature reserve",
-      "He played it with great reserve",
+      "In the sentence, “purpose” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 2,
-    explanation: `'Nature reserve' uses 'reserve' to mean a protected area set aside for wildlife conservation.`
+    correctAnswer: 0,
+    explanation: `Context clues in the school or community situation show that “purpose” has the practical meaning used in the correct option.`
   },
   {
     id: 22,
     type: "vocabulary",
-    skill: "Prefix bio-",
-    question: `The prefix 'bio-' in 'biodiversity' means:`,
+    skill: "Context Clues",
+    question: `In a passage about reading challenge, the word “encouraged” is used in context. Which option gives the best meaning?`,
     options: [
-      "life",
-      "water",
-      "earth",
-      "sound",
+      "It names a place far from the school.",
+      "It means the opposite of what the sentence suggests.",
+      "It means a loud sound made by traffic.",
+      "In the sentence, “encouraged” means a sensible meaning that fits the activity.",
     ],
-    correctAnswer: 0,
-    explanation: `'Bio-' comes from Greek meaning life. 'Biodiversity' = the variety of life forms in an ecosystem.`
+    correctAnswer: 1,
+    explanation: `Context clues in the school or community situation show that “encouraged” has the practical meaning used in the correct option.`
   },
   {
     id: 23,
     type: "vocabulary",
-    skill: "Suffix -tion",
-    question: `Adding '-tion' to 'conserve' gives 'conservation', which is:`,
+    skill: "Context Clues",
+    question: `In a passage about reading challenge, the word “materials” is used in context. Which option gives the best meaning?`,
     options: [
-      "a verb",
-      "an adjective",
-      "an adverb",
-      "a noun",
+      "It means a loud sound made by traffic.",
+      "In the sentence, “materials” means a sensible meaning that fits the activity.",
+      "It names a place far from the school.",
+      "It means the opposite of what the sentence suggests.",
     ],
-    correctAnswer: 3,
-    explanation: `'-tion' creates nouns from verbs. 'Conservation' = the act or process of conserving or protecting.`
+    correctAnswer: 2,
+    explanation: `Context clues in the school or community situation show that “materials” has the practical meaning used in the correct option.`
   },
   {
     id: 24,
     type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'The last hutia in Jamaica would be the silent end of a song that began millions of years ago.' This is a:`,
+    skill: "Context Clues",
+    question: `In a passage about reading challenge, the word “displayed” is used in context. Which option gives the best meaning?`,
     options: [
-      "Simile",
-      "Metaphor — comparing the species' history to a song",
-      "Personification",
-      "Alliteration",
+      "In the sentence, “displayed” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 1,
-    explanation: `The metaphor compares the species' evolutionary history to a song — making its potential extinction feel like the ending of something beautiful and ancient.`
+    correctAnswer: 3,
+    explanation: `Context clues in the school or community situation show that “displayed” has the practical meaning used in the correct option.`
   },
   {
     id: 25,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `Scientists described the discovery as UNPRECEDENTED — nothing like it had ever been recorded before. 'Unprecedented' means:`,
+    question: `In a passage about reading challenge, the word “pride” is used in context. Which option gives the best meaning?`,
     options: [
-      "very common",
-      "seen many times before",
-      "happening for the very first time, with no prior example",
-      "slightly unusual",
+      "In the sentence, “pride” means a sensible meaning that fits the activity.",
+      "It means the opposite of what the sentence suggests.",
+      "It names a place far from the school.",
+      "It means a loud sound made by traffic.",
     ],
-    correctAnswer: 2,
-    explanation: `'Unprecedented' means without precedent — no previous example of this exists.`
+    correctAnswer: 0,
+    explanation: `Context clues in the school or community situation show that “pride” has the practical meaning used in the correct option.`
   },
   {
     id: 26,
     type: "grammar",
-    skill: "Collective Nouns",
-    question: `Which word is a COLLECTIVE NOUN for a group of birds?`,
+    skill: "Subject-Verb Agreement",
+    question: `The club ___ the plants every Wednesday.`,
     options: [
-      "team",
-      "herd",
-      "flock",
-      "pack",
+      "watering",
+      "water",
+      "were water",
+      "waters",
     ],
-    correctAnswer: 2,
-    explanation: `'Flock' is the collective noun for a group of birds.`
+    correctAnswer: 1,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 27,
     type: "grammar",
-    skill: "Helping Verbs",
-    question: `Which sentence uses a HELPING VERB?`,
+    skill: "Verb Tense",
+    question: `Yesterday, the pupils ___ their display.`,
     options: [
-      "The boa slides through the grass",
-      "The parrot sings at dawn",
-      "The hutia has been spotted in the forest",
-      "Researchers study the species",
+      "preparing",
+      "prepared",
+      "prepares",
+      "prepare",
     ],
     correctAnswer: 2,
-    explanation: `'Has been' is the helping (auxiliary) verb. 'Has been spotted' = auxiliary + main verb.`
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 28,
     type: "grammar",
-    skill: "Comparative Adjectives",
-    question: `Choose the COMPARATIVE form of 'rare':`,
+    skill: "Pronoun Reference",
+    question: `Maya lent Jada a ruler because ___ had an extra one.`,
     options: [
-      "rarest",
-      "more rarer",
-      "rarer",
-      "most rare",
+      "she",
+      "they",
+      "it",
+      "we",
     ],
-    correctAnswer: 2,
-    explanation: `For two-syllable or short adjectives, add '-er' to compare. 'Rarer' is the comparative of 'rare.'`
+    correctAnswer: 3,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 29,
     type: "grammar",
-    skill: "Adverbs of Frequency",
-    question: `Which word is an ADVERB OF FREQUENCY?`,
+    skill: "Punctuation",
+    question: `Which sentence is punctuated correctly?`,
     options: [
-      "slowly",
-      "red",
-      "rarely",
-      "clever",
+      "“Please bring gloves,” said Mr. Brown.",
+      "“Please bring gloves” said Mr. Brown.",
+      "Please bring gloves, said Mr. Brown.",
+      "“Please bring gloves said Mr. Brown.”",
     ],
-    correctAnswer: 2,
-    explanation: `'Rarely' tells how often something happens — it is an adverb of frequency.`
+    correctAnswer: 0,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 30,
     type: "grammar",
-    skill: "Punctuation — Colon",
-    question: `Which sentence correctly uses a COLON?`,
+    skill: "Adjective Use",
+    question: `Choose the sentence with the best describing word.`,
     options: [
-      "Jamaica has: many unique animals",
-      "The island is home to three rare species: the hutia, the parrot, and the boa",
-      "The hutia: lives in forested areas",
-      "Rare animals: are found in Jamaica",
+      "Neatly poster caught the visitors.",
+      "The poster caught attention neat.",
+      "The poster neat caught attention.",
+      "The neat poster caught the visitors’ attention.",
     ],
     correctAnswer: 1,
-    explanation: `A colon introduces a list or explanation. 'Three rare species:' correctly introduces the list that follows.`
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 31,
     type: "grammar",
-    skill: "Present Perfect Tense",
-    question: `Which sentence is in the PRESENT PERFECT tense?`,
+    skill: "Conjunctions",
+    question: `Choose the best word: We packed water ___ the afternoon was hot.`,
     options: [
-      "Scientists discovered the hutia",
-      "Scientists are discovering the hutia",
-      "Scientists have discovered many facts about the hutia",
-      "Scientists will discover more soon",
+      "so",
+      "because",
+      "or",
+      "but",
     ],
     correctAnswer: 2,
-    explanation: `Present perfect = has/have + past participle. 'Have discovered' is correct.`
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 32,
     type: "grammar",
-    skill: "Relative Clauses",
-    question: `Which sentence contains a RELATIVE CLAUSE?`,
+    skill: "Complete Sentence",
+    question: `Which is a complete sentence?`,
     options: [
-      "The parrot lives in the mountains",
-      "The parrot sings loudly every morning",
-      "The parrot, which is yellow-billed, is found in Jamaica's mountains",
-      "The parrot eats fruit",
+      "The students shared books with Grade 1.",
+      "After the bell near the gate.",
+      "Because the table with cards.",
+      "The clean bags on Saturday.",
     ],
-    correctAnswer: 2,
-    explanation: `'Which is yellow-billed' is a relative clause — it gives extra information about the parrot using a relative pronoun.`
+    correctAnswer: 3,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 33,
     type: "grammar",
-    skill: "Subject-Verb Agreement",
-    question: `Choose the correct verb: 'The group of scientists ___ studying the boa.'`,
+    skill: "Comma in a Series",
+    question: `Which sentence uses commas correctly?`,
     options: [
-      "are",
-      "is",
-      "have",
-      "were",
+      "We need pencils, glue, paper, and string.",
+      "We need pencils glue, paper and string.",
+      "We need, pencils glue paper, and string.",
+      "We need pencils, glue paper and, string.",
     ],
     correctAnswer: 0,
-    explanation: `'Group' is a collective noun — typically singular in formal writing. 'Is studying' is standard, but 'are studying' is also acceptable in Caribbean English when members act individually. 'Are' is the better answer here.`
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 34,
     type: "grammar",
-    skill: "Possessive Pronouns",
-    question: `Which sentence correctly uses a POSSESSIVE PRONOUN?`,
+    skill: "Possessive Noun",
+    question: `Choose the correct possessive form.`,
     options: [
-      "The habitat belongs to the boa. It is the boas.",
-      "The habitat is its.",
-      "The habitat belongs to the boa. It is hers.",
-      "The habitat is the boa's",
+      "The classes chart was full.",
+      "The class chart’s was full.",
+      "The classs chart was full.",
+      "The class’s chart was full.",
     ],
     correctAnswer: 1,
-    explanation: `'Its' is the possessive pronoun for a non-human animal or thing. 'The habitat is its' is correct.`
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 35,
     type: "grammar",
-    skill: "Sentence Correction",
-    question: `Which sentence is CORRECT?`,
+    skill: "Sentence Combining",
+    question: `Which combines the ideas best?`,
     options: [
-      "The hutia live in the forest since many years",
-      "The hutia has lived in the forest for many years",
-      "The hutia living in the forest since years",
-      "The hutia lived in forest for many year",
+      "The event went because carefully pupils.",
+      "The pupils planned carefully, and the event went well.",
+      "Planning carefully and event went.",
+      "The pupils planned carefully the event went well.",
     ],
-    correctAnswer: 1,
-    explanation: `'Has lived... for many years' is the correct present perfect construction indicating an ongoing state.`
+    correctAnswer: 2,
+    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
   },
   {
     id: 36,
     type: "writing",
-    skill: "Purpose — Informative Writing",
-    question: `An informative article about endangered animals should MAINLY:`,
+    skill: "Purpose and Audience",
+    question: `You are writing a notice for pupils about the event connected to sharing books with younger students. What is the best approach?`,
     options: [
-      "Use emotional language to make readers cry",
-      "Present accurate facts and evidence to educate readers about the topic",
-      "Give only the writer's personal opinion",
-      "Entertain with fictional stories about animals",
+      "Use a clear heading, important details, and polite language for a notice for pupils about the event.",
+      "Hide the date and place so readers must guess.",
+      "Use only jokes and leave out the main message.",
+      "Write one very long sentence with no punctuation.",
     ],
-    correctAnswer: 1,
-    explanation: `Informative writing educates readers with accurate, well-organised facts and evidence — its primary purpose is to inform.`
+    correctAnswer: 3,
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
   },
   {
     id: 37,
     type: "writing",
-    skill: "Text Features",
-    question: `Which text feature BEST helps readers navigate a long informative article?`,
+    skill: "Purpose and Audience",
+    question: `You are writing a friendly letter thanking helpers connected to sharing books with younger students. What is the best approach?`,
     options: [
-      "Writing in one continuous paragraph",
-      "Using different fonts randomly",
-      "Subheadings that clearly signal each section's topic",
-      "Making every sentence very short",
+      "Use a clear heading, important details, and polite language for a friendly letter thanking helpers.",
+      "Hide the date and place so readers must guess.",
+      "Use only jokes and leave out the main message.",
+      "Write one very long sentence with no punctuation.",
     ],
-    correctAnswer: 2,
-    explanation: `Subheadings guide readers through a text by clearly signalling what each section covers — an essential navigation tool for informative writing.`
+    correctAnswer: 0,
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "Formal Language",
-    question: `Which sentence is written in the MOST formal register for an environmental report?`,
+    skill: "Purpose and Audience",
+    question: `You are writing a school announcement for assembly connected to sharing books with younger students. What is the best approach?`,
     options: [
-      "The animals are dying because of us",
-      "People need to stop messing up the environment",
-      "Human activities are contributing significantly to habitat loss and species extinction",
-      "It's really bad what we're doing to animals",
+      "Use only jokes and leave out the main message.",
+      "Hide the date and place so readers must guess.",
+      "Write one very long sentence with no punctuation.",
+      "Use a clear heading, important details, and polite language for a school announcement for assembly.",
     ],
-    correctAnswer: 2,
-    explanation: `Formal writing uses precise, measured vocabulary and avoids contractions and casual language. Option C exemplifies formal register.`
+    correctAnswer: 1,
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Using Evidence",
-    question: `When writing about conservation, including a STATISTIC is useful because:`,
+    skill: "Purpose and Audience",
+    question: `You are writing a poster for the community project connected to sharing books with younger students. What is the best approach?`,
     options: [
-      "It makes the writing longer",
-      "Statistics are always 100% accurate",
-      "A specific number or percentage makes the argument more concrete and credible",
-      "Readers prefer numbers to words",
+      "Write one very long sentence with no punctuation.",
+      "Use a clear heading, important details, and polite language for a poster for the community project.",
+      "Use only jokes and leave out the main message.",
+      "Hide the date and place so readers must guess.",
     ],
     correctAnswer: 2,
-    explanation: `Evidence like statistics gives arguments credibility — concrete data is more convincing than vague general claims.`
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
   },
   {
     id: 40,
     type: "writing",
-    skill: "Concluding with a Call to Action",
-    question: `A conservation article BEST ends with:`,
+    skill: "Purpose and Audience",
+    question: `You are writing a short report for the school newsletter connected to sharing books with younger students. What is the best approach?`,
     options: [
-      "A summary of problems with no solution suggested",
-      "A call to action that tells readers what they can do to help",
-      "A long list of all endangered species",
-      "A personal story about the writer's pet",
+      "Use a clear heading, important details, and polite language for a short report for the school newsletter.",
+      "Hide the date and place so readers must guess.",
+      "Use only jokes and leave out the main message.",
+      "Write one very long sentence with no punctuation.",
     ],
-    correctAnswer: 1,
-    explanation: `Ending with a call to action empowers readers — it turns awareness into a practical invitation to make a difference.`
-  }
+    correctAnswer: 3,
+    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+  },
 ]
-
 
 const shuffleAnswerOptions = (questions: Question[]): Question[] => {
   return questions.map((question) => {
@@ -685,6 +684,7 @@ export default function G5LaEasy7MockTest() {
   const [answers, setAnswers]             = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]           = useState(60 * 60)
   const [randomizedQuestions, setRandomizedQuestions] = useState<Question[]>([])
+  const hasSavedResult = useRef(false)
 
   const sourceQuestions = isPremium ? g5LaEasy7Questions : g5LaEasy7Questions.slice(0, FREE_QUESTION_LIMIT)
   const availableQuestions = randomizedQuestions.length > 0 ? randomizedQuestions : sourceQuestions
@@ -711,8 +711,30 @@ export default function G5LaEasy7MockTest() {
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
 
-  const calcScore  = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
+  const calcScore  = () => answers.reduce<number>((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct   = () => Math.round((calcScore() / totalQuestions) * 100)
+
+
+  useEffect(() => {
+    if (!showResults || !user?.id || hasSavedResult.current) return
+
+    hasSavedResult.current = true
+    const completedAtIso = new Date().toISOString()
+    void saveStudentTestResult({
+      parentId: user.id,
+      studentName: user?.childName ?? "Student",
+      grade: "grade5",
+      subject: "Literacy",
+      testName: "Easy 7",
+      difficulty: "Easy",
+      score: calcScore(),
+      totalQuestions,
+      percentage: scorePct(),
+      completedAt: completedAtIso,
+    }).catch(() => {
+      hasSavedResult.current = false
+    })
+  }, [showResults, user?.id, user?.childName, totalQuestions, answers])
 
   const getGrade = () => {
     const p = scorePct()
@@ -739,13 +761,14 @@ export default function G5LaEasy7MockTest() {
     setCurrentQuestion(0)
     setTimeLeft(60 * 60)
     setShowResults(false)
+    hasSavedResult.current = false
     setStarted(true)
   }
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
     setRandomizedQuestions([])
-    setAnswers(new Array(sourceQuestions.length).fill(null)); setTimeLeft(60 * 60)
+    setAnswers(new Array(sourceQuestions.length).fill(null)); setTimeLeft(60 * 60); hasSavedResult.current = false
   }
 
   const handleSubmit = () => {
