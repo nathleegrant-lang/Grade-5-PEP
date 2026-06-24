@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -32,467 +32,453 @@ const g5LaEasy5Questions: Question[] = [
     id: 1,
     type: "reading",
     skill: "Main Idea",
-    question: `Read the passage then answer the question.
+    question: `Read Passage 1, then answer the question.
 
-"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
+Passage 1: Sports Day Helpers
 
-What is this passage MAINLY about?`,
+On Thursday morning, Grade 5 students at Seaview Primary met under the almond tree to prepare for Sports Day. Their teacher, Mr. Grant, gave each group a task. One group checked the lane markers on the field, another filled water bottles, and a third group made signs for the class tents. Before they began, Talia read the safety rules aloud so everyone would know how to move around the field.
+
+During practice, Dwayne noticed that the water table was too close to the running lane. He asked two classmates to help him move it nearer to the shade. Mr. Grant thanked him for thinking ahead. By lunch time, the field looked neat, and the students felt proud of their work.
+
+The next day, families arrived with folding chairs and umbrellas. The races were exciting, but the best part for Grade 5 was seeing how their careful planning helped the day run smoothly.
+
+What is Passage 1 mainly about?`,
     options: [
-      "The smell of freshly baked bread",
-      "The local market as a place of community, commerce, and connection",
-      "How mangoes are grown",
-      "The best time to buy vegetables",
+      "Grade 5 students preparing carefully for Sports Day",
+      "Families buying chairs for a school event",
+      "A teacher running in a race with students",
+      "Students choosing new uniforms for school",
     ],
-    correctAnswer: 1,
-    explanation: `The passage describes the market as more than just a shop — it is a place where community gathers and connects. This is the main idea.`
+    correctAnswer: 0,
+    explanation: `The passage focuses on Grade 5 students planning, organising, and helping Sports Day run smoothly.`
   },
   {
     id: 2,
     type: "reading",
-    skill: "Detail",
-    question: `Read the passage then answer the question.
+    skill: "Supporting Detail",
+    question: `Read Passage 1, then answer the question.
 
-"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
-
-What do vendors do to attract buyers?`,
+Which task did one group do before Sports Day?`,
     options: [
-      "They offer free samples",
-      "They arrange their stalls and call out prices",
-      "They close early",
-      "They only sell vegetables",
+      "They sold tickets at the gate.",
+      "They painted a classroom wall.",
+      "They cooked lunch for visitors.",
+      "They filled water bottles.",
     ],
-    correctAnswer: 1,
-    explanation: `The passage states vendors 'arrange their stalls carefully, calling out prices to attract buyers.'`
+    correctAnswer: 3,
+    explanation: `The passage states that one group filled water bottles as part of the preparations.`
   },
   {
     id: 3,
     type: "reading",
     skill: "Inference",
-    question: `Read the passage then answer the question.
+    question: `Read Passage 1, then answer the question.
 
-"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
-
-What can you INFER about the market from the phrase 'more than just a place to shop'?`,
+Why did Dwayne move the water table?`,
     options: [
-      "The market is very expensive",
-      "The market has deep social and community value beyond buying and selling",
-      "The market sells only crafts",
-      "The market is only open on weekdays",
+      "He wanted to hide it from the visitors.",
+      "He thought the bottles were empty.",
+      "He believed it would be safer away from the running lane.",
+      "He wanted his group to stop working early.",
     ],
-    correctAnswer: 1,
-    explanation: `'More than just a place to shop' implies the market has value beyond commerce — it is central to community life.`
+    correctAnswer: 2,
+    explanation: `Dwayne noticed the table was too close to the lane, so moving it helped prevent problems during races.`
   },
   {
     id: 4,
     type: "reading",
-    skill: "Vocabulary in Context",
-    question: `Read the passage then answer the question.
+    skill: "Sequence",
+    question: `Read Passage 1, then answer the question.
 
-"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
-
-The word 'mingles' in the passage most nearly means:`,
+What happened before the groups began their tasks?`,
     options: [
-      "separates",
-      "disappears",
-      "mixes together",
-      "replaces",
+      "Families arrived with umbrellas.",
+      "The races began on the field.",
+      "The students ate lunch together.",
+      "Talia read the safety rules aloud.",
     ],
-    correctAnswer: 2,
-    explanation: `'Mingles' means mixes or blends together. The smells of bread and mango mix in the air.`
+    correctAnswer: 3,
+    explanation: `The passage says Talia read the safety rules before the students began their preparation tasks.`
   },
   {
     id: 5,
     type: "reading",
-    skill: "Sensory Details",
-    question: `Read the passage then answer the question.
+    skill: "Character Trait",
+    question: `Read Passage 1, then answer the question.
 
-"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
-
-The author describes smells in the passage. What effect does this have?`,
+Which word best describes Dwayne?`,
     options: [
-      "It makes the passage about food only",
-      "It helps the reader imagine being at the market through sensory experience",
-      "It tells us the market is a restaurant",
-      "It shows the vendors are good cooks",
+      "Thoughtful",
+      "Careless",
+      "Forgetful",
+      "Jealous",
     ],
-    correctAnswer: 1,
-    explanation: `Using sensory details like smell (bread, mango, spices) makes the scene vivid and immersive for the reader.`
+    correctAnswer: 0,
+    explanation: `Dwayne noticed a possible safety problem and acted before it caused trouble, which shows thoughtfulness.`
   },
   {
     id: 6,
     type: "reading",
-    skill: "Figurative Language",
-    question: `Read the passage then answer the question.
+    skill: "Vocabulary in Context",
+    question: `Read Passage 1, then answer the question.
 
-"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
-
-'The market comes alive.' This phrase is an example of:`,
+In the sentence "Mr. Grant thanked him for thinking ahead," what does "thinking ahead" mean?`,
     options: [
-      "Simile",
-      "Metaphor",
-      "Personification",
-      "Alliteration",
+      "Remembering an old story",
+      "Guessing the winner of a race",
+      "Looking across the playing field",
+      "Planning for what might happen later",
     ],
-    correctAnswer: 2,
-    explanation: `The market is given the human quality of coming alive — this is personification.`
+    correctAnswer: 3,
+    explanation: `Dwayne planned for safety before the races, so "thinking ahead" means considering what may happen later.`
   },
   {
     id: 7,
     type: "reading",
-    skill: "Author's Purpose",
-    question: `Read the passage then answer the question.
+    skill: "Cause and Effect",
+    question: `Read Passage 1, then answer the question.
 
-"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
-
-The author ends with 'it is where the community gathers and connects.' Why?`,
+What was one effect of the students' careful planning?`,
     options: [
-      "To list all the things sold at the market",
-      "To end with the market's deeper significance — its role as a community hub",
-      "To show the market is crowded",
-      "To advertise the market",
+      "The families cancelled the event.",
+      "The field became too crowded to use.",
+      "Sports Day ran more smoothly.",
+      "The students forgot the safety rules.",
     ],
-    correctAnswer: 1,
-    explanation: `The final sentence shifts from description to meaning — revealing that the author sees the market as a social and cultural heart of the community.`
+    correctAnswer: 2,
+    explanation: `The passage says the students' careful planning helped the day run smoothly.`
   },
   {
     id: 8,
     type: "reading",
-    skill: "Tone",
-    question: `Read the passage then answer the question.
+    skill: "Theme",
+    question: `Read Passage 1, then answer the question.
 
-"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
-
-The tone of this passage is BEST described as:`,
+Which lesson best fits Passage 1?`,
     options: [
-      "Negative and critical",
-      "Warm and celebratory",
-      "Factual and scientific",
-      "Confused and uncertain",
+      "Winning every race is the only thing that matters.",
+      "Students should never help with school events.",
+      "Outdoor events do not need rules.",
+      "Teamwork and preparation can help an event succeed.",
     ],
-    correctAnswer: 1,
-    explanation: `The rich, colourful description and positive language ('alive,' 'gathers and connects') create a warm, celebratory tone.`
+    correctAnswer: 3,
+    explanation: `The students shared duties, followed rules, and prepared carefully, showing the value of teamwork and preparation.`
   },
   {
     id: 9,
     type: "reading",
-    skill: "Summarise",
-    question: `Read the passage then answer the question.
+    skill: "Main Idea",
+    question: `Read Passage 2, then answer the question.
 
-"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
+Passage 2: The Safe Walk
 
-Which BEST summarises this passage?`,
+After devotion on Monday, Constable Lewis visited Grade 5 to speak about road safety. She drew a simple map of the road outside the school gate. The map showed the crossing, the bus stop, and the corner where drivers sometimes turned quickly. She reminded the students to stop, look both ways, listen, and wait for the crossing guard's signal.
+
+Later that week, the class practised the safe route to the bus stop. Rohan wanted to run ahead when he saw his bus, but his friend Amaya touched his shoulder and pointed to the road. Rohan stopped at the kerb and waited with the group. The bus driver smiled when the students boarded in a line instead of pushing.
+
+On Friday, Mrs. Henry asked the class what they had learned. Amaya said that being careful for a few extra seconds was better than rushing into danger. The class agreed to remind younger students to use the crossing every afternoon.
+
+What is Passage 2 mainly about?`,
     options: [
-      "Markets sell food and crafts",
-      "A local Saturday market is a vibrant hub of activity where the community comes together",
-      "Vendors work hard on Saturdays",
-      "Shoppers fill their baskets with vegetables",
+      "A class learning and practising safe road habits",
+      "A bus driver repairing a school bus",
+      "Students planning a Friday concert",
+      "A teacher drawing pictures for an art lesson",
     ],
-    correctAnswer: 1,
-    explanation: `This captures both the surface (market activity) and deeper meaning (community gathering) of the passage.`
+    correctAnswer: 0,
+    explanation: `The whole passage is about students learning road safety rules and practising them near school.`
   },
   {
     id: 10,
     type: "reading",
-    skill: "Text Evidence",
-    question: `Read the passage then answer the question.
+    skill: "Supporting Detail",
+    question: `Read Passage 2, then answer the question.
 
-"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
-
-Which phrase BEST shows the market's importance to the community?`,
+What did Constable Lewis draw for the class?`,
     options: [
-      "Vendors arrange their stalls carefully",
-      "Shoppers move through the narrow lanes",
-      "The market is more than just a place to shop — it is where the community gathers and connects",
-      "The smell of freshly baked bread mingles with spices",
+      "A picture of the school garden",
+      "A timetable for the school buses",
+      "A poster about healthy snacks",
+      "A simple map of the road outside the school gate",
     ],
-    correctAnswer: 2,
-    explanation: `This phrase directly states the market's community significance — the strongest textual evidence.`
+    correctAnswer: 3,
+    explanation: `The passage states that Constable Lewis drew a simple map of the road outside the school gate.`
   },
   {
     id: 11,
     type: "reading",
-    skill: "Sequence",
-    question: `Read the passage then answer the question.
+    skill: "Inference",
+    question: `Read Passage 2, then answer the question.
 
-"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
-
-What do shoppers do AFTER moving through the lanes?`,
+Why did Amaya touch Rohan's shoulder?`,
     options: [
-      "They go home immediately",
-      "They call out prices",
-      "They fill their baskets with fruits, vegetables, and crafts",
-      "They arrange stalls",
+      "She wanted him to carry her schoolbag.",
+      "She was telling him the bus was late.",
+      "She wanted to remind him to stop and be safe.",
+      "She was asking him to change seats.",
     ],
     correctAnswer: 2,
-    explanation: `The passage says shoppers 'move through the narrow lanes, filling their baskets' — filling baskets happens as they move.`
+    explanation: `Rohan wanted to run ahead, and Amaya pointed to the road, so she was reminding him to act safely.`
   },
   {
     id: 12,
     type: "reading",
     skill: "Vocabulary in Context",
-    question: `Read the passage then answer the question.
+    question: `Read Passage 2, then answer the question.
 
-"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
-
-The word 'vibrant' would BEST describe the market scene because:`,
+In the passage, the word "kerb" means:`,
     options: [
-      "The market is dull and quiet",
-      "The market is full of colour, energy, and life",
-      "The market is very expensive",
-      "The market is dangerous",
+      "the seat at the back of a bus",
+      "the bell used by the crossing guard",
+      "the edge of the pavement beside the road",
+      "the gate at the front of the school",
     ],
-    correctAnswer: 1,
-    explanation: `'Vibrant' means full of energy and colour — which perfectly describes this busy, colourful, lively market.`
+    correctAnswer: 2,
+    explanation: `Rohan stopped at the kerb before crossing, so it means the edge of the pavement next to the road.`
   },
   {
     id: 13,
     type: "reading",
-    skill: "Fact vs Opinion",
-    question: `Read the passage then answer the question.
+    skill: "Text Evidence",
+    question: `Read Passage 2, then answer the question.
 
-"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
-
-Which statement is an OPINION about the market?`,
+Which detail best shows that the students used good bus safety?`,
     options: [
-      "Vendors call out prices",
-      "The market smells of bread and mangoes",
-      "The market is the best place to spend a Saturday morning",
-      "Shoppers buy fruits and vegetables",
+      "Constable Lewis visited after devotion.",
+      "The corner had drivers who sometimes turned quickly.",
+      "Mrs. Henry asked what the class had learned.",
+      "The students boarded in a line instead of pushing.",
     ],
-    correctAnswer: 2,
-    explanation: `This is a personal judgement — an opinion. The others are directly stated facts from the passage.`
+    correctAnswer: 3,
+    explanation: `Boarding in a line instead of pushing is the clearest evidence that the students practised safe bus behaviour.`
   },
   {
     id: 14,
     type: "reading",
-    skill: "Character",
-    question: `Read the passage then answer the question.
+    skill: "Author's Purpose",
+    question: `Read Passage 2, then answer the question.
 
-"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
-
-Based on the passage, how would you describe the vendors?`,
+Why did the author most likely include Amaya's final statement?`,
     options: [
-      "Lazy and uninterested",
-      "Energetic and engaged in their work",
-      "Quiet and shy",
-      "Angry at the buyers",
+      "To show the lesson that safety is worth a short wait",
+      "To explain how to repair a bus door",
+      "To list every road near the school",
+      "To prove that running is always safer than walking",
     ],
-    correctAnswer: 1,
-    explanation: `Vendors 'arrange their stalls carefully' and 'call out prices' — showing energy and engagement in their work.`
+    correctAnswer: 0,
+    explanation: `Amaya's statement sums up the safety lesson: it is better to wait briefly than rush into danger.`
   },
   {
     id: 15,
     type: "reading",
-    skill: "Audience",
-    question: `Read the passage then answer the question.
+    skill: "Fact and Opinion",
+    question: `Read Passage 2, then answer the question.
 
-"Every Saturday morning, the local market comes alive with colour, noise, and activity. Vendors arrange their stalls carefully, calling out prices to attract buyers. The smell of freshly baked bread mingles with the scent of ripe mangoes and spices. Shoppers move through the narrow lanes, filling their baskets with fruits, vegetables, and local crafts. The market is more than just a place to shop — it is where the community gathers and connects."
-
-This passage was MOST LIKELY written for:`,
+Which statement is an opinion about the road safety lesson?`,
     options: [
-      "Scientists studying markets",
-      "A general audience, possibly students, to appreciate community and local culture",
-      "Economists studying trade",
-      "Market vendors only",
+      "The class practised the safe route to the bus stop.",
+      "The safety talk was the most useful lesson of the week.",
+      "The students waited for the crossing guard's signal.",
+      "Constable Lewis drew a map of the road.",
     ],
     correctAnswer: 1,
-    explanation: `The warm, descriptive language and celebration of community life suggest an audience of general readers or students.`
+    explanation: `Calling the talk "the most useful lesson" is a personal judgement, so it is an opinion.`
   },
   {
     id: 16,
     type: "vocabulary",
-    skill: "Synonyms",
-    question: `Which word is a SYNONYM for 'vibrant'?`,
+    skill: "Context Clues",
+    question: `The lane markers were aligned before Sports Day, so each runner could stay in a straight path. What does "aligned" mean?`,
     options: [
-      "dull",
-      "colourless",
-      "lively",
-      "quiet",
+      "placed in a proper line",
+      "covered with bright paint",
+      "removed from the field",
+      "shared among the teams",
     ],
-    correctAnswer: 2,
-    explanation: `'Lively' means full of energy and colour — a synonym for 'vibrant.'`
+    correctAnswer: 0,
+    explanation: `The clue "straight path" shows that aligned means placed neatly in line.`
   },
   {
     id: 17,
     type: "vocabulary",
-    skill: "Antonyms",
-    question: `The ANTONYM of 'plentiful' is:`,
+    skill: "Synonym in Context",
+    question: `Maya gave a brief reminder before the race began. Which word is closest in meaning to "brief"?`,
     options: [
-      "abundant",
-      "scarce",
-      "generous",
-      "rich",
+      "loud",
+      "short",
+      "angry",
+      "secret",
     ],
     correctAnswer: 1,
-    explanation: `'Scarce' means in short supply — the opposite of 'plentiful' (abundant).`
+    explanation: `A brief reminder is a short reminder, not a long speech.`
   },
   {
     id: 18,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `The vendor HAGGLED with the buyer until they agreed on a fair price. 'Haggled' means:`,
+    skill: "Antonym in Context",
+    question: `The students were cautious near the road. Which word is the opposite of "cautious"?`,
     options: [
-      "shouted angrily",
-      "bargained or negotiated back and forth",
-      "refused to sell",
-      "gave a discount immediately",
+      "careful",
+      "patient",
+      "reckless",
+      "quiet",
     ],
-    correctAnswer: 1,
-    explanation: `'Haggle' means to negotiate or bargain — going back and forth on a price until both sides agree.`
+    correctAnswer: 2,
+    explanation: `Cautious means careful; reckless means not careful, so it is the opposite.`
   },
   {
     id: 19,
     type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'The market is the heartbeat of our community.' This is an example of:`,
+    skill: "Multiple Meaning Words",
+    question: `Which sentence uses "line" to mean people standing one behind another?`,
     options: [
-      "Simile",
-      "Alliteration",
-      "Metaphor",
-      "Personification",
+      "Draw a line under the title.",
+      "The poem's first line is short.",
+      "The fishing line broke in the river.",
+      "The students formed a line at the bus stop.",
     ],
-    correctAnswer: 2,
-    explanation: `The market is directly called 'the heartbeat' — comparing it to a vital organ through metaphor, not using 'like' or 'as.'`
+    correctAnswer: 3,
+    explanation: `Students forming a line means they stood one behind another.`
   },
   {
     id: 20,
     type: "vocabulary",
-    skill: "Word Meaning",
-    question: `The word 'commerce' means:`,
+    skill: "Figurative Language",
+    question: `"The whistle sliced through the noisy field." What does this sentence help the reader imagine?`,
     options: [
-      "community events",
-      "buying and selling of goods and services",
-      "cooking and food preparation",
-      "growing crops",
+      "A sharp sound heard clearly",
+      "A whistle being cut in half",
+      "A field with no students on it",
+      "A runner carrying a knife",
     ],
-    correctAnswer: 1,
-    explanation: `'Commerce' refers to trade — the buying and selling of goods and services.`
+    correctAnswer: 0,
+    explanation: `The figurative phrase suggests the whistle made a sharp, clear sound above the noise.`
   },
   {
     id: 21,
     type: "vocabulary",
-    skill: "Multiple Meaning",
-    question: `Which sentence uses the word 'stall' to mean a vendor's stand at a market?`,
+    skill: "Context Clues",
+    question: `The crossing guard signalled, and the children proceeded across the road. What does "proceeded" mean?`,
     options: [
-      "The engine will stall if you do not keep it moving",
-      "She set up her stall and arranged her mangoes neatly",
-      "The negotiations stalled for three hours",
-      "He tried to stall for time",
+      "turned back",
+      "moved forward",
+      "waited silently",
+      "dropped their bags",
     ],
     correctAnswer: 1,
-    explanation: `'Stall' meaning a market stand is a noun. 'She set up her stall' uses this meaning.`
+    explanation: `After the signal, the children crossed, so proceeded means moved forward.`
   },
   {
     id: 22,
     type: "vocabulary",
-    skill: "Prefix inter-",
-    question: `The prefix 'inter-' in 'interact' means:`,
+    skill: "Prefix",
+    question: `In the word "unsafe," the prefix "un-" means:`,
     options: [
-      "above",
-      "against",
-      "between or among",
       "again",
+      "before",
+      "not",
+      "many",
     ],
     correctAnswer: 2,
-    explanation: `'Inter-' means between or among. 'Interact' = act between people — engage with each other.`
+    explanation: `The prefix "un-" means not, so unsafe means not safe.`
   },
   {
     id: 23,
     type: "vocabulary",
-    skill: "Suffix -ful",
-    question: `Which word uses '-ful' to mean 'full of colour'?`,
+    skill: "Suffix",
+    question: `Which word means "full of care"?`,
     options: [
-      "colourless",
-      "colourful",
-      "recolour",
-      "colouring",
+      "careless",
+      "caring",
+      "recare",
+      "careful",
     ],
-    correctAnswer: 1,
-    explanation: `'-ful' means full of. 'Colourful' = full of colour.`
+    correctAnswer: 3,
+    explanation: `The suffix "-ful" means full of, so careful means full of care.`
   },
   {
     id: 24,
     type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'Business was as slow as a tortoise that morning.' This is a:`,
+    skill: "Word Choice",
+    question: `Which word best completes the sentence? The teacher gave clear ______ before the practice race began.`,
     options: [
-      "Metaphor",
-      "Personification",
-      "Simile",
-      "Hyperbole",
+      "instructions",
+      "clouds",
+      "sandals",
+      "mangoes",
     ],
-    correctAnswer: 2,
-    explanation: `It uses 'as...as' to compare business to a tortoise — a simile.`
+    correctAnswer: 0,
+    explanation: `A teacher gives instructions before an activity so students know what to do.`
   },
   {
     id: 25,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `The mango was RIPE — soft, golden-yellow, and dripping with sweet juice. 'Ripe' means:`,
+    question: `The crowd applauded when the final runner crossed the finish line. What does "applauded" mean?`,
     options: [
-      "unready for eating",
-      "fully grown and ready to eat",
-      "too old and rotten",
-      "unripe and hard",
+      "waited",
+      "clapped",
+      "whispered",
+      "complained",
     ],
     correctAnswer: 1,
-    explanation: `'Ripe' describes fruit at its peak, ready to eat — supported by 'soft, golden-yellow, and sweet.'`
+    explanation: `At an event, a crowd applauds by clapping to show approval or support.`
   },
   {
     id: 26,
     type: "grammar",
-    skill: "Common vs Proper Nouns",
-    question: `Which sentence contains a PROPER NOUN?`,
+    skill: "Subject-Verb Agreement",
+    question: `Choose the sentence with correct subject-verb agreement.`,
     options: [
-      "The dog chased the ball",
-      "She visited the park",
-      "He travelled to Montego Bay for the weekend",
-      "A man walked past the shop",
+      "The students waits at the crossing.",
+      "The buses stops near the gate.",
+      "The crossing guard wave every morning.",
+      "The teacher reminds the class about safety.",
     ],
-    correctAnswer: 2,
-    explanation: `'Montego Bay' is a proper noun — the specific name of a place. It begins with a capital letter.`
+    correctAnswer: 3,
+    explanation: `"Teacher" is singular, so the verb "reminds" agrees with it.`
   },
   {
     id: 27,
     type: "grammar",
-    skill: "Action Verbs",
-    question: `Which sentence contains an ACTION VERB?`,
+    skill: "Verb Tense",
+    question: `Choose the correct verb: Yesterday, the team ______ the field for Sports Day.`,
     options: [
-      "The soup is hot",
-      "She seems nervous",
-      "He jumped over the fence",
-      "The sky looks dark",
+      "prepared",
+      "prepare",
+      "prepares",
+      "will prepare",
     ],
-    correctAnswer: 2,
-    explanation: `'Jumped' is an action verb — it describes a physical movement performed by the subject.`
+    correctAnswer: 0,
+    explanation: `"Yesterday" shows past time, so the past-tense verb "prepared" is correct.`
   },
   {
     id: 28,
     type: "grammar",
-    skill: "Adjectives",
-    question: `Which word is an ADJECTIVE in: 'The elderly vendor arranged her colourful stall.'?`,
+    skill: "Pronouns",
+    question: `Choose the correct pronoun: Amaya and Rohan waited until ______ saw the signal.`,
     options: [
-      "arranged",
-      "vendor",
-      "stall",
-      "colourful",
+      "she",
+      "they",
+      "he",
+      "it",
     ],
-    correctAnswer: 3,
-    explanation: `'Colourful' describes the stall — it is an adjective.`
+    correctAnswer: 1,
+    explanation: `Amaya and Rohan are two people, so the plural pronoun "they" is correct.`
   },
   {
     id: 29,
     type: "grammar",
-    skill: "Sentence Types",
-    question: `Which sentence is an EXCLAMATION?`,
+    skill: "Adjectives",
+    question: `Which word is an adjective in this sentence? The careful students crossed the busy road.`,
     options: [
-      "Are you going to the market?",
-      "Buy some mangoes please",
-      "What a beautiful morning it is!",
-      "She sells vegetables every Saturday",
+      "crossed",
+      "students",
+      "careful",
+      "road",
     ],
     correctAnswer: 2,
-    explanation: `An exclamation expresses strong feeling and ends with an exclamation mark.`
+    explanation: `"Careful" describes the students, so it is an adjective.`
   },
   {
     id: 30,
@@ -500,153 +486,153 @@ This passage was MOST LIKELY written for:`,
     skill: "Punctuation",
     question: `Which sentence is correctly punctuated?`,
     options: [
-      "The market sells fruit, vegetables, and crafts.",
-      "The market sells fruit vegetables and crafts.",
-      "The market, sells fruit vegetables and crafts.",
-      "The market sells fruit, vegetables and, crafts.",
+      "Bring water a cap and your house shirt.",
+      "Bring water, a cap, and your house shirt.",
+      "Bring water, a cap and, your house shirt.",
+      "Bring, water a cap, and your house shirt.",
     ],
-    correctAnswer: 0,
-    explanation: `Items in a list are separated by commas. Option A correctly uses commas between all three items.`
+    correctAnswer: 1,
+    explanation: `Commas separate the items in the list: water, a cap, and your house shirt.`
   },
   {
     id: 31,
     type: "grammar",
-    skill: "Simple Past Tense",
-    question: `Choose the correct PAST TENSE: 'Last week, she ___ vegetables at the market.'`,
+    skill: "Capitalisation",
+    question: `Which sentence uses capital letters correctly?`,
     options: [
-      "sells",
-      "is selling",
-      "will sell",
-      "sold",
+      "on friday, our class practised road safety.",
+      "On Friday, our class practised road safety.",
+      "On friday, our Class practised Road safety.",
+      "on Friday, Our class practised road Safety.",
     ],
-    correctAnswer: 3,
-    explanation: `'Last week' signals the simple past tense. 'Sold' is the past tense of 'sell.'`
+    correctAnswer: 1,
+    explanation: `The first word and the day of the week should be capitalised: On Friday.`
   },
   {
     id: 32,
     type: "grammar",
-    skill: "Personal Pronouns",
-    question: `Replace 'The vendors' with the correct pronoun: 'The vendors called out to the buyers.'`,
+    skill: "Complete Sentences",
+    question: `Which option is a complete sentence?`,
     options: [
-      "It",
-      "She",
-      "They",
-      "He",
+      "Near the school gate.",
+      "Before the bell rang.",
+      "The runners waited at the starting line.",
+      "With two full water bottles.",
     ],
     correctAnswer: 2,
-    explanation: `'The vendors' is plural (more than one person) — replace with 'They.'`
+    explanation: `This option has a subject and a verb and expresses a complete thought.`
   },
   {
     id: 33,
     type: "grammar",
-    skill: "Subject-Verb Agreement",
-    question: `Choose the correct verb: 'Every stall at the market ___ a story.'`,
+    skill: "Conjunctions",
+    question: `Choose the best conjunction: The sun was hot, ______ the students drank water after the race.`,
     options: [
-      "tell",
-      "are",
-      "have",
-      "tells",
+      "because",
+      "so",
+      "although",
+      "unless",
     ],
-    correctAnswer: 3,
-    explanation: `'Every stall' is singular. Use the singular verb 'tells.'`
+    correctAnswer: 1,
+    explanation: `"So" shows the result: the sun was hot, so the students drank water.`
   },
   {
     id: 34,
     type: "grammar",
-    skill: "Apostrophe — Possession",
-    question: `Which shows the stall BELONGING to the vendor?`,
+    skill: "Apostrophes",
+    question: `Which phrase correctly shows that the whistle belongs to the teacher?`,
     options: [
-      "the vendors stall",
-      "the vendor stall",
-      "the vendor's stall",
-      "the vendors' stall",
+      "the whistle teacher",
+      "the teachers whistle",
+      "the teacher's whistle",
+      "the teachers' whistle's",
     ],
     correctAnswer: 2,
-    explanation: `For a singular noun (vendor), add apostrophe + s. 'The vendor's stall' is correct.`
+    explanation: `For one teacher, use apostrophe + s: the teacher's whistle.`
   },
   {
     id: 35,
     type: "grammar",
-    skill: "Compound Sentences",
-    question: `Which is a COMPOUND sentence?`,
+    skill: "Sentence Combining",
+    question: `Which sentence best combines these ideas? The bus arrived. The students boarded calmly.`,
     options: [
-      "She sells mangoes at the market.",
-      "She sells mangoes and her sister sells vegetables.",
-      "She sells mangoes because they are in season.",
-      "Selling mangoes is her job.",
+      "The bus arrived, and the students boarded calmly.",
+      "The bus arrived the students boarded calmly.",
+      "The bus arrived because calmly.",
+      "Boarded calmly the bus arrived students.",
     ],
-    correctAnswer: 1,
-    explanation: `A compound sentence joins two independent clauses with a conjunction. 'She sells mangoes AND her sister sells vegetables' joins two main clauses.`
+    correctAnswer: 0,
+    explanation: `The sentence correctly joins two complete ideas with a comma and the conjunction "and."`
   },
   {
     id: 36,
     type: "writing",
-    skill: "Purpose of Descriptive Writing",
-    question: `A student writes a description of a busy market for a travel magazine. The PRIMARY purpose is to:`,
+    skill: "Topic Sentence",
+    question: `A student is writing a paragraph about staying safe after school. Which is the best topic sentence?`,
     options: [
-      "Give directions to the market",
-      "Persuade readers not to shop at the market",
-      "Describe the market so vividly that readers feel they are there",
-      "List everything sold at the market",
+      "After-school safety is important because students must make careful choices near roads and buses.",
+      "The bus is yellow and parks near the gate.",
+      "I saw three students yesterday afternoon.",
+      "Roads can be long, short, wide, or narrow.",
     ],
-    correctAnswer: 2,
-    explanation: `Descriptive travel writing aims to evoke a place so richly that readers feel transported there — creating an experience, not just a list.`
+    correctAnswer: 0,
+    explanation: `The sentence clearly states the paragraph's main idea about after-school safety.`
   },
   {
     id: 37,
     type: "writing",
-    skill: "Sensory Language",
-    question: `Which sentence uses the MOST effective sensory language?`,
+    skill: "Supporting Details",
+    question: `Which detail best supports a paragraph about preparing for Sports Day?`,
     options: [
-      "The market was big",
-      "There were many people and things",
-      "The air buzzed with vendors' calls, thick with the scent of pepper and ripe mango",
-      "It was a Saturday market",
+      "My favourite fruit is pineapple.",
+      "The students checked lane markers and filled water bottles.",
+      "The library has many storybooks.",
+      "Rain sometimes falls in the afternoon.",
     ],
-    correctAnswer: 2,
-    explanation: `Effective sensory writing engages multiple senses (sound: 'buzzed,' smell: 'pepper and mango') to create an immersive experience.`
+    correctAnswer: 1,
+    explanation: `Checking lane markers and filling water bottles directly supports the idea of preparing for Sports Day.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "Topic Sentence",
-    question: `Which would make the BEST topic sentence for a paragraph about why local markets matter?`,
+    skill: "Audience and Tone",
+    question: `You are writing a notice to Grade 5 students about bus safety. Which tone is most suitable?`,
     options: [
-      "Markets sell vegetables",
-      "Local markets are busy on Saturdays",
-      "Local markets are vital centres of community life, trade, and cultural identity",
-      "People go to the market to buy food",
+      "Angry and insulting",
+      "Silly and confusing",
+      "Clear, polite, and helpful",
+      "Secretive and mysterious",
     ],
     correctAnswer: 2,
-    explanation: `A strong topic sentence makes a clear, arguable claim about the paragraph's subject. Option C is specific and substantive.`
+    explanation: `A school notice should give information in a clear, polite, and helpful tone.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Audience",
-    question: `A student writes a report on local markets for a school newsletter. Which language is MOST appropriate?`,
+    skill: "Revision",
+    question: `A student wrote: "Sports Day was nice." Which revision gives the clearest detail?`,
     options: [
-      "Very formal academic language with technical terms",
-      "Casual slang and informal expressions",
-      "Clear, organised, semi-formal language accessible to fellow students and parents",
-      "One very long sentence covering all the facts",
+      "Sports Day was nice and also very nice.",
+      "Sports Day happened at school one day.",
+      "Sports Day was an event with some things.",
+      "Sports Day was exciting because students cheered, raced, and helped their teams.",
     ],
-    correctAnswer: 2,
-    explanation: `A school newsletter requires language that is clear and accessible to students and parents — not overly formal or too casual.`
+    correctAnswer: 3,
+    explanation: `The revision gives clear details that explain why Sports Day was exciting.`
   },
   {
     id: 40,
     type: "writing",
     skill: "Concluding Sentence",
-    question: `Which BEST concludes a paragraph arguing that markets are important community spaces?`,
+    question: `Which sentence best concludes a paragraph about road safety?`,
     options: [
-      "Markets sell many things",
-      "There are different stalls at the market",
-      "Markets are therefore not simply places of commerce — they are the living, breathing heart of community life",
-      "People should visit the market more often",
+      "Drivers sometimes turn at the corner.",
+      "Therefore, taking a few careful seconds can help students get home safely.",
+      "The bus stop is near the school gate.",
+      "Some students carry blue schoolbags.",
     ],
-    correctAnswer: 2,
-    explanation: `A concluding sentence wraps up the argument powerfully. This sentence restates the key idea (community heart) in a memorable way.`
+    correctAnswer: 1,
+    explanation: `This sentence wraps up the paragraph by restating the importance of careful road-safety choices.`
   }
 ]
 
@@ -685,6 +671,7 @@ export default function G5LaEasy5MockTest() {
   const [answers, setAnswers]             = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]           = useState(60 * 60)
   const [randomizedQuestions, setRandomizedQuestions] = useState<Question[]>([])
+  const hasSavedResult = useRef(false)
 
   const sourceQuestions = isPremium ? g5LaEasy5Questions : g5LaEasy5Questions.slice(0, FREE_QUESTION_LIMIT)
   const availableQuestions = randomizedQuestions.length > 0 ? randomizedQuestions : sourceQuestions
@@ -711,8 +698,29 @@ export default function G5LaEasy5MockTest() {
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
 
-  const calcScore  = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
+  const calcScore  = () => answers.reduce<number>((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct   = () => Math.round((calcScore() / totalQuestions) * 100)
+
+  useEffect(() => {
+    if (!showResults || !user?.id || hasSavedResult.current) return
+
+    hasSavedResult.current = true
+    const completedAtIso = new Date().toISOString()
+    void saveStudentTestResult({
+      parentId: user.id,
+      studentName: user?.childName ?? "Student",
+      grade: "grade5",
+      subject: "Literacy",
+      testName: "Easy 5",
+      difficulty: "Easy",
+      score: calcScore(),
+      totalQuestions,
+      percentage: scorePct(),
+      completedAt: completedAtIso,
+    }).catch(() => {
+      hasSavedResult.current = false
+    })
+  }, [showResults, user?.id, user?.childName, totalQuestions, answers])
 
   const getGrade = () => {
     const p = scorePct()
@@ -739,13 +747,14 @@ export default function G5LaEasy5MockTest() {
     setCurrentQuestion(0)
     setTimeLeft(60 * 60)
     setShowResults(false)
+    hasSavedResult.current = false
     setStarted(true)
   }
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
     setRandomizedQuestions([])
-    setAnswers(new Array(sourceQuestions.length).fill(null)); setTimeLeft(60 * 60)
+    setAnswers(new Array(sourceQuestions.length).fill(null)); setTimeLeft(60 * 60); hasSavedResult.current = false
   }
 
   const handleSubmit = () => {
