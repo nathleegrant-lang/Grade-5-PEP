@@ -36,15 +36,15 @@ const g5LaEasy7Questions: Question[] = [
 
 "At Monday devotion, the librarian announced a School Library Reading Challenge. Each Grade 5 pupil chose a book at a comfortable level and recorded reading minutes on a chart. Friends recommended stories to one another, but everyone had to write a short comment after finishing a book. At the end of the month, the class with the most steady reading would receive a new set of novels."
 
-Which answer best matches the passage?`,
+What is the main idea of the passage?`,
     options: [
-      "to entertain with a fantasy adventure",
-      "to describe the pupils’ organized school activity",
-      "to explain why sports day was postponed",
-      "to list rules for a spelling contest",
+      "The school library started a reading challenge to encourage steady reading.",
+      "The pupils were learning how to repair damaged library shelves.",
+      "The librarian cancelled all reading activities for the month.",
+      "The class with the loudest readers would win a sports prize.",
     ],
     correctAnswer: 0,
-    explanation: `The passage shows school library reading challenge as a planned, helpful activity involving pupils.`
+    explanation: `The whole passage focuses on the School Library Reading Challenge and how it encouraged pupils to read steadily.`
   },
   {
     id: 2,
@@ -54,15 +54,15 @@ Which answer best matches the passage?`,
 
 "At Monday devotion, the librarian announced a School Library Reading Challenge. Each Grade 5 pupil chose a book at a comfortable level and recorded reading minutes on a chart. Friends recommended stories to one another, but everyone had to write a short comment after finishing a book. At the end of the month, the class with the most steady reading would receive a new set of novels."
 
-Which answer best matches the passage?`,
+What did each Grade 5 pupil record on a chart?`,
     options: [
-      "They cancelled the activity after assembly.",
-      "They used a schedule or record to guide the activity.",
-      "They sold tickets at the gate.",
-      "They worked alone without a teacher.",
+      "The number of snacks sold at break",
+      "The titles of books younger children donated",
+      "The reading minutes spent on the challenge",
+      "The names of pupils absent from devotion",
     ],
-    correctAnswer: 1,
-    explanation: `The passage shows school library reading challenge as a planned, helpful activity involving pupils.`
+    correctAnswer: 2,
+    explanation: `The passage says each Grade 5 pupil recorded reading minutes on a chart.`
   },
   {
     id: 3,
@@ -72,15 +72,15 @@ Which answer best matches the passage?`,
 
 "At Monday devotion, the librarian announced a School Library Reading Challenge. Each Grade 5 pupil chose a book at a comfortable level and recorded reading minutes on a chart. Friends recommended stories to one another, but everyone had to write a short comment after finishing a book. At the end of the month, the class with the most steady reading would receive a new set of novels."
 
-Which answer best matches the passage?`,
+What can the reader infer about the challenge?`,
     options: [
-      "Only adults did the work.",
-      "The pupils were careless.",
-      "The school was closed.",
-      "The activity was planned and helpful.",
+      "It was meant to build regular reading habits.",
+      "It was designed to stop pupils from borrowing books.",
+      "It required pupils to read only difficult books.",
+      "It took place because the library had no books.",
     ],
-    correctAnswer: 2,
-    explanation: `The passage shows school library reading challenge as a planned, helpful activity involving pupils.`
+    correctAnswer: 0,
+    explanation: `Because pupils tracked minutes, chose suitable books, and wrote comments, the challenge was meant to build regular reading habits.`
   },
   {
     id: 4,
@@ -90,15 +90,15 @@ Which answer best matches the passage?`,
 
 "At Monday devotion, the librarian announced a School Library Reading Challenge. Each Grade 5 pupil chose a book at a comfortable level and recorded reading minutes on a chart. Friends recommended stories to one another, but everyone had to write a short comment after finishing a book. At the end of the month, the class with the most steady reading would receive a new set of novels."
 
-Which answer best matches the passage?`,
+In the passage, what does “comfortable level” most likely mean?`,
     options: [
-      "comfortable means suitable for the person",
-      "comfortable means broken into pieces",
-      "comfortable means very expensive",
-      "comfortable means impossible to find",
+      "A book that is suitable for the pupil to read",
+      "A shelf that is soft enough to sit on",
+      "A prize that costs very little money",
+      "A comment that is written in red ink",
     ],
-    correctAnswer: 3,
-    explanation: `The passage shows school library reading challenge as a planned, helpful activity involving pupils.`
+    correctAnswer: 0,
+    explanation: `In this context, a comfortable level means a book that matches the pupil’s reading ability.`
   },
   {
     id: 5,
@@ -108,15 +108,15 @@ Which answer best matches the passage?`,
 
 "At Monday devotion, the librarian announced a School Library Reading Challenge. Each Grade 5 pupil chose a book at a comfortable level and recorded reading minutes on a chart. Friends recommended stories to one another, but everyone had to write a short comment after finishing a book. At the end of the month, the class with the most steady reading would receive a new set of novels."
 
-Which answer best matches the passage?`,
+Why did the author most likely write this passage?`,
     options: [
-      "to persuade readers to avoid school clubs",
-      "to inform readers about a useful school event",
-      "to describe a storm at school",
-      "to compare two famous athletes",
+      "To explain how a reading challenge worked at school",
+      "To persuade pupils never to visit a library",
+      "To describe rules for a football competition",
+      "To entertain readers with a mystery story",
     ],
     correctAnswer: 0,
-    explanation: `The passage shows school library reading challenge as a planned, helpful activity involving pupils.`
+    explanation: `The author gives facts about the reading challenge, so the purpose is to explain how it worked.`
   },
   {
     id: 6,
@@ -126,15 +126,15 @@ Which answer best matches the passage?`,
 
 "At Monday devotion, the librarian announced a School Library Reading Challenge. Each Grade 5 pupil chose a book at a comfortable level and recorded reading minutes on a chart. Friends recommended stories to one another, but everyone had to write a short comment after finishing a book. At the end of the month, the class with the most steady reading would receive a new set of novels."
 
-Which answer best matches the passage?`,
+What happened after pupils finished a book?`,
     options: [
-      "First they went home; then they listened to directions.",
-      "First they received prizes; then they began planning.",
-      "First visitors left; then the event opened.",
-      "First pupils planned; then they carried out the task.",
+      "They wrote a short comment.",
+      "They closed the library for the day.",
+      "They received the new novels immediately.",
+      "They stopped recommending stories.",
     ],
-    correctAnswer: 1,
-    explanation: `The passage shows school library reading challenge as a planned, helpful activity involving pupils.`
+    correctAnswer: 0,
+    explanation: `The passage states that everyone had to write a short comment after finishing a book.`
   },
   {
     id: 7,
@@ -144,15 +144,15 @@ Which answer best matches the passage?`,
 
 "At Monday devotion, the librarian announced a School Library Reading Challenge. Each Grade 5 pupil chose a book at a comfortable level and recorded reading minutes on a chart. Friends recommended stories to one another, but everyone had to write a short comment after finishing a book. At the end of the month, the class with the most steady reading would receive a new set of novels."
 
-Which answer best matches the passage?`,
+What would cause a class to receive the new set of novels?`,
     options: [
-      "Because the bell rang, the trees became taller.",
-      "Because pupils worked together, the activity was successful.",
-      "Because no one listened, the fair opened early.",
-      "Because it rained indoors, the books disappeared.",
+      "Having the most steady reading by the end of the month",
+      "Choosing only books with the longest titles",
+      "Reading aloud at Monday devotion",
+      "Writing no comments after reading",
     ],
-    correctAnswer: 2,
-    explanation: `The passage shows school library reading challenge as a planned, helpful activity involving pupils.`
+    correctAnswer: 0,
+    explanation: `The passage says the class with the most steady reading would receive a new set of novels.`
   },
   {
     id: 8,
@@ -162,15 +162,15 @@ Which answer best matches the passage?`,
 
 "At Monday devotion, the librarian announced a School Library Reading Challenge. Each Grade 5 pupil chose a book at a comfortable level and recorded reading minutes on a chart. Friends recommended stories to one another, but everyone had to write a short comment after finishing a book. At the end of the month, the class with the most steady reading would receive a new set of novels."
 
-Which answer best matches the passage?`,
+Which detail best shows that pupils had to think about what they read?`,
     options: [
-      "A sentence about teamwork and careful records supports the answer.",
-      "A sentence about a football match supports the answer.",
-      "A sentence about a lost puppy supports the answer.",
-      "A sentence about a birthday party supports the answer.",
+      "They had to write a short comment after finishing a book.",
+      "The announcement was made at Monday devotion.",
+      "The prize was a new set of novels.",
+      "Each pupil chose a book at school.",
     ],
-    correctAnswer: 3,
-    explanation: `The passage shows school library reading challenge as a planned, helpful activity involving pupils.`
+    correctAnswer: 0,
+    explanation: `Writing a short comment after finishing a book shows that pupils had to think about their reading.`
   },
   {
     id: 9,
@@ -180,15 +180,15 @@ Which answer best matches the passage?`,
 
 "The student council organized a Book Donation Drive for the infant department. Pupils brought gently used picture books and wiped the covers before sorting them by topic. On Friday, Grade 5 volunteers read aloud to younger children and helped them choose books to keep in their classroom corner. The drive showed that sharing books can make reading enjoyable for everyone."
 
-What does the passage help the reader understand?`,
+What is the main idea of the passage?`,
     options: [
-      "The community activity helped others through shared effort.",
-      "The event was mainly about buying new uniforms.",
-      "The children avoided helping younger pupils.",
-      "The passage focuses on a private family trip.",
+      "A book donation drive helped younger students enjoy reading.",
+      "The student council planned a race for the infant department.",
+      "Grade 5 pupils threw away all used picture books.",
+      "Younger children chose books to sell at a market.",
     ],
     correctAnswer: 0,
-    explanation: `The details show book donation drive brought people together for a helpful purpose.`
+    explanation: `The passage is mainly about donating and sharing books so younger students can enjoy reading.`
   },
   {
     id: 10,
@@ -198,15 +198,15 @@ What does the passage help the reader understand?`,
 
 "The student council organized a Book Donation Drive for the infant department. Pupils brought gently used picture books and wiped the covers before sorting them by topic. On Friday, Grade 5 volunteers read aloud to younger children and helped them choose books to keep in their classroom corner. The drive showed that sharing books can make reading enjoyable for everyone."
 
-What does the passage help the reader understand?`,
+What did pupils do before sorting the donated books?`,
     options: [
-      "The children avoided helping younger pupils.",
-      "The event was mainly about buying new uniforms.",
-      "The passage focuses on a private family trip.",
-      "The community activity helped others through shared effort.",
+      "They wiped the covers.",
+      "They painted the classroom corner.",
+      "They counted money from ticket sales.",
+      "They wrote novels for Grade 5.",
     ],
-    correctAnswer: 1,
-    explanation: `The details show book donation drive brought people together for a helpful purpose.`
+    correctAnswer: 0,
+    explanation: `The passage says pupils wiped the covers before sorting the books by topic.`
   },
   {
     id: 11,
@@ -216,15 +216,15 @@ What does the passage help the reader understand?`,
 
 "The student council organized a Book Donation Drive for the infant department. Pupils brought gently used picture books and wiped the covers before sorting them by topic. On Friday, Grade 5 volunteers read aloud to younger children and helped them choose books to keep in their classroom corner. The drive showed that sharing books can make reading enjoyable for everyone."
 
-What does the passage help the reader understand?`,
+What can the reader infer about the Grade 5 volunteers?`,
     options: [
-      "The passage focuses on a private family trip.",
-      "The community activity helped others through shared effort.",
-      "The children avoided helping younger pupils.",
-      "The event was mainly about buying new uniforms.",
+      "They cared about helping younger children read.",
+      "They wanted to keep every book for themselves.",
+      "They did not understand why books matter.",
+      "They planned to close the classroom corner.",
     ],
-    correctAnswer: 2,
-    explanation: `The details show book donation drive brought people together for a helpful purpose.`
+    correctAnswer: 0,
+    explanation: `The volunteers read aloud and helped younger children choose books, which shows they cared about helping them read.`
   },
   {
     id: 12,
@@ -234,15 +234,15 @@ What does the passage help the reader understand?`,
 
 "The student council organized a Book Donation Drive for the infant department. Pupils brought gently used picture books and wiped the covers before sorting them by topic. On Friday, Grade 5 volunteers read aloud to younger children and helped them choose books to keep in their classroom corner. The drive showed that sharing books can make reading enjoyable for everyone."
 
-What does the passage help the reader understand?`,
+In the passage, what does “gently used” mean?`,
     options: [
-      "The community activity helped others through shared effort.",
-      "The event was mainly about buying new uniforms.",
-      "The children avoided helping younger pupils.",
-      "The passage focuses on a private family trip.",
+      "Used before but still in good condition",
+      "So old that no one can read it",
+      "Brand new and wrapped in plastic",
+      "Too dirty to place on a shelf",
     ],
-    correctAnswer: 3,
-    explanation: `The details show book donation drive brought people together for a helpful purpose.`
+    correctAnswer: 0,
+    explanation: `Gently used books have been used before but are still suitable to share.`
   },
   {
     id: 13,
@@ -252,15 +252,15 @@ What does the passage help the reader understand?`,
 
 "The student council organized a Book Donation Drive for the infant department. Pupils brought gently used picture books and wiped the covers before sorting them by topic. On Friday, Grade 5 volunteers read aloud to younger children and helped them choose books to keep in their classroom corner. The drive showed that sharing books can make reading enjoyable for everyone."
 
-What does the passage help the reader understand?`,
+Why did the author most likely include the last sentence?`,
     options: [
-      "The community activity helped others through shared effort.",
-      "The event was mainly about buying new uniforms.",
-      "The children avoided helping younger pupils.",
-      "The passage focuses on a private family trip.",
+      "To show the positive lesson learned from the drive",
+      "To explain why picture books should be hidden",
+      "To prove that only older pupils like reading",
+      "To list every book donated by the student council",
     ],
     correctAnswer: 0,
-    explanation: `The details show book donation drive brought people together for a helpful purpose.`
+    explanation: `The last sentence explains that sharing books can make reading enjoyable for everyone, which is the positive lesson of the drive.`
   },
   {
     id: 14,
@@ -270,15 +270,15 @@ What does the passage help the reader understand?`,
 
 "The student council organized a Book Donation Drive for the infant department. Pupils brought gently used picture books and wiped the covers before sorting them by topic. On Friday, Grade 5 volunteers read aloud to younger children and helped them choose books to keep in their classroom corner. The drive showed that sharing books can make reading enjoyable for everyone."
 
-What does the passage help the reader understand?`,
+How were donating books and reading aloud similar in the passage?`,
     options: [
-      "The children avoided helping younger pupils.",
-      "The event was mainly about buying new uniforms.",
-      "The passage focuses on a private family trip.",
-      "The community activity helped others through shared effort.",
+      "Both actions helped younger students enjoy books.",
+      "Both actions were done only by the librarian.",
+      "Both actions happened after the classroom corner closed.",
+      "Both actions stopped pupils from sharing.",
     ],
-    correctAnswer: 1,
-    explanation: `The details show book donation drive brought people together for a helpful purpose.`
+    correctAnswer: 0,
+    explanation: `Donating books and reading aloud both supported younger students and helped them enjoy reading.`
   },
   {
     id: 15,
@@ -288,197 +288,197 @@ What does the passage help the reader understand?`,
 
 "The student council organized a Book Donation Drive for the infant department. Pupils brought gently used picture books and wiped the covers before sorting them by topic. On Friday, Grade 5 volunteers read aloud to younger children and helped them choose books to keep in their classroom corner. The drive showed that sharing books can make reading enjoyable for everyone."
 
-What does the passage help the reader understand?`,
+Which problem and solution are shown in the passage?`,
     options: [
-      "The passage focuses on a private family trip.",
-      "The community activity helped others through shared effort.",
-      "The children avoided helping younger pupils.",
-      "The event was mainly about buying new uniforms.",
+      "Younger students needed books, so pupils donated and shared picture books.",
+      "The library had too many chairs, so pupils planted flowers.",
+      "The Grade 5 pupils lost a chart, so they cancelled reading.",
+      "The infant department wanted uniforms, so pupils sorted shoes.",
     ],
-    correctAnswer: 2,
-    explanation: `The details show book donation drive brought people together for a helpful purpose.`
+    correctAnswer: 0,
+    explanation: `The passage shows pupils solving a need for books by donating, sorting, and sharing picture books.`
   },
   {
     id: 16,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `In a passage about reading challenge, the word “steady” is used in context. Which option gives the best meaning?`,
+    question: `Choose the best meaning of “steady” as it is used in the Easy 7 reading passages.`,
     options: [
-      "In the sentence, “steady” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      "continuing in a regular way",
+      "a loud sound made by traffic",
+      "a place where no books are allowed",
+      "the opposite of careful work",
     ],
-    correctAnswer: 3,
-    explanation: `Context clues in the school or community situation show that “steady” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `In the reading context, “steady” means continuing in a regular way.`
   },
   {
     id: 17,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `In a passage about reading challenge, the word “gently” is used in context. Which option gives the best meaning?`,
+    question: `Choose the best meaning of “recommended” as it is used in the Easy 7 reading passages.`,
     options: [
-      "In the sentence, “gently” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      "suggested as a good choice",
+      "a loud sound made by traffic",
+      "a place where no books are allowed",
+      "the opposite of careful work",
     ],
     correctAnswer: 0,
-    explanation: `Context clues in the school or community situation show that “gently” has the practical meaning used in the correct option.`
+    explanation: `In the reading context, “recommended” means suggested as a good choice.`
   },
   {
     id: 18,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `In a passage about reading challenge, the word “bright” is used in context. Which option gives the best meaning?`,
+    question: `Choose the best meaning of “novels” as it is used in the Easy 7 reading passages.`,
     options: [
-      "It names a place far from the school.",
-      "It means the opposite of what the sentence suggests.",
-      "It means a loud sound made by traffic.",
-      "In the sentence, “bright” means a sensible meaning that fits the activity.",
+      "long storybooks",
+      "a loud sound made by traffic",
+      "a place where no books are allowed",
+      "the opposite of careful work",
     ],
-    correctAnswer: 1,
-    explanation: `Context clues in the school or community situation show that “bright” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `In the reading context, “novels” means long storybooks.`
   },
   {
     id: 19,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `In a passage about reading challenge, the word “careful” is used in context. Which option gives the best meaning?`,
+    question: `Choose the best meaning of “organized” as it is used in the Easy 7 reading passages.`,
     options: [
-      "It means a loud sound made by traffic.",
-      "In the sentence, “careful” means a sensible meaning that fits the activity.",
-      "It names a place far from the school.",
-      "It means the opposite of what the sentence suggests.",
+      "planned and arranged",
+      "a loud sound made by traffic",
+      "a place where no books are allowed",
+      "the opposite of careful work",
     ],
-    correctAnswer: 2,
-    explanation: `Context clues in the school or community situation show that “careful” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `In the reading context, “organized” means planned and arranged.`
   },
   {
     id: 20,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `In a passage about reading challenge, the word “useful” is used in context. Which option gives the best meaning?`,
+    question: `Choose the best meaning of “infant department” as it is used in the Easy 7 reading passages.`,
     options: [
-      "In the sentence, “useful” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      "the section of school for younger children",
+      "a loud sound made by traffic",
+      "a place where no books are allowed",
+      "the opposite of careful work",
     ],
-    correctAnswer: 3,
-    explanation: `Context clues in the school or community situation show that “useful” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `In the reading context, “infant department” means the section of school for younger children.`
   },
   {
     id: 21,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `In a passage about reading challenge, the word “purpose” is used in context. Which option gives the best meaning?`,
+    question: `Choose the best meaning of “topic” as it is used in the Easy 7 reading passages.`,
     options: [
-      "In the sentence, “purpose” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      "subject or main idea",
+      "a loud sound made by traffic",
+      "a place where no books are allowed",
+      "the opposite of careful work",
     ],
     correctAnswer: 0,
-    explanation: `Context clues in the school or community situation show that “purpose” has the practical meaning used in the correct option.`
+    explanation: `In the reading context, “topic” means subject or main idea.`
   },
   {
     id: 22,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `In a passage about reading challenge, the word “encouraged” is used in context. Which option gives the best meaning?`,
+    question: `Choose the best meaning of “volunteers” as it is used in the Easy 7 reading passages.`,
     options: [
-      "It names a place far from the school.",
-      "It means the opposite of what the sentence suggests.",
-      "It means a loud sound made by traffic.",
-      "In the sentence, “encouraged” means a sensible meaning that fits the activity.",
+      "people who choose to help",
+      "a loud sound made by traffic",
+      "a place where no books are allowed",
+      "the opposite of careful work",
     ],
-    correctAnswer: 1,
-    explanation: `Context clues in the school or community situation show that “encouraged” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `In the reading context, “volunteers” means people who choose to help.`
   },
   {
     id: 23,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `In a passage about reading challenge, the word “materials” is used in context. Which option gives the best meaning?`,
+    question: `Choose the best meaning of “enjoyable” as it is used in the Easy 7 reading passages.`,
     options: [
-      "It means a loud sound made by traffic.",
-      "In the sentence, “materials” means a sensible meaning that fits the activity.",
-      "It names a place far from the school.",
-      "It means the opposite of what the sentence suggests.",
+      "pleasant or fun",
+      "a loud sound made by traffic",
+      "a place where no books are allowed",
+      "the opposite of careful work",
     ],
-    correctAnswer: 2,
-    explanation: `Context clues in the school or community situation show that “materials” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `In the reading context, “enjoyable” means pleasant or fun.`
   },
   {
     id: 24,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `In a passage about reading challenge, the word “displayed” is used in context. Which option gives the best meaning?`,
+    question: `Choose the best meaning of “challenge” as it is used in the Easy 7 reading passages.`,
     options: [
-      "In the sentence, “displayed” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      "a task that encourages effort",
+      "a loud sound made by traffic",
+      "a place where no books are allowed",
+      "the opposite of careful work",
     ],
-    correctAnswer: 3,
-    explanation: `Context clues in the school or community situation show that “displayed” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `In the reading context, “challenge” means a task that encourages effort.`
   },
   {
     id: 25,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `In a passage about reading challenge, the word “pride” is used in context. Which option gives the best meaning?`,
+    question: `Choose the best meaning of “donation” as it is used in the Easy 7 reading passages.`,
     options: [
-      "In the sentence, “pride” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      "something given to help others",
+      "a loud sound made by traffic",
+      "a place where no books are allowed",
+      "the opposite of careful work",
     ],
     correctAnswer: 0,
-    explanation: `Context clues in the school or community situation show that “pride” has the practical meaning used in the correct option.`
+    explanation: `In the reading context, “donation” means something given to help others.`
   },
   {
     id: 26,
     type: "grammar",
     skill: "Subject-Verb Agreement",
-    question: `The club ___ the plants every Wednesday.`,
+    question: `Choose the sentence with correct subject-verb agreement.`,
     options: [
-      "watering",
-      "water",
-      "were water",
-      "waters",
+      "The librarian announces the challenge on Monday.",
+      "The librarian announce the challenge on Monday.",
+      "The librarians announces the challenge on Monday.",
+      "The pupil read the books every day.",
     ],
-    correctAnswer: 1,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 0,
+    explanation: `“The librarian” is singular, so the verb “announces” agrees with it.`
   },
   {
     id: 27,
     type: "grammar",
     skill: "Verb Tense",
-    question: `Yesterday, the pupils ___ their display.`,
+    question: `Choose the correct verb to complete the sentence: Yesterday, Grade 5 pupils ___ the donated books.`,
     options: [
-      "preparing",
-      "prepared",
-      "prepares",
-      "prepare",
+      "sorted",
+      "sort",
+      "sorting",
+      "sorts",
     ],
-    correctAnswer: 2,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 0,
+    explanation: `“Yesterday” shows past time, so “sorted” is the correct past-tense verb.`
   },
   {
     id: 28,
     type: "grammar",
     skill: "Pronoun Reference",
-    question: `Maya lent Jada a ruler because ___ had an extra one.`,
+    question: `Choose the best pronoun: Maya chose a book because ___ wanted to join the challenge.`,
     options: [
       "she",
       "they",
       "it",
       "we",
     ],
-    correctAnswer: 3,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 0,
+    explanation: `“Maya” names one girl, so the pronoun “she” is correct.`
   },
   {
     id: 29,
@@ -486,13 +486,13 @@ What does the passage help the reader understand?`,
     skill: "Punctuation",
     question: `Which sentence is punctuated correctly?`,
     options: [
-      "“Please bring gloves,” said Mr. Brown.",
-      "“Please bring gloves” said Mr. Brown.",
-      "Please bring gloves, said Mr. Brown.",
-      "“Please bring gloves said Mr. Brown.”",
+      "“Please return the book,” said Miss Lee.",
+      "“Please return the book” said Miss Lee.",
+      "Please return the book,” said Miss Lee.",
+      "“Please return the book, said Miss Lee.”",
     ],
     correctAnswer: 0,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    explanation: `The correct sentence uses quotation marks and a comma before the speech tag.`
   },
   {
     id: 30,
@@ -500,55 +500,55 @@ What does the passage help the reader understand?`,
     skill: "Adjective Use",
     question: `Choose the sentence with the best describing word.`,
     options: [
-      "Neatly poster caught the visitors.",
-      "The poster caught attention neat.",
-      "The poster neat caught attention.",
-      "The neat poster caught the visitors’ attention.",
+      "The colourful poster invited pupils to donate books.",
+      "The poster colourful invited pupils to donate books.",
+      "Colourful invited the poster pupils donate books.",
+      "The poster invited colourful pupils to donate books.",
     ],
-    correctAnswer: 1,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 0,
+    explanation: `“Colourful” correctly describes the noun “poster” before the noun.`
   },
   {
     id: 31,
     type: "grammar",
     skill: "Conjunctions",
-    question: `Choose the best word: We packed water ___ the afternoon was hot.`,
+    question: `Choose the best word to complete the sentence: We brought extra books ___ the younger students needed more choices.`,
     options: [
-      "so",
       "because",
-      "or",
       "but",
+      "or",
+      "although",
     ],
-    correctAnswer: 2,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 0,
+    explanation: `“Because” correctly shows the reason pupils brought extra books.`
   },
   {
     id: 32,
     type: "grammar",
     skill: "Complete Sentence",
-    question: `Which is a complete sentence?`,
+    question: `Which option is a complete sentence?`,
     options: [
-      "The students shared books with Grade 1.",
-      "After the bell near the gate.",
-      "Because the table with cards.",
-      "The clean bags on Saturday.",
+      "The volunteers read aloud to the younger children.",
+      "After the reading challenge in the library.",
+      "Because the books on the table.",
+      "The colourful chart near the door.",
     ],
-    correctAnswer: 3,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 0,
+    explanation: `The correct option has a subject and predicate and expresses a complete thought.`
   },
   {
     id: 33,
     type: "grammar",
     skill: "Comma in a Series",
-    question: `Which sentence uses commas correctly?`,
+    question: `Which sentence uses commas correctly in a series?`,
     options: [
-      "We need pencils, glue, paper, and string.",
-      "We need pencils glue, paper and string.",
-      "We need, pencils glue paper, and string.",
-      "We need pencils, glue paper and, string.",
+      "We sorted stories, poems, picture books, and magazines.",
+      "We sorted stories poems, picture books and magazines.",
+      "We sorted, stories poems picture books, and magazines.",
+      "We sorted stories, poems picture books and, magazines.",
     ],
     correctAnswer: 0,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    explanation: `Commas correctly separate the items in the series: stories, poems, picture books, and magazines.`
   },
   {
     id: 34,
@@ -556,97 +556,97 @@ What does the passage help the reader understand?`,
     skill: "Possessive Noun",
     question: `Choose the correct possessive form.`,
     options: [
-      "The classes chart was full.",
-      "The class chart’s was full.",
-      "The classs chart was full.",
-      "The class’s chart was full.",
+      "The class’s reading chart was full.",
+      "The classes reading chart was full.",
+      "The class reading chart’s was full.",
+      "The classs reading chart was full.",
     ],
-    correctAnswer: 1,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 0,
+    explanation: `“Class’s” correctly shows that the reading chart belongs to the class.`
   },
   {
     id: 35,
     type: "grammar",
     skill: "Sentence Combining",
-    question: `Which combines the ideas best?`,
+    question: `Which sentence best combines the ideas: The pupils collected books. They shared them with younger students.`,
     options: [
-      "The event went because carefully pupils.",
-      "The pupils planned carefully, and the event went well.",
-      "Planning carefully and event went.",
-      "The pupils planned carefully the event went well.",
+      "The pupils collected books and shared them with younger students.",
+      "The pupils collected books, younger students.",
+      "Shared them with younger students the pupils collected books.",
+      "The pupils collected and younger students books shared.",
     ],
-    correctAnswer: 2,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 0,
+    explanation: `The correct option joins the two ideas clearly with “and.”`
   },
   {
     id: 36,
     type: "writing",
     skill: "Purpose and Audience",
-    question: `You are writing a notice for pupils about the event connected to sharing books with younger students. What is the best approach?`,
+    question: `You are writing a notice about the School Library Reading Challenge. What should you include?`,
     options: [
-      "Use a clear heading, important details, and polite language for a notice for pupils about the event.",
-      "Hide the date and place so readers must guess.",
-      "Use only jokes and leave out the main message.",
-      "Write one very long sentence with no punctuation.",
+      "A clear heading, the dates, what pupils must do, and polite language",
+      "Only jokes about reading and no important details",
+      "A secret message that does not say where to sign up",
+      "One long sentence with no punctuation",
     ],
-    correctAnswer: 3,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    correctAnswer: 0,
+    explanation: `A notice should give clear details such as the heading, dates, actions, and polite language for readers.`
   },
   {
     id: 37,
     type: "writing",
-    skill: "Purpose and Audience",
-    question: `You are writing a friendly letter thanking helpers connected to sharing books with younger students. What is the best approach?`,
+    skill: "Organization",
+    question: `Which opening sentence best begins a paragraph about the Book Donation Drive?`,
     options: [
-      "Use a clear heading, important details, and polite language for a friendly letter thanking helpers.",
-      "Hide the date and place so readers must guess.",
-      "Use only jokes and leave out the main message.",
-      "Write one very long sentence with no punctuation.",
+      "Our school’s Book Donation Drive helped younger students enjoy reading.",
+      "Books books books and then some other things happened.",
+      "Nobody knows what this paragraph will explain.",
+      "The sky was blue before I ate lunch.",
     ],
     correctAnswer: 0,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    explanation: `The correct opening sentence clearly introduces the topic of the paragraph.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "Purpose and Audience",
-    question: `You are writing a school announcement for assembly connected to sharing books with younger students. What is the best approach?`,
+    skill: "Supporting Details",
+    question: `Which detail best supports a report about sharing books with younger students?`,
     options: [
-      "Use only jokes and leave out the main message.",
-      "Hide the date and place so readers must guess.",
-      "Write one very long sentence with no punctuation.",
-      "Use a clear heading, important details, and polite language for a school announcement for assembly.",
+      "Grade 5 volunteers read aloud and helped children choose books.",
+      "The tuck shop sold patties at lunch time.",
+      "A dog barked near the school gate.",
+      "The football team practised after school.",
     ],
-    correctAnswer: 1,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    correctAnswer: 0,
+    explanation: `The detail about volunteers reading aloud directly supports the report about sharing books.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Purpose and Audience",
-    question: `You are writing a poster for the community project connected to sharing books with younger students. What is the best approach?`,
+    skill: "Revision",
+    question: `Which sentence is the best revision of “The drive was good”?`,
     options: [
-      "Write one very long sentence with no punctuation.",
-      "Use a clear heading, important details, and polite language for a poster for the community project.",
-      "Use only jokes and leave out the main message.",
-      "Hide the date and place so readers must guess.",
+      "The book drive was successful because many pupils donated clean picture books.",
+      "The drive good very much books stuff.",
+      "Good drive and thing happened there.",
+      "The drive was good good good.",
     ],
-    correctAnswer: 2,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    correctAnswer: 0,
+    explanation: `The revised sentence is clearer and gives a specific reason the drive was successful.`
   },
   {
     id: 40,
     type: "writing",
-    skill: "Purpose and Audience",
-    question: `You are writing a short report for the school newsletter connected to sharing books with younger students. What is the best approach?`,
+    skill: "Conclusion",
+    question: `Which sentence would make the best conclusion for a paragraph about Easy 7’s book themes?`,
     options: [
-      "Use a clear heading, important details, and polite language for a short report for the school newsletter.",
-      "Hide the date and place so readers must guess.",
-      "Use only jokes and leave out the main message.",
-      "Write one very long sentence with no punctuation.",
+      "Reading and sharing books can help the whole school community learn together.",
+      "The paragraph will now start with a new topic.",
+      "Some books have pages and covers.",
+      "I forgot what happened in the library.",
     ],
-    correctAnswer: 3,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    correctAnswer: 0,
+    explanation: `The correct conclusion sums up the idea that reading and sharing books help the school community.`
   },
 ]
 
