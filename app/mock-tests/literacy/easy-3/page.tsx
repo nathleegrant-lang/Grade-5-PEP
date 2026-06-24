@@ -32,621 +32,631 @@ const g5LaEasy3Questions: Question[] = [
     id: 1,
     type: "reading",
     skill: "Main Idea",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
-"Reading is one of the most valuable skills a person can develop. When you read regularly, your vocabulary grows, your spelling improves, and you become better at expressing your ideas. Books allow you to travel to new places, meet interesting characters, and learn about events in history — all without leaving your chair. Students who read widely tend to perform better in all of their subjects, not just Language Arts."
+"Ms. Brown's Grade 5 class wanted to reduce waste at Seaview Primary. First, the students counted how many plastic bottles, paper scraps, and snack wrappers were thrown away in one week. Next, they made posters explaining which items could be reused or recycled. They placed labelled bins near the canteen and library. On Friday, the class announced that the school had collected six large bags of recyclable materials. The principal praised the students for helping the school become cleaner and more responsible."
 
-What is the MAIN idea of this passage?`,
+What is the main idea of the passage?`,
     options: [
-      "Reading makes students lazy",
-      "Books are very expensive",
-      "Regular reading is valuable and improves many skills",
-      "Only Language Arts students need to read",
+      "A Grade 5 class organised a recycling drive to help their school reduce waste",
+      "The principal wanted students to stop using the library",
+      "Students collected snack wrappers because they liked colourful packages",
+      "Ms. Brown's class spent the whole week making art projects",
     ],
-    correctAnswer: 2,
-    explanation: `The passage explains how reading benefits vocabulary, spelling, expression, and performance in school — making reading's value the main idea.`
+    correctAnswer: 0,
+    explanation: `The whole passage focuses on the class planning and carrying out a recycling drive to reduce waste at school.`
   },
   {
     id: 2,
     type: "reading",
     skill: "Detail",
-    question: `Read the passage then answer the questions.
+    question: `Read the passage then answer the question.
 
-"Reading is one of the most valuable skills a person can develop. When you read regularly, your vocabulary grows, your spelling improves, and you become better at expressing your ideas. Books allow you to travel to new places, meet interesting characters, and learn about events in history — all without leaving your chair. Students who read widely tend to perform better in all of their subjects, not just Language Arts."
+"Ms. Brown's Grade 5 class wanted to reduce waste at Seaview Primary. First, the students counted how many plastic bottles, paper scraps, and snack wrappers were thrown away in one week. Next, they made posters explaining which items could be reused or recycled. They placed labelled bins near the canteen and library. On Friday, the class announced that the school had collected six large bags of recyclable materials. The principal praised the students for helping the school become cleaner and more responsible."
 
-According to the passage, which skills improve when you read regularly?`,
+Where did the students place the labelled bins?`,
     options: [
-      "Drawing and painting",
-      "Vocabulary, spelling, and expressing ideas",
-      "Speed and agility",
-      "Cooking and crafts",
+      "Beside the football field and office",
+      "Near the canteen and library",
+      "Inside the principal's car",
+      "Behind Ms. Brown's desk",
     ],
     correctAnswer: 1,
-    explanation: `The passage specifically states reading improves vocabulary, spelling, and ability to express ideas.`
+    explanation: `The passage states that the labelled bins were placed near the canteen and library.`
   },
   {
     id: 3,
     type: "reading",
-    skill: "Inference",
-    question: `Read the passage then answer the questions.
+    skill: "Sequence",
+    question: `Read the passage then answer the question.
 
-"Reading is one of the most valuable skills a person can develop. When you read regularly, your vocabulary grows, your spelling improves, and you become better at expressing your ideas. Books allow you to travel to new places, meet interesting characters, and learn about events in history — all without leaving your chair. Students who read widely tend to perform better in all of their subjects, not just Language Arts."
+"Ms. Brown's Grade 5 class wanted to reduce waste at Seaview Primary. First, the students counted how many plastic bottles, paper scraps, and snack wrappers were thrown away in one week. Next, they made posters explaining which items could be reused or recycled. They placed labelled bins near the canteen and library. On Friday, the class announced that the school had collected six large bags of recyclable materials. The principal praised the students for helping the school become cleaner and more responsible."
 
-What does the passage suggest about students who do NOT read widely?`,
+What did the students do BEFORE making posters?`,
     options: [
-      "They are lazy",
-      "They may not perform as well in their subjects",
-      "They are more creative",
-      "They do not like Language Arts",
+      "They announced the final total",
+      "They praised the principal",
+      "They counted the waste thrown away in one week",
+      "They moved the library shelves",
     ],
-    correctAnswer: 1,
-    explanation: `The passage says students who read widely tend to perform better — implying those who don't read may not perform as well.`
+    correctAnswer: 2,
+    explanation: `The word "First" shows that counting the waste happened before the students made posters.`
   },
   {
     id: 4,
     type: "reading",
-    skill: "Figurative Language",
-    question: `Read the passage then answer the questions.
+    skill: "Inference",
+    question: `Read the passage then answer the question.
 
-"Reading is one of the most valuable skills a person can develop. When you read regularly, your vocabulary grows, your spelling improves, and you become better at expressing your ideas. Books allow you to travel to new places, meet interesting characters, and learn about events in history — all without leaving your chair. Students who read widely tend to perform better in all of their subjects, not just Language Arts."
+"Ms. Brown's Grade 5 class wanted to reduce waste at Seaview Primary. First, the students counted how many plastic bottles, paper scraps, and snack wrappers were thrown away in one week. Next, they made posters explaining which items could be reused or recycled. They placed labelled bins near the canteen and library. On Friday, the class announced that the school had collected six large bags of recyclable materials. The principal praised the students for helping the school become cleaner and more responsible."
 
-'Travel to new places…without leaving your chair.' What literary technique is used?`,
+What can you infer about the students?`,
     options: [
-      "Simile",
-      "Metaphor",
-      "Personification",
-      "Hyperbole",
+      "They wanted to leave school early every day",
+      "They disliked working with classmates",
+      "They thought recycling was too difficult to try",
+      "They cared about improving their school environment",
     ],
     correctAnswer: 3,
-    explanation: `Hyperbole or imaginative language — the idea is exaggerated for effect to show the power of reading.`
+    explanation: `The students counted waste, taught others, and collected recyclables, so it is reasonable to infer that they cared about improving the school environment.`
   },
   {
     id: 5,
     type: "reading",
-    skill: "Vocabulary in Context",
-    question: `Read the passage then answer the questions.
+    skill: "Cause and Effect",
+    question: `Read the passage then answer the question.
 
-"Reading is one of the most valuable skills a person can develop. When you read regularly, your vocabulary grows, your spelling improves, and you become better at expressing your ideas. Books allow you to travel to new places, meet interesting characters, and learn about events in history — all without leaving your chair. Students who read widely tend to perform better in all of their subjects, not just Language Arts."
+"Ms. Brown's Grade 5 class wanted to reduce waste at Seaview Primary. First, the students counted how many plastic bottles, paper scraps, and snack wrappers were thrown away in one week. Next, they made posters explaining which items could be reused or recycled. They placed labelled bins near the canteen and library. On Friday, the class announced that the school had collected six large bags of recyclable materials. The principal praised the students for helping the school become cleaner and more responsible."
 
-The word 'valuable' in the passage most nearly means:`,
+Why did the students make posters?`,
     options: [
-      "costly",
-      "worthless",
-      "very useful and important",
-      "boring",
+      "To explain which items could be reused or recycled",
+      "To invite parents to a concert at school",
+      "To cover the windows during lunch time",
+      "To advertise a new library book sale",
     ],
-    correctAnswer: 2,
-    explanation: `'Valuable' in this context means extremely useful and important, not necessarily expensive.`
+    correctAnswer: 0,
+    explanation: `The passage says the posters explained which items could be reused or recycled.`
   },
   {
     id: 6,
     type: "reading",
-    skill: "Purpose",
-    question: `Read the passage then answer the questions.
+    skill: "Fact vs Opinion",
+    question: `Read the passage then answer the question.
 
-"Reading is one of the most valuable skills a person can develop. When you read regularly, your vocabulary grows, your spelling improves, and you become better at expressing your ideas. Books allow you to travel to new places, meet interesting characters, and learn about events in history — all without leaving your chair. Students who read widely tend to perform better in all of their subjects, not just Language Arts."
+"Ms. Brown's Grade 5 class wanted to reduce waste at Seaview Primary. First, the students counted how many plastic bottles, paper scraps, and snack wrappers were thrown away in one week. Next, they made posters explaining which items could be reused or recycled. They placed labelled bins near the canteen and library. On Friday, the class announced that the school had collected six large bags of recyclable materials. The principal praised the students for helping the school become cleaner and more responsible."
 
-The MAIN purpose of this passage is to:`,
+Which statement from the passage is a fact?`,
     options: [
-      "Entertain with an interesting story",
-      "Describe a character",
-      "Persuade readers that reading is important",
-      "Explain how books are made",
+      "Recycling is the most exciting school activity",
+      "The school collected six large bags of recyclable materials",
+      "Every student loves making posters",
+      "The canteen is the best place for a recycling bin",
     ],
-    correctAnswer: 2,
-    explanation: `The passage aims to convince readers of the benefits of reading — this is a persuasive purpose.`
+    correctAnswer: 1,
+    explanation: `The amount collected can be checked or counted, so it is a fact rather than an opinion.`
   },
   {
     id: 7,
     type: "reading",
-    skill: "Text Evidence",
-    question: `Read the passage then answer the questions.
+    skill: "Vocabulary in Context",
+    question: `Read the passage then answer the question.
 
-"Reading is one of the most valuable skills a person can develop. When you read regularly, your vocabulary grows, your spelling improves, and you become better at expressing your ideas. Books allow you to travel to new places, meet interesting characters, and learn about events in history — all without leaving your chair. Students who read widely tend to perform better in all of their subjects, not just Language Arts."
+"Ms. Brown's Grade 5 class wanted to reduce waste at Seaview Primary. First, the students counted how many plastic bottles, paper scraps, and snack wrappers were thrown away in one week. Next, they made posters explaining which items could be reused or recycled. They placed labelled bins near the canteen and library. On Friday, the class announced that the school had collected six large bags of recyclable materials. The principal praised the students for helping the school become cleaner and more responsible."
 
-Which sentence from the passage BEST supports the idea that books are educational?`,
+In the passage, the word "labelled" most nearly means:`,
     options: [
-      "Books allow you to travel to new places",
-      "Reading is one of the most valuable skills",
-      "Students who read widely perform better in all subjects",
-      "When you read, your vocabulary grows",
+      "hidden carefully",
+      "painted blue",
+      "marked with words or signs",
+      "filled to the top",
     ],
     correctAnswer: 2,
-    explanation: `Option C directly connects reading to improved performance across all school subjects.`
+    explanation: `The bins were labelled so students would know what to put in them, meaning they were marked with words or signs.`
   },
   {
     id: 8,
     type: "reading",
-    skill: "Cause and Effect",
-    question: `Read the passage then answer the questions.
+    skill: "Author's Purpose",
+    question: `Read the passage then answer the question.
 
-"Reading is one of the most valuable skills a person can develop. When you read regularly, your vocabulary grows, your spelling improves, and you become better at expressing your ideas. Books allow you to travel to new places, meet interesting characters, and learn about events in history — all without leaving your chair. Students who read widely tend to perform better in all of their subjects, not just Language Arts."
+"Ms. Brown's Grade 5 class wanted to reduce waste at Seaview Primary. First, the students counted how many plastic bottles, paper scraps, and snack wrappers were thrown away in one week. Next, they made posters explaining which items could be reused or recycled. They placed labelled bins near the canteen and library. On Friday, the class announced that the school had collected six large bags of recyclable materials. The principal praised the students for helping the school become cleaner and more responsible."
 
-According to the passage, what CAUSES students to perform better in all subjects?`,
+The author's main purpose is to:`,
     options: [
-      "Playing sport",
-      "Attending extra lessons",
-      "Reading widely",
-      "Having good teachers",
+      "describe how to bake snacks for the canteen",
+      "compare two schools in different towns",
+      "tell a funny story about a messy classroom",
+      "show how students helped their school by recycling",
     ],
-    correctAnswer: 2,
-    explanation: `The passage states 'Students who read widely tend to perform better in all of their subjects.'`
+    correctAnswer: 3,
+    explanation: `The passage explains the steps students took to help their school through a recycling drive.`
   },
   {
     id: 9,
     type: "reading",
-    skill: "Author's Opinion",
-    question: `Read the passage then answer the questions.
+    skill: "Main Idea",
+    question: `Read the passage then answer the question.
 
-"Reading is one of the most valuable skills a person can develop. When you read regularly, your vocabulary grows, your spelling improves, and you become better at expressing your ideas. Books allow you to travel to new places, meet interesting characters, and learn about events in history — all without leaving your chair. Students who read widely tend to perform better in all of their subjects, not just Language Arts."
+"In June, Mr. Clarke's class learned how to prepare for hurricane season. The teacher explained that families should keep water, canned food, batteries, and a first-aid kit in a safe place. Students checked the classroom windows and helped make a list of emergency phone numbers. At home, Nia reminded her family to trim branches near the roof and charge their flashlights. When a storm watch was announced, Nia felt nervous, but she also felt ready because her family and school had made careful plans."
 
-Does the author think reading is important? How do you know?`,
+What is the main idea of this passage?`,
     options: [
-      "No — the author ignores reading",
-      "No — the author says books are boring",
-      "Yes — the author calls it 'one of the most valuable skills'",
-      "We cannot tell from the passage",
+      "Students should never listen to weather reports",
+      "Homes and schools can prepare carefully for hurricane season",
+      "Hurricanes only happen when classrooms are untidy",
+      "Nia wanted to miss school during stormy weather",
     ],
-    correctAnswer: 2,
-    explanation: `The very first sentence states reading is 'one of the most valuable skills' — showing the author's positive opinion.`
+    correctAnswer: 1,
+    explanation: `The passage is mainly about steps a class and family take to prepare safely for hurricane season.`
   },
   {
     id: 10,
     type: "reading",
-    skill: "Vocabulary in Context",
-    question: `Read the passage then answer the questions.
+    skill: "Detail",
+    question: `Read the passage then answer the question.
 
-"Reading is one of the most valuable skills a person can develop. When you read regularly, your vocabulary grows, your spelling improves, and you become better at expressing your ideas. Books allow you to travel to new places, meet interesting characters, and learn about events in history — all without leaving your chair. Students who read widely tend to perform better in all of their subjects, not just Language Arts."
+"In June, Mr. Clarke's class learned how to prepare for hurricane season. The teacher explained that families should keep water, canned food, batteries, and a first-aid kit in a safe place. Students checked the classroom windows and helped make a list of emergency phone numbers. At home, Nia reminded her family to trim branches near the roof and charge their flashlights. When a storm watch was announced, Nia felt nervous, but she also felt ready because her family and school had made careful plans."
 
-The phrase 'expressing your ideas' means:`,
+Which item did the teacher say families should keep in a safe place?`,
     options: [
-      "drawing your ideas",
-      "keeping your ideas secret",
-      "communicating your thoughts clearly in words",
-      "copying ideas from others",
+      "A beach ball",
+      "A first-aid kit",
+      "A science trophy",
+      "A paintbrush",
     ],
-    correctAnswer: 2,
-    explanation: `'Expressing ideas' means communicating or sharing your thoughts clearly, usually in speech or writing.`
+    correctAnswer: 1,
+    explanation: `The teacher listed water, canned food, batteries, and a first-aid kit as supplies to keep in a safe place.`
   },
   {
     id: 11,
     type: "reading",
-    skill: "Inference",
-    question: `Read the passage then answer the questions.
+    skill: "Cause and Effect",
+    question: `Read the passage then answer the question.
 
-"Reading is one of the most valuable skills a person can develop. When you read regularly, your vocabulary grows, your spelling improves, and you become better at expressing your ideas. Books allow you to travel to new places, meet interesting characters, and learn about events in history — all without leaving your chair. Students who read widely tend to perform better in all of their subjects, not just Language Arts."
+"In June, Mr. Clarke's class learned how to prepare for hurricane season. The teacher explained that families should keep water, canned food, batteries, and a first-aid kit in a safe place. Students checked the classroom windows and helped make a list of emergency phone numbers. At home, Nia reminded her family to trim branches near the roof and charge their flashlights. When a storm watch was announced, Nia felt nervous, but she also felt ready because her family and school had made careful plans."
 
-Why does the author mention that reading lets you 'travel to new places… without leaving your chair'?`,
+Why did Nia feel ready when the storm watch was announced?`,
     options: [
-      "To show that travelling is dangerous",
-      "To suggest reading is lazy",
-      "To make reading sound exciting and imaginative",
-      "To discourage students from going outside",
+      "She wanted the storm to arrive quickly",
+      "She had never heard of a hurricane before",
+      "Her family and school had made careful plans",
+      "Her teacher cancelled all homework",
     ],
     correctAnswer: 2,
-    explanation: `This imaginative image makes reading sound exciting — helping persuade the reader that books are enjoyable and worthwhile.`
+    explanation: `The passage directly says Nia felt ready because her family and school had made careful plans.`
   },
   {
     id: 12,
     type: "reading",
-    skill: "Literal Comprehension",
-    question: `Read the passage then answer the questions.
+    skill: "Summary",
+    question: `Read the passage then answer the question.
 
-"Reading is one of the most valuable skills a person can develop. When you read regularly, your vocabulary grows, your spelling improves, and you become better at expressing your ideas. Books allow you to travel to new places, meet interesting characters, and learn about events in history — all without leaving your chair. Students who read widely tend to perform better in all of their subjects, not just Language Arts."
+"In June, Mr. Clarke's class learned how to prepare for hurricane season. The teacher explained that families should keep water, canned food, batteries, and a first-aid kit in a safe place. Students checked the classroom windows and helped make a list of emergency phone numbers. At home, Nia reminded her family to trim branches near the roof and charge their flashlights. When a storm watch was announced, Nia felt nervous, but she also felt ready because her family and school had made careful plans."
 
-According to the passage, what do books allow you to learn about?`,
+Which sentence best summarizes the passage?`,
     options: [
-      "Only stories",
-      "Only Science",
-      "Events in history, new places, and interesting characters",
-      "Only Language Arts topics",
+      "Nia forgot to charge the flashlight before a storm",
+      "Mr. Clarke's class spent June learning only about batteries",
+      "The school windows were broken before hurricane season began",
+      "Mr. Clarke's class and Nia's family prepared for hurricane season by making safety plans",
     ],
-    correctAnswer: 2,
-    explanation: `The passage lists 'new places, interesting characters, and events in history' as things books allow you to explore.`
+    correctAnswer: 3,
+    explanation: `This summary includes the most important ideas: the class, Nia's family, and their hurricane safety plans.`
   },
   {
     id: 13,
     type: "reading",
-    skill: "Tone",
-    question: `Read the passage then answer the questions.
+    skill: "Sequence",
+    question: `Read the passage then answer the question.
 
-"Reading is one of the most valuable skills a person can develop. When you read regularly, your vocabulary grows, your spelling improves, and you become better at expressing your ideas. Books allow you to travel to new places, meet interesting characters, and learn about events in history — all without leaving your chair. Students who read widely tend to perform better in all of their subjects, not just Language Arts."
+"In June, Mr. Clarke's class learned how to prepare for hurricane season. The teacher explained that families should keep water, canned food, batteries, and a first-aid kit in a safe place. Students checked the classroom windows and helped make a list of emergency phone numbers. At home, Nia reminded her family to trim branches near the roof and charge their flashlights. When a storm watch was announced, Nia felt nervous, but she also felt ready because her family and school had made careful plans."
 
-The tone of this passage is:`,
+What happened AFTER the students checked the classroom windows?`,
     options: [
-      "Negative and discouraging",
-      "Enthusiastic and persuasive",
-      "Worried and uncertain",
-      "Casual and unimportant",
+      "They helped make a list of emergency phone numbers",
+      "They planted a new tree near the roof",
+      "They threw away all the canned food",
+      "They ignored the teacher's advice",
     ],
-    correctAnswer: 1,
-    explanation: `The writer enthusiastically promotes reading using strong, positive language — making the tone persuasive and enthusiastic.`
+    correctAnswer: 0,
+    explanation: `The passage says the students checked the windows and helped make a list of emergency phone numbers.`
   },
   {
     id: 14,
     type: "reading",
-    skill: "Summarise",
-    question: `Read the passage then answer the questions.
+    skill: "Inference",
+    question: `Read the passage then answer the question.
 
-"Reading is one of the most valuable skills a person can develop. When you read regularly, your vocabulary grows, your spelling improves, and you become better at expressing your ideas. Books allow you to travel to new places, meet interesting characters, and learn about events in history — all without leaving your chair. Students who read widely tend to perform better in all of their subjects, not just Language Arts."
+"In June, Mr. Clarke's class learned how to prepare for hurricane season. The teacher explained that families should keep water, canned food, batteries, and a first-aid kit in a safe place. Students checked the classroom windows and helped make a list of emergency phone numbers. At home, Nia reminded her family to trim branches near the roof and charge their flashlights. When a storm watch was announced, Nia felt nervous, but she also felt ready because her family and school had made careful plans."
 
-Which statement BEST summarises this passage?`,
+What can you infer about Mr. Clarke?`,
     options: [
-      "Books are very expensive and hard to find",
-      "Reading regularly improves many skills and helps students succeed in school",
-      "Only Language Arts teachers read books",
-      "Students should only read for fun, not to improve",
+      "He thinks safety planning is important",
+      "He wants students to be afraid of every cloud",
+      "He dislikes teaching during June",
+      "He believes emergency phone numbers are useless",
     ],
-    correctAnswer: 1,
-    explanation: `This captures the key message: regular reading leads to multiple improvements and school success.`
+    correctAnswer: 0,
+    explanation: `Mr. Clarke teaches students about supplies, windows, and emergency numbers, showing that he thinks safety planning is important.`
   },
   {
     id: 15,
     type: "reading",
-    skill: "Audience",
-    question: `Read the passage then answer the questions.
+    skill: "Theme",
+    question: `Read the passage then answer the question.
 
-"Reading is one of the most valuable skills a person can develop. When you read regularly, your vocabulary grows, your spelling improves, and you become better at expressing your ideas. Books allow you to travel to new places, meet interesting characters, and learn about events in history — all without leaving your chair. Students who read widely tend to perform better in all of their subjects, not just Language Arts."
+"In June, Mr. Clarke's class learned how to prepare for hurricane season. The teacher explained that families should keep water, canned food, batteries, and a first-aid kit in a safe place. Students checked the classroom windows and helped make a list of emergency phone numbers. At home, Nia reminded her family to trim branches near the roof and charge their flashlights. When a storm watch was announced, Nia felt nervous, but she also felt ready because her family and school had made careful plans."
 
-This passage was MOST LIKELY written for:`,
+Which theme best fits the passage?`,
     options: [
-      "Librarians buying new books",
-      "Students and young people to encourage reading",
-      "Scientists studying literacy",
-      "Book publishers",
+      "Being prepared can help people feel safer",
+      "Storms are exciting games for children",
+      "Classrooms should never discuss weather",
+      "Families should wait until danger arrives to plan",
     ],
-    correctAnswer: 1,
-    explanation: `The encouraging tone and focus on student performance suggest this was written for students and young readers.`
+    correctAnswer: 0,
+    explanation: `The passage shows that planning before hurricane season helped Nia feel safer and ready.`
   },
   {
     id: 16,
     type: "vocabulary",
-    skill: "Synonyms",
-    question: `A SYNONYM for 'brave' is:`,
+    skill: "Context Clues",
+    question: `Maya was reluctant to speak at assembly, so her teacher gently encouraged her until she felt ready. What does "reluctant" mean in this sentence?`,
     options: [
-      "cowardly",
-      "timid",
-      "bold",
-      "fearful",
+      "eager and excited",
+      "already finished",
+      "loud and rude",
+      "unwilling or unsure",
     ],
-    correctAnswer: 2,
-    explanation: `'Bold' means having courage — it is a synonym for brave.`
+    correctAnswer: 3,
+    explanation: `Maya needed encouragement before speaking, so "reluctant" means she was unwilling or unsure at first.`
   },
   {
     id: 17,
     type: "vocabulary",
-    skill: "Antonyms",
-    question: `The ANTONYM of 'noisy' is:`,
+    skill: "Multiple-Meaning Words",
+    question: `Which sentence uses "watch" to mean a warning that weather conditions may become dangerous?`,
     options: [
-      "loud",
-      "quiet",
-      "busy",
-      "messy",
+      "Dad bought a new watch with a blue strap",
+      "The class will watch a video after lunch",
+      "A hurricane watch was announced for the coast",
+      "Please watch the baby while I get water",
     ],
-    correctAnswer: 1,
-    explanation: `The opposite of noisy (full of sound) is quiet (little or no sound).`
+    correctAnswer: 2,
+    explanation: `In weather reports, a "watch" means conditions may become dangerous and people should stay alert.`
   },
   {
     id: 18,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `The crowd APPLAUDED at the end of the performance. 'Applauded' means:`,
+    skill: "Prefix",
+    question: `The class had to reorganize the supply shelf after the cans fell. What does the prefix "re-" help you understand about "reorganize"?`,
     options: [
-      "booed and left",
-      "clapped to show appreciation",
-      "shouted in anger",
-      "fell asleep",
+      "organize before school starts",
+      "organize in the wrong way",
+      "organize again",
+      "organize without help",
     ],
-    correctAnswer: 1,
-    explanation: `Applauding means clapping to show approval or appreciation, which makes sense at the end of a performance.`
+    correctAnswer: 2,
+    explanation: `The prefix "re-" means again, so "reorganize" means organize again.`
   },
   {
     id: 19,
     type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'He was a lion in the game.' What type of figurative language is this?`,
+    skill: "Suffix",
+    question: `The signs near the bins were useful because they told students where each item belonged. What does the suffix "-ful" mean in "useful"?`,
     options: [
-      "Simile",
-      "Metaphor",
-      "Personification",
-      "Alliteration",
+      "without",
+      "before",
+      "again",
+      "full of or having",
     ],
-    correctAnswer: 1,
-    explanation: `This is a metaphor — it directly says he WAS a lion, comparing him to one without using 'like' or 'as.'`
+    correctAnswer: 3,
+    explanation: `The suffix "-ful" means full of or having, so "useful" means having use or being helpful.`
   },
   {
     id: 20,
     type: "vocabulary",
-    skill: "Word Meaning",
-    question: `'Transparent' means:`,
+    skill: "Figurative Language",
+    question: `After the recycling drive, the classroom sparkled like a clean window. What does the figurative phrase help the reader understand?`,
     options: [
-      "completely dark",
-      "see-through and clear",
-      "very heavy",
-      "bright and shiny",
+      "The classroom looked very clean",
+      "The classroom was made of glass",
+      "The students washed every window",
+      "The bins were impossible to see",
     ],
-    correctAnswer: 1,
-    explanation: `Transparent means allowing light to pass through so objects can be seen clearly — like glass.`
+    correctAnswer: 0,
+    explanation: `The comparison to a clean window helps readers picture a classroom that looked very clean.`
   },
   {
     id: 21,
     type: "vocabulary",
-    skill: "Multiple Meaning",
-    question: `Which sentence uses 'spring' to mean a season?`,
+    skill: "Shades of Meaning",
+    question: `Which word best completes the sentence?
+
+The principal did not shout; she _____ reminded students to use the recycling bins.`,
     options: [
-      "The spring in the mattress broke",
-      "In spring, the flowers bloom",
-      "Water springs up from the ground",
-      "The cat made a spring toward the mouse",
+      "angrily",
+      "wildly",
+      "carelessly",
+      "calmly",
     ],
-    correctAnswer: 1,
-    explanation: `'In spring, the flowers bloom' uses 'spring' as the season between winter and summer.`
+    correctAnswer: 3,
+    explanation: `"Calmly" fits because the sentence says the principal did not shout.`
   },
   {
     id: 22,
     type: "vocabulary",
-    skill: "Prefix re-",
-    question: `The prefix 're-' in 'rewrite' means:`,
+    skill: "Context Clues",
+    question: `The emergency kit was stored in a sturdy box that did not bend or break when it was carried. What does "sturdy" mean?`,
     options: [
-      "not",
-      "before",
-      "again",
-      "without",
+      "colourful",
+      "empty",
+      "strong",
+      "tiny",
     ],
     correctAnswer: 2,
-    explanation: `'Re-' means again. 'Rewrite' = write again.`
+    explanation: `The clue "did not bend or break" shows that "sturdy" means strong.`
   },
   {
     id: 23,
     type: "vocabulary",
-    skill: "Suffix -less",
-    question: `Adding '-less' to 'care' creates 'careless', meaning:`,
+    skill: "Multiple-Meaning Words",
+    question: `Which sentence uses "charge" to mean add power to a device?`,
     options: [
-      "full of care",
-      "very careful",
-      "without care",
-      "more careful",
+      "The shop will charge two dollars for the notebook",
+      "The bull began to charge across the field",
+      "The captain led a brave charge up the hill",
+      "Remember to charge the flashlight before the storm",
     ],
-    correctAnswer: 2,
-    explanation: `The suffix '-less' means without. Careless = without care.`
+    correctAnswer: 3,
+    explanation: `In this sentence, "charge" means to add power to the flashlight's battery.`
   },
   {
     id: 24,
     type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'The wind whispered through the trees.' This is an example of:`,
+    skill: "Context Clues",
+    question: `The students sorted the materials into separate bins: paper in one, plastic in another, and cans in a third. What does "sorted" mean here?`,
     options: [
-      "Simile",
-      "Metaphor",
-      "Personification",
-      "Hyperbole",
+      "mixed everything together",
+      "placed items into groups",
+      "carried items home",
+      "counted only the cans",
     ],
-    correctAnswer: 2,
-    explanation: `The wind is given the human action of whispering — this is personification.`
+    correctAnswer: 1,
+    explanation: `The examples of paper, plastic, and cans in different bins show that "sorted" means placed items into groups.`
   },
   {
     id: 25,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `The scientist used PRECISE measurements in her experiment. 'Precise' means:`,
+    skill: "Figurative Language",
+    question: `When the rain began, the sky grumbled above the school. What type of figurative language is used?`,
     options: [
-      "rough and approximate",
-      "exact and accurate",
-      "large and heavy",
-      "quick and careless",
+      "simile",
+      "metaphor",
+      "personification",
+      "rhyme",
     ],
-    correctAnswer: 1,
-    explanation: `'Precise' means exact and accurate, especially in measurements or details.`
+    correctAnswer: 2,
+    explanation: `The sky is given the human action of grumbling, so the sentence uses personification.`
   },
   {
     id: 26,
     type: "grammar",
-    skill: "Nouns",
-    question: `Which word in the following sentence is a NOUN? 'The teacher read a story to the class.'`,
+    skill: "Capitalisation",
+    question: `Choose the sentence with correct capitalisation.`,
     options: [
-      "read",
-      "to",
-      "teacher",
-      "The",
+      "On Monday, Grade 5 visited Seaview Primary's recycling centre.",
+      "on Monday, Grade 5 visited Seaview Primary's recycling centre.",
+      "On monday, Grade 5 visited seaview primary's recycling centre.",
+      "On Monday, grade 5 visited Seaview primary's Recycling Centre.",
     ],
-    correctAnswer: 2,
-    explanation: `'Teacher' is a noun (a person). 'Class' is also a noun (a group of people/a thing).`
+    correctAnswer: 0,
+    explanation: `The first word, the day Monday, and the proper name Seaview Primary are correctly capitalised.`
   },
   {
     id: 27,
     type: "grammar",
-    skill: "Adjectives",
-    question: `Choose the ADJECTIVE in: 'She wore a beautiful dress to the party.'`,
+    skill: "Punctuation",
+    question: `Choose the sentence with correct punctuation.`,
     options: [
-      "wore",
-      "party",
-      "she",
-      "beautiful",
+      "Please bring water batteries and canned food.",
+      "Please bring water, batteries, and canned food.",
+      "Please bring, water batteries, and canned food",
+      "Please bring water batteries, and canned food?",
     ],
-    correctAnswer: 3,
-    explanation: `'Beautiful' is an adjective — it describes the dress (a noun).`
+    correctAnswer: 1,
+    explanation: `Commas separate the items in the list, and the sentence ends with a period.`
   },
   {
     id: 28,
     type: "grammar",
-    skill: "Adverbs",
-    question: `Choose the ADVERB in: 'He ran quickly to catch the bus.'`,
+    skill: "Pronouns",
+    question: `Choose the pronoun that best completes the sentence.
+
+Nia and I checked the flashlights before _____ packed them in the kit.`,
     options: [
-      "ran",
-      "quickly",
-      "catch",
-      "bus",
+      "us",
+      "them",
+      "we",
+      "her",
     ],
-    correctAnswer: 1,
-    explanation: `'Quickly' is an adverb — it describes HOW he ran.`
+    correctAnswer: 2,
+    explanation: `"We" is the subject pronoun needed before the verb "packed."`
   },
   {
     id: 29,
     type: "grammar",
-    skill: "Sentence Types",
-    question: `Which sentence is a COMMAND?`,
+    skill: "Verb Tense",
+    question: `Choose the correct verb tense.
+
+Yesterday, the students _____ posters for the recycling drive.`,
     options: [
-      "Where are you going?",
-      "She is going to the park",
-      "Sit down and open your books",
-      "What a great idea!",
+      "make",
+      "makes",
+      "will make",
+      "made",
     ],
-    correctAnswer: 2,
-    explanation: `A command gives an instruction or order. 'Sit down and open your books' does this.`
+    correctAnswer: 3,
+    explanation: `"Yesterday" shows past time, so the past-tense verb "made" is correct.`
   },
   {
     id: 30,
     type: "grammar",
-    skill: "Capital Letters",
-    question: `Which sentence uses capital letters CORRECTLY?`,
+    skill: "Subject-Verb Agreement",
+    question: `Choose the sentence with correct subject-verb agreement.`,
     options: [
-      "My mother went to Kingston on tuesday",
-      "my mother went to Kingston on Tuesday",
-      "My mother went to Kingston on Tuesday",
-      "my Mother went to Kingston on tuesday",
+      "The boxes of bottles are beside the door.",
+      "The boxes of bottles is beside the door.",
+      "The box of bottles are beside the door.",
+      "The students in the class helps after lunch.",
     ],
-    correctAnswer: 2,
-    explanation: `Proper nouns (Kingston) and the names of days (Tuesday) begin with capital letters. 'My' begins the sentence.`
+    correctAnswer: 0,
+    explanation: `The subject "boxes" is plural, so it needs the plural verb "are."`
   },
   {
     id: 31,
     type: "grammar",
-    skill: "Present Tense",
-    question: `Choose the correct PRESENT TENSE form: 'Every day, the farmers ___ their crops.'`,
+    skill: "Apostrophes",
+    question: `Choose the sentence that uses an apostrophe correctly.`,
     options: [
-      "watered",
-      "will water",
-      "water",
-      "were watering",
+      "The students bins were full by Friday.",
+      "The student's bins were full by Friday.",
+      "The students' bins were full by Friday.",
+      "The students's bins were full by Friday.",
     ],
     correctAnswer: 2,
-    explanation: `'Every day' signals a habitual action in the present. 'Water' is the simple present form.`
+    explanation: `Because the bins belong to more than one student, the plural possessive form is "students'."`
   },
   {
     id: 32,
     type: "grammar",
-    skill: "Possessive Nouns",
-    question: `Which shows POSSESSIVE correctly: the book belonging to the boy?`,
+    skill: "Complete Sentences",
+    question: `Which option is a complete sentence?`,
     options: [
-      "the boys book",
-      "the boys's book",
-      "the boy's book",
-      "the boys' book",
+      "After the storm warning on the radio.",
+      "The emergency kit in the cupboard.",
+      "Because the wind was strong outside.",
+      "Our class reviewed the safety plan before lunch.",
     ],
-    correctAnswer: 2,
-    explanation: `For a singular noun (boy), add apostrophe + s to show possession: boy's book.`
+    correctAnswer: 3,
+    explanation: `This option has a subject, a verb, and a complete thought.`
   },
   {
     id: 33,
     type: "grammar",
-    skill: "Conjunctions",
-    question: `Choose the CONJUNCTION in: 'I wanted to go swimming but it was raining.'`,
+    skill: "Word Choice",
+    question: `Choose the clearest word to complete the sentence.
+
+The teacher asked us to _____ the paper and plastic into different bins.`,
     options: [
-      "swimming",
-      "wanted",
-      "but",
-      "raining",
+      "separate",
+      "scatter",
+      "forget",
+      "damage",
     ],
-    correctAnswer: 2,
-    explanation: `'But' is a conjunction — it joins two contrasting ideas in a sentence.`
+    correctAnswer: 0,
+    explanation: `"Separate" clearly means to put the paper and plastic into different bins.`
   },
   {
     id: 34,
     type: "grammar",
-    skill: "Subject-Verb Agreement",
-    question: `Choose the correct verb: 'Neither the students nor the teacher ___ late.'`,
+    skill: "Punctuation",
+    question: `Choose the sentence with the correct end punctuation.`,
     options: [
-      "were",
-      "are",
-      "is",
-      "have been",
+      "Where should we store the first-aid kit.",
+      "Where should we store the first-aid kit?",
+      "Where should we store the first-aid kit!",
+      "Where should we store the first-aid kit,",
     ],
-    correctAnswer: 2,
-    explanation: `When using 'neither…nor,' the verb agrees with the noun closest to it — 'teacher' (singular). Use 'is.'`
+    correctAnswer: 1,
+    explanation: `The sentence asks a question, so it should end with a question mark.`
   },
   {
     id: 35,
     type: "grammar",
-    skill: "Sentence Structure",
-    question: `A sentence that has one main clause and one subordinate clause is called:`,
+    skill: "Pronouns",
+    question: `Choose the sentence in which the pronoun clearly refers to Nia.`,
     options: [
-      "A simple sentence",
-      "A compound sentence",
-      "A complex sentence",
-      "A fragment",
+      "Nia told Sara that she should charge the flashlight.",
+      "After Nia checked the kit, she charged the flashlight.",
+      "Nia and Sara found the kit when she opened it.",
+      "When Sara helped Nia, she smiled at her.",
     ],
-    correctAnswer: 2,
-    explanation: `A complex sentence contains one main (independent) clause and at least one subordinate (dependent) clause.`
+    correctAnswer: 1,
+    explanation: `In this sentence, "she" clearly refers to Nia because Nia is the only named person in the sentence.`
   },
   {
     id: 36,
     type: "writing",
     skill: "Purpose",
-    question: `A student writes a story about a brave young girl who saves her village. The purpose is MOST LIKELY to:`,
+    question: `Jaden wants classmates to join a clean-up day after the recycling drive. Which purpose best fits his flyer?`,
     options: [
-      "inform readers about safety rules",
-      "persuade readers to visit the village",
-      "entertain readers with an exciting narrative",
-      "describe how to be brave",
+      "To persuade students to help clean the school grounds",
+      "To tell a make-believe story about a talking bottle",
+      "To list every book in the school library",
+      "To explain how hurricanes are named",
     ],
-    correctAnswer: 2,
-    explanation: `Narratives (stories) are primarily written to entertain readers.`
+    correctAnswer: 0,
+    explanation: `A flyer asking classmates to join a clean-up day is meant to persuade students to help.`
   },
   {
     id: 37,
     type: "writing",
-    skill: "Organisation",
-    question: `Which order should a narrative follow?`,
+    skill: "Audience",
+    question: `Leah is writing a note to Grade 5 families about hurricane supplies to keep at home. Which greeting best matches her audience?`,
     options: [
-      "Conclusion, Middle, Beginning",
-      "Middle, Beginning, End",
-      "Beginning, Middle, End",
-      "End, Beginning, Middle",
+      "Yo, people on my team,",
+      "Dear Grade 5 families,",
+      "Dear weather machine,",
+      "Hey, empty batteries,",
     ],
-    correctAnswer: 2,
-    explanation: `A narrative is organised into Beginning (introduction), Middle (events/climax), and End (resolution/conclusion).`
+    correctAnswer: 1,
+    explanation: `"Dear Grade 5 families" is polite and directly addresses the intended audience.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "Descriptive Details",
-    question: `Why do writers include sensory details (sight, sound, smell) in their writing?`,
+    skill: "Supporting Details",
+    question: `Which detail best supports this topic sentence?
+
+Our class recycling drive made the school cleaner.`,
     options: [
-      "To make the writing longer",
-      "To confuse the reader",
-      "To help readers imagine the scene more clearly",
-      "To avoid having a plot",
+      "The music club practised three new songs",
+      "Some students wore red shirts on Friday",
+      "We collected bottles and paper that had been left near the canteen",
+      "The library has many interesting storybooks",
     ],
     correctAnswer: 2,
-    explanation: `Sensory details make writing vivid and help readers picture and experience the scene.`
+    explanation: `Collecting bottles and paper near the canteen directly supports the idea that the recycling drive made the school cleaner.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Word Choice",
-    question: `Which sentence uses the MOST precise and interesting vocabulary?`,
+    skill: "Paragraph Organisation",
+    question: `Which sentence would make the best closing sentence for a paragraph about hurricane preparation?`,
     options: [
-      "The man walked to the shop",
-      "The man moved somewhere",
-      "The elderly gentleman strode purposefully toward the market stall",
-      "There was a man",
+      "My favourite lunch is rice and peas",
+      "That is why planning early can help families stay safe during a storm",
+      "The puppy chased a ball across the yard",
+      "There are twelve crayons in my box",
     ],
-    correctAnswer: 2,
-    explanation: `Precise, vivid words like 'elderly,' 'strode,' and 'purposefully' make the writing more engaging and clear.`
+    correctAnswer: 1,
+    explanation: `This sentence wraps up the paragraph by restating the main idea about planning early for safety.`
   },
   {
     id: 40,
     type: "writing",
-    skill: "Concluding Sentence",
-    question: `A concluding sentence in a paragraph should:`,
+    skill: "Descriptive Writing",
+    question: `Which sentence uses the best descriptive details for a story about a stormy afternoon at school?`,
     options: [
-      "Introduce a new, unrelated topic",
-      "Repeat the topic sentence word for word",
-      "Summarise or reinforce the main idea of the paragraph",
-      "Be very long and detailed",
+      "It was weather outside the school",
+      "The day happened and students were there",
+      "Things were not normal after lunch",
+      "Dark clouds rolled over the roof while rain tapped against the classroom windows",
     ],
-    correctAnswer: 2,
-    explanation: `A concluding sentence wraps up the paragraph by summarising or reinforcing the main point.`
+    correctAnswer: 3,
+    explanation: `This sentence uses clear details about clouds, rain, the roof, and windows to help readers picture the scene.`
   }
 ]
 
