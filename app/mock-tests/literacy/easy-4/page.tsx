@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -32,621 +32,607 @@ const g5LaEasy4Questions: Question[] = [
     id: 1,
     type: "reading",
     skill: "Main Idea",
-    question: `Read the passage then answer the questions.
+    question: `Read Passage 1, then answer the question.
 
-"When a hurricane warning was announced on the radio, the Williams family worked quickly to prepare their home. Mr. Williams brought the outdoor furniture inside and nailed wooden boards over the windows. Mrs. Williams filled containers with drinking water and stocked shelves with canned food. The children helped by gathering candles, flashlights, and blankets. By the time the storm arrived, the family felt as ready as they could be."
+Passage 1: The Garden Morning
 
-What is this passage MAINLY about?`,
+On Friday morning, Grade 5 Blue gathered near the fence behind the canteen. Their teacher, Miss Brown, explained that the class would turn the dusty patch into a small school garden. Some students carried bags of soil, while others sorted seedlings of pak choi, tomato, and sweet pepper. Before anyone began digging, Jada read the planting plan aloud so each group knew its task.
+
+Malik noticed that the youngest seedlings were wilting in the sun. He suggested moving them under the ackee tree until the holes were ready. Miss Brown smiled and asked him to explain his idea to the class. By break time, the students had planted two neat rows and placed labelled sticks beside each seedling.
+
+The project was not finished in one morning. The class made a watering schedule and agreed to check the garden after lunch each day. Miss Brown reminded them that a garden grows best when people care for it regularly, not just when it is new.
+
+What is the passage mainly about?`,
     options: [
-      "The dangers of hurricanes in the Caribbean",
-      "A family preparing for a hurricane together",
-      "Mr. Williams's skills in building",
-      "The importance of canned food",
+      "A class preparing and beginning a school garden project",
+      "A canteen selling more vegetables to students",
+      "A teacher choosing a new class monitor",
+      "A storm damaging seedlings behind the school",
     ],
-    correctAnswer: 1,
-    explanation: `The passage describes the Williams family working together to prepare for a hurricane — this is the main topic.`
+    correctAnswer: 0,
+    explanation: `The whole passage focuses on Grade 5 Blue planning, planting, and arranging care for a school garden.`
   },
   {
     id: 2,
     type: "reading",
-    skill: "Detail",
-    question: `Read the passage then answer the questions.
+    skill: "Supporting Detail",
+    question: `Read Passage 1, then answer the question.
 
-"When a hurricane warning was announced on the radio, the Williams family worked quickly to prepare their home. Mr. Williams brought the outdoor furniture inside and nailed wooden boards over the windows. Mrs. Williams filled containers with drinking water and stocked shelves with canned food. The children helped by gathering candles, flashlights, and blankets. By the time the storm arrived, the family felt as ready as they could be."
-
-What did Mr. Williams do to the windows?`,
+Which crops did the students sort before planting?`,
     options: [
-      "Painted them",
-      "Nailed wooden boards over them",
-      "Replaced them with new glass",
-      "Left them open for air",
+      "Yam, corn, and pumpkin",
+      "Pak choi, tomato, and sweet pepper",
+      "Banana, mango, and ackee",
+      "Callaloo, carrot, and beetroot",
     ],
     correctAnswer: 1,
-    explanation: `The passage says Mr. Williams 'nailed wooden boards over the windows.'`
+    explanation: `The passage says the students sorted seedlings of pak choi, tomato, and sweet pepper.`
   },
   {
     id: 3,
     type: "reading",
     skill: "Inference",
-    question: `Read the passage then answer the questions.
+    question: `Read Passage 1, then answer the question.
 
-"When a hurricane warning was announced on the radio, the Williams family worked quickly to prepare their home. Mr. Williams brought the outdoor furniture inside and nailed wooden boards over the windows. Mrs. Williams filled containers with drinking water and stocked shelves with canned food. The children helped by gathering candles, flashlights, and blankets. By the time the storm arrived, the family felt as ready as they could be."
-
-What can you infer about the Williams family based on this passage?`,
+Why did Malik suggest moving the seedlings under the ackee tree?`,
     options: [
-      "They were not worried about the storm",
-      "They were well-organised and worked as a team",
-      "Only Mr. Williams prepared for the storm",
-      "They left the house before the storm arrived",
+      "He wanted to hide them from the teacher.",
+      "He thought the soil bags were too heavy.",
+      "He wanted to protect them from the hot sun.",
+      "He planned to take them home after school.",
     ],
-    correctAnswer: 1,
-    explanation: `Every family member had a specific role — showing they were organised and worked as a team.`
+    correctAnswer: 2,
+    explanation: `Malik noticed the seedlings were wilting in the sun, so shade under the ackee tree would help protect them.`
   },
   {
     id: 4,
     type: "reading",
-    skill: "Vocabulary in Context",
-    question: `Read the passage then answer the questions.
+    skill: "Sequence",
+    question: `Read Passage 1, then answer the question.
 
-"When a hurricane warning was announced on the radio, the Williams family worked quickly to prepare their home. Mr. Williams brought the outdoor furniture inside and nailed wooden boards over the windows. Mrs. Williams filled containers with drinking water and stocked shelves with canned food. The children helped by gathering candles, flashlights, and blankets. By the time the storm arrived, the family felt as ready as they could be."
-
-The word 'stocked' in the passage means:`,
+What happened before the students began digging?`,
     options: [
-      "emptied out",
-      "broke apart",
-      "filled up with supplies",
-      "cleaned thoroughly",
+      "They checked the garden after lunch.",
+      "They harvested tomatoes for the canteen.",
+      "They painted the fence near the canteen.",
+      "Jada read the planting plan aloud.",
     ],
-    correctAnswer: 2,
-    explanation: `'Stocked shelves with canned food' means filling the shelves with supplies in preparation.`
+    correctAnswer: 3,
+    explanation: `The passage states that before anyone began digging, Jada read the planting plan aloud.`
   },
   {
     id: 5,
     type: "reading",
-    skill: "Cause and Effect",
-    question: `Read the passage then answer the questions.
+    skill: "Vocabulary in Context",
+    question: `Read Passage 1, then answer the question.
 
-"When a hurricane warning was announced on the radio, the Williams family worked quickly to prepare their home. Mr. Williams brought the outdoor furniture inside and nailed wooden boards over the windows. Mrs. Williams filled containers with drinking water and stocked shelves with canned food. The children helped by gathering candles, flashlights, and blankets. By the time the storm arrived, the family felt as ready as they could be."
-
-WHY did the family board up the windows?`,
+In the sentence "Malik noticed that the youngest seedlings were wilting in the sun," what does "wilting" mean?`,
     options: [
-      "To keep cool",
-      "To prevent hurricane damage",
-      "Because the glass was broken",
-      "To block out the sunlight",
+      "Drooping because they needed care",
+      "Growing taller very quickly",
+      "Changing into bright flowers",
+      "Being washed away by rain",
     ],
-    correctAnswer: 1,
-    explanation: `Boarding up windows is a standard hurricane preparation to protect against high winds and flying objects.`
+    correctAnswer: 0,
+    explanation: `The seedlings were in the sun and needed shade, so "wilting" means drooping or becoming weak.`
   },
   {
     id: 6,
     type: "reading",
-    skill: "Sequence",
-    question: `Read the passage then answer the questions.
+    skill: "Character Trait",
+    question: `Read Passage 1, then answer the question.
 
-"When a hurricane warning was announced on the radio, the Williams family worked quickly to prepare their home. Mr. Williams brought the outdoor furniture inside and nailed wooden boards over the windows. Mrs. Williams filled containers with drinking water and stocked shelves with canned food. The children helped by gathering candles, flashlights, and blankets. By the time the storm arrived, the family felt as ready as they could be."
-
-What did Mrs. Williams do BEFORE stocking the shelves with canned food?`,
+Which word best describes Malik in the passage?`,
     options: [
-      "She boarded up the windows",
-      "She helped the children",
-      "She filled containers with drinking water",
-      "She brought in the furniture",
+      "Careless",
+      "Observant",
+      "Boastful",
+      "Impatient",
     ],
-    correctAnswer: 2,
-    explanation: `The passage says she 'filled containers with drinking water AND stocked shelves with canned food' — water came first in the sentence.`
+    correctAnswer: 1,
+    explanation: `Malik noticed a problem with the seedlings and suggested a helpful solution, showing he was observant.`
   },
   {
     id: 7,
     type: "reading",
-    skill: "Character",
-    question: `Read the passage then answer the questions.
+    skill: "Cause and Effect",
+    question: `Read Passage 1, then answer the question.
 
-"When a hurricane warning was announced on the radio, the Williams family worked quickly to prepare their home. Mr. Williams brought the outdoor furniture inside and nailed wooden boards over the windows. Mrs. Williams filled containers with drinking water and stocked shelves with canned food. The children helped by gathering candles, flashlights, and blankets. By the time the storm arrived, the family felt as ready as they could be."
-
-How would you describe the Williams family's response to the hurricane warning?`,
+Why did the class make a watering schedule?`,
     options: [
-      "Slow and confused",
-      "Frightened and helpless",
-      "Calm, organised, and cooperative",
-      "Unconcerned and unprepared",
+      "To decide who would sell vegetables at break",
+      "To choose which students would skip lunch",
+      "To make sure the garden received regular care",
+      "To keep students away from the ackee tree",
     ],
     correctAnswer: 2,
-    explanation: `Each person had tasks and carried them out efficiently — calm, organised, and cooperative.`
+    explanation: `The schedule helped the students care for the garden regularly after the first planting day.`
   },
   {
     id: 8,
     type: "reading",
-    skill: "Detail",
-    question: `Read the passage then answer the questions.
+    skill: "Theme",
+    question: `Read Passage 1, then answer the question.
 
-"When a hurricane warning was announced on the radio, the Williams family worked quickly to prepare their home. Mr. Williams brought the outdoor furniture inside and nailed wooden boards over the windows. Mrs. Williams filled containers with drinking water and stocked shelves with canned food. The children helped by gathering candles, flashlights, and blankets. By the time the storm arrived, the family felt as ready as they could be."
-
-What did the children help gather?`,
+Which lesson best fits Passage 1?`,
     options: [
-      "Furniture",
-      "Boards and nails",
-      "Candles, flashlights, and blankets",
-      "Canned food",
+      "Plants grow better when they are left alone.",
+      "The fastest student should make every decision.",
+      "Outdoor work is always easier than classroom work.",
+      "Teamwork and steady care help a project succeed.",
     ],
-    correctAnswer: 2,
-    explanation: `'The children helped by gathering candles, flashlights, and blankets.'`
+    correctAnswer: 3,
+    explanation: `The students shared tasks and planned regular care, showing that teamwork and consistency help projects succeed.`
   },
   {
     id: 9,
     type: "reading",
-    skill: "Tone",
-    question: `Read the passage then answer the questions.
+    skill: "Text Evidence",
+    question: `Read Passage 1, then answer the question.
 
-"When a hurricane warning was announced on the radio, the Williams family worked quickly to prepare their home. Mr. Williams brought the outdoor furniture inside and nailed wooden boards over the windows. Mrs. Williams filled containers with drinking water and stocked shelves with canned food. The children helped by gathering candles, flashlights, and blankets. By the time the storm arrived, the family felt as ready as they could be."
-
-The tone of this passage is BEST described as:`,
+Which detail best shows that the garden work was organised?`,
     options: [
-      "Panicked and fearful",
-      "Calm and informative",
-      "Humorous",
-      "Critical and negative",
+      "Jada read the planting plan so each group knew its task.",
+      "The garden was near the fence behind the canteen.",
+      "The seedlings were young and stood in the sun.",
+      "Break time came after the class planted two rows.",
     ],
-    correctAnswer: 1,
-    explanation: `The family responds logically and without panic — the tone is calm and matter-of-fact.`
+    correctAnswer: 0,
+    explanation: `A planting plan with tasks for each group is the clearest evidence that the work was organised.`
   },
   {
     id: 10,
     type: "reading",
-    skill: "Summarise",
-    question: `Read the passage then answer the questions.
+    skill: "Author's Purpose",
+    question: `Read Passage 1, then answer the question.
 
-"When a hurricane warning was announced on the radio, the Williams family worked quickly to prepare their home. Mr. Williams brought the outdoor furniture inside and nailed wooden boards over the windows. Mrs. Williams filled containers with drinking water and stocked shelves with canned food. The children helped by gathering candles, flashlights, and blankets. By the time the storm arrived, the family felt as ready as they could be."
-
-Which sentence BEST summarises this passage?`,
+Why did the author most likely include Miss Brown's reminder at the end?`,
     options: [
-      "Hurricanes are very dangerous storms",
-      "The Williams family calmly and efficiently prepared their home for a hurricane",
-      "Mr. Williams is very good at building",
-      "Canned food is important during a storm",
+      "To explain why students should avoid gardening",
+      "To show that continued responsibility matters",
+      "To prove that vegetables grow in one morning",
+      "To describe the taste of pak choi and tomatoes",
     ],
     correctAnswer: 1,
-    explanation: `This captures the who, what, and result of the passage.`
+    explanation: `Miss Brown's reminder stresses that the garden needs regular care, so it points to continued responsibility.`
   },
   {
     id: 11,
     type: "reading",
-    skill: "Vocabulary in Context",
-    question: `Read the passage then answer the questions.
+    skill: "Main Idea",
+    question: `Read Passage 2, then answer the question.
 
-"When a hurricane warning was announced on the radio, the Williams family worked quickly to prepare their home. Mr. Williams brought the outdoor furniture inside and nailed wooden boards over the windows. Mrs. Williams filled containers with drinking water and stocked shelves with canned food. The children helped by gathering candles, flashlights, and blankets. By the time the storm arrived, the family felt as ready as they could be."
+Passage 2: The Library Drive
 
-The phrase 'as ready as they could be' suggests:`,
+At the start of Literacy Week, Mr. Clarke opened the school library during lunch and after school. He wanted more students to borrow books, but many shelves were nearly empty. The reading club decided to hold a book donation drive. They made posters, visited classes, and asked families to send gently used storybooks, poems, and information books.
+
+By Wednesday, a box near the library door was half full. Nia checked each book for torn pages, while Andre wrote the titles in a notebook. Some books were too damaged to use, so the club set them aside for recycling. On Friday, Mr. Clarke displayed the donated books on a front table with a sign that said, "Choose one new adventure."
+
+The next week, more students visited the library. Some came for Anansi stories, and others searched for books about animals, football, and space. The reading club felt proud because their work had helped classmates find books they wanted to read.
+
+What is Passage 2 mainly about?`,
     options: [
-      "The family was completely unprepared",
-      "The family had done everything possible to prepare",
-      "The storm was not dangerous",
-      "The family was scared",
+      "Students learning to repair every damaged book",
+      "A football team using the library after practice",
+      "A reading club helping the library get more useful books",
+      "Mr. Clarke closing the library during Literacy Week",
     ],
-    correctAnswer: 1,
-    explanation: `This phrase means they had done all they could — they were as prepared as possible.`
+    correctAnswer: 2,
+    explanation: `The passage is mainly about the reading club organising donations so the library has more books for students.`
   },
   {
     id: 12,
     type: "reading",
-    skill: "Fact vs Opinion",
-    question: `Read the passage then answer the questions.
+    skill: "Supporting Detail",
+    question: `Read Passage 2, then answer the question.
 
-"When a hurricane warning was announced on the radio, the Williams family worked quickly to prepare their home. Mr. Williams brought the outdoor furniture inside and nailed wooden boards over the windows. Mrs. Williams filled containers with drinking water and stocked shelves with canned food. The children helped by gathering candles, flashlights, and blankets. By the time the storm arrived, the family felt as ready as they could be."
-
-Which statement is an OPINION?`,
+What did Andre do with the donated books?`,
     options: [
-      "The children gathered candles and blankets",
-      "Mrs. Williams filled containers with water",
-      "Mr. Williams is the best father in Jamaica",
-      "A hurricane warning was announced",
+      "He sold them at the front gate.",
+      "He repaired all the torn pages.",
+      "He read each one aloud at lunch.",
+      "He wrote the titles in a notebook.",
     ],
-    correctAnswer: 2,
-    explanation: `This is an opinion — a personal judgement that cannot be verified. The others are facts from the passage.`
+    correctAnswer: 3,
+    explanation: `The passage states that Andre wrote the titles of the donated books in a notebook.`
   },
   {
     id: 13,
     type: "reading",
-    skill: "Author's Purpose",
-    question: `Read the passage then answer the questions.
+    skill: "Inference",
+    question: `Read Passage 2, then answer the question.
 
-"When a hurricane warning was announced on the radio, the Williams family worked quickly to prepare their home. Mr. Williams brought the outdoor furniture inside and nailed wooden boards over the windows. Mrs. Williams filled containers with drinking water and stocked shelves with canned food. The children helped by gathering candles, flashlights, and blankets. By the time the storm arrived, the family felt as ready as they could be."
-
-Why did the author write this passage?`,
+What can you infer about the books placed on the front table?`,
     options: [
-      "To scare readers about hurricanes",
-      "To teach readers how to prepare for a hurricane",
-      "To entertain readers with a funny family story",
-      "To describe hurricane damage",
+      "They were ready for students to choose and borrow.",
+      "They were too damaged for anyone to read.",
+      "They belonged only to Mr. Clarke.",
+      "They were being hidden from younger students.",
     ],
-    correctAnswer: 1,
-    explanation: `The passage shows step-by-step how a family prepares — the purpose is informative/instructional.`
+    correctAnswer: 0,
+    explanation: `The sign invited students to choose an adventure, so the displayed books were ready for students to select.`
   },
   {
     id: 14,
     type: "reading",
-    skill: "Inference",
-    question: `Read the passage then answer the questions.
+    skill: "Vocabulary in Context",
+    question: `Read Passage 2, then answer the question.
 
-"When a hurricane warning was announced on the radio, the Williams family worked quickly to prepare their home. Mr. Williams brought the outdoor furniture inside and nailed wooden boards over the windows. Mrs. Williams filled containers with drinking water and stocked shelves with canned food. The children helped by gathering candles, flashlights, and blankets. By the time the storm arrived, the family felt as ready as they could be."
-
-What does the passage suggest about hurricane preparation?`,
+In the phrase "gently used storybooks," what does "gently used" suggest?`,
     options: [
-      "It is unnecessary",
-      "It should be done alone",
-      "It is easier and more effective when everyone helps",
-      "Only adults should prepare",
+      "Books written only for quiet students",
+      "Books that are still in good condition",
+      "Books that must be read very slowly",
+      "Books kept outside in gentle rain",
     ],
-    correctAnswer: 2,
-    explanation: `Every family member contributed — suggesting preparation is easier and more effective as a team.`
+    correctAnswer: 1,
+    explanation: `"Gently used" means the books have been used before but are still in good enough condition to donate.`
   },
   {
     id: 15,
     type: "reading",
-    skill: "Text Evidence",
-    question: `Read the passage then answer the questions.
+    skill: "Cause and Effect",
+    question: `Read Passage 2, then answer the question.
 
-"When a hurricane warning was announced on the radio, the Williams family worked quickly to prepare their home. Mr. Williams brought the outdoor furniture inside and nailed wooden boards over the windows. Mrs. Williams filled containers with drinking water and stocked shelves with canned food. The children helped by gathering candles, flashlights, and blankets. By the time the storm arrived, the family felt as ready as they could be."
-
-Which detail BEST shows that the family took the hurricane seriously?`,
+What happened because of the donation drive?`,
     options: [
-      "Mrs. Williams cooked a meal",
-      "The radio made the announcement",
-      "Every family member had a specific preparation task",
-      "They locked the front door",
+      "Students stopped visiting the library.",
+      "The school cancelled Literacy Week.",
+      "Every student chose the same Anansi story.",
+      "More students visited the library the next week.",
     ],
-    correctAnswer: 2,
-    explanation: `Each person completing assigned tasks shows the family recognised the severity of the storm.`
+    correctAnswer: 3,
+    explanation: `After the donated books were displayed, the passage says more students visited the library the next week.`
   },
   {
     id: 16,
     type: "vocabulary",
-    skill: "Synonyms",
-    question: `A SYNONYM for 'determined' is:`,
+    skill: "Context Clues",
+    question: `During the garden project, Tasha handled the tiny seedlings carefully because they were delicate. What does "delicate" mean in this sentence?`,
     options: [
-      "confused",
-      "weak",
-      "persistent",
-      "relaxed",
+      "Easy to damage",
+      "Very noisy",
+      "Too expensive",
+      "Full of mud",
     ],
-    correctAnswer: 2,
-    explanation: `'Persistent' means continuing despite difficulty — similar to 'determined.'`
+    correctAnswer: 0,
+    explanation: `Tasha handled the seedlings carefully, which shows that "delicate" means easy to damage.`
   },
   {
     id: 17,
     type: "vocabulary",
-    skill: "Antonyms",
-    question: `The ANTONYM of 'expensive' is:`,
+    skill: "Context Clues",
+    question: `The library was usually quiet, but it became lively when the reading club displayed the new books. What does "lively" mean here?`,
     options: [
-      "costly",
-      "valuable",
-      "cheap",
-      "luxurious",
+      "Locked and empty",
+      "Full of energy and interest",
+      "Dark and difficult to see",
+      "Late for an appointment",
     ],
-    correctAnswer: 2,
-    explanation: `The opposite of expensive (high-priced) is cheap (low-priced).`
+    correctAnswer: 1,
+    explanation: `The new books attracted students, so "lively" means full of energy and interest.`
   },
   {
     id: 18,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `The river was MURKY after the heavy rain. 'Murky' most likely means:`,
+    question: `Dwayne gave a brief report about the class garden; he spoke for only two minutes. What does "brief" mean?`,
     options: [
-      "clear and bright",
-      "dark and cloudy",
-      "warm and shallow",
-      "cool and flowing",
+      "Funny",
+      "Confusing",
+      "Short",
+      "Loud",
     ],
-    correctAnswer: 1,
-    explanation: `Rain stirs up sediment, making water dark and cloudy — murky.`
+    correctAnswer: 2,
+    explanation: `The clue "only two minutes" shows that "brief" means short.`
   },
   {
     id: 19,
     type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'He ran as fast as the wind.' This is a:`,
+    skill: "Context Clues",
+    question: `The book cover was faded, but the story inside was still exciting. What does "faded" mean?`,
     options: [
-      "Metaphor",
-      "Simile",
-      "Personification",
-      "Hyperbole",
+      "Newly printed",
+      "Covered with glue",
+      "Heavy to carry",
+      "Less bright than before",
     ],
-    correctAnswer: 1,
-    explanation: `It uses 'as…as' to compare his speed to the wind — a simile.`
+    correctAnswer: 3,
+    explanation: `A faded cover has lost some of its colour or brightness over time.`
   },
   {
     id: 20,
     type: "vocabulary",
-    skill: "Word Meaning",
-    question: `The word 'anxious' means:`,
+    skill: "Synonym in Context",
+    question: `Miss Brown asked the group to inspect the seedlings for insects. Which word is closest in meaning to "inspect"?`,
     options: [
-      "excited and happy",
-      "worried and nervous",
-      "calm and peaceful",
-      "tired and bored",
+      "Examine",
+      "Forget",
+      "Drop",
+      "Borrow",
     ],
-    correctAnswer: 1,
-    explanation: `'Anxious' describes feeling worried or nervous, especially about something uncertain.`
+    correctAnswer: 0,
+    explanation: `To inspect something is to examine or look at it carefully.`
   },
   {
     id: 21,
     type: "vocabulary",
-    skill: "Multiple Meaning",
-    question: `Which sentence uses 'fair' to mean equal or just?`,
+    skill: "Antonym in Context",
+    question: `The first poster was dull, so the club added colour to make it attractive. Which word is the opposite of "dull" as used here?`,
     options: [
-      "She has fair skin",
-      "The school fair was held on Friday",
-      "The judge's decision was fair to both sides",
-      "She has fair hair",
+      "Plain",
+      "Bright",
+      "Torn",
+      "Careful",
     ],
-    correctAnswer: 2,
-    explanation: `'Fair' meaning equal/just describes the judge's decision being unbiased.`
+    correctAnswer: 1,
+    explanation: `In this sentence, dull means not bright or interesting; the opposite is bright.`
   },
   {
     id: 22,
     type: "vocabulary",
-    skill: "Prefix mis-",
-    question: `The prefix 'mis-' in 'mistake' means:`,
+    skill: "Multiple-Meaning Words",
+    question: `Which sentence uses "patch" to mean a small area of land?`,
     options: [
-      "again",
-      "not",
-      "wrongly",
-      "before",
+      "Grandma sewed a patch on my uniform.",
+      "The nurse put a patch over the cut.",
+      "The class planted vegetables in a patch behind the canteen.",
+      "The technician installed a patch for the computer program.",
     ],
     correctAnswer: 2,
-    explanation: `'Mis-' means wrongly or incorrectly. A mistake is something done wrongly.`
+    explanation: `In the garden sentence, "patch" means a small piece or area of land.`
   },
   {
     id: 23,
     type: "vocabulary",
-    skill: "Suffix -tion",
-    question: `Adding '-tion' to 'educate' creates 'education', which is:`,
+    skill: "Figurative Language",
+    question: `Nia said, "This new book is a treasure." What does she mean?`,
     options: [
-      "A verb",
-      "An adjective",
-      "A noun",
-      "An adverb",
+      "The book is locked in a chest.",
+      "The book is printed on gold paper.",
+      "The book cannot be borrowed.",
+      "The book is valuable and special to her.",
     ],
-    correctAnswer: 2,
-    explanation: `'-tion' turns a verb into a noun. Education is the noun form of educate.`
+    correctAnswer: 3,
+    explanation: `Nia is using a metaphor to show that the book is very valuable or special to her.`
   },
   {
     id: 24,
     type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'The classroom was a zoo after lunch.' This is a:`,
+    skill: "Word Parts",
+    question: `The students reread the instructions before planting the seedlings. What does the prefix "re-" in "reread" mean?`,
     options: [
-      "Simile",
-      "Metaphor",
-      "Personification",
-      "Alliteration",
+      "Again",
+      "Not",
+      "Before",
+      "Wrongly",
     ],
-    correctAnswer: 1,
-    explanation: `It directly compares the classroom to a zoo without using 'like' or 'as' — a metaphor.`
+    correctAnswer: 0,
+    explanation: `The prefix "re-" means again, so reread means read again.`
   },
   {
     id: 25,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `The athlete was EXHAUSTED after the long race. 'Exhausted' means:`,
+    question: `The donated books were arranged in categories such as stories, poems, and information books. What does "categories" mean?`,
     options: [
-      "energetic",
-      "angry",
-      "extremely tired",
-      "very hungry",
+      "Secret messages",
+      "Groups with similar features",
+      "Damaged pages",
+      "Very difficult words",
     ],
-    correctAnswer: 2,
-    explanation: `After a long race, an athlete would be extremely tired — exhausted.`
+    correctAnswer: 1,
+    explanation: `Stories, poems, and information books are groups of similar items, so "categories" means groups with similar features.`
   },
   {
     id: 26,
     type: "grammar",
-    skill: "Types of Nouns",
-    question: `Which noun is an ABSTRACT NOUN?`,
+    skill: "Subject-Verb Agreement",
+    question: `Choose the sentence that is written correctly.`,
     options: [
-      "table",
-      "teacher",
-      "happiness",
-      "book",
+      "The students waters the garden every morning.",
+      "The students water the garden every morning.",
+      "The students watering the garden every morning.",
+      "The students has watered the garden every morning.",
     ],
-    correctAnswer: 2,
-    explanation: `Abstract nouns name things we cannot physically touch or see. 'Happiness' is a feeling — abstract.`
+    correctAnswer: 1,
+    explanation: `The plural subject "students" agrees with the verb "water."`
   },
   {
     id: 27,
     type: "grammar",
-    skill: "Verbs",
-    question: `Which sentence contains a LINKING VERB?`,
+    skill: "Verb Tense",
+    question: `Choose the best verb to complete the sentence: Yesterday, the reading club ___ posters near the library.`,
     options: [
-      "She runs every morning",
-      "The soup smells delicious",
-      "He threw the ball",
-      "They played in the rain",
+      "hang",
+      "hangs",
+      "hung",
+      "will hang",
     ],
-    correctAnswer: 1,
-    explanation: `'Smells' is a linking verb — it connects the subject (soup) to a description (delicious).`
+    correctAnswer: 2,
+    explanation: `"Yesterday" shows past time, so the correct past-tense verb is "hung."`
   },
   {
     id: 28,
     type: "grammar",
-    skill: "Adjectives — Comparative",
-    question: `Choose the COMPARATIVE form of 'tall':`,
+    skill: "Pronoun Agreement",
+    question: `Choose the correct pronoun: Each student brought ___ own water bottle to the garden.`,
     options: [
-      "tallest",
-      "more tall",
-      "taller",
-      "tallly",
+      "their",
+      "our",
+      "your",
+      "his or her",
     ],
-    correctAnswer: 2,
-    explanation: `To compare two things, add '-er' to short adjectives. 'Taller' compares two heights.`
+    correctAnswer: 3,
+    explanation: `"Each student" is singular, so "his or her" agrees with it in this sentence.`
   },
   {
     id: 29,
     type: "grammar",
-    skill: "Adverbs",
-    question: `Which word is an ADVERB in: 'She spoke quietly to her friend.'?`,
+    skill: "Punctuation",
+    question: `Which sentence uses commas correctly in a list?`,
     options: [
-      "spoke",
-      "friend",
-      "quietly",
-      "she",
+      "We planted tomatoes, pak choi, and sweet peppers.",
+      "We planted, tomatoes pak choi and sweet peppers.",
+      "We planted tomatoes pak choi, and sweet peppers.",
+      "We planted tomatoes, pak choi and, sweet peppers.",
     ],
-    correctAnswer: 2,
-    explanation: `'Quietly' is an adverb — it tells HOW she spoke.`
+    correctAnswer: 0,
+    explanation: `Commas separate the items in the list: tomatoes, pak choi, and sweet peppers.`
   },
   {
     id: 30,
     type: "grammar",
-    skill: "Punctuation — Comma",
-    question: `Which sentence uses a comma CORRECTLY after an introductory phrase?`,
+    skill: "Capitalisation",
+    question: `Choose the sentence with correct capitalisation.`,
     options: [
-      "After the game we ate lunch",
-      "After the game, we ate lunch",
-      "After, the game we ate lunch",
-      "After the game we, ate lunch",
+      "mr. clarke opened the library on monday.",
+      "Mr. Clarke opened the library on Monday.",
+      "Mr. clarke opened the Library on monday.",
+      "mr. Clarke opened the library on Monday.",
     ],
     correctAnswer: 1,
-    explanation: `A comma is placed after an introductory phrase to separate it from the main clause.`
+    explanation: `Names, titles with names, and days of the week need capital letters: Mr. Clarke and Monday.`
   },
   {
     id: 31,
     type: "grammar",
-    skill: "Tense — Future",
-    question: `Which sentence is in the FUTURE TENSE?`,
+    skill: "Complete Sentences",
+    question: `Which option is a complete sentence?`,
     options: [
-      "She baked a cake",
-      "She bakes a cake",
-      "She will bake a cake",
-      "She is baking a cake",
+      "After lunch near the library.",
+      "Because the seedlings needed water.",
+      "The class checked the garden after lunch.",
+      "Carrying the box of donated books.",
     ],
     correctAnswer: 2,
-    explanation: `'Will bake' is the future tense — it describes something that has not happened yet.`
+    explanation: `"The class checked the garden after lunch" has a subject and a complete predicate.`
   },
   {
     id: 32,
     type: "grammar",
-    skill: "Pronouns — Object",
-    question: `Choose the correct OBJECT PRONOUN: 'The teacher gave the award to ___ .'`,
+    skill: "Apostrophes",
+    question: `Choose the sentence that shows possession correctly.`,
     options: [
-      "I",
-      "we",
-      "them",
-      "they",
+      "The clubs posters were bright.",
+      "The clubs' poster's were bright.",
+      "The club poster's were bright.",
+      "The club's posters were bright.",
     ],
-    correctAnswer: 2,
-    explanation: `Object pronouns (me, him, her, them, us) come after a verb or preposition. 'Them' is correct.`
+    correctAnswer: 3,
+    explanation: `"Club's" shows that the posters belong to one club.`
   },
   {
     id: 33,
     type: "grammar",
-    skill: "Conjunctions",
-    question: `Which conjunction shows CONTRAST?`,
+    skill: "Adjectives in Context",
+    question: `Choose the best adjective to complete the sentence: The ___ seedlings needed shade and water.`,
     options: [
-      "and",
-      "because",
-      "so",
-      "but",
+      "fragile",
+      "quickly",
+      "plant",
+      "under",
     ],
-    correctAnswer: 3,
-    explanation: `'But' joins two contrasting ideas (e.g., 'I wanted to go but it was raining').`
+    correctAnswer: 0,
+    explanation: `"Fragile" is an adjective that describes the seedlings as easily damaged.`
   },
   {
     id: 34,
     type: "grammar",
-    skill: "Apostrophe — Possession (plural)",
-    question: `Which shows correct possession for several girls?`,
+    skill: "Conjunctions",
+    question: `Choose the best word to join the ideas: The library had few books, ___ the club held a donation drive.`,
     options: [
-      "the girl's bag",
-      "the girls's bag",
-      "the girls' bags",
-      "the girls bags",
+      "or",
+      "so",
+      "but",
+      "although",
     ],
-    correctAnswer: 2,
-    explanation: `For a plural noun ending in s, add only an apostrophe: girls' bags.`
+    correctAnswer: 1,
+    explanation: `"So" shows the result: because the library had few books, the club held a donation drive.`
   },
   {
     id: 35,
     type: "grammar",
-    skill: "Sentence Fragments",
-    question: `Which is a COMPLETE SENTENCE?`,
+    skill: "Editing for Clarity",
+    question: `Which revision best fixes the sentence? "The students put labels beside the plants they were neat."`,
     options: [
-      "Running in the park",
-      "Because she was tired",
-      "The students completed the project on time",
-      "After the heavy rain",
+      "The students put labels beside the plants, they were neat.",
+      "The students put labels beside the plants they neat were.",
+      "The students put neat labels beside the plants.",
+      "The students neat put labels beside the plants.",
     ],
     correctAnswer: 2,
-    explanation: `A complete sentence has a subject and a predicate. 'The students completed the project on time' has both.`
+    explanation: `The revision clearly says that the labels were neat and removes the confusing wording.`
   },
   {
     id: 36,
     type: "writing",
-    skill: "Purpose",
-    question: `A student writes an article for the school newspaper about how plastic waste harms marine life. The purpose is to:`,
+    skill: "Audience and Purpose",
+    question: `Your class is making a poster to ask families to donate gently used books. Which sentence is best for the poster?`,
     options: [
-      "Entertain readers with a funny story",
-      "Persuade and inform readers about an environmental problem",
-      "Describe how plastic is made",
-      "Tell the history of the ocean",
+      "Please send clean, gently used books to help our library grow.",
+      "Books have been part of human history for many centuries.",
+      "Some shelves are made from wood, metal, or plastic.",
+      "I once read a funny book during the holiday.",
     ],
-    correctAnswer: 1,
-    explanation: `An article about environmental harm aims to inform and persuade readers to care about the issue.`
+    correctAnswer: 0,
+    explanation: `The best poster sentence clearly asks families to donate books and explains the helpful purpose.`
   },
   {
     id: 37,
     type: "writing",
-    skill: "Planning — Brainstorm",
-    question: `When a writer BRAINSTORMS ideas, they are:`,
+    skill: "Topic Sentence",
+    question: `Which topic sentence best begins a paragraph about caring for the school garden?`,
     options: [
-      "Editing their completed work",
-      "Jotting down any and all ideas before organising them",
-      "Writing their final draft",
-      "Proofreading for errors",
+      "Tomatoes can be red, green, or yellow.",
+      "Our school garden needs daily care from responsible students.",
+      "The canteen opens when the bell rings.",
+      "My favourite lunch is rice and peas.",
     ],
     correctAnswer: 1,
-    explanation: `Brainstorming is the creative phase where a writer generates many ideas freely before deciding which to use.`
+    explanation: `This sentence gives the main idea of a paragraph about caring for the school garden.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "Paragraph Structure",
-    question: `Which element CORRECTLY identifies the THREE main parts of a paragraph?`,
+    skill: "Supporting Details",
+    question: `A student writes: "The book donation drive was successful." Which detail best supports this idea?`,
     options: [
-      "Introduction, climax, resolution",
-      "Topic sentence, supporting details, concluding sentence",
-      "Title, body, bibliography",
-      "Hook, plot, theme",
+      "The library door is painted blue.",
+      "Mr. Clarke wears glasses at school.",
+      "By Friday, students had donated three boxes of useful books.",
+      "The reading club meets near the office.",
     ],
-    correctAnswer: 1,
-    explanation: `A well-structured paragraph has a topic sentence (main idea), supporting details (evidence/examples), and a concluding sentence.`
+    correctAnswer: 2,
+    explanation: `Three boxes of useful donated books is specific evidence that the drive was successful.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Audience",
-    question: `A student writes a poster to warn young children about road safety. Which language is MOST appropriate?`,
+    skill: "Ordering Ideas",
+    question: `Which order makes the most sense for instructions on planting a seedling?`,
     options: [
-      "Use long, complex sentences with technical vocabulary",
-      "Use simple words, short sentences, and bright colours",
-      "Use academic references and footnotes",
-      "Use mostly numbers and statistics",
+      "Water the plant, choose a spot, dig a hole, place the seedling.",
+      "Place the seedling, cover the roots, choose a spot, dig a hole.",
+      "Cover the roots, water the plant, choose a spot, dig a hole.",
+      "Choose a spot, dig a hole, place the seedling, cover the roots.",
     ],
-    correctAnswer: 1,
-    explanation: `For young children, simple, clear language and visual appeal are most effective.`
+    correctAnswer: 3,
+    explanation: `The logical order is to choose where to plant, dig the hole, place the seedling, and then cover the roots.`
   },
   {
     id: 40,
     type: "writing",
-    skill: "Editing",
-    question: `After finishing a first draft, a writer should:`,
+    skill: "Revision",
+    question: `A student wrote: "The library is good." Which revision gives the clearest detail?`,
     options: [
-      "Submit it immediately without reading it again",
-      "Delete the whole piece and start again",
-      "Read it carefully and make improvements",
-      "Ask someone else to rewrite it completely",
+      "The library has new storybooks, quiet tables, and a helpful reading club.",
+      "The library is very, very, very good for everyone.",
+      "The library is a place and it is at school.",
+      "The library is good because it is not bad.",
     ],
-    correctAnswer: 2,
-    explanation: `Reviewing and improving a first draft is called editing — it is an essential step in producing quality writing.`
+    correctAnswer: 0,
+    explanation: `The revision gives specific details that explain what makes the library useful.`
   }
 ]
 
@@ -685,6 +671,7 @@ export default function G5LaEasy4MockTest() {
   const [answers, setAnswers]             = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]           = useState(60 * 60)
   const [randomizedQuestions, setRandomizedQuestions] = useState<Question[]>([])
+  const hasSavedResult = useRef(false)
 
   const sourceQuestions = isPremium ? g5LaEasy4Questions : g5LaEasy4Questions.slice(0, FREE_QUESTION_LIMIT)
   const availableQuestions = randomizedQuestions.length > 0 ? randomizedQuestions : sourceQuestions
@@ -711,8 +698,29 @@ export default function G5LaEasy4MockTest() {
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
 
-  const calcScore  = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
+  const calcScore  = () => answers.reduce<number>((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct   = () => Math.round((calcScore() / totalQuestions) * 100)
+
+  useEffect(() => {
+    if (!showResults || !user?.id || hasSavedResult.current) return
+
+    hasSavedResult.current = true
+    const completedAtIso = new Date().toISOString()
+    void saveStudentTestResult({
+      parentId: user.id,
+      studentName: user?.childName ?? "Student",
+      grade: "grade5",
+      subject: "Literacy",
+      testName: "Easy 4",
+      difficulty: "Easy",
+      score: calcScore(),
+      totalQuestions,
+      percentage: scorePct(),
+      completedAt: completedAtIso,
+    }).catch(() => {
+      hasSavedResult.current = false
+    })
+  }, [showResults, user?.id, user?.childName, totalQuestions, answers])
 
   const getGrade = () => {
     const p = scorePct()
@@ -739,13 +747,14 @@ export default function G5LaEasy4MockTest() {
     setCurrentQuestion(0)
     setTimeLeft(60 * 60)
     setShowResults(false)
+    hasSavedResult.current = false
     setStarted(true)
   }
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
     setRandomizedQuestions([])
-    setAnswers(new Array(sourceQuestions.length).fill(null)); setTimeLeft(60 * 60)
+    setAnswers(new Array(sourceQuestions.length).fill(null)); setTimeLeft(60 * 60); hasSavedResult.current = false
   }
 
   const handleSubmit = () => {
