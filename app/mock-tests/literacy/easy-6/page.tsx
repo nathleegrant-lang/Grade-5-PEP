@@ -30,650 +30,644 @@ interface Question {
 const g5LaEasy6Questions: Question[] = [
   {
     id: 1,
-    type: "reading",
-    skill: "Main Idea",
+    type: `reading`,
+    skill: `Main Idea`,
     question: `Read the passage then answer the question.
 
 "The School Environmental Club met behind the Grade 5 block on Friday morning. Mrs. Reid showed the pupils how to loosen the soil before placing young trees near the fence. Each group watered one tree and added dry leaves around it to keep the ground moist. Before leaving, the club made a schedule so that different classes would check the trees and pick up litter around the school grounds."
 
-Which answer best matches the passage?`,
+What is the passage mainly about?`,
     options: [
-      "to entertain with a fantasy adventure",
-      "to describe the pupils’ organized school activity",
-      "to explain why sports day was postponed",
-      "to list rules for a spelling contest",
+      `A teacher planning a sports match`,
+      `Pupils working together to care for the school environment`,
+      `A class learning how to paint a fence`,
+      `Families cleaning a community centre`,
     ],
-    correctAnswer: 0,
-    explanation: `The passage shows school environmental club as a planned, helpful activity involving pupils.`
+    correctAnswer: 1,
+    explanation: `The whole passage focuses on the Environmental Club planting trees, making a care schedule, and picking up litter at school.`,
   },
   {
     id: 2,
-    type: "reading",
-    skill: "Detail",
+    type: `reading`,
+    skill: `Detail`,
     question: `Read the passage then answer the question.
 
 "The School Environmental Club met behind the Grade 5 block on Friday morning. Mrs. Reid showed the pupils how to loosen the soil before placing young trees near the fence. Each group watered one tree and added dry leaves around it to keep the ground moist. Before leaving, the club made a schedule so that different classes would check the trees and pick up litter around the school grounds."
 
-Which answer best matches the passage?`,
+Where did the School Environmental Club meet?`,
     options: [
-      "They cancelled the activity after assembly.",
-      "They used a schedule or record to guide the activity.",
-      "They sold tickets at the gate.",
-      "They worked alone without a teacher.",
+      `Behind the Grade 5 block`,
+      `At the community centre`,
+      `Near the bus stop`,
+      `Inside the library`,
     ],
-    correctAnswer: 1,
-    explanation: `The passage shows school environmental club as a planned, helpful activity involving pupils.`
+    correctAnswer: 0,
+    explanation: `The passage says the club met behind the Grade 5 block on Friday morning.`,
   },
   {
     id: 3,
-    type: "reading",
-    skill: "Inference",
+    type: `reading`,
+    skill: `Detail`,
     question: `Read the passage then answer the question.
 
 "The School Environmental Club met behind the Grade 5 block on Friday morning. Mrs. Reid showed the pupils how to loosen the soil before placing young trees near the fence. Each group watered one tree and added dry leaves around it to keep the ground moist. Before leaving, the club made a schedule so that different classes would check the trees and pick up litter around the school grounds."
 
-Which answer best matches the passage?`,
+What did Mrs. Reid show the pupils how to do before planting the trees?`,
     options: [
-      "Only adults did the work.",
-      "The pupils were careless.",
-      "The school was closed.",
-      "The activity was planned and helpful.",
+      `Tie ribbons to the fence`,
+      `Loosen the soil`,
+      `Sweep the sidewalks`,
+      `Hand out gloves`,
     ],
-    correctAnswer: 2,
-    explanation: `The passage shows school environmental club as a planned, helpful activity involving pupils.`
+    correctAnswer: 1,
+    explanation: `Mrs. Reid showed the pupils how to loosen the soil before placing the young trees near the fence.`,
   },
   {
     id: 4,
-    type: "reading",
-    skill: "Vocabulary in Context",
+    type: `reading`,
+    skill: `Cause and Effect`,
     question: `Read the passage then answer the question.
 
 "The School Environmental Club met behind the Grade 5 block on Friday morning. Mrs. Reid showed the pupils how to loosen the soil before placing young trees near the fence. Each group watered one tree and added dry leaves around it to keep the ground moist. Before leaving, the club made a schedule so that different classes would check the trees and pick up litter around the school grounds."
 
-Which answer best matches the passage?`,
+Why did the pupils add dry leaves around each tree?`,
     options: [
-      "comfortable means suitable for the person",
-      "comfortable means broken into pieces",
-      "comfortable means very expensive",
-      "comfortable means impossible to find",
+      `To make the trees look taller`,
+      `To keep the ground moist`,
+      `To hide litter from visitors`,
+      `To mark the end of the fence`,
     ],
-    correctAnswer: 3,
-    explanation: `The passage shows school environmental club as a planned, helpful activity involving pupils.`
+    correctAnswer: 1,
+    explanation: `The passage directly states that the pupils added dry leaves around each tree to keep the ground moist.`,
   },
   {
     id: 5,
-    type: "reading",
-    skill: "Author’s Purpose",
+    type: `reading`,
+    skill: `Inference`,
     question: `Read the passage then answer the question.
 
 "The School Environmental Club met behind the Grade 5 block on Friday morning. Mrs. Reid showed the pupils how to loosen the soil before placing young trees near the fence. Each group watered one tree and added dry leaves around it to keep the ground moist. Before leaving, the club made a schedule so that different classes would check the trees and pick up litter around the school grounds."
 
-Which answer best matches the passage?`,
+What can you infer from the club making a schedule before leaving?`,
     options: [
-      "to persuade readers to avoid school clubs",
-      "to inform readers about a useful school event",
-      "to describe a storm at school",
-      "to compare two famous athletes",
+      `They wanted the trees and grounds to be cared for regularly`,
+      `They did not enjoy the activity`,
+      `They planned to stop helping after Friday`,
+      `They forgot where the trees were planted`,
     ],
     correctAnswer: 0,
-    explanation: `The passage shows school environmental club as a planned, helpful activity involving pupils.`
+    explanation: `A schedule for different classes to check trees and pick up litter shows that the club planned regular care.`,
   },
   {
     id: 6,
-    type: "reading",
-    skill: "Sequence",
+    type: `vocabulary`,
+    skill: `Vocabulary in Context`,
     question: `Read the passage then answer the question.
 
 "The School Environmental Club met behind the Grade 5 block on Friday morning. Mrs. Reid showed the pupils how to loosen the soil before placing young trees near the fence. Each group watered one tree and added dry leaves around it to keep the ground moist. Before leaving, the club made a schedule so that different classes would check the trees and pick up litter around the school grounds."
 
-Which answer best matches the passage?`,
+In the passage, the word "moist" most nearly means:`,
     options: [
-      "First they went home; then they listened to directions.",
-      "First they received prizes; then they began planning.",
-      "First visitors left; then the event opened.",
-      "First pupils planned; then they carried out the task.",
+      `slightly wet`,
+      `very noisy`,
+      `full of stones`,
+      `completely dry`,
     ],
-    correctAnswer: 1,
-    explanation: `The passage shows school environmental club as a planned, helpful activity involving pupils.`
+    correctAnswer: 0,
+    explanation: `The dry leaves helped keep water in the soil, so "moist" means slightly wet.`,
   },
   {
     id: 7,
-    type: "reading",
-    skill: "Cause and Effect",
+    type: `vocabulary`,
+    skill: `Vocabulary in Context`,
     question: `Read the passage then answer the question.
 
 "The School Environmental Club met behind the Grade 5 block on Friday morning. Mrs. Reid showed the pupils how to loosen the soil before placing young trees near the fence. Each group watered one tree and added dry leaves around it to keep the ground moist. Before leaving, the club made a schedule so that different classes would check the trees and pick up litter around the school grounds."
 
-Which answer best matches the passage?`,
+In the passage, the word "loosen" most nearly means:`,
     options: [
-      "Because the bell rang, the trees became taller.",
-      "Because pupils worked together, the activity was successful.",
-      "Because no one listened, the fair opened early.",
-      "Because it rained indoors, the books disappeared.",
+      `make less tight or packed`,
+      `paint with bright colours`,
+      `carry to another place`,
+      `cover completely`,
     ],
-    correctAnswer: 2,
-    explanation: `The passage shows school environmental club as a planned, helpful activity involving pupils.`
+    correctAnswer: 0,
+    explanation: `The pupils loosened the soil before planting, which means they made the packed soil less tight.`,
   },
   {
     id: 8,
-    type: "reading",
-    skill: "Text Evidence",
+    type: `vocabulary`,
+    skill: `Vocabulary in Context`,
     question: `Read the passage then answer the question.
 
 "The School Environmental Club met behind the Grade 5 block on Friday morning. Mrs. Reid showed the pupils how to loosen the soil before placing young trees near the fence. Each group watered one tree and added dry leaves around it to keep the ground moist. Before leaving, the club made a schedule so that different classes would check the trees and pick up litter around the school grounds."
 
-Which answer best matches the passage?`,
+In the passage, the word "schedule" means:`,
     options: [
-      "A sentence about teamwork and careful records supports the answer.",
-      "A sentence about a football match supports the answer.",
-      "A sentence about a lost puppy supports the answer.",
-      "A sentence about a birthday party supports the answer.",
+      `a list showing when people should do tasks`,
+      `a tool used to dig holes`,
+      `a prize for the best class`,
+      `a bag for collecting leaves`,
     ],
-    correctAnswer: 3,
-    explanation: `The passage shows school environmental club as a planned, helpful activity involving pupils.`
+    correctAnswer: 0,
+    explanation: `The schedule showed different classes when to check the trees and pick up litter.`,
   },
   {
     id: 9,
-    type: "reading",
-    skill: "Main Idea",
+    type: `reading`,
+    skill: `Sequence`,
     question: `Read the passage then answer the question.
 
-"On Saturday, families gathered near the community centre for Clean-Up Day. Mr. Brown gave everyone gloves and bags, and the children worked in pairs along the lane. They sorted plastic bottles from leaves and swept the bus stop. By noon, the neighbourhood looked brighter, and the team agreed to remind others to keep the drains clear."
+"The School Environmental Club met behind the Grade 5 block on Friday morning. Mrs. Reid showed the pupils how to loosen the soil before placing young trees near the fence. Each group watered one tree and added dry leaves around it to keep the ground moist. Before leaving, the club made a schedule so that different classes would check the trees and pick up litter around the school grounds."
 
-What does the passage help the reader understand?`,
+Which event happened last in the passage?`,
     options: [
-      "The community activity helped others through shared effort.",
-      "The event was mainly about buying new uniforms.",
-      "The children avoided helping younger pupils.",
-      "The passage focuses on a private family trip.",
+      `Mrs. Reid showed pupils how to loosen soil.`,
+      `Each group watered one tree.`,
+      `The club made a schedule for different classes.`,
+      `The club met behind the Grade 5 block.`,
     ],
-    correctAnswer: 0,
-    explanation: `The details show community clean-up day brought people together for a helpful purpose.`
+    correctAnswer: 2,
+    explanation: `The final sentence says that before leaving, the club made a schedule for different classes.`,
   },
   {
     id: 10,
-    type: "reading",
-    skill: "Detail",
+    type: `reading`,
+    skill: `Author’s Purpose`,
     question: `Read the passage then answer the question.
 
-"On Saturday, families gathered near the community centre for Clean-Up Day. Mr. Brown gave everyone gloves and bags, and the children worked in pairs along the lane. They sorted plastic bottles from leaves and swept the bus stop. By noon, the neighbourhood looked brighter, and the team agreed to remind others to keep the drains clear."
+"The School Environmental Club met behind the Grade 5 block on Friday morning. Mrs. Reid showed the pupils how to loosen the soil before placing young trees near the fence. Each group watered one tree and added dry leaves around it to keep the ground moist. Before leaving, the club made a schedule so that different classes would check the trees and pick up litter around the school grounds."
 
-What does the passage help the reader understand?`,
+Why did the author most likely write this passage?`,
     options: [
-      "The children avoided helping younger pupils.",
-      "The event was mainly about buying new uniforms.",
-      "The passage focuses on a private family trip.",
-      "The community activity helped others through shared effort.",
+      `To describe how pupils helped improve their school grounds`,
+      `To persuade readers to buy young trees`,
+      `To explain how to bake sweet potato pudding`,
+      `To tell a funny story about a lost rake`,
     ],
-    correctAnswer: 1,
-    explanation: `The details show community clean-up day brought people together for a helpful purpose.`
+    correctAnswer: 0,
+    explanation: `The passage describes the club’s actions to plant trees, water them, and keep the grounds clean.`,
   },
   {
     id: 11,
-    type: "reading",
-    skill: "Inference",
+    type: `reading`,
+    skill: `Main Idea`,
     question: `Read the passage then answer the question.
 
-"On Saturday, families gathered near the community centre for Clean-Up Day. Mr. Brown gave everyone gloves and bags, and the children worked in pairs along the lane. They sorted plastic bottles from leaves and swept the bus stop. By noon, the neighbourhood looked brighter, and the team agreed to remind others to keep the drains clear."
+"On Saturday, families gathered at the community centre for Clean-Up Day. Mr. Brown handed out gloves, garbage bags, and rakes. Teams swept the sidewalks, removed plastic bottles from the drain, and planted bright flowers near the bus stop. By noon, the area looked neat and welcoming. The volunteers promised to keep working together so the community would stay clean."
 
-What does the passage help the reader understand?`,
+What is the passage mainly about?`,
     options: [
-      "The passage focuses on a private family trip.",
-      "The community activity helped others through shared effort.",
-      "The children avoided helping younger pupils.",
-      "The event was mainly about buying new uniforms.",
+      `Volunteers working together to clean and beautify a community area`,
+      `A bus stop being moved to a new road`,
+      `Mr. Brown teaching families to cook lunch`,
+      `Children playing games at the community centre`,
     ],
-    correctAnswer: 2,
-    explanation: `The details show community clean-up day brought people together for a helpful purpose.`
+    correctAnswer: 0,
+    explanation: `The passage focuses on families volunteering to clean sidewalks, clear a drain, plant flowers, and keep the community clean.`,
   },
   {
     id: 12,
-    type: "reading",
-    skill: "Vocabulary in Context",
+    type: `reading`,
+    skill: `Detail`,
     question: `Read the passage then answer the question.
 
-"On Saturday, families gathered near the community centre for Clean-Up Day. Mr. Brown gave everyone gloves and bags, and the children worked in pairs along the lane. They sorted plastic bottles from leaves and swept the bus stop. By noon, the neighbourhood looked brighter, and the team agreed to remind others to keep the drains clear."
+"On Saturday, families gathered at the community centre for Clean-Up Day. Mr. Brown handed out gloves, garbage bags, and rakes. Teams swept the sidewalks, removed plastic bottles from the drain, and planted bright flowers near the bus stop. By noon, the area looked neat and welcoming. The volunteers promised to keep working together so the community would stay clean."
 
-What does the passage help the reader understand?`,
+What did Mr. Brown hand out?`,
     options: [
-      "The community activity helped others through shared effort.",
-      "The event was mainly about buying new uniforms.",
-      "The children avoided helping younger pupils.",
-      "The passage focuses on a private family trip.",
+      `Paint, brushes, and ladders`,
+      `Gloves, garbage bags, and rakes`,
+      `Books, pencils, and rulers`,
+      `Seeds, baskets, and tickets`,
     ],
-    correctAnswer: 3,
-    explanation: `The details show community clean-up day brought people together for a helpful purpose.`
+    correctAnswer: 1,
+    explanation: `The passage says Mr. Brown handed out gloves, garbage bags, and rakes.`,
   },
   {
     id: 13,
-    type: "reading",
-    skill: "Author’s Purpose",
+    type: `reading`,
+    skill: `Detail`,
     question: `Read the passage then answer the question.
 
-"On Saturday, families gathered near the community centre for Clean-Up Day. Mr. Brown gave everyone gloves and bags, and the children worked in pairs along the lane. They sorted plastic bottles from leaves and swept the bus stop. By noon, the neighbourhood looked brighter, and the team agreed to remind others to keep the drains clear."
+"On Saturday, families gathered at the community centre for Clean-Up Day. Mr. Brown handed out gloves, garbage bags, and rakes. Teams swept the sidewalks, removed plastic bottles from the drain, and planted bright flowers near the bus stop. By noon, the area looked neat and welcoming. The volunteers promised to keep working together so the community would stay clean."
 
-What does the passage help the reader understand?`,
+What did teams remove from the drain?`,
     options: [
-      "The community activity helped others through shared effort.",
-      "The event was mainly about buying new uniforms.",
-      "The children avoided helping younger pupils.",
-      "The passage focuses on a private family trip.",
+      `Plastic bottles`,
+      `Bright flowers`,
+      `Young trees`,
+      `Bus tickets`,
     ],
     correctAnswer: 0,
-    explanation: `The details show community clean-up day brought people together for a helpful purpose.`
+    explanation: `The passage states that teams removed plastic bottles from the drain.`,
   },
   {
     id: 14,
-    type: "reading",
-    skill: "Compare Ideas",
+    type: `reading`,
+    skill: `Sequence`,
     question: `Read the passage then answer the question.
 
-"On Saturday, families gathered near the community centre for Clean-Up Day. Mr. Brown gave everyone gloves and bags, and the children worked in pairs along the lane. They sorted plastic bottles from leaves and swept the bus stop. By noon, the neighbourhood looked brighter, and the team agreed to remind others to keep the drains clear."
+"On Saturday, families gathered at the community centre for Clean-Up Day. Mr. Brown handed out gloves, garbage bags, and rakes. Teams swept the sidewalks, removed plastic bottles from the drain, and planted bright flowers near the bus stop. By noon, the area looked neat and welcoming. The volunteers promised to keep working together so the community would stay clean."
 
-What does the passage help the reader understand?`,
+When did the area look neat and welcoming?`,
     options: [
-      "The children avoided helping younger pupils.",
-      "The event was mainly about buying new uniforms.",
-      "The passage focuses on a private family trip.",
-      "The community activity helped others through shared effort.",
+      `Before sunrise`,
+      `By noon`,
+      `Late at night`,
+      `The next Friday morning`,
     ],
     correctAnswer: 1,
-    explanation: `The details show community clean-up day brought people together for a helpful purpose.`
+    explanation: `The passage says, "By noon, the area looked neat and welcoming."`,
   },
   {
     id: 15,
-    type: "reading",
-    skill: "Problem and Solution",
+    type: `reading`,
+    skill: `Inference`,
     question: `Read the passage then answer the question.
 
-"On Saturday, families gathered near the community centre for Clean-Up Day. Mr. Brown gave everyone gloves and bags, and the children worked in pairs along the lane. They sorted plastic bottles from leaves and swept the bus stop. By noon, the neighbourhood looked brighter, and the team agreed to remind others to keep the drains clear."
+"On Saturday, families gathered at the community centre for Clean-Up Day. Mr. Brown handed out gloves, garbage bags, and rakes. Teams swept the sidewalks, removed plastic bottles from the drain, and planted bright flowers near the bus stop. By noon, the area looked neat and welcoming. The volunteers promised to keep working together so the community would stay clean."
 
-What does the passage help the reader understand?`,
+What can you infer about the volunteers?`,
     options: [
-      "The passage focuses on a private family trip.",
-      "The community activity helped others through shared effort.",
-      "The children avoided helping younger pupils.",
-      "The event was mainly about buying new uniforms.",
+      `They cared about making their community cleaner`,
+      `They wanted the community centre to close`,
+      `They refused to work in teams`,
+      `They only came to watch Mr. Brown`,
     ],
-    correctAnswer: 2,
-    explanation: `The details show community clean-up day brought people together for a helpful purpose.`
+    correctAnswer: 0,
+    explanation: `Their cleaning, planting, and promise to keep working together show that they cared about the community.`,
   },
   {
     id: 16,
-    type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about tree planting day, the word “steady” is used in context. Which option gives the best meaning?`,
+    type: `vocabulary`,
+    skill: `Vocabulary in Context`,
+    question: `Read the passage then answer the question.
+
+"On Saturday, families gathered at the community centre for Clean-Up Day. Mr. Brown handed out gloves, garbage bags, and rakes. Teams swept the sidewalks, removed plastic bottles from the drain, and planted bright flowers near the bus stop. By noon, the area looked neat and welcoming. The volunteers promised to keep working together so the community would stay clean."
+
+In the passage, the word "volunteers" means people who:`,
     options: [
-      "In the sentence, “steady” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      `help willingly without being forced`,
+      `sell tickets at a gate`,
+      `drive buses every morning`,
+      `write signs for homework`,
     ],
-    correctAnswer: 3,
-    explanation: `Context clues in the school or community situation show that “steady” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `The families helped clean the area and promised to keep working together, so "volunteers" means people who help willingly.`,
   },
   {
     id: 17,
-    type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about tree planting day, the word “gently” is used in context. Which option gives the best meaning?`,
+    type: `vocabulary`,
+    skill: `Vocabulary in Context`,
+    question: `Read the passage then answer the question.
+
+"On Saturday, families gathered at the community centre for Clean-Up Day. Mr. Brown handed out gloves, garbage bags, and rakes. Teams swept the sidewalks, removed plastic bottles from the drain, and planted bright flowers near the bus stop. By noon, the area looked neat and welcoming. The volunteers promised to keep working together so the community would stay clean."
+
+In the passage, "welcoming" most nearly means:`,
     options: [
-      "In the sentence, “gently” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      `friendly and pleasant to enter`,
+      `locked and dangerous`,
+      `dark and empty`,
+      `noisy and confusing`,
     ],
     correctAnswer: 0,
-    explanation: `Context clues in the school or community situation show that “gently” has the practical meaning used in the correct option.`
+    explanation: `After the clean-up, the area looked neat and welcoming, meaning it seemed friendly and pleasant.`,
   },
   {
     id: 18,
-    type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about tree planting day, the word “bright” is used in context. Which option gives the best meaning?`,
+    type: `vocabulary`,
+    skill: `Vocabulary in Context`,
+    question: `Read the passage then answer the question.
+
+"On Saturday, families gathered at the community centre for Clean-Up Day. Mr. Brown handed out gloves, garbage bags, and rakes. Teams swept the sidewalks, removed plastic bottles from the drain, and planted bright flowers near the bus stop. By noon, the area looked neat and welcoming. The volunteers promised to keep working together so the community would stay clean."
+
+In the passage, "gathered" most nearly means:`,
     options: [
-      "It names a place far from the school.",
-      "It means the opposite of what the sentence suggests.",
-      "It means a loud sound made by traffic.",
-      "In the sentence, “bright” means a sensible meaning that fits the activity.",
+      `came together in one place`,
+      `ran away quickly`,
+      `argued loudly`,
+      `fell asleep`,
     ],
-    correctAnswer: 1,
-    explanation: `Context clues in the school or community situation show that “bright” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `Families gathered at the community centre, meaning they came together there for Clean-Up Day.`,
   },
   {
     id: 19,
-    type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about tree planting day, the word “careful” is used in context. Which option gives the best meaning?`,
+    type: `reading`,
+    skill: `Cause and Effect`,
+    question: `Read the passage then answer the question.
+
+"On Saturday, families gathered at the community centre for Clean-Up Day. Mr. Brown handed out gloves, garbage bags, and rakes. Teams swept the sidewalks, removed plastic bottles from the drain, and planted bright flowers near the bus stop. By noon, the area looked neat and welcoming. The volunteers promised to keep working together so the community would stay clean."
+
+What happened because the teams cleaned and planted flowers?`,
     options: [
-      "It means a loud sound made by traffic.",
-      "In the sentence, “careful” means a sensible meaning that fits the activity.",
-      "It names a place far from the school.",
-      "It means the opposite of what the sentence suggests.",
+      `The area looked neat and welcoming`,
+      `The community centre disappeared`,
+      `The bus stop was closed forever`,
+      `Mr. Brown cancelled Clean-Up Day`,
     ],
-    correctAnswer: 2,
-    explanation: `Context clues in the school or community situation show that “careful” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `The teams swept, removed bottles, and planted flowers; as a result, the area looked neat and welcoming by noon.`,
   },
   {
     id: 20,
-    type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about tree planting day, the word “useful” is used in context. Which option gives the best meaning?`,
+    type: `reading`,
+    skill: `Theme`,
+    question: `Read the passage then answer the question.
+
+"On Saturday, families gathered at the community centre for Clean-Up Day. Mr. Brown handed out gloves, garbage bags, and rakes. Teams swept the sidewalks, removed plastic bottles from the drain, and planted bright flowers near the bus stop. By noon, the area looked neat and welcoming. The volunteers promised to keep working together so the community would stay clean."
+
+Which lesson best fits the passage?`,
     options: [
-      "In the sentence, “useful” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      `Working together can improve a shared space`,
+      `Only one person should do community work`,
+      `Clean places do not need regular care`,
+      `Flowers should never be planted near roads`,
     ],
-    correctAnswer: 3,
-    explanation: `Context clues in the school or community situation show that “useful” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `The volunteers worked as teams and promised continued effort, showing that cooperation can improve a shared space.`,
   },
   {
     id: 21,
-    type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about tree planting day, the word “purpose” is used in context. Which option gives the best meaning?`,
+    type: `grammar`,
+    skill: `Subject-Verb Agreement`,
+    question: `Choose the sentence with correct subject-verb agreement.`,
     options: [
-      "In the sentence, “purpose” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      `The pupils waters the trees.`,
+      `The pupils water the trees.`,
+      `The pupils watering the trees.`,
+      `The pupils is water the trees.`,
     ],
-    correctAnswer: 0,
-    explanation: `Context clues in the school or community situation show that “purpose” has the practical meaning used in the correct option.`
+    correctAnswer: 1,
+    explanation: `"Pupils" is plural, so it needs the plural verb "water."`,
   },
   {
     id: 22,
-    type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about tree planting day, the word “encouraged” is used in context. Which option gives the best meaning?`,
+    type: `grammar`,
+    skill: `Verb Tense`,
+    question: `Choose the sentence written in the past tense.`,
     options: [
-      "It names a place far from the school.",
-      "It means the opposite of what the sentence suggests.",
-      "It means a loud sound made by traffic.",
-      "In the sentence, “encouraged” means a sensible meaning that fits the activity.",
+      `The families gather at the centre.`,
+      `The families will gather at the centre.`,
+      `The families gathered at the centre.`,
+      `The families are gathering at the centre.`,
     ],
-    correctAnswer: 1,
-    explanation: `Context clues in the school or community situation show that “encouraged” has the practical meaning used in the correct option.`
+    correctAnswer: 2,
+    explanation: `"Gathered" is the past-tense form of the verb.`,
   },
   {
     id: 23,
-    type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about tree planting day, the word “materials” is used in context. Which option gives the best meaning?`,
+    type: `grammar`,
+    skill: `Pronouns`,
+    question: `Choose the best pronoun to complete the sentence: Mrs. Reid showed the pupils how to plant trees, and ___ listened carefully.`,
     options: [
-      "It means a loud sound made by traffic.",
-      "In the sentence, “materials” means a sensible meaning that fits the activity.",
-      "It names a place far from the school.",
-      "It means the opposite of what the sentence suggests.",
+      `they`,
+      `he`,
+      `it`,
+      `she`,
     ],
-    correctAnswer: 2,
-    explanation: `Context clues in the school or community situation show that “materials” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `The pronoun "they" correctly refers to the plural noun "pupils."`,
   },
   {
     id: 24,
-    type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about tree planting day, the word “displayed” is used in context. Which option gives the best meaning?`,
+    type: `grammar`,
+    skill: `Capitalization`,
+    question: `Choose the sentence with correct capitalization.`,
     options: [
-      "In the sentence, “displayed” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      `on saturday, families gathered at the community centre.`,
+      `On saturday, families gathered at the community centre.`,
+      `On Saturday, families gathered at the community centre.`,
+      `on Saturday, Families gathered at the community centre.`,
     ],
-    correctAnswer: 3,
-    explanation: `Context clues in the school or community situation show that “displayed” has the practical meaning used in the correct option.`
+    correctAnswer: 2,
+    explanation: `The first word of a sentence and the day of the week, "Saturday," must be capitalized.`,
   },
   {
     id: 25,
-    type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about tree planting day, the word “pride” is used in context. Which option gives the best meaning?`,
+    type: `grammar`,
+    skill: `Punctuation`,
+    question: `Choose the sentence with correct punctuation.`,
     options: [
-      "In the sentence, “pride” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      `Mr. Brown handed out gloves garbage bags and rakes.`,
+      `Mr. Brown handed out gloves, garbage bags, and rakes.`,
+      `Mr Brown handed out gloves, garbage bags and rakes`,
+      `Mr. Brown handed out, gloves garbage bags, and rakes.`,
     ],
-    correctAnswer: 0,
-    explanation: `Context clues in the school or community situation show that “pride” has the practical meaning used in the correct option.`
+    correctAnswer: 1,
+    explanation: `Commas correctly separate the items in the list, and the sentence ends with a period.`,
   },
   {
     id: 26,
-    type: "grammar",
-    skill: "Subject-Verb Agreement",
-    question: `The club ___ the plants every Wednesday.`,
+    type: `grammar`,
+    skill: `Complete Sentence`,
+    question: `Which option is a complete sentence?`,
     options: [
-      "watering",
-      "water",
-      "were water",
-      "waters",
+      `After the clean-up day.`,
+      `Because the pupils watered the trees.`,
+      `The volunteers swept the sidewalks.`,
+      `Near the fence behind the Grade 5 block.`,
     ],
-    correctAnswer: 1,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 2,
+    explanation: `"The volunteers swept the sidewalks" has a subject and a complete predicate.`,
   },
   {
     id: 27,
-    type: "grammar",
-    skill: "Verb Tense",
-    question: `Yesterday, the pupils ___ their display.`,
+    type: `grammar`,
+    skill: `Adjectives`,
+    question: `Which word is an adjective in this sentence? The bright flowers grew near the bus stop.`,
     options: [
-      "preparing",
-      "prepared",
-      "prepares",
-      "prepare",
+      `bright`,
+      `grew`,
+      `near`,
+      `stop`,
     ],
-    correctAnswer: 2,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 0,
+    explanation: `"Bright" describes the noun "flowers," so it is an adjective.`,
   },
   {
     id: 28,
-    type: "grammar",
-    skill: "Pronoun Reference",
-    question: `Maya lent Jada a ruler because ___ had an extra one.`,
+    type: `grammar`,
+    skill: `Conjunctions`,
+    question: `Choose the best word to join the ideas: The club planted trees, ___ the classes checked them later.`,
     options: [
-      "she",
-      "they",
-      "it",
-      "we",
+      `or`,
+      `but`,
+      `and`,
+      `because`,
     ],
-    correctAnswer: 3,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 2,
+    explanation: `"And" correctly joins two related actions that both happened.`,
   },
   {
     id: 29,
-    type: "grammar",
-    skill: "Punctuation",
-    question: `Which sentence is punctuated correctly?`,
+    type: `grammar`,
+    skill: `Comparative Adjectives`,
+    question: `Choose the sentence that uses a comparative adjective correctly.`,
     options: [
-      "“Please bring gloves,” said Mr. Brown.",
-      "“Please bring gloves” said Mr. Brown.",
-      "Please bring gloves, said Mr. Brown.",
-      "“Please bring gloves said Mr. Brown.”",
+      `The school yard looked cleaner after the club worked.`,
+      `The school yard looked cleanest than before.`,
+      `The school yard looked more cleanest after work.`,
+      `The school yard looked clean than before.`,
     ],
     correctAnswer: 0,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    explanation: `"Cleaner" correctly compares how the school yard looked after the work with how it looked before.`,
   },
   {
     id: 30,
-    type: "grammar",
-    skill: "Adjective Use",
-    question: `Choose the sentence with the best describing word.`,
+    type: `grammar`,
+    skill: `Apostrophes`,
+    question: `Choose the sentence with the apostrophe used correctly.`,
     options: [
-      "Neatly poster caught the visitors.",
-      "The poster caught attention neat.",
-      "The poster neat caught attention.",
-      "The neat poster caught the visitors’ attention.",
+      `The clubs schedule was helpful.`,
+      `The club’s schedule was helpful.`,
+      `The clubs’ schedule were helpful.`,
+      `The club schedule’s was helpful.`,
     ],
     correctAnswer: 1,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    explanation: `"Club’s" correctly shows that the schedule belonged to one club.`,
   },
   {
     id: 31,
-    type: "grammar",
-    skill: "Conjunctions",
-    question: `Choose the best word: We packed water ___ the afternoon was hot.`,
+    type: `writing`,
+    skill: `Topic Sentence`,
+    question: `Which is the best topic sentence for a paragraph about the School Environmental Club?`,
     options: [
-      "so",
-      "because",
-      "or",
-      "but",
+      `The School Environmental Club helped make the school grounds cleaner and greener.`,
+      `Mrs. Reid wore a blue shirt on Friday.`,
+      `Some trees are taller than houses.`,
+      `I like lunch more than recess.`,
     ],
-    correctAnswer: 2,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 0,
+    explanation: `The best topic sentence clearly introduces the main idea of the club improving the school grounds.`,
   },
   {
     id: 32,
-    type: "grammar",
-    skill: "Complete Sentence",
-    question: `Which is a complete sentence?`,
+    type: `writing`,
+    skill: `Supporting Detail`,
+    question: `Which sentence best supports this topic: Clean-Up Day improved the community area.`,
     options: [
-      "The students shared books with Grade 1.",
-      "After the bell near the gate.",
-      "Because the table with cards.",
-      "The clean bags on Saturday.",
+      `Teams swept the sidewalks and removed plastic bottles from the drain.`,
+      `My cousin has a red bicycle.`,
+      `Saturday is after Friday.`,
+      `Some people enjoy watching television.`,
     ],
-    correctAnswer: 3,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 0,
+    explanation: `Sweeping sidewalks and removing bottles directly supports the idea that Clean-Up Day improved the area.`,
   },
   {
     id: 33,
-    type: "grammar",
-    skill: "Comma in a Series",
-    question: `Which sentence uses commas correctly?`,
+    type: `writing`,
+    skill: `Concluding Sentence`,
+    question: `Which is the best concluding sentence for a paragraph about volunteers cleaning a community?`,
     options: [
-      "We need pencils, glue, paper, and string.",
-      "We need pencils glue, paper and string.",
-      "We need, pencils glue paper, and string.",
-      "We need pencils, glue paper and, string.",
+      `Their teamwork showed that everyone can help keep the community clean.`,
+      `Mr. Brown handed out gloves first.`,
+      `The bus stop is near the road.`,
+      `Garbage bags can be black or white.`,
     ],
     correctAnswer: 0,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    explanation: `A concluding sentence should wrap up the paragraph’s main idea about teamwork and keeping the community clean.`,
   },
   {
     id: 34,
-    type: "grammar",
-    skill: "Possessive Noun",
-    question: `Choose the correct possessive form.`,
+    type: `writing`,
+    skill: `Sentence Combining`,
+    question: `Which sentence best combines these ideas? The pupils watered the trees. The pupils added dry leaves around them.`,
     options: [
-      "The classes chart was full.",
-      "The class chart’s was full.",
-      "The classs chart was full.",
-      "The class’s chart was full.",
+      `The pupils watered the trees and added dry leaves around them.`,
+      `The pupils watered the trees, the pupils added.`,
+      `Added dry leaves around them the pupils watered.`,
+      `The trees watered the pupils and dry leaves.`,
     ],
-    correctAnswer: 1,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 0,
+    explanation: `The best combined sentence joins the two related actions clearly with "and."`,
   },
   {
     id: 35,
-    type: "grammar",
-    skill: "Sentence Combining",
-    question: `Which combines the ideas best?`,
+    type: `writing`,
+    skill: `Best Word Choice`,
+    question: `Which word best completes the sentence? The volunteers worked ___ to finish the clean-up by noon.`,
     options: [
-      "The event went because carefully pupils.",
-      "The pupils planned carefully, and the event went well.",
-      "Planning carefully and event went.",
-      "The pupils planned carefully the event went well.",
+      `carelessly`,
+      `together`,
+      `sleepily`,
+      `rudely`,
     ],
-    correctAnswer: 2,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 1,
+    explanation: `"Together" best fits because the passage emphasizes teams and volunteers working as a group.`,
   },
   {
     id: 36,
-    type: "writing",
-    skill: "Purpose and Audience",
-    question: `You are writing a notice for pupils about the event connected to neighbourhood clean-up. What is the best approach?`,
+    type: `writing`,
+    skill: `Relevant Detail`,
+    question: `Which detail should be included in a paragraph about Community Clean-Up Day?`,
     options: [
-      "Use a clear heading, important details, and polite language for a notice for pupils about the event.",
-      "Hide the date and place so readers must guess.",
-      "Use only jokes and leave out the main message.",
-      "Write one very long sentence with no punctuation.",
+      `Volunteers planted bright flowers near the bus stop.`,
+      `A student forgot a math book at home.`,
+      `The beach waves were very high.`,
+      `A puppy learned a new trick.`,
     ],
-    correctAnswer: 3,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    correctAnswer: 0,
+    explanation: `Planting bright flowers near the bus stop is directly related to Community Clean-Up Day.`,
   },
   {
     id: 37,
-    type: "writing",
-    skill: "Purpose and Audience",
-    question: `You are writing a friendly letter thanking helpers connected to neighbourhood clean-up. What is the best approach?`,
+    type: `writing`,
+    skill: `Audience and Purpose`,
+    question: `You are writing a notice asking students to join the Environmental Club. Which sentence is best?`,
     options: [
-      "Use a clear heading, important details, and polite language for a friendly letter thanking helpers.",
-      "Hide the date and place so readers must guess.",
-      "Use only jokes and leave out the main message.",
-      "Write one very long sentence with no punctuation.",
+      `Join us on Friday to plant trees and help keep our school grounds clean.`,
+      `The trees near the fence are not all the same height.`,
+      `I once saw a rake beside a classroom.`,
+      `Some students have green school bags.`,
     ],
     correctAnswer: 0,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    explanation: `The best notice clearly invites students to join and explains the helpful activity.`,
   },
   {
     id: 38,
-    type: "writing",
-    skill: "Purpose and Audience",
-    question: `You are writing a school announcement for assembly connected to neighbourhood clean-up. What is the best approach?`,
+    type: `writing`,
+    skill: `Order of Ideas`,
+    question: `Which sentence should come first in a paragraph explaining how the club planted trees?`,
     options: [
-      "Use only jokes and leave out the main message.",
-      "Hide the date and place so readers must guess.",
-      "Write one very long sentence with no punctuation.",
-      "Use a clear heading, important details, and polite language for a school announcement for assembly.",
+      `First, Mrs. Reid showed the pupils how to loosen the soil.`,
+      `Finally, the classes checked the trees later.`,
+      `After that, each group watered one tree.`,
+      `In the end, the club made a schedule.`,
     ],
-    correctAnswer: 1,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    correctAnswer: 0,
+    explanation: `The word "First" and the action of preparing the soil make this the best opening step.`,
   },
   {
     id: 39,
-    type: "writing",
-    skill: "Purpose and Audience",
-    question: `You are writing a poster for the community project connected to neighbourhood clean-up. What is the best approach?`,
+    type: `writing`,
+    skill: `Clear Sentence`,
+    question: `Which sentence is clearest?`,
     options: [
-      "Write one very long sentence with no punctuation.",
-      "Use a clear heading, important details, and polite language for a poster for the community project.",
-      "Use only jokes and leave out the main message.",
-      "Hide the date and place so readers must guess.",
+      `The teams swept the sidewalks and put the litter in garbage bags.`,
+      `Swept sidewalks teams litter bags the.`,
+      `The sidewalks, because teams and bags.`,
+      `Garbage bags were teams sweeping in them.`,
     ],
-    correctAnswer: 2,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    correctAnswer: 0,
+    explanation: `The clearest sentence has a logical word order and clearly explains what the teams did.`,
   },
   {
     id: 40,
-    type: "writing",
-    skill: "Purpose and Audience",
-    question: `You are writing a short report for the school newsletter connected to neighbourhood clean-up. What is the best approach?`,
+    type: `writing`,
+    skill: `Formal Tone`,
+    question: `Which sentence has the best formal tone for a school report?`,
     options: [
-      "Use a clear heading, important details, and polite language for a short report for the school newsletter.",
-      "Hide the date and place so readers must guess.",
-      "Use only jokes and leave out the main message.",
-      "Write one very long sentence with no punctuation.",
+      `The Environmental Club planted young trees to improve the school grounds.`,
+      `The club did some cool stuff by the fence.`,
+      `Those kids were kinda messing with dirt.`,
+      `It was like, trees and things everywhere.`,
     ],
-    correctAnswer: 3,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    correctAnswer: 0,
+    explanation: `A school report needs clear, respectful language; this sentence is formal and specific.`,
   },
-]
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({ option, index }))
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [optionsWithOriginalIndex[j], optionsWithOriginalIndex[i]]
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex((item) => item.index === question.correctAnswer)
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    }
-  })
-}
-
-const SECTION_CONFIG = [
-  { type: "reading" as const,    label: "Reading Comprehension",  note: "main idea, inference, author's purpose, tone, text structure" },
-  { type: "vocabulary" as const, label: "Vocabulary & Word Study", note: "context clues, synonyms, antonyms, figurative language, word meaning" },
-  { type: "grammar" as const,    label: "Grammar & Language Use",  note: "parts of speech, sentence structure, punctuation, tense, agreement" },
-  { type: "writing" as const,    label: "Writing Skills",          note: "paragraph structure, purpose, audience, techniques, planning" },
 ]
 
 export default function G5LaEasy6MockTest() {
