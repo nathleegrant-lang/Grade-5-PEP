@@ -34,17 +34,17 @@ const g5LaEasy8Questions: Question[] = [
     skill: "Main Idea",
     question: `Read the passage then answer the question.
 
-"For Jamaica Heritage Day, Grade 5 decorated the hall with drawings of national heroes, traditional foods, and musical instruments. During the programme, groups performed poems, dances, and short speeches about customs from different parishes. Miss Lewis reminded the pupils that heritage is not only about the past; it also guides how people show respect and pride today."
+"Jamaica Heritage Day began with drums echoing across the school hall. Grade 5 pupils wore bandana colours, displayed drawings of national heroes, and labelled tables with traditional foods such as ackee, bammy, and sweet potato pudding. During the celebration, each group explained a custom from a different parish. By the end of the morning, the pupils understood that heritage is more than old stories; it is the music, food, language, and respect people continue to share."
 
-Which answer best matches the passage?`,
+What is the main idea of the passage?`,
     options: [
-      "to entertain with a fantasy adventure",
-      "to describe the pupils’ organized school activity",
-      "to explain why sports day was postponed",
-      "to list rules for a spelling contest",
+      "Grade 5 celebrated Jamaica Heritage Day by learning and sharing parts of Jamaican culture.",
+      "The pupils spent the morning practising for a football competition.",
+      "The school hall was closed because the tables were missing.",
+      "Jamaica Heritage Day was mainly about choosing the fastest drummer.",
     ],
     correctAnswer: 0,
-    explanation: `The passage shows jamaica heritage day as a planned, helpful activity involving pupils.`
+    explanation: `The whole passage focuses on pupils sharing music, food, heroes, customs, and respect during Jamaica Heritage Day.`
   },
   {
     id: 2,
@@ -52,17 +52,17 @@ Which answer best matches the passage?`,
     skill: "Detail",
     question: `Read the passage then answer the question.
 
-"For Jamaica Heritage Day, Grade 5 decorated the hall with drawings of national heroes, traditional foods, and musical instruments. During the programme, groups performed poems, dances, and short speeches about customs from different parishes. Miss Lewis reminded the pupils that heritage is not only about the past; it also guides how people show respect and pride today."
+"Jamaica Heritage Day began with drums echoing across the school hall. Grade 5 pupils wore bandana colours, displayed drawings of national heroes, and labelled tables with traditional foods such as ackee, bammy, and sweet potato pudding. During the celebration, each group explained a custom from a different parish. By the end of the morning, the pupils understood that heritage is more than old stories; it is the music, food, language, and respect people continue to share."
 
-Which answer best matches the passage?`,
+Which traditional food was named in the passage?`,
     options: [
-      "They cancelled the activity after assembly.",
-      "They used a schedule or record to guide the activity.",
-      "They sold tickets at the gate.",
-      "They worked alone without a teacher.",
+      "pizza",
+      "bammy",
+      "ice cream",
+      "hamburger",
     ],
     correctAnswer: 1,
-    explanation: `The passage shows jamaica heritage day as a planned, helpful activity involving pupils.`
+    explanation: `The passage lists ackee, bammy, and sweet potato pudding as traditional foods on the labelled tables.`
   },
   {
     id: 3,
@@ -70,17 +70,17 @@ Which answer best matches the passage?`,
     skill: "Inference",
     question: `Read the passage then answer the question.
 
-"For Jamaica Heritage Day, Grade 5 decorated the hall with drawings of national heroes, traditional foods, and musical instruments. During the programme, groups performed poems, dances, and short speeches about customs from different parishes. Miss Lewis reminded the pupils that heritage is not only about the past; it also guides how people show respect and pride today."
+"Jamaica Heritage Day began with drums echoing across the school hall. Grade 5 pupils wore bandana colours, displayed drawings of national heroes, and labelled tables with traditional foods such as ackee, bammy, and sweet potato pudding. During the celebration, each group explained a custom from a different parish. By the end of the morning, the pupils understood that heritage is more than old stories; it is the music, food, language, and respect people continue to share."
 
-Which answer best matches the passage?`,
+What can the reader infer about the pupils?`,
     options: [
-      "Only adults did the work.",
-      "The pupils were careless.",
-      "The school was closed.",
-      "The activity was planned and helpful.",
+      "They were not allowed to speak during the programme.",
+      "They knew nothing about Jamaica before the day started.",
+      "They took an active part in teaching others about culture.",
+      "They wanted the celebration to end before it began.",
     ],
     correctAnswer: 2,
-    explanation: `The passage shows jamaica heritage day as a planned, helpful activity involving pupils.`
+    explanation: `The pupils displayed work and explained customs, so they were actively helping others learn about Jamaican culture.`
   },
   {
     id: 4,
@@ -88,17 +88,17 @@ Which answer best matches the passage?`,
     skill: "Vocabulary in Context",
     question: `Read the passage then answer the question.
 
-"For Jamaica Heritage Day, Grade 5 decorated the hall with drawings of national heroes, traditional foods, and musical instruments. During the programme, groups performed poems, dances, and short speeches about customs from different parishes. Miss Lewis reminded the pupils that heritage is not only about the past; it also guides how people show respect and pride today."
+"Jamaica Heritage Day began with drums echoing across the school hall. Grade 5 pupils wore bandana colours, displayed drawings of national heroes, and labelled tables with traditional foods such as ackee, bammy, and sweet potato pudding. During the celebration, each group explained a custom from a different parish. By the end of the morning, the pupils understood that heritage is more than old stories; it is the music, food, language, and respect people continue to share."
 
-Which answer best matches the passage?`,
+What does displayed mean in the passage?`,
     options: [
-      "comfortable means suitable for the person",
-      "comfortable means broken into pieces",
-      "comfortable means very expensive",
-      "comfortable means impossible to find",
+      "hid from everyone",
+      "threw away quickly",
+      "copied without reading",
+      "showed for people to see",
     ],
     correctAnswer: 3,
-    explanation: `The passage shows jamaica heritage day as a planned, helpful activity involving pupils.`
+    explanation: `The pupils put their drawings where others could see them, so displayed means showed for people to see.`
   },
   {
     id: 5,
@@ -106,17 +106,17 @@ Which answer best matches the passage?`,
     skill: "Author’s Purpose",
     question: `Read the passage then answer the question.
 
-"For Jamaica Heritage Day, Grade 5 decorated the hall with drawings of national heroes, traditional foods, and musical instruments. During the programme, groups performed poems, dances, and short speeches about customs from different parishes. Miss Lewis reminded the pupils that heritage is not only about the past; it also guides how people show respect and pride today."
+"Jamaica Heritage Day began with drums echoing across the school hall. Grade 5 pupils wore bandana colours, displayed drawings of national heroes, and labelled tables with traditional foods such as ackee, bammy, and sweet potato pudding. During the celebration, each group explained a custom from a different parish. By the end of the morning, the pupils understood that heritage is more than old stories; it is the music, food, language, and respect people continue to share."
 
-Which answer best matches the passage?`,
+Why did the author most likely write this passage?`,
     options: [
-      "to persuade readers to avoid school clubs",
-      "to inform readers about a useful school event",
-      "to describe a storm at school",
-      "to compare two famous athletes",
+      "to inform readers about a school celebration of Jamaican heritage",
+      "to persuade readers to stop learning about the past",
+      "to explain how to cook every Jamaican dish",
+      "to describe a problem with a broken drum",
     ],
     correctAnswer: 0,
-    explanation: `The passage shows jamaica heritage day as a planned, helpful activity involving pupils.`
+    explanation: `The passage gives information about what happened at the celebration and what pupils learned from it.`
   },
   {
     id: 6,
@@ -124,17 +124,17 @@ Which answer best matches the passage?`,
     skill: "Sequence",
     question: `Read the passage then answer the question.
 
-"For Jamaica Heritage Day, Grade 5 decorated the hall with drawings of national heroes, traditional foods, and musical instruments. During the programme, groups performed poems, dances, and short speeches about customs from different parishes. Miss Lewis reminded the pupils that heritage is not only about the past; it also guides how people show respect and pride today."
+"Jamaica Heritage Day began with drums echoing across the school hall. Grade 5 pupils wore bandana colours, displayed drawings of national heroes, and labelled tables with traditional foods such as ackee, bammy, and sweet potato pudding. During the celebration, each group explained a custom from a different parish. By the end of the morning, the pupils understood that heritage is more than old stories; it is the music, food, language, and respect people continue to share."
 
-Which answer best matches the passage?`,
+What happened after the pupils displayed drawings and labelled tables?`,
     options: [
-      "First they went home; then they listened to directions.",
-      "First they received prizes; then they began planning.",
-      "First visitors left; then the event opened.",
-      "First pupils planned; then they carried out the task.",
+      "The drums began echoing across the hall.",
+      "Each group explained a custom from a different parish.",
+      "The pupils forgot why they came to the hall.",
+      "The school cancelled Jamaica Heritage Day.",
     ],
     correctAnswer: 1,
-    explanation: `The passage shows jamaica heritage day as a planned, helpful activity involving pupils.`
+    explanation: `The passage says that during the celebration, after the displays were prepared, each group explained a parish custom.`
   },
   {
     id: 7,
@@ -142,17 +142,17 @@ Which answer best matches the passage?`,
     skill: "Cause and Effect",
     question: `Read the passage then answer the question.
 
-"For Jamaica Heritage Day, Grade 5 decorated the hall with drawings of national heroes, traditional foods, and musical instruments. During the programme, groups performed poems, dances, and short speeches about customs from different parishes. Miss Lewis reminded the pupils that heritage is not only about the past; it also guides how people show respect and pride today."
+"Jamaica Heritage Day began with drums echoing across the school hall. Grade 5 pupils wore bandana colours, displayed drawings of national heroes, and labelled tables with traditional foods such as ackee, bammy, and sweet potato pudding. During the celebration, each group explained a custom from a different parish. By the end of the morning, the pupils understood that heritage is more than old stories; it is the music, food, language, and respect people continue to share."
 
-Which answer best matches the passage?`,
+What was one effect of the Heritage Day activities?`,
     options: [
-      "Because the bell rang, the trees became taller.",
-      "Because pupils worked together, the activity was successful.",
-      "Because no one listened, the fair opened early.",
-      "Because it rained indoors, the books disappeared.",
+      "The pupils understood that heritage is still shared today.",
+      "The pupils decided that customs were unimportant.",
+      "The tables were removed before anyone saw them.",
+      "The national heroes were replaced with cartoons.",
     ],
-    correctAnswer: 2,
-    explanation: `The passage shows jamaica heritage day as a planned, helpful activity involving pupils.`
+    correctAnswer: 0,
+    explanation: `Because pupils took part in the activities, they learned that heritage includes things people continue to share.`
   },
   {
     id: 8,
@@ -160,17 +160,17 @@ Which answer best matches the passage?`,
     skill: "Text Evidence",
     question: `Read the passage then answer the question.
 
-"For Jamaica Heritage Day, Grade 5 decorated the hall with drawings of national heroes, traditional foods, and musical instruments. During the programme, groups performed poems, dances, and short speeches about customs from different parishes. Miss Lewis reminded the pupils that heritage is not only about the past; it also guides how people show respect and pride today."
+"Jamaica Heritage Day began with drums echoing across the school hall. Grade 5 pupils wore bandana colours, displayed drawings of national heroes, and labelled tables with traditional foods such as ackee, bammy, and sweet potato pudding. During the celebration, each group explained a custom from a different parish. By the end of the morning, the pupils understood that heritage is more than old stories; it is the music, food, language, and respect people continue to share."
 
-Which answer best matches the passage?`,
+Which detail best supports the idea that the pupils shared Jamaican culture?`,
     options: [
-      "A sentence about teamwork and careful records supports the answer.",
-      "A sentence about a football match supports the answer.",
-      "A sentence about a lost puppy supports the answer.",
-      "A sentence about a birthday party supports the answer.",
+      "The hall was part of the school building.",
+      "The morning eventually came to an end.",
+      "Each group explained a custom from a different parish.",
+      "Some words in the passage are longer than others.",
     ],
-    correctAnswer: 3,
-    explanation: `The passage shows jamaica heritage day as a planned, helpful activity involving pupils.`
+    correctAnswer: 2,
+    explanation: `Explaining customs from different parishes is direct evidence that pupils shared Jamaican culture.`
   },
   {
     id: 9,
@@ -178,17 +178,17 @@ Which answer best matches the passage?`,
     skill: "Main Idea",
     question: `Read the passage then answer the question.
 
-"The class visited a small museum near the town square. A guide showed them old tools, photographs, and a model of a market from long ago. The pupils asked careful questions and sketched one object in their notebooks. On the bus ride back, they discussed how museums protect stories that might otherwise be forgotten."
+"On Friday, Mr. Henry took the class to the Seville Heritage Park. A guide led them past stone ruins, old maps, and a small room filled with clay pots and tools. The pupils moved quietly because the objects were fragile. Amara sketched a tiny pot while Daniel wrote notes about how people traded goods long ago. On the ride back to school, the class agreed that visiting a historical site helped them imagine real people from the past."
 
-What does the passage help the reader understand?`,
+What is the main idea of this passage?`,
     options: [
-      "The community activity helped others through shared effort.",
-      "The event was mainly about buying new uniforms.",
-      "The children avoided helping younger pupils.",
-      "The passage focuses on a private family trip.",
+      "A class visit to a historical site helped pupils learn about people and objects from the past.",
+      "Mr. Henry took the pupils to buy new clay pots for the classroom.",
+      "The bus ride was longer and more important than the site visit.",
+      "The pupils went to a park only to play games outdoors.",
     ],
     correctAnswer: 0,
-    explanation: `The details show museum visit brought people together for a helpful purpose.`
+    explanation: `Most details describe the visit, the historical objects, and what the pupils learned about the past.`
   },
   {
     id: 10,
@@ -196,17 +196,17 @@ What does the passage help the reader understand?`,
     skill: "Detail",
     question: `Read the passage then answer the question.
 
-"The class visited a small museum near the town square. A guide showed them old tools, photographs, and a model of a market from long ago. The pupils asked careful questions and sketched one object in their notebooks. On the bus ride back, they discussed how museums protect stories that might otherwise be forgotten."
+"On Friday, Mr. Henry took the class to the Seville Heritage Park. A guide led them past stone ruins, old maps, and a small room filled with clay pots and tools. The pupils moved quietly because the objects were fragile. Amara sketched a tiny pot while Daniel wrote notes about how people traded goods long ago. On the ride back to school, the class agreed that visiting a historical site helped them imagine real people from the past."
 
-What does the passage help the reader understand?`,
+Who led the class around the historical site?`,
     options: [
-      "The children avoided helping younger pupils.",
-      "The event was mainly about buying new uniforms.",
-      "The passage focuses on a private family trip.",
-      "The community activity helped others through shared effort.",
+      "a market vendor",
+      "Daniel",
+      "a guide",
+      "Amara",
     ],
-    correctAnswer: 1,
-    explanation: `The details show museum visit brought people together for a helpful purpose.`
+    correctAnswer: 2,
+    explanation: `The passage says a guide led the pupils past stone ruins, old maps, and other objects.`
   },
   {
     id: 11,
@@ -214,17 +214,17 @@ What does the passage help the reader understand?`,
     skill: "Inference",
     question: `Read the passage then answer the question.
 
-"The class visited a small museum near the town square. A guide showed them old tools, photographs, and a model of a market from long ago. The pupils asked careful questions and sketched one object in their notebooks. On the bus ride back, they discussed how museums protect stories that might otherwise be forgotten."
+"On Friday, Mr. Henry took the class to the Seville Heritage Park. A guide led them past stone ruins, old maps, and a small room filled with clay pots and tools. The pupils moved quietly because the objects were fragile. Amara sketched a tiny pot while Daniel wrote notes about how people traded goods long ago. On the ride back to school, the class agreed that visiting a historical site helped them imagine real people from the past."
 
-What does the passage help the reader understand?`,
+Why did the pupils move quietly?`,
     options: [
-      "The passage focuses on a private family trip.",
-      "The community activity helped others through shared effort.",
-      "The children avoided helping younger pupils.",
-      "The event was mainly about buying new uniforms.",
+      "They were bored and wanted to sleep.",
+      "They were showing care around breakable historical objects.",
+      "They were trying to hide from Mr. Henry.",
+      "They had been told not to learn anything.",
     ],
-    correctAnswer: 2,
-    explanation: `The details show museum visit brought people together for a helpful purpose.`
+    correctAnswer: 1,
+    explanation: `The objects were fragile, so moving quietly suggests the pupils were being careful and respectful.`
   },
   {
     id: 12,
@@ -232,17 +232,17 @@ What does the passage help the reader understand?`,
     skill: "Vocabulary in Context",
     question: `Read the passage then answer the question.
 
-"The class visited a small museum near the town square. A guide showed them old tools, photographs, and a model of a market from long ago. The pupils asked careful questions and sketched one object in their notebooks. On the bus ride back, they discussed how museums protect stories that might otherwise be forgotten."
+"On Friday, Mr. Henry took the class to the Seville Heritage Park. A guide led them past stone ruins, old maps, and a small room filled with clay pots and tools. The pupils moved quietly because the objects were fragile. Amara sketched a tiny pot while Daniel wrote notes about how people traded goods long ago. On the ride back to school, the class agreed that visiting a historical site helped them imagine real people from the past."
 
-What does the passage help the reader understand?`,
+What does fragile mean in the passage?`,
     options: [
-      "The community activity helped others through shared effort.",
-      "The event was mainly about buying new uniforms.",
-      "The children avoided helping younger pupils.",
-      "The passage focuses on a private family trip.",
+      "easy to break",
+      "newly painted",
+      "very noisy",
+      "too heavy to see",
     ],
-    correctAnswer: 3,
-    explanation: `The details show museum visit brought people together for a helpful purpose.`
+    correctAnswer: 0,
+    explanation: `The pupils moved quietly around the objects because fragile means easy to break or damage.`
   },
   {
     id: 13,
@@ -250,17 +250,17 @@ What does the passage help the reader understand?`,
     skill: "Author’s Purpose",
     question: `Read the passage then answer the question.
 
-"The class visited a small museum near the town square. A guide showed them old tools, photographs, and a model of a market from long ago. The pupils asked careful questions and sketched one object in their notebooks. On the bus ride back, they discussed how museums protect stories that might otherwise be forgotten."
+"On Friday, Mr. Henry took the class to the Seville Heritage Park. A guide led them past stone ruins, old maps, and a small room filled with clay pots and tools. The pupils moved quietly because the objects were fragile. Amara sketched a tiny pot while Daniel wrote notes about how people traded goods long ago. On the ride back to school, the class agreed that visiting a historical site helped them imagine real people from the past."
 
-What does the passage help the reader understand?`,
+Why did the author most likely include Amara and Daniel in the passage?`,
     options: [
-      "The community activity helped others through shared effort.",
-      "The event was mainly about buying new uniforms.",
-      "The children avoided helping younger pupils.",
-      "The passage focuses on a private family trip.",
+      "to show examples of how pupils recorded what they learned",
+      "to prove that only two pupils went on the trip",
+      "to explain why the guide left the park early",
+      "to make the historical objects seem unimportant",
     ],
     correctAnswer: 0,
-    explanation: `The details show museum visit brought people together for a helpful purpose.`
+    explanation: `Amara sketched and Daniel wrote notes, which are examples of pupils recording information during the visit.`
   },
   {
     id: 14,
@@ -268,17 +268,17 @@ What does the passage help the reader understand?`,
     skill: "Compare Ideas",
     question: `Read the passage then answer the question.
 
-"The class visited a small museum near the town square. A guide showed them old tools, photographs, and a model of a market from long ago. The pupils asked careful questions and sketched one object in their notebooks. On the bus ride back, they discussed how museums protect stories that might otherwise be forgotten."
+"On Friday, Mr. Henry took the class to the Seville Heritage Park. A guide led them past stone ruins, old maps, and a small room filled with clay pots and tools. The pupils moved quietly because the objects were fragile. Amara sketched a tiny pot while Daniel wrote notes about how people traded goods long ago. On the ride back to school, the class agreed that visiting a historical site helped them imagine real people from the past."
 
-What does the passage help the reader understand?`,
+How were Amara and Daniel alike during the visit?`,
     options: [
-      "The children avoided helping younger pupils.",
-      "The event was mainly about buying new uniforms.",
-      "The passage focuses on a private family trip.",
-      "The community activity helped others through shared effort.",
+      "Both ignored the guide's directions.",
+      "Both used a way to record information about the visit.",
+      "Both repaired the stone ruins.",
+      "Both traded goods with people from long ago.",
     ],
     correctAnswer: 1,
-    explanation: `The details show museum visit brought people together for a helpful purpose.`
+    explanation: `Amara sketched an object and Daniel wrote notes, so both recorded information in different ways.`
   },
   {
     id: 15,
@@ -286,199 +286,199 @@ What does the passage help the reader understand?`,
     skill: "Problem and Solution",
     question: `Read the passage then answer the question.
 
-"The class visited a small museum near the town square. A guide showed them old tools, photographs, and a model of a market from long ago. The pupils asked careful questions and sketched one object in their notebooks. On the bus ride back, they discussed how museums protect stories that might otherwise be forgotten."
+"On Friday, Mr. Henry took the class to the Seville Heritage Park. A guide led them past stone ruins, old maps, and a small room filled with clay pots and tools. The pupils moved quietly because the objects were fragile. Amara sketched a tiny pot while Daniel wrote notes about how people traded goods long ago. On the ride back to school, the class agreed that visiting a historical site helped them imagine real people from the past."
 
-What does the passage help the reader understand?`,
+Which sentence best states a problem and solution from the passage?`,
     options: [
-      "The passage focuses on a private family trip.",
-      "The community activity helped others through shared effort.",
-      "The children avoided helping younger pupils.",
-      "The event was mainly about buying new uniforms.",
+      "The pupils were hungry, so they bought lunch at the park.",
+      "The maps were lost, so Daniel drew new ones.",
+      "The objects were fragile, so the pupils moved quietly around them.",
+      "The bus was late, so the guide cancelled the visit.",
     ],
     correctAnswer: 2,
-    explanation: `The details show museum visit brought people together for a helpful purpose.`
+    explanation: `Fragile objects could be damaged, and the pupils helped solve that problem by moving quietly and carefully.`
   },
   {
     id: 16,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `In a passage about heritage celebration, the word “steady” is used in context. Which option gives the best meaning?`,
+    question: `During Heritage Day, the choir sang a lively folk song that made the audience clap along. What does lively mean?`,
     options: [
-      "In the sentence, “steady” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      "full of energy",
+      "almost silent",
+      "made of stone",
+      "difficult to spell",
     ],
-    correctAnswer: 3,
-    explanation: `Context clues in the school or community situation show that “steady” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `The audience clapped along, so lively means full of energy in this sentence.`
   },
   {
     id: 17,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about heritage celebration, the word “gently” is used in context. Which option gives the best meaning?`,
+    skill: "Synonym",
+    question: `Choose the word that means nearly the same as celebrate in this sentence: We celebrate Jamaica's heritage with songs and stories.`,
     options: [
-      "In the sentence, “gently” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      "hide",
+      "honour",
+      "forget",
+      "measure",
     ],
-    correctAnswer: 0,
-    explanation: `Context clues in the school or community situation show that “gently” has the practical meaning used in the correct option.`
+    correctAnswer: 1,
+    explanation: `To celebrate heritage is to honour or show respect for it.`
   },
   {
     id: 18,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about heritage celebration, the word “bright” is used in context. Which option gives the best meaning?`,
+    skill: "Antonym",
+    question: `Which word is the opposite of ancient in the phrase ancient stone ruins?`,
     options: [
-      "It names a place far from the school.",
-      "It means the opposite of what the sentence suggests.",
-      "It means a loud sound made by traffic.",
-      "In the sentence, “bright” means a sensible meaning that fits the activity.",
+      "old",
+      "broken",
+      "modern",
+      "rough",
     ],
-    correctAnswer: 1,
-    explanation: `Context clues in the school or community situation show that “bright” has the practical meaning used in the correct option.`
+    correctAnswer: 2,
+    explanation: `Ancient means very old, so modern is the opposite.`
   },
   {
     id: 19,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `In a passage about heritage celebration, the word “careful” is used in context. Which option gives the best meaning?`,
+    question: `The guide asked the class to observe the carvings closely before writing notes. What does observe mean?`,
     options: [
-      "It means a loud sound made by traffic.",
-      "In the sentence, “careful” means a sensible meaning that fits the activity.",
-      "It names a place far from the school.",
-      "It means the opposite of what the sentence suggests.",
+      "look at carefully",
+      "paint over quickly",
+      "carry away",
+      "laugh loudly",
     ],
-    correctAnswer: 2,
-    explanation: `Context clues in the school or community situation show that “careful” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `Writing notes after looking closely shows that observe means look at carefully.`
   },
   {
     id: 20,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about heritage celebration, the word “useful” is used in context. Which option gives the best meaning?`,
+    skill: "Multiple Meaning Words",
+    question: `In the sentence, The guide pointed to the model of an old market, what does model mean?`,
     options: [
-      "In the sentence, “useful” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      "a person showing clothing",
+      "a small copy of something",
+      "a rule for behaviour",
+      "a type of notebook",
     ],
-    correctAnswer: 3,
-    explanation: `Context clues in the school or community situation show that “useful” has the practical meaning used in the correct option.`
+    correctAnswer: 1,
+    explanation: `At a museum or historical site, a model of a market is a small copy that shows what the market looked like.`
   },
   {
     id: 21,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `In a passage about heritage celebration, the word “purpose” is used in context. Which option gives the best meaning?`,
+    question: `The labels gave brief facts about each national hero, so visitors could read them quickly. What does brief mean?`,
     options: [
-      "In the sentence, “purpose” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      "wet",
+      "short",
+      "angry",
+      "hidden",
     ],
-    correctAnswer: 0,
-    explanation: `Context clues in the school or community situation show that “purpose” has the practical meaning used in the correct option.`
+    correctAnswer: 1,
+    explanation: `Visitors could read the facts quickly because brief means short.`
   },
   {
     id: 22,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about heritage celebration, the word “encouraged” is used in context. Which option gives the best meaning?`,
+    skill: "Word Meaning",
+    question: `Which meaning best fits the word preserve in this sentence: Museums preserve objects from the past?`,
     options: [
-      "It names a place far from the school.",
-      "It means the opposite of what the sentence suggests.",
-      "It means a loud sound made by traffic.",
-      "In the sentence, “encouraged” means a sensible meaning that fits the activity.",
+      "protect and keep safe",
+      "mix with sugar",
+      "throw into a bin",
+      "guess without looking",
     ],
-    correctAnswer: 1,
-    explanation: `Context clues in the school or community situation show that “encouraged” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `Museums preserve objects by protecting them and keeping them safe for people to study.`
   },
   {
     id: 23,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `In a passage about heritage celebration, the word “materials” is used in context. Which option gives the best meaning?`,
+    question: `The class admired the intricate pattern on the clay pot because it had many tiny shapes and lines. What does intricate mean?`,
     options: [
-      "It means a loud sound made by traffic.",
-      "In the sentence, “materials” means a sensible meaning that fits the activity.",
-      "It names a place far from the school.",
-      "It means the opposite of what the sentence suggests.",
+      "plain and empty",
+      "carelessly broken",
+      "detailed and complex",
+      "too bright to see",
     ],
     correctAnswer: 2,
-    explanation: `Context clues in the school or community situation show that “materials” has the practical meaning used in the correct option.`
+    explanation: `Many tiny shapes and lines are clues that intricate means detailed and complex.`
   },
   {
     id: 24,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about heritage celebration, the word “displayed” is used in context. Which option gives the best meaning?`,
+    skill: "Synonym",
+    question: `Which word means nearly the same as custom in the sentence, Each parish shared a special custom?`,
     options: [
-      "In the sentence, “displayed” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      "mistake",
+      "tradition",
+      "machine",
+      "weather",
     ],
-    correctAnswer: 3,
-    explanation: `Context clues in the school or community situation show that “displayed” has the practical meaning used in the correct option.`
+    correctAnswer: 1,
+    explanation: `A custom is a tradition or usual way of doing something in a group or place.`
   },
   {
     id: 25,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about heritage celebration, the word “pride” is used in context. Which option gives the best meaning?`,
+    skill: "Antonym",
+    question: `Which word is the opposite of respect in the sentence, The pupils showed respect for the old objects?`,
     options: [
-      "In the sentence, “pride” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      "care",
+      "interest",
+      "disrespect",
+      "attention",
     ],
-    correctAnswer: 0,
-    explanation: `Context clues in the school or community situation show that “pride” has the practical meaning used in the correct option.`
+    correctAnswer: 2,
+    explanation: `Disrespect is the opposite of respect.`
   },
   {
     id: 26,
     type: "grammar",
     skill: "Subject-Verb Agreement",
-    question: `The club ___ the plants every Wednesday.`,
+    question: `Choose the correct verb: The class ___ the museum every year.`,
     options: [
-      "watering",
-      "water",
-      "were water",
-      "waters",
+      "visit",
+      "visits",
+      "visiting",
+      "were visit",
     ],
     correctAnswer: 1,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    explanation: `The singular subject The class takes the verb visits.`
   },
   {
     id: 27,
     type: "grammar",
     skill: "Verb Tense",
-    question: `Yesterday, the pupils ___ their display.`,
+    question: `Choose the correct verb: Yesterday, the pupils ___ their Heritage Day poems.`,
     options: [
-      "preparing",
-      "prepared",
-      "prepares",
-      "prepare",
+      "performed",
+      "perform",
+      "performs",
+      "performing",
     ],
-    correctAnswer: 2,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 0,
+    explanation: `Yesterday signals past tense, so performed is correct.`
   },
   {
     id: 28,
     type: "grammar",
     skill: "Pronoun Reference",
-    question: `Maya lent Jada a ruler because ___ had an extra one.`,
+    question: `Choose the pronoun that best completes the sentence: Amara brought her notebook because ___ wanted to sketch the pot.`,
     options: [
+      "he",
+      "it",
       "she",
       "they",
-      "it",
-      "we",
     ],
-    correctAnswer: 3,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 2,
+    explanation: `Amara is one girl, so she is the correct pronoun.`
   },
   {
     id: 29,
@@ -486,41 +486,41 @@ What does the passage help the reader understand?`,
     skill: "Punctuation",
     question: `Which sentence is punctuated correctly?`,
     options: [
-      "“Please bring gloves,” said Mr. Brown.",
-      "“Please bring gloves” said Mr. Brown.",
-      "Please bring gloves, said Mr. Brown.",
-      "“Please bring gloves said Mr. Brown.”",
+      `"Please walk carefully," said the guide.`,
+      `"Please walk carefully" said the guide.`,
+      `Please walk carefully," said the guide.`,
+      `"Please walk carefully, said the guide."`,
     ],
     correctAnswer: 0,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    explanation: `The correct sentence uses quotation marks and a comma before said the guide.`
   },
   {
     id: 30,
     type: "grammar",
     skill: "Adjective Use",
-    question: `Choose the sentence with the best describing word.`,
+    question: `Choose the sentence with the best adjective placement.`,
     options: [
-      "Neatly poster caught the visitors.",
-      "The poster caught attention neat.",
-      "The poster neat caught attention.",
-      "The neat poster caught the visitors’ attention.",
+      "The fragile pot was kept behind glass.",
+      "The pot fragile was kept behind glass.",
+      "Fragile was kept the pot behind glass.",
+      "The pot was behind fragile glass kept.",
     ],
-    correctAnswer: 1,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 0,
+    explanation: `Fragile correctly describes pot when it is placed before the noun.`
   },
   {
     id: 31,
     type: "grammar",
     skill: "Conjunctions",
-    question: `Choose the best word: We packed water ___ the afternoon was hot.`,
+    question: `Choose the best word: The pupils took notes ___ they wanted to remember the guide's facts.`,
     options: [
-      "so",
+      "but",
       "because",
       "or",
-      "but",
+      "although",
     ],
-    correctAnswer: 2,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 1,
+    explanation: `Because gives the reason the pupils took notes.`
   },
   {
     id: 32,
@@ -528,13 +528,13 @@ What does the passage help the reader understand?`,
     skill: "Complete Sentence",
     question: `Which is a complete sentence?`,
     options: [
-      "The students shared books with Grade 1.",
-      "After the bell near the gate.",
-      "Because the table with cards.",
-      "The clean bags on Saturday.",
+      "After the drums in the hall.",
+      "The museum guide answered our questions.",
+      "Because the old map on the wall.",
+      "Near the table with traditional foods.",
     ],
-    correctAnswer: 3,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 1,
+    explanation: `The museum guide answered our questions has a subject and a predicate and expresses a complete thought.`
   },
   {
     id: 33,
@@ -542,13 +542,13 @@ What does the passage help the reader understand?`,
     skill: "Comma in a Series",
     question: `Which sentence uses commas correctly?`,
     options: [
-      "We need pencils, glue, paper, and string.",
-      "We need pencils glue, paper and string.",
-      "We need, pencils glue paper, and string.",
-      "We need pencils, glue paper and, string.",
+      "We saw drums, maps, pots, and tools.",
+      "We saw drums maps, pots and tools.",
+      "We saw, drums maps pots, and tools.",
+      "We saw drums, maps pots and, tools.",
     ],
     correctAnswer: 0,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    explanation: `Commas correctly separate the items drums, maps, pots, and tools in a series.`
   },
   {
     id: 34,
@@ -556,100 +556,99 @@ What does the passage help the reader understand?`,
     skill: "Possessive Noun",
     question: `Choose the correct possessive form.`,
     options: [
-      "The classes chart was full.",
-      "The class chart’s was full.",
-      "The classs chart was full.",
-      "The class’s chart was full.",
+      "The guides badge was blue.",
+      "The guide's badge was blue.",
+      "The guides' badge's was blue.",
+      "The guide badge's was blue.",
     ],
     correctAnswer: 1,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    explanation: `The badge belongs to one guide, so guide's is the correct possessive form.`
   },
   {
     id: 35,
     type: "grammar",
     skill: "Sentence Combining",
-    question: `Which combines the ideas best?`,
+    question: `Which sentence best combines these ideas? The class visited the site. The class learned about history.`,
     options: [
-      "The event went because carefully pupils.",
-      "The pupils planned carefully, and the event went well.",
-      "Planning carefully and event went.",
-      "The pupils planned carefully the event went well.",
+      "The class visited the site and learned about history.",
+      "Visited the class site history learned.",
+      "The class learned because visited and history.",
+      "The site history the class and learned visited.",
     ],
-    correctAnswer: 2,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 0,
+    explanation: `The first option combines both ideas clearly with and.`
   },
   {
     id: 36,
     type: "writing",
     skill: "Purpose and Audience",
-    question: `You are writing a notice for pupils about the event connected to local historical site visit. What is the best approach?`,
+    question: `You are writing a notice inviting Grade 5 pupils to a Jamaica Heritage Day celebration. What should you include?`,
     options: [
-      "Use a clear heading, important details, and polite language for a notice for pupils about the event.",
-      "Hide the date and place so readers must guess.",
-      "Use only jokes and leave out the main message.",
-      "Write one very long sentence with no punctuation.",
+      "the date, time, place, activities, and polite instructions",
+      "only a joke about the drums",
+      "a secret message with no location",
+      "a list of unrelated football scores",
     ],
-    correctAnswer: 3,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    correctAnswer: 0,
+    explanation: `A notice should clearly give important details such as date, time, place, activities, and instructions for its audience.`
   },
   {
     id: 37,
     type: "writing",
-    skill: "Purpose and Audience",
-    question: `You are writing a friendly letter thanking helpers connected to local historical site visit. What is the best approach?`,
+    skill: "Topic Sentence",
+    question: `Which is the best topic sentence for a paragraph about a museum visit?`,
     options: [
-      "Use a clear heading, important details, and polite language for a friendly letter thanking helpers.",
-      "Hide the date and place so readers must guess.",
-      "Use only jokes and leave out the main message.",
-      "Write one very long sentence with no punctuation.",
+      "The bus had windows and seats.",
+      "Our visit to the museum taught us many facts about Jamaica's past.",
+      "I sharpened my pencil before lunch.",
+      "The sky was blue on Tuesday.",
     ],
-    correctAnswer: 0,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    correctAnswer: 1,
+    explanation: `The best topic sentence clearly introduces the main idea of learning about Jamaica's past at the museum.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "Purpose and Audience",
-    question: `You are writing a school announcement for assembly connected to local historical site visit. What is the best approach?`,
+    skill: "Supporting Details",
+    question: `Which detail best supports this sentence? Heritage Day helped our class appreciate Jamaican culture.`,
     options: [
-      "Use only jokes and leave out the main message.",
-      "Hide the date and place so readers must guess.",
-      "Write one very long sentence with no punctuation.",
-      "Use a clear heading, important details, and polite language for a school announcement for assembly.",
+      "We learned folk songs and explained customs from several parishes.",
+      "The classroom door was painted brown.",
+      "My pencil case has three zippers.",
+      "The rain stopped before bedtime.",
     ],
-    correctAnswer: 1,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    correctAnswer: 0,
+    explanation: `Learning folk songs and explaining customs directly supports the idea of appreciating Jamaican culture.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Purpose and Audience",
-    question: `You are writing a poster for the community project connected to local historical site visit. What is the best approach?`,
+    skill: "Revision",
+    question: `Which revision makes this sentence clearer? We went there and saw things.`,
     options: [
-      "Write one very long sentence with no punctuation.",
-      "Use a clear heading, important details, and polite language for a poster for the community project.",
-      "Use only jokes and leave out the main message.",
-      "Hide the date and place so readers must guess.",
+      "We went and there saw and things.",
+      "Things saw us when we went there.",
+      "Our class visited Seville Heritage Park and saw clay pots, old maps, and stone ruins.",
+      "We went there things saw.",
     ],
     correctAnswer: 2,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    explanation: `The correct revision adds specific details that make the sentence clear and informative.`
   },
   {
     id: 40,
     type: "writing",
-    skill: "Purpose and Audience",
-    question: `You are writing a short report for the school newsletter connected to local historical site visit. What is the best approach?`,
+    skill: "Concluding Sentence",
+    question: `Which sentence would best conclude a report about the historical site visit?`,
     options: [
-      "Use a clear heading, important details, and polite language for a short report for the school newsletter.",
-      "Hide the date and place so readers must guess.",
-      "Use only jokes and leave out the main message.",
-      "Write one very long sentence with no punctuation.",
+      "In conclusion, the visit helped us understand and respect Jamaica's history.",
+      "The bus tyres were round and black.",
+      "My friend forgot a red pencil at home.",
+      "Next week I might eat a sandwich.",
     ],
-    correctAnswer: 3,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    correctAnswer: 0,
+    explanation: `A concluding sentence should sum up the report's main idea, and this option restates what the class learned from the visit.`
   },
 ]
-
 const shuffleAnswerOptions = (questions: Question[]): Question[] => {
   return questions.map((question) => {
     const optionsWithOriginalIndex = question.options.map((option, index) => ({ option, index }))
