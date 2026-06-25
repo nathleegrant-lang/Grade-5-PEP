@@ -121,7 +121,7 @@ Why did the author most likely write this passage?`,
   {
     id: 6,
     type: "reading",
-    skill: "Sequence",
+    skill: "Cause and Effect",
     question: `Read the passage then answer the question.
 
 "Jamaica Heritage Day began with drums echoing across the school hall. Grade 5 pupils wore bandana colours, displayed drawings of national heroes, and labelled tables with traditional foods such as ackee, bammy, and sweet potato pudding. During the celebration, each group explained a custom from a different parish. By the end of the morning, the pupils understood that heritage is more than old stories; it is the music, food, language, and respect people continue to share."
@@ -139,7 +139,7 @@ What happened after the pupils displayed drawings and labelled tables?`,
   {
     id: 7,
     type: "reading",
-    skill: "Cause and Effect",
+    skill: "Text Evidence",
     question: `Read the passage then answer the question.
 
 "Jamaica Heritage Day began with drums echoing across the school hall. Grade 5 pupils wore bandana colours, displayed drawings of national heroes, and labelled tables with traditional foods such as ackee, bammy, and sweet potato pudding. During the celebration, each group explained a custom from a different parish. By the end of the morning, the pupils understood that heritage is more than old stories; it is the music, food, language, and respect people continue to share."
@@ -157,7 +157,7 @@ What was one effect of the Heritage Day activities?`,
   {
     id: 8,
     type: "reading",
-    skill: "Text Evidence",
+    skill: "Main Idea",
     question: `Read the passage then answer the question.
 
 "Jamaica Heritage Day began with drums echoing across the school hall. Grade 5 pupils wore bandana colours, displayed drawings of national heroes, and labelled tables with traditional foods such as ackee, bammy, and sweet potato pudding. During the celebration, each group explained a custom from a different parish. By the end of the morning, the pupils understood that heritage is more than old stories; it is the music, food, language, and respect people continue to share."
@@ -175,7 +175,7 @@ Which detail best supports the idea that the pupils shared Jamaican culture?`,
   {
     id: 9,
     type: "reading",
-    skill: "Main Idea",
+    skill: "Detail",
     question: `Read the passage then answer the question.
 
 "On Friday, Mr. Henry took the class to the Seville Heritage Park. A guide led them past stone ruins, old maps, and a small room filled with clay pots and tools. The pupils moved quietly because the objects were fragile. Amara sketched a tiny pot while Daniel wrote notes about how people traded goods long ago. On the ride back to school, the class agreed that visiting a historical site helped them imagine real people from the past."
@@ -193,7 +193,7 @@ What is the main idea of this passage?`,
   {
     id: 10,
     type: "reading",
-    skill: "Detail",
+    skill: "Inference",
     question: `Read the passage then answer the question.
 
 "On Friday, Mr. Henry took the class to the Seville Heritage Park. A guide led them past stone ruins, old maps, and a small room filled with clay pots and tools. The pupils moved quietly because the objects were fragile. Amara sketched a tiny pot while Daniel wrote notes about how people traded goods long ago. On the ride back to school, the class agreed that visiting a historical site helped them imagine real people from the past."
@@ -211,7 +211,7 @@ Who led the class around the historical site?`,
   {
     id: 11,
     type: "reading",
-    skill: "Inference",
+    skill: "Vocabulary in Context",
     question: `Read the passage then answer the question.
 
 "On Friday, Mr. Henry took the class to the Seville Heritage Park. A guide led them past stone ruins, old maps, and a small room filled with clay pots and tools. The pupils moved quietly because the objects were fragile. Amara sketched a tiny pot while Daniel wrote notes about how people traded goods long ago. On the ride back to school, the class agreed that visiting a historical site helped them imagine real people from the past."
@@ -229,7 +229,7 @@ Why did the pupils move quietly?`,
   {
     id: 12,
     type: "reading",
-    skill: "Vocabulary in Context",
+    skill: "Character Response",
     question: `Read the passage then answer the question.
 
 "On Friday, Mr. Henry took the class to the Seville Heritage Park. A guide led them past stone ruins, old maps, and a small room filled with clay pots and tools. The pupils moved quietly because the objects were fragile. Amara sketched a tiny pot while Daniel wrote notes about how people traded goods long ago. On the ride back to school, the class agreed that visiting a historical site helped them imagine real people from the past."
@@ -247,7 +247,7 @@ What does fragile mean in the passage?`,
   {
     id: 13,
     type: "reading",
-    skill: "Author’s Purpose",
+    skill: "Text Evidence",
     question: `Read the passage then answer the question.
 
 "On Friday, Mr. Henry took the class to the Seville Heritage Park. A guide led them past stone ruins, old maps, and a small room filled with clay pots and tools. The pupils moved quietly because the objects were fragile. Amara sketched a tiny pot while Daniel wrote notes about how people traded goods long ago. On the ride back to school, the class agreed that visiting a historical site helped them imagine real people from the past."
@@ -283,7 +283,7 @@ How were Amara and Daniel alike during the visit?`,
   {
     id: 15,
     type: "reading",
-    skill: "Problem and Solution",
+    skill: "Theme",
     question: `Read the passage then answer the question.
 
 "On Friday, Mr. Henry took the class to the Seville Heritage Park. A guide led them past stone ruins, old maps, and a small room filled with clay pots and tools. The pupils moved quietly because the objects were fragile. Amara sketched a tiny pot while Daniel wrote notes about how people traded goods long ago. On the ride back to school, the class agreed that visiting a historical site helped them imagine real people from the past."
@@ -483,8 +483,8 @@ Which sentence best states a problem and solution from the passage?`,
   {
     id: 29,
     type: "grammar",
-    skill: "Punctuation",
-    question: `Which sentence is punctuated correctly?`,
+    skill: "Capitalization",
+    question: `Which sentence uses capital letters correctly?`,
     options: [
       `"Please walk carefully," said the guide.`,
       `"Please walk carefully" said the guide.`,
@@ -525,8 +525,8 @@ Which sentence best states a problem and solution from the passage?`,
   {
     id: 32,
     type: "grammar",
-    skill: "Complete Sentence",
-    question: `Which is a complete sentence?`,
+    skill: "Conjunctions",
+    question: `Which word best completes the sentence? The pupils observed the pottery, ___ they wrote notes.`,
     options: [
       "After the drums in the hall.",
       "The museum guide answered our questions.",
@@ -539,8 +539,8 @@ Which sentence best states a problem and solution from the passage?`,
   {
     id: 33,
     type: "grammar",
-    skill: "Comma in a Series",
-    question: `Which sentence uses commas correctly?`,
+    skill: "Comma Use",
+    question: `Which sentence uses a comma correctly in a list?`,
     options: [
       "We saw drums, maps, pots, and tools.",
       "We saw drums maps, pots and tools.",
@@ -553,8 +553,8 @@ Which sentence best states a problem and solution from the passage?`,
   {
     id: 34,
     type: "grammar",
-    skill: "Possessive Noun",
-    question: `Choose the correct possessive form.`,
+    skill: "Complete Sentences",
+    question: `Which option is a complete sentence?`,
     options: [
       "The guides badge was blue.",
       "The guide's badge was blue.",
