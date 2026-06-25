@@ -526,15 +526,15 @@ Which sentence best states a problem and solution from the passage?`,
     id: 32,
     type: "grammar",
     skill: "Conjunctions",
-    question: `Which word best completes the sentence? The pupils observed the pottery, ___ they wrote notes.`,
+    question: `Choose the best word: The pupils observed the pottery, ___ they wrote notes.`,
     options: [
-      "After the drums in the hall.",
-      "The museum guide answered our questions.",
-      "Because the old map on the wall.",
-      "Near the table with traditional foods.",
+      "because",
+      "but",
+      "or",
+      "although",
     ],
-    correctAnswer: 1,
-    explanation: `The museum guide answered our questions has a subject and a predicate and expresses a complete thought.`
+    correctAnswer: 0,
+    explanation: `Because correctly explains why the pupils wrote notes after observing the pottery.`
   },
   {
     id: 33,
@@ -553,7 +553,7 @@ Which sentence best states a problem and solution from the passage?`,
   {
     id: 34,
     type: "grammar",
-    skill: "Complete Sentences",
+    skill: "Possessive Apostrophes",
     question: `Which option is a complete sentence?`,
     options: [
       "The guides badge was blue.",
