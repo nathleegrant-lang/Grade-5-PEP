@@ -34,17 +34,17 @@ const g5LaEasy10Questions: Question[] = [
     skill: "Main Idea",
     question: `Read the passage then answer the question.
 
-"At the School Science Fair, Grade 5 pupils displayed projects on magnets, plants, water filters, and weather instruments. Each group explained its question, materials, method, and results on a neat board. Visitors asked questions, so the pupils had to speak clearly and use evidence from their tests. The fair helped everyone see that science begins with curiosity."
+"Grade 5 prepared for the School Science Fair by working in small teams. One team tested which soil helped bean plants grow tallest, another built a simple water filter, and a third measured how shadows changed during the day. Each group wrote a question, listed materials, followed steps, and recorded results in a notebook. On fair day, visitors studied the display boards and asked pupils to explain their evidence. The fair showed that careful observation and honest reporting help scientists learn."
 
-Which answer best matches the passage?`,
+What is the main idea of the passage?`,
     options: [
-      "to entertain with a fantasy adventure",
-      "to describe the pupils’ organized school activity",
-      "to explain why sports day was postponed",
-      "to list rules for a spelling contest",
+      "Grade 5 pupils used planned investigations to learn and share science ideas.",
+      "The school cancelled the fair because no one finished a project.",
+      "Visitors taught pupils how to play new games after lunch.",
+      "The bean plants were the only project at the science fair.",
     ],
     correctAnswer: 0,
-    explanation: `The passage shows school science fair as a planned, helpful activity involving pupils.`
+    explanation: `The passage is mainly about pupils planning investigations, recording results, and explaining science projects at the fair.`
   },
   {
     id: 2,
@@ -52,125 +52,125 @@ Which answer best matches the passage?`,
     skill: "Detail",
     question: `Read the passage then answer the question.
 
-"At the School Science Fair, Grade 5 pupils displayed projects on magnets, plants, water filters, and weather instruments. Each group explained its question, materials, method, and results on a neat board. Visitors asked questions, so the pupils had to speak clearly and use evidence from their tests. The fair helped everyone see that science begins with curiosity."
+"Grade 5 prepared for the School Science Fair by working in small teams. One team tested which soil helped bean plants grow tallest, another built a simple water filter, and a third measured how shadows changed during the day. Each group wrote a question, listed materials, followed steps, and recorded results in a notebook. On fair day, visitors studied the display boards and asked pupils to explain their evidence. The fair showed that careful observation and honest reporting help scientists learn."
 
-Which answer best matches the passage?`,
+Which project did one team complete?`,
     options: [
-      "They cancelled the activity after assembly.",
-      "They used a schedule or record to guide the activity.",
-      "They sold tickets at the gate.",
-      "They worked alone without a teacher.",
+      "a model of the moon made from cheese",
+      "a simple water filter",
+      "a new set of football rules",
+      "a recipe book for the canteen",
     ],
     correctAnswer: 1,
-    explanation: `The passage shows school science fair as a planned, helpful activity involving pupils.`
+    explanation: `The passage states that one team built a simple water filter.`
   },
   {
     id: 3,
     type: "reading",
-    skill: "Inference",
+    skill: "Detail",
     question: `Read the passage then answer the question.
 
-"At the School Science Fair, Grade 5 pupils displayed projects on magnets, plants, water filters, and weather instruments. Each group explained its question, materials, method, and results on a neat board. Visitors asked questions, so the pupils had to speak clearly and use evidence from their tests. The fair helped everyone see that science begins with curiosity."
+"Grade 5 prepared for the School Science Fair by working in small teams. One team tested which soil helped bean plants grow tallest, another built a simple water filter, and a third measured how shadows changed during the day. Each group wrote a question, listed materials, followed steps, and recorded results in a notebook. On fair day, visitors studied the display boards and asked pupils to explain their evidence. The fair showed that careful observation and honest reporting help scientists learn."
 
-Which answer best matches the passage?`,
+What did each group record results in?`,
     options: [
-      "Only adults did the work.",
-      "The pupils were careless.",
-      "The school was closed.",
-      "The activity was planned and helpful.",
+      "a notebook",
+      "a lunch box",
+      "a library card",
+      "a sports timetable",
     ],
-    correctAnswer: 2,
-    explanation: `The passage shows school science fair as a planned, helpful activity involving pupils.`
+    correctAnswer: 0,
+    explanation: `The passage says each group recorded results in a notebook.`
   },
   {
     id: 4,
     type: "reading",
-    skill: "Vocabulary in Context",
+    skill: "Inference",
     question: `Read the passage then answer the question.
 
-"At the School Science Fair, Grade 5 pupils displayed projects on magnets, plants, water filters, and weather instruments. Each group explained its question, materials, method, and results on a neat board. Visitors asked questions, so the pupils had to speak clearly and use evidence from their tests. The fair helped everyone see that science begins with curiosity."
+"Grade 5 prepared for the School Science Fair by working in small teams. One team tested which soil helped bean plants grow tallest, another built a simple water filter, and a third measured how shadows changed during the day. Each group wrote a question, listed materials, followed steps, and recorded results in a notebook. On fair day, visitors studied the display boards and asked pupils to explain their evidence. The fair showed that careful observation and honest reporting help scientists learn."
 
-Which answer best matches the passage?`,
+What can the reader infer about the pupils?`,
     options: [
-      "comfortable means suitable for the person",
-      "comfortable means broken into pieces",
-      "comfortable means very expensive",
-      "comfortable means impossible to find",
+      "They guessed answers without testing anything.",
+      "They worked carefully and could explain what they learned.",
+      "They wanted visitors to ignore their display boards.",
+      "They copied projects without understanding them.",
     ],
-    correctAnswer: 3,
-    explanation: `The passage shows school science fair as a planned, helpful activity involving pupils.`
+    correctAnswer: 1,
+    explanation: `Because the pupils followed steps, recorded results, and explained evidence, they worked carefully and understood their projects.`
   },
   {
     id: 5,
     type: "reading",
-    skill: "Author’s Purpose",
+    skill: "Vocabulary in Context",
     question: `Read the passage then answer the question.
 
-"At the School Science Fair, Grade 5 pupils displayed projects on magnets, plants, water filters, and weather instruments. Each group explained its question, materials, method, and results on a neat board. Visitors asked questions, so the pupils had to speak clearly and use evidence from their tests. The fair helped everyone see that science begins with curiosity."
+"Grade 5 prepared for the School Science Fair by working in small teams. One team tested which soil helped bean plants grow tallest, another built a simple water filter, and a third measured how shadows changed during the day. Each group wrote a question, listed materials, followed steps, and recorded results in a notebook. On fair day, visitors studied the display boards and asked pupils to explain their evidence. The fair showed that careful observation and honest reporting help scientists learn."
 
-Which answer best matches the passage?`,
+What does evidence mean in the passage?`,
     options: [
-      "to persuade readers to avoid school clubs",
-      "to inform readers about a useful school event",
-      "to describe a storm at school",
-      "to compare two famous athletes",
+      "proof or information that supports an idea",
+      "a loud noise made during assembly",
+      "a prize given for neat handwriting",
+      "a place where pupils store lunch kits",
     ],
     correctAnswer: 0,
-    explanation: `The passage shows school science fair as a planned, helpful activity involving pupils.`
+    explanation: `Visitors asked pupils to explain their evidence, so evidence means proof or information from their tests that supports their ideas.`
   },
   {
     id: 6,
     type: "reading",
-    skill: "Sequence",
+    skill: "Author’s Purpose",
     question: `Read the passage then answer the question.
 
-"At the School Science Fair, Grade 5 pupils displayed projects on magnets, plants, water filters, and weather instruments. Each group explained its question, materials, method, and results on a neat board. Visitors asked questions, so the pupils had to speak clearly and use evidence from their tests. The fair helped everyone see that science begins with curiosity."
+"Grade 5 prepared for the School Science Fair by working in small teams. One team tested which soil helped bean plants grow tallest, another built a simple water filter, and a third measured how shadows changed during the day. Each group wrote a question, listed materials, followed steps, and recorded results in a notebook. On fair day, visitors studied the display boards and asked pupils to explain their evidence. The fair showed that careful observation and honest reporting help scientists learn."
 
-Which answer best matches the passage?`,
+Why did the author most likely write this passage?`,
     options: [
-      "First they went home; then they listened to directions.",
-      "First they received prizes; then they began planning.",
-      "First visitors left; then the event opened.",
-      "First pupils planned; then they carried out the task.",
+      "to inform readers about how pupils prepared and presented science projects",
+      "to persuade readers to stop asking questions",
+      "to describe a holiday trip to the beach",
+      "to explain how to win a football match",
     ],
-    correctAnswer: 1,
-    explanation: `The passage shows school science fair as a planned, helpful activity involving pupils.`
+    correctAnswer: 0,
+    explanation: `The author gives information about the science fair and how pupils prepared and presented their work.`
   },
   {
     id: 7,
     type: "reading",
-    skill: "Cause and Effect",
+    skill: "Sequence",
     question: `Read the passage then answer the question.
 
-"At the School Science Fair, Grade 5 pupils displayed projects on magnets, plants, water filters, and weather instruments. Each group explained its question, materials, method, and results on a neat board. Visitors asked questions, so the pupils had to speak clearly and use evidence from their tests. The fair helped everyone see that science begins with curiosity."
+"Grade 5 prepared for the School Science Fair by working in small teams. One team tested which soil helped bean plants grow tallest, another built a simple water filter, and a third measured how shadows changed during the day. Each group wrote a question, listed materials, followed steps, and recorded results in a notebook. On fair day, visitors studied the display boards and asked pupils to explain their evidence. The fair showed that careful observation and honest reporting help scientists learn."
 
-Which answer best matches the passage?`,
+Which event happened before visitors asked questions?`,
     options: [
-      "Because the bell rang, the trees became taller.",
-      "Because pupils worked together, the activity was successful.",
-      "Because no one listened, the fair opened early.",
-      "Because it rained indoors, the books disappeared.",
+      "Pupils made display boards and recorded their results.",
+      "The canteen labelled balanced lunches.",
+      "Pupils promised to exercise every week.",
+      "The guidance counsellor spoke about sleep.",
     ],
-    correctAnswer: 2,
-    explanation: `The passage shows school science fair as a planned, helpful activity involving pupils.`
+    correctAnswer: 0,
+    explanation: `The groups prepared their boards and results before fair day, when visitors asked questions.`
   },
   {
     id: 8,
     type: "reading",
-    skill: "Text Evidence",
+    skill: "Cause and Effect",
     question: `Read the passage then answer the question.
 
-"At the School Science Fair, Grade 5 pupils displayed projects on magnets, plants, water filters, and weather instruments. Each group explained its question, materials, method, and results on a neat board. Visitors asked questions, so the pupils had to speak clearly and use evidence from their tests. The fair helped everyone see that science begins with curiosity."
+"Grade 5 prepared for the School Science Fair by working in small teams. One team tested which soil helped bean plants grow tallest, another built a simple water filter, and a third measured how shadows changed during the day. Each group wrote a question, listed materials, followed steps, and recorded results in a notebook. On fair day, visitors studied the display boards and asked pupils to explain their evidence. The fair showed that careful observation and honest reporting help scientists learn."
 
-Which answer best matches the passage?`,
+Why could pupils explain their projects clearly to visitors?`,
     options: [
-      "A sentence about teamwork and careful records supports the answer.",
-      "A sentence about a football match supports the answer.",
-      "A sentence about a lost puppy supports the answer.",
-      "A sentence about a birthday party supports the answer.",
+      "They had followed steps and recorded evidence from their tests.",
+      "They had hidden their notebooks under the tables.",
+      "They had refused to list their materials.",
+      "They had left their projects at home.",
     ],
-    correctAnswer: 3,
-    explanation: `The passage shows school science fair as a planned, helpful activity involving pupils.`
+    correctAnswer: 0,
+    explanation: `Following steps and recording evidence gave pupils information to use when explaining their projects.`
   },
   {
     id: 9,
@@ -178,17 +178,17 @@ Which answer best matches the passage?`,
     skill: "Main Idea",
     question: `Read the passage then answer the question.
 
-"The guidance counsellor launched a Healthy Eating and Wellness Campaign during assembly. Pupils learned how fruits, vegetables, water, rest, and exercise help the body work well. At break time, the canteen displayed colourful lunch choices, and the prefects led a short stretching activity. The campaign encouraged small habits that pupils could practise every day."
+"The student council launched a Healthy Living and Wellness Campaign on Monday morning. Posters reminded pupils to drink water, eat fruits and vegetables, sleep well, wash their hands, and exercise safely. At break time, prefects led a five-minute stretch, and the canteen placed colourful labels beside balanced lunch choices. The guidance counsellor explained that small daily habits can protect the body and improve focus in class. Many pupils promised to try one healthier habit each week."
 
-What does the passage help the reader understand?`,
+What is the main idea of the passage?`,
     options: [
-      "The community activity helped others through shared effort.",
-      "The event was mainly about buying new uniforms.",
-      "The children avoided helping younger pupils.",
-      "The passage focuses on a private family trip.",
+      "A school campaign encouraged pupils to build healthy daily habits.",
+      "The student council planned a concert for Monday morning.",
+      "The canteen removed every lunch choice from the school.",
+      "Pupils learned only about painting posters.",
     ],
     correctAnswer: 0,
-    explanation: `The details show healthy eating campaign brought people together for a helpful purpose.`
+    explanation: `The passage focuses on a campaign that encouraged healthy habits such as water, food choices, rest, hygiene, and exercise.`
   },
   {
     id: 10,
@@ -196,457 +196,481 @@ What does the passage help the reader understand?`,
     skill: "Detail",
     question: `Read the passage then answer the question.
 
-"The guidance counsellor launched a Healthy Eating and Wellness Campaign during assembly. Pupils learned how fruits, vegetables, water, rest, and exercise help the body work well. At break time, the canteen displayed colourful lunch choices, and the prefects led a short stretching activity. The campaign encouraged small habits that pupils could practise every day."
+"The student council launched a Healthy Living and Wellness Campaign on Monday morning. Posters reminded pupils to drink water, eat fruits and vegetables, sleep well, wash their hands, and exercise safely. At break time, prefects led a five-minute stretch, and the canteen placed colourful labels beside balanced lunch choices. The guidance counsellor explained that small daily habits can protect the body and improve focus in class. Many pupils promised to try one healthier habit each week."
 
-What does the passage help the reader understand?`,
+Which habit was shown on the posters?`,
     options: [
-      "The children avoided helping younger pupils.",
-      "The event was mainly about buying new uniforms.",
-      "The passage focuses on a private family trip.",
-      "The community activity helped others through shared effort.",
+      "drink water",
+      "skip sleep",
+      "avoid handwashing",
+      "sit still all day",
     ],
-    correctAnswer: 1,
-    explanation: `The details show healthy eating campaign brought people together for a helpful purpose.`
+    correctAnswer: 0,
+    explanation: `The posters reminded pupils to drink water, along with other healthy habits.`
   },
   {
     id: 11,
     type: "reading",
-    skill: "Inference",
+    skill: "Detail",
     question: `Read the passage then answer the question.
 
-"The guidance counsellor launched a Healthy Eating and Wellness Campaign during assembly. Pupils learned how fruits, vegetables, water, rest, and exercise help the body work well. At break time, the canteen displayed colourful lunch choices, and the prefects led a short stretching activity. The campaign encouraged small habits that pupils could practise every day."
+"The student council launched a Healthy Living and Wellness Campaign on Monday morning. Posters reminded pupils to drink water, eat fruits and vegetables, sleep well, wash their hands, and exercise safely. At break time, prefects led a five-minute stretch, and the canteen placed colourful labels beside balanced lunch choices. The guidance counsellor explained that small daily habits can protect the body and improve focus in class. Many pupils promised to try one healthier habit each week."
 
-What does the passage help the reader understand?`,
+Who led the five-minute stretch at break time?`,
     options: [
-      "The passage focuses on a private family trip.",
-      "The community activity helped others through shared effort.",
-      "The children avoided helping younger pupils.",
-      "The event was mainly about buying new uniforms.",
+      "prefects",
+      "bus drivers",
+      "visiting farmers",
+      "the football team from another school",
     ],
-    correctAnswer: 2,
-    explanation: `The details show healthy eating campaign brought people together for a helpful purpose.`
+    correctAnswer: 0,
+    explanation: `The passage says prefects led a five-minute stretch at break time.`
   },
   {
     id: 12,
     type: "reading",
-    skill: "Vocabulary in Context",
+    skill: "Inference",
     question: `Read the passage then answer the question.
 
-"The guidance counsellor launched a Healthy Eating and Wellness Campaign during assembly. Pupils learned how fruits, vegetables, water, rest, and exercise help the body work well. At break time, the canteen displayed colourful lunch choices, and the prefects led a short stretching activity. The campaign encouraged small habits that pupils could practise every day."
+"The student council launched a Healthy Living and Wellness Campaign on Monday morning. Posters reminded pupils to drink water, eat fruits and vegetables, sleep well, wash their hands, and exercise safely. At break time, prefects led a five-minute stretch, and the canteen placed colourful labels beside balanced lunch choices. The guidance counsellor explained that small daily habits can protect the body and improve focus in class. Many pupils promised to try one healthier habit each week."
 
-What does the passage help the reader understand?`,
+What can the reader infer about the campaign?`,
     options: [
-      "The community activity helped others through shared effort.",
-      "The event was mainly about buying new uniforms.",
-      "The children avoided helping younger pupils.",
-      "The passage focuses on a private family trip.",
+      "It gave pupils practical actions they could try at school and at home.",
+      "It was designed to make pupils less focused in class.",
+      "It told pupils that exercise and rest were unimportant.",
+      "It lasted only because no one understood the posters.",
     ],
-    correctAnswer: 3,
-    explanation: `The details show healthy eating campaign brought people together for a helpful purpose.`
+    correctAnswer: 0,
+    explanation: `The campaign gave simple actions, and pupils promised to try healthier habits each week, so it was practical.`
   },
   {
     id: 13,
     type: "reading",
-    skill: "Author’s Purpose",
+    skill: "Vocabulary in Context",
     question: `Read the passage then answer the question.
 
-"The guidance counsellor launched a Healthy Eating and Wellness Campaign during assembly. Pupils learned how fruits, vegetables, water, rest, and exercise help the body work well. At break time, the canteen displayed colourful lunch choices, and the prefects led a short stretching activity. The campaign encouraged small habits that pupils could practise every day."
+"The student council launched a Healthy Living and Wellness Campaign on Monday morning. Posters reminded pupils to drink water, eat fruits and vegetables, sleep well, wash their hands, and exercise safely. At break time, prefects led a five-minute stretch, and the canteen placed colourful labels beside balanced lunch choices. The guidance counsellor explained that small daily habits can protect the body and improve focus in class. Many pupils promised to try one healthier habit each week."
 
-What does the passage help the reader understand?`,
+What does balanced mean in the passage?`,
     options: [
-      "The community activity helped others through shared effort.",
-      "The event was mainly about buying new uniforms.",
-      "The children avoided helping younger pupils.",
-      "The passage focuses on a private family trip.",
+      "having a healthy mix of different foods",
+      "falling off a chair during lunch",
+      "written in very tiny letters",
+      "made only from sweets and soda",
     ],
     correctAnswer: 0,
-    explanation: `The details show healthy eating campaign brought people together for a helpful purpose.`
+    explanation: `Balanced lunch choices are presented as healthy, so balanced means having a healthy mix of foods.`
   },
   {
     id: 14,
     type: "reading",
-    skill: "Compare Ideas",
+    skill: "Cause and Effect",
     question: `Read the passage then answer the question.
 
-"The guidance counsellor launched a Healthy Eating and Wellness Campaign during assembly. Pupils learned how fruits, vegetables, water, rest, and exercise help the body work well. At break time, the canteen displayed colourful lunch choices, and the prefects led a short stretching activity. The campaign encouraged small habits that pupils could practise every day."
+"The student council launched a Healthy Living and Wellness Campaign on Monday morning. Posters reminded pupils to drink water, eat fruits and vegetables, sleep well, wash their hands, and exercise safely. At break time, prefects led a five-minute stretch, and the canteen placed colourful labels beside balanced lunch choices. The guidance counsellor explained that small daily habits can protect the body and improve focus in class. Many pupils promised to try one healthier habit each week."
 
-What does the passage help the reader understand?`,
+According to the passage, what can small daily habits improve?`,
     options: [
-      "The children avoided helping younger pupils.",
-      "The event was mainly about buying new uniforms.",
-      "The passage focuses on a private family trip.",
-      "The community activity helped others through shared effort.",
+      "focus in class",
+      "the colour of the school gate",
+      "the number of desks in the room",
+      "the length of the lunch bell",
     ],
-    correctAnswer: 1,
-    explanation: `The details show healthy eating campaign brought people together for a helpful purpose.`
+    correctAnswer: 0,
+    explanation: `The guidance counsellor explained that small daily habits can protect the body and improve focus in class.`
   },
   {
     id: 15,
     type: "reading",
-    skill: "Problem and Solution",
+    skill: "Text Evidence",
     question: `Read the passage then answer the question.
 
-"The guidance counsellor launched a Healthy Eating and Wellness Campaign during assembly. Pupils learned how fruits, vegetables, water, rest, and exercise help the body work well. At break time, the canteen displayed colourful lunch choices, and the prefects led a short stretching activity. The campaign encouraged small habits that pupils could practise every day."
+"The student council launched a Healthy Living and Wellness Campaign on Monday morning. Posters reminded pupils to drink water, eat fruits and vegetables, sleep well, wash their hands, and exercise safely. At break time, prefects led a five-minute stretch, and the canteen placed colourful labels beside balanced lunch choices. The guidance counsellor explained that small daily habits can protect the body and improve focus in class. Many pupils promised to try one healthier habit each week."
 
-What does the passage help the reader understand?`,
+Which detail best shows pupils planned to continue the healthy habits?`,
     options: [
-      "The passage focuses on a private family trip.",
-      "The community activity helped others through shared effort.",
-      "The children avoided helping younger pupils.",
-      "The event was mainly about buying new uniforms.",
+      "Many pupils promised to try one healthier habit each week.",
+      "Posters were placed around the school.",
+      "The campaign began on Monday morning.",
+      "The canteen used colourful labels.",
     ],
-    correctAnswer: 2,
-    explanation: `The details show healthy eating campaign brought people together for a helpful purpose.`
+    correctAnswer: 0,
+    explanation: `Promising to try one healthier habit each week shows that pupils planned to continue practising healthy choices.`
   },
   {
     id: 16,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about science fair, the word “steady” is used in context. Which option gives the best meaning?`,
+    skill: "Synonyms",
+    question: `Choose the word that means nearly the same as observe.
+
+The pupils observe the bean plants each morning.`,
     options: [
-      "In the sentence, “steady” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      "watch carefully",
+      "hide quickly",
+      "paint brightly",
+      "forget completely",
     ],
-    correctAnswer: 3,
-    explanation: `Context clues in the school or community situation show that “steady” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `Observe means to watch carefully, especially to learn information.`
   },
   {
     id: 17,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about science fair, the word “gently” is used in context. Which option gives the best meaning?`,
+    skill: "Antonyms",
+    question: `Choose the word that means the opposite of honest.
+
+Scientists should give honest results.`,
     options: [
-      "In the sentence, “gently” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      "truthful",
+      "careful",
+      "dishonest",
+      "helpful",
     ],
-    correctAnswer: 0,
-    explanation: `Context clues in the school or community situation show that “gently” has the practical meaning used in the correct option.`
+    correctAnswer: 2,
+    explanation: `Honest means truthful; dishonest is the opposite.`
   },
   {
     id: 18,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `In a passage about science fair, the word “bright” is used in context. Which option gives the best meaning?`,
+    question: `What does filter mean in the sentence?
+
+The team used clean sand and cloth to filter muddy water.`,
     options: [
-      "It names a place far from the school.",
-      "It means the opposite of what the sentence suggests.",
-      "It means a loud sound made by traffic.",
-      "In the sentence, “bright” means a sensible meaning that fits the activity.",
+      "to clean by passing through material",
+      "to make a poster larger",
+      "to count money after a sale",
+      "to run quickly across a field",
     ],
-    correctAnswer: 1,
-    explanation: `Context clues in the school or community situation show that “bright” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `The sand and cloth were used to clean muddy water, so filter means to clean by passing through material.`
   },
   {
     id: 19,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about science fair, the word “careful” is used in context. Which option gives the best meaning?`,
+    skill: "Multiple Meaning Words",
+    question: `Which meaning of fair is used in the sentence?
+
+Each group decided on a fair way to share the table space.`,
     options: [
-      "It means a loud sound made by traffic.",
-      "In the sentence, “careful” means a sensible meaning that fits the activity.",
-      "It names a place far from the school.",
-      "It means the opposite of what the sentence suggests.",
+      "just and equal",
+      "an event with displays",
+      "light in colour",
+      "a type of weather",
     ],
-    correctAnswer: 2,
-    explanation: `Context clues in the school or community situation show that “careful” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `Here fair describes a just and equal way to share space, not the event itself.`
   },
   {
     id: 20,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about science fair, the word “useful” is used in context. Which option gives the best meaning?`,
+    skill: "Prefixes",
+    question: `What does unsafe mean?`,
     options: [
-      "In the sentence, “useful” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      "not safe",
+      "safe again",
+      "full of safety",
+      "one who keeps safe",
     ],
-    correctAnswer: 3,
-    explanation: `Context clues in the school or community situation show that “useful” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `The prefix un- means not, so unsafe means not safe.`
   },
   {
     id: 21,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about science fair, the word “purpose” is used in context. Which option gives the best meaning?`,
+    skill: "Suffixes",
+    question: `What does the suffix -less mean in careless?`,
     options: [
-      "In the sentence, “purpose” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      "without",
+      "full of",
+      "before",
+      "able to",
     ],
     correctAnswer: 0,
-    explanation: `Context clues in the school or community situation show that “purpose” has the practical meaning used in the correct option.`
+    explanation: `The suffix -less means without, so careless means without care.`
   },
   {
     id: 22,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about science fair, the word “encouraged” is used in context. Which option gives the best meaning?`,
+    skill: "Compound Words",
+    question: `Which word is a compound word?`,
     options: [
-      "It names a place far from the school.",
-      "It means the opposite of what the sentence suggests.",
-      "It means a loud sound made by traffic.",
-      "In the sentence, “encouraged” means a sensible meaning that fits the activity.",
+      "notebook",
+      "healthy",
+      "stretch",
+      "visitor",
     ],
-    correctAnswer: 1,
-    explanation: `Context clues in the school or community situation show that “encouraged” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `Notebook is a compound word made from note and book.`
   },
   {
     id: 23,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about science fair, the word “materials” is used in context. Which option gives the best meaning?`,
+    skill: "Word Meaning",
+    question: `What does wellness mean?`,
     options: [
-      "It means a loud sound made by traffic.",
-      "In the sentence, “materials” means a sensible meaning that fits the activity.",
-      "It names a place far from the school.",
-      "It means the opposite of what the sentence suggests.",
+      "the state of being healthy in body and mind",
+      "a machine used to measure shadows",
+      "a mistake in a science notebook",
+      "a prize for the loudest speaker",
     ],
-    correctAnswer: 2,
-    explanation: `Context clues in the school or community situation show that “materials” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `Wellness means being healthy in body and mind.`
   },
   {
     id: 24,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `In a passage about science fair, the word “displayed” is used in context. Which option gives the best meaning?`,
+    question: `What does launched mean in the sentence?
+
+The student council launched the campaign on Monday morning.`,
     options: [
-      "In the sentence, “displayed” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      "started",
+      "washed",
+      "dropped",
+      "forgot",
     ],
-    correctAnswer: 3,
-    explanation: `Context clues in the school or community situation show that “displayed” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `Launched means started in this sentence because the campaign began on Monday morning.`
   },
   {
     id: 25,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about science fair, the word “pride” is used in context. Which option gives the best meaning?`,
+    skill: "Antonyms",
+    question: `Which word is the opposite of improve?`,
     options: [
-      "In the sentence, “pride” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      "better",
+      "weaken",
+      "help",
+      "polish",
     ],
-    correctAnswer: 0,
-    explanation: `Context clues in the school or community situation show that “pride” has the practical meaning used in the correct option.`
+    correctAnswer: 1,
+    explanation: `Improve means to make better; weaken means to make worse or less strong.`
   },
   {
     id: 26,
     type: "grammar",
     skill: "Subject-Verb Agreement",
-    question: `The club ___ the plants every Wednesday.`,
+    question: `Choose the sentence with correct subject-verb agreement.`,
     options: [
-      "watering",
-      "water",
-      "were water",
-      "waters",
+      "The teams records their results daily.",
+      "The team record their results daily.",
+      "The teams record their results daily.",
+      "The teams recording their results daily.",
     ],
-    correctAnswer: 1,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 2,
+    explanation: `The plural subject teams agrees with the plural verb record.`
   },
   {
     id: 27,
     type: "grammar",
     skill: "Verb Tense",
-    question: `Yesterday, the pupils ___ their display.`,
+    question: `Choose the sentence written in the future tense.`,
     options: [
-      "preparing",
-      "prepared",
-      "prepares",
-      "prepare",
+      "The pupils tested the water filter.",
+      "The pupils test the water filter.",
+      "The pupils will test the water filter.",
+      "The pupils are testing the water filter.",
     ],
     correctAnswer: 2,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    explanation: `Will test shows that the action will happen in the future.`
   },
   {
     id: 28,
     type: "grammar",
-    skill: "Pronoun Reference",
-    question: `Maya lent Jada a ruler because ___ had an extra one.`,
+    skill: "Punctuation",
+    question: `Choose the sentence with correct punctuation.`,
     options: [
-      "she",
-      "they",
-      "it",
-      "we",
+      "Did you record the results?",
+      "Did you record the results.",
+      "Did you record the results!",
+      "Did you record the results,",
     ],
-    correctAnswer: 3,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 0,
+    explanation: `A direct question should end with a question mark.`
   },
   {
     id: 29,
     type: "grammar",
-    skill: "Punctuation",
-    question: `Which sentence is punctuated correctly?`,
+    skill: "Capitalization",
+    question: `Choose the sentence with correct capitalization.`,
     options: [
-      "“Please bring gloves,” said Mr. Brown.",
-      "“Please bring gloves” said Mr. Brown.",
-      "Please bring gloves, said Mr. Brown.",
-      "“Please bring gloves said Mr. Brown.”",
+      "on monday, the wellness campaign began.",
+      "On monday, the wellness campaign began.",
+      "On Monday, the wellness campaign began.",
+      "on Monday, the Wellness campaign began.",
     ],
-    correctAnswer: 0,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 2,
+    explanation: `The first word of the sentence and the day Monday should begin with capital letters.`
   },
   {
     id: 30,
     type: "grammar",
-    skill: "Adjective Use",
-    question: `Choose the sentence with the best describing word.`,
+    skill: "Pronouns",
+    question: `Choose the pronoun that best completes the sentence.
+
+Jada brought a water bottle because _____ wanted to stay hydrated.`,
     options: [
-      "Neatly poster caught the visitors.",
-      "The poster caught attention neat.",
-      "The poster neat caught attention.",
-      "The neat poster caught the visitors’ attention.",
+      "she",
+      "him",
+      "they",
+      "us",
     ],
-    correctAnswer: 1,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 0,
+    explanation: `She is the correct subject pronoun to refer to Jada.`
   },
   {
     id: 31,
     type: "grammar",
-    skill: "Conjunctions",
-    question: `Choose the best word: We packed water ___ the afternoon was hot.`,
+    skill: "Adjectives",
+    question: `Which word is an adjective in the sentence?
+
+The careful pupils labelled each display board.`,
     options: [
-      "so",
-      "because",
-      "or",
-      "but",
+      "careful",
+      "labelled",
+      "display",
+      "each",
     ],
-    correctAnswer: 2,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 0,
+    explanation: `Careful describes the noun pupils, so it is an adjective.`
   },
   {
     id: 32,
     type: "grammar",
-    skill: "Complete Sentence",
-    question: `Which is a complete sentence?`,
+    skill: "Adverbs",
+    question: `Which word is an adverb in the sentence?
+
+The presenter spoke clearly to the visitors.`,
     options: [
-      "The students shared books with Grade 1.",
-      "After the bell near the gate.",
-      "Because the table with cards.",
-      "The clean bags on Saturday.",
+      "presenter",
+      "spoke",
+      "clearly",
+      "visitors",
     ],
-    correctAnswer: 3,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 2,
+    explanation: `Clearly tells how the presenter spoke, so it is an adverb.`
   },
   {
     id: 33,
     type: "grammar",
-    skill: "Comma in a Series",
-    question: `Which sentence uses commas correctly?`,
+    skill: "Conjunctions",
+    question: `Choose the conjunction that best completes the sentence.
+
+The poster was colourful, _____ the message was easy to read.`,
     options: [
-      "We need pencils, glue, paper, and string.",
-      "We need pencils glue, paper and string.",
-      "We need, pencils glue paper, and string.",
-      "We need pencils, glue paper and, string.",
+      "and",
+      "under",
+      "quickly",
+      "beside",
     ],
     correctAnswer: 0,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    explanation: `And correctly joins two related ideas that both describe the poster.`
   },
   {
     id: 34,
     type: "grammar",
-    skill: "Possessive Noun",
-    question: `Choose the correct possessive form.`,
+    skill: "Commas",
+    question: `Choose the sentence that uses commas correctly in a list.`,
     options: [
-      "The classes chart was full.",
-      "The class chart’s was full.",
-      "The classs chart was full.",
-      "The class’s chart was full.",
+      "We need water fruits vegetables and rest.",
+      "We need water, fruits, vegetables, and rest.",
+      "We need, water fruits, vegetables and rest.",
+      "We need water fruits, vegetables, and, rest.",
     ],
     correctAnswer: 1,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    explanation: `Commas separate the items in the list: water, fruits, vegetables, and rest.`
   },
   {
     id: 35,
     type: "grammar",
-    skill: "Sentence Combining",
-    question: `Which combines the ideas best?`,
+    skill: "Complete Sentences",
+    question: `Which option is a complete sentence?`,
     options: [
-      "The event went because carefully pupils.",
-      "The pupils planned carefully, and the event went well.",
-      "Planning carefully and event went.",
-      "The pupils planned carefully the event went well.",
+      "After the science fair.",
+      "Because the display board.",
+      "The pupils explained their evidence.",
+      "Recording results carefully.",
     ],
     correctAnswer: 2,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    explanation: `The pupils explained their evidence has a subject and predicate and expresses a complete thought.`
   },
   {
     id: 36,
     type: "writing",
-    skill: "Purpose and Audience",
-    question: `You are writing a notice for pupils about the event connected to wellness campaign. What is the best approach?`,
+    skill: "Topic Sentence",
+    question: `Which sentence would be the best topic sentence for a paragraph about the School Science Fair?`,
     options: [
-      "Use a clear heading, important details, and polite language for a notice for pupils about the event.",
-      "Hide the date and place so readers must guess.",
-      "Use only jokes and leave out the main message.",
-      "Write one very long sentence with no punctuation.",
+      "The School Science Fair helped pupils practise asking questions and using evidence.",
+      "My shoes were beside the classroom door.",
+      "The mango tree dropped leaves near the gate.",
+      "A puppy slept under the library steps.",
     ],
-    correctAnswer: 3,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    correctAnswer: 0,
+    explanation: `A topic sentence should introduce the main idea, which is pupils learning science skills through the fair.`
   },
   {
     id: 37,
     type: "writing",
-    skill: "Purpose and Audience",
-    question: `You are writing a friendly letter thanking helpers connected to wellness campaign. What is the best approach?`,
+    skill: "Supporting Details",
+    question: `Which detail best supports this topic sentence?
+
+The wellness campaign taught pupils simple healthy habits.`,
     options: [
-      "Use a clear heading, important details, and polite language for a friendly letter thanking helpers.",
-      "Hide the date and place so readers must guess.",
-      "Use only jokes and leave out the main message.",
-      "Write one very long sentence with no punctuation.",
+      "Posters reminded pupils to drink water, eat fruits and vegetables, rest, and exercise.",
+      "The library shelf has many storybooks.",
+      "A bird flew over the playground fence.",
+      "The school bell rang loudly at noon.",
     ],
     correctAnswer: 0,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    explanation: `The poster details directly support the idea that pupils learned simple healthy habits.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "Purpose and Audience",
-    question: `You are writing a school announcement for assembly connected to wellness campaign. What is the best approach?`,
+    skill: "Sentence Order",
+    question: `Choose the best order for these sentences.
+
+1. Finally, they explained their results to visitors.
+2. First, the group wrote a science question.
+3. Next, they tested their idea and recorded observations.`,
     options: [
-      "Use only jokes and leave out the main message.",
-      "Hide the date and place so readers must guess.",
-      "Write one very long sentence with no punctuation.",
-      "Use a clear heading, important details, and polite language for a school announcement for assembly.",
+      "2, 3, 1",
+      "1, 2, 3",
+      "3, 1, 2",
+      "2, 1, 3",
     ],
-    correctAnswer: 1,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    correctAnswer: 0,
+    explanation: `The logical order is to write a question first, test and record next, and explain results finally.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Purpose and Audience",
-    question: `You are writing a poster for the community project connected to wellness campaign. What is the best approach?`,
+    skill: "Concluding Sentence",
+    question: `Which sentence is the best conclusion for a paragraph about the wellness campaign?`,
     options: [
-      "Write one very long sentence with no punctuation.",
-      "Use a clear heading, important details, and polite language for a poster for the community project.",
-      "Use only jokes and leave out the main message.",
-      "Hide the date and place so readers must guess.",
+      "Small healthy choices each day can help pupils feel ready to learn.",
+      "The blue pencil rolled across the desk.",
+      "My cousin likes cartoons on Saturdays.",
+      "The classroom window was open during rain.",
     ],
-    correctAnswer: 2,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    correctAnswer: 0,
+    explanation: `This sentence wraps up the paragraph by restating the importance of daily healthy choices.`
   },
   {
     id: 40,
     type: "writing",
-    skill: "Purpose and Audience",
-    question: `You are writing a short report for the school newsletter connected to wellness campaign. What is the best approach?`,
+    skill: "Revise for Clarity",
+    question: `Choose the clearest sentence.`,
     options: [
-      "Use a clear heading, important details, and polite language for a short report for the school newsletter.",
-      "Hide the date and place so readers must guess.",
-      "Use only jokes and leave out the main message.",
-      "Write one very long sentence with no punctuation.",
+      "We labelled the lunch choices so pupils could identify balanced meals.",
+      "Lunch choices pupils identify labelled balanced so meals.",
+      "Balanced so choices the pupils lunch labelled identify.",
+      "We meals choices because balanced labelled pupils.",
     ],
-    correctAnswer: 3,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    correctAnswer: 0,
+    explanation: `The correct sentence clearly explains what was labelled and why.`
   },
 ]
 
