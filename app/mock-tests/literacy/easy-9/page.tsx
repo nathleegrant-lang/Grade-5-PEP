@@ -34,17 +34,17 @@ const g5LaEasy9Questions: Question[] = [
     skill: "Main Idea",
     question: `Read the passage then answer the question.
 
-"Grade 5 prepared for the Junior Entrepreneurship Fair by planning small businesses in teams. One group made bookmarks, another mixed fruit cups, and a third designed greeting cards. Before the fair opened, each team counted its costs and decided on fair prices. The pupils learned that a good business needs planning, teamwork, and polite service."
+"Grade 5 prepared for the Junior Entrepreneurship Fair by planning small businesses in teams. One group made bookmarks from bright card, another mixed fruit cups, and a third designed greeting cards. Before the fair opened, each team counted its costs and decided on fair prices. At the tables, pupils greeted customers politely and explained how their products were made. By the end of the day, they learned that a good business needs planning, teamwork, honesty, and helpful service."
 
-Which answer best matches the passage?`,
+What is the main idea of the passage?`,
     options: [
-      "to entertain with a fantasy adventure",
-      "to describe the pupils’ organized school activity",
-      "to explain why sports day was postponed",
-      "to list rules for a spelling contest",
+      "Grade 5 pupils learned about business by preparing and selling products at a fair.",
+      "The pupils spent the whole day playing games in the school yard.",
+      "The fair was cancelled because no products were ready.",
+      "Only teachers were allowed to speak to customers at the fair.",
     ],
     correctAnswer: 0,
-    explanation: `The passage shows junior entrepreneurship fair as a planned, helpful activity involving pupils.`
+    explanation: `The passage focuses on pupils planning small businesses, selling products, and learning what a good business needs.`
   },
   {
     id: 2,
@@ -52,89 +52,89 @@ Which answer best matches the passage?`,
     skill: "Detail",
     question: `Read the passage then answer the question.
 
-"Grade 5 prepared for the Junior Entrepreneurship Fair by planning small businesses in teams. One group made bookmarks, another mixed fruit cups, and a third designed greeting cards. Before the fair opened, each team counted its costs and decided on fair prices. The pupils learned that a good business needs planning, teamwork, and polite service."
+"Grade 5 prepared for the Junior Entrepreneurship Fair by planning small businesses in teams. One group made bookmarks from bright card, another mixed fruit cups, and a third designed greeting cards. Before the fair opened, each team counted its costs and decided on fair prices. At the tables, pupils greeted customers politely and explained how their products were made. By the end of the day, they learned that a good business needs planning, teamwork, honesty, and helpful service."
 
-Which answer best matches the passage?`,
+Which product was made by one of the groups?`,
     options: [
-      "They cancelled the activity after assembly.",
-      "They used a schedule or record to guide the activity.",
-      "They sold tickets at the gate.",
-      "They worked alone without a teacher.",
+      "toy cars",
+      "bookmarks",
+      "school shoes",
+      "painted desks",
     ],
     correctAnswer: 1,
-    explanation: `The passage shows junior entrepreneurship fair as a planned, helpful activity involving pupils.`
+    explanation: `The passage states that one group made bookmarks from bright card.`
   },
   {
     id: 3,
     type: "reading",
-    skill: "Inference",
+    skill: "Detail",
     question: `Read the passage then answer the question.
 
-"Grade 5 prepared for the Junior Entrepreneurship Fair by planning small businesses in teams. One group made bookmarks, another mixed fruit cups, and a third designed greeting cards. Before the fair opened, each team counted its costs and decided on fair prices. The pupils learned that a good business needs planning, teamwork, and polite service."
+"Grade 5 prepared for the Junior Entrepreneurship Fair by planning small businesses in teams. One group made bookmarks from bright card, another mixed fruit cups, and a third designed greeting cards. Before the fair opened, each team counted its costs and decided on fair prices. At the tables, pupils greeted customers politely and explained how their products were made. By the end of the day, they learned that a good business needs planning, teamwork, honesty, and helpful service."
 
-Which answer best matches the passage?`,
+What did each team do before the fair opened?`,
     options: [
-      "Only adults did the work.",
-      "The pupils were careless.",
-      "The school was closed.",
-      "The activity was planned and helpful.",
+      "They counted costs and decided on fair prices.",
+      "They hid their products in the library.",
+      "They asked customers to leave the school.",
+      "They stopped working and went home early.",
     ],
-    correctAnswer: 2,
-    explanation: `The passage shows junior entrepreneurship fair as a planned, helpful activity involving pupils.`
+    correctAnswer: 0,
+    explanation: `The passage says each team counted its costs and decided on fair prices before the fair opened.`
   },
   {
     id: 4,
     type: "reading",
-    skill: "Vocabulary in Context",
+    skill: "Inference",
     question: `Read the passage then answer the question.
 
-"Grade 5 prepared for the Junior Entrepreneurship Fair by planning small businesses in teams. One group made bookmarks, another mixed fruit cups, and a third designed greeting cards. Before the fair opened, each team counted its costs and decided on fair prices. The pupils learned that a good business needs planning, teamwork, and polite service."
+"Grade 5 prepared for the Junior Entrepreneurship Fair by planning small businesses in teams. One group made bookmarks from bright card, another mixed fruit cups, and a third designed greeting cards. Before the fair opened, each team counted its costs and decided on fair prices. At the tables, pupils greeted customers politely and explained how their products were made. By the end of the day, they learned that a good business needs planning, teamwork, honesty, and helpful service."
 
-Which answer best matches the passage?`,
+What can the reader infer about the pupils?`,
     options: [
-      "comfortable means suitable for the person",
-      "comfortable means broken into pieces",
-      "comfortable means very expensive",
-      "comfortable means impossible to find",
+      "They were careless with money and materials.",
+      "They worked together and took the fair seriously.",
+      "They did not understand why customers came.",
+      "They wanted the fair to happen without any planning.",
     ],
-    correctAnswer: 3,
-    explanation: `The passage shows junior entrepreneurship fair as a planned, helpful activity involving pupils.`
+    correctAnswer: 1,
+    explanation: `The pupils planned in teams, counted costs, set prices, and spoke politely, so they worked responsibly together.`
   },
   {
     id: 5,
     type: "reading",
-    skill: "Author’s Purpose",
+    skill: "Vocabulary in Context",
     question: `Read the passage then answer the question.
 
-"Grade 5 prepared for the Junior Entrepreneurship Fair by planning small businesses in teams. One group made bookmarks, another mixed fruit cups, and a third designed greeting cards. Before the fair opened, each team counted its costs and decided on fair prices. The pupils learned that a good business needs planning, teamwork, and polite service."
+"Grade 5 prepared for the Junior Entrepreneurship Fair by planning small businesses in teams. One group made bookmarks from bright card, another mixed fruit cups, and a third designed greeting cards. Before the fair opened, each team counted its costs and decided on fair prices. At the tables, pupils greeted customers politely and explained how their products were made. By the end of the day, they learned that a good business needs planning, teamwork, honesty, and helpful service."
 
-Which answer best matches the passage?`,
+What does costs mean in the passage?`,
     options: [
-      "to persuade readers to avoid school clubs",
-      "to inform readers about a useful school event",
-      "to describe a storm at school",
-      "to compare two famous athletes",
+      "songs sung during the fair",
+      "materials needed to play a game",
+      "money spent to make the products",
+      "names of pupils on each team",
     ],
-    correctAnswer: 0,
-    explanation: `The passage shows junior entrepreneurship fair as a planned, helpful activity involving pupils.`
+    correctAnswer: 2,
+    explanation: `The teams counted costs before setting prices, so costs means the money spent to make the products.`
   },
   {
     id: 6,
     type: "reading",
-    skill: "Sequence",
+    skill: "Author’s Purpose",
     question: `Read the passage then answer the question.
 
-"Grade 5 prepared for the Junior Entrepreneurship Fair by planning small businesses in teams. One group made bookmarks, another mixed fruit cups, and a third designed greeting cards. Before the fair opened, each team counted its costs and decided on fair prices. The pupils learned that a good business needs planning, teamwork, and polite service."
+"Grade 5 prepared for the Junior Entrepreneurship Fair by planning small businesses in teams. One group made bookmarks from bright card, another mixed fruit cups, and a third designed greeting cards. Before the fair opened, each team counted its costs and decided on fair prices. At the tables, pupils greeted customers politely and explained how their products were made. By the end of the day, they learned that a good business needs planning, teamwork, honesty, and helpful service."
 
-Which answer best matches the passage?`,
+Why did the author most likely write this passage?`,
     options: [
-      "First they went home; then they listened to directions.",
-      "First they received prizes; then they began planning.",
-      "First visitors left; then the event opened.",
-      "First pupils planned; then they carried out the task.",
+      "to explain how a class learned business skills at a fair",
+      "to persuade pupils never to work in groups",
+      "to describe a race between three schools",
+      "to list rules for borrowing library books",
     ],
-    correctAnswer: 1,
-    explanation: `The passage shows junior entrepreneurship fair as a planned, helpful activity involving pupils.`
+    correctAnswer: 0,
+    explanation: `The author informs readers about the fair and the business skills pupils learned from it.`
   },
   {
     id: 7,
@@ -142,17 +142,17 @@ Which answer best matches the passage?`,
     skill: "Cause and Effect",
     question: `Read the passage then answer the question.
 
-"Grade 5 prepared for the Junior Entrepreneurship Fair by planning small businesses in teams. One group made bookmarks, another mixed fruit cups, and a third designed greeting cards. Before the fair opened, each team counted its costs and decided on fair prices. The pupils learned that a good business needs planning, teamwork, and polite service."
+"Grade 5 prepared for the Junior Entrepreneurship Fair by planning small businesses in teams. One group made bookmarks from bright card, another mixed fruit cups, and a third designed greeting cards. Before the fair opened, each team counted its costs and decided on fair prices. At the tables, pupils greeted customers politely and explained how their products were made. By the end of the day, they learned that a good business needs planning, teamwork, honesty, and helpful service."
 
-Which answer best matches the passage?`,
+What happened because the pupils counted costs before setting prices?`,
     options: [
-      "Because the bell rang, the trees became taller.",
-      "Because pupils worked together, the activity was successful.",
-      "Because no one listened, the fair opened early.",
-      "Because it rained indoors, the books disappeared.",
+      "They could choose fair prices for their products.",
+      "They had to throw away every greeting card.",
+      "They forgot how their products were made.",
+      "They stopped customers from visiting their tables.",
     ],
-    correctAnswer: 2,
-    explanation: `The passage shows junior entrepreneurship fair as a planned, helpful activity involving pupils.`
+    correctAnswer: 0,
+    explanation: `Counting costs helped the pupils decide on fair prices for the items they were selling.`
   },
   {
     id: 8,
@@ -160,17 +160,17 @@ Which answer best matches the passage?`,
     skill: "Text Evidence",
     question: `Read the passage then answer the question.
 
-"Grade 5 prepared for the Junior Entrepreneurship Fair by planning small businesses in teams. One group made bookmarks, another mixed fruit cups, and a third designed greeting cards. Before the fair opened, each team counted its costs and decided on fair prices. The pupils learned that a good business needs planning, teamwork, and polite service."
+"Grade 5 prepared for the Junior Entrepreneurship Fair by planning small businesses in teams. One group made bookmarks from bright card, another mixed fruit cups, and a third designed greeting cards. Before the fair opened, each team counted its costs and decided on fair prices. At the tables, pupils greeted customers politely and explained how their products were made. By the end of the day, they learned that a good business needs planning, teamwork, honesty, and helpful service."
 
-Which answer best matches the passage?`,
+Which detail best supports the idea that the pupils practised good customer service?`,
     options: [
-      "A sentence about teamwork and careful records supports the answer.",
-      "A sentence about a football match supports the answer.",
-      "A sentence about a lost puppy supports the answer.",
-      "A sentence about a birthday party supports the answer.",
+      "They made bookmarks from bright card.",
+      "They greeted customers politely and explained their products.",
+      "The fair took place at school.",
+      "The pupils were in Grade 5.",
     ],
-    correctAnswer: 3,
-    explanation: `The passage shows junior entrepreneurship fair as a planned, helpful activity involving pupils.`
+    correctAnswer: 1,
+    explanation: `Greeting customers politely and explaining products are examples of helpful customer service.`
   },
   {
     id: 9,
@@ -178,17 +178,17 @@ Which answer best matches the passage?`,
     skill: "Main Idea",
     question: `Read the passage then answer the question.
 
-"For their charity project, students created simple products to sell after school. They made bead bracelets, small plant pots, and paper gift bags from clean materials. A sign explained that the money would help buy art supplies for a nearby children's home. Customers were pleased because the products were useful and the purpose was kind."
+"For their charity project, students created simple products to sell after school. They made bead bracelets, small plant pots, and paper gift bags from clean reusable materials. A sign explained that the money would help buy art supplies for a nearby children's home. Customers were pleased because the products were useful and the purpose was kind. When the sale ended, the students counted the money carefully and thanked everyone who supported the project."
 
-What does the passage help the reader understand?`,
+What is the main idea of the passage?`,
     options: [
-      "The community activity helped others through shared effort.",
-      "The event was mainly about buying new uniforms.",
-      "The children avoided helping younger pupils.",
-      "The passage focuses on a private family trip.",
+      "Students sold handmade products to raise money for a children's home.",
+      "Students visited a children's home to borrow art supplies.",
+      "Customers came to school only to watch a concert.",
+      "The project was about throwing reusable materials away.",
     ],
     correctAnswer: 0,
-    explanation: `The details show charity products project brought people together for a helpful purpose.`
+    explanation: `Most details describe students making products, selling them, and using the money to help a children's home.`
   },
   {
     id: 10,
@@ -196,457 +196,481 @@ What does the passage help the reader understand?`,
     skill: "Detail",
     question: `Read the passage then answer the question.
 
-"For their charity project, students created simple products to sell after school. They made bead bracelets, small plant pots, and paper gift bags from clean materials. A sign explained that the money would help buy art supplies for a nearby children's home. Customers were pleased because the products were useful and the purpose was kind."
+"For their charity project, students created simple products to sell after school. They made bead bracelets, small plant pots, and paper gift bags from clean reusable materials. A sign explained that the money would help buy art supplies for a nearby children's home. Customers were pleased because the products were useful and the purpose was kind. When the sale ended, the students counted the money carefully and thanked everyone who supported the project."
 
-What does the passage help the reader understand?`,
+What would the money help buy?`,
     options: [
-      "The children avoided helping younger pupils.",
-      "The event was mainly about buying new uniforms.",
-      "The passage focuses on a private family trip.",
-      "The community activity helped others through shared effort.",
+      "sports trophies",
+      "new school buses",
+      "art supplies",
+      "musical instruments for a parade",
     ],
-    correctAnswer: 1,
-    explanation: `The details show charity products project brought people together for a helpful purpose.`
+    correctAnswer: 2,
+    explanation: `The sign explained that the money would help buy art supplies for a nearby children's home.`
   },
   {
     id: 11,
     type: "reading",
-    skill: "Inference",
+    skill: "Detail",
     question: `Read the passage then answer the question.
 
-"For their charity project, students created simple products to sell after school. They made bead bracelets, small plant pots, and paper gift bags from clean materials. A sign explained that the money would help buy art supplies for a nearby children's home. Customers were pleased because the products were useful and the purpose was kind."
+"For their charity project, students created simple products to sell after school. They made bead bracelets, small plant pots, and paper gift bags from clean reusable materials. A sign explained that the money would help buy art supplies for a nearby children's home. Customers were pleased because the products were useful and the purpose was kind. When the sale ended, the students counted the money carefully and thanked everyone who supported the project."
 
-What does the passage help the reader understand?`,
+Which product did the students make?`,
     options: [
-      "The passage focuses on a private family trip.",
-      "The community activity helped others through shared effort.",
-      "The children avoided helping younger pupils.",
-      "The event was mainly about buying new uniforms.",
+      "glass windows",
+      "bead bracelets",
+      "bicycle helmets",
+      "computer tablets",
     ],
-    correctAnswer: 2,
-    explanation: `The details show charity products project brought people together for a helpful purpose.`
+    correctAnswer: 1,
+    explanation: `The passage lists bead bracelets as one of the products the students made.`
   },
   {
     id: 12,
     type: "reading",
-    skill: "Vocabulary in Context",
+    skill: "Inference",
     question: `Read the passage then answer the question.
 
-"For their charity project, students created simple products to sell after school. They made bead bracelets, small plant pots, and paper gift bags from clean materials. A sign explained that the money would help buy art supplies for a nearby children's home. Customers were pleased because the products were useful and the purpose was kind."
+"For their charity project, students created simple products to sell after school. They made bead bracelets, small plant pots, and paper gift bags from clean reusable materials. A sign explained that the money would help buy art supplies for a nearby children's home. Customers were pleased because the products were useful and the purpose was kind. When the sale ended, the students counted the money carefully and thanked everyone who supported the project."
 
-What does the passage help the reader understand?`,
+What can the reader infer about the students?`,
     options: [
-      "The community activity helped others through shared effort.",
-      "The event was mainly about buying new uniforms.",
-      "The children avoided helping younger pupils.",
-      "The passage focuses on a private family trip.",
+      "They cared about helping others.",
+      "They wanted to keep all the money for themselves.",
+      "They were angry that customers visited the sale.",
+      "They did not know the purpose of the project.",
     ],
-    correctAnswer: 3,
-    explanation: `The details show charity products project brought people together for a helpful purpose.`
+    correctAnswer: 0,
+    explanation: `The students raised money for a children's home and thanked supporters, showing that they cared about helping others.`
   },
   {
     id: 13,
     type: "reading",
-    skill: "Author’s Purpose",
+    skill: "Vocabulary in Context",
     question: `Read the passage then answer the question.
 
-"For their charity project, students created simple products to sell after school. They made bead bracelets, small plant pots, and paper gift bags from clean materials. A sign explained that the money would help buy art supplies for a nearby children's home. Customers were pleased because the products were useful and the purpose was kind."
+"For their charity project, students created simple products to sell after school. They made bead bracelets, small plant pots, and paper gift bags from clean reusable materials. A sign explained that the money would help buy art supplies for a nearby children's home. Customers were pleased because the products were useful and the purpose was kind. When the sale ended, the students counted the money carefully and thanked everyone who supported the project."
 
-What does the passage help the reader understand?`,
+What does charity mean in the passage?`,
     options: [
-      "The community activity helped others through shared effort.",
-      "The event was mainly about buying new uniforms.",
-      "The children avoided helping younger pupils.",
-      "The passage focuses on a private family trip.",
+      "an effort to help people in need",
+      "a rule that stops people from sharing",
+      "a game played only during lunchtime",
+      "a shop that sells broken items",
     ],
     correctAnswer: 0,
-    explanation: `The details show charity products project brought people together for a helpful purpose.`
+    explanation: `The project raised money to help a children's home, so charity means an effort to help people in need.`
   },
   {
     id: 14,
     type: "reading",
-    skill: "Compare Ideas",
+    skill: "Cause and Effect",
     question: `Read the passage then answer the question.
 
-"For their charity project, students created simple products to sell after school. They made bead bracelets, small plant pots, and paper gift bags from clean materials. A sign explained that the money would help buy art supplies for a nearby children's home. Customers were pleased because the products were useful and the purpose was kind."
+"For their charity project, students created simple products to sell after school. They made bead bracelets, small plant pots, and paper gift bags from clean reusable materials. A sign explained that the money would help buy art supplies for a nearby children's home. Customers were pleased because the products were useful and the purpose was kind. When the sale ended, the students counted the money carefully and thanked everyone who supported the project."
 
-What does the passage help the reader understand?`,
+Why were customers pleased?`,
     options: [
-      "The children avoided helping younger pupils.",
-      "The event was mainly about buying new uniforms.",
-      "The passage focuses on a private family trip.",
-      "The community activity helped others through shared effort.",
+      "The products were useful and the purpose was kind.",
+      "The students refused to explain the project.",
+      "The sale ended before customers arrived.",
+      "The money was hidden and never counted.",
     ],
-    correctAnswer: 1,
-    explanation: `The details show charity products project brought people together for a helpful purpose.`
+    correctAnswer: 0,
+    explanation: `The passage says customers were pleased because the products were useful and the purpose was kind.`
   },
   {
     id: 15,
     type: "reading",
-    skill: "Problem and Solution",
+    skill: "Text Evidence",
     question: `Read the passage then answer the question.
 
-"For their charity project, students created simple products to sell after school. They made bead bracelets, small plant pots, and paper gift bags from clean materials. A sign explained that the money would help buy art supplies for a nearby children's home. Customers were pleased because the products were useful and the purpose was kind."
+"For their charity project, students created simple products to sell after school. They made bead bracelets, small plant pots, and paper gift bags from clean reusable materials. A sign explained that the money would help buy art supplies for a nearby children's home. Customers were pleased because the products were useful and the purpose was kind. When the sale ended, the students counted the money carefully and thanked everyone who supported the project."
 
-What does the passage help the reader understand?`,
+Which detail shows that the students handled the money responsibly?`,
     options: [
-      "The passage focuses on a private family trip.",
-      "The community activity helped others through shared effort.",
-      "The children avoided helping younger pupils.",
-      "The event was mainly about buying new uniforms.",
+      "They used clean reusable materials.",
+      "They made small plant pots.",
+      "They counted the money carefully after the sale.",
+      "Customers were pleased by the products.",
     ],
     correctAnswer: 2,
-    explanation: `The details show charity products project brought people together for a helpful purpose.`
+    explanation: `Counting the money carefully after the sale shows responsible handling of the money collected.`
   },
   {
     id: 16,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about student business fair, the word “steady” is used in context. Which option gives the best meaning?`,
+    skill: "Synonyms",
+    question: `Choose the word that means nearly the same as purchase.
+
+The pupils hoped many visitors would purchase their fruit cups.`,
     options: [
-      "In the sentence, “steady” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      "buy",
+      "hide",
+      "drop",
+      "forget",
     ],
-    correctAnswer: 3,
-    explanation: `Context clues in the school or community situation show that “steady” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `Purchase means buy.`
   },
   {
     id: 17,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about student business fair, the word “gently” is used in context. Which option gives the best meaning?`,
+    skill: "Antonyms",
+    question: `Choose the word that means the opposite of profit.
+
+After paying for materials, the team wanted to make a profit.`,
     options: [
-      "In the sentence, “gently” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      "gain",
+      "loss",
+      "plan",
+      "price",
     ],
-    correctAnswer: 0,
-    explanation: `Context clues in the school or community situation show that “gently” has the practical meaning used in the correct option.`
+    correctAnswer: 1,
+    explanation: `A profit is money gained; the opposite is a loss.`
   },
   {
     id: 18,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `In a passage about student business fair, the word “bright” is used in context. Which option gives the best meaning?`,
+    question: `What does promote mean in the sentence?
+
+The class made posters to promote the charity sale so more customers would come.`,
     options: [
-      "It names a place far from the school.",
-      "It means the opposite of what the sentence suggests.",
-      "It means a loud sound made by traffic.",
-      "In the sentence, “bright” means a sensible meaning that fits the activity.",
+      "to advertise or support",
+      "to cancel suddenly",
+      "to whisper quietly",
+      "to make dirty",
     ],
-    correctAnswer: 1,
-    explanation: `Context clues in the school or community situation show that “bright” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `The posters were made so more customers would come, so promote means advertise or support.`
   },
   {
     id: 19,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about student business fair, the word “careful” is used in context. Which option gives the best meaning?`,
+    skill: "Multiple Meaning Words",
+    question: `Which meaning of change is used in the sentence?
+
+Maya gave the customer the correct change after he paid for a bookmark.`,
     options: [
-      "It means a loud sound made by traffic.",
-      "In the sentence, “careful” means a sensible meaning that fits the activity.",
-      "It names a place far from the school.",
-      "It means the opposite of what the sentence suggests.",
+      "money returned after payment",
+      "to become different",
+      "a fresh set of clothes",
+      "to move to another seat",
     ],
-    correctAnswer: 2,
-    explanation: `Context clues in the school or community situation show that “careful” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `In this sentence, change means the money returned to a customer after payment.`
   },
   {
     id: 20,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about student business fair, the word “useful” is used in context. Which option gives the best meaning?`,
+    skill: "Prefixes",
+    question: `What does reusable mean?`,
     options: [
-      "In the sentence, “useful” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      "able to be used again",
+      "unable to be opened",
+      "used only once",
+      "full of noise",
     ],
-    correctAnswer: 3,
-    explanation: `Context clues in the school or community situation show that “useful” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `The prefix re- means again, so reusable means able to be used again.`
   },
   {
     id: 21,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about student business fair, the word “purpose” is used in context. Which option gives the best meaning?`,
+    skill: "Suffixes",
+    question: `What does the suffix -ful mean in helpful?`,
     options: [
-      "In the sentence, “purpose” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      "without",
+      "full of",
+      "before",
+      "one who",
     ],
-    correctAnswer: 0,
-    explanation: `Context clues in the school or community situation show that “purpose” has the practical meaning used in the correct option.`
+    correctAnswer: 1,
+    explanation: `The suffix -ful means full of, so helpful means full of help or useful assistance.`
   },
   {
     id: 22,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about student business fair, the word “encouraged” is used in context. Which option gives the best meaning?`,
+    skill: "Compound Words",
+    question: `Which word is a compound word?`,
     options: [
-      "It names a place far from the school.",
-      "It means the opposite of what the sentence suggests.",
-      "It means a loud sound made by traffic.",
-      "In the sentence, “encouraged” means a sensible meaning that fits the activity.",
+      "bookmark",
+      "kind",
+      "price",
+      "team",
     ],
-    correctAnswer: 1,
-    explanation: `Context clues in the school or community situation show that “encouraged” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `Bookmark is made from two smaller words: book and mark.`
   },
   {
     id: 23,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about student business fair, the word “materials” is used in context. Which option gives the best meaning?`,
+    skill: "Word Meaning",
+    question: `What does customer mean?`,
     options: [
-      "It means a loud sound made by traffic.",
-      "In the sentence, “materials” means a sensible meaning that fits the activity.",
-      "It names a place far from the school.",
-      "It means the opposite of what the sentence suggests.",
+      "a person who buys goods or services",
+      "a person who sweeps the classroom",
+      "a place where books are kept",
+      "a rule written on a poster",
     ],
-    correctAnswer: 2,
-    explanation: `Context clues in the school or community situation show that “materials” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `A customer is a person who buys goods or services.`
   },
   {
     id: 24,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `In a passage about student business fair, the word “displayed” is used in context. Which option gives the best meaning?`,
+    question: `What does donated mean in the sentence?
+
+Several parents donated craft paper for the charity project.`,
     options: [
-      "In the sentence, “displayed” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      "gave to help",
+      "took back angrily",
+      "counted twice",
+      "painted blue",
     ],
-    correctAnswer: 3,
-    explanation: `Context clues in the school or community situation show that “displayed” has the practical meaning used in the correct option.`
+    correctAnswer: 0,
+    explanation: `Because parents provided craft paper for the project, donated means gave to help.`
   },
   {
     id: 25,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `In a passage about student business fair, the word “pride” is used in context. Which option gives the best meaning?`,
+    skill: "Antonyms",
+    question: `Which word is the opposite of polite?`,
     options: [
-      "In the sentence, “pride” means a sensible meaning that fits the activity.",
-      "It means the opposite of what the sentence suggests.",
-      "It names a place far from the school.",
-      "It means a loud sound made by traffic.",
+      "careful",
+      "rude",
+      "honest",
+      "useful",
     ],
-    correctAnswer: 0,
-    explanation: `Context clues in the school or community situation show that “pride” has the practical meaning used in the correct option.`
+    correctAnswer: 1,
+    explanation: `Polite means showing good manners; rude means the opposite.`
   },
   {
     id: 26,
     type: "grammar",
     skill: "Subject-Verb Agreement",
-    question: `The club ___ the plants every Wednesday.`,
+    question: `Choose the sentence with correct subject-verb agreement.`,
     options: [
-      "watering",
-      "water",
-      "were water",
-      "waters",
+      "The teams sells fruit cups at the fair.",
+      "The team sell fruit cups at the fair.",
+      "The teams sell fruit cups at the fair.",
+      "The teams selling fruit cups at the fair.",
     ],
-    correctAnswer: 1,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 2,
+    explanation: `The plural subject teams agrees with the plural verb sell.`
   },
   {
     id: 27,
     type: "grammar",
     skill: "Verb Tense",
-    question: `Yesterday, the pupils ___ their display.`,
+    question: `Choose the sentence written in the past tense.`,
     options: [
-      "preparing",
-      "prepared",
-      "prepares",
-      "prepare",
+      "The pupils count the money.",
+      "The pupils counted the money.",
+      "The pupils will count the money.",
+      "The pupils are counting the money.",
     ],
-    correctAnswer: 2,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 1,
+    explanation: `Counted shows that the action happened in the past.`
   },
   {
     id: 28,
     type: "grammar",
-    skill: "Pronoun Reference",
-    question: `Maya lent Jada a ruler because ___ had an extra one.`,
+    skill: "Punctuation",
+    question: `Choose the sentence with correct punctuation.`,
     options: [
-      "she",
-      "they",
-      "it",
-      "we",
+      "What price did you choose?",
+      "What price did you choose.",
+      "What price did you choose!",
+      "What price did you choose,",
     ],
-    correctAnswer: 3,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 0,
+    explanation: `A direct question should end with a question mark.`
   },
   {
     id: 29,
     type: "grammar",
-    skill: "Punctuation",
-    question: `Which sentence is punctuated correctly?`,
+    skill: "Capitalization",
+    question: `Choose the sentence with correct capitalization.`,
     options: [
-      "“Please bring gloves,” said Mr. Brown.",
-      "“Please bring gloves” said Mr. Brown.",
-      "Please bring gloves, said Mr. Brown.",
-      "“Please bring gloves said Mr. Brown.”",
+      "on monday, we prepared posters for the fair.",
+      "On monday, we prepared posters for the fair.",
+      "On Monday, we prepared posters for the fair.",
+      "on Monday, we prepared Posters for the fair.",
     ],
-    correctAnswer: 0,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 2,
+    explanation: `The first word of the sentence and the day Monday should begin with capital letters.`
   },
   {
     id: 30,
     type: "grammar",
-    skill: "Adjective Use",
-    question: `Choose the sentence with the best describing word.`,
+    skill: "Pronouns",
+    question: `Choose the pronoun that best completes the sentence.
+
+Alicia made gift bags, and _____ sold them after school.`,
     options: [
-      "Neatly poster caught the visitors.",
-      "The poster caught attention neat.",
-      "The poster neat caught attention.",
-      "The neat poster caught the visitors’ attention.",
+      "she",
+      "him",
+      "they",
+      "us",
     ],
-    correctAnswer: 1,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 0,
+    explanation: `She is the correct subject pronoun to refer to Alicia.`
   },
   {
     id: 31,
     type: "grammar",
-    skill: "Conjunctions",
-    question: `Choose the best word: We packed water ___ the afternoon was hot.`,
+    skill: "Adjectives",
+    question: `Which word is an adjective in the sentence?
+
+The honest pupils counted the money carefully.`,
     options: [
-      "so",
-      "because",
-      "or",
-      "but",
+      "honest",
+      "counted",
+      "money",
+      "carefully",
     ],
-    correctAnswer: 2,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 0,
+    explanation: `Honest describes the noun pupils, so it is an adjective.`
   },
   {
     id: 32,
     type: "grammar",
-    skill: "Complete Sentence",
-    question: `Which is a complete sentence?`,
+    skill: "Adverbs",
+    question: `Which word is an adverb in the sentence?
+
+The customers waited patiently at the table.`,
     options: [
-      "The students shared books with Grade 1.",
-      "After the bell near the gate.",
-      "Because the table with cards.",
-      "The clean bags on Saturday.",
+      "customers",
+      "waited",
+      "patiently",
+      "table",
     ],
-    correctAnswer: 3,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 2,
+    explanation: `Patiently tells how the customers waited, so it is an adverb.`
   },
   {
     id: 33,
     type: "grammar",
-    skill: "Comma in a Series",
-    question: `Which sentence uses commas correctly?`,
+    skill: "Conjunctions",
+    question: `Choose the conjunction that best completes the sentence.
+
+The bracelets were colourful, _____ the plant pots sold first.`,
     options: [
-      "We need pencils, glue, paper, and string.",
-      "We need pencils glue, paper and string.",
-      "We need, pencils glue paper, and string.",
-      "We need pencils, glue paper and, string.",
+      "and",
+      "but",
+      "under",
+      "quickly",
     ],
-    correctAnswer: 0,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    correctAnswer: 1,
+    explanation: `But correctly joins two related ideas with a contrast.`
   },
   {
     id: 34,
     type: "grammar",
-    skill: "Possessive Noun",
-    question: `Choose the correct possessive form.`,
+    skill: "Commas",
+    question: `Choose the sentence that uses commas correctly in a list.`,
     options: [
-      "The classes chart was full.",
-      "The class chart’s was full.",
-      "The classs chart was full.",
-      "The class’s chart was full.",
+      "We sold bookmarks fruit cups and cards.",
+      "We sold bookmarks, fruit cups, and cards.",
+      "We sold, bookmarks fruit cups, and cards.",
+      "We sold bookmarks fruit cups, and, cards.",
     ],
     correctAnswer: 1,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    explanation: `Commas are used to separate the items in the list: bookmarks, fruit cups, and cards.`
   },
   {
     id: 35,
     type: "grammar",
-    skill: "Sentence Combining",
-    question: `Which combines the ideas best?`,
+    skill: "Complete Sentences",
+    question: `Which option is a complete sentence?`,
     options: [
-      "The event went because carefully pupils.",
-      "The pupils planned carefully, and the event went well.",
-      "Planning carefully and event went.",
-      "The pupils planned carefully the event went well.",
+      "After the charity sale.",
+      "Because the posters were bright.",
+      "The students thanked their customers.",
+      "Counting money carefully.",
     ],
     correctAnswer: 2,
-    explanation: `The correct option follows standard sentence grammar and fits the context clearly.`
+    explanation: `The students thanked their customers has a subject and predicate and expresses a complete thought.`
   },
   {
     id: 36,
     type: "writing",
-    skill: "Purpose and Audience",
-    question: `You are writing a notice for pupils about the event connected to selling simple products for charity. What is the best approach?`,
+    skill: "Topic Sentence",
+    question: `Which sentence would be the best topic sentence for a paragraph about the Junior Entrepreneurship Fair?`,
     options: [
-      "Use a clear heading, important details, and polite language for a notice for pupils about the event.",
-      "Hide the date and place so readers must guess.",
-      "Use only jokes and leave out the main message.",
-      "Write one very long sentence with no punctuation.",
+      "The Junior Entrepreneurship Fair helped Grade 5 pupils learn useful business skills.",
+      "My pencil fell under the desk during lunch.",
+      "The sky was dark long before the rain began.",
+      "A puppy slept beside the classroom door.",
     ],
-    correctAnswer: 3,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    correctAnswer: 0,
+    explanation: `A topic sentence should introduce the main idea of the paragraph, which is learning business skills at the fair.`
   },
   {
     id: 37,
     type: "writing",
-    skill: "Purpose and Audience",
-    question: `You are writing a friendly letter thanking helpers connected to selling simple products for charity. What is the best approach?`,
+    skill: "Supporting Details",
+    question: `Which detail best supports this topic sentence?
+
+The charity sale was carefully organized.`,
     options: [
-      "Use a clear heading, important details, and polite language for a friendly letter thanking helpers.",
-      "Hide the date and place so readers must guess.",
-      "Use only jokes and leave out the main message.",
-      "Write one very long sentence with no punctuation.",
+      "Students labelled prices, arranged products, and counted the money after the sale.",
+      "The playground gate is painted green.",
+      "Some birds flew over the school roof.",
+      "My favourite story has twelve chapters.",
     ],
     correctAnswer: 0,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    explanation: `Labelling prices, arranging products, and counting money are details that show the sale was organized.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "Purpose and Audience",
-    question: `You are writing a school announcement for assembly connected to selling simple products for charity. What is the best approach?`,
+    skill: "Sentence Order",
+    question: `Choose the best order for these sentences.
+
+1. Finally, they thanked the customers for supporting the charity.
+2. First, the students made bead bracelets and gift bags.
+3. Next, they displayed the products on a table after school.`,
     options: [
-      "Use only jokes and leave out the main message.",
-      "Hide the date and place so readers must guess.",
-      "Write one very long sentence with no punctuation.",
-      "Use a clear heading, important details, and polite language for a school announcement for assembly.",
+      "2, 3, 1",
+      "1, 2, 3",
+      "3, 1, 2",
+      "2, 1, 3",
     ],
-    correctAnswer: 1,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    correctAnswer: 0,
+    explanation: `The logical order is first making products, next displaying them, and finally thanking customers.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Purpose and Audience",
-    question: `You are writing a poster for the community project connected to selling simple products for charity. What is the best approach?`,
+    skill: "Concluding Sentence",
+    question: `Which sentence is the best conclusion for a paragraph about selling products to help charity?`,
     options: [
-      "Write one very long sentence with no punctuation.",
-      "Use a clear heading, important details, and polite language for a poster for the community project.",
-      "Use only jokes and leave out the main message.",
-      "Hide the date and place so readers must guess.",
+      "The project showed that small acts of teamwork can make a kind difference.",
+      "The red ball rolled under the mango tree.",
+      "My cousin prefers swimming on Saturday mornings.",
+      "The classroom clock stopped at nine o'clock.",
     ],
-    correctAnswer: 2,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    correctAnswer: 0,
+    explanation: `This sentence wraps up the paragraph by restating the value of teamwork and kindness in the charity project.`
   },
   {
     id: 40,
     type: "writing",
-    skill: "Purpose and Audience",
-    question: `You are writing a short report for the school newsletter connected to selling simple products for charity. What is the best approach?`,
+    skill: "Revise for Clarity",
+    question: `Choose the clearest sentence.`,
     options: [
-      "Use a clear heading, important details, and polite language for a short report for the school newsletter.",
-      "Hide the date and place so readers must guess.",
-      "Use only jokes and leave out the main message.",
-      "Write one very long sentence with no punctuation.",
+      "We sold the cards, and then we recorded the amount earned.",
+      "Cards sold amount then recorded we earned.",
+      "The cards and amount because sold recorded.",
+      "We amount sold the recorded cards earned then.",
     ],
-    correctAnswer: 3,
-    explanation: `Effective writing matches the purpose and audience with clear details and appropriate language.`
+    correctAnswer: 0,
+    explanation: `The correct sentence clearly explains that the cards were sold and the amount earned was recorded.`
   },
 ]
 
