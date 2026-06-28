@@ -1,799 +1,459 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useCallback } from "react"
-import { saveStudentTestResult } from "@/lib/student-test-results"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
+import { useState, useEffect, useCallback, useRef } from "react";
+import { saveStudentTestResult } from "@/lib/student-test-results";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
 import {
-  Clock, ChevronLeft, ChevronRight, Flag, CheckCircle, XCircle,
-  BookOpen, RotateCcw, Home, Lock, Crown, ArrowLeft, Printer
-} from "lucide-react"
-import { cn } from "@/lib/utils"
-import { useAuth } from "@/contexts/auth-context"
+  Clock,
+  ChevronLeft,
+  ChevronRight,
+  Flag,
+  CheckCircle,
+  XCircle,
+  BookOpen,
+  RotateCcw,
+  Home,
+  Lock,
+  Crown,
+  ArrowLeft,
+  Printer,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/auth-context";
 
-const FREE_QUESTION_LIMIT = 5
+const FREE_QUESTION_LIMIT = 5;
 
 interface Question {
-  id: number
-  type: "reading" | "vocabulary" | "grammar" | "writing"
-  skill: string
-  question: string
-  options: string[]
-  correctAnswer: number
-  explanation: string
+  id: number;
+  type: "reading" | "vocabulary" | "grammar" | "writing";
+  skill: string;
+  question: string;
+  options: string[];
+  correctAnswer: number;
+  explanation: string;
 }
 
-const g5LaMod9Questions: Question[] = [
-  {
-    id: 1,
-    type: "reading",
-    skill: "Inference",
-    question: `Read the passage then answer the question.
+const stemPassage = `Read the passage then answer the question.
 
-"Reggae music did not emerge from nothing. Its roots are tangled deep in the soil of Jamaica's history — in the rhythms of African drumming, the call-and-response of plantation work songs, the jazz and rhythm and blues that floated across from America, and the street music of ska and rocksteady. What Bob Marley and his contemporaries did was to take this rich musical heritage and fuse it with a message of liberation, love, and spiritual searching. The result was a sound so distinctive and so deeply human that it transcended national boundaries and became a global language. Reggae was designated a UNESCO Intangible Cultural Heritage in 2018 — an acknowledgment that it belonged not just to Jamaica, but to the world."
+"Grade 5 at Mandeville Primary entered a parish STEM Challenge called Build a Better Bridge. Each team received craft sticks, string, tape, two small weights, and a planning sheet. Mr. Gordon, the science teacher, reminded the class that engineers do not simply build and hope. They investigate a problem, design a solution, test it, and improve it.
 
-What does the passage suggest about the deeper significance of the topic described?`,
-    options: [
-      "The topic is purely decorative",
-      "The topic is significant only to a small group",
-      "The passage reveals a deeper human, social, or cultural significance beneath the surface",
-      "The passage has no deeper meaning",
-    ],
-    correctAnswer: 2,
-    explanation: `Good passages operate on multiple levels — the surface topic and a deeper human significance that the writer invites the reader to notice.`
-  },
-  {
-    id: 2,
-    type: "reading",
-    skill: "Author's Craft",
-    question: `Read the passage then answer the question.
+Kayla’s team wanted their bridge to hold the weights while stretching across two desks. At first, they copied a flat design from a picture, but the middle bent as soon as one weight was placed on it. Instead of arguing, the group studied the weak area. Dwayne suggested adding triangle shapes because he had seen them on a metal bridge near Spur Tree. Kayla measured the craft sticks, while Renaldo tied string under the centre for extra support.
 
-"Reggae music did not emerge from nothing. Its roots are tangled deep in the soil of Jamaica's history — in the rhythms of African drumming, the call-and-response of plantation work songs, the jazz and rhythm and blues that floated across from America, and the street music of ska and rocksteady. What Bob Marley and his contemporaries did was to take this rich musical heritage and fuse it with a message of liberation, love, and spiritual searching. The result was a sound so distinctive and so deeply human that it transcended national boundaries and became a global language. Reggae was designated a UNESCO Intangible Cultural Heritage in 2018 — an acknowledgment that it belonged not just to Jamaica, but to the world."
+During the second test, the bridge held one weight but twisted when the second was added. The team changed the tape positions and made both sides equal. Their final prototype held the two weights for ten seconds. It was not the neatest bridge in the room, but the judges praised the team’s notes because each change was explained clearly. Kayla wrote that failure helped them see what to improve. By the end of the challenge, the pupils understood that STEM is not only about getting the right answer quickly. It is about careful thinking, teamwork, and learning from evidence."`;
 
-How does the author make the writing vivid and engaging?`,
-    options: [
-      "By using only facts and statistics",
-      "Through the use of sensory details, specific examples, and carefully chosen language",
-      "By writing very long sentences",
-      "By including only opinions",
-    ],
-    correctAnswer: 1,
-    explanation: `Vivid, engaging writing uses sensory details and precise word choices to bring the subject to life for the reader.`
-  },
-  {
-    id: 3,
-    type: "reading",
-    skill: "Vocabulary in Context",
-    question: `Read the passage then answer the question.
+const roboticsPassage = `Read the passage then answer the question.
 
-"Reggae music did not emerge from nothing. Its roots are tangled deep in the soil of Jamaica's history — in the rhythms of African drumming, the call-and-response of plantation work songs, the jazz and rhythm and blues that floated across from America, and the street music of ska and rocksteady. What Bob Marley and his contemporaries did was to take this rich musical heritage and fuse it with a message of liberation, love, and spiritual searching. The result was a sound so distinctive and so deeply human that it transcended national boundaries and became a global language. Reggae was designated a UNESCO Intangible Cultural Heritage in 2018 — an acknowledgment that it belonged not just to Jamaica, but to the world."
+"On Saturday, students from several primary schools gathered at the Montego Bay Robotics Competition. The task was to program a small robot to carry a sponge cube through a model disaster zone and deliver it to a paper shelter. The course included a cardboard bridge, a narrow turn, and a black line that the robot’s sensor had to follow.
 
-In the passage, the word or phrase 'resilience' (or a similar theme word) most nearly means:`,
-    options: [
-      "a type of food",
-      "the ability to recover and continue despite difficulty",
-      "a musical style",
-      "a geographical feature",
-    ],
-    correctAnswer: 1,
-    explanation: `In passages about challenging human situations, resilience refers to the ability to face difficulty and keep going.`
-  },
-  {
-    id: 4,
-    type: "reading",
-    skill: "Theme",
-    question: `Read the passage then answer the question.
+The Hopewell Primary team named their robot Rio. Before the first round, captain Nia checked the wheels while Omar reviewed the code on a tablet. Their robot moved well at first, but it stopped at the narrow turn and dropped the cube. Some team members groaned, yet their coach, Miss Lee, asked them to observe before changing anything. They noticed that the sensor was reading a shiny patch of tape as part of the black line. Omar adjusted the code so Rio would slow down near the turn, and Nia moved the cube holder slightly higher.
 
-"Reggae music did not emerge from nothing. Its roots are tangled deep in the soil of Jamaica's history — in the rhythms of African drumming, the call-and-response of plantation work songs, the jazz and rhythm and blues that floated across from America, and the street music of ska and rocksteady. What Bob Marley and his contemporaries did was to take this rich musical heritage and fuse it with a message of liberation, love, and spiritual searching. The result was a sound so distinctive and so deeply human that it transcended national boundaries and became a global language. Reggae was designated a UNESCO Intangible Cultural Heritage in 2018 — an acknowledgment that it belonged not just to Jamaica, but to the world."
+In the second round, Rio crossed the cardboard bridge and reached the shelter, but it arrived two seconds after the time limit. The team decided not to make the robot faster because that might cause another drop. Instead, they made the path smoother by removing loose tape from the course with a judge’s permission. In the final round, Rio delivered the cube on time. The team did not win the tallest trophy, but they earned a special award for problem solving. Their presentation explained the sensor problem, the code change, and the reason for each decision."`;
 
-What is the CENTRAL theme of this passage?`,
-    options: [
-      "A minor detail about Jamaica",
-      "Something irrelevant to daily life",
-      "A significant aspect of Jamaican life, identity, or challenge that reveals human depth",
-      "An argument that Jamaica is inferior",
-    ],
-    correctAnswer: 2,
-    explanation: `Moderate passages are structured around a significant human theme — the surface topic reveals deeper meaning.`
-  },
-  {
-    id: 5,
-    type: "reading",
-    skill: "Figurative Language",
-    question: `Read the passage then answer the question.
+const g5LaModerate9Questions: Question[] = [
+  {id:1,type:"reading",skill:"Cause and Effect",question:`${stemPassage}\n\nWhy did Kayla’s team add triangle shapes to the bridge?`,options:["The flat middle bent during the first test.","The judges required every bridge to be triangular.","They wanted to use fewer craft sticks.","The planning sheet told them to stop testing."],correctAnswer:0,explanation:"After the flat design bent, Dwayne suggested triangles to strengthen the weak area."},
+  {id:2,type:"reading",skill:"Vocabulary in Context",question:`${stemPassage}\n\nIn the passage, what does “prototype” mean?`,options:["a first model built to test and improve a design","a final trophy given to the neatest team","a string used only for decoration","a picture copied without changes"],correctAnswer:0,explanation:"The bridge was a model tested and improved during the challenge."},
+  {id:3,type:"reading",skill:"Point of View",question:`${stemPassage}\n\nWhich statement best shows Mr. Gordon’s point of view about engineering?`,options:["Engineers should investigate, design, test, and improve solutions.","Engineers should build quickly without planning.","A neat bridge is always better than a tested bridge.","Team notes are less important than arguing."],correctAnswer:0,explanation:"Mr. Gordon directly reminds pupils of the engineering process."},
+  {id:4,type:"reading",skill:"Supporting Details",question:`${stemPassage}\n\nWhat did Renaldo do to help the bridge?`,options:["He tied string under the centre for extra support.","He judged the other teams’ bridges.","He removed tape from a robotics course.","He programmed a sensor to follow a line."],correctAnswer:0,explanation:"The passage says Renaldo tied string under the centre of the bridge."},
+  {id:5,type:"reading",skill:"Inference",question:`${stemPassage}\n\nWhat can be inferred from the judges praising the team’s notes?`,options:["They valued clear evidence of testing and improvement.","They cared only about how colourful the bridge looked.","They thought the bridge never had any problems.","They wanted the pupils to hide their failed tests."],correctAnswer:0,explanation:"The notes explained each change clearly, showing the team learned from evidence."},
+  {id:6,type:"reading",skill:"Sequence",question:`${stemPassage}\n\nWhat happened immediately after the second test showed the bridge twisted?`,options:["The team changed the tape positions and made both sides equal.","The team entered the robotics competition.","The judges gave a special award.","Mr. Gordon cancelled the challenge."],correctAnswer:0,explanation:"After the second test, they adjusted the tape and balanced the sides."},
+  {id:7,type:"reading",skill:"Theme",question:`${stemPassage}\n\nWhich lesson best fits the STEM Challenge passage?`,options:["Mistakes can guide improvement when a team studies evidence carefully.","The first design is usually perfect.","Winning matters more than learning.","Only one person should make all design decisions."],correctAnswer:0,explanation:"Kayla writes that failure helped the team see what to improve."},
+  {id:8,type:"reading",skill:"Main Idea",question:`${roboticsPassage}\n\nWhat is the main idea of the robotics passage?`,options:["A robotics team solved problems by observing, adjusting, and explaining its decisions.","A robot named Rio won every trophy without difficulty.","Students gathered only to watch a cardboard bridge.","The competition was about drawing paper shelters."],correctAnswer:0,explanation:"The passage follows the team as they observe problems, change code and equipment, and present their reasoning."},
+  {id:9,type:"reading",skill:"Text Evidence",question:`${roboticsPassage}\n\nWhich detail best proves that Rio had a sensor problem?`,options:["The sensor read a shiny patch of tape as part of the black line.","The robot carried a sponge cube through a disaster zone.","Students gathered in Montego Bay on Saturday.","The team did not win the tallest trophy."],correctAnswer:0,explanation:"The shiny tape being read as the line is direct evidence of the sensor problem."},
+  {id:10,type:"reading",skill:"Author's Purpose",question:`${roboticsPassage}\n\nWhy does the author describe the first failed round in detail?`,options:["To show how the team identified the problem before changing the robot","To prove the team should have quit immediately","To explain that competitions should not have time limits","To show that the sponge cube was too heavy for all robots"],correctAnswer:0,explanation:"The first round sets up the sensor and cube-holder problems that the team later solves."},
+  {id:11,type:"reading",skill:"Supporting Details",question:`${roboticsPassage}\n\nWhat two things did Omar and Nia change after the first round?`,options:["Omar adjusted the code, and Nia raised the cube holder.","Omar painted the shelter, and Nia changed schools.","Omar removed the bridge, and Nia rewrote the rules.","Omar built a new trophy, and Nia stopped the competition."],correctAnswer:0,explanation:"Omar made Rio slow down near the turn, and Nia moved the holder higher."},
+  {id:12,type:"reading",skill:"Cause and Effect",question:`${roboticsPassage}\n\nWhy did the team choose not to make Rio faster after the second round?`,options:["A faster robot might drop the cube again.","The judge refused to let the robot move.","The sensor could not follow any black line.","The paper shelter had disappeared."],correctAnswer:0,explanation:"The team reasoned that extra speed might cause another dropped cube."},
+  {id:13,type:"reading",skill:"Vocabulary in Context",question:`${roboticsPassage}\n\nIn the passage, what does “adjusted” mean?`,options:["changed slightly to make something work better","copied without understanding","threw away completely","decorated for a photograph"],correctAnswer:0,explanation:"Omar changed the code slightly so Rio would slow near the turn."},
+  {id:14,type:"reading",skill:"Inference",question:`${roboticsPassage}\n\nWhat can be inferred about Miss Lee from her advice to observe before changing anything?`,options:["She wanted students to use evidence rather than guess.","She wanted the team to ignore the robot.","She believed the first run had gone perfectly.","She thought the competition was only about speed."],correctAnswer:0,explanation:"Miss Lee’s advice led the team to identify the shiny tape and make targeted changes."},
+  {id:15,type:"reading",skill:"Text Evidence",question:`${roboticsPassage}\n\nWhich detail shows that the team communicated its problem-solving process?`,options:["Their presentation explained the sensor problem, the code change, and each decision.","The robot was named Rio before the first round.","Several schools gathered at the competition.","The course included a cardboard bridge."],correctAnswer:0,explanation:"The presentation directly communicated the team’s process and reasoning."},
+  {id:16,type:"vocabulary",skill:"Vocabulary in Context",question:"In the STEM passage, “engineers” are people who—",options:["design and improve solutions to practical problems","judge only the colour of craft sticks","carry sponge cubes for robots","write stories about lunch boxes"],correctAnswer:0,explanation:"Mr. Gordon describes engineers as people who investigate, design, test, and improve."},
+  {id:17,type:"vocabulary",skill:"Vocabulary in Context",question:"In the STEM passage, to “investigate” means to—",options:["study carefully to find information","guess without looking closely","decorate a bridge with string","win a prize before testing"],correctAnswer:0,explanation:"The teams investigate problems before designing solutions."},
+  {id:18,type:"vocabulary",skill:"Vocabulary in Context",question:"A “solution” in the STEM passage is—",options:["a way to solve a problem","a mistake that must be hidden","a trophy from Montego Bay","a loose piece of shiny tape"],correctAnswer:0,explanation:"The bridge design is a solution to the problem of holding weights across two desks."},
+  {id:19,type:"vocabulary",skill:"Vocabulary in Context",question:"In the robotics passage, a “sensor” is—",options:["a device that detects information such as a line on the course","a sponge cube carried by students","a paper shelter at the finish","a judge’s permission slip"],correctAnswer:0,explanation:"Rio’s sensor had to follow the black line and misread shiny tape."},
+  {id:20,type:"vocabulary",skill:"Vocabulary in Context",question:"In the STEM passage, “evidence” means—",options:["information from tests or observations","a guess made before planning","a craft stick with no purpose","a prize for the fastest robot"],correctAnswer:0,explanation:"The pupils learned from test results and observations."},
+  {id:21,type:"vocabulary",skill:"Vocabulary in Context",question:"To “collaborate” means to—",options:["work together toward a goal","work alone without speaking","copy a design and refuse changes","stop a project after one mistake"],correctAnswer:0,explanation:"Both passages show teams sharing tasks and decisions."},
+  {id:22,type:"vocabulary",skill:"Vocabulary in Context",question:"In the robotics passage, “code” means—",options:["instructions that tell the robot what to do","a cardboard bridge on the course","a sponge cube in a shelter","a trophy for presentation skills"],correctAnswer:0,explanation:"Omar reviewed and adjusted the code controlling Rio."},
+  {id:23,type:"vocabulary",skill:"Vocabulary in Context",question:"In the STEM passage, “improve” means—",options:["make better","make weaker on purpose","leave unchanged","measure once and stop"],correctAnswer:0,explanation:"Teams improve designs after tests reveal problems."},
+  {id:24,type:"vocabulary",skill:"Vocabulary in Context",question:"In the robotics passage, “presentation” means—",options:["a spoken or displayed explanation shared with others","a robot wheel that follows a line","a hidden mistake in the code","a narrow turn on the course"],correctAnswer:0,explanation:"The team’s presentation explained their problem-solving decisions."},
+  {id:25,type:"vocabulary",skill:"Vocabulary in Context",question:"In the STEM passage, “design” means—",options:["a plan for how something will be made or work","a random pile of materials","a time limit in a competition","a mistake that cannot be fixed"],correctAnswer:0,explanation:"The bridge design guided how the team arranged materials."},
+  {id:26,type:"grammar",skill:"Subject-Verb Agreement",question:"Which sentence is written correctly?",options:["The robot follows the black line around the turn.","The robot follow the black line around the turn.","The robot following the black line around the turn.","The robot were follows the black line around the turn."],correctAnswer:0,explanation:"The singular subject robot takes follows."},
+  {id:27,type:"grammar",skill:"Verb Tense",question:"Which sentence uses future tense correctly?",options:["Tomorrow, the team will test the new bridge design.","Tomorrow, the team tested the new bridge design.","Tomorrow, the team testing the new bridge design.","Tomorrow, the team tests yesterday's bridge design."],correctAnswer:0,explanation:"Will test correctly shows future time."},
+  {id:28,type:"grammar",skill:"Pronouns",question:"Choose the sentence with the correct pronoun.",options:["Miss Lee asked Omar and me to observe the robot.","Miss Lee asked Omar and I to observe the robot.","Me and Omar asked she to observe the robot.","Miss Lee asked I and Omar to observe the robot."],correctAnswer:0,explanation:"Me is the correct object pronoun after asked."},
+  {id:29,type:"grammar",skill:"Punctuation",question:"Which sentence is punctuated correctly?",options:["After the bridge twisted, the team changed the tape positions.","After the bridge twisted the team, changed the tape positions.","After, the bridge twisted the team changed the tape positions.","After the bridge twisted the team changed, the tape positions."],correctAnswer:0,explanation:"A comma follows the introductory clause."},
+  {id:30,type:"grammar",skill:"Quotation Marks",question:"Which sentence uses quotation marks correctly?",options:["“Observe before changing the code,” Miss Lee reminded the team.","Observe before changing the code, “Miss Lee reminded the team.”","“Observe before changing the code, Miss Lee reminded the team.","Observe before changing the code,” Miss Lee reminded the team."],correctAnswer:0,explanation:"The spoken words are correctly enclosed in quotation marks."},
+  {id:31,type:"grammar",skill:"Conjunctions",question:"Which conjunction best completes the sentence?\nThe bridge looked neat, ___ it could not hold the second weight.",options:["but","because","unless","so"],correctAnswer:0,explanation:"But shows contrast between appearance and performance."},
+  {id:32,type:"grammar",skill:"Transitions",question:"Which transition best shows the next step?\nFirst, the team tested the flat bridge. ___, they added triangles for support.",options:["Next","However","In conclusion","For example"],correctAnswer:0,explanation:"Next shows the following step in the process."},
+  {id:33,type:"grammar",skill:"Apostrophes",question:"Which sentence uses an apostrophe correctly?",options:["Kayla’s measurements helped the team balance the bridge.","Kaylas measurements helped the team balance the bridge.","Kayla’s measurements helped the teams’ balance the bridge.","Kaylas’ measurement’s helped the team balance the bridge."],correctAnswer:0,explanation:"Kayla’s shows possession by one person."},
+  {id:34,type:"grammar",skill:"Sentence Combining",question:"Which choice best combines the sentences?\nThe sensor saw shiny tape. The robot stopped at the turn.",options:["When the sensor saw shiny tape, the robot stopped at the turn.","The sensor saw shiny tape the robot stopped at the turn.","Stopped at the turn because shiny.","The robot, the sensor saw, tape stopped."],correctAnswer:0,explanation:"When clearly combines the cause and event."},
+  {id:35,type:"grammar",skill:"Fragments",question:"Which choice is a complete sentence, not a fragment?",options:["The team explained its changes during the presentation.","Because the team explained its changes.","During the presentation about changes.","Explaining the robot's sensor problem."],correctAnswer:0,explanation:"It includes a subject, verb, and complete thought."},
+  {id:36,type:"writing",skill:"Report Topic Sentence",question:"Which sentence best begins a report about a STEM challenge?",options:["Our team improved a bridge design by testing it, studying weak points, and making balanced changes.","There were sticks, and sticks are thin.","I like competitions because they happen sometimes.","The room had desks and people."],correctAnswer:0,explanation:"It clearly previews the engineering process used by the team."},
+  {id:37,type:"writing",skill:"Supporting Evidence",question:"Which detail best supports a paragraph about problem solving in robotics?",options:["The team discovered that shiny tape confused the sensor, so Omar changed the code.","The robot had a short name that was easy to say.","Several students groaned after the first round.","The trophy was taller than the paper shelter."],correctAnswer:0,explanation:"This detail connects a specific problem with a specific solution."},
+  {id:38,type:"writing",skill:"Organisation",question:"Which order best organises an engineering report?",options:["Describe the challenge, explain each test result, then discuss improvements and final performance.","List team names, describe lunch, then mention the bridge at the end.","Start with the award, skip the tests, and repeat the title.","Give only opinions without explaining evidence."],correctAnswer:0,explanation:"A strong report follows the design process from challenge to tests to improvements."},
+  {id:39,type:"writing",skill:"Revision",question:"Which revision makes this sentence stronger?\nThe robot had a problem.",options:["Rio stopped at the narrow turn because its sensor mistook shiny tape for the black line.","The robot had a problem and it was a problem.","There was a robot and something happened.","The problem was not good for the robot."],correctAnswer:0,explanation:"The revision names the robot, the location, the cause, and the sensor issue."},
+  {id:40,type:"writing",skill:"Presentation Closing",question:"Which closing sentence best fits a team presentation about invention?",options:["Our results show that careful testing and teamwork can turn a weak design into a stronger solution.","That is all, and bridges can be brown or grey.","We finished because the time ended and everyone went home.","Robots are nice, and competitions have chairs."],correctAnswer:0,explanation:"It reflects on testing, teamwork, and improvement, which match both STEM passages."},
+];
 
-"Reggae music did not emerge from nothing. Its roots are tangled deep in the soil of Jamaica's history — in the rhythms of African drumming, the call-and-response of plantation work songs, the jazz and rhythm and blues that floated across from America, and the street music of ska and rocksteady. What Bob Marley and his contemporaries did was to take this rich musical heritage and fuse it with a message of liberation, love, and spiritual searching. The result was a sound so distinctive and so deeply human that it transcended national boundaries and became a global language. Reggae was designated a UNESCO Intangible Cultural Heritage in 2018 — an acknowledgment that it belonged not just to Jamaica, but to the world."
+const shuffleAnswerOptions = (questions: Question[]): Question[] => {
+  return questions.map((question) => {
+    const optionsWithOriginalIndex = question.options.map((option, index) => ({
+      option,
+      index,
+    }));
 
-Identify a figurative technique used in the passage and explain its effect.`,
-    options: [
-      "The passage contains no figurative language",
-      "Figurative language is used to confuse the reader",
-      "Figurative language is used to create vivid images, emotional resonance, or deeper meaning",
-      "The passage only uses facts",
-    ],
-    correctAnswer: 2,
-    explanation: `Writers use figurative language — metaphors, similes, personification — to deepen meaning and engage readers emotionally.`
-  },
-  {
-    id: 6,
-    type: "reading",
-    skill: "Cause and Effect",
-    question: `Read the passage then answer the question.
+    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
+        optionsWithOriginalIndex[j],
+        optionsWithOriginalIndex[i],
+      ];
+    }
 
-"Reggae music did not emerge from nothing. Its roots are tangled deep in the soil of Jamaica's history — in the rhythms of African drumming, the call-and-response of plantation work songs, the jazz and rhythm and blues that floated across from America, and the street music of ska and rocksteady. What Bob Marley and his contemporaries did was to take this rich musical heritage and fuse it with a message of liberation, love, and spiritual searching. The result was a sound so distinctive and so deeply human that it transcended national boundaries and became a global language. Reggae was designated a UNESCO Intangible Cultural Heritage in 2018 — an acknowledgment that it belonged not just to Jamaica, but to the world."
+    const correctAnswer = optionsWithOriginalIndex.findIndex(
+      (item) => item.index === question.correctAnswer,
+    );
 
-What cause-and-effect relationship does the passage describe?`,
-    options: [
-      "Events in the passage happen randomly",
-      "Actions or conditions in the passage lead to specific outcomes described by the writer",
-      "The passage describes only effects without causes",
-      "No relationships are described",
-    ],
-    correctAnswer: 1,
-    explanation: `Moderate passages trace cause-and-effect relationships — understanding these is central to comprehending the argument or narrative.`
-  },
-  {
-    id: 7,
-    type: "reading",
-    skill: "Author's Purpose",
-    question: `Read the passage then answer the question.
-
-"Reggae music did not emerge from nothing. Its roots are tangled deep in the soil of Jamaica's history — in the rhythms of African drumming, the call-and-response of plantation work songs, the jazz and rhythm and blues that floated across from America, and the street music of ska and rocksteady. What Bob Marley and his contemporaries did was to take this rich musical heritage and fuse it with a message of liberation, love, and spiritual searching. The result was a sound so distinctive and so deeply human that it transcended national boundaries and became a global language. Reggae was designated a UNESCO Intangible Cultural Heritage in 2018 — an acknowledgment that it belonged not just to Jamaica, but to the world."
-
-The MAIN purpose of this passage is:`,
-    options: [
-      "To entertain with a fictional story only",
-      "To inform or persuade readers about a significant topic, often with an implicit argument",
-      "To advertise a product",
-      "To give instructions",
-    ],
-    correctAnswer: 1,
-    explanation: `Moderate informational passages typically inform readers while also carrying an implicit argument or perspective.`
-  },
-  {
-    id: 8,
-    type: "reading",
-    skill: "Tone",
-    question: `Read the passage then answer the question.
-
-"Reggae music did not emerge from nothing. Its roots are tangled deep in the soil of Jamaica's history — in the rhythms of African drumming, the call-and-response of plantation work songs, the jazz and rhythm and blues that floated across from America, and the street music of ska and rocksteady. What Bob Marley and his contemporaries did was to take this rich musical heritage and fuse it with a message of liberation, love, and spiritual searching. The result was a sound so distinctive and so deeply human that it transcended national boundaries and became a global language. Reggae was designated a UNESCO Intangible Cultural Heritage in 2018 — an acknowledgment that it belonged not just to Jamaica, but to the world."
-
-The tone of this passage is BEST described as:`,
-    options: [
-      "Angry and hostile",
-      "Completely neutral with no feeling",
-      "Thoughtful and engaged — the writer clearly cares about the topic",
-      "Bored and uninterested",
-    ],
-    correctAnswer: 2,
-    explanation: `Moderate passages are written with engagement and care — the writer's concern for the topic is evident in their language choices.`
-  },
-  {
-    id: 9,
-    type: "reading",
-    skill: "Critical Thinking",
-    question: `Read the passage then answer the question.
-
-"Reggae music did not emerge from nothing. Its roots are tangled deep in the soil of Jamaica's history — in the rhythms of African drumming, the call-and-response of plantation work songs, the jazz and rhythm and blues that floated across from America, and the street music of ska and rocksteady. What Bob Marley and his contemporaries did was to take this rich musical heritage and fuse it with a message of liberation, love, and spiritual searching. The result was a sound so distinctive and so deeply human that it transcended national boundaries and became a global language. Reggae was designated a UNESCO Intangible Cultural Heritage in 2018 — an acknowledgment that it belonged not just to Jamaica, but to the world."
-
-Which of the following BEST reflects a critical reading of this passage?`,
-    options: [
-      "Accepting everything the writer says as completely true",
-      "Finding the passage too difficult to understand",
-      "Identifying the writer's perspective, examining the evidence, and considering what might have been left out",
-      "Simply retelling what the passage says",
-    ],
-    correctAnswer: 2,
-    explanation: `Critical reading involves evaluating the author's perspective, evidence, and potential gaps or biases — not just accepting the text at face value.`
-  },
-  {
-    id: 10,
-    type: "reading",
-    skill: "Summarise",
-    question: `Read the passage then answer the question.
-
-"Reggae music did not emerge from nothing. Its roots are tangled deep in the soil of Jamaica's history — in the rhythms of African drumming, the call-and-response of plantation work songs, the jazz and rhythm and blues that floated across from America, and the street music of ska and rocksteady. What Bob Marley and his contemporaries did was to take this rich musical heritage and fuse it with a message of liberation, love, and spiritual searching. The result was a sound so distinctive and so deeply human that it transcended national boundaries and became a global language. Reggae was designated a UNESCO Intangible Cultural Heritage in 2018 — an acknowledgment that it belonged not just to Jamaica, but to the world."
-
-Which statement BEST summarises the MAIN ARGUMENT or MESSAGE of this passage?`,
-    options: [
-      "The passage has no clear message",
-      "The topic discussed is straightforward and has no complexity",
-      "The passage reveals a significant truth about the topic — that it is more complex, important, or meaningful than it first appears",
-      "The passage argues that the topic should be ignored",
-    ],
-    correctAnswer: 2,
-    explanation: `Moderate passages typically have a central insight that deepens the reader's understanding of the topic.`
-  },
-  {
-    id: 11,
-    type: "reading",
-    skill: "Text Structure",
-    question: `Read the passage then answer the question.
-
-"Reggae music did not emerge from nothing. Its roots are tangled deep in the soil of Jamaica's history — in the rhythms of African drumming, the call-and-response of plantation work songs, the jazz and rhythm and blues that floated across from America, and the street music of ska and rocksteady. What Bob Marley and his contemporaries did was to take this rich musical heritage and fuse it with a message of liberation, love, and spiritual searching. The result was a sound so distinctive and so deeply human that it transcended national boundaries and became a global language. Reggae was designated a UNESCO Intangible Cultural Heritage in 2018 — an acknowledgment that it belonged not just to Jamaica, but to the world."
-
-How does the author STRUCTURE the passage?`,
-    options: [
-      "Randomly with no organisation",
-      "By listing unrelated facts",
-      "By building from a surface observation to a deeper insight or argument",
-      "By presenting only one-sided facts",
-    ],
-    correctAnswer: 2,
-    explanation: `Moderate passages often move from the observable to the deeper — from surface description to significance.`
-  },
-  {
-    id: 12,
-    type: "reading",
-    skill: "Evidence",
-    question: `Read the passage then answer the question.
-
-"Reggae music did not emerge from nothing. Its roots are tangled deep in the soil of Jamaica's history — in the rhythms of African drumming, the call-and-response of plantation work songs, the jazz and rhythm and blues that floated across from America, and the street music of ska and rocksteady. What Bob Marley and his contemporaries did was to take this rich musical heritage and fuse it with a message of liberation, love, and spiritual searching. The result was a sound so distinctive and so deeply human that it transcended national boundaries and became a global language. Reggae was designated a UNESCO Intangible Cultural Heritage in 2018 — an acknowledgment that it belonged not just to Jamaica, but to the world."
-
-Which type of evidence does the author use to support the main point?`,
-    options: [
-      "No evidence at all",
-      "Only personal opinion",
-      "A combination of specific details, examples, and observations that build the argument",
-      "Only statistics and numbers",
-    ],
-    correctAnswer: 2,
-    explanation: `Moderate passages use layered evidence — details, examples, and observations — to build a convincing argument.`
-  },
-  {
-    id: 13,
-    type: "reading",
-    skill: "Vocabulary in Context",
-    question: `Read the passage then answer the question.
-
-"Reggae music did not emerge from nothing. Its roots are tangled deep in the soil of Jamaica's history — in the rhythms of African drumming, the call-and-response of plantation work songs, the jazz and rhythm and blues that floated across from America, and the street music of ska and rocksteady. What Bob Marley and his contemporaries did was to take this rich musical heritage and fuse it with a message of liberation, love, and spiritual searching. The result was a sound so distinctive and so deeply human that it transcended national boundaries and became a global language. Reggae was designated a UNESCO Intangible Cultural Heritage in 2018 — an acknowledgment that it belonged not just to Jamaica, but to the world."
-
-The phrase 'beneath the vibrant surface' (or similar) in the passage is used to:`,
-    options: [
-      "Describe the colour of something",
-      "Signal that there is more depth and meaning beyond what first appears",
-      "Confuse the reader",
-      "Describe a physical location",
-    ],
-    correctAnswer: 1,
-    explanation: `Phrases like 'beneath the surface' signal to the reader that the writer is about to reveal a deeper layer of meaning.`
-  },
-  {
-    id: 14,
-    type: "reading",
-    skill: "Audience",
-    question: `Read the passage then answer the question.
-
-"Reggae music did not emerge from nothing. Its roots are tangled deep in the soil of Jamaica's history — in the rhythms of African drumming, the call-and-response of plantation work songs, the jazz and rhythm and blues that floated across from America, and the street music of ska and rocksteady. What Bob Marley and his contemporaries did was to take this rich musical heritage and fuse it with a message of liberation, love, and spiritual searching. The result was a sound so distinctive and so deeply human that it transcended national boundaries and became a global language. Reggae was designated a UNESCO Intangible Cultural Heritage in 2018 — an acknowledgment that it belonged not just to Jamaica, but to the world."
-
-This passage was MOST LIKELY written for:`,
-    options: [
-      "Only specialists in the field",
-      "A general, thoughtful audience interested in Jamaican life and culture",
-      "Young children learning basic literacy",
-      "Government officials only",
-    ],
-    correctAnswer: 1,
-    explanation: `The language and content suggest a general, educated audience — not specialists, but thoughtful readers.`
-  },
-  {
-    id: 15,
-    type: "reading",
-    skill: "Implied Meaning",
-    question: `Read the passage then answer the question.
-
-"Reggae music did not emerge from nothing. Its roots are tangled deep in the soil of Jamaica's history — in the rhythms of African drumming, the call-and-response of plantation work songs, the jazz and rhythm and blues that floated across from America, and the street music of ska and rocksteady. What Bob Marley and his contemporaries did was to take this rich musical heritage and fuse it with a message of liberation, love, and spiritual searching. The result was a sound so distinctive and so deeply human that it transcended national boundaries and became a global language. Reggae was designated a UNESCO Intangible Cultural Heritage in 2018 — an acknowledgment that it belonged not just to Jamaica, but to the world."
-
-What does the passage IMPLY about the importance of this topic to Jamaican society?`,
-    options: [
-      "The topic is unimportant",
-      "The topic affects only a small minority",
-      "The topic is central to understanding Jamaican identity, economy, culture, or wellbeing",
-      "The topic should be forgotten",
-    ],
-    correctAnswer: 2,
-    explanation: `Moderate passages consistently signal that their topic matters deeply — to individuals, communities, or the nation.`
-  },
-  {
-    id: 16,
-    type: "vocabulary",
-    skill: "Connotation",
-    question: `Which sentence uses the word 'ambitious' with a NEGATIVE connotation?`,
-    options: [
-      "She was an ambitious young teacher who wanted to inspire her students",
-      "His ambitious plan to rebuild the community inspired everyone",
-      "His ruthlessly ambitious nature led him to betray his colleagues",
-      "The ambitious project created jobs for hundreds",
-    ],
-    correctAnswer: 2,
-    explanation: `'Ruthlessly ambitious' shows ambition leading to harmful behaviour — a negative connotation.`
-  },
-  {
-    id: 17,
-    type: "vocabulary",
-    skill: "Idiom",
-    question: `'Don't count your chickens before they hatch.' This proverb means:`,
-    options: [
-      "Chicken farming is unpredictable",
-      "Do not rely on something that has not yet happened",
-      "Count all animals carefully",
-      "Hatch eggs quickly",
-    ],
-    correctAnswer: 1,
-    explanation: `The proverb warns against assuming a positive outcome before it is confirmed.`
-  },
-  {
-    id: 18,
-    type: "vocabulary",
-    skill: "Extended Metaphor",
-    question: `In the passage about Jamaican music and reggae, the writer uses extended description to suggest that:`,
-    options: [
-      "The topic is boring",
-      "The topic is complex and carries deeper human meaning than its surface appearance suggests",
-      "The topic is only important for tourists",
-      "The passage is about something completely different",
-    ],
-    correctAnswer: 1,
-    explanation: `Extended description in moderate passages reveals layers of meaning — the topic is always richer than it first appears.`
-  },
-  {
-    id: 19,
-    type: "vocabulary",
-    skill: "Context Clues",
-    question: `The community was RESILIENT, bouncing back from the storm far more quickly than anyone expected. 'Resilient' means:`,
-    options: [
-      "easily defeated",
-      "slow to change",
-      "able to recover quickly from difficulties",
-      "very noisy",
-    ],
-    correctAnswer: 2,
-    explanation: `'Resilient' describes the ability to recover from setbacks — bouncing back from the storm supports this meaning.`
-  },
-  {
-    id: 20,
-    type: "vocabulary",
-    skill: "Word Meaning",
-    question: `The word 'advocate' as a NOUN means:`,
-    options: [
-      "someone who opposes a cause",
-      "someone who publicly supports or defends a cause",
-      "a type of government",
-      "an academic researcher",
-    ],
-    correctAnswer: 1,
-    explanation: `An advocate (noun) is a person who actively supports or defends a particular cause or policy.`
-  },
-  {
-    id: 21,
-    type: "vocabulary",
-    skill: "Figurative Language — Symbol",
-    question: `In literature, the SEA is often used as a symbol for:`,
-    options: [
-      "nothing significant",
-      "clarity and logic",
-      "vastness, freedom, danger, or the unknown",
-      "money and wealth",
-    ],
-    correctAnswer: 2,
-    explanation: `The sea is a rich literary symbol often representing freedom, the unknown, vastness, or unpredictable danger.`
-  },
-  {
-    id: 22,
-    type: "vocabulary",
-    skill: "Word Families",
-    question: `Which set all belongs to the same word family?`,
-    options: [
-      "act, action, active, activate",
-      "fast, quickly, speed, hurry",
-      "house, home, shelter, dwelling",
-      "write, read, speak, listen",
-    ],
-    correctAnswer: 0,
-    explanation: `All four words (act, action, active, activate) share the root 'act' — they belong to the same word family.`
-  },
-  {
-    id: 23,
-    type: "vocabulary",
-    skill: "Prefix trans-",
-    question: `The prefix 'trans-' in 'transform' means:`,
-    options: [
-      "above",
-      "across or beyond",
-      "before",
-      "not",
-    ],
-    correctAnswer: 1,
-    explanation: `'Trans-' means across or beyond. Transform = change across/beyond the original form.`
-  },
-  {
-    id: 24,
-    type: "vocabulary",
-    skill: "Context Clues",
-    question: `The artist's work was PROVOCATIVE, stirring debate and strong reactions wherever it was displayed. 'Provocative' means:`,
-    options: [
-      "calm and uncontroversial",
-      "causing strong reactions or debate",
-      "too expensive",
-      "very colourful",
-    ],
-    correctAnswer: 1,
-    explanation: `'Provocative' describes something that deliberately stimulates reaction or controversy — supported by 'stirring debate.'`
-  },
-  {
-    id: 25,
-    type: "vocabulary",
-    skill: "Proverb",
-    question: `'Smooth seas never made a skilled sailor.' This proverb means:`,
-    options: [
-      "Always choose the easiest path",
-      "Avoid the ocean if possible",
-      "Challenges and difficulties are what develop skill, strength, and character",
-      "Sailing is a dangerous sport",
-    ],
-    correctAnswer: 2,
-    explanation: `The proverb uses seafaring as a metaphor for life — difficulties and hardship are what build genuine capability.`
-  },
-  {
-    id: 26,
-    type: "grammar",
-    skill: "Complex Sentence",
-    question: `Which sentence is a COMPLEX sentence?`,
-    options: [
-      "She studied hard",
-      "She and her brother studied hard",
-      "She studied hard because the exam was tomorrow",
-      "She studied and her brother studied",
-    ],
-    correctAnswer: 2,
-    explanation: `A complex sentence has one main clause and at least one subordinate clause. 'Because the exam was tomorrow' is the subordinate clause.`
-  },
-  {
-    id: 27,
-    type: "grammar",
-    skill: "Passive Voice",
-    question: `Identify the sentence in PASSIVE VOICE.`,
-    options: [
-      "The students completed the assignment",
-      "The assignment was completed by the students",
-      "Students work on assignments every day",
-      "She handed in her assignment late",
-    ],
-    correctAnswer: 1,
-    explanation: `Passive: subject (assignment) receives action (was completed). The agent 'students' follows 'by.'`
-  },
-  {
-    id: 28,
-    type: "grammar",
-    skill: "Reported Speech",
-    question: `Change to REPORTED SPEECH: 'We are leaving tomorrow,' they said.`,
-    options: [
-      "They said that they were leaving the next day",
-      "They said that we are leaving tomorrow",
-      "They told that they leaving the next day",
-      "They said we were leaving tomorrow",
-    ],
-    correctAnswer: 0,
-    explanation: `Reported speech: 'we' → 'they'; present continuous → past continuous; 'tomorrow' → 'the next day.'`
-  },
-  {
-    id: 29,
-    type: "grammar",
-    skill: "Punctuation — Semicolon vs Comma",
-    question: `Choose the correctly punctuated sentence.`,
-    options: [
-      "She loves reading, however she rarely has time for it",
-      "She loves reading; however, she rarely has time for it",
-      "She loves reading; however she rarely has time for it",
-      "She loves reading however; she rarely has time for it",
-    ],
-    correctAnswer: 1,
-    explanation: `A semicolon precedes 'however' when used as a conjunctive adverb, and a comma follows it.`
-  },
-  {
-    id: 30,
-    type: "grammar",
-    skill: "Relative Pronouns",
-    question: `Which sentence uses WHO correctly?`,
-    options: [
-      "The book who I read was excellent",
-      "The teacher who I admire is retiring",
-      "The school who won the competition was famous",
-      "The prize who she won was large",
-    ],
-    correctAnswer: 1,
-    explanation: `'Who' refers to people. 'The teacher who I admire' correctly uses 'who' to refer to a person.`
-  },
-  {
-    id: 31,
-    type: "grammar",
-    skill: "Tense — Present Perfect vs Past Simple",
-    question: `Which sentence correctly uses the PRESENT PERFECT?`,
-    options: [
-      "She lived in Jamaica for ten years (she no longer does)",
-      "She has lived in Jamaica for ten years (she still does)",
-      "She was living in Jamaica when I met her",
-      "She will live in Jamaica",
-    ],
-    correctAnswer: 1,
-    explanation: `Present perfect is used for actions that started in the past and continue to now. 'Has lived for ten years' still ongoing is present perfect.`
-  },
-  {
-    id: 32,
-    type: "grammar",
-    skill: "Modal Verbs",
-    question: `'You should exercise daily.' The modal 'should' expresses:`,
-    options: [
-      "certainty",
-      "ability",
-      "advice or recommendation",
-      "permission",
-    ],
-    correctAnswer: 2,
-    explanation: `'Should' expresses recommendation or advice — what is considered the right thing to do.`
-  },
-  {
-    id: 33,
-    type: "grammar",
-    skill: "Participle Phrases",
-    question: `Which sentence correctly uses a PARTICIPIAL PHRASE?`,
-    options: [
-      "Finishing the race, which was very long",
-      "Having studied all night, she felt ready for the exam",
-      "Running fast is good for health",
-      "The running athlete was exhausted",
-    ],
-    correctAnswer: 1,
-    explanation: `'Having studied all night' is a participial phrase that correctly modifies the subject 'she.'`
-  },
-  {
-    id: 34,
-    type: "grammar",
-    skill: "Punctuation — Apostrophe Types",
-    question: `Which sentence correctly uses BOTH types of apostrophe (possession AND contraction)?`,
-    options: [
-      "Its raining and the dog's bowl is full",
-      "It's raining and the dogs bowl is full",
-      "It's raining and the dog's bowl is full",
-      "Its raining and the dogs' bowl is full",
-    ],
-    correctAnswer: 2,
-    explanation: `'It's' = it is (contraction). 'The dog's bowl' = bowl belonging to the dog (possession). Both are correctly used.`
-  },
-  {
-    id: 35,
-    type: "grammar",
-    skill: "Sentence Variety",
-    question: `Which technique creates the MOST effective sentence variety in a paragraph?`,
-    options: [
-      "Writing every sentence the same length",
-      "Beginning every sentence with 'I'",
-      "Using a mix of simple, compound, and complex sentences of varying lengths",
-      "Avoiding all punctuation",
-    ],
-    correctAnswer: 2,
-    explanation: `Varied sentence structures and lengths create rhythm, maintain interest, and show grammatical sophistication.`
-  },
-  {
-    id: 36,
-    type: "writing",
-    skill: "Analysing Language",
-    question: `When asked to analyse HOW a writer creates a particular effect, a student should:`,
-    options: [
-      "Simply retell the plot",
-      "State what happens without explaining the language",
-      "Identify a specific technique, quote it, and explain what it makes the reader think or feel",
-      "Say whether they liked the text",
-    ],
-    correctAnswer: 2,
-    explanation: `Effective analysis: technique + quotation + effect on the reader. All three elements are essential.`
-  },
-  {
-    id: 37,
-    type: "writing",
-    skill: "Argument vs Assertion",
-    question: `What is the difference between an ARGUMENT and an ASSERTION in writing?`,
-    options: [
-      "They are exactly the same",
-      "An argument is supported by evidence and reasoning; an assertion is a claim stated without support",
-      "An assertion is stronger than an argument",
-      "Arguments are used only in formal essays",
-    ],
-    correctAnswer: 1,
-    explanation: `An assertion states a position; an argument SUPPORTS that position with evidence and reasoning.`
-  },
-  {
-    id: 38,
-    type: "writing",
-    skill: "Register — Formal vs Informal",
-    question: `Which feature is CHARACTERISTIC of formal written English?`,
-    options: [
-      "Contractions like 'don't' and 'won't'",
-      "First person ('I feel that...')",
-      "Complete sentences, precise vocabulary, and avoidance of slang",
-      "Short, chatty sentences",
-    ],
-    correctAnswer: 2,
-    explanation: `Formal writing avoids contractions and slang, uses complete sentences, and employs precise, varied vocabulary.`
-  },
-  {
-    id: 39,
-    type: "writing",
-    skill: "Openings",
-    question: `Which type of OPENING is MOST effective for a persuasive speech?`,
-    options: [
-      "'In this essay I will argue...'",
-      "A powerful rhetorical question or striking statement that immediately engages the audience",
-      "Starting with 'My name is and I am going to talk about'",
-      "A very long introduction with background information",
-    ],
-    correctAnswer: 1,
-    explanation: `A striking opening — a rhetorical question, bold statement, or anecdote — immediately engages and hooks the audience.`
-  },
-  {
-    id: 40,
-    type: "writing",
-    skill: "Concluding Techniques",
-    question: `Which is the MOST powerful way to END a persuasive essay?`,
-    options: [
-      "Introduce a brand new argument",
-      "Repeat the introduction word for word",
-      "End with a call to action or a memorable statement that reinforces the main message",
-      "Simply stop writing after the last argument",
-    ],
-    correctAnswer: 2,
-    explanation: `A strong conclusion reinforces the argument and often ends with a call to action or memorable statement that leaves a lasting impression.`
-  }
-]
+    return {
+      ...question,
+      options: optionsWithOriginalIndex.map((item) => item.option),
+      correctAnswer,
+    };
+  });
+};
 
 const SECTION_CONFIG = [
-  { type: "reading" as const,    label: "Reading Comprehension",   note: "inference, author's craft, theme, tone, text analysis, figurative language" },
-  { type: "vocabulary" as const, label: "Vocabulary & Word Study",  note: "connotation, idioms, word relationships, advanced figurative language" },
-  { type: "grammar" as const,    label: "Grammar & Language Use",   note: "clauses, passive voice, reported speech, complex sentences, punctuation" },
-  { type: "writing" as const,    label: "Writing Skills",           note: "persuasive devices, analytical writing, register, planning, technique" },
-]
+  {
+    type: "reading" as const,
+    label: "Reading Comprehension",
+    note: "main idea, details, inference, purpose, point of view, evidence",
+  },
+  {
+    type: "vocabulary" as const,
+    label: "Vocabulary & Word Study",
+    note: "meaning in context, synonyms, antonyms, connotation, precise word choice",
+  },
+  {
+    type: "grammar" as const,
+    label: "Grammar & Language Use",
+    note: "agreement, tense, punctuation, pronouns, sentence structure, transitions",
+  },
+  {
+    type: "writing" as const,
+    label: "Writing Skills",
+    note: "topic sentences, support, organization, transitions, revision",
+  },
+];
 
-export default function G5LaMod9MockTest() {
-  const { isPremium, user } = useAuth()
-  const [started, setStarted]                 = useState(false)
-  const [showResults, setShowResults]         = useState(false)
-  const [currentQuestion, setCurrentQuestion] = useState(0)
-  const [answers, setAnswers]                 = useState<(number | null)[]>([])
-  const [timeLeft, setTimeLeft]               = useState(60 * 60)
+export default function G5LaModerate9MockTest() {
+  const { isPremium, user } = useAuth();
+  const [started, setStarted] = useState(false);
+  const [showResults, setShowResults] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answers, setAnswers] = useState<(number | null)[]>([]);
+  const [timeLeft, setTimeLeft] = useState(60 * 60);
+  const [randomizedQuestions, setRandomizedQuestions] = useState<Question[]>(
+    [],
+  );
+  const hasSavedResult = useRef(false);
 
-  const availableQuestions = isPremium ? g5LaMod9Questions : g5LaMod9Questions.slice(0, FREE_QUESTION_LIMIT)
-  const totalQuestions = availableQuestions.length
+  const sourceQuestions = isPremium
+    ? g5LaModerate9Questions
+    : g5LaModerate9Questions.slice(0, FREE_QUESTION_LIMIT);
+  const availableQuestions =
+    randomizedQuestions.length > 0 ? randomizedQuestions : sourceQuestions;
+  const totalQuestions = availableQuestions.length;
 
   useEffect(() => {
-    if (answers.length !== totalQuestions) setAnswers(new Array(totalQuestions).fill(null))
-  }, [totalQuestions, answers.length])
+    if (answers.length !== totalQuestions)
+      setAnswers(new Array(totalQuestions).fill(null));
+  }, [totalQuestions, answers.length]);
+
+  useEffect(() => {
+    setCurrentQuestion((prev) =>
+      Math.min(prev, Math.max(totalQuestions - 1, 0)),
+    );
+  }, [totalQuestions]);
 
   const formatTime = useCallback((s: number) => {
-    const m = Math.floor(s / 60)
-    return `${m.toString().padStart(2, "0")}:${(s % 60).toString().padStart(2, "0")}`
-  }, [])
+    const m = Math.floor(s / 60);
+    return `${m.toString().padStart(2, "0")}:${(s % 60).toString().padStart(2, "0")}`;
+  }, []);
 
   useEffect(() => {
-    if (!started || showResults) return
-    const t = setInterval(() => setTimeLeft((p) => { if (p <= 1) { setShowResults(true); return 0 } return p - 1 }), 1000)
-    return () => clearInterval(t)
-  }, [started, showResults])
+    if (!started || showResults) return;
+    const t = setInterval(
+      () =>
+        setTimeLeft((p) => {
+          if (p <= 1) {
+            setShowResults(true);
+            return 0;
+          }
+          return p - 1;
+        }),
+      1000,
+    );
+    return () => clearInterval(t);
+  }, [started, showResults]);
 
-  const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
+  const handleAnswer = (idx: number) => {
+    const a = [...answers];
+    a[currentQuestion] = idx;
+    setAnswers(a);
+  };
 
-  const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
-  const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
+  const calcScore = () =>
+    answers.reduce<number>(
+      (c, a, i) =>
+        i < totalQuestions && a === availableQuestions[i].correctAnswer
+          ? c + 1
+          : c,
+      0,
+    );
+  const scorePct = () => Math.round((calcScore() / totalQuestions) * 100);
 
-  const handleSubmit = async () => {
-    setShowResults(true)
+  useEffect(() => {
+    if (!showResults || !user?.id || hasSavedResult.current) return;
 
-    if (!user?.id) return
-
-    try {
-      await saveStudentTestResult({
-        parentId: user.id,
-        studentName: user?.childName ?? "Student",
-        grade: "grade5",
-        subject: "Language Arts",
-        testName: "Moderate 9",
-        difficulty: "Moderate",
-        score: calcScore(),
-        totalQuestions,
-        percentage: scorePct(),
-        completedAt: new Date().toISOString(),
-      })
-    } catch (error) {
-      console.error("Failed to save test result:", error)
-    }
-  }
+    hasSavedResult.current = true;
+    const completedAtIso = new Date().toISOString();
+    void saveStudentTestResult({
+      parentId: user.id,
+      studentName: user?.childName ?? "Student",
+      grade: "grade5",
+      subject: "Literacy",
+      testName: "Moderate 9",
+      difficulty: "Moderate",
+      score: calcScore(),
+      totalQuestions,
+      percentage: scorePct(),
+      completedAt: completedAtIso,
+    }).catch(() => {
+      hasSavedResult.current = false;
+    });
+  }, [showResults, user?.id, user?.childName, totalQuestions, answers]);
 
   const getGrade = () => {
-    const p = scorePct()
-    if (p >= 85) return { grade: "Excellent",         color: "text-green-600" }
-    if (p >= 70) return { grade: "Good",              color: "text-blue-600" }
-    if (p >= 50) return { grade: "Fair",              color: "text-amber-600" }
-    return              { grade: "Needs Improvement", color: "text-red-600" }
-  }
+    const p = scorePct();
+    if (p >= 85) return { grade: "Excellent", color: "text-green-600" };
+    if (p >= 70) return { grade: "Good", color: "text-blue-600" };
+    if (p >= 50) return { grade: "Fair", color: "text-amber-600" };
+    return { grade: "Needs Improvement", color: "text-red-600" };
+  };
 
   const getSectionStats = (type: Question["type"]) => {
-    const sq = availableQuestions.filter((q) => q.type === type)
-    const correct = sq.filter((q) => { const i = availableQuestions.findIndex((x) => x.id === q.id); return answers[i] === q.correctAnswer }).length
-    const total = sq.length
-    const pct = total === 0 ? 0 : Math.round((correct / total) * 100)
-    const rating = pct >= 85 ? "Excellent" : pct >= 70 ? "Good" : pct >= 50 ? "Fair" : "Needs Improvement"
-    const color  = pct >= 85 ? "text-green-600" : pct >= 70 ? "text-blue-600" : pct >= 50 ? "text-amber-600" : "text-red-600"
-    return { correct, total, percentage: pct, rating, ratingColor: color }
-  }
+    const sq = availableQuestions.filter((q) => q.type === type);
+    const correct = sq.filter((q) => {
+      const i = availableQuestions.findIndex((x) => x.id === q.id);
+      return answers[i] === q.correctAnswer;
+    }).length;
+    const total = sq.length;
+    const pct = total === 0 ? 0 : Math.round((correct / total) * 100);
+    const rating =
+      pct >= 85
+        ? "Excellent"
+        : pct >= 70
+          ? "Good"
+          : pct >= 50
+            ? "Fair"
+            : "Needs Improvement";
+    const color =
+      pct >= 85
+        ? "text-green-600"
+        : pct >= 70
+          ? "text-blue-600"
+          : pct >= 50
+            ? "text-amber-600"
+            : "text-red-600";
+    return { correct, total, percentage: pct, rating, ratingColor: color };
+  };
+
+  const startTest = () => {
+    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions);
+    setRandomizedQuestions(shuffledQuestions);
+    setAnswers(new Array(shuffledQuestions.length).fill(null));
+    setCurrentQuestion(0);
+    setTimeLeft(60 * 60);
+    setShowResults(false);
+    hasSavedResult.current = false;
+    setStarted(true);
+  };
 
   const resetTest = () => {
-    setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setStarted(false);
+    setShowResults(false);
+    setCurrentQuestion(0);
+    setRandomizedQuestions([]);
+    setAnswers(new Array(sourceQuestions.length).fill(null));
+    setTimeLeft(60 * 60);
+    hasSavedResult.current = false;
+  };
+
+  const handleSubmit = () => {
+    setShowResults(true);
+  };
+
+  const q = availableQuestions[currentQuestion];
+  const answeredCount = answers.filter((a) => a !== null).length;
+
+  if (!q) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
+        <Header />
+        <main className="container mx-auto px-4 py-10">
+          <Card className="mx-auto max-w-xl border-amber-200">
+            <CardHeader className="bg-amber-50">
+              <CardTitle className="text-amber-800">Preview Complete</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4 p-6">
+              <p className="text-slate-700">
+                You completed the free preview for this test. Upgrade to Premium
+                to unlock all 40 questions.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/pricing">
+                  <Button className="bg-amber-500 hover:bg-amber-600">
+                    <Crown className="mr-2 h-4 w-4" />
+                    Upgrade to Premium
+                  </Button>
+                </Link>
+                <Link href="/mock-tests/language-arts">
+                  <Button variant="outline">Back to Language Arts Tests</Button>
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+        </main>
+        <Footer />
+      </div>
+    );
   }
-
-  const q = availableQuestions[currentQuestion]
-  const answeredCount = answers.filter((a) => a !== null).length
   const secLabel = (t: Question["type"]) =>
-    t === "reading" ? "Reading Comprehension" : t === "vocabulary" ? "Vocabulary & Word Study"
-    : t === "grammar" ? "Grammar & Language Use" : "Writing Skills"
+    t === "reading"
+      ? "Reading Comprehension"
+      : t === "vocabulary"
+        ? "Vocabulary & Word Study"
+        : t === "grammar"
+          ? "Grammar & Language Use"
+          : "Writing Skills";
   const secColor = (t: Question["type"]) =>
-    t === "reading" ? "bg-blue-50 text-blue-700" : t === "vocabulary" ? "bg-purple-50 text-purple-700"
-    : t === "grammar" ? "bg-green-50 text-green-700" : "bg-amber-50 text-amber-700"
+    t === "reading"
+      ? "bg-blue-50 text-blue-700"
+      : t === "vocabulary"
+        ? "bg-purple-50 text-purple-700"
+        : t === "grammar"
+          ? "bg-green-50 text-green-700"
+          : "bg-amber-50 text-amber-700";
 
-  if (!started) return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
-      <Header />
-      <main className="container mx-auto px-4 py-10">
-        <Link href="/mock-tests/language-arts"><Button variant="ghost" className="mb-6"><ArrowLeft className="mr-2 h-4 w-4" />Back to Language Arts Mock Tests</Button></Link>
-        <Card className="mx-auto max-w-3xl border-blue-200 shadow-lg">
-          <CardHeader className="bg-blue-50 text-center">
-            <BookOpen className="mx-auto mb-4 h-14 w-14 text-blue-600" />
-            <CardTitle className="text-2xl text-blue-800">Language Arts Moderate 9</CardTitle>
-            <p className="text-slate-600">Grade 5 PEP Language Arts · Moderate Level</p>
-          </CardHeader>
-          <CardContent className="space-y-6 p-6">
-            {!isPremium && (
-              <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
-                <div className="flex items-start gap-3">
-                  <Lock className="mt-1 h-5 w-5 flex-shrink-0 text-amber-600" />
-                  <div>
-                    <p className="font-semibold text-amber-800">Free Preview Mode</p>
-                    <p className="text-sm text-amber-700">Try {FREE_QUESTION_LIMIT} questions free. Upgrade to unlock all 40.</p>
-                    <Link href="/pricing" className="mt-3 inline-block"><Button className="bg-amber-500 hover:bg-amber-600"><Crown className="mr-2 h-4 w-4" />Upgrade to Premium</Button></Link>
+  if (!started)
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
+        <Header />
+        <main className="container mx-auto px-4 py-10">
+          <Link href="/mock-tests/language-arts">
+            <Button variant="ghost" className="mb-6">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Language Arts Mock Tests
+            </Button>
+          </Link>
+          <Card className="mx-auto max-w-3xl border-blue-200 shadow-lg">
+            <CardHeader className="bg-blue-50 text-center">
+              <BookOpen className="mx-auto mb-4 h-14 w-14 text-blue-600" />
+              <CardTitle className="text-2xl text-blue-800">
+                Language Arts Moderate 9
+              </CardTitle>
+              <p className="text-slate-600">
+                Grade 5 PEP Language Arts · Moderate Level
+              </p>
+            </CardHeader>
+            <CardContent className="space-y-6 p-6">
+              {!isPremium && (
+                <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
+                  <div className="flex items-start gap-3">
+                    <Lock className="mt-1 h-5 w-5 flex-shrink-0 text-amber-600" />
+                    <div>
+                      <p className="font-semibold text-amber-800">
+                        Free Preview Mode
+                      </p>
+                      <p className="text-sm text-amber-700">
+                        Try {FREE_QUESTION_LIMIT} questions free. Upgrade to
+                        unlock all 40.
+                      </p>
+                      <Link href="/pricing" className="mt-3 inline-block">
+                        <Button className="bg-amber-500 hover:bg-amber-600">
+                          <Crown className="mr-2 h-4 w-4" />
+                          Upgrade to Premium
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
+              )}
+              <div className="rounded-lg border border-blue-200 bg-white p-4">
+                <h3 className="mb-2 font-semibold text-slate-800">
+                  Test Overview
+                </h3>
+                <p className="text-slate-700">
+                  This Grade 5 Language Arts test covers reading comprehension,
+                  vocabulary in context, grammar and language use, and writing
+                  skills — all aligned to the NSC curriculum.
+                </p>
               </div>
-            )}
-            <div className="rounded-lg border border-blue-200 bg-white p-4">
-              <h3 className="mb-2 font-semibold text-slate-800">Moderate Level Focus</h3>
-              <p className="text-slate-700">This test requires deeper analysis of texts — understanding inference, author's craft, figurative language, complex grammar structures, and effective writing techniques at a solid NSC Grade 5 standard.</p>
-            </div>
-            <div className="rounded-lg bg-sky-50 p-4">
-              <h3 className="mb-2 font-semibold text-sky-800">21st-Century Skills</h3>
-              <ul className="space-y-1 text-sm text-slate-700">
-                <li>Critical Thinking: analysing how language creates meaning</li>
-                <li>Communication: understanding purpose, audience, and register</li>
-                <li>Creativity: recognising how writers use technique for effect</li>
-                <li>Collaboration: understanding how writing connects with readers</li>
-              </ul>
-            </div>
-            <div className="grid grid-cols-2 gap-4 text-center">
-              <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-blue-600">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
-              <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-blue-600">60</p><p className="text-sm text-slate-600">Minutes</p></div>
-            </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-blue-600 py-6 text-lg hover:bg-blue-700">Start Test</Button>
-          </CardContent>
-        </Card>
-      </main>
-      <Footer />
-    </div>
-  )
+              <div className="rounded-lg bg-sky-50 p-4">
+                <h3 className="mb-2 font-semibold text-sky-800">
+                  21st-Century Skills
+                </h3>
+                <ul className="space-y-1 text-sm text-slate-700">
+                  <li>
+                    Critical Thinking: analysing texts and evaluating language
+                    choices
+                  </li>
+                  <li>
+                    Communication: understanding how language works in context
+                  </li>
+                  <li>
+                    Creativity: recognising and applying effective writing
+                    techniques
+                  </li>
+                  <li>
+                    Collaboration: understanding how writers address their
+                    audience
+                  </li>
+                </ul>
+              </div>
+              <div className="grid grid-cols-2 gap-4 text-center">
+                <div className="rounded-lg bg-gray-50 p-4">
+                  <p className="text-2xl font-bold text-blue-600">
+                    {totalQuestions}
+                  </p>
+                  <p className="text-sm text-slate-600">
+                    Questions {!isPremium && "(Preview)"}
+                  </p>
+                </div>
+                <div className="rounded-lg bg-gray-50 p-4">
+                  <p className="text-2xl font-bold text-blue-600">60</p>
+                  <p className="text-sm text-slate-600">Minutes</p>
+                </div>
+              </div>
+              <Button
+                onClick={startTest}
+                className="w-full bg-blue-600 py-6 text-lg hover:bg-blue-700"
+              >
+                Start Test
+              </Button>
+            </CardContent>
+          </Card>
+        </main>
+        <Footer />
+      </div>
+    );
 
   if (showResults) {
-    const sc = calcScore(); const pct = scorePct(); const { grade, color } = getGrade()
+    const sc = calcScore();
+    const pct = scorePct();
+    const { grade, color } = getGrade();
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
         <Header />
@@ -801,64 +461,163 @@ export default function G5LaMod9MockTest() {
           <Card className="mx-auto max-w-4xl border-blue-200 shadow-lg">
             <CardHeader className="bg-blue-50 text-center">
               <CheckCircle className="mx-auto mb-4 h-14 w-14 text-blue-600" />
-              <CardTitle className="text-2xl text-blue-800">Language Arts Test Completed</CardTitle>
+              <CardTitle className="text-2xl text-blue-800">
+                Language Arts Test Completed
+              </CardTitle>
               <p className="text-slate-600">Language Arts Moderate 9</p>
             </CardHeader>
             <CardContent className="space-y-6 p-6">
               <div className="rounded-lg bg-gray-50 p-6 text-center">
-                <p className="text-5xl font-bold text-blue-600">{sc}/{totalQuestions}</p>
+                <p className="text-5xl font-bold text-blue-600">
+                  {sc}/{totalQuestions}
+                </p>
                 <p className="mt-2 text-slate-600">Questions Correct</p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-                <div className="rounded-lg bg-gray-50 p-4"><p className="text-3xl font-bold text-blue-600">{pct}%</p><p className="text-sm text-slate-600">Score</p></div>
-                <div className="rounded-lg bg-gray-50 p-4"><p className={cn("text-2xl font-bold", color)}>{grade}</p><p className="text-sm text-slate-600">Performance</p></div>
-                <div className="rounded-lg bg-gray-50 p-4"><p className="text-sm font-semibold text-slate-700">{new Date().toLocaleDateString()}</p><p className="text-sm text-slate-600">Completed</p></div>
+                <div className="rounded-lg bg-gray-50 p-4">
+                  <p className="text-3xl font-bold text-blue-600">{pct}%</p>
+                  <p className="text-sm text-slate-600">Score</p>
+                </div>
+                <div className="rounded-lg bg-gray-50 p-4">
+                  <p className={cn("text-2xl font-bold", color)}>{grade}</p>
+                  <p className="text-sm text-slate-600">Performance</p>
+                </div>
+                <div className="rounded-lg bg-gray-50 p-4">
+                  <p className="text-sm font-semibold text-slate-700">
+                    {new Date().toLocaleDateString()}
+                  </p>
+                  <p className="text-sm text-slate-600">Completed</p>
+                </div>
               </div>
-              {!isPremium && (<div className="rounded-lg border border-amber-200 bg-amber-50 p-4"><p className="font-semibold text-amber-800">Upgrade to access all 40 questions.</p><Link href="/pricing" className="mt-2 inline-block"><Button className="bg-amber-500 hover:bg-amber-600"><Crown className="mr-2 h-4 w-4" />Upgrade</Button></Link></div>)}
+              {!isPremium && (
+                <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
+                  <p className="font-semibold text-amber-800">
+                    You completed the free preview.
+                  </p>
+                  <p className="text-sm text-amber-700">
+                    Upgrade to unlock all 40 questions.
+                  </p>
+                  <Link href="/pricing" className="mt-3 inline-block">
+                    <Button className="bg-amber-500 hover:bg-amber-600">
+                      <Crown className="mr-2 h-4 w-4" />
+                      Upgrade
+                    </Button>
+                  </Link>
+                </div>
+              )}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {SECTION_CONFIG.map((s) => { const st = getSectionStats(s.type); return (
-                  <div key={s.type} className="rounded-xl border border-blue-100 bg-blue-50 p-4">
-                    <p className="font-semibold text-blue-800">{s.label}</p>
-                    <p className="text-sm text-slate-500 mt-1">{s.note}</p>
-                    <div className="mt-3 flex items-center justify-between">
-                      <span className="text-sm text-slate-700">{st.correct}/{st.total} correct</span>
-                      <span className={cn("text-sm font-semibold", st.ratingColor)}>{st.rating}</span>
+                {SECTION_CONFIG.map((s) => {
+                  const st = getSectionStats(s.type);
+                  return (
+                    <div
+                      key={s.type}
+                      className="rounded-xl border border-blue-100 bg-blue-50 p-4"
+                    >
+                      <p className="font-semibold text-blue-800">{s.label}</p>
+                      <p className="text-sm text-slate-500 mt-1">{s.note}</p>
+                      <div className="mt-3 flex items-center justify-between">
+                        <span className="text-sm text-slate-700">
+                          {st.correct}/{st.total} correct
+                        </span>
+                        <span
+                          className={cn(
+                            "text-sm font-semibold",
+                            st.ratingColor,
+                          )}
+                        >
+                          {st.rating}
+                        </span>
+                      </div>
+                      <Progress value={st.percentage} className="h-2 mt-2" />
+                      <p className="text-xs text-slate-500 mt-1">
+                        {st.percentage}%
+                      </p>
                     </div>
-                    <Progress value={st.percentage} className="h-2 mt-2" />
-                    <p className="text-xs text-slate-500 mt-1">{st.percentage}%</p>
-                  </div>
-                )})}
+                  );
+                })}
               </div>
               <div className="space-y-4">
                 {availableQuestions.map((q, i) => {
-                  const correct = answers[i] === q.correctAnswer
+                  const correct = answers[i] === q.correctAnswer;
                   return (
-                    <div key={q.id} className={cn("rounded-lg border-2 p-4", correct ? "border-green-200 bg-green-50" : "border-red-200 bg-red-50")}>
+                    <div
+                      key={q.id}
+                      className={cn(
+                        "rounded-lg border-2 p-4",
+                        correct
+                          ? "border-green-200 bg-green-50"
+                          : "border-red-200 bg-red-50",
+                      )}
+                    >
                       <div className="flex items-start gap-3">
-                        {correct ? <CheckCircle className="mt-1 h-5 w-5 text-green-600" /> : <XCircle className="mt-1 h-5 w-5 text-red-600" />}
+                        {correct ? (
+                          <CheckCircle className="mt-1 h-5 w-5 text-green-600" />
+                        ) : (
+                          <XCircle className="mt-1 h-5 w-5 text-red-600" />
+                        )}
                         <div className="flex-1">
-                          <p className="font-semibold text-slate-800">Q{i + 1} · <span className="text-blue-700">{q.skill}</span></p>
-                          <p className="mt-1 text-slate-700 text-sm">{q.question}</p>
-                          <p className="mt-2 text-sm text-slate-600">Your answer: <span className={correct ? "text-green-700 font-medium" : "text-red-700 font-medium"}>{answers[i] !== null ? q.options[answers[i]!] : "Not answered"}</span></p>
-                          <p className="text-sm text-green-700">Correct: {q.options[q.correctAnswer]}</p>
-                          <p className="mt-1 text-sm text-slate-700">Explanation: {q.explanation}</p>
+                          <p className="font-semibold text-slate-800">
+                            Q{i + 1} ·{" "}
+                            <span className="text-blue-700">{q.skill}</span>
+                          </p>
+                          <p className="mt-1 text-slate-700 text-sm">
+                            {q.question}
+                          </p>
+                          <p className="mt-2 text-sm text-slate-600">
+                            Your answer:{" "}
+                            <span
+                              className={
+                                correct
+                                  ? "text-green-700 font-medium"
+                                  : "text-red-700 font-medium"
+                              }
+                            >
+                              {answers[i] !== null
+                                ? q.options[answers[i]!]
+                                : "Not answered"}
+                            </span>
+                          </p>
+                          <p className="text-sm text-green-700">
+                            Correct: {q.options[q.correctAnswer]}
+                          </p>
+                          <p className="mt-1 text-sm text-slate-700">
+                            Explanation: {q.explanation}
+                          </p>
                         </div>
                       </div>
                     </div>
-                  )
+                  );
                 })}
               </div>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <Button onClick={() => window.print()} className="flex-1 bg-blue-600 hover:bg-blue-700"><Printer className="mr-2 h-4 w-4" />Print / Save Report</Button>
-                <Button onClick={resetTest} variant="outline" className="flex-1"><RotateCcw className="mr-2 h-4 w-4" />Try Again</Button>
-                <Link href="/mock-tests/language-arts" className="flex-1"><Button variant="outline" className="w-full"><Home className="mr-2 h-4 w-4" />Back to Language Arts Tests</Button></Link>
+                <Button
+                  onClick={() => window.print()}
+                  className="flex-1 bg-blue-600 hover:bg-blue-700"
+                >
+                  <Printer className="mr-2 h-4 w-4" />
+                  Print / Save Report
+                </Button>
+                <Button
+                  onClick={resetTest}
+                  variant="outline"
+                  className="flex-1"
+                >
+                  <RotateCcw className="mr-2 h-4 w-4" />
+                  Try Again
+                </Button>
+                <Link href="/mock-tests/language-arts" className="flex-1">
+                  <Button variant="outline" className="w-full">
+                    <Home className="mr-2 h-4 w-4" />
+                    Back to Language Arts Tests
+                  </Button>
+                </Link>
               </div>
             </CardContent>
           </Card>
         </main>
         <Footer />
       </div>
-    )
+    );
   }
 
   return (
@@ -867,71 +626,166 @@ export default function G5LaMod9MockTest() {
       <header className="bg-blue-800 text-white sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Link href="/mock-tests/language-arts" className="p-2 hover:bg-white/10 rounded-lg transition-colors"><ArrowLeft className="h-5 w-5" /></Link>
+            <Link
+              href="/mock-tests/language-arts"
+              className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </Link>
             <BookOpen className="h-8 w-8" />
-            <div><h1 className="text-lg font-bold">Language Arts Moderate 9</h1><p className="text-blue-100 text-xs">Question {currentQuestion + 1} of {totalQuestions}</p></div>
+            <div>
+              <h1 className="text-lg font-bold">Language Arts Moderate 9</h1>
+              <p className="text-blue-100 text-xs">
+                Question {currentQuestion + 1} of {totalQuestions}
+              </p>
+            </div>
           </div>
-          <div className={cn("flex items-center gap-2 px-4 py-2 rounded-lg font-mono text-lg", timeLeft <= 300 ? "bg-red-500" : "bg-green-600")}>
-            <Clock className="h-5 w-5" />{formatTime(timeLeft)}
+          <div
+            className={cn(
+              "flex items-center gap-2 px-4 py-2 rounded-lg font-mono text-lg",
+              timeLeft <= 300 ? "bg-red-500" : "bg-green-600",
+            )}
+          >
+            <Clock className="h-5 w-5" />
+            {formatTime(timeLeft)}
           </div>
         </div>
       </header>
       <div className="bg-white border-b shadow-sm sticky top-[72px] z-10">
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between text-sm text-gray-600 mb-2">
-            <span>Progress: {answeredCount}/{totalQuestions} answered</span>
-            <span>{Math.round((answeredCount / totalQuestions) * 100)}% complete</span>
+            <span>
+              Progress: {answeredCount}/{totalQuestions} answered
+            </span>
+            <span>
+              {Math.round((answeredCount / totalQuestions) * 100)}% complete
+            </span>
           </div>
-          <Progress value={(answeredCount / totalQuestions) * 100} className="h-2" />
+          <Progress
+            value={(answeredCount / totalQuestions) * 100}
+            className="h-2"
+          />
         </div>
       </div>
       <main className="container mx-auto px-4 py-6">
         <div className="max-w-4xl mx-auto">
-          {!isPremium && (<div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 p-4"><p className="font-semibold text-amber-800">Free Preview: {FREE_QUESTION_LIMIT} of 40 questions</p><p className="text-sm text-amber-700">Upgrade to Premium for full access.</p></div>)}
+          {!isPremium && (
+            <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
+              <p className="font-semibold text-amber-800">
+                Free Preview: {FREE_QUESTION_LIMIT} of 40 questions
+              </p>
+              <p className="text-sm text-amber-700">
+                Upgrade to Premium to access the full test.
+              </p>
+            </div>
+          )}
           <Card className="mb-6 border-blue-100">
             <CardHeader className={cn("rounded-t-lg", secColor(q.type))}>
               <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold uppercase tracking-wide">{q.skill}</span>
-                <span className="text-xs uppercase tracking-wide opacity-70">{secLabel(q.type)}</span>
+                <span className="text-sm font-semibold uppercase tracking-wide">
+                  {q.skill}
+                </span>
+                <span className="text-xs uppercase tracking-wide opacity-70">
+                  {secLabel(q.type)}
+                </span>
               </div>
             </CardHeader>
             <CardContent className="p-6">
-              <p className="text-base font-medium text-slate-800 mb-6 leading-relaxed whitespace-pre-line">{q.question}</p>
+              <p className="text-base font-medium text-slate-800 mb-6 leading-relaxed whitespace-pre-line">
+                {q.question}
+              </p>
               <div className="space-y-3">
                 {q.options.map((opt, idx) => (
-                  <button key={idx} onClick={() => handleAnswer(idx)}
-                    className={cn("w-full p-4 text-left rounded-lg border-2 transition-all",
-                      answers[currentQuestion] === idx ? "border-blue-600 bg-blue-50" : "border-gray-200 hover:border-blue-300 hover:bg-blue-50/50")}>
-                    <span className="font-medium text-blue-700 mr-3">{String.fromCharCode(65 + idx)}.</span>{opt}
+                  <button
+                    key={idx}
+                    onClick={() => handleAnswer(idx)}
+                    className={cn(
+                      "w-full p-4 text-left rounded-lg border-2 transition-all",
+                      answers[currentQuestion] === idx
+                        ? "border-blue-600 bg-blue-50"
+                        : "border-gray-200 hover:border-blue-300 hover:bg-blue-50/50",
+                    )}
+                  >
+                    <span className="font-medium text-blue-700 mr-3">
+                      {String.fromCharCode(65 + idx)}.
+                    </span>
+                    {opt}
                   </button>
                 ))}
               </div>
             </CardContent>
           </Card>
           <div className="flex items-center justify-between mb-6">
-            <Button variant="outline" onClick={() => setCurrentQuestion((p) => p - 1)} disabled={currentQuestion === 0}><ChevronLeft className="h-4 w-4 mr-2" />Previous</Button>
-            {currentQuestion === totalQuestions - 1
-              ? <Button onClick={handleSubmit} className="bg-blue-600 hover:bg-blue-700"><Flag className="h-4 w-4 mr-2" />Submit Test</Button>
-              : <Button onClick={() => setCurrentQuestion((p) => p + 1)} className="bg-blue-600 hover:bg-blue-700">Next<ChevronRight className="h-4 w-4 ml-2" /></Button>}
+            <Button
+              variant="outline"
+              onClick={() => setCurrentQuestion((p) => Math.max(p - 1, 0))}
+              disabled={currentQuestion === 0}
+            >
+              <ChevronLeft className="h-4 w-4 mr-2" />
+              Previous
+            </Button>
+            {currentQuestion === totalQuestions - 1 ? (
+              <Button
+                onClick={handleSubmit}
+                className="bg-blue-600 hover:bg-blue-700"
+              >
+                <Flag className="h-4 w-4 mr-2" />
+                Submit Test
+              </Button>
+            ) : (
+              <Button
+                onClick={() =>
+                  setCurrentQuestion((p) => Math.min(p + 1, totalQuestions - 1))
+                }
+                className="bg-blue-600 hover:bg-blue-700"
+              >
+                Next
+                <ChevronRight className="h-4 w-4 ml-2" />
+              </Button>
+            )}
           </div>
           <Card className="border-blue-100">
-            <CardHeader className="py-3"><CardTitle className="text-sm text-blue-700">Question Navigator</CardTitle></CardHeader>
+            <CardHeader className="py-3">
+              <CardTitle className="text-sm text-blue-700">
+                Question Navigator
+              </CardTitle>
+            </CardHeader>
             <CardContent className="pb-4">
               <div className="grid grid-cols-10 gap-2">
                 {availableQuestions.map((_, idx) => (
-                  <button key={idx} onClick={() => setCurrentQuestion(idx)}
-                    className={cn("w-8 h-8 rounded text-sm font-medium transition-colors",
-                      currentQuestion === idx ? "bg-blue-600 text-white"
-                      : answers[idx] !== null ? "bg-blue-100 text-blue-700"
-                      : "bg-gray-100 text-gray-600 hover:bg-gray-200")}>
+                  <button
+                    key={idx}
+                    onClick={() =>
+                      setCurrentQuestion(
+                        Math.min(Math.max(idx, 0), totalQuestions - 1),
+                      )
+                    }
+                    className={cn(
+                      "w-8 h-8 rounded text-sm font-medium transition-colors",
+                      currentQuestion === idx
+                        ? "bg-blue-600 text-white"
+                        : answers[idx] !== null
+                          ? "bg-blue-100 text-blue-700"
+                          : "bg-gray-100 text-gray-600 hover:bg-gray-200",
+                    )}
+                  >
                     {idx + 1}
                   </button>
                 ))}
               </div>
               <div className="flex items-center gap-4 mt-4 text-xs text-gray-500">
-                <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-blue-600" /><span>Current</span></div>
-                <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-blue-100" /><span>Answered</span></div>
-                <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-gray-100" /><span>Unanswered</span></div>
+                <div className="flex items-center gap-1">
+                  <div className="w-3 h-3 rounded bg-blue-600" />
+                  <span>Current</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="w-3 h-3 rounded bg-blue-100" />
+                  <span>Answered</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="w-3 h-3 rounded bg-gray-100" />
+                  <span>Unanswered</span>
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -939,5 +793,5 @@ export default function G5LaMod9MockTest() {
       </main>
       <Footer />
     </div>
-  )
+  );
 }
