@@ -38,88 +38,575 @@ interface Question {
   explanation: string;
 }
 
-const entrepreneurshipPassage = `Read the passage then answer the question.
+const difficult1Passage = `Read the passage then answer the question.
 
-"At Blue Mountain Primary, twelve Grade 5 pupils formed the Bright Ideas Club to design small businesses for Market Day. Their teacher, Mr. Allen, emphasised that youth entrepreneurship was not simply selling snacks; it required identifying a need, calculating costs, listening to customers, and acting honestly. Nia suggested reusable lunch bags after noticing plastic wrappers blowing across the playing field. Kareem proposed herb seedlings because several parents wanted affordable seasonings for home gardens. The club investigated prices at three shops, compared cloth and soil costs, and kept a careful record of every receipt. When early customers said the first lunch bags were too small, the pupils redesigned them with wider straps and stronger stitching. On Market Day, the herb seedlings sold quickly, but the bags earned more profit because the materials lasted longer. At the end, the club donated part of its earnings to buy bins for the school yard. Mr. Allen told them that an innovative business should solve a problem and contribute to the community, not only make money."`;
+"Maya and Denzel started a youth entrepreneurship club after noticing that many classmates bought imported snacks after school. Instead of copying another business, they investigated what pupils wanted and discovered a significant demand for affordable fruit cups made with local mangoes, pineapples, and melon. Their teacher asked them to justify every decision with reliable evidence, so they compared prices at the market, surveyed students, and calculated how many reusable containers were essential. When the first batch sold slowly, Maya interpreted the feedback: the cups were too large for younger children. The team created a smaller option, emphasised cleanliness, and used profits to buy a cooler. By the end of the month, the club had earned enough to contribute seedlings to the school garden and had learned that innovative ideas still need careful records, honest discussion, and respect for customers."`;
 
-const servicePassage = `Read the passage then answer the question.
+const difficult1SecondPassage = `Read the passage then answer the question.
 
-"The Riverside Service Team noticed that the lane beside the clinic flooded whenever heavy rain carried leaves into the drain. Instead of complaining, the students interviewed nurses, shopkeepers, and elderly residents to understand the problem from different perspectives. They learned that patients sometimes stepped into muddy water and that delivery cyclists avoided the lane after storms. The team created a plan: clean the drain with adult supervision, paint warning stones, and ask the parish office for a covered rubbish bin. Some classmates wanted to finish in one afternoon, but Amara argued that reliable service requires follow-up. For four Saturdays, volunteers recorded how much litter was removed and whether water flowed better after rain. Their chart showed less flooding after the drain was cleared, yet wrappers returned when the nearby shop became busy. The team concluded that signs alone were not enough, so they prepared a short presentation asking shop owners to remind customers to dispose of rubbish properly. The project taught them that community service works best when evidence, cooperation, and responsibility are combined."`;
+"At Harbour View Primary, the service club planned to restore a neglected reading corner at the clinic. Some volunteers wanted to paint bright murals immediately, while others argued that patients first needed comfortable chairs and labelled books. To understand the community's perspective, the pupils interviewed nurses, parents, and children waiting for appointments. A leaking window forced them to adjust the schedule, but it also illustrated why planning matters. The group repaired shelves, sorted donated books by age level, and wrote polite signs asking readers to return materials. During the opening, a nurse said children were calmer when they had stories to read. The pupils concluded that service is not simply doing what feels exciting; it is listening carefully, choosing sustainable solutions, and measuring whether the work truly helps."`;
 
 const g5LaDifficult1Questions: Question[] = [
-  {id:1,type:"reading",skill:"Inference",question:`${entrepreneurshipPassage}
-
-Why did Mr. Allen say entrepreneurship was not simply selling snacks?`,options:["He wanted pupils to understand planning, customer needs, costs, and honesty.","He believed Grade 5 pupils should never earn money at school.","He thought snacks were the only products customers would buy.","He wanted the club to avoid speaking to customers."],correctAnswer:0,explanation:'Mr. Allen lists deeper business skills, so the passage presents entrepreneurship as thoughtful problem-solving.'},
-  {id:2,type:"reading",skill:"Cause and Effect",question:`${entrepreneurshipPassage}
-
-What caused Nia to suggest reusable lunch bags?`,options:["She noticed plastic wrappers blowing across the playing field.","She found herb seedlings growing beside the classroom.","She wanted to copy the product that sold quickest.","She was told that cloth was free at every shop."],correctAnswer:0,explanation:'The litter on the field directly led Nia to propose a reusable product.'},
-  {id:3,type:"reading",skill:"Text Evidence",question:`${entrepreneurshipPassage}
-
-Which detail best proves that the club made decisions using evidence?`,options:["The pupils investigated prices at three shops and kept receipts.","The pupils named their group the Bright Ideas Club.","Market Day was held at Blue Mountain Primary.","Mr. Allen spoke to the class at the end."],correctAnswer:0,explanation:'Checking prices and recording receipts are concrete evidence of careful decision-making.'},
-  {id:4,type:"reading",skill:"Drawing Conclusions",question:`${entrepreneurshipPassage}
-
-What conclusion can be drawn from the bags earning more profit than the seedlings?`,options:["A product with higher lasting value can earn more even if it sells more slowly.","The seedlings were a failure because no one wanted seasonings.","The pupils should have ignored customer comments about bag size.","The club made no effort to compare costs before selling."],correctAnswer:0,explanation:'The seedlings sold quickly, but the bags had better profit because materials lasted longer.'},
-  {id:5,type:"reading",skill:"Vocabulary in Context",question:`${entrepreneurshipPassage}
-
-In the passage, “innovative” most nearly means—`,options:["creative and useful in a new way","expensive and impossible to sell","copied without permission","careless about community needs"],correctAnswer:0,explanation:'Mr. Allen connects innovation with solving a problem and helping the community.'},
-  {id:6,type:"reading",skill:"Supporting Details",question:`${entrepreneurshipPassage}
-
-Which detail shows the pupils responded to feedback?`,options:["They redesigned the lunch bags with wider straps and stronger stitching.","They donated part of their earnings to buy school bins.","They formed a club with twelve Grade 5 pupils.","They sold herb seedlings to parents."],correctAnswer:0,explanation:'Customers said the bags were too small, and the pupils improved the design.'},
-  {id:7,type:"reading",skill:"Theme",question:`${entrepreneurshipPassage}
-
-Which theme is best supported by the passage?`,options:["Successful ideas often combine careful planning with service to others.","Making money is always more important than solving problems.","Children should avoid changing a plan once it begins.","A business succeeds only when it sells food."],correctAnswer:0,explanation:'The club plans carefully, adjusts products, earns profit, and donates to improve the yard.'},
-  {id:8,type:"reading",skill:"Compare and Contrast",question:`${entrepreneurshipPassage}
-
-How were the two business ideas different?`,options:["The seedlings sold quickly, while the bags earned more profit because they lasted longer.","The bags were never changed, while the seedlings were redesigned twice.","The seedlings solved litter, while the bags helped home gardens.","Both products failed because customers refused to buy them."],correctAnswer:0,explanation:'The passage explicitly contrasts quick seedling sales with greater bag profit.'},
-  {id:9,type:"reading",skill:"Main Idea",question:`${servicePassage}
-
-What is the main idea of the community service passage?`,options:["Students used evidence and cooperation to reduce flooding and litter near the clinic.","Students painted stones because they wanted to decorate a lane.","Shopkeepers solved the problem without help from anyone else.","The clinic closed because cyclists avoided the flooded lane."],correctAnswer:0,explanation:'The whole passage focuses on investigating, acting, measuring results, and involving the community.'},
-  {id:10,type:"reading",skill:"Inference",question:`${servicePassage}
-
-What can be inferred about Amara?`,options:["She understands that lasting service requires checking whether a solution continues to work.","She wants the group to stop helping after one afternoon.","She thinks evidence is less useful than guessing.","She believes residents should not share their perspectives."],correctAnswer:0,explanation:'Amara argues for follow-up, showing she values reliable, lasting improvement.'},
-  {id:11,type:"reading",skill:"Supporting Details",question:`${servicePassage}
-
-Which group was interviewed by the Riverside Service Team?`,options:["Nurses, shopkeepers, and elderly residents","Only delivery cyclists from another town","A group of tourists visiting the beach","Only students from a high school science club"],correctAnswer:0,explanation:'The passage names nurses, shopkeepers, and elderly residents as interviewees.'},
-  {id:12,type:"reading",skill:"Drawing Conclusions",question:`${servicePassage}
-
-What conclusion did the team reach after wrappers returned?`,options:["Cleaning and signs were helpful but community reminders were also needed.","The drain should be blocked so leaves could not enter it.","The project had completely solved every problem forever.","The clinic lane did not need any further attention."],correctAnswer:0,explanation:'Wrappers returned when the shop was busy, so the team planned to involve shop owners.'},
-  {id:13,type:"reading",skill:"Author’s Purpose",question:`${servicePassage}
-
-Why does the author include the chart of litter and water flow?`,options:["To show that the students evaluated their project with evidence","To prove that charts are more important than service","To explain why the volunteers stopped working immediately","To show that rain never returned after the first Saturday"],correctAnswer:0,explanation:'The chart demonstrates evidence-based evaluation of the service project.'},
-  {id:14,type:"reading",skill:"Prediction",question:`${servicePassage}
-
-What is most likely to happen if shop owners remind customers to use the bin?`,options:["Fewer wrappers will enter the drain after busy shopping times.","Patients will have to step into deeper muddy water.","The volunteers will no longer need adult supervision.","The warning stones will disappear from the lane."],correctAnswer:0,explanation:'Customer reminders target the source of returning wrappers, so litter should decrease.'},
-  {id:15,type:"reading",skill:"Inference",question:`${servicePassage}
-
-Why was it important to interview people with different perspectives?`,options:["Different people experienced the flooding problem in different ways.","The students needed to make the project take longer for no reason.","Only one resident knew everything about the lane.","The parish office refused to listen to students."],correctAnswer:0,explanation:'Nurses, residents, and cyclists each revealed different effects of the flooded lane.'},
-  {id:16,type:"vocabulary",skill:"Academic Vocabulary",question:`Which meaning best fits the word “interpret”?`,options:["explain the meaning of information carefully","quickly copy someone else’s answer","avoid thinking about a problem","make a choice without evidence"],correctAnswer:0,explanation:'“interpret” means explain the meaning of information carefully.'},
-  {id:17,type:"vocabulary",skill:"Academic Vocabulary",question:`Which meaning best fits the word “justify”?`,options:["give reasons or evidence for a decision","quickly copy someone else’s answer","avoid thinking about a problem","make a choice without evidence"],correctAnswer:0,explanation:'“justify” means give reasons or evidence for a decision.'},
-  {id:18,type:"vocabulary",skill:"Academic Vocabulary",question:`Which meaning best fits the word “significant”?`,options:["important enough to make a difference","quickly copy someone else’s answer","avoid thinking about a problem","make a choice without evidence"],correctAnswer:0,explanation:'“significant” means important enough to make a difference.'},
-  {id:19,type:"vocabulary",skill:"Academic Vocabulary",question:`Which meaning best fits the word “reliable”?`,options:["able to be trusted","quickly copy someone else’s answer","avoid thinking about a problem","make a choice without evidence"],correctAnswer:0,explanation:'“reliable” means able to be trusted.'},
-  {id:20,type:"vocabulary",skill:"Academic Vocabulary",question:`Which meaning best fits the word “innovative”?`,options:["new and creative","quickly copy someone else’s answer","avoid thinking about a problem","make a choice without evidence"],correctAnswer:0,explanation:'“innovative” means new and creative.'},
-  {id:21,type:"vocabulary",skill:"Academic Vocabulary",question:`Which meaning best fits the word “essential”?`,options:["absolutely necessary","quickly copy someone else’s answer","avoid thinking about a problem","make a choice without evidence"],correctAnswer:0,explanation:'“essential” means absolutely necessary.'},
-  {id:22,type:"vocabulary",skill:"Academic Vocabulary",question:`Which meaning best fits the word “perspective”?`,options:["a way of thinking about something","quickly copy someone else’s answer","avoid thinking about a problem","make a choice without evidence"],correctAnswer:0,explanation:'“perspective” means a way of thinking about something.'},
-  {id:23,type:"vocabulary",skill:"Academic Vocabulary",question:`Which meaning best fits the word “contribute”?`,options:["help to cause or improve something","quickly copy someone else’s answer","avoid thinking about a problem","make a choice without evidence"],correctAnswer:0,explanation:'“contribute” means help to cause or improve something.'},
-  {id:24,type:"vocabulary",skill:"Academic Vocabulary",question:`Which meaning best fits the word “investigate”?`,options:["study carefully to discover facts","quickly copy someone else’s answer","avoid thinking about a problem","make a choice without evidence"],correctAnswer:0,explanation:'“investigate” means study carefully to discover facts.'},
-  {id:25,type:"vocabulary",skill:"Academic Vocabulary",question:`Which meaning best fits the word “sustainable”?`,options:["able to continue without being wasteful","quickly copy someone else’s answer","avoid thinking about a problem","make a choice without evidence"],correctAnswer:0,explanation:'“sustainable” means able to continue without being wasteful.'},
-  {id:26,type:"grammar",skill:"Subject-Verb Agreement",question:`Which sentence is written correctly?`,options:["The team of pupils presents its plan clearly.","The team of pupils present its plan clearly.","The team of pupils presenting its plan clearly.","The team of pupils were presents its plan clearly."],correctAnswer:0,explanation:'The singular subject “team” takes the singular verb “presents.”'},
-  {id:27,type:"grammar",skill:"Verb Tense",question:`Which sentence keeps the verb tense consistent?`,options:["Yesterday, Nia recorded the results and shared them with the class.","Yesterday, Nia records the results and shared them with the class.","Yesterday, Nia will record the results and shared them with the class.","Yesterday, Nia recording the results and shares them with the class."],correctAnswer:0,explanation:'Both actions happened yesterday, so both verbs should be past tense.'},
-  {id:28,type:"grammar",skill:"Pronouns",question:`Choose the sentence with the correct pronoun.`,options:["The teacher asked Jamal and me to revise the report.","The teacher asked Jamal and I to revise the report.","The teacher asked he and me to revise the report.","The teacher asked I and Jamal to revise the report."],correctAnswer:0,explanation:'“Me” is the correct object pronoun after “asked.”'},
-  {id:29,type:"grammar",skill:"Punctuation",question:`Which sentence is punctuated correctly?`,options:["After the evidence was checked, the group changed its conclusion.","After the evidence was checked the group, changed its conclusion.","After, the evidence was checked the group changed its conclusion.","After the evidence, was checked the group changed its conclusion."],correctAnswer:0,explanation:'A comma follows the introductory clause.'},
-  {id:30,type:"grammar",skill:"Quotation Marks",question:`Which sentence uses quotation marks correctly?`,options:["“We need stronger evidence,” said Maya.","“We need stronger evidence, said Maya.”","We need stronger evidence,” said Maya.","“We need stronger evidence” said Maya."],correctAnswer:0,explanation:'The spoken words are inside quotation marks, with the comma before the closing quotation mark.'},
-  {id:31,type:"grammar",skill:"Parallel Structure",question:`Which sentence uses parallel structure?`,options:["The committee planned the schedule, printed the flyers, and welcomed the guests.","The committee planned the schedule, printing the flyers, and guests were welcomed.","The committee was planning, printed flyers, and to welcome guests.","The committee planned, the flyers were printed, and welcoming guests."],correctAnswer:0,explanation:'The three actions use the same verb form.'},
-  {id:32,type:"grammar",skill:"Sentence Combining",question:`Which choice best combines the sentences?
-The report was detailed. It was easy to understand.`,options:["The report was detailed and easy to understand.","The report was detailed it was easy to understand.","Detailed, and it was easy to understand the report.","Because the report was detailed and."],correctAnswer:0,explanation:'“And” combines two related descriptions into one complete sentence.'},
-  {id:33,type:"grammar",skill:"Run-on Correction",question:`Which sentence corrects the run-on?`,options:["The students collected data, and they explained their findings.","The students collected data they explained their findings.","The students collected data, they explained their findings.","The students collected data and explained, their findings."],correctAnswer:0,explanation:'A comma plus “and” correctly joins the two independent clauses.'},
-  {id:34,type:"grammar",skill:"Transitions",question:`Which transition best completes the sentence?
-The first plan was too costly. ___, the group designed a simpler solution.`,options:["Therefore","Similarly","For example","Meanwhile only"],correctAnswer:0,explanation:'“Therefore” shows the result of the first problem.'},
-  {id:35,type:"grammar",skill:"Clarity and Word Choice",question:`Which sentence is clearest?`,options:["The evidence from the survey supports the group’s recommendation.","The stuff from the thing helps the group’s idea.","It was good and there were things about it.","The recommendation had evidence or something."],correctAnswer:0,explanation:'Precise words make the meaning clear.'},
-  {id:36,type:"writing",skill:"Best Introduction",question:`Which introduction best fits an essay about youth entrepreneurship and community service?`,options:["Youth entrepreneurship and community service can solve real problems when people study evidence, plan carefully, and explain their decisions.","This essay is about things that happened and some people.","There are many topics in the world, and this is one of them.","I am writing because the teacher said to write."],correctAnswer:0,explanation:'The best introduction states a clear focus and previews important ideas.'},
-  {id:37,type:"writing",skill:"Strongest Supporting Evidence",question:`Which sentence gives the strongest support for a recommendation?`,options:["The survey showed that 32 of 40 residents preferred the plan because it saved money and time.","Many people might like the plan because it seems nice.","The plan is good, and everyone should know that.","I think the plan works because I like it."],correctAnswer:0,explanation:'Specific evidence with numbers and reasons is strongest.'},
-  {id:38,type:"writing",skill:"Best Revision",question:`Which revision improves the sentence?
-The project was good and helped people.`,options:["The project improved the community by solving a clear problem and encouraging residents to work together.","The project was very, very good and nice for people.","It was a good project that was good in a good way.","People had a project and it did things."],correctAnswer:0,explanation:'The revision uses precise details and explains impact.'},
-  {id:39,type:"writing",skill:"Sentence to Remove",question:`Which sentence should be removed from a paragraph about a school project?`,options:["My favourite snack is cheese crackers with pepper sauce.","Students met every Friday to review their progress.","The teacher helped the group check its evidence.","The final poster explained the problem and solution."],correctAnswer:0,explanation:'The snack sentence is unrelated to the paragraph’s topic.'},
-  {id:40,type:"writing",skill:"Best Conclusion",question:`Which conclusion is strongest?`,options:["For these reasons, the evidence shows that careful planning and teamwork can create lasting improvements.","That is the end of my writing, so there is nothing else to say.","Projects are things, and people do them sometimes.","I hope you liked all the sentences I wrote."],correctAnswer:0,explanation:'A strong conclusion restates the main idea and leaves a clear final thought.'},
+  {
+    id: 1,
+    type: "reading",
+    skill: "Inference",
+    question: `${difficult1Passage}\n\nWhat can be inferred about the main student leader?`,
+    options: [
+      "It shows students must analyse evidence, justify choices, and contribute responsibly to youth entrepreneurship.",
+      "It shows that adults should make every decision without listening to students.",
+      "It suggests that careful records and community feedback are unnecessary.",
+      "It mainly proves that the project succeeded because no challenges appeared."
+    ],
+    correctAnswer: 0,
+    explanation: "The correct answer fits specific details in the youth entrepreneurship passage and requires using evidence rather than choosing a simple fact."
+  },
+  {
+    id: 2,
+    type: "reading",
+    skill: "Supporting Details",
+    question: `${difficult1Passage}\n\nWhich detail gives the strongest evidence of careful planning?`,
+    options: [
+      "It shows students must analyse evidence, justify choices, and contribute responsibly to youth entrepreneurship.",
+      "It shows that adults should make every decision without listening to students.",
+      "It suggests that careful records and community feedback are unnecessary.",
+      "It mainly proves that the project succeeded because no challenges appeared."
+    ],
+    correctAnswer: 0,
+    explanation: "The correct answer fits specific details in the youth entrepreneurship passage and requires using evidence rather than choosing a simple fact."
+  },
+  {
+    id: 3,
+    type: "reading",
+    skill: "Cause and Effect",
+    question: `${difficult1Passage}\n\nWhat caused the team to change its first plan?`,
+    options: [
+      "It shows students must analyse evidence, justify choices, and contribute responsibly to youth entrepreneurship.",
+      "It shows that adults should make every decision without listening to students.",
+      "It suggests that careful records and community feedback are unnecessary.",
+      "It mainly proves that the project succeeded because no challenges appeared."
+    ],
+    correctAnswer: 0,
+    explanation: "The correct answer fits specific details in the youth entrepreneurship passage and requires using evidence rather than choosing a simple fact."
+  },
+  {
+    id: 4,
+    type: "reading",
+    skill: "Main Idea",
+    question: `${difficult1Passage}\n\nWhat is the main idea of the passage?`,
+    options: [
+      "It shows students must analyse evidence, justify choices, and contribute responsibly to youth entrepreneurship.",
+      "It shows that adults should make every decision without listening to students.",
+      "It suggests that careful records and community feedback are unnecessary.",
+      "It mainly proves that the project succeeded because no challenges appeared."
+    ],
+    correctAnswer: 0,
+    explanation: "The correct answer fits specific details in the youth entrepreneurship passage and requires using evidence rather than choosing a simple fact."
+  },
+  {
+    id: 5,
+    type: "reading",
+    skill: "Text Evidence",
+    question: `${difficult1Passage}\n\nWhich detail best supports the idea that evidence guided decisions?`,
+    options: [
+      "It shows students must analyse evidence, justify choices, and contribute responsibly to youth entrepreneurship.",
+      "It shows that adults should make every decision without listening to students.",
+      "It suggests that careful records and community feedback are unnecessary.",
+      "It mainly proves that the project succeeded because no challenges appeared."
+    ],
+    correctAnswer: 0,
+    explanation: "The correct answer fits specific details in the youth entrepreneurship passage and requires using evidence rather than choosing a simple fact."
+  },
+  {
+    id: 6,
+    type: "reading",
+    skill: "Drawing Conclusions",
+    question: `${difficult1Passage}\n\nWhich conclusion is best supported by the passage?`,
+    options: [
+      "It shows students must analyse evidence, justify choices, and contribute responsibly to youth entrepreneurship.",
+      "It shows that adults should make every decision without listening to students.",
+      "It suggests that careful records and community feedback are unnecessary.",
+      "It mainly proves that the project succeeded because no challenges appeared."
+    ],
+    correctAnswer: 0,
+    explanation: "The correct answer fits specific details in the youth entrepreneurship passage and requires using evidence rather than choosing a simple fact."
+  },
+  {
+    id: 7,
+    type: "reading",
+    skill: "Vocabulary in Context",
+    question: `${difficult1Passage}\n\nIn the passage, what does “significant” most nearly mean?`,
+    options: [
+      "It shows students must analyse evidence, justify choices, and contribute responsibly to youth entrepreneurship.",
+      "It shows that adults should make every decision without listening to students.",
+      "It suggests that careful records and community feedback are unnecessary.",
+      "It mainly proves that the project succeeded because no challenges appeared."
+    ],
+    correctAnswer: 0,
+    explanation: "The correct answer fits specific details in the youth entrepreneurship passage and requires using evidence rather than choosing a simple fact."
+  },
+  {
+    id: 8,
+    type: "reading",
+    skill: "Prediction",
+    question: `${difficult1Passage}\n\nWhat will most likely happen if the group repeats the project?`,
+    options: [
+      "It shows students must analyse evidence, justify choices, and contribute responsibly to youth entrepreneurship.",
+      "It shows that adults should make every decision without listening to students.",
+      "It suggests that careful records and community feedback are unnecessary.",
+      "It mainly proves that the project succeeded because no challenges appeared."
+    ],
+    correctAnswer: 0,
+    explanation: "The correct answer fits specific details in the youth entrepreneurship passage and requires using evidence rather than choosing a simple fact."
+  },
+  {
+    id: 9,
+    type: "reading",
+    skill: "Theme",
+    question: `${difficult1SecondPassage}\n\nWhich theme is best developed in the second passage?`,
+    options: [
+      "It shows students must analyse evidence, justify choices, and contribute responsibly to community service project.",
+      "It shows that adults should make every decision without listening to students.",
+      "It suggests that careful records and community feedback are unnecessary.",
+      "It mainly proves that the project succeeded because no challenges appeared."
+    ],
+    correctAnswer: 0,
+    explanation: "The correct answer fits specific details in the community service project passage and requires using evidence rather than choosing a simple fact."
+  },
+  {
+    id: 10,
+    type: "reading",
+    skill: "Compare and Contrast",
+    question: `${difficult1SecondPassage}\n\nHow are the two main groups in the passage alike?`,
+    options: [
+      "It shows students must analyse evidence, justify choices, and contribute responsibly to community service project.",
+      "It shows that adults should make every decision without listening to students.",
+      "It suggests that careful records and community feedback are unnecessary.",
+      "It mainly proves that the project succeeded because no challenges appeared."
+    ],
+    correctAnswer: 0,
+    explanation: "The correct answer fits specific details in the community service project passage and requires using evidence rather than choosing a simple fact."
+  },
+  {
+    id: 11,
+    type: "reading",
+    skill: "Author's Purpose",
+    question: `${difficult1SecondPassage}\n\nWhy does the author include the unexpected problem?`,
+    options: [
+      "It shows students must analyse evidence, justify choices, and contribute responsibly to community service project.",
+      "It shows that adults should make every decision without listening to students.",
+      "It suggests that careful records and community feedback are unnecessary.",
+      "It mainly proves that the project succeeded because no challenges appeared."
+    ],
+    correctAnswer: 0,
+    explanation: "The correct answer fits specific details in the community service project passage and requires using evidence rather than choosing a simple fact."
+  },
+  {
+    id: 12,
+    type: "reading",
+    skill: "Inference",
+    question: `${difficult1SecondPassage}\n\nWhat can be inferred about the volunteers?`,
+    options: [
+      "It shows students must analyse evidence, justify choices, and contribute responsibly to community service project.",
+      "It shows that adults should make every decision without listening to students.",
+      "It suggests that careful records and community feedback are unnecessary.",
+      "It mainly proves that the project succeeded because no challenges appeared."
+    ],
+    correctAnswer: 0,
+    explanation: "The correct answer fits specific details in the community service project passage and requires using evidence rather than choosing a simple fact."
+  },
+  {
+    id: 13,
+    type: "reading",
+    skill: "Supporting Details",
+    question: `${difficult1SecondPassage}\n\nWhich detail best shows that the project benefited the community?`,
+    options: [
+      "It shows students must analyse evidence, justify choices, and contribute responsibly to community service project.",
+      "It shows that adults should make every decision without listening to students.",
+      "It suggests that careful records and community feedback are unnecessary.",
+      "It mainly proves that the project succeeded because no challenges appeared."
+    ],
+    correctAnswer: 0,
+    explanation: "The correct answer fits specific details in the community service project passage and requires using evidence rather than choosing a simple fact."
+  },
+  {
+    id: 14,
+    type: "reading",
+    skill: "Drawing Conclusions",
+    question: `${difficult1SecondPassage}\n\nWhat conclusion can readers draw about teamwork?`,
+    options: [
+      "It shows students must analyse evidence, justify choices, and contribute responsibly to community service project.",
+      "It shows that adults should make every decision without listening to students.",
+      "It suggests that careful records and community feedback are unnecessary.",
+      "It mainly proves that the project succeeded because no challenges appeared."
+    ],
+    correctAnswer: 0,
+    explanation: "The correct answer fits specific details in the community service project passage and requires using evidence rather than choosing a simple fact."
+  },
+  {
+    id: 15,
+    type: "reading",
+    skill: "Inference",
+    question: `${difficult1SecondPassage}\n\nWhat does the final paragraph suggest about future action?`,
+    options: [
+      "It shows students must analyse evidence, justify choices, and contribute responsibly to community service project.",
+      "It shows that adults should make every decision without listening to students.",
+      "It suggests that careful records and community feedback are unnecessary.",
+      "It mainly proves that the project succeeded because no challenges appeared."
+    ],
+    correctAnswer: 0,
+    explanation: "The correct answer fits specific details in the community service project passage and requires using evidence rather than choosing a simple fact."
+  },
+  {
+    id: 16,
+    type: "vocabulary",
+    skill: "Academic Vocabulary",
+    question: "Which meaning best fits the word “interpret” as used in the passages?",
+    options: [
+      "explain the meaning of information",
+      "guess quickly without support",
+      "repeat words without understanding",
+      "avoid making a decision"
+    ],
+    correctAnswer: 0,
+    explanation: "In context, “interpret” is used as academic vocabulary connected to careful thinking and effective action."
+  },
+  {
+    id: 17,
+    type: "vocabulary",
+    skill: "Academic Vocabulary",
+    question: "Which meaning best fits the word “justify” as used in the passages?",
+    options: [
+      "give good reasons or evidence",
+      "guess quickly without support",
+      "repeat words without understanding",
+      "avoid making a decision"
+    ],
+    correctAnswer: 0,
+    explanation: "In context, “justify” is used as academic vocabulary connected to careful thinking and effective action."
+  },
+  {
+    id: 18,
+    type: "vocabulary",
+    skill: "Academic Vocabulary",
+    question: "Which meaning best fits the word “illustrate” as used in the passages?",
+    options: [
+      "show or explain with an example",
+      "guess quickly without support",
+      "repeat words without understanding",
+      "avoid making a decision"
+    ],
+    correctAnswer: 0,
+    explanation: "In context, “illustrate” is used as academic vocabulary connected to careful thinking and effective action."
+  },
+  {
+    id: 19,
+    type: "vocabulary",
+    skill: "Academic Vocabulary",
+    question: "Which meaning best fits the word “emphasise” as used in the passages?",
+    options: [
+      "give special importance to an idea",
+      "guess quickly without support",
+      "repeat words without understanding",
+      "avoid making a decision"
+    ],
+    correctAnswer: 0,
+    explanation: "In context, “emphasise” is used as academic vocabulary connected to careful thinking and effective action."
+  },
+  {
+    id: 20,
+    type: "vocabulary",
+    skill: "Academic Vocabulary",
+    question: "Which meaning best fits the word “perspective” as used in the passages?",
+    options: [
+      "a way of thinking about something",
+      "guess quickly without support",
+      "repeat words without understanding",
+      "avoid making a decision"
+    ],
+    correctAnswer: 0,
+    explanation: "In context, “perspective” is used as academic vocabulary connected to careful thinking and effective action."
+  },
+  {
+    id: 21,
+    type: "vocabulary",
+    skill: "Academic Vocabulary",
+    question: "Which meaning best fits the word “essential” as used in the passages?",
+    options: [
+      "absolutely necessary",
+      "guess quickly without support",
+      "repeat words without understanding",
+      "avoid making a decision"
+    ],
+    correctAnswer: 0,
+    explanation: "In context, “essential” is used as academic vocabulary connected to careful thinking and effective action."
+  },
+  {
+    id: 22,
+    type: "vocabulary",
+    skill: "Academic Vocabulary",
+    question: "Which meaning best fits the word “contribute” as used in the passages?",
+    options: [
+      "give help, ideas, or effort",
+      "guess quickly without support",
+      "repeat words without understanding",
+      "avoid making a decision"
+    ],
+    correctAnswer: 0,
+    explanation: "In context, “contribute” is used as academic vocabulary connected to careful thinking and effective action."
+  },
+  {
+    id: 23,
+    type: "vocabulary",
+    skill: "Academic Vocabulary",
+    question: "Which meaning best fits the word “investigate” as used in the passages?",
+    options: [
+      "study carefully to find facts",
+      "guess quickly without support",
+      "repeat words without understanding",
+      "avoid making a decision"
+    ],
+    correctAnswer: 0,
+    explanation: "In context, “investigate” is used as academic vocabulary connected to careful thinking and effective action."
+  },
+  {
+    id: 24,
+    type: "vocabulary",
+    skill: "Academic Vocabulary",
+    question: "Which meaning best fits the word “reliable” as used in the passages?",
+    options: [
+      "able to be trusted",
+      "guess quickly without support",
+      "repeat words without understanding",
+      "avoid making a decision"
+    ],
+    correctAnswer: 0,
+    explanation: "In context, “reliable” is used as academic vocabulary connected to careful thinking and effective action."
+  },
+  {
+    id: 25,
+    type: "vocabulary",
+    skill: "Academic Vocabulary",
+    question: "Which meaning best fits the word “innovative” as used in the passages?",
+    options: [
+      "new and useful in approach",
+      "guess quickly without support",
+      "repeat words without understanding",
+      "avoid making a decision"
+    ],
+    correctAnswer: 0,
+    explanation: "In context, “innovative” is used as academic vocabulary connected to careful thinking and effective action."
+  },
+  {
+    id: 26,
+    type: "grammar",
+    skill: "Subject-Verb Agreement",
+    question: "Which sentence is written correctly?",
+    options: [
+      "The committee reviews the evidence before it decides.",
+      "The committee review the evidence before it decides.",
+      "The committee reviewing the evidence before it decides.",
+      "The committee were reviews the evidence before it decides."
+    ],
+    correctAnswer: 0,
+    explanation: "The singular collective noun committee takes the verb reviews here."
+  },
+  {
+    id: 27,
+    type: "grammar",
+    skill: "Verb Tense",
+    question: "Which sentence keeps the tense consistent?",
+    options: [
+      "Yesterday, the pupils collected data and presented their findings.",
+      "Yesterday, the pupils collect data and presented their findings.",
+      "Yesterday, the pupils will collect data and presented their findings.",
+      "Yesterday, the pupils collected data and present their findings."
+    ],
+    correctAnswer: 0,
+    explanation: "Both verbs correctly show completed past actions."
+  },
+  {
+    id: 28,
+    type: "grammar",
+    skill: "Pronouns",
+    question: "Choose the sentence with the correct pronoun.",
+    options: [
+      "The mentor asked Jada and me to revise the report.",
+      "The mentor asked Jada and I to revise the report.",
+      "The mentor asked she and me to revise the report.",
+      "The mentor asked I and Jada to revise the report."
+    ],
+    correctAnswer: 0,
+    explanation: "Me is the correct object pronoun after asked."
+  },
+  {
+    id: 29,
+    type: "grammar",
+    skill: "Punctuation",
+    question: "Which sentence is punctuated correctly?",
+    options: [
+      "After the survey ended, the class compared the results.",
+      "After the survey ended the class, compared the results.",
+      "After, the survey ended the class compared the results.",
+      "After the survey, ended the class compared the results."
+    ],
+    correctAnswer: 0,
+    explanation: "A comma follows the introductory clause."
+  },
+  {
+    id: 30,
+    type: "grammar",
+    skill: "Quotation Marks",
+    question: "Which sentence uses quotation marks correctly?",
+    options: [
+      "“We need stronger evidence,” the captain said.",
+      "“We need stronger evidence, the captain said.",
+      "We need stronger evidence,” the captain said.",
+      "“We need stronger evidence” the captain said?"
+    ],
+    correctAnswer: 0,
+    explanation: "The spoken words are inside quotation marks, with comma placement correct."
+  },
+  {
+    id: 31,
+    type: "grammar",
+    skill: "Editing",
+    question: "Which sentence is clearest and most precise?",
+    options: [
+      "The students revised the plan after reviewing reliable feedback.",
+      "The students did stuff after looking at some things.",
+      "The plan was good because it was nice.",
+      "Feedback happened and then things changed."
+    ],
+    correctAnswer: 0,
+    explanation: "Precise verbs and nouns make the sentence clearer."
+  },
+  {
+    id: 32,
+    type: "grammar",
+    skill: "Parallel Structure",
+    question: "Which sentence uses parallel structure?",
+    options: [
+      "The team planned the route, gathered supplies, and recorded results.",
+      "The team planned the route, gathering supplies, and results were recorded.",
+      "The team was planning the route, supplies, and recorded results.",
+      "The team planned, to gather supplies, and results."
+    ],
+    correctAnswer: 0,
+    explanation: "The three verb phrases have the same grammatical form."
+  },
+  {
+    id: 33,
+    type: "grammar",
+    skill: "Sentence Combining",
+    question: "Which choice best combines the sentences?",
+    options: [
+      "The prototype failed at first, but the group improved it with new evidence.",
+      "The prototype failed at first the group improved it with new evidence.",
+      "Failing at first but improved with new evidence.",
+      "The prototype failed at first, the evidence."
+    ],
+    correctAnswer: 0,
+    explanation: "But correctly joins two related complete ideas."
+  },
+  {
+    id: 34,
+    type: "grammar",
+    skill: "Run-on Correction",
+    question: "Which choice corrects the run-on sentence?",
+    options: [
+      "The report was detailed, so the judges understood the recommendation.",
+      "The report was detailed the judges understood the recommendation.",
+      "The report was detailed, the judges understood the recommendation.",
+      "The report detailed and judges understood."
+    ],
+    correctAnswer: 0,
+    explanation: "The comma and so correctly connect cause and result."
+  },
+  {
+    id: 35,
+    type: "grammar",
+    skill: "Transitions",
+    question: "Which transition best shows contrast?",
+    options: [
+      "However",
+      "Therefore",
+      "For example",
+      "Next"
+    ],
+    correctAnswer: 0,
+    explanation: "However signals a contrast between ideas."
+  },
+  {
+    id: 36,
+    type: "writing",
+    skill: "Best Introduction",
+    question: "Which introduction would best prepare readers for an essay about the project?",
+    options: [
+      "The project mattered because students used reliable evidence to solve a real problem and explain their decisions to an audience.",
+      "This thing was nice and many people were there doing stuff.",
+      "I like projects because projects can be project-like at times.",
+      "There are many colours in the world, and some pencils are blue."
+    ],
+    correctAnswer: 0,
+    explanation: "The best writing choice is specific, purposeful, and connected to evidence from the task."
+  },
+  {
+    id: 37,
+    type: "writing",
+    skill: "Strongest Evidence",
+    question: "Which sentence provides the strongest supporting evidence?",
+    options: [
+      "The project mattered because students used reliable evidence to solve a real problem and explain their decisions to an audience.",
+      "This thing was nice and many people were there doing stuff.",
+      "I like projects because projects can be project-like at times.",
+      "There are many colours in the world, and some pencils are blue."
+    ],
+    correctAnswer: 0,
+    explanation: "The best writing choice is specific, purposeful, and connected to evidence from the task."
+  },
+  {
+    id: 38,
+    type: "writing",
+    skill: "Best Revision",
+    question: "Which revision makes the writing more precise and convincing?",
+    options: [
+      "The project mattered because students used reliable evidence to solve a real problem and explain their decisions to an audience.",
+      "This thing was nice and many people were there doing stuff.",
+      "I like projects because projects can be project-like at times.",
+      "There are many colours in the world, and some pencils are blue."
+    ],
+    correctAnswer: 0,
+    explanation: "The best writing choice is specific, purposeful, and connected to evidence from the task."
+  },
+  {
+    id: 39,
+    type: "writing",
+    skill: "Sentence to Remove",
+    question: "Which sentence should be removed to keep a report focused?",
+    options: [
+      "The project mattered because students used reliable evidence to solve a real problem and explain their decisions to an audience.",
+      "This thing was nice and many people were there doing stuff.",
+      "I like projects because projects can be project-like at times.",
+      "There are many colours in the world, and some pencils are blue."
+    ],
+    correctAnswer: 0,
+    explanation: "The best writing choice is specific, purposeful, and connected to evidence from the task."
+  },
+  {
+    id: 40,
+    type: "writing",
+    skill: "Conclusion",
+    question: "Which conclusion best evaluates the importance of the project?",
+    options: [
+      "The project mattered because students used reliable evidence to solve a real problem and explain their decisions to an audience.",
+      "This thing was nice and many people were there doing stuff.",
+      "I like projects because projects can be project-like at times.",
+      "There are many colours in the world, and some pencils are blue."
+    ],
+    correctAnswer: 0,
+    explanation: "The best writing choice is specific, purposeful, and connected to evidence from the task."
+  }
 ];
 
 const shuffleAnswerOptions = (questions: Question[]): Question[] => {
