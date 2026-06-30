@@ -38,20 +38,20 @@ interface Question {
   explanation: string;
 }
 
-const difficult2Passage = `Read the passage then answer the question.
+const d2Passage1 = `Read the passage then answer the question.
 
-"At Windward Primary, a science team investigated renewable energy after the computer lab lost power twice in one week. They compared solar, wind, and hydro power, then built a small solar oven from foil, cardboard, and a clear plastic cover. At first, the oven barely warmed a cup of water. Instead of giving up, the pupils interpreted thermometer readings and noticed that clouds and a loose cover reduced the heat. They tightened the cover, changed the angle toward the sun, and recorded more reliable data every ten minutes. Their report emphasised that sustainable energy can reduce pollution, but it also needs thoughtful design and storage for cloudy days. The principal praised the team because they did more than make a model; they justified their conclusions with measurements and explained both the benefits and limits of renewable energy."`;
+"At Windward Primary, a science team investigated renewable energy after the computer lab lost power twice in one week. They compared solar, wind, and hydro power, then built a small solar oven from foil, cardboard, and a clear plastic cover. At first the oven barely warmed a cup of water. Instead of giving up, the pupils interpreted the thermometer readings and noticed that passing clouds and a loose cover were letting heat escape. They tightened the cover, changed the oven's angle toward the sun, and recorded data every ten minutes. Their final report emphasised that sustainable energy can reduce pollution, but it also needs thoughtful design and a way to store power for cloudy days. The principal praised the team because they did more than build a model; they justified their conclusions with measurements and explained both the benefits and the limits of renewable energy."`;
 
-const difficult2SecondPassage = `Read the passage then answer the question.
+const d2Passage2 = `Read the passage then answer the question.
 
-"Dr. Nia Blake visited the school to describe a scientific discovery she made while studying coral reefs near Port Royal. Her team expected warmer water to damage every coral sample in the same way, but one group of coral survived longer than predicted. Rather than announce a conclusion too quickly, the scientists investigated water temperature, algae, sunlight, and the coral's location. A microscope revealed a tiny organism living with the stronger coral, offering a possible explanation. Dr. Blake told the pupils that discovery often begins with a surprising observation and continues through repeated tests. She also warned that reliable science requires honesty about uncertainty. By sharing her evidence with other researchers, she allowed them to compare results, challenge her interpretation, and contribute new ideas. The pupils left understanding that a discovery is powerful when evidence, patience, and collaboration support it."`;
+"Dr. Nia Blake visited the school to describe a discovery she made while studying coral reefs near Port Royal. Her team expected warmer water to damage every coral sample in the same way, yet one group of coral survived far longer than predicted. Rather than announce a conclusion too quickly, the scientists investigated the water temperature, the algae, the sunlight, and the coral's exact location. A microscope finally revealed a tiny organism living inside the stronger coral, offering a possible explanation. Dr. Blake told the pupils that discovery often begins with a surprising observation and continues through repeated tests. She also warned that honest science must admit what is still uncertain. By sharing her evidence with other researchers, she allowed them to compare results, challenge her interpretation, and add new ideas. The pupils left understanding that a discovery becomes powerful only when evidence, patience, and cooperation support it."`;
 
 const g5LaDifficult2Questions: Question[] = [
   {
     id: 1,
     type: "reading",
     skill: "Inference",
-    question: `${difficult2Passage}\n\nWhat can be inferred about the main student leader?`,
+    question: `${d2Passage1}\n\nWhat can be inferred about the main student leader?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to renewable energy.",
       "It shows that adults should make every decision without listening to students.",
@@ -65,7 +65,7 @@ const g5LaDifficult2Questions: Question[] = [
     id: 2,
     type: "reading",
     skill: "Supporting Details",
-    question: `${difficult2Passage}\n\nWhich detail gives the strongest evidence of careful planning?`,
+    question: `${d2Passage1}\n\nWhich detail gives the strongest evidence of careful planning?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to renewable energy.",
       "It shows that adults should make every decision without listening to students.",
@@ -79,7 +79,7 @@ const g5LaDifficult2Questions: Question[] = [
     id: 3,
     type: "reading",
     skill: "Cause and Effect",
-    question: `${difficult2Passage}\n\nWhat caused the team to change its first plan?`,
+    question: `${d2Passage1}\n\nWhat caused the team to change its first plan?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to renewable energy.",
       "It shows that adults should make every decision without listening to students.",
@@ -93,7 +93,7 @@ const g5LaDifficult2Questions: Question[] = [
     id: 4,
     type: "reading",
     skill: "Main Idea",
-    question: `${difficult2Passage}\n\nWhat is the main idea of the passage?`,
+    question: `${d2Passage1}\n\nWhat is the main idea of the passage?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to renewable energy.",
       "It shows that adults should make every decision without listening to students.",
@@ -107,7 +107,7 @@ const g5LaDifficult2Questions: Question[] = [
     id: 5,
     type: "reading",
     skill: "Text Evidence",
-    question: `${difficult2Passage}\n\nWhich detail best supports the idea that evidence guided decisions?`,
+    question: `${d2Passage1}\n\nWhich detail best supports the idea that evidence guided decisions?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to renewable energy.",
       "It shows that adults should make every decision without listening to students.",
@@ -121,7 +121,7 @@ const g5LaDifficult2Questions: Question[] = [
     id: 6,
     type: "reading",
     skill: "Drawing Conclusions",
-    question: `${difficult2Passage}\n\nWhich conclusion is best supported by the passage?`,
+    question: `${d2Passage1}\n\nWhich conclusion is best supported by the passage?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to renewable energy.",
       "It shows that adults should make every decision without listening to students.",
@@ -135,7 +135,7 @@ const g5LaDifficult2Questions: Question[] = [
     id: 7,
     type: "reading",
     skill: "Vocabulary in Context",
-    question: `${difficult2Passage}\n\nIn the passage, what does “significant” most nearly mean?`,
+    question: `${d2Passage1}\n\nIn the passage, what does “significant” most nearly mean?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to renewable energy.",
       "It shows that adults should make every decision without listening to students.",
@@ -149,7 +149,7 @@ const g5LaDifficult2Questions: Question[] = [
     id: 8,
     type: "reading",
     skill: "Prediction",
-    question: `${difficult2Passage}\n\nWhat will most likely happen if the group repeats the project?`,
+    question: `${d2Passage1}\n\nWhat will most likely happen if the group repeats the project?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to renewable energy.",
       "It shows that adults should make every decision without listening to students.",
@@ -163,7 +163,7 @@ const g5LaDifficult2Questions: Question[] = [
     id: 9,
     type: "reading",
     skill: "Theme",
-    question: `${difficult2SecondPassage}\n\nWhich theme is best developed in the second passage?`,
+    question: `${d2Passage2}\n\nWhich theme is best developed in the second passage?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to scientific discovery.",
       "It shows that adults should make every decision without listening to students.",
@@ -177,7 +177,7 @@ const g5LaDifficult2Questions: Question[] = [
     id: 10,
     type: "reading",
     skill: "Compare and Contrast",
-    question: `${difficult2SecondPassage}\n\nHow are the two main groups in the passage alike?`,
+    question: `${d2Passage2}\n\nHow are the two main groups in the passage alike?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to scientific discovery.",
       "It shows that adults should make every decision without listening to students.",
@@ -191,7 +191,7 @@ const g5LaDifficult2Questions: Question[] = [
     id: 11,
     type: "reading",
     skill: "Author's Purpose",
-    question: `${difficult2SecondPassage}\n\nWhy does the author include the unexpected problem?`,
+    question: `${d2Passage2}\n\nWhy does the author include the unexpected problem?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to scientific discovery.",
       "It shows that adults should make every decision without listening to students.",
@@ -205,7 +205,7 @@ const g5LaDifficult2Questions: Question[] = [
     id: 12,
     type: "reading",
     skill: "Inference",
-    question: `${difficult2SecondPassage}\n\nWhat can be inferred about the volunteers?`,
+    question: `${d2Passage2}\n\nWhat can be inferred about the volunteers?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to scientific discovery.",
       "It shows that adults should make every decision without listening to students.",
@@ -219,7 +219,7 @@ const g5LaDifficult2Questions: Question[] = [
     id: 13,
     type: "reading",
     skill: "Supporting Details",
-    question: `${difficult2SecondPassage}\n\nWhich detail best shows that the project benefited the community?`,
+    question: `${d2Passage2}\n\nWhich detail best shows that the project benefited the community?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to scientific discovery.",
       "It shows that adults should make every decision without listening to students.",
@@ -233,7 +233,7 @@ const g5LaDifficult2Questions: Question[] = [
     id: 14,
     type: "reading",
     skill: "Drawing Conclusions",
-    question: `${difficult2SecondPassage}\n\nWhat conclusion can readers draw about teamwork?`,
+    question: `${d2Passage2}\n\nWhat conclusion can readers draw about teamwork?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to scientific discovery.",
       "It shows that adults should make every decision without listening to students.",
@@ -247,7 +247,7 @@ const g5LaDifficult2Questions: Question[] = [
     id: 15,
     type: "reading",
     skill: "Inference",
-    question: `${difficult2SecondPassage}\n\nWhat does the final paragraph suggest about future action?`,
+    question: `${d2Passage2}\n\nWhat does the final paragraph suggest about future action?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to scientific discovery.",
       "It shows that adults should make every decision without listening to students.",

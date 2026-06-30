@@ -38,20 +38,20 @@ interface Question {
   explanation: string;
 }
 
-const difficult1Passage = `Read the passage then answer the question.
+const d1Passage1 = `Read the passage then answer the question.
 
-"Maya and Denzel started a youth entrepreneurship club after noticing that many classmates bought imported snacks after school. Instead of copying another business, they investigated what pupils wanted and discovered a significant demand for affordable fruit cups made with local mangoes, pineapples, and melon. Their teacher asked them to justify every decision with reliable evidence, so they compared prices at the market, surveyed students, and calculated how many reusable containers were essential. When the first batch sold slowly, Maya interpreted the feedback: the cups were too large for younger children. The team created a smaller option, emphasised cleanliness, and used profits to buy a cooler. By the end of the month, the club had earned enough to contribute seedlings to the school garden and had learned that innovative ideas still need careful records, honest discussion, and respect for customers."`;
+"Twelve-year-old Kemar noticed that pupils at his school often went hungry because the tuck shop sold only sweets and sugary drinks. Instead of complaining, he surveyed forty classmates and learned that most of them wanted affordable, healthy snacks. Kemar used his savings to buy fruit and oats from a nearby farmer and began selling small bags of granola before school. His first batch sold out quickly, but several customers complained that the price was too high. Rather than ignore them, Kemar reduced the portion size, lowered the price, and kept a simple notebook recording his costs and profits. Within a month he earned enough to reinvest in supplies and even donate a little to the school garden. His teacher observed that Kemar's success came not from a clever idea alone, but from listening to customers, studying his numbers, and adjusting his plan whenever the evidence pointed to a problem."`;
 
-const difficult1SecondPassage = `Read the passage then answer the question.
+const d1Passage2 = `Read the passage then answer the question.
 
-"At Harbour View Primary, the service club planned to restore a neglected reading corner at the clinic. Some volunteers wanted to paint bright murals immediately, while others argued that patients first needed comfortable chairs and labelled books. To understand the community's perspective, the pupils interviewed nurses, parents, and children waiting for appointments. A leaking window forced them to adjust the schedule, but it also illustrated why planning matters. The group repaired shelves, sorted donated books by age level, and wrote polite signs asking readers to return materials. During the opening, a nurse said children were calmer when they had stories to read. The pupils concluded that service is not simply doing what feels exciting; it is listening carefully, choosing sustainable solutions, and measuring whether the work truly helps."`;
+"When flooding damaged the footbridge linking Rose Town to the main road, residents could no longer reach the clinic or market easily. A group of secondary students, led by sixteen-year-old Aaliyah, decided to act. They could not rebuild the bridge alone, so they organised the community instead: older residents described the original bridge, parents collected materials, and the students wrote letters asking a local hardware company for help. Some neighbours doubted that young people could manage such a project, yet Aaliyah insisted that the work belonged to everyone. The group divided the tasks, recorded every donation, and thanked each contributor in public. The rebuilt crossing was plain, but it reopened within three weeks. Aaliyah later explained that the bridge itself mattered less than what the village had discovered: that cooperation, careful planning, and respect for every contributor could solve a problem too large for any single person."`;
 
 const g5LaDifficult1Questions: Question[] = [
   {
     id: 1,
     type: "reading",
     skill: "Inference",
-    question: `${difficult1Passage}\n\nWhat can be inferred about the main student leader?`,
+    question: `${d1Passage1}\n\nWhat can be inferred about the main student leader?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to youth entrepreneurship.",
       "It shows that adults should make every decision without listening to students.",
@@ -65,7 +65,7 @@ const g5LaDifficult1Questions: Question[] = [
     id: 2,
     type: "reading",
     skill: "Supporting Details",
-    question: `${difficult1Passage}\n\nWhich detail gives the strongest evidence of careful planning?`,
+    question: `${d1Passage1}\n\nWhich detail gives the strongest evidence of careful planning?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to youth entrepreneurship.",
       "It shows that adults should make every decision without listening to students.",
@@ -79,7 +79,7 @@ const g5LaDifficult1Questions: Question[] = [
     id: 3,
     type: "reading",
     skill: "Cause and Effect",
-    question: `${difficult1Passage}\n\nWhat caused the team to change its first plan?`,
+    question: `${d1Passage1}\n\nWhat caused the team to change its first plan?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to youth entrepreneurship.",
       "It shows that adults should make every decision without listening to students.",
@@ -93,7 +93,7 @@ const g5LaDifficult1Questions: Question[] = [
     id: 4,
     type: "reading",
     skill: "Main Idea",
-    question: `${difficult1Passage}\n\nWhat is the main idea of the passage?`,
+    question: `${d1Passage1}\n\nWhat is the main idea of the passage?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to youth entrepreneurship.",
       "It shows that adults should make every decision without listening to students.",
@@ -107,7 +107,7 @@ const g5LaDifficult1Questions: Question[] = [
     id: 5,
     type: "reading",
     skill: "Text Evidence",
-    question: `${difficult1Passage}\n\nWhich detail best supports the idea that evidence guided decisions?`,
+    question: `${d1Passage1}\n\nWhich detail best supports the idea that evidence guided decisions?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to youth entrepreneurship.",
       "It shows that adults should make every decision without listening to students.",
@@ -121,7 +121,7 @@ const g5LaDifficult1Questions: Question[] = [
     id: 6,
     type: "reading",
     skill: "Drawing Conclusions",
-    question: `${difficult1Passage}\n\nWhich conclusion is best supported by the passage?`,
+    question: `${d1Passage1}\n\nWhich conclusion is best supported by the passage?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to youth entrepreneurship.",
       "It shows that adults should make every decision without listening to students.",
@@ -135,7 +135,7 @@ const g5LaDifficult1Questions: Question[] = [
     id: 7,
     type: "reading",
     skill: "Vocabulary in Context",
-    question: `${difficult1Passage}\n\nIn the passage, what does “significant” most nearly mean?`,
+    question: `${d1Passage1}\n\nIn the passage, what does “significant” most nearly mean?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to youth entrepreneurship.",
       "It shows that adults should make every decision without listening to students.",
@@ -149,7 +149,7 @@ const g5LaDifficult1Questions: Question[] = [
     id: 8,
     type: "reading",
     skill: "Prediction",
-    question: `${difficult1Passage}\n\nWhat will most likely happen if the group repeats the project?`,
+    question: `${d1Passage1}\n\nWhat will most likely happen if the group repeats the project?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to youth entrepreneurship.",
       "It shows that adults should make every decision without listening to students.",
@@ -163,7 +163,7 @@ const g5LaDifficult1Questions: Question[] = [
     id: 9,
     type: "reading",
     skill: "Theme",
-    question: `${difficult1SecondPassage}\n\nWhich theme is best developed in the second passage?`,
+    question: `${d1Passage2}\n\nWhich theme is best developed in the second passage?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to community service project.",
       "It shows that adults should make every decision without listening to students.",
@@ -177,7 +177,7 @@ const g5LaDifficult1Questions: Question[] = [
     id: 10,
     type: "reading",
     skill: "Compare and Contrast",
-    question: `${difficult1SecondPassage}\n\nHow are the two main groups in the passage alike?`,
+    question: `${d1Passage2}\n\nHow are the two main groups in the passage alike?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to community service project.",
       "It shows that adults should make every decision without listening to students.",
@@ -191,7 +191,7 @@ const g5LaDifficult1Questions: Question[] = [
     id: 11,
     type: "reading",
     skill: "Author's Purpose",
-    question: `${difficult1SecondPassage}\n\nWhy does the author include the unexpected problem?`,
+    question: `${d1Passage2}\n\nWhy does the author include the unexpected problem?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to community service project.",
       "It shows that adults should make every decision without listening to students.",
@@ -205,7 +205,7 @@ const g5LaDifficult1Questions: Question[] = [
     id: 12,
     type: "reading",
     skill: "Inference",
-    question: `${difficult1SecondPassage}\n\nWhat can be inferred about the volunteers?`,
+    question: `${d1Passage2}\n\nWhat can be inferred about the volunteers?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to community service project.",
       "It shows that adults should make every decision without listening to students.",
@@ -219,7 +219,7 @@ const g5LaDifficult1Questions: Question[] = [
     id: 13,
     type: "reading",
     skill: "Supporting Details",
-    question: `${difficult1SecondPassage}\n\nWhich detail best shows that the project benefited the community?`,
+    question: `${d1Passage2}\n\nWhich detail best shows that the project benefited the community?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to community service project.",
       "It shows that adults should make every decision without listening to students.",
@@ -233,7 +233,7 @@ const g5LaDifficult1Questions: Question[] = [
     id: 14,
     type: "reading",
     skill: "Drawing Conclusions",
-    question: `${difficult1SecondPassage}\n\nWhat conclusion can readers draw about teamwork?`,
+    question: `${d1Passage2}\n\nWhat conclusion can readers draw about teamwork?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to community service project.",
       "It shows that adults should make every decision without listening to students.",
@@ -247,7 +247,7 @@ const g5LaDifficult1Questions: Question[] = [
     id: 15,
     type: "reading",
     skill: "Inference",
-    question: `${difficult1SecondPassage}\n\nWhat does the final paragraph suggest about future action?`,
+    question: `${d1Passage2}\n\nWhat does the final paragraph suggest about future action?`,
     options: [
       "It shows students must analyse evidence, justify choices, and contribute responsibly to community service project.",
       "It shows that adults should make every decision without listening to students.",
