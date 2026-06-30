@@ -56,12 +56,14 @@ const g5LaDifficult1Questions: Question[] = [
     id: 1,
     type: "reading",
     skill: "Main Idea",
-    question: `${d1Passage1}\n\nWhat is the main idea of the passage?`,
+    question: `${d1Passage1}
+
+What is the main idea of the passage?`,
     options: [
-      "Kemar succeeded because he listened to feedback and adjusted his plan using evidence.",
-      "Kemar became wealthy by selling sweets to hungry pupils.",
-      "The tuck shop refused to sell any healthy food to students.",
-      "A farmer taught Kemar everything he needed to know about business.",
+      "Kemar succeeded by listening to feedback and adjusting his plan.",
+      "The tuck shop refused to change its menu, so Kemar started his own business.",
+      "Kemar became wealthy by selling healthy snacks to his classmates.",
+      "A local farmer gave Kemar the idea to sell granola at the school."
     ],
     correctAnswer: 0,
     explanation:
@@ -71,14 +73,16 @@ const g5LaDifficult1Questions: Question[] = [
     id: 2,
     type: "reading",
     skill: "Cause and Effect",
-    question: `${d1Passage1}\n\nWhat caused Kemar to lower his price?`,
+    question: `${d1Passage1}
+
+What caused Kemar to lower his price?`,
     options: [
-      "Several customers complained that the price was too high.",
+      "He realised that making granola took too much of his time.",
       "The farmer told him the fruit was too expensive to buy.",
-      "His teacher ordered him to charge less for the granola.",
-      "He ran out of oats and had nothing left to sell.",
+      "His teacher suggested that lower prices would attract more pupils.",
+      "Several customers complained that the price was too high."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "The passage links the price change directly to customer complaints. The other options name causes the text never mentions.",
   },
@@ -86,29 +90,33 @@ const g5LaDifficult1Questions: Question[] = [
     id: 3,
     type: "reading",
     skill: "Inference",
-    question: `${d1Passage1}\n\nWhat can you infer about how Kemar makes decisions?`,
+    question: `${d1Passage1}
+
+What can you infer about how Kemar makes decisions?`,
     options: [
-      "He uses information and feedback rather than guessing.",
-      "He copies whatever other sellers in the school do.",
-      "He refuses to change a plan once he has started it.",
-      "He depends on luck more than on careful records.",
+      "He has saved enough money from his previous sales to cover any loss.",
+      "He asks his teacher to step in and solve the problem for him.",
+      "He quickly changes his plan based on what the customers are telling him.",
+      "He depends mostly on luck instead of keeping careful records."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
-      "His survey, notebook, and willingness to adjust show evidence-based decisions. The other choices contradict his recorded habits in the text.",
+      "His survey, notebook, and willingness to adjust show evidence-based decisions rather than luck or relying on others.",
   },
   {
     id: 4,
     type: "reading",
     skill: "Supporting Details",
-    question: `${d1Passage1}\n\nWhich detail best shows that Kemar managed his business responsibly?`,
+    question: `${d1Passage1}
+
+Which detail best shows that Kemar managed his business responsibly?`,
     options: [
+      "He noticed that the tuck shop sold mostly sugary drinks to the pupils.",
       "He kept a notebook recording his costs and profits.",
-      "He noticed that the tuck shop sold sugary drinks.",
-      "He was only twelve years old at the time.",
-      "His granola sold out on the very first day.",
+      "He was only twelve years old when he started the business.",
+      "His first batch of granola sold out very quickly on the first day."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "Recording costs and profits is the clearest evidence of responsible management. The other details are true but do not show careful management.",
   },
@@ -116,12 +124,14 @@ const g5LaDifficult1Questions: Question[] = [
     id: 5,
     type: "reading",
     skill: "Vocabulary in Context",
-    question: `${d1Passage1}\n\nIn the passage, what does the word "reinvest" most nearly mean?`,
+    question: `${d1Passage1}
+
+In the passage, what does the word "reinvest" most nearly mean?`,
     options: [
       "to put money back into the business to keep it going",
-      "to give all the money away to charity",
-      "to hide the profits in a secret place",
-      "to spend the money only on personal treats",
+      "to spend all of the profits on personal items right away",
+      "to hide the extra money in a safe place at home",
+      "to give the remaining earnings to a local charity"
     ],
     correctAnswer: 0,
     explanation:
@@ -131,14 +141,16 @@ const g5LaDifficult1Questions: Question[] = [
     id: 6,
     type: "reading",
     skill: "Author's Purpose",
-    question: `${d1Passage1}\n\nWhy does the author include the teacher's observation at the end?`,
+    question: `${d1Passage1}
+
+Why does the author include the teacher's observation at the end?`,
     options: [
-      "To highlight the real reason for Kemar's success.",
-      "To prove that teachers should run all student businesses.",
-      "To suggest that Kemar's idea was actually a failure.",
-      "To explain how granola is made from fruit and oats.",
+      "To explain the step-by-step process of making granola from oats.",
+      "To show that teachers should take over when a student struggles.",
+      "To suggest that Kemar's idea was actually a failure in the end.",
+      "To highlight the main reason Kemar's business worked."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "The teacher's comment points to the lesson of the passage — success came from listening and adjusting. The other choices misread the purpose.",
   },
@@ -146,29 +158,33 @@ const g5LaDifficult1Questions: Question[] = [
     id: 7,
     type: "reading",
     skill: "Prediction",
-    question: `${d1Passage1}\n\nIf a new snack sold poorly, what would Kemar most likely do next?`,
+    question: `${d1Passage1}
+
+If Kemar noticed that his profits were dropping even though sales stayed the same, what would he most likely do first?`,
     options: [
-      "Study his records and change the product based on what he learns.",
-      "Stop selling food and close the business immediately.",
-      "Raise the price sharply to make up for lost sales.",
-      "Blame his customers and keep the product exactly the same.",
+      "Assume that the pupils were simply tired of eating granola.",
+      "Stop selling food altogether and return his supplies to the farmer.",
+      "Raise the price sharply to make up for the money he was losing.",
+      "Look closely at his costs to find out where the money was going."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
-      "His established pattern is to use evidence and adjust, so analysing records and changing the product fits his behaviour best.",
+      "Because he keeps a notebook of costs and profits, looking closely at his costs is the logical first step when profits drop despite steady sales.",
   },
   {
     id: 8,
     type: "reading",
     skill: "Text Evidence",
-    question: `${d1Passage1}\n\nWhich sentence best supports the idea that Kemar cared about more than profit?`,
+    question: `${d1Passage1}
+
+Which sentence best supports the idea that Kemar cared about more than profit?`,
     options: [
+      "He surveyed forty classmates to find out what they wanted to buy.",
       "He donated a little of his earnings to the school garden.",
-      "His first batch of granola sold out quickly.",
-      "He bought fruit and oats from a nearby farmer.",
-      "He surveyed forty classmates about their preferences.",
+      "His first batch of granola sold out on the very first day.",
+      "He bought fruit and oats from a nearby farmer in the area."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "Donating to the school garden shows concern beyond personal profit. The other details show business activity, not generosity.",
   },
@@ -176,12 +192,14 @@ const g5LaDifficult1Questions: Question[] = [
     id: 9,
     type: "reading",
     skill: "Point of View",
-    question: `${d1Passage2}\n\nHow does Aaliyah view the role of young people in the community?`,
+    question: `${d1Passage2}
+
+How does Aaliyah view the role of young people in the community?`,
     options: [
       "She believes young people can lead and that the work belongs to everyone.",
-      "She believes only adults should make decisions for the village.",
-      "She believes the students should rebuild the bridge with no help.",
-      "She believes the project was too large to attempt at all.",
+      "She thinks that young people should only help when adults ask them to.",
+      "She feels that the bridge was too simple to be considered a real success.",
+      "She wants the community to wait for the government to fix the bridge."
     ],
     correctAnswer: 0,
     explanation:
@@ -191,12 +209,14 @@ const g5LaDifficult1Questions: Question[] = [
     id: 10,
     type: "reading",
     skill: "Theme",
-    question: `${d1Passage2}\n\nWhich theme is best developed in the passage?`,
+    question: `${d1Passage2}
+
+Which theme is best developed in the passage?`,
     options: [
       "Cooperation and planning can solve problems too big for one person.",
-      "Strong individuals should work alone to get the best results.",
+      "Strong individuals should always work alone to get the best results.",
       "Communities should wait for the government to fix every problem.",
-      "Young people should avoid difficult tasks until they are adults.",
+      "Young people should avoid difficult tasks until they are much older."
     ],
     correctAnswer: 0,
     explanation:
@@ -206,14 +226,16 @@ const g5LaDifficult1Questions: Question[] = [
     id: 11,
     type: "reading",
     skill: "Drawing Conclusions",
-    question: `${d1Passage2}\n\nWhat can you conclude about the doubting neighbours by the end?`,
+    question: `${d1Passage2}
+
+What can you conclude about the doubting neighbours by the end?`,
     options: [
+      "They were proven right because the rebuilt crossing was very plain.",
       "The completed bridge showed that their doubts were mistaken.",
-      "They were proven right because the project failed.",
-      "They joined the students and led the whole project.",
-      "They forced the students to give up after one week.",
+      "They forced the students to stop working after the first week.",
+      "They took over the project and finished it without the students."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "The crossing reopened in three weeks despite the doubts, so the conclusion is that the doubters were proven wrong.",
   },
@@ -221,29 +243,35 @@ const g5LaDifficult1Questions: Question[] = [
     id: 12,
     type: "reading",
     skill: "Compare and Contrast",
-    question: `${d1Passage1}\n\n${d1Passage2}\n\nHow are Kemar and Aaliyah alike?`,
+    question: `${d1Passage1}
+
+${d1Passage2}
+
+What do Kemar's notebook and Aaliyah's record of donations have in common?`,
     options: [
+      "Both show that keeping track of details helped make their projects successful.",
       "Both responded to a real problem with careful planning instead of complaint.",
-      "Both rebuilt a bridge for their local community.",
-      "Both sold healthy food to raise money for a garden.",
-      "Both refused any help from adults in their community.",
+      "Both were used to prove that adults could not be trusted with important tasks.",
+      "Both were required by their teachers before they were allowed to start."
     ],
     correctAnswer: 0,
     explanation:
-      "The shared trait across both passages is meeting a real problem with planned action rather than complaining. The other choices apply to only one passage or neither.",
+      "Kemar's notebook and Aaliyah's donation records both show how careful tracking contributed to their success.",
   },
   {
     id: 13,
     type: "reading",
     skill: "Cause and Effect",
-    question: `${d1Passage2}\n\nWhy did the residents struggle after the flooding?`,
+    question: `${d1Passage2}
+
+Why did the residents struggle after the flooding?`,
     options: [
-      "The damaged footbridge made it hard to reach the clinic and market.",
-      "The hardware company refused to donate any materials.",
-      "The students moved away from Rose Town for safety.",
-      "The clinic and market were destroyed by the flood.",
+      "The flooding destroyed the clinic and the market completely.",
+      "The hardware company refused to donate any materials to the town.",
+      "The students decided to move away from Rose Town for their safety.",
+      "The damaged footbridge made it hard to reach the clinic and market."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "The text says the damaged bridge cut off easy access to the clinic and market. The other options state things the passage never says.",
   },
@@ -251,12 +279,14 @@ const g5LaDifficult1Questions: Question[] = [
     id: 14,
     type: "reading",
     skill: "Supporting Details",
-    question: `${d1Passage2}\n\nWhich detail shows the students valued every helper?`,
+    question: `${d1Passage2}
+
+Which detail shows the students valued every helper?`,
     options: [
       "They recorded every donation and thanked each contributor in public.",
-      "They wrote letters to a local hardware company.",
-      "They could not rebuild the bridge by themselves.",
-      "The rebuilt crossing reopened within three weeks.",
+      "They wrote letters to a local hardware company asking for supplies.",
+      "They made sure that adults were not allowed to help with the work.",
+      "The rebuilt crossing was finished and reopened within three weeks."
     ],
     correctAnswer: 0,
     explanation:
@@ -266,14 +296,16 @@ const g5LaDifficult1Questions: Question[] = [
     id: 15,
     type: "reading",
     skill: "Inference",
-    question: `${d1Passage2}\n\nWhat does Aaliyah's final statement suggest she learned?`,
+    question: `${d1Passage2}
+
+Why does Aaliyah say the bridge itself "mattered less" than what the village discovered?`,
     options: [
-      "The way a community works together can matter more than the object it builds.",
-      "Bridges should always be built from expensive materials.",
-      "Letters are the only way to gather support for a project.",
-      "Adults should never be trusted to keep promises.",
+      "Bridges should always be built from expensive materials to last a long time.",
+      "She realised that the real achievement was learning how to work together.",
+      "She was disappointed that the crossing did not look as good as the old one.",
+      "She wanted to make sure the hardware company did not take the credit."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "She says the bridge mattered less than what the village discovered about cooperation, implying the process mattered most.",
   },
@@ -283,8 +315,8 @@ const g5LaDifficult1Questions: Question[] = [
     skill: "Synonym",
     question:
       "In the sentence \"Kemar surveyed his classmates,\" which word is the closest synonym for \"surveyed\"?",
-    options: ["questioned", "ignored", "punished", "fed"],
-    correctAnswer: 0,
+    options: ["observed", "ignored", "comforted", "questioned"],
+    correctAnswer: 3,
     explanation:
       "To survey people is to question or poll them, so 'questioned' is the closest match.",
   },
@@ -305,8 +337,8 @@ const g5LaDifficult1Questions: Question[] = [
     skill: "Prefix",
     question:
       "The prefix in \"reinvest\" means \"again.\" Which word also uses this prefix to mean doing something again?",
-    options: ["rebuild", "remove", "react", "relax"],
-    correctAnswer: 0,
+    options: ["remove", "react", "rebuild", "relax"],
+    correctAnswer: 2,
     explanation:
       "'Rebuild' means to build again, matching the 'again' meaning. In 'remove', 're-' means back, not again.",
   },
@@ -316,8 +348,8 @@ const g5LaDifficult1Questions: Question[] = [
     skill: "Context Clues",
     question:
       "\"The crossing was plain, but it reopened within three weeks.\" In this sentence, \"plain\" most nearly means —",
-    options: ["simple", "flat", "honest", "clear"],
-    correctAnswer: 0,
+    options: ["flat", "simple", "honest", "clear"],
+    correctAnswer: 1,
     explanation:
       "Describing a bridge as plain here means simple or basic. The contrast with 'reopened' shows it worked despite being simple.",
   },
@@ -328,12 +360,12 @@ const g5LaDifficult1Questions: Question[] = [
     question:
       "Which sentence uses \"batch\" in the same way as \"His first batch of granola sold out\"?",
     options: [
+      "The teacher placed the students in a batch for the art project.",
+      "The rain fell in a heavy batch during the night.",
       "The baker pulled a fresh batch of bread from the oven.",
-      "Please batch the windows before the storm arrives.",
-      "They tried to batch across the flooded river.",
-      "The teacher gave the class a batch for good behaviour.",
+      "Aaliyah wrote a batch to the hardware company asking for help."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "A 'batch' is a quantity made at one time, as with bread. The other sentences misuse the word.",
   },
@@ -343,8 +375,8 @@ const g5LaDifficult1Questions: Question[] = [
     skill: "Suffix",
     question:
       "Add a suffix to \"donate\" to name the act of giving. The correct word is —",
-    options: ["donation", "donating", "donated", "donates"],
-    correctAnswer: 0,
+    options: ["donating", "donated", "donates", "donation"],
+    correctAnswer: 3,
     explanation:
       "The suffix '-ion' turns the verb 'donate' into the noun 'donation', the name of the act.",
   },
@@ -354,8 +386,8 @@ const g5LaDifficult1Questions: Question[] = [
     skill: "Word Relationships",
     question:
       "Profit is to gain as loss is to —",
-    options: ["shortfall", "savings", "donation", "supply"],
-    correctAnswer: 0,
+    options: ["savings", "shortfall", "donation", "supply"],
+    correctAnswer: 1,
     explanation:
       "Profit means a gain, so the matching pair for loss is a shortfall, which means money missing or lost.",
   },
@@ -377,12 +409,12 @@ const g5LaDifficult1Questions: Question[] = [
     question:
       "Which meaning best fits the academic word \"contributor\"?",
     options: [
+      "a person who watches a project but never offers any help",
+      "a person who is paid to manage a shop or a business",
       "a person who gives help, money, or effort to something",
-      "a person who watches but never helps",
-      "a person who is paid to manage a shop",
-      "a person who refuses to join a group",
+      "a person who refuses to join a group or support a cause"
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "A contributor is one who contributes — gives help, money, or effort to a shared effort.",
   },
@@ -392,8 +424,8 @@ const g5LaDifficult1Questions: Question[] = [
     skill: "Choosing the Best Word",
     question:
       "Choose the best word: \"Because the evidence was clear, Kemar felt _____ in changing his plan.\"",
-    options: ["confident", "confused", "careless", "fearful"],
-    correctAnswer: 0,
+    options: ["confused", "careless", "fearful", "confident"],
+    correctAnswer: 3,
     explanation:
       "Clear evidence would make someone feel confident. The other words contradict having clear information.",
   },
@@ -403,12 +435,12 @@ const g5LaDifficult1Questions: Question[] = [
     skill: "Subject-Verb Agreement",
     question: "Which sentence is written correctly?",
     options: [
-      "The group of students records every donation carefully.",
       "The group of students record every donation carefully.",
+      "The group of students records every donation carefully.",
       "The group of students recording every donation carefully.",
-      "The group of students were records every donation carefully.",
+      "The group of students were records every donation carefully."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "The subject 'group' is singular and takes the singular verb 'records', even though 'students' follows it.",
   },
@@ -418,12 +450,12 @@ const g5LaDifficult1Questions: Question[] = [
     skill: "Verb Tense",
     question: "Which sentence keeps the verb tense consistent?",
     options: [
-      "Last week Kemar surveyed his class and lowered his prices.",
       "Last week Kemar surveys his class and lowered his prices.",
       "Last week Kemar will survey his class and lowered his prices.",
-      "Last week Kemar surveyed his class and lowers his prices.",
+      "Last week Kemar surveyed his class and lowered his prices.",
+      "Last week Kemar surveyed his class and lowers his prices."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "'Last week' signals the past, so both verbs must be past tense: surveyed and lowered.",
   },
@@ -433,12 +465,12 @@ const g5LaDifficult1Questions: Question[] = [
     skill: "Pronouns",
     question: "Choose the sentence with the correct pronoun.",
     options: [
-      "Aaliyah and she wrote letters to the hardware company.",
       "Aaliyah and her wrote letters to the hardware company.",
       "Her and Aaliyah wrote letters to the hardware company.",
       "Aaliyah and herself wrote letters to the hardware company.",
+      "Aaliyah and she wrote letters to the hardware company."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "The pronoun is a subject doing the writing, so the subject form 'she' is correct.",
   },
@@ -451,7 +483,7 @@ const g5LaDifficult1Questions: Question[] = [
       "After the flood damaged the bridge, the residents needed help.",
       "After the flood damaged the bridge the residents, needed help.",
       "After, the flood damaged the bridge the residents needed help.",
-      "After the flood, damaged the bridge the residents needed help.",
+      "After the flood, damaged the bridge the residents needed help."
     ],
     correctAnswer: 0,
     explanation:
@@ -463,12 +495,12 @@ const g5LaDifficult1Questions: Question[] = [
     skill: "Quotation Marks",
     question: "Which sentence uses quotation marks correctly?",
     options: [
-      "\"The work belongs to everyone,\" Aaliyah said.",
       "\"The work belongs to everyone Aaliyah said.\"",
       "The work belongs to everyone,\" Aaliyah said.",
-      "\"The work belongs to everyone\" Aaliyah said?",
+      "\"The work belongs to everyone,\" Aaliyah said.",
+      "\"The work belongs to everyone\" Aaliyah said?"
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "The spoken words sit inside the quotation marks with a comma before the closing mark and the tag.",
   },
@@ -478,12 +510,12 @@ const g5LaDifficult1Questions: Question[] = [
     skill: "Parallel Structure",
     question: "Which sentence uses parallel structure?",
     options: [
-      "Kemar bought supplies, recorded costs, and donated profits.",
       "Kemar bought supplies, recording costs, and profits were donated.",
-      "Kemar was buying supplies, costs, and donated profits.",
-      "Kemar bought, to record costs, and donating profits.",
+      "Kemar bought supplies, recorded costs, and donated profits.",
+      "Kemar bought his supplies, recorded the costs, and donated his profits.",
+      "Kemar bought, to record costs, and donating profits."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "The three actions share the same past-tense form: bought, recorded, donated.",
   },
@@ -493,12 +525,12 @@ const g5LaDifficult1Questions: Question[] = [
     skill: "Run-on Correction",
     question: "Which choice corrects the run-on sentence?",
     options: [
-      "The bridge was damaged, so the students decided to act.",
       "The bridge was damaged the students decided to act.",
       "The bridge was damaged, the students decided to act.",
-      "The bridge damaged and students decided act.",
+      "The bridge was damaged, and the students decided to act.",
+      "The bridge was damaged, so the students decided to act."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "A comma plus 'so' correctly joins the two complete ideas as cause and effect.",
   },
@@ -510,8 +542,8 @@ const g5LaDifficult1Questions: Question[] = [
     options: [
       "Although the project seemed large, the community completed it together.",
       "The project seemed large the community completed it together.",
-      "Seeming large but completed by the community together.",
-      "The project seemed large, the community, completed it.",
+      "Although the project seemed large, it was completed by the community together.",
+      "The project seemed large, but the community, it was completed by them."
     ],
     correctAnswer: 0,
     explanation:
@@ -523,8 +555,8 @@ const g5LaDifficult1Questions: Question[] = [
     skill: "Transitions",
     question:
       "Which transition best completes the sentence? \"Kemar's price was too high; _____, he lowered it.\"",
-    options: ["therefore", "however", "for example", "meanwhile"],
-    correctAnswer: 0,
+    options: ["however", "for example", "therefore", "meanwhile"],
+    correctAnswer: 2,
     explanation:
       "'Therefore' shows the result of the high price. The high price caused the lowering, so a cause-result transition fits.",
   },
@@ -534,14 +566,14 @@ const g5LaDifficult1Questions: Question[] = [
     skill: "Clarity",
     question: "Which sentence is the clearest and most precise?",
     options: [
+      "The students made some letters that were about the materials they needed from the company.",
       "The students wrote letters asking the company for building materials.",
-      "The students did a thing with letters about stuff they needed.",
-      "Letters were a thing that the students made for materials.",
-      "The students and letters and materials all happened together.",
+      "Letters were written by the students to the company for the purpose of materials.",
+      "The students and the company and the letters and the materials were all connected."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
-      "Precise nouns and verbs make the first sentence clear; the others are vague and confusing.",
+      "Precise nouns and verbs make the second sentence clear; the others are vague, wordy, or confusing.",
   },
   {
     id: 36,
@@ -550,12 +582,12 @@ const g5LaDifficult1Questions: Question[] = [
     question:
       "Which sentence is the best introduction for an essay about young people solving community problems?",
     options: [
-      "When young people plan carefully and work together, they can solve problems that adults thought were impossible.",
-      "Young people are people who are young and live in places.",
-      "This essay is going to be about some stuff that happened.",
-      "There are bridges and snacks and many other things in towns.",
+      "Young people often face many different problems in their communities today.",
+      "In this essay, I am going to write about two young people who did things.",
+      "Careful planning and teamwork allow young people to solve difficult community problems.",
+      "There are many young people, and some of them live in places with bridges and shops."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "A strong introduction states a clear, specific main idea that previews the essay. The others are vague or off-topic.",
   },
@@ -566,12 +598,12 @@ const g5LaDifficult1Questions: Question[] = [
     question:
       "Which detail best supports the idea that Kemar ran his business carefully?",
     options: [
-      "He kept a notebook of costs and profits and adjusted his plan when needed.",
-      "He was twelve years old and went to a primary school.",
-      "Granola can be made from fruit and oats mixed together.",
-      "Some pupils at the school liked sugary drinks.",
+      "He was twelve years old and went to a primary school in his neighbourhood.",
+      "Granola can be made from fruit and oats mixed together in a simple way.",
+      "Some pupils at the school liked buying sugary drinks from the tuck shop.",
+      "He kept a notebook of costs and profits and adjusted his plan when needed."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "Tracking costs and adjusting the plan directly supports the claim of careful management; the others are unrelated facts.",
   },
@@ -581,8 +613,8 @@ const g5LaDifficult1Questions: Question[] = [
     skill: "Best Transition",
     question:
       "Read these sentences: \"Some neighbours doubted the students. _____ the bridge reopened in three weeks.\" Which transition fits best?",
-    options: ["Nevertheless,", "For instance,", "In addition,", "Similarly,"],
-    correctAnswer: 0,
+    options: ["For instance,", "Similarly,", "Nevertheless,", "In addition,"],
+    correctAnswer: 2,
     explanation:
       "The result contrasts with the doubt, so 'Nevertheless' (showing contrast) is the best transition.",
   },
@@ -593,12 +625,12 @@ const g5LaDifficult1Questions: Question[] = [
     question:
       "A report on the bridge project includes these sentences. Which one should be REMOVED to keep the report focused?",
     options: [
-      "Aaliyah's favourite colour is bright green.",
-      "The students wrote letters requesting materials.",
-      "Parents helped to collect supplies for the work.",
-      "The crossing reopened within three weeks.",
+      "The students wrote letters requesting materials from a local hardware store.",
+      "Parents helped to collect the necessary supplies for the building work.",
+      "Aaliyah's favourite colour is bright green, which she also painted her room.",
+      "The new crossing reopened for the whole community within three short weeks."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "Aaliyah's favourite colour has nothing to do with the project and should be removed; the others all advance the report.",
   },
@@ -609,15 +641,15 @@ const g5LaDifficult1Questions: Question[] = [
     question:
       "Which sentence is the best conclusion for an essay about these two projects?",
     options: [
-      "Both stories prove that careful planning and teamwork let young people make a real difference.",
-      "In the end, that is all I have to say about these two things.",
-      "Bridges and granola are two examples of things that exist.",
-      "So the projects happened and then they were finished, the end.",
+      "As you can see, bridges and granola are two things that can help a town.",
+      "Both stories show that planning and teamwork let young people make a real difference.",
+      "In conclusion, these two projects happened and then they were completely finished.",
+      "To sum up, young people should always try to help out when they see a problem."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "A strong conclusion restates the main idea with purpose; the first choice ties both examples to the central point.",
-  },
+  }
 ];
 
 const shuffleAnswerOptions = (questions: Question[]): Question[] => {
