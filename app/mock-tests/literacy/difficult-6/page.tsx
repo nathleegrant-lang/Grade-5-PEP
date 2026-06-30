@@ -56,318 +56,320 @@ const g5LaDifficult6Questions: Question[] = [
     id: 1,
     type: "reading",
     skill: "Cause and Effect",
-    question: `${d6Passage1}\n\nWhat caused Miss Pearl to start her water campaign?`,
+    question: `${d6Passage1}
+
+What caused Miss Pearl to start her water campaign?`,
     options: [
-      "Families were wasting the little water they collected.",
-      "The standpipe gave water every day of the week.",
-      "Her garden had grown too large to manage.",
-      "The village received too much rain that year.",
+      "She wanted to prove that the standpipe schedule was unfair to the village.",
+      "She noticed that families were wasting the little water they collected.",
+      "She saw that the leaking taps were ruining the community board.",
+      "She realized her garden was the only one that stayed green."
     ],
-    correctAnswer: 0,
-    explanation:
-      "Miss Pearl acted because families were wasting scarce water during the drought.",
+    correctAnswer: 1,
+    explanation: "Miss Pearl acted because she observed families wasting water during the drought, not for external rewards or requests."
   },
   {
     id: 2,
     type: "reading",
     skill: "Supporting Details",
-    question: `${d6Passage1}\n\nWhich detail shows Miss Pearl used evidence to persuade neighbours?`,
+    question: `${d6Passage1}
+
+Which detail shows Miss Pearl used evidence to persuade neighbours?`,
     options: [
-      "She measured a dripping tap's daily loss and posted the figure.",
-      "She was a retired teacher in the village.",
-      "The standpipe ran only twice a week.",
-      "The drought lasted for a long time.",
+      "She posted a list of simple habits on the community board for everyone to read.",
+      "She reminded everyone that water was a precious resource that should not be wasted.",
+      "She showed neighbours how to fix leaks at once so they would not lose water.",
+      "She measured a dripping tap's daily loss and posted the figure."
     ],
-    correctAnswer: 0,
-    explanation:
-      "Measuring and posting the water loss is the evidence-based detail; the others are background facts.",
+    correctAnswer: 3,
+    explanation: "Measuring and posting a specific figure provides concrete data, which distinguishes it from general advice or reminders."
   },
   {
     id: 3,
     type: "reading",
     skill: "Inference",
-    question: `${d6Passage1}\n\nWhy did more families join Miss Pearl over time?`,
+    question: `${d6Passage1}
+
+Why did more families join Miss Pearl over time?`,
     options: [
-      "They saw the results, such as full drums and green gardens.",
-      "She forced every family to follow her rules.",
-      "The government ordered them to obey her.",
-      "The drought suddenly came to an end.",
+      "They were ordered by the village council to attend her meetings.",
+      "They wanted to compete to see who could save the most water.",
+      "They saw that her methods actually saved water without making life harder.",
+      "They realised the standpipe would soon stop working entirely."
     ],
-    correctAnswer: 0,
-    explanation:
-      "Families joined as they saw the visible results — full drums and green gardens — an inference from the text.",
+    correctAnswer: 2,
+    explanation: "The passage states that as drums filled and gardens stayed green, more families joined, implying the visible results persuaded them."
   },
   {
     id: 4,
     type: "reading",
     skill: "Main Idea",
-    question: `${d6Passage1}\n\nWhat is the main idea of the passage?`,
+    question: `${d6Passage1}
+
+What is the main idea of the passage?`,
     options: [
-      "Careful habits can protect a precious resource for everyone.",
-      "Droughts make it impossible to save any water.",
-      "Only retired teachers can solve village problems.",
-      "Rainwater is the only safe water to drink.",
+      "Simple, thoughtful habits can help a community protect a scarce resource.",
+      "Building water drums is the only reliable way to survive a long drought.",
+      "Retired teachers are often better at solving village problems than younger people.",
+      "Villages should rely entirely on rainwater instead of waiting for standpipes."
     ],
     correctAnswer: 0,
-    explanation:
-      "Miss Pearl's message is that careful use protects a precious resource for all — the main idea.",
+    explanation: "The passage centres on how adopting simple, careful habits allowed the village to conserve water effectively."
   },
   {
     id: 5,
     type: "reading",
     skill: "Vocabulary in Context",
-    question: `${d6Passage1}\n\nIn the passage, what does "conserving" most nearly mean?`,
+    question: `${d6Passage1}
+
+In the passage, what does "conserving" most nearly mean?`,
     options: [
-      "using carefully to avoid waste",
-      "giving away to other villages",
-      "storing forever without using",
-      "spilling without any concern",
+      "keeping it hidden so others cannot find it",
+      "using it carefully to avoid waste",
+      "adding fresh water to it to make it last longer",
+      "sharing it equally among all the neighbours"
     ],
-    correctAnswer: 0,
-    explanation:
-      "Conserving water means using it carefully to avoid waste, as the passage explains.",
+    correctAnswer: 1,
+    explanation: "Miss Pearl clarifies that conserving is not about going without, but about using the resource with care to avoid waste."
   },
   {
     id: 6,
     type: "reading",
     skill: "Author's Purpose",
-    question: `${d6Passage1}\n\nWhy does the author include Miss Pearl's final reminder?`,
+    question: `${d6Passage1}
+
+Why does the author include Miss Pearl's final reminder?`,
     options: [
-      "To explain the true meaning of conserving water.",
-      "To prove that gardens are a waste of water.",
-      "To show that the village should be abandoned.",
-      "To describe how to build a water drum.",
+      "To encourage families to stop using water for their gardens.",
+      "To explain the exact steps for building a rainwater drum.",
+      "To show that Miss Pearl was unhappy with the community's effort.",
+      "To correct the idea that saving water means going without it."
     ],
-    correctAnswer: 0,
-    explanation:
-      "Her reminder clarifies what conservation really means — respecting and sharing a resource.",
+    correctAnswer: 3,
+    explanation: "The reminder specifically addresses the misconception that saving water means going without, serving to clarify the concept."
   },
   {
     id: 7,
     type: "reading",
     skill: "Drawing Conclusions",
-    question: `${d6Passage1}\n\nWhat can you conclude about the families who fixed their leaks?`,
+    question: `${d6Passage1}
+
+What can you conclude about the families who fixed their leaks?`,
     options: [
-      "They had more water available for their needs.",
-      "They used far more water than before.",
-      "They moved away from the village.",
-      "They stopped collecting any water.",
+      "They probably spent more money on their water bills.",
+      "They found that fixing leaks was too difficult to maintain.",
+      "They put Miss Pearl's advice about careful use into practice.",
+      "They stopped needing to collect water from the standpipe."
     ],
-    correctAnswer: 0,
-    explanation:
-      "Fixing leaks saves water, so those families would have more available — a logical conclusion.",
+    correctAnswer: 2,
+    explanation: "Since fixing leaks prevents water loss, the logical conclusion is that these families retained more of the water they collected."
   },
   {
     id: 8,
     type: "reading",
     skill: "Point of View",
-    question: `${d6Passage2}\n\nHow does Mr. Dawes view the fish near the shore?`,
+    question: `${d6Passage2}
+
+How does Mr. Dawes view the fish near the shore?`,
     options: [
-      "As a shared resource the whole community must manage together.",
-      "As the property of whoever catches them first.",
-      "As something not worth protecting at all.",
-      "As a problem that only the government can solve.",
+      "As a shared resource that requires group agreement to survive.",
+      "As a private source of income that should not have any rules.",
+      "As a temporary problem that will fix itself when the season changes.",
+      "As a burden that the elder fishers should manage on their own."
     ],
     correctAnswer: 0,
-    explanation:
-      "Mr. Dawes sees the fish as a shared resource that lasts only with joint management.",
+    explanation: "Mr. Dawes explicitly states that the resource belongs to no single person and can only last when managed together."
   },
   {
     id: 9,
     type: "reading",
     skill: "Cause and Effect",
-    question: `${d6Passage2}\n\nWhat was the effect of the community following Mr. Dawes's rules?`,
+    question: `${d6Passage2}
+
+What was the effect of the community following Mr. Dawes's rules?`,
     options: [
-      "Within two seasons the fish returned in greater numbers.",
-      "The fishers left Blue Harbour for good.",
-      "The young fish disappeared completely.",
-      "The community stopped recording their catch.",
+      "A few fishers decided to leave Blue Harbour permanently.",
+      "The fish population grew because they were given time to recover.",
+      "The community stopped keeping records of their daily catch.",
+      "The young fish were forced to move to deeper waters."
     ],
-    correctAnswer: 0,
-    explanation:
-      "The passage states that within two seasons the fish returned in greater numbers.",
+    correctAnswer: 1,
+    explanation: "The text directly states that within two seasons, the fish returned in greater numbers as a result of the rules."
   },
   {
     id: 10,
     type: "reading",
     skill: "Supporting Details",
-    question: `${d6Passage2}\n\nWhich rule did Mr. Dawes propose?`,
+    question: `${d6Passage2}
+
+Which rule did Mr. Dawes propose?`,
     options: [
-      "Leaving young fish to grow before catching them.",
-      "Catching as many fish as possible at once.",
-      "Blaming other fishers for the shortage.",
-      "Keeping each day's catch a secret.",
+      "Catching fish only during the hottest months of the year.",
+      "Dividing the harbour into equal sections for each family.",
+      "Selling the daily catch to buyers outside the community.",
+      "Leaving the young fish alone to grow before catching them."
     ],
-    correctAnswer: 0,
-    explanation:
-      "Leaving young fish to grow was one of his proposed rules; the others contradict his plan.",
+    correctAnswer: 3,
+    explanation: "Leaving young fish to grow was one of the specific rules Mr. Dawes proposed to help the fish population recover."
   },
   {
     id: 11,
     type: "reading",
     skill: "Theme",
-    question: `${d6Passage2}\n\nWhich theme is best developed in the passage?`,
+    question: `${d6Passage2}
+
+Which theme is best developed in the passage?`,
     options: [
-      "A shared resource lasts only when a community manages it together.",
-      "Each person should take as much as they can while it lasts.",
-      "Rules always cost more than the benefits they bring.",
-      "Elders should not be trusted to give advice.",
+      "Individual success is much more important than group agreement.",
+      "Following rules usually leads to financial loss for everyone involved.",
+      "Working together to protect shared resources helps everyone in the long run.",
+      "Elders are usually too old to understand modern fishing methods."
     ],
-    correctAnswer: 0,
-    explanation:
-      "Mr. Dawes's closing words state the theme: shared resources last through joint management.",
+    correctAnswer: 2,
+    explanation: "Mr. Dawes's closing words about balancing today's needs against tomorrow's survival directly state this theme."
   },
   {
     id: 12,
     type: "reading",
     skill: "Compare and Contrast",
-    question: `${d6Passage1}\n\n${d6Passage2}\n\nHow are Miss Pearl and Mr. Dawes alike?`,
+    question: `${d6Passage1}
+
+${d6Passage2}
+
+How are Miss Pearl and Mr. Dawes alike?`,
     options: [
-      "Both led their communities to protect a shared resource.",
-      "Both taught school before they retired.",
-      "Both caught fish to feed their villages.",
-      "Both refused to let anyone use the resource.",
+      "Both proved their ideas worked by letting others see the positive results.",
+      "Both held official government positions in their local communities.",
+      "Both started their campaigns by openly blaming their neighbours.",
+      "Both believed that giving strict punishments was the best way."
     ],
     correctAnswer: 0,
-    explanation:
-      "Both leaders guided their communities to protect a shared resource. The others fit only one passage.",
+    explanation: "Miss Pearl's full drums and green gardens, like Mr. Dawes's returning fish, served as visible proof that convinced others to join their efforts."
   },
   {
     id: 13,
     type: "reading",
     skill: "Prediction",
-    question: `${d6Passage2}\n\nIf another resource became scarce, what would Mr. Dawes most likely suggest?`,
+    question: `${d6Passage2}
+
+If another resource became scarce, what would Mr. Dawes most likely suggest?`,
     options: [
-      "That the community agree on shared rules to manage it.",
-      "That each family take as much as it could.",
-      "That the fishers blame one another for the loss.",
-      "That everyone ignore the problem completely.",
+      "He would suggest that each family hide its supply from the others.",
+      "He would recommend setting shared rules and tracking the results.",
+      "He would ask the government to send replacement supplies immediately.",
+      "He would advise the community to use as much as possible before it runs out."
     ],
-    correctAnswer: 0,
-    explanation:
-      "His pattern is shared management, so he would suggest agreed rules for a new scarce resource.",
+    correctAnswer: 1,
+    explanation: "Based on his successful strategy with the fishery, Mr. Dawes would logically apply the same methods of shared rules and record-keeping."
   },
   {
     id: 14,
     type: "reading",
     skill: "Text Evidence",
-    question: `${d6Passage2}\n\nWhich sentence best supports the idea that the rules helped everyone?`,
+    question: `${d6Passage2}
+
+Which sentence best supports the idea that the rules helped everyone?`,
     options: [
-      "Within two seasons the fish returned and every family benefited.",
-      "Some fishers blamed each other for the shortage.",
-      "A few fishers argued the rules would cost money.",
-      "The fish near the shore were becoming scarce.",
+      "At first, some fishers blamed each other for the shortage of fish.",
+      "A few fishers argued that the new rules would cost them money.",
+      "Mr. Dawes explained that a shared resource belongs to no single person.",
+      "Within two seasons the fish returned in greater numbers, and every family benefited."
     ],
-    correctAnswer: 0,
-    explanation:
-      "The return of the fish and every family benefiting is direct evidence the rules helped all.",
+    correctAnswer: 3,
+    explanation: "This sentence provides direct evidence that the rules resulted in a positive outcome for the entire community."
   },
   {
     id: 15,
     type: "reading",
     skill: "Inference",
-    question: `${d6Passage2}\n\nWhy did a few fishers argue against the rules at first?`,
+    question: `${d6Passage2}
+
+Why did a few fishers argue against the rules at first?`,
     options: [
-      "They worried about losing money in the short term.",
-      "They did not believe the fish were scarce.",
-      "They wanted Mr. Dawes to leave the harbour.",
-      "They preferred to record every day's catch.",
+      "They thought the rules would make the fish move to a different harbour.",
+      "They did not trust Mr. Dawes to keep accurate records of the catch.",
+      "They were afraid that catching less fish right away would leave them with less money.",
+      "They simply wanted to continue blaming other fishers for the shortage."
     ],
-    correctAnswer: 0,
-    explanation:
-      "The text says they argued the rules would cost them money in the short term.",
+    correctAnswer: 2,
+    explanation: "The passage notes that some fishers argued the rules would cost them money in the short term, implying fear of immediate financial loss."
   },
   {
     id: 16,
     type: "vocabulary",
     skill: "Antonym",
-    question:
-      "The fish became \"scarce.\" Which word means the OPPOSITE of \"scarce\"?",
-    options: ["plentiful", "rare", "limited", "small"],
+    question: "The fish became \"scarce.\" Which word means the OPPOSITE of \"scarce\"?",
+    options: ["abundant", "rare", "meagre", "insufficient"],
     correctAnswer: 0,
-    explanation:
-      "Scarce means in short supply; its opposite is plentiful, meaning abundant.",
+    explanation: "Scarce means in short supply; its opposite is abundant, meaning more than enough."
   },
   {
     id: 17,
     type: "vocabulary",
     skill: "Synonym",
-    question:
-      "Which word is the closest synonym for \"precious\" in \"a precious resource\"?",
-    options: ["valuable", "common", "heavy", "wet"],
-    correctAnswer: 0,
-    explanation:
-      "Precious means highly valued, so 'valuable' is the closest synonym.",
+    question: "Which word is the closest synonym for \"precious\" in \"a precious resource\"?",
+    options: ["ordinary", "valuable", "harmful", "abundant"],
+    correctAnswer: 1,
+    explanation: "Precious means highly valued or important, making 'valuable' the closest synonym."
   },
   {
     id: 18,
     type: "vocabulary",
     skill: "Prefix",
-    question:
-      "The word \"reuse\" begins with \"re-,\" meaning \"again.\" To reuse dishwater is to —",
-    options: ["use it again for another purpose", "throw it away at once", "boil it until it is clean", "store it for many years"],
-    correctAnswer: 0,
-    explanation:
-      "'Re-' means again, so to reuse water is to use it again.",
+    question: "The word \"reuse\" begins with \"re-,\" meaning \"again.\" To reuse dishwater is to —",
+    options: ["throw it away after one use", "pour it down the drain quickly", "mix it with fresh water before using", "use it a second time for a different purpose"],
+    correctAnswer: 3,
+    explanation: "The prefix 're-' indicates repetition, so reusing water means using it again rather than discarding it."
   },
   {
     id: 19,
     type: "vocabulary",
     skill: "Suffix",
-    question:
-      "Add the suffix \"-ation\" to \"conserve\" to form a noun. The correct word is —",
-    options: ["conservation", "conserving", "conserved", "conserver"],
-    correctAnswer: 0,
-    explanation:
-      "'-ation' forms the noun 'conservation', the act of conserving.",
+    question: "Add the suffix \"-ation\" to \"conserve\" to form a noun. The correct spelling is —",
+    options: ["conserveation", "conservement", "conservation", "conservity"],
+    correctAnswer: 2,
+    explanation: "When adding '-ation' to 'conserve', the 'e' is dropped to form the correctly spelled noun 'conservation'."
   },
   {
     id: 20,
     type: "vocabulary",
     skill: "Context Clues",
-    question:
-      "\"Resting certain areas for part of the year\" let the fish recover. Here \"resting\" most nearly means —",
-    options: ["leaving them unused for a time", "destroying them quickly", "selling them to others", "moving them far away"],
+    question: "\"Resting certain areas for part of the year\" let the fish recover. Here \"resting\" most nearly means —",
+    options: ["leaving them alone so they can recover", "planting new fish in them immediately", "dividing them equally among the fishers", "closing them permanently to all boats"],
     correctAnswer: 0,
-    explanation:
-      "Resting an area means leaving it unused so it can recover, shown by the fish returning.",
+    explanation: "The context clue 'let the fish recover' shows that resting means leaving the areas alone temporarily."
   },
   {
     id: 21,
     type: "vocabulary",
     skill: "Multiple Meaning",
-    question:
-      "Which sentence uses \"run\" in the same way as \"letting taps run\"?",
+    question: "Which sentence uses \"run\" in the same way as \"letting taps run\"?",
     options: [
-      "Do not let the water run while you brush your teeth.",
-      "She will run in the school sports day race.",
-      "He can run a small shop on the corner.",
-      "The bus does not run on public holidays.",
+      "The young athlete will run the final race on Friday.",
+      "We should not let the water run while we wash the dishes.",
+      "He plans to run a small business in the town.",
+      "The local train does not run on public holidays."
     ],
-    correctAnswer: 0,
-    explanation:
-      "Here 'run' means to flow, as water from a tap. The others mean to race, manage, or operate.",
+    correctAnswer: 1,
+    explanation: "In both the passage and the correct option, 'run' means to flow continuously, unlike running a race or a business."
   },
   {
     id: 22,
     type: "vocabulary",
     skill: "Word Relationships",
     question: "Drought is to water as famine is to —",
-    options: ["food", "rain", "money", "land"],
-    correctAnswer: 0,
-    explanation:
-      "A drought is a shortage of water; a famine is a shortage of food, so 'food' completes the pair.",
+    options: ["soil", "medicine", "shelter", "food"],
+    correctAnswer: 3,
+    explanation: "A drought is a severe shortage of water; a famine is a severe shortage of food."
   },
   {
     id: 23,
     type: "vocabulary",
     skill: "Replacing a Word",
-    question:
-      "Which word could best replace \"manages\" in \"a community manages it together\"?",
-    options: ["handles", "wastes", "ignores", "sells"],
-    correctAnswer: 0,
-    explanation:
-      "To manage a resource is to handle or look after it; 'handles' keeps the meaning.",
+    question: "Which word could best replace \"manages\" in \"a community manages it together\"?",
+    options: ["exhausts", "abandons", "supervises", "conceals"],
+    correctAnswer: 2,
+    explanation: "To manage a resource is to supervise or look after it carefully, which matches the context of the passage."
   },
   {
     id: 24,
@@ -375,25 +377,22 @@ const g5LaDifficult6Questions: Question[] = [
     skill: "Academic Vocabulary",
     question: "Which meaning best fits the academic word \"resource\"?",
     options: [
-      "a useful supply that can be drawn upon",
-      "a punishment for breaking rules",
-      "a mistake made by a community",
-      "a story passed down by elders",
+      "a supply of materials that can be drawn upon",
+      "an argument that is used to settle a dispute",
+      "a careful plan developed by a group of leaders",
+      "a strict punishment given for breaking a rule"
     ],
     correctAnswer: 0,
-    explanation:
-      "A resource is a useful supply, such as water or fish, that people can draw upon.",
+    explanation: "In the context of water and fish, a resource is a stock or supply of materials that can be drawn on when needed."
   },
   {
     id: 25,
     type: "vocabulary",
     skill: "Choosing the Best Word",
-    question:
-      "Choose the best word: \"To protect the fish, the community had to _____ today's needs against tomorrow's survival.\"",
-    options: ["balance", "ignore", "increase", "hide"],
-    correctAnswer: 0,
-    explanation:
-      "The passage speaks of balancing present and future needs; 'balance' fits the meaning.",
+    question: "Choose the best word: \"To protect the fish, the community had to _____ today's needs against tomorrow's survival.\"",
+    options: ["dismiss", "weigh", "multiply", "separate"],
+    correctAnswer: 1,
+    explanation: "To 'weigh' one thing against another means to carefully compare their importance, which fits the context of balancing needs."
   },
   {
     id: 26,
@@ -401,14 +400,13 @@ const g5LaDifficult6Questions: Question[] = [
     skill: "Run-on Correction",
     question: "Which choice corrects the run-on sentence?",
     options: [
-      "The taps leaked, so Miss Pearl showed families how to fix them.",
-      "The taps leaked Miss Pearl showed families how to fix them.",
+      "The taps leaked Miss Pearl showing families how to fix them.",
+      "Because the taps leaked, therefore Miss Pearl showed families how to fix them.",
       "The taps leaked, Miss Pearl showed families how to fix them.",
-      "The taps leaking and Miss Pearl showed how to fix.",
+      "The taps leaked, so Miss Pearl showed families how to fix them."
     ],
-    correctAnswer: 0,
-    explanation:
-      "A comma plus 'so' correctly joins the two complete ideas.",
+    correctAnswer: 3,
+    explanation: "Using a comma and the coordinating conjunction 'so' correctly joins two independent clauses without creating a run-on."
   },
   {
     id: 27,
@@ -416,14 +414,13 @@ const g5LaDifficult6Questions: Question[] = [
     skill: "Subject-Verb Agreement",
     question: "Which sentence is written correctly?",
     options: [
-      "The community of fishers shares the same harbour.",
       "The community of fishers share the same harbour.",
-      "The community of fishers sharing the same harbour.",
-      "The community of fishers are shares the same harbour.",
+      "The community of fishers have shared the same harbour.",
+      "The community of fishers shares the same harbour.",
+      "The community of fishers has sharing the same harbour."
     ],
-    correctAnswer: 0,
-    explanation:
-      "'Community' is singular and takes the singular verb 'shares'.",
+    correctAnswer: 2,
+    explanation: "The subject 'community' is singular, so it requires the singular verb 'shares', regardless of the plural phrase in between."
   },
   {
     id: 28,
@@ -432,13 +429,12 @@ const g5LaDifficult6Questions: Question[] = [
     question: "Which sentence keeps the tense consistent?",
     options: [
       "Miss Pearl measured the leak and posted the figure.",
-      "Miss Pearl measures the leak and posted the figure.",
-      "Miss Pearl measured the leak and posts the figure.",
-      "Miss Pearl will measure the leak and posted the figure.",
+      "Miss Pearl had measured the leak and posts the figure.",
+      "Miss Pearl measured the leak and has posting the figure.",
+      "Miss Pearl measures the leak and had posted the figure."
     ],
     correctAnswer: 0,
-    explanation:
-      "Both verbs are past tense — measured and posted — keeping the sentence consistent.",
+    explanation: "Both verbs are in the simple past tense, ensuring the sentence remains consistent in its timeline."
   },
   {
     id: 29,
@@ -446,14 +442,13 @@ const g5LaDifficult6Questions: Question[] = [
     skill: "Pronouns",
     question: "Choose the sentence with the correct pronoun.",
     options: [
-      "Mr. Dawes asked the fishers and us to follow the rules.",
       "Mr. Dawes asked the fishers and we to follow the rules.",
-      "Mr. Dawes asked we and them to follow the rules.",
-      "Mr. Dawes asked the fishers and ourselves to follow the rules.",
+      "Mr. Dawes asked the fishers and us to follow the rules.",
+      "Mr. Dawes asked the fishers and they to follow the rules.",
+      "Mr. Dawes asked the fishers and ourselves to follow the rules."
     ],
-    correctAnswer: 0,
-    explanation:
-      "The pronoun is an object of 'asked', so the object form 'us' is correct.",
+    correctAnswer: 1,
+    explanation: "The pronoun follows the action verb 'asked' and acts as an object, making the object pronoun 'us' the correct choice."
   },
   {
     id: 30,
@@ -461,14 +456,13 @@ const g5LaDifficult6Questions: Question[] = [
     skill: "Punctuation",
     question: "Which sentence is punctuated correctly?",
     options: [
-      "During the drought, the standpipe ran only twice a week.",
-      "During the drought the standpipe ran only, twice a week.",
-      "During, the drought the standpipe ran only twice a week.",
       "During the drought the standpipe, ran only twice a week.",
+      "During the drought, the standpipe, ran only twice a week.",
+      "During, the drought the standpipe ran only twice a week.",
+      "During the drought, the standpipe ran only twice a week."
     ],
-    correctAnswer: 0,
-    explanation:
-      "A comma follows the introductory phrase 'During the drought'.",
+    correctAnswer: 3,
+    explanation: "A comma should follow the introductory prepositional phrase 'During the drought' to separate it from the main clause."
   },
   {
     id: 31,
@@ -476,14 +470,13 @@ const g5LaDifficult6Questions: Question[] = [
     skill: "Quotation Marks",
     question: "Which sentence uses quotation marks correctly?",
     options: [
-      "\"A shared resource belongs to no single person,\" Mr. Dawes said.",
       "\"A shared resource belongs to no single person Mr. Dawes said.\"",
       "A shared resource belongs to no single person,\" Mr. Dawes said.",
-      "\"A shared resource belongs to no single person\" Mr. Dawes said.",
+      "\"A shared resource belongs to no single person,\" Mr. Dawes said.",
+      "\"A shared resource belongs to no single person\" Mr. Dawes said."
     ],
-    correctAnswer: 0,
-    explanation:
-      "The quoted words are enclosed, with the comma inside the closing mark before the tag.",
+    correctAnswer: 2,
+    explanation: "The spoken words are fully enclosed in quotation marks, with the comma correctly placed inside the closing quotation mark."
   },
   {
     id: 32,
@@ -492,13 +485,12 @@ const g5LaDifficult6Questions: Question[] = [
     question: "Which sentence uses parallel structure?",
     options: [
       "They caught rainwater, reused dishwater, and fixed leaks.",
-      "They caught rainwater, reusing dishwater, and leaks were fixed.",
-      "They were catching rainwater, dishwater, and fixed leaks.",
-      "They caught, to reuse dishwater, and fixing leaks.",
+      "They caught rainwater, reusing dishwater, and fixed leaks.",
+      "They caught rainwater, reused dishwater, and the fixing of leaks.",
+      "To catch rainwater, reusing dishwater, and fixing leaks."
     ],
     correctAnswer: 0,
-    explanation:
-      "The three actions share the same past-tense form: caught, reused, fixed.",
+    explanation: "The three items in the list follow the exact same grammatical pattern: past tense verb + direct object."
   },
   {
     id: 33,
@@ -506,112 +498,97 @@ const g5LaDifficult6Questions: Question[] = [
     skill: "Sentence Combining",
     question: "Which choice best combines the two sentences?",
     options: [
+      "The fish were scarce, the community agreed on new rules.",
       "Because the fish were scarce, the community agreed on new rules.",
-      "The fish were scarce the community agreed on new rules.",
-      "Being scarce but the community agreed on new rules.",
-      "The fish were scarce, the community, agreed on new rules.",
+      "The fish were scarce, and agreeing on new rules.",
+      "Since the fish were scarce, therefore the community agreed on new rules."
     ],
-    correctAnswer: 0,
-    explanation:
-      "'Because' joins the cause and effect into one clear sentence.",
+    correctAnswer: 1,
+    explanation: "Using 'Because' clearly establishes the cause-and-effect relationship between the two ideas in one grammatically correct sentence."
   },
   {
     id: 34,
     type: "grammar",
     skill: "Transitions",
-    question:
-      "Which transition best completes the sentence? \"The rules cost money at first; _____, the fish soon returned.\"",
-    options: ["however", "therefore", "for example", "next"],
-    correctAnswer: 0,
-    explanation:
-      "'However' shows the contrast between the early cost and the later return of the fish.",
+    question: "Which transition best completes the sentence? \"The rules cost money at first; _____, the fish soon returned.\"",
+    options: ["therefore", "for example", "next", "however"],
+    correctAnswer: 3,
+    explanation: "'However' is used to show a contrast between the initial negative cost and the eventual positive outcome."
   },
   {
     id: 35,
     type: "grammar",
     skill: "Word Choice",
-    question:
-      "Which word choice is most precise? \"Miss Pearl _____ how much water a dripping tap lost.\"",
-    options: ["measured", "checked out", "did", "saw about"],
-    correctAnswer: 0,
-    explanation:
-      "'Measured' precisely names the action; the others are vague.",
+    question: "Which word choice is most precise? \"Miss Pearl _____ how much water a dripping tap lost.\"",
+    options: ["guessed", "noticed", "measured", "imagined"],
+    correctAnswer: 2,
+    explanation: "'Measured' implies using a tool to find an exact amount, which is much more precise than guessing or noticing."
   },
   {
     id: 36,
     type: "writing",
     skill: "Best Introduction",
-    question:
-      "Which sentence is the best introduction for an essay about protecting shared resources?",
+    question: "Which sentence is the best introduction for an essay about protecting shared resources?",
     options: [
-      "When a community works together, it can protect resources like water and fish for everyone.",
-      "Water and fish are things that people use sometimes.",
-      "This essay will be about a few different things.",
-      "There are harbours and villages all over the place.",
+      "When communities face shortages, working together to manage shared resources can ensure survival for everyone.",
+      "Water and fish are just two of the important things that people use in their daily lives.",
+      "This essay is going to talk about two different places and explain exactly what happened there.",
+      "There are many small villages and busy harbours located all across the country."
     ],
     correctAnswer: 0,
-    explanation:
-      "A strong introduction states a clear, specific main idea; the others are vague or off-topic.",
+    explanation: "A strong introduction clearly states the essay's main idea or thesis, which the first option does effectively."
   },
   {
     id: 37,
     type: "writing",
     skill: "Strongest Supporting Detail",
-    question:
-      "Which detail best supports the claim that managing the fishery worked?",
+    question: "Which detail best supports the claim that managing the fishery worked?",
     options: [
-      "Within two seasons the fish returned in greater numbers.",
-      "Some fishers blamed one another at first.",
-      "Mr. Dawes was an elder in the community.",
-      "A few fishers worried about losing money.",
+      "At first, some fishers blamed each other before the new rules were introduced.",
+      "Within two seasons, the fish returned in greater numbers, proving the plan worked.",
+      "Mr. Dawes was highly respected as an elder in the Blue Harbour community.",
+      "A few fishers initially worried that the new rules would end up costing them money."
     ],
-    correctAnswer: 0,
-    explanation:
-      "The return of the fish is the strongest evidence that the management worked.",
+    correctAnswer: 1,
+    explanation: "Providing the concrete result of the plan directly supports the claim that the management strategy was successful."
   },
   {
     id: 38,
     type: "writing",
     skill: "Best Transition",
-    question:
-      "\"Few families listened at first. _____ many joined as the drums filled.\" Which transition fits best?",
-    options: ["Gradually,", "However,", "In contrast,", "For instance,"],
-    correctAnswer: 0,
-    explanation:
-      "'Gradually' shows the change over time as more families joined.",
+    question: "\"Few families listened at first. _____ many joined as the drums filled.\" Which transition fits best?",
+    options: ["However,", "In contrast,", "For instance,", "Gradually,"],
+    correctAnswer: 3,
+    explanation: "'Gradually' indicates a slow change over time, which perfectly matches the shift from few families listening to many joining."
   },
   {
     id: 39,
     type: "writing",
     skill: "Sentence to Remove",
-    question:
-      "These sentences appear in a report about water conservation. Which should be REMOVED?",
+    question: "These sentences appear in a report about water conservation. Which should be REMOVED?",
     options: [
-      "Miss Pearl enjoys watching cricket on the weekend.",
-      "She measured how much a dripping tap wastes.",
-      "Families began catching rainwater in clean drums.",
-      "Reusing dishwater kept the gardens green.",
+      "She measured how much water a dripping tap wastes in a single day.",
+      "Many families began catching rainwater in clean drums behind their homes.",
+      "Miss Pearl also enjoys baking cakes for the village fair on Saturdays.",
+      "Reusing dishwater helped keep the kitchen gardens green during the dry weeks."
     ],
-    correctAnswer: 0,
-    explanation:
-      "Miss Pearl's cricket hobby is unrelated to the conservation report and should be removed.",
+    correctAnswer: 2,
+    explanation: "Baking cakes is unrelated to the topic of water conservation and breaks the focus of the paragraph."
   },
   {
     id: 40,
     type: "writing",
     skill: "Best Conclusion",
-    question:
-      "Which sentence is the best conclusion for an essay about these two communities?",
+    question: "Which sentence is the best conclusion for an essay about these two communities?",
     options: [
-      "Both stories prove that caring for shared resources keeps them alive for all.",
-      "And that is the end of the writing about water and fish.",
-      "Drums and harbours are two things found near water.",
-      "So the communities did something and the essay finished.",
+      "Ultimately, both communities clearly show that protecting shared resources requires close cooperation and careful planning.",
+      "In conclusion, both water and fish are two very important things for people to have.",
+      "To end this essay, Miss Pearl and Mr. Dawes were very good leaders in their towns.",
+      "As you can clearly see, the drums filled up and the fish came back to the harbour."
     ],
     correctAnswer: 0,
-    explanation:
-      "A strong conclusion restates the shared main idea with purpose, as the first choice does.",
-  },
+    explanation: "A strong conclusion synthesizes the main points into a broader takeaway, which the first option accomplishes."
+  }
 ];
 
 const shuffleAnswerOptions = (questions: Question[]): Question[] => {
