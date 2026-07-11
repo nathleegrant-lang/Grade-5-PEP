@@ -56,12 +56,14 @@ const g5LaDifficult4Questions: Question[] = [
     id: 1,
     type: "reading",
     skill: "Main Idea",
-    question: `${d4Passage1}\n\nWhat is the main idea of the passage?`,
+    question: `${d4Passage1}
+
+What is the main idea of the passage?`,
     options: [
       "Being a good citizen means making small, brave choices every day.",
-      "Heroes only existed long ago and cannot exist now.",
-      "Studying history is the only way to honour heroes.",
-      "Picking up litter is the most important civic duty.",
+      "Civic duty is only about completing large, famous deeds.",
+      "Studying history is the only way to truly honour our National Heroes.",
+      "Picking up litter is the single most important duty a person has."
     ],
     correctAnswer: 0,
     explanation:
@@ -71,14 +73,16 @@ const g5LaDifficult4Questions: Question[] = [
     id: 2,
     type: "reading",
     skill: "Inference",
-    question: `${d4Passage1}\n\nWhat can you infer changed in Tanya's thinking during the lesson?`,
+    question: `${d4Passage1}
+
+What can you infer changed in Tanya's thinking during the lesson?`,
     options: [
-      "She began to see ordinary people as capable of heroic acts.",
-      "She decided heroes were not worth learning about.",
-      "She concluded that only Maroons could be heroes.",
-      "She stopped believing that telling the truth matters.",
+      "She realised that famous heroes probably never did ordinary tasks.",
+      "She concluded that only adults, not children, can show true courage.",
+      "She began to see that ordinary people doing small things can be heroic.",
+      "She decided that studying history was the only way to learn about bravery."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "Tanya moves from thinking heroes are only famous figures to seeing everyday choices as brave, an inference about her changed view.",
   },
@@ -86,14 +90,16 @@ const g5LaDifficult4Questions: Question[] = [
     id: 3,
     type: "reading",
     skill: "Supporting Details",
-    question: `${d4Passage1}\n\nWhich detail does the passage give about Nanny of the Maroons?`,
+    question: `${d4Passage1}
+
+Which detail does the passage give about Nanny of the Maroons?`,
     options: [
+      "She organised a weekly clean-up team at a local school.",
       "She led her people to freedom with courage and clever strategy.",
-      "She organised a weekly clean-up team at a school.",
-      "She taught Tanya's class on Heroes' Day.",
-      "She wrote a book about civic responsibility.",
+      "She taught Tanya's class how to write essays on Heroes' Day.",
+      "She wrote a book explaining the importance of civic responsibility."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "The passage states Nanny led her people to freedom through courage and strategy; the other options are not in the text.",
   },
@@ -101,14 +107,16 @@ const g5LaDifficult4Questions: Question[] = [
     id: 4,
     type: "reading",
     skill: "Author's Purpose",
-    question: `${d4Passage1}\n\nWhy does the teacher ask what it means to be a good citizen today?`,
+    question: `${d4Passage1}
+
+Why does the teacher ask what it means to be a good citizen today?`,
     options: [
-      "To help pupils connect past heroes to their own actions now.",
-      "To prove that heroes today are unimportant.",
-      "To test whether pupils can name every National Hero.",
-      "To explain how Heroes' Day became a holiday.",
+      "To prove that modern citizens are not as strong as heroes from the past.",
+      "To test whether the pupils could memorise the names of every National Hero.",
+      "To explain the exact history of how Heroes' Day became a public holiday.",
+      "To help pupils connect past heroes to their own actions now."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "The question links the heroes of the past to the pupils' present choices, which is the author's purpose.",
   },
@@ -116,14 +124,16 @@ const g5LaDifficult4Questions: Question[] = [
     id: 5,
     type: "reading",
     skill: "Vocabulary in Context",
-    question: `${d4Passage1}\n\nIn the passage, what does "civic" most nearly mean?`,
+    question: `${d4Passage1}
+
+In the passage, what does "civic" most nearly mean?`,
     options: [
+      "relating only to ancient history or old traditions",
       "relating to one's community or society",
-      "relating only to ancient history",
-      "relating to a single family",
-      "relating to a school subject grade",
+      "relating strictly to a single family's private matters",
+      "relating to the grades a student earns in school"
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "Civic responsibility concerns duties to the community, so 'relating to one's community' fits.",
   },
@@ -131,12 +141,14 @@ const g5LaDifficult4Questions: Question[] = [
     id: 6,
     type: "reading",
     skill: "Drawing Conclusions",
-    question: `${d4Passage1}\n\nWhat conclusion can you draw about what the heroes had in common?`,
+    question: `${d4Passage1}
+
+What conclusion can you draw about what the heroes had in common?`,
     options: [
       "Each cared about others and refused to accept what was wrong.",
-      "Each lived in exactly the same time period.",
-      "Each became famous for picking up litter.",
-      "Each taught at Tanya's school personally.",
+      "Each became well-known by writing books about their experiences.",
+      "Each lived in exactly the same area of Jamaica during the same era.",
+      "Each was officially appointed as a leader by the government of their time."
     ],
     correctAnswer: 0,
     explanation:
@@ -146,14 +158,16 @@ const g5LaDifficult4Questions: Question[] = [
     id: 7,
     type: "reading",
     skill: "Point of View",
-    question: `${d4Passage1}\n\nHow does Tanya come to view civic responsibility by the end?`,
+    question: `${d4Passage1}
+
+How does Tanya come to view civic responsibility by the end?`,
     options: [
+      "As a duty that belongs only to teachers and school staff.",
+      "As a topic that is far too difficult for young pupils to understand.",
       "As everyday brave choices, not only famous past deeds.",
-      "As something only National Heroes can practise.",
-      "As a topic too difficult for pupils to understand.",
-      "As a duty that belongs only to teachers.",
+      "As something that only National Heroes are truly able to practise."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "Tanya decides civic responsibility is about small brave choices ordinary people make daily.",
   },
@@ -161,14 +175,16 @@ const g5LaDifficult4Questions: Question[] = [
     id: 8,
     type: "reading",
     skill: "Inference",
-    question: `${d4Passage2}\n\nWhat can you infer about Marcus's first idea of being head boy?`,
+    question: `${d4Passage2}
+
+What can you infer about Marcus's first idea of being head boy?`,
     options: [
-      "He thought it was mostly about authority and status.",
-      "He thought it would require no effort at all.",
-      "He thought he would have to leave the school.",
-      "He thought it meant teaching the younger pupils.",
+      "He thought it would be an easy way to avoid doing regular classwork.",
+      "He believed the role would require him to teach the younger pupils every day.",
+      "He thought the responsibilities would be too difficult for a student to handle.",
+      "He thought it was mostly about having authority and a special badge."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "He expected giving orders and a special badge, suggesting he first saw the role as authority and status.",
   },
@@ -176,14 +192,16 @@ const g5LaDifficult4Questions: Question[] = [
     id: 9,
     type: "reading",
     skill: "Cause and Effect",
-    question: `${d4Passage2}\n\nWhat was the effect of Marcus's actions by the end of the term?`,
+    question: `${d4Passage2}
+
+What was the effect of Marcus's actions by the end of the term?`,
     options: [
-      "More students joined his efforts than he expected.",
-      "The school removed him as head boy.",
-      "The younger pupils stopped attending school.",
-      "The broken gate caused the yard to close.",
+      "The school decided to replace him with an older, more experienced pupil.",
+      "More students joined his efforts than he had ever expected.",
+      "The younger pupils stopped attending the school altogether.",
+      "The broken gate forced the school yard to close for repairs."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "The passage says more students joined his efforts than he had ever expected.",
   },
@@ -191,12 +209,14 @@ const g5LaDifficult4Questions: Question[] = [
     id: 10,
     type: "reading",
     skill: "Theme",
-    question: `${d4Passage2}\n\nWhich theme is best developed in the passage?`,
+    question: `${d4Passage2}
+
+Which theme is best developed in the passage?`,
     options: [
       "True leadership means serving others, not standing above them.",
-      "A leader should avoid ordinary tasks to keep respect.",
-      "Titles alone are enough to make someone a good leader.",
-      "Younger pupils should solve every problem themselves.",
+      "A good leader should avoid ordinary tasks to maintain the respect of others.",
+      "Having an important title is enough to make someone a strong leader.",
+      "Younger pupils should always be left to solve their own problems."
     ],
     correctAnswer: 0,
     explanation:
@@ -206,14 +226,16 @@ const g5LaDifficult4Questions: Question[] = [
     id: 11,
     type: "reading",
     skill: "Supporting Details",
-    question: `${d4Passage2}\n\nWhich detail shows Marcus took action to help younger pupils?`,
+    question: `${d4Passage2}
+
+Which detail shows Marcus took action to help younger pupils?`,
     options: [
-      "He organised a buddy system to support them.",
-      "He wore a special badge as head boy.",
-      "He reported the broken gate to the office.",
-      "He started a weekly clean-up team.",
+      "He wore a special badge to show he was the head boy.",
+      "He reported the dangerous, rusting gate to the school office.",
+      "He started a weekly clean-up team for the school yard.",
+      "He organised a buddy system to support them."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "The buddy system is the action aimed specifically at supporting younger pupils. The clean-up and gate address other problems.",
   },
@@ -221,14 +243,18 @@ const g5LaDifficult4Questions: Question[] = [
     id: 12,
     type: "reading",
     skill: "Compare and Contrast",
-    question: `${d4Passage1}\n\n${d4Passage2}\n\nHow are Tanya's lesson and Marcus's experience alike?`,
+    question: `${d4Passage1}
+
+${d4Passage2}
+
+How are Tanya's lesson and Marcus's experience alike?`,
     options: [
-      "Both learn that service to others matters more than fame or titles.",
-      "Both become head pupils of their schools.",
-      "Both study the lives of the Maroons in class.",
-      "Both decide that leadership is unimportant.",
+      "Both become head pupils of their respective schools to test their skills.",
+      "Both study the lives of the Maroons in their history classes to find ideas.",
+      "Both learn that serving others matters more than having a famous title.",
+      "Both decide that taking on a leadership role is too much responsibility."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "Both passages teach that caring for and serving others matters more than status. The other choices fit only one passage.",
   },
@@ -236,12 +262,14 @@ const g5LaDifficult4Questions: Question[] = [
     id: 13,
     type: "reading",
     skill: "Prediction",
-    question: `${d4Passage2}\n\nIf a new problem appeared at school, what would Marcus most likely do?`,
+    question: `${d4Passage2}
+
+If a new problem appeared at school, what would Marcus most likely do?`,
     options: [
       "Step in to help and encourage others to join him.",
-      "Wait for a teacher to fix everything alone.",
-      "Ignore it because leaders avoid ordinary work.",
-      "Resign from his position immediately.",
+      "Wait for a teacher to notice and fix the problem alone.",
+      "Ignore it because he believes leaders should avoid ordinary work.",
+      "Complain to the principal that the problem is not his responsibility."
     ],
     correctAnswer: 0,
     explanation:
@@ -251,14 +279,16 @@ const g5LaDifficult4Questions: Question[] = [
     id: 14,
     type: "reading",
     skill: "Text Evidence",
-    question: `${d4Passage2}\n\nWhich sentence best supports the idea that Marcus led by example?`,
+    question: `${d4Passage2}
+
+Which sentence best supports the idea that Marcus led by example?`,
     options: [
+      "He expected the role to be about giving orders and wearing a badge.",
       "He earns respect not by his title, but by the example he sets.",
-      "He expected the role to be about giving orders.",
-      "The school gate was rusting dangerously.",
-      "Some classmates complained about the chores.",
+      "The school gate was rusting dangerously and needed immediate repairs.",
+      "Some classmates complained that he was doing too many ordinary chores."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "The closing line directly states he earned respect through his example, supporting the idea.",
   },
@@ -266,14 +296,16 @@ const g5LaDifficult4Questions: Question[] = [
     id: 15,
     type: "reading",
     skill: "Cause and Effect",
-    question: `${d4Passage2}\n\nWhy did some classmates complain about Marcus?`,
+    question: `${d4Passage2}
+
+Why did some classmates complain about Marcus?`,
     options: [
-      "They thought a leader should not do ordinary chores.",
-      "They believed he was not strict enough with pupils.",
-      "They wanted to be head boy in his place.",
-      "They thought the buddy system was too expensive.",
+      "They believed he was not being strict enough with the younger pupils.",
+      "They wanted to be chosen as head boy in his place.",
+      "They felt that doing chores was beneath someone with his title.",
+      "They thought the buddy system took too much time away from regular classes."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "The text says classmates complained that a leader should not have to do ordinary chores.",
   },
@@ -283,8 +315,8 @@ const g5LaDifficult4Questions: Question[] = [
     skill: "Synonym",
     question:
       "Which word is the closest synonym for \"courage\" as used in the first passage?",
-    options: ["bravery", "weakness", "silence", "doubt"],
-    correctAnswer: 0,
+    options: ["weakness", "silence", "doubt", "bravery"],
+    correctAnswer: 3,
     explanation:
       "Courage means bravery, the willingness to face danger or difficulty.",
   },
@@ -294,8 +326,8 @@ const g5LaDifficult4Questions: Question[] = [
     skill: "Antonym",
     question:
       "Marcus chose to serve rather than rule. Which word means the OPPOSITE of \"serve\" here?",
-    options: ["dominate", "assist", "support", "help"],
-    correctAnswer: 0,
+    options: ["assist", "dominate", "support", "help"],
+    correctAnswer: 1,
     explanation:
       "To serve is to help others; its opposite here is to dominate or rule over them.",
   },
@@ -305,8 +337,8 @@ const g5LaDifficult4Questions: Question[] = [
     skill: "Prefix",
     question:
       "The word \"unfairness\" begins with \"un-,\" meaning \"not.\" \"Unfairness\" describes a situation that is —",
-    options: ["not fair", "fully fair", "fair again", "able to be fair"],
-    correctAnswer: 0,
+    options: ["fully fair", "fair again", "not fair", "able to be fair"],
+    correctAnswer: 2,
     explanation:
       "'Un-' means not, so unfairness is the state of not being fair.",
   },
@@ -339,12 +371,12 @@ const g5LaDifficult4Questions: Question[] = [
     question:
       "Which sentence uses \"example\" in the same way as \"the example he sets\"?",
     options: [
-      "A good captain is an example for the whole team.",
       "Give me one example of a noun, please.",
-      "This is an example question on the test.",
-      "For example, oranges grow in warm places.",
+      "For example, oranges grow well in warm places.",
+      "A good captain is an example for the whole team.",
+      "This is just an example question on the practice test."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "Here 'example' means a model others follow, as a captain is an example. The others mean a sample or instance.",
   },
@@ -353,8 +385,8 @@ const g5LaDifficult4Questions: Question[] = [
     type: "vocabulary",
     skill: "Word Relationships",
     question: "Hero is to brave as coward is to —",
-    options: ["fearful", "kind", "strong", "honest"],
-    correctAnswer: 0,
+    options: ["kind", "fearful", "strong", "honest"],
+    correctAnswer: 1,
     explanation:
       "A hero is brave; a coward is fearful, so 'fearful' completes the relationship.",
   },
@@ -378,7 +410,7 @@ const g5LaDifficult4Questions: Question[] = [
       "a duty to act correctly or care for something",
       "a reward given for good behaviour",
       "a punishment for breaking a rule",
-      "a story told about the past",
+      "a story told about the past"
     ],
     correctAnswer: 0,
     explanation:
@@ -390,8 +422,8 @@ const g5LaDifficult4Questions: Question[] = [
     skill: "Choosing the Best Word",
     question:
       "Choose the best word: \"A good leader is willing to _____ others rather than command them.\"",
-    options: ["serve", "scold", "avoid", "outrank"],
-    correctAnswer: 0,
+    options: ["scold", "avoid", "serve", "outrank"],
+    correctAnswer: 2,
     explanation:
       "The passage's idea of leadership is serving others; 'serve' fits the meaning best.",
   },
@@ -401,12 +433,12 @@ const g5LaDifficult4Questions: Question[] = [
     skill: "Pronouns",
     question: "Choose the sentence with the correct pronoun.",
     options: [
-      "The teacher praised Marcus and me for our service.",
       "The teacher praised Marcus and I for our service.",
       "The teacher praised he and me for our service.",
       "The teacher praised I and Marcus for our service.",
+      "The teacher praised Marcus and me for our service."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "The pronoun is an object of 'praised', so the object form 'me' is correct.",
   },
@@ -419,7 +451,7 @@ const g5LaDifficult4Questions: Question[] = [
       "The class of pupils honours the National Heroes each year.",
       "The class of pupils honour the National Heroes each year.",
       "The class of pupils honouring the National Heroes each year.",
-      "The class of pupils are honours the National Heroes each year.",
+      "The class of pupils are honours the National Heroes each year."
     ],
     correctAnswer: 0,
     explanation:
@@ -431,12 +463,12 @@ const g5LaDifficult4Questions: Question[] = [
     skill: "Verb Tense",
     question: "Which sentence keeps the tense consistent?",
     options: [
-      "Marcus reported the gate and started a clean-up team.",
       "Marcus reports the gate and started a clean-up team.",
       "Marcus reported the gate and starts a clean-up team.",
-      "Marcus will report the gate and started a clean-up team.",
+      "Marcus reported the gate and started a clean-up team.",
+      "Marcus will report the gate and started a clean-up team."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "Both verbs are past tense — reported and started — keeping the sentence consistent.",
   },
@@ -449,7 +481,7 @@ const g5LaDifficult4Questions: Question[] = [
       "On Heroes' Day, the class studied Jamaica's National Heroes.",
       "On Heroes' Day the class, studied Jamaica's National Heroes.",
       "On, Heroes' Day the class studied Jamaica's National Heroes.",
-      "On Heroes' Day the class studied Jamaica's, National Heroes.",
+      "On Heroes' Day the class studied Jamaica's, National Heroes."
     ],
     correctAnswer: 0,
     explanation:
@@ -464,7 +496,7 @@ const g5LaDifficult4Questions: Question[] = [
       "\"Leadership means serving others,\" Marcus said.",
       "\"Leadership means serving others Marcus said.\"",
       "Leadership means serving others,\" Marcus said.",
-      "\"Leadership means serving others\" Marcus said.",
+      "\"Leadership means serving others\" Marcus said."
     ],
     correctAnswer: 0,
     explanation:
@@ -476,12 +508,12 @@ const g5LaDifficult4Questions: Question[] = [
     skill: "Parallel Structure",
     question: "Which sentence uses parallel structure?",
     options: [
-      "Marcus supported pupils, reported the gate, and led clean-ups.",
       "Marcus supported pupils, reporting the gate, and clean-ups were led.",
+      "Marcus supported pupils, reported the gate, and led clean-ups.",
       "Marcus was supporting pupils, the gate, and led clean-ups.",
-      "Marcus supported, to report the gate, and leading clean-ups.",
+      "Marcus supported, to report the gate, and leading clean-ups."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "The three actions share the same past-tense form: supported, reported, led.",
   },
@@ -491,12 +523,12 @@ const g5LaDifficult4Questions: Question[] = [
     skill: "Run-on Correction",
     question: "Which choice corrects the run-on sentence?",
     options: [
-      "The gate was rusting, so Marcus reported it to the office.",
       "The gate was rusting Marcus reported it to the office.",
       "The gate was rusting, Marcus reported it to the office.",
-      "The gate rusting and Marcus reported it.",
+      "The gate was rusting, so Marcus reported it to the office.",
+      "The gate rusting and Marcus reported it."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "A comma plus 'so' correctly joins the two complete ideas.",
   },
@@ -509,7 +541,7 @@ const g5LaDifficult4Questions: Question[] = [
       "Although classmates complained, Marcus continued to serve the school.",
       "Classmates complained Marcus continued to serve the school.",
       "Complaining classmates but Marcus continued serving.",
-      "Classmates complained, Marcus, continued to serve.",
+      "Classmates complained, Marcus, continued to serve."
     ],
     correctAnswer: 0,
     explanation:
@@ -521,8 +553,8 @@ const g5LaDifficult4Questions: Question[] = [
     skill: "Transitions",
     question:
       "Which transition best completes the sentence? \"Marcus saw several problems; _____, he decided to act.\"",
-    options: ["therefore", "however", "for example", "meanwhile"],
-    correctAnswer: 0,
+    options: ["however", "therefore", "for example", "meanwhile"],
+    correctAnswer: 1,
     explanation:
       "'Therefore' shows the result of seeing the problems — deciding to act.",
   },
@@ -532,8 +564,8 @@ const g5LaDifficult4Questions: Question[] = [
     skill: "Word Choice",
     question:
       "Which word choice is most precise? \"Marcus _____ a weekly clean-up team to keep the yard tidy.\"",
-    options: ["organised", "got", "made up", "did"],
-    correctAnswer: 0,
+    options: ["got", "made up", "did", "organised"],
+    correctAnswer: 3,
     explanation:
       "'Organised' precisely describes setting up a team; the others are vague.",
   },
@@ -544,12 +576,12 @@ const g5LaDifficult4Questions: Question[] = [
     question:
       "A student is writing an essay about being a good citizen. Which sentence should come FIRST as a topic sentence?",
     options: [
-      "Good citizens improve their community through small, everyday actions.",
       "For example, they pick up litter on the way to school.",
-      "They also help classmates who are struggling with work.",
-      "Finally, they speak the truth even when it is difficult.",
+      "They also help classmates who are struggling with their work.",
+      "Good citizens improve their community through small, everyday actions.",
+      "Finally, they speak the truth even when it is difficult."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "The topic sentence states the main idea; the others are supporting examples that follow it.",
   },
@@ -561,9 +593,9 @@ const g5LaDifficult4Questions: Question[] = [
       "Which detail best supports the idea that Marcus was a serving leader?",
     options: [
       "He started a buddy system and a clean-up team to help others.",
-      "He was chosen as head boy of the school.",
-      "He expected to wear a special badge.",
-      "Some classmates complained about him.",
+      "He was chosen as head boy of the school at the start of the term.",
+      "He expected to wear a special badge to show his new position.",
+      "Some classmates complained that he was doing too many ordinary chores."
     ],
     correctAnswer: 0,
     explanation:
@@ -575,8 +607,8 @@ const g5LaDifficult4Questions: Question[] = [
     skill: "Best Transition",
     question:
       "\"Marcus expected to give orders. _____ he found that leading meant helping.\" Which transition fits best?",
-    options: ["Instead,", "Therefore,", "For example,", "Similarly,"],
-    correctAnswer: 0,
+    options: ["Therefore,", "Instead,", "For example,", "Similarly,"],
+    correctAnswer: 1,
     explanation:
       "'Instead' shows the contrast between what he expected and what he found.",
   },
@@ -587,12 +619,12 @@ const g5LaDifficult4Questions: Question[] = [
     question:
       "These sentences appear in an essay about civic responsibility. Which should be REMOVED?",
     options: [
-      "Tanya's brother likes to play video games after school.",
-      "Good citizens care about the people around them.",
-      "They are willing to speak up against unfairness.",
-      "Even small actions can improve a community.",
+      "Good citizens care deeply about the people around them.",
+      "They are willing to speak up against unfairness when they see it.",
+      "Even small, brave actions can slowly improve a whole community.",
+      "Tanya's brother likes to play video games after school."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "Tanya's brother's hobby is unrelated to civic responsibility and should be removed.",
   },
@@ -603,15 +635,15 @@ const g5LaDifficult4Questions: Question[] = [
     question:
       "Which sentence is the best conclusion for an essay about heroes and service?",
     options: [
+      "The best way to honour heroes is to learn their names and dates by heart.",
       "Whether famous or ordinary, true heroes serve others and stand up for what is right.",
-      "And that is all I wanted to write about heroes today.",
-      "Heroes and head boys are two words that start differently.",
-      "So there were some heroes and then the essay stopped.",
+      "Being a good citizen is something that only adults can truly achieve.",
+      "In conclusion, both passages show that schools are the most important places for leaders."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
-      "A strong conclusion restates the shared main idea with purpose, as the first choice does.",
-  },
+      "A strong conclusion restates the shared main idea with purpose, as the second choice does.",
+  }
 ];
 
 const shuffleAnswerOptions = (questions: Question[]): Question[] => {
