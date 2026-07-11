@@ -56,12 +56,14 @@ const g5LaDifficult3Questions: Question[] = [
     id: 1,
     type: "reading",
     skill: "Inference",
-    question: `${d3Passage1}\n\nWhat can you infer about why Mr. Campbell stopped trusting the old calendar?`,
+    question: `${d3Passage1}
+
+What can you infer about why Mr. Campbell stopped trusting the old calendar?`,
     options: [
       "The weather no longer matched the patterns the calendar assumed.",
-      "His grandfather told him the calendar was wrong.",
-      "The agricultural officer destroyed the old calendar.",
-      "His neighbours forced him to throw the calendar away.",
+      "He wanted to prove that the agricultural officer knew more than his grandfather.",
+      "His neighbours convinced him that old methods were no longer fashionable.",
+      "He wanted to try planting completely different crops that were not on the calendar."
     ],
     correctAnswer: 0,
     explanation:
@@ -71,14 +73,16 @@ const g5LaDifficult3Questions: Question[] = [
     id: 2,
     type: "reading",
     skill: "Cause and Effect",
-    question: `${d3Passage1}\n\nWhat caused Mr. Campbell to lose two seasons of yams?`,
+    question: `${d3Passage1}
+
+What caused Mr. Campbell to lose two seasons of yams?`,
     options: [
-      "A long dry spell ruined the crops.",
-      "His neighbours stole the yams from his fields.",
-      "He planted too many crops in one season.",
-      "The agricultural officer gave him bad seeds.",
+      "He planted the seeds too close to the water channels.",
+      "A long dry spell ruined the crops before they could be harvested.",
+      "The new mulch he used prevented the yams from growing properly.",
+      "He stopped weeding the fields after visiting the agricultural officer."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "The passage names a long dry spell as the cause of the ruined yams.",
   },
@@ -86,14 +90,16 @@ const g5LaDifficult3Questions: Question[] = [
     id: 3,
     type: "reading",
     skill: "Supporting Details",
-    question: `${d3Passage1}\n\nWhich detail shows Mr. Campbell used evidence to make decisions?`,
+    question: `${d3Passage1}
+
+Which detail shows Mr. Campbell used evidence to make decisions?`,
     options: [
-      "He kept his own rainfall records.",
-      "He had farmed the land for thirty years.",
-      "His grandfather had used the same calendar.",
-      "His neighbours laughed at his new methods.",
+      "He had farmed the same land for thirty years.",
+      "His grandfather had used the same calendar for many years.",
+      "He kept his own rainfall records to track changes.",
+      "His neighbours laughed at his new methods at first."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "Keeping rainfall records is the detail that shows decisions based on evidence.",
   },
@@ -101,14 +107,16 @@ const g5LaDifficult3Questions: Question[] = [
     id: 4,
     type: "reading",
     skill: "Drawing Conclusions",
-    question: `${d3Passage1}\n\nWhat can you conclude about the neighbours who laughed?`,
+    question: `${d3Passage1}
+
+What can you conclude about the neighbours who laughed?`,
     options: [
-      "Their methods failed because they did not adapt like Mr. Campbell.",
-      "They had a better harvest than Mr. Campbell that year.",
-      "They taught Mr. Campbell how to dig water channels.",
-      "They stopped farming and moved to the city.",
+      "They secretly copied Mr. Campbell's methods after seeing his success.",
+      "They realised their mistake and asked him for advice the next year.",
+      "They decided to plant only drought-resistant crops the following season.",
+      "Their crops withered because they kept using the same old methods."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "Their crops withered while his survived, so we conclude their unchanged methods failed.",
   },
@@ -116,12 +124,14 @@ const g5LaDifficult3Questions: Question[] = [
     id: 5,
     type: "reading",
     skill: "Main Idea",
-    question: `${d3Passage1}\n\nWhat is the main idea of the passage?`,
+    question: `${d3Passage1}
+
+What is the main idea of the passage?`,
     options: [
       "A wise farmer must observe, learn, and adapt as the climate changes.",
-      "Old farming calendars are always better than new methods.",
-      "Yams are the most important crop a farmer can plant.",
-      "Farmers should never ask experts for advice.",
+      "Farming is too difficult to do without help from the government.",
+      "Traditional farming methods no longer work in any part of the country.",
+      "Growing yams requires more water than any other crop."
     ],
     correctAnswer: 0,
     explanation:
@@ -131,14 +141,16 @@ const g5LaDifficult3Questions: Question[] = [
     id: 6,
     type: "reading",
     skill: "Vocabulary in Context",
-    question: `${d3Passage1}\n\nIn the passage, what does "adapt" most nearly mean?`,
+    question: `${d3Passage1}
+
+In the passage, what does "adapt" most nearly mean?`,
     options: [
-      "to change methods to fit new conditions",
       "to repeat the same actions every year",
+      "to change methods to fit new conditions",
       "to give up and stop trying",
-      "to copy a neighbour exactly",
+      "to copy a neighbour exactly"
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "He adapted his methods to the conditions in front of him — changing to fit new conditions.",
   },
@@ -146,14 +158,16 @@ const g5LaDifficult3Questions: Question[] = [
     id: 7,
     type: "reading",
     skill: "Author's Purpose",
-    question: `${d3Passage1}\n\nWhy does the author describe the neighbours laughing and then their crops withering?`,
+    question: `${d3Passage1}
+
+Why does the author describe the neighbours laughing and then their crops withering?`,
     options: [
+      "To highlight how difficult it is to predict the weather.",
+      "To explain why yams are easily affected by dry spells.",
       "To show that adapting was wiser than repeating old habits.",
-      "To prove that farming is an impossible job.",
-      "To explain how to build channels for rainwater.",
-      "To suggest the neighbours were Mr. Campbell's enemies.",
+      "To suggest that neighbours should not laugh at new farming methods."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "The contrast shows the value of adapting over repeating habits, which is the author's point.",
   },
@@ -161,14 +175,16 @@ const g5LaDifficult3Questions: Question[] = [
     id: 8,
     type: "reading",
     skill: "Point of View",
-    question: `${d3Passage2}\n\nHow do the project leaders define true food security?`,
+    question: `${d3Passage2}
+
+How do the project leaders define true food security?`,
     options: [
-      "Growing wisely, sharing knowledge, and preventing waste.",
-      "Buying as much imported food as possible.",
-      "Growing the largest amount of any single crop.",
-      "Keeping all farming methods a secret.",
+      "Buying as much imported food as the community can afford.",
+      "Growing the largest amount of a single crop to sell for profit.",
+      "Keeping all new farming methods a secret from other villages.",
+      "Growing wisely, sharing knowledge, and preventing waste."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "The leaders argue food security comes from growing wisely, sharing knowledge, and not losing good food.",
   },
@@ -176,12 +192,14 @@ const g5LaDifficult3Questions: Question[] = [
     id: 9,
     type: "reading",
     skill: "Cause and Effect",
-    question: `${d3Passage2}\n\nWhy did many of the group's first crops fail?`,
+    question: `${d3Passage2}
+
+Why did many of the group's first crops fail?`,
     options: [
-      "They planted in poor soil without preparing it.",
-      "Families refused to eat the vegetables.",
-      "The school kitchen used up all the produce.",
-      "Heavy rain flooded the entire garden.",
+      "They planted in poor soil without preparing it first.",
+      "The seeds they found were too old to grow properly.",
+      "Families accidentally picked the vegetables before they were ripe.",
+      "Heavy rain washed away the seeds before they could sprout."
     ],
     correctAnswer: 0,
     explanation:
@@ -191,14 +209,16 @@ const g5LaDifficult3Questions: Question[] = [
     id: 10,
     type: "reading",
     skill: "Supporting Details",
-    question: `${d3Passage2}\n\nWhich detail shows the group reduced waste?`,
+    question: `${d3Passage2}
+
+Which detail shows the group reduced waste?`,
     options: [
-      "They taught families to store and preserve part of each harvest.",
       "They planted vegetables on unused land beside the school.",
-      "They worried about the cost of imported food.",
-      "The garden supplied produce within a single year.",
+      "They taught families to store and preserve part of each harvest.",
+      "The garden supplied produce to dozens of homes within a year.",
+      "They worried about the high cost of imported food."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "Teaching families to store and preserve harvests is the detail that directly addresses reducing waste.",
   },
@@ -206,14 +226,16 @@ const g5LaDifficult3Questions: Question[] = [
     id: 11,
     type: "reading",
     skill: "Theme",
-    question: `${d3Passage2}\n\nWhich theme is best developed in the passage?`,
+    question: `${d3Passage2}
+
+Which theme is best developed in the passage?`,
     options: [
+      "Growing food locally is always easier than buying it from other countries.",
+      "Community projects only work when experts are paid to lead them.",
       "Solving a community problem requires knowledge, effort, and sharing.",
-      "Imported food is always better than locally grown food.",
-      "A garden can only succeed if experts plant every seed.",
-      "Communities should keep useful knowledge to themselves.",
+      "It is better to keep useful farming knowledge a secret."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "The garden's success rests on tested knowledge, hard work, and sharing — the central theme.",
   },
@@ -221,14 +243,18 @@ const g5LaDifficult3Questions: Question[] = [
     id: 12,
     type: "reading",
     skill: "Compare and Contrast",
-    question: `${d3Passage1}\n\n${d3Passage2}\n\nHow are Mr. Campbell and the community group alike?`,
+    question: `${d3Passage1}
+
+${d3Passage2}
+
+How are Mr. Campbell and the community group alike?`,
     options: [
-      "Both tested ideas and changed their methods after early failure.",
-      "Both grew yams to sell at the local market.",
-      "Both gave up after their first crops failed.",
-      "Both refused help from any outside experts.",
+      "Both grew yams and other root vegetables to sell at the market.",
+      "Both decided to stop farming after their first crops failed.",
+      "Both refused to accept help from outside agricultural experts.",
+      "Both tested ideas and changed their methods after early failure."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "Both responded to failure by testing and adapting. The other choices fit only one passage or neither.",
   },
@@ -236,12 +262,14 @@ const g5LaDifficult3Questions: Question[] = [
     id: 13,
     type: "reading",
     skill: "Prediction",
-    question: `${d3Passage2}\n\nIf a new pest attacked the garden, what would the group most likely do?`,
+    question: `${d3Passage2}
+
+If a new pest attacked the garden, what would the group most likely do?`,
     options: [
       "Study the problem and try a solution suited to local conditions.",
-      "Abandon the garden and go back to imported food.",
-      "Plant the same way and hope the pest disappears.",
-      "Blame the school and stop sharing knowledge.",
+      "Stop planting vegetables and use the land for something else.",
+      "Continue planting the same crops and hope the pest goes away.",
+      "Ask the government to send experts to fix the problem for them."
     ],
     correctAnswer: 0,
     explanation:
@@ -251,14 +279,16 @@ const g5LaDifficult3Questions: Question[] = [
     id: 14,
     type: "reading",
     skill: "Text Evidence",
-    question: `${d3Passage2}\n\nWhich sentence best supports the idea that the project benefited many people?`,
+    question: `${d3Passage2}
+
+Which sentence best supports the idea that the project benefited many people?`,
     options: [
-      "The garden supplied fresh produce to dozens of homes and the school kitchen.",
       "They started a project on unused land beside the school.",
-      "Many crops failed in the poor soil at first.",
-      "They added compost made from kitchen scraps.",
+      "The garden supplied fresh produce to dozens of homes and the school kitchen.",
+      "They added compost made from kitchen scraps to help the soil.",
+      "Many crops failed in the poor soil at first."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "Supplying dozens of homes and the school kitchen is direct evidence of wide benefit.",
   },
@@ -266,14 +296,16 @@ const g5LaDifficult3Questions: Question[] = [
     id: 15,
     type: "reading",
     skill: "Inference",
-    question: `${d3Passage2}\n\nWhat can you infer about why the group made compost from kitchen scraps?`,
+    question: `${d3Passage2}
+
+What can you infer about why the group made compost from kitchen scraps?`,
     options: [
-      "They wanted a low-cost way to improve the poor soil.",
-      "They had no other use for the scraps at all.",
-      "An expert ordered them to stop buying fertiliser.",
-      "They wanted to keep the scraps away from animals.",
+      "They wanted to keep the kitchen scraps away from stray animals.",
+      "An expert advised them to stop using chemical fertilisers.",
+      "They needed a low-cost way to improve the poor soil.",
+      "They had no other place to throw away the extra food waste."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "Compost from scraps is a cheap way to enrich soil, which is why the group used it after their crops failed.",
   },
@@ -283,8 +315,8 @@ const g5LaDifficult3Questions: Question[] = [
     skill: "Synonym",
     question:
       "Which word is the closest synonym for \"withered\" in \"their crops withered\"?",
-    options: ["shrivelled", "bloomed", "ripened", "grew"],
-    correctAnswer: 0,
+    options: ["bloomed", "ripened", "grew", "shrivelled"],
+    correctAnswer: 3,
     explanation:
       "Withered means dried up and shrank, so 'shrivelled' is the closest match.",
   },
@@ -306,12 +338,12 @@ const g5LaDifficult3Questions: Question[] = [
     question:
       "The word \"imported\" begins with \"im-,\" meaning \"into.\" Imported food is food that is —",
     options: [
-      "brought into the country from elsewhere",
       "grown only in the local village",
-      "thrown out before it is eaten",
+      "brought into the country from elsewhere",
       "stored for many years at a time",
+      "thrown out before it is eaten"
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "'Im-' means into, so imported food is brought into the country from abroad.",
   },
@@ -321,8 +353,8 @@ const g5LaDifficult3Questions: Question[] = [
     skill: "Suffix",
     question:
       "Add the suffix \"-ance\" to \"resist\" to form a noun. The correct word is —",
-    options: ["resistance", "resisting", "resisted", "resistful"],
-    correctAnswer: 0,
+    options: ["resistful", "resisted", "resistance", "resisting"],
+    correctAnswer: 2,
     explanation:
       "'-ance' forms the noun 'resistance', as in drought resistance.",
   },
@@ -332,8 +364,13 @@ const g5LaDifficult3Questions: Question[] = [
     skill: "Context Clues",
     question:
       "\"They added compost so the soil could hold moisture.\" Using context, \"moisture\" most nearly means —",
-    options: ["small amounts of water", "thick layers of mud", "tiny insects", "dry dust"],
-    correctAnswer: 0,
+    options: [
+      "thick layers of mud",
+      "tiny pieces of rock",
+      "dry dust from the ground",
+      "small amounts of water"
+    ],
+    correctAnswer: 3,
     explanation:
       "Soil that holds moisture holds water, so 'small amounts of water' fits the context.",
   },
@@ -347,7 +384,7 @@ const g5LaDifficult3Questions: Question[] = [
       "We expect a cold spell later this week.",
       "Please spell your full name for the record.",
       "The teacher asked her to spell the word aloud.",
-      "He read a magic spell from the old book.",
+      "He read a magic spell from the old book."
     ],
     correctAnswer: 0,
     explanation:
@@ -358,8 +395,8 @@ const g5LaDifficult3Questions: Question[] = [
     type: "vocabulary",
     skill: "Word Relationships",
     question: "Drought is to dry as flood is to —",
-    options: ["wet", "warm", "windy", "empty"],
-    correctAnswer: 0,
+    options: ["warm", "wet", "windy", "empty"],
+    correctAnswer: 1,
     explanation:
       "A drought is a time of dryness; a flood is a time of too much water, so 'wet' completes the pair.",
   },
@@ -369,8 +406,8 @@ const g5LaDifficult3Questions: Question[] = [
     skill: "Replacing a Word",
     question:
       "Which word could best replace \"preserve\" in \"store and preserve part of each harvest\"?",
-    options: ["protect", "waste", "sell", "plant"],
-    correctAnswer: 0,
+    options: ["waste", "sell", "protect", "plant"],
+    correctAnswer: 2,
     explanation:
       "To preserve food is to protect it from spoiling; 'protect' keeps the meaning.",
   },
@@ -380,12 +417,12 @@ const g5LaDifficult3Questions: Question[] = [
     skill: "Academic Vocabulary",
     question: "Which meaning best fits the academic word \"adapt\"?",
     options: [
-      "to change to suit new conditions",
-      "to refuse to make any change",
       "to copy something exactly",
+      "to refuse to make any change",
       "to forget what was learned",
+      "to change to suit new conditions"
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "To adapt is to adjust or change so as to fit new conditions.",
   },
@@ -395,7 +432,7 @@ const g5LaDifficult3Questions: Question[] = [
     skill: "Choosing the Best Word",
     question:
       "Choose the best word: \"Because the rains had become unpredictable, the farmer had to plan more _____.\"",
-    options: ["carefully", "carelessly", "rarely", "loudly"],
+    options: ["carefully", "carelessly", "rarely", "quickly"],
     correctAnswer: 0,
     explanation:
       "Unpredictable rains demand careful planning; the other words do not fit the meaning.",
@@ -406,12 +443,12 @@ const g5LaDifficult3Questions: Question[] = [
     skill: "Verb Tense",
     question: "Which sentence keeps the tense consistent?",
     options: [
-      "Mr. Campbell observed the weather and changed his crops.",
       "Mr. Campbell observes the weather and changed his crops.",
+      "Mr. Campbell observed the weather and changed his crops.",
       "Mr. Campbell observed the weather and changes his crops.",
-      "Mr. Campbell will observe the weather and changed his crops.",
+      "Mr. Campbell will observe the weather and changed his crops."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "Both verbs are past tense — observed and changed — keeping the sentence consistent.",
   },
@@ -421,12 +458,12 @@ const g5LaDifficult3Questions: Question[] = [
     skill: "Subject-Verb Agreement",
     question: "Which sentence is written correctly?",
     options: [
-      "Each of the crops needs the right kind of soil.",
       "Each of the crops need the right kind of soil.",
       "Each of the crops needing the right kind of soil.",
-      "Each of the crops are needs the right kind of soil.",
+      "Each of the crops needs the right kind of soil.",
+      "Each of the crops are needs the right kind of soil."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "'Each' is singular and takes the singular verb 'needs'.",
   },
@@ -436,12 +473,12 @@ const g5LaDifficult3Questions: Question[] = [
     skill: "Pronouns",
     question: "Choose the sentence with the correct pronoun.",
     options: [
-      "The officer gave advice to Mr. Campbell and them.",
       "The officer gave advice to Mr. Campbell and they.",
       "The officer gave advice to he and them.",
       "The officer gave advice to Mr. Campbell and theirselves.",
+      "The officer gave advice to Mr. Campbell and them."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "The pronoun is an object of 'to', so the object form 'them' is correct.",
   },
@@ -454,7 +491,7 @@ const g5LaDifficult3Questions: Question[] = [
       "When the dry season came, his crops survived.",
       "When the dry season came his crops, survived.",
       "When, the dry season came his crops survived.",
-      "When the dry season, came his crops survived.",
+      "When the dry season, came his crops survived."
     ],
     correctAnswer: 0,
     explanation:
@@ -466,12 +503,12 @@ const g5LaDifficult3Questions: Question[] = [
     skill: "Quotation Marks",
     question: "Which sentence uses quotation marks correctly?",
     options: [
-      "\"A wise farmer must adapt,\" Mr. Campbell said.",
       "\"A wise farmer must adapt Mr. Campbell said.\"",
+      "\"A wise farmer must adapt,\" Mr. Campbell said.",
       "A wise farmer must adapt,\" Mr. Campbell said.",
-      "\"A wise farmer must adapt\" Mr. Campbell said!",
+      "\"A wise farmer must adapt\" Mr. Campbell said!"
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "The quoted words are enclosed, with the comma inside the closing mark before the tag.",
   },
@@ -481,12 +518,12 @@ const g5LaDifficult3Questions: Question[] = [
     skill: "Parallel Structure",
     question: "Which sentence uses parallel structure?",
     options: [
-      "The group tested the soil, added compost, and chose suitable plants.",
       "The group tested the soil, adding compost, and plants were chosen.",
       "The group was testing the soil, compost, and chose plants.",
-      "The group tested, to add compost, and choosing plants.",
+      "The group tested the soil, added compost, and chose suitable plants.",
+      "The group tested, to add compost, and choosing plants."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "The three actions share the same past-tense form: tested, added, chose.",
   },
@@ -496,12 +533,12 @@ const g5LaDifficult3Questions: Question[] = [
     skill: "Run-on Correction",
     question: "Which choice corrects the run-on sentence?",
     options: [
-      "The soil was poor, so the group added compost to it.",
       "The soil was poor the group added compost to it.",
       "The soil was poor, the group added compost to it.",
       "The soil poor and the group added compost.",
+      "The soil was poor, so the group added compost to it."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "A comma plus 'so' correctly joins the two complete ideas.",
   },
@@ -514,7 +551,7 @@ const g5LaDifficult3Questions: Question[] = [
       "After the group tested the soil, they added compost to improve it.",
       "The group tested the soil they added compost to improve it.",
       "Testing the soil but adding compost to improve it.",
-      "The group tested the soil, they, added compost.",
+      "The group tested the soil, they, added compost."
     ],
     correctAnswer: 0,
     explanation:
@@ -526,8 +563,8 @@ const g5LaDifficult3Questions: Question[] = [
     skill: "Transitions",
     question:
       "Which transition best completes the sentence? \"The first seeds failed; _____, the group did not give up.\"",
-    options: ["nevertheless", "therefore", "for example", "first"],
-    correctAnswer: 0,
+    options: ["therefore", "nevertheless", "for example", "first"],
+    correctAnswer: 1,
     explanation:
       "'Nevertheless' shows the contrast between failure and continuing the project.",
   },
@@ -537,14 +574,14 @@ const g5LaDifficult3Questions: Question[] = [
     skill: "Clarity",
     question: "Which sentence is the clearest and most precise?",
     options: [
-      "The farmer dug channels to guide rainwater into his fields.",
       "The farmer did some digging for water in the field area.",
-      "There was digging and water and fields all at once.",
-      "Channels and water and the farmer were a thing that happened.",
+      "Channels were dug by the farmer for water to go into the fields.",
+      "The farmer dug channels to guide rainwater into his fields.",
+      "The farmer and the water and the channels were in the fields."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
-      "The first sentence uses precise nouns and verbs; the others are vague.",
+      "The third sentence uses precise nouns and verbs; the others are vague or confusing.",
   },
   {
     id: 36,
@@ -553,12 +590,12 @@ const g5LaDifficult3Questions: Question[] = [
     question:
       "Which sentence is the best introduction for an essay about adapting to a changing climate?",
     options: [
-      "As the climate changes, farmers who observe and adapt can protect their crops and their communities.",
       "Farming is a job that some people do in the countryside.",
       "This essay will talk about a few things to do with farms.",
-      "There is soil and rain and many plants in the world.",
+      "There is soil and rain and many different plants in the world.",
+      "As the climate changes, farmers who observe and adapt can protect their crops and their communities."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "A strong introduction states a clear, specific main idea; the others are vague or off-topic.",
   },
@@ -572,7 +609,7 @@ const g5LaDifficult3Questions: Question[] = [
       "Don't waste food — save what you can't eat now so you can enjoy it later!",
       "Optimising household consumption reduces aggregate nutritional shortfalls.",
       "Food security frameworks require systemic agricultural reform.",
-      "The preservation of surplus produce mitigates economic loss.",
+      "The preservation of surplus produce mitigates economic loss."
     ],
     correctAnswer: 0,
     explanation:
@@ -584,8 +621,8 @@ const g5LaDifficult3Questions: Question[] = [
     skill: "Best Transition",
     question:
       "\"The garden's soil was poor. _____ the group enriched it with compost.\" Which transition fits best?",
-    options: ["Therefore,", "However,", "For example,", "Meanwhile,"],
-    correctAnswer: 0,
+    options: ["However,", "Therefore,", "For example,", "Meanwhile,"],
+    correctAnswer: 1,
     explanation:
       "'Therefore' shows the action that resulted from the poor soil.",
   },
@@ -596,12 +633,12 @@ const g5LaDifficult3Questions: Question[] = [
     question:
       "These sentences appear in a report about the community garden. Which should be REMOVED?",
     options: [
-      "The school's football team won a match last Friday.",
       "The group tested the soil before planting.",
       "Compost was made from kitchen scraps.",
-      "Families learned how to preserve their harvest.",
+      "The school's football team won a match last Friday.",
+      "Families learned how to preserve their harvest."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "A football result has nothing to do with the garden report and should be removed.",
   },
@@ -612,15 +649,15 @@ const g5LaDifficult3Questions: Question[] = [
     question:
       "Which sentence is the best conclusion for an essay about these two stories?",
     options: [
-      "Both stories show that observing, adapting, and sharing can help communities feed themselves.",
-      "And that is the whole story about food and farming, the end.",
-      "Yams and gardens are two different things in the world.",
-      "So they grew food and the essay is now finished here.",
+      "In the end, both Mr. Campbell and the group found that growing food is easy.",
+      "Yams and vegetables are two completely different types of plants.",
+      "So they grew some food and then the essay is now finished.",
+      "Both stories show that observing, adapting, and sharing can help communities feed themselves."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
-      "A strong conclusion restates the shared main idea with purpose, as the first choice does.",
-  },
+      "A strong conclusion restates the shared main idea with purpose, as the last choice does.",
+  }
 ];
 
 const shuffleAnswerOptions = (questions: Question[]): Question[] => {
