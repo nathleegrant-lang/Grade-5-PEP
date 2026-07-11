@@ -56,29 +56,33 @@ const g5LaDifficult5Questions: Question[] = [
     id: 1,
     type: "reading",
     skill: "Inference",
-    question: `${d5Passage1}\n\nWhat can you infer about Renee before her mother's question?`,
+    question: `${d5Passage1}
+
+What can you infer about Renee before her mother's question?`,
     options: [
-      "She had not considered who could see what she posted.",
+      "She thought the app was completely safe without checking its settings.",
       "She had already made her account fully private.",
-      "She knew strangers could see her location.",
-      "She had stopped using the photo app entirely.",
+      "She knew strangers could see her location but did not care.",
+      "She had stopped using the photo app entirely."
     ],
     correctAnswer: 0,
     explanation:
-      "The text says she had never thought about who could see her posts, so she had not considered it.",
+      "The text says she had never thought about who could see her posts, implying she assumed she was safe without checking.",
   },
   {
     id: 2,
     type: "reading",
     skill: "Cause and Effect",
-    question: `${d5Passage1}\n\nWhat caused Renee to change her account settings?`,
+    question: `${d5Passage1}
+
+What caused Renee to change her account settings?`,
     options: [
-      "She discovered that strangers could view her photos and location.",
       "The app deleted all of her photos by mistake.",
-      "Her friends asked her to share more pictures.",
-      "Her school told her to stop using the app.",
+      "She learned that the app's default settings shared her location with strangers.",
+      "Her friends asked her to share more pictures with them.",
+      "Her school told her to stop using the app during the week."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "Learning that her public account let strangers see her photos and location caused her to change the settings.",
   },
@@ -86,14 +90,16 @@ const g5LaDifficult5Questions: Question[] = [
     id: 3,
     type: "reading",
     skill: "Supporting Details",
-    question: `${d5Passage1}\n\nWhich detail shows Renee took a specific step to protect herself?`,
+    question: `${d5Passage1}
+
+Which detail shows Renee took a specific step to protect herself?`,
     options: [
-      "She turned off the feature that shared each photo's location.",
       "She loved the new photo-sharing app.",
-      "Her mother asked her a question one evening.",
       "She had never thought about her privacy before.",
+      "She turned off the feature that shared each photo's location.",
+      "Her mother asked her a question one evening."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "Turning off location sharing is a specific protective step; the others describe the situation, not an action.",
   },
@@ -101,14 +107,16 @@ const g5LaDifficult5Questions: Question[] = [
     id: 4,
     type: "reading",
     skill: "Main Idea",
-    question: `${d5Passage1}\n\nWhat is the main idea of the passage?`,
+    question: `${d5Passage1}
+
+What is the main idea of the passage?`,
     options: [
-      "Privacy comes from making careful, informed choices about sharing.",
       "Photo apps should never be used by young people.",
       "Technology is always dangerous and should be feared.",
       "Strangers should be allowed to see all public posts.",
+      "Privacy comes from making careful, informed choices about sharing."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "Renee decides privacy is about careful, informed choices — the main idea. The others are false or too extreme.",
   },
@@ -116,14 +124,16 @@ const g5LaDifficult5Questions: Question[] = [
     id: 5,
     type: "reading",
     skill: "Author's Purpose",
-    question: `${d5Passage1}\n\nWhy does the author include Renee's mother's question?`,
+    question: `${d5Passage1}
+
+Why does the author include Renee's mother's question?`,
     options: [
+      "To prove that mothers dislike all new technology.",
       "To start Renee thinking about online safety.",
-      "To prove that mothers dislike all technology.",
       "To explain how to take a good photograph.",
-      "To show that the app was broken.",
+      "To show that the app was broken and needed fixing."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "The mother's question prompts Renee to consider safety, which is the author's purpose for including it.",
   },
@@ -131,14 +141,16 @@ const g5LaDifficult5Questions: Question[] = [
     id: 6,
     type: "reading",
     skill: "Vocabulary in Context",
-    question: `${d5Passage1}\n\nIn the passage, what does "informed" most nearly mean?`,
+    question: `${d5Passage1}
+
+In the passage, what does "informed" most nearly mean?`,
     options: [
+      "done quickly without checking the facts",
       "based on good understanding",
-      "made out of fear",
-      "done without thinking",
-      "copied from a friend",
+      "copied from someone else's work",
+      "made out of sudden fear"
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "An informed choice is one based on understanding, which is how Renee made her decisions.",
   },
@@ -146,12 +158,14 @@ const g5LaDifficult5Questions: Question[] = [
     id: 7,
     type: "reading",
     skill: "Drawing Conclusions",
-    question: `${d5Passage1}\n\nWhat can you conclude about Renee's view of technology by the end?`,
+    question: `${d5Passage1}
+
+What can you conclude about Renee's view of technology by the end?`,
     options: [
       "It is safe when used with understanding.",
       "It is too dangerous to use at all.",
       "It should be controlled only by adults.",
-      "It works best when accounts stay public.",
+      "It works best when accounts stay public."
     ],
     correctAnswer: 0,
     explanation:
@@ -161,14 +175,16 @@ const g5LaDifficult5Questions: Question[] = [
     id: 8,
     type: "reading",
     skill: "Point of View",
-    question: `${d5Passage2}\n\nHow does Mr. Reid view the AI helper?`,
+    question: `${d5Passage2}
+
+How does Mr. Reid view the AI helper?`,
     options: [
-      "As a useful tool that must be checked and used honestly.",
       "As a machine that should do all the pupils' work.",
       "As something pupils should never be allowed to touch.",
       "As a replacement for their own thinking and learning.",
+      "As a useful tool that must be checked and used honestly."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "Mr. Reid treats the AI as a useful tool that pupils must check and use honestly, not rely on blindly.",
   },
@@ -176,12 +192,14 @@ const g5LaDifficult5Questions: Question[] = [
     id: 9,
     type: "reading",
     skill: "Cause and Effect",
-    question: `${d5Passage2}\n\nWhat happened because one pupil copied an AI answer?`,
+    question: `${d5Passage2}
+
+What happened because one pupil copied an AI answer?`,
     options: [
       "The class discussed why machines can make mistakes.",
       "Mr. Reid banned the AI helper for everyone.",
       "The pupil received the highest grade in the class.",
-      "The AI was upgraded to never be wrong again.",
+      "The AI was upgraded to never be wrong again."
     ],
     correctAnswer: 0,
     explanation:
@@ -191,14 +209,16 @@ const g5LaDifficult5Questions: Question[] = [
     id: 10,
     type: "reading",
     skill: "Supporting Details",
-    question: `${d5Passage2}\n\nWhich rule did Mr. Reid set for using the AI?`,
+    question: `${d5Passage2}
+
+Which rule did Mr. Reid set for using the AI?`,
     options: [
-      "Pupils had to check answers and say when they used the AI.",
       "Pupils had to let the AI write the whole project.",
       "Pupils were forbidden from asking the AI anything.",
       "Pupils had to keep their AI use a secret.",
+      "Pupils had to check answers and say when they used the AI."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "Mr. Reid required pupils to check answers, write in their own words, and disclose AI use.",
   },
@@ -206,12 +226,14 @@ const g5LaDifficult5Questions: Question[] = [
     id: 11,
     type: "reading",
     skill: "Theme",
-    question: `${d5Passage2}\n\nWhich theme is best developed in the passage?`,
+    question: `${d5Passage2}
+
+Which theme is best developed in the passage?`,
     options: [
       "Tools help us most when we use them honestly and thoughtfully.",
       "Machines are always smarter than the people who use them.",
       "Students should avoid all new technology in school.",
-      "Copying answers is the fastest way to learn.",
+      "Copying answers is the fastest way to finish an assignment."
     ],
     correctAnswer: 0,
     explanation:
@@ -221,14 +243,18 @@ const g5LaDifficult5Questions: Question[] = [
     id: 12,
     type: "reading",
     skill: "Compare and Contrast",
-    question: `${d5Passage1}\n\n${d5Passage2}\n\nWhat lesson do both passages share?`,
+    question: `${d5Passage1}
+
+${d5Passage2}
+
+What lesson do both passages share?`,
     options: [
-      "Technology helps most when people understand and use it wisely.",
       "Technology should be kept away from all young people.",
       "Photo apps and AI helpers are exactly the same tool.",
       "Adults should make every technology choice for children.",
+      "Technology helps most when people understand and use it wisely."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "Both passages teach that understanding and wise use make technology helpful and safe. The others are false.",
   },
@@ -236,14 +262,16 @@ const g5LaDifficult5Questions: Question[] = [
     id: 13,
     type: "reading",
     skill: "Prediction",
-    question: `${d5Passage2}\n\nIf the AI gave a strange answer, what would Mr. Reid's pupils most likely do?`,
+    question: `${d5Passage2}
+
+If the AI gave a strange answer, what would Mr. Reid's pupils most likely do?`,
     options: [
-      "Question it and check whether the answer is correct.",
       "Copy it straight into their projects without checking.",
       "Stop using any technology for the rest of the year.",
-      "Hide that they had used the AI at all.",
+      "Question it and check whether the answer is correct.",
+      "Hide that they had used the AI at all."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "The pupils learned to question and check the tool, so they would verify a strange answer.",
   },
@@ -251,14 +279,16 @@ const g5LaDifficult5Questions: Question[] = [
     id: 14,
     type: "reading",
     skill: "Text Evidence",
-    question: `${d5Passage2}\n\nWhich sentence best supports the idea that the AI is only a helper, not a replacement?`,
+    question: `${d5Passage2}
+
+Which sentence best supports the idea that the AI is only a helper, not a replacement?`,
     options: [
-      "An AI tool is like a calculator for thinking, useful only in skilled hands.",
       "The pupils were allowed to use an AI helper for projects.",
       "One pupil copied an AI answer that was wrong.",
-      "Some thought the computer would do all their work.",
+      "An AI tool is like a calculator for thinking, useful only in skilled hands.",
+      "Some thought the computer would do all their work."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "The calculator comparison shows the AI assists a skilled user rather than replacing them.",
   },
@@ -266,12 +296,14 @@ const g5LaDifficult5Questions: Question[] = [
     id: 15,
     type: "reading",
     skill: "Inference",
-    question: `${d5Passage2}\n\nWhat does Mr. Reid mean by saying the goal is to grow smarter, not lazier?`,
+    question: `${d5Passage2}
+
+What does Mr. Reid mean by saying the goal is to grow smarter, not lazier?`,
     options: [
       "Pupils should use the tool to learn, not to avoid thinking.",
       "Pupils should let the AI complete every assignment.",
       "Pupils should stop checking the AI's answers.",
-      "Pupils should never use the tool for any reason.",
+      "Pupils should never use the tool for any reason."
     ],
     correctAnswer: 0,
     explanation:
@@ -294,8 +326,8 @@ const g5LaDifficult5Questions: Question[] = [
     skill: "Antonym",
     question:
       "Renee made her account \"private.\" Which word means the OPPOSITE of \"private\"?",
-    options: ["public", "hidden", "secret", "closed"],
-    correctAnswer: 0,
+    options: ["hidden", "public", "secret", "closed"],
+    correctAnswer: 1,
     explanation:
       "Private means restricted to a few; its opposite is public, open to all.",
   },
@@ -316,8 +348,8 @@ const g5LaDifficult5Questions: Question[] = [
     skill: "Suffix",
     question:
       "Add the suffix \"-ible\" or \"-able\" to \"rely\" to mean \"able to be trusted.\" The correct word is —",
-    options: ["reliable", "relying", "relied", "reliance"],
-    correctAnswer: 0,
+    options: ["relying", "reliable", "relied", "reliance"],
+    correctAnswer: 1,
     explanation:
       "'Reliable' means able to be relied on or trusted.",
   },
@@ -327,8 +359,8 @@ const g5LaDifficult5Questions: Question[] = [
     skill: "Context Clues",
     question:
       "\"Pupils still had to verify the AI's answers.\" Using context, \"verify\" most nearly means —",
-    options: ["check whether they are true", "copy them carefully", "delete them quickly", "memorise them all"],
-    correctAnswer: 0,
+    options: ["delete them quickly", "check whether they are true", "copy them carefully", "memorise them all"],
+    correctAnswer: 1,
     explanation:
       "To verify answers is to check whether they are correct, which is what the rule required.",
   },
@@ -339,12 +371,12 @@ const g5LaDifficult5Questions: Question[] = [
     question:
       "Which sentence uses \"share\" in the same way as \"choices over what to share\"?",
     options: [
-      "Be careful what you share with strangers online.",
       "Each child received a fair share of the cake.",
       "I bought one share in the small company.",
       "They planted the field with their share of seeds.",
+      "Be careful what you share with strangers online."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "Here 'share' means to make information available, as online. The others mean a portion or a unit of ownership.",
   },
@@ -375,12 +407,12 @@ const g5LaDifficult5Questions: Question[] = [
     skill: "Academic Vocabulary",
     question: "Which meaning best fits the academic word \"responsible\"?",
     options: [
-      "acting with care and accepting one's duties",
       "doing whatever is easiest at the moment",
       "letting others make every decision",
-      "avoiding all difficult tasks",
+      "acting with care and accepting one's duties",
+      "avoiding all difficult tasks"
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "To be responsible is to act with care and accept one's duties.",
   },
@@ -390,8 +422,8 @@ const g5LaDifficult5Questions: Question[] = [
     skill: "Choosing the Best Word",
     question:
       "Choose the best word: \"Because machines can make mistakes, students should _____ what an AI tells them.\"",
-    options: ["question", "trust blindly", "ignore", "memorise"],
-    correctAnswer: 0,
+    options: ["trust blindly", "ignore", "question", "memorise"],
+    correctAnswer: 2,
     explanation:
       "Since machines can err, students should question the output rather than accept it without thought.",
   },
@@ -404,7 +436,7 @@ const g5LaDifficult5Questions: Question[] = [
       "After Renee changed her settings, she felt much safer.",
       "After Renee changed her settings she felt, much safer.",
       "After, Renee changed her settings she felt much safer.",
-      "After Renee changed, her settings she felt much safer.",
+      "After Renee changed, her settings she felt much safer."
     ],
     correctAnswer: 0,
     explanation:
@@ -416,12 +448,12 @@ const g5LaDifficult5Questions: Question[] = [
     skill: "Subject-Verb Agreement",
     question: "Which sentence is written correctly?",
     options: [
-      "Neither the app nor the website keeps her location private.",
       "Neither the app nor the website keep her location private.",
+      "Neither the app nor the website keeps her location private.",
       "Neither the app nor the website keeping her location private.",
-      "Neither the app nor the website are keeps her location private.",
+      "Neither the app nor the website are keeps her location private."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "With 'neither...nor', the verb agrees with the nearer subject 'website', which is singular, so 'keeps' is correct.",
   },
@@ -431,12 +463,12 @@ const g5LaDifficult5Questions: Question[] = [
     skill: "Verb Tense",
     question: "Which sentence keeps the tense consistent?",
     options: [
-      "The pupil copied the answer and learned it was wrong.",
       "The pupil copies the answer and learned it was wrong.",
       "The pupil copied the answer and learns it was wrong.",
-      "The pupil will copy the answer and learned it was wrong.",
+      "The pupil copied the answer and learned it was wrong.",
+      "The pupil will copy the answer and learned it was wrong."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "Both verbs are past tense — copied and learned — keeping the sentence consistent.",
   },
@@ -446,12 +478,12 @@ const g5LaDifficult5Questions: Question[] = [
     skill: "Pronouns",
     question: "Choose the sentence with the correct pronoun.",
     options: [
-      "Renee and I checked the settings together.",
       "Renee and me checked the settings together.",
       "Me and Renee checked the settings together.",
       "Renee and myself checked the settings together.",
+      "Renee and I checked the settings together."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "The pronoun is part of the subject doing the checking, so the subject form 'I' is correct.",
   },
@@ -461,12 +493,12 @@ const g5LaDifficult5Questions: Question[] = [
     skill: "Quotation Marks",
     question: "Which sentence uses quotation marks correctly?",
     options: [
-      "\"Always check the AI's answers,\" Mr. Reid reminded the class.",
       "\"Always check the AI's answers Mr. Reid reminded the class.\"",
       "Always check the AI's answers,\" Mr. Reid reminded the class.",
       "\"Always check the AI's answers\", Mr. Reid reminded the class",
+      "\"Always check the AI's answers,\" Mr. Reid reminded the class."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "The quoted words are enclosed, with the comma inside the closing mark before the tag.",
   },
@@ -476,12 +508,12 @@ const g5LaDifficult5Questions: Question[] = [
     skill: "Parallel Structure",
     question: "Which sentence uses parallel structure?",
     options: [
-      "Renee changed her settings, removed old posts, and blocked strangers.",
       "Renee changed her settings, removing old posts, and strangers were blocked.",
       "Renee was changing her settings, old posts, and blocked strangers.",
       "Renee changed, to remove old posts, and blocking strangers.",
+      "Renee changed her settings, removed old posts, and blocked strangers."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "The three actions share the same past-tense form: changed, removed, blocked.",
   },
@@ -491,12 +523,12 @@ const g5LaDifficult5Questions: Question[] = [
     skill: "Run-on Correction",
     question: "Which choice corrects the run-on sentence?",
     options: [
-      "The answer was wrong, so the class talked about machine errors.",
       "The answer was wrong the class talked about machine errors.",
       "The answer was wrong, the class talked about machine errors.",
       "The answer wrong and the class talked about errors.",
+      "The answer was wrong, so the class talked about machine errors."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "A comma plus 'so' correctly joins the two complete ideas.",
   },
@@ -506,12 +538,12 @@ const g5LaDifficult5Questions: Question[] = [
     skill: "Sentence Combining",
     question: "Which choice best combines the two sentences?",
     options: [
-      "Because the account was public, strangers could see her photos.",
       "The account was public strangers could see her photos.",
       "Being public but strangers could see her photos.",
-      "The account was public, strangers, could see her photos.",
+      "Because the account was public, strangers could see her photos.",
+      "The account was public, strangers, could see her photos."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "'Because' joins the cause and effect into one clear sentence.",
   },
@@ -521,8 +553,8 @@ const g5LaDifficult5Questions: Question[] = [
     skill: "Transitions",
     question:
       "Which transition best completes the sentence? \"The AI can be helpful; _____, it can also make mistakes.\"",
-    options: ["however", "therefore", "for example", "finally"],
-    correctAnswer: 0,
+    options: ["therefore", "for example", "however", "finally"],
+    correctAnswer: 2,
     explanation:
       "'However' shows the contrast between being helpful and making mistakes.",
   },
@@ -535,7 +567,7 @@ const g5LaDifficult5Questions: Question[] = [
       "Renee turned off the setting that shared her location.",
       "Renee did a thing with a setting about places.",
       "There was a setting and a location and Renee.",
-      "Renee and the location setting were a situation.",
+      "Renee and the location setting were a situation."
     ],
     correctAnswer: 0,
     explanation:
@@ -551,7 +583,7 @@ const g5LaDifficult5Questions: Question[] = [
       "A private account limits who can see your photos and personal details.",
       "Please, everyone, you simply must protect your privacy today!",
       "Once there was a girl who loved a photo-sharing app.",
-      "Step one: open the app and tap the settings button.",
+      "Step one: open the app and tap the settings button."
     ],
     correctAnswer: 0,
     explanation:
@@ -567,7 +599,7 @@ const g5LaDifficult5Questions: Question[] = [
       "She made her account private and stopped sharing her location.",
       "She had always loved using the photo app.",
       "Her mother spoke to her one evening.",
-      "The app had many different features.",
+      "The app had many different features."
     ],
     correctAnswer: 0,
     explanation:
@@ -594,7 +626,7 @@ const g5LaDifficult5Questions: Question[] = [
       "The classroom walls were painted pale yellow last summer.",
       "Pupils must check the AI's answers for mistakes.",
       "They should write final work in their own words.",
-      "Honesty means saying when the AI was used.",
+      "Honesty means saying when the AI was used."
     ],
     correctAnswer: 0,
     explanation:
@@ -608,14 +640,14 @@ const g5LaDifficult5Questions: Question[] = [
       "Which sentence is the best conclusion for an essay about using technology wisely?",
     options: [
       "Used with care and honesty, technology can make us safer and smarter.",
-      "And that is everything I know about phones and computers.",
-      "Apps and robots are two words that sound interesting.",
-      "So the technology was used and then the essay ended.",
+      "In the end, both passages show that using technology is always a bad idea for students.",
+      "Therefore, apps and artificial intelligence are completely different topics with nothing in common.",
+      "To conclude, people should let machines do all the thinking so they can relax."
     ],
     correctAnswer: 0,
     explanation:
       "A strong conclusion restates the main idea with purpose, as the first choice does.",
-  },
+  }
 ];
 
 const shuffleAnswerOptions = (questions: Question[]): Question[] => {
