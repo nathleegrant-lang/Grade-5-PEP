@@ -56,14 +56,16 @@ const g5LaDifficult2Questions: Question[] = [
     id: 1,
     type: "reading",
     skill: "Cause and Effect",
-    question: `${d2Passage1}\n\nWhat first caused the team to investigate renewable energy?`,
+    question: `${d2Passage1}
+
+What first caused the team to investigate renewable energy?`,
     options: [
+      "The principal ordered them to investigate different types of pollution.",
+      "A scientist visited the school to teach them about solar ovens.",
       "The computer lab lost power twice in one week.",
-      "The principal ordered them to build a solar oven.",
-      "Their thermometer broke during a science lesson.",
-      "A scientist visited the school to teach them.",
+      "They needed a new project to present at the island's science fair."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "The passage opens by saying the team began their work after the lab lost power twice. The other options are not the starting cause.",
   },
@@ -71,29 +73,33 @@ const g5LaDifficult2Questions: Question[] = [
     id: 2,
     type: "reading",
     skill: "Inference",
-    question: `${d2Passage1}\n\nWhat can you infer about how the pupils respond to failure?`,
+    question: `${d2Passage1}
+
+What can you infer about how the pupils respond to unexpected results?`,
     options: [
-      "They study the problem and adjust instead of giving up.",
-      "They abandon the project as soon as it goes wrong.",
-      "They keep the same design no matter what the data shows.",
-      "They wait for an adult to solve every problem for them.",
+      "They prefer to build a completely new model rather than fix a broken one.",
+      "They treat unexpected results as clues to improve their design.",
+      "They wait for an adult to tell them exactly what to change.",
+      "They change their main goal completely whenever something goes wrong."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
-      "When the oven barely worked, they interpreted the readings and made changes, showing they adjust rather than quit.",
+      "When the oven barely worked, they used the poor results to find the problem (heat escaping) and fix it, showing they treat failures as clues.",
   },
   {
     id: 3,
     type: "reading",
     skill: "Supporting Details",
-    question: `${d2Passage1}\n\nWhich detail shows the pupils collected reliable data?`,
+    question: `${d2Passage1}
+
+Which detail shows the pupils collected reliable data?`,
     options: [
-      "They recorded thermometer readings every ten minutes.",
-      "They built the oven from foil and cardboard.",
-      "The computer lab had lost power that week.",
-      "The principal praised them at the end.",
+      "They compared solar, wind, and hydro power before building the oven.",
+      "They used foil, cardboard, and a clear plastic cover for the oven.",
+      "The principal praised them for doing more than just building a model.",
+      "They recorded the oven's temperature every ten minutes to track changes."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "Recording readings at regular intervals is the detail that shows reliable data collection; the others do not.",
   },
@@ -101,12 +107,14 @@ const g5LaDifficult2Questions: Question[] = [
     id: 4,
     type: "reading",
     skill: "Main Idea",
-    question: `${d2Passage1}\n\nWhat is the main idea of the passage?`,
+    question: `${d2Passage1}
+
+What is the main idea of the passage?`,
     options: [
-      "Renewable energy is useful but needs careful design and storage.",
-      "Solar ovens are the only good source of clean energy.",
-      "Clouds make all renewable energy projects fail.",
-      "Building a model is more important than testing it.",
+      "Renewable energy can reduce pollution but requires careful design and storage solutions.",
+      "Solar ovens are easy to build and always work perfectly on the first try.",
+      "Building models is more important than understanding why they work or fail.",
+      "Cloudy weather makes it impossible to use any type of renewable energy."
     ],
     correctAnswer: 0,
     explanation:
@@ -116,14 +124,16 @@ const g5LaDifficult2Questions: Question[] = [
     id: 5,
     type: "reading",
     skill: "Vocabulary in Context",
-    question: `${d2Passage1}\n\nIn the passage, what does "justified" most nearly mean?`,
+    question: `${d2Passage1}
+
+In the passage, what does "justified" most nearly mean?`,
     options: [
-      "supported with reasons and evidence",
-      "argued about loudly with others",
-      "changed without giving any reason",
-      "copied from another team's report",
+      "argued about loudly with the other students in the class",
+      "supported with good reasons and clear measurements",
+      "changed without giving any explanation to the teacher",
+      "copied from another team's report to save time"
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "They justified their conclusions with measurements, meaning they supported them with evidence.",
   },
@@ -131,14 +141,16 @@ const g5LaDifficult2Questions: Question[] = [
     id: 6,
     type: "reading",
     skill: "Author's Purpose",
-    question: `${d2Passage1}\n\nWhy does the author mention that the team explained the LIMITS of renewable energy?`,
+    question: `${d2Passage1}
+
+Why does the author mention that the team explained the LIMITS of renewable energy?`,
     options: [
-      "To show that their thinking was balanced and honest.",
-      "To prove that renewable energy never works at all.",
-      "To suggest the pupils failed to finish the project.",
-      "To explain how to build a better cardboard oven.",
+      "To prove that the solar oven was a complete failure.",
+      "To explain how to build a better oven out of stronger cardboard.",
+      "To show that their conclusion was honest and based on the whole truth.",
+      "To suggest that renewable energy should not be used in schools."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "Noting both benefits and limits shows balanced, honest reasoning, which is why the principal praised them.",
   },
@@ -146,27 +158,31 @@ const g5LaDifficult2Questions: Question[] = [
     id: 7,
     type: "reading",
     skill: "Prediction",
-    question: `${d2Passage1}\n\nIf the team built a new device, what would they most likely do?`,
+    question: `${d2Passage1}
+
+If the team built a new device that did not work well at first, what would they most likely do?`,
     options: [
-      "Test it carefully and record measurements over time.",
-      "Present it as perfect without any testing.",
-      "Refuse to change it even if it performed poorly.",
-      "Ask the principal to do the experiment for them.",
+      "Assume it works perfectly and skip the testing phase entirely.",
+      "Present it to the principal without making any adjustments.",
+      "Refuse to share their findings with the rest of the class.",
+      "Look for flaws, test it, and record the results before drawing conclusions."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
-      "Their established method is to test and record, so they would most likely repeat that careful approach.",
+      "Their established method is to test, find the problem, and record data, so they would repeat that careful approach.",
   },
   {
     id: 8,
     type: "reading",
     skill: "Point of View",
-    question: `${d2Passage2}\n\nHow does Dr. Blake view scientific discovery?`,
+    question: `${d2Passage2}
+
+How does Dr. Blake view scientific discovery?`,
     options: [
-      "As a careful process built on evidence, patience, and cooperation.",
-      "As a single lucky guess that needs no further testing.",
-      "As something only famous scientists can ever achieve.",
-      "As work that should be kept secret from other researchers.",
+      "As a careful process that requires evidence, patience, and cooperation to succeed.",
+      "As a quick event that happens by luck and needs no follow-up.",
+      "As something only experienced adult scientists are able to achieve.",
+      "As private work that should be hidden from other researchers."
     ],
     correctAnswer: 0,
     explanation:
@@ -176,14 +192,16 @@ const g5LaDifficult2Questions: Question[] = [
     id: 9,
     type: "reading",
     skill: "Cause and Effect",
-    question: `${d2Passage2}\n\nWhy did Dr. Blake's team avoid announcing a conclusion quickly?`,
+    question: `${d2Passage2}
+
+Why did Dr. Blake's team avoid announcing a conclusion quickly?`,
     options: [
-      "They wanted to investigate several possible causes first.",
-      "They had already lost all of their coral samples.",
-      "Another team had ordered them to stay silent.",
-      "The microscope had broken during the study.",
+      "They had already lost all of their coral samples in the warm water.",
+      "They wanted to study multiple factors before deciding on a reason.",
+      "Another team of scientists had ordered them to stay silent.",
+      "The microscope they needed to use was broken at the time."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "The text says rather than conclude quickly, they investigated temperature, algae, sunlight, and location first.",
   },
@@ -191,14 +209,16 @@ const g5LaDifficult2Questions: Question[] = [
     id: 10,
     type: "reading",
     skill: "Drawing Conclusions",
-    question: `${d2Passage2}\n\nWhat can you conclude about why the stronger coral survived?`,
+    question: `${d2Passage2}
+
+What can you conclude about why the stronger coral survived?`,
     options: [
-      "A tiny organism living inside it likely helped it survive.",
-      "The warmer water made the coral grow more quickly.",
-      "The coral was simply older than the other samples.",
-      "Other researchers moved it to a cooler location.",
+      "The warmer water caused the coral to grow much faster than normal.",
+      "The other samples were simply older and weaker than this one.",
+      "A tiny organism inside it offered a possible reason for its strength.",
+      "Other researchers had secretly moved it to a cooler location."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "The microscope revealed a tiny organism inside the stronger coral, offering the explanation for its survival.",
   },
@@ -206,14 +226,16 @@ const g5LaDifficult2Questions: Question[] = [
     id: 11,
     type: "reading",
     skill: "Theme",
-    question: `${d2Passage2}\n\nWhich statement best expresses a theme of the passage?`,
+    question: `${d2Passage2}
+
+Which statement best expresses a theme of the passage?`,
     options: [
-      "Honest discovery requires patience, evidence, and sharing with others.",
-      "Scientists should hide surprising results from the public.",
-      "The first idea a scientist has is always the correct one.",
-      "Working alone is the fastest way to make a discovery.",
+      "Scientists should keep surprising results a secret from the public.",
+      "The very first idea a scientist has is always the correct one.",
+      "Working completely alone is the fastest way to make a discovery.",
+      "Honest discovery relies on patience, careful evidence, and teamwork."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "The passage repeatedly stresses patience, evidence, and cooperation as what makes discovery trustworthy.",
   },
@@ -221,27 +243,33 @@ const g5LaDifficult2Questions: Question[] = [
     id: 12,
     type: "reading",
     skill: "Compare and Contrast",
-    question: `${d2Passage1}\n\n${d2Passage2}\n\nWhat do the science team and Dr. Blake's team have in common?`,
+    question: `${d2Passage1}
+
+${d2Passage2}
+
+What do the science team and Dr. Blake's team have in common?`,
     options: [
-      "Both used evidence and testing before reaching conclusions.",
-      "Both studied coral reefs near Port Royal.",
-      "Both built solar ovens to capture sunlight.",
-      "Both refused to share their results with anyone.",
+      "Both discovered new types of coral living near Port Royal.",
+      "Both delayed final conclusions until they had tested multiple ideas.",
+      "Both built models using cardboard, foil, and plastic covers.",
+      "Both decided to hide their findings from other researchers."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
-      "Both groups relied on evidence and careful testing. The other choices describe only one passage or neither.",
+      "Both groups relied on testing variables and delayed conclusions. The other choices describe only one passage or neither.",
   },
   {
     id: 13,
     type: "reading",
     skill: "Text Evidence",
-    question: `${d2Passage2}\n\nWhich sentence best supports the idea that Dr. Blake values honesty in science?`,
+    question: `${d2Passage2}
+
+Which sentence best supports the idea that Dr. Blake values honesty in science?`,
     options: [
       "She warned that honest science must admit what is still uncertain.",
-      "She visited the school to describe her discovery.",
-      "Her team studied coral reefs near Port Royal.",
-      "A microscope revealed a tiny organism inside the coral.",
+      "She visited the school to describe a discovery she had made.",
+      "Her team studied how warmer water affected the coral samples.",
+      "A microscope finally revealed a tiny organism inside the coral."
     ],
     correctAnswer: 0,
     explanation:
@@ -251,14 +279,16 @@ const g5LaDifficult2Questions: Question[] = [
     id: 14,
     type: "reading",
     skill: "Inference",
-    question: `${d2Passage2}\n\nWhy did Dr. Blake share her evidence with other researchers?`,
+    question: `${d2Passage2}
+
+Why did Dr. Blake share her evidence with other researchers?`,
     options: [
-      "So they could check her results and improve the ideas.",
-      "So they could take all the credit for the discovery.",
-      "So she would never have to study coral again.",
-      "So the pupils would stop asking her questions.",
+      "So they could take all the credit for her hard work.",
+      "So she would never have to study coral reefs again.",
+      "So they could test her ideas and help make the science stronger.",
+      "So the pupils would stop asking her so many questions."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "The text says sharing let others compare results, challenge her interpretation, and add ideas — improving the science.",
   },
@@ -266,14 +296,16 @@ const g5LaDifficult2Questions: Question[] = [
     id: 15,
     type: "reading",
     skill: "Vocabulary in Context",
-    question: `${d2Passage2}\n\nIn the passage, what does "interpretation" most nearly mean?`,
+    question: `${d2Passage2}
+
+In the passage, what does "interpretation" most nearly mean?`,
     options: [
-      "an explanation of what the evidence means",
-      "a list of the equipment that was used",
-      "a refusal to look at any of the data",
-      "a guess made with no information at all",
+      "a list of all the equipment used during the study",
+      "a refusal to look at any of the data collected",
+      "a quick guess made with no supporting information",
+      "an explanation of what the evidence seems to show"
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "Others could challenge her interpretation — her explanation of what the evidence meant.",
   },
@@ -283,8 +315,13 @@ const g5LaDifficult2Questions: Question[] = [
     skill: "Context Clues",
     question:
       "\"The pupils interpreted the thermometer readings.\" Using context, \"interpreted\" most nearly means —",
-    options: ["explained the meaning of", "threw away", "memorised quickly", "copied neatly"],
-    correctAnswer: 0,
+    options: [
+      "memorised the numbers without thinking about them",
+      "worked out and explained the meaning of",
+      "changed to match what they wanted to see",
+      "copied carefully into a new notebook"
+    ],
+    correctAnswer: 1,
     explanation:
       "To interpret readings is to work out and explain what they mean.",
   },
@@ -294,10 +331,15 @@ const g5LaDifficult2Questions: Question[] = [
     skill: "Synonym",
     question:
       "Which word is the closest synonym for \"sustainable\" as used in the passage?",
-    options: ["lasting", "broken", "sudden", "costly"],
-    correctAnswer: 0,
+    options: [
+      "damaged beyond repair",
+      "very expensive to build",
+      "able to be maintained over time",
+      "harmful to the environment"
+    ],
+    correctAnswer: 2,
     explanation:
-      "Sustainable energy is energy that can last or be kept up over time, so 'lasting' fits best.",
+      "Sustainable energy is energy that can last or be kept up over time, so 'able to be maintained' fits best.",
   },
   {
     id: 18,
@@ -305,7 +347,7 @@ const g5LaDifficult2Questions: Question[] = [
     skill: "Antonym",
     question:
       "The report praised \"reliable\" data. Which word means the OPPOSITE of \"reliable\"?",
-    options: ["untrustworthy", "steady", "honest", "accurate"],
+    options: ["untrustworthy", "consistent", "careful", "exact"],
     correctAnswer: 0,
     explanation:
       "Reliable means trustworthy, so its opposite is untrustworthy. The other choices are near-synonyms.",
@@ -316,8 +358,8 @@ const g5LaDifficult2Questions: Question[] = [
     skill: "Prefix",
     question:
       "In \"renewable,\" the prefix \"re-\" means \"again.\" Which word uses \"re-\" with the same meaning?",
-    options: ["recharge", "reduce", "remain", "respect"],
-    correctAnswer: 0,
+    options: ["reduce", "remain", "respect", "recharge"],
+    correctAnswer: 3,
     explanation:
       "'Recharge' means to charge again, matching the 'again' meaning of 're-'.",
   },
@@ -328,14 +370,14 @@ const g5LaDifficult2Questions: Question[] = [
     question:
       "The suffix \"-able\" in \"renewable\" means \"able to be.\" What does \"renewable\" describe?",
     options: [
-      "something able to be renewed",
-      "something that has been removed",
-      "a person who renews things",
-      "the act of renewing once",
+      "the act of renewing something once",
+      "something that can be renewed or replaced",
+      "a person who is skilled at renewing items",
+      "something that has already been removed"
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
-      "'-able' means able to be, so renewable means able to be renewed.",
+      "'-able' means able to be, so renewable means something that can be renewed.",
   },
   {
     id: 21,
@@ -344,12 +386,12 @@ const g5LaDifficult2Questions: Question[] = [
     question:
       "Which sentence uses \"store\" in the same way as \"a way to store power for cloudy days\"?",
     options: [
-      "The battery can store energy for later use.",
       "We bought our snacks at the corner store.",
-      "The store opened early on Saturday morning.",
       "She works at a clothing store downtown.",
+      "A battery can store energy to be used later.",
+      "The new store opened early on Saturday morning."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "Here 'store' means to keep for later, as a battery stores energy. The others use 'store' to mean a shop.",
   },
@@ -369,10 +411,10 @@ const g5LaDifficult2Questions: Question[] = [
     skill: "Replacing a Word",
     question:
       "Which word could best replace \"investigated\" in \"the scientists investigated the water\"?",
-    options: ["examined", "ignored", "decorated", "swallowed"],
-    correctAnswer: 0,
+    options: ["avoided carefully", "cleaned thoroughly", "created from scratch", "studied closely"],
+    correctAnswer: 3,
     explanation:
-      "To investigate is to examine carefully; 'examined' keeps the meaning.",
+      "To investigate is to examine carefully; 'studied closely' keeps the meaning.",
   },
   {
     id: 24,
@@ -380,12 +422,12 @@ const g5LaDifficult2Questions: Question[] = [
     skill: "Academic Vocabulary",
     question: "Which meaning best fits the academic word \"emphasise\"?",
     options: [
-      "to give special importance to an idea",
-      "to remove an idea from a report",
-      "to repeat a word without meaning it",
-      "to hide an idea from the reader",
+      "to remove an idea from a report entirely",
+      "to give special importance to a particular point",
+      "to repeat a word without understanding it",
+      "to hide an idea from the reader on purpose"
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "To emphasise is to stress or give special importance to something.",
   },
@@ -395,10 +437,10 @@ const g5LaDifficult2Questions: Question[] = [
     skill: "Choosing the Best Word",
     question:
       "Choose the best word: \"Because the result was surprising, the team decided to _____ it with more tests.\"",
-    options: ["verify", "ignore", "forget", "hide"],
-    correctAnswer: 0,
+    options: ["ignore", "hide", "double-check", "forget"],
+    correctAnswer: 2,
     explanation:
-      "A surprising result should be verified, or checked, with more tests; the other words contradict careful science.",
+      "A surprising result should be double-checked, or verified, with more tests; the other words contradict careful science.",
   },
   {
     id: 26,
@@ -409,7 +451,7 @@ const g5LaDifficult2Questions: Question[] = [
       "The team of pupils records data every ten minutes.",
       "The team of pupils record data every ten minutes.",
       "The team of pupils recording data every ten minutes.",
-      "The team of pupils are records data every ten minutes.",
+      "The team of pupils are records data every ten minutes."
     ],
     correctAnswer: 0,
     explanation:
@@ -421,12 +463,12 @@ const g5LaDifficult2Questions: Question[] = [
     skill: "Verb Tense",
     question: "Which sentence keeps the tense consistent?",
     options: [
-      "The scientists studied the coral and recorded the results.",
       "The scientists study the coral and recorded the results.",
       "The scientists studied the coral and record the results.",
       "The scientists will study the coral and recorded the results.",
+      "The scientists studied the coral and recorded the results."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "Both verbs are in the past tense, keeping the sentence consistent.",
   },
@@ -436,12 +478,12 @@ const g5LaDifficult2Questions: Question[] = [
     skill: "Pronouns",
     question: "Choose the sentence with the correct pronoun.",
     options: [
-      "Dr. Blake shared her results with the other researchers and us.",
       "Dr. Blake shared her results with the other researchers and we.",
+      "Dr. Blake shared her results with the other researchers and us.",
       "Dr. Blake shared she results with the other researchers and us.",
-      "Dr. Blake shared her results with the other researchers and ourselves.",
+      "Dr. Blake shared her results with the other researchers and ourselves."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "The pronoun is an object of 'with', so the object form 'us' is correct.",
   },
@@ -451,12 +493,12 @@ const g5LaDifficult2Questions: Question[] = [
     skill: "Punctuation",
     question: "Which sentence is punctuated correctly?",
     options: [
-      "Before the cover was tightened, the oven lost heat quickly.",
       "Before the cover was tightened the oven lost, heat quickly.",
       "Before, the cover was tightened the oven lost heat quickly.",
-      "Before the cover, was tightened the oven lost heat quickly.",
+      "Before the cover was tightened, the oven lost heat quickly.",
+      "Before the cover, was tightened the oven lost heat quickly."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "A comma follows the introductory clause 'Before the cover was tightened'.",
   },
@@ -469,7 +511,7 @@ const g5LaDifficult2Questions: Question[] = [
       "\"Honest science admits uncertainty,\" Dr. Blake explained.",
       "\"Honest science admits uncertainty Dr. Blake explained.\"",
       "Honest science admits uncertainty,\" Dr. Blake explained.",
-      "\"Honest science admits uncertainty\", Dr. Blake explained,",
+      "\"Honest science admits uncertainty\", Dr. Blake explained,"
     ],
     correctAnswer: 0,
     explanation:
@@ -481,12 +523,12 @@ const g5LaDifficult2Questions: Question[] = [
     skill: "Parallel Structure",
     question: "Which sentence uses parallel structure?",
     options: [
-      "The team tightened the cover, changed the angle, and recorded the data.",
       "The team tightened the cover, changing the angle, and data was recorded.",
       "The team was tightening the cover, the angle, and recorded data.",
       "The team tightened, to change the angle, and recording data.",
+      "The team tightened the cover, changed the angle, and recorded the data."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "The three actions use the same past-tense form: tightened, changed, recorded.",
   },
@@ -496,12 +538,12 @@ const g5LaDifficult2Questions: Question[] = [
     skill: "Run-on Correction",
     question: "Which choice corrects the run-on sentence?",
     options: [
-      "The oven lost heat, so the pupils tightened the cover.",
       "The oven lost heat the pupils tightened the cover.",
+      "The oven lost heat, so the pupils tightened the cover.",
       "The oven lost heat, the pupils tightened the cover.",
-      "The oven losing heat and pupils tightened cover.",
+      "The oven losing heat and pupils tightened cover."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "A comma plus 'so' correctly joins the two complete ideas.",
   },
@@ -511,12 +553,12 @@ const g5LaDifficult2Questions: Question[] = [
     skill: "Sentence Combining",
     question: "Which choice best combines the two sentences?",
     options: [
-      "Because one coral survived, the scientists searched for an explanation.",
       "One coral survived the scientists searched for an explanation.",
       "Surviving coral but searching for an explanation by scientists.",
-      "One coral survived, the scientists, searched for an explanation.",
+      "Because one coral survived, the scientists searched for an explanation.",
+      "One coral survived, the scientists, searched for an explanation."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "'Because' joins the cause and effect into one clear sentence.",
   },
@@ -537,8 +579,8 @@ const g5LaDifficult2Questions: Question[] = [
     skill: "Word Choice",
     question:
       "Which word choice is most precise for a science report? \"The team _____ the temperature every ten minutes.\"",
-    options: ["measured", "looked at", "did", "had"],
-    correctAnswer: 0,
+    options: ["watched", "guessed", "noticed", "measured"],
+    correctAnswer: 3,
     explanation:
       "'Measured' is precise and scientific; the other choices are vague.",
   },
@@ -549,12 +591,12 @@ const g5LaDifficult2Questions: Question[] = [
     question:
       "A student wants to PERSUADE readers to support renewable energy. Which sentence fits that purpose best?",
     options: [
-      "We must choose renewable energy because it protects our health and our future.",
       "Renewable energy is a type of energy that comes from nature.",
+      "We must choose renewable energy because it protects our health and our future.",
       "Here are the steps for building a solar oven from cardboard.",
-      "Once upon a time, a science team built a small oven.",
+      "Once upon a time, a science team built a small oven."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
       "A persuasive purpose calls for an opinion with reasons; the others inform, instruct, or tell a story instead.",
   },
@@ -565,12 +607,12 @@ const g5LaDifficult2Questions: Question[] = [
     question:
       "Which detail best supports the claim that the pupils were thorough scientists?",
     options: [
-      "They recorded measurements every ten minutes and adjusted their design.",
       "They built the oven from foil and cardboard.",
       "The computer lab had lost power that week.",
-      "The principal smiled when he heard the report.",
+      "They recorded measurements every ten minutes and adjusted their design.",
+      "The principal smiled when he heard the report."
     ],
-    correctAnswer: 0,
+    correctAnswer: 2,
     explanation:
       "Regular measurement and adjustment is strong evidence of thoroughness; the others are weaker or unrelated.",
   },
@@ -592,12 +634,12 @@ const g5LaDifficult2Questions: Question[] = [
     question:
       "These sentences appear in a report on the solar oven. Which should be REMOVED to keep it focused?",
     options: [
-      "The school cafeteria serves lunch at noon each day.",
       "The pupils tightened the loose plastic cover.",
       "They changed the oven's angle toward the sun.",
       "They recorded temperature data every ten minutes.",
+      "The school cafeteria serves lunch at noon each day."
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation:
       "Lunch times are unrelated to the solar oven study and should be removed; the others belong in the report.",
   },
@@ -608,15 +650,15 @@ const g5LaDifficult2Questions: Question[] = [
     question:
       "Which sentence is the best conclusion for an essay about these two science stories?",
     options: [
+      "In conclusion, both renewable energy and coral reefs are very interesting topics to study.",
       "Both stories show that real science depends on evidence, patience, and honest testing.",
-      "And that is everything there is to say about science today.",
-      "Coral and ovens are two things that are not the same.",
-      "So the scientists did science and then the essay ended.",
+      "These examples prove that students should always wait for adults to do the hard work.",
+      "As the passages show, the only way to do science is to build a model or use a microscope."
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation:
-      "A strong conclusion restates the shared main idea with purpose, as the first choice does.",
-  },
+      "A strong conclusion restates the shared main idea with purpose; the second choice ties both examples to the central point.",
+  }
 ];
 
 const shuffleAnswerOptions = (questions: Question[]): Question[] => {
