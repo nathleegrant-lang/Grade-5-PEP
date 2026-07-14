@@ -1,68 +1,126 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useCallback } from "react"
-import { saveStudentTestResult } from "@/lib/student-test-results"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
+import { useState, useEffect, useCallback, useRef } from "react";
+import { saveStudentTestResult } from "@/lib/student-test-results";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
 import {
-  Clock, ChevronLeft, ChevronRight, Flag, CheckCircle, XCircle,
-  BookOpen, RotateCcw, Home, Lock, Crown, ArrowLeft, Printer
-} from "lucide-react"
-import { cn } from "@/lib/utils"
-import { useAuth } from "@/contexts/auth-context"
+  Clock,
+  ChevronLeft,
+  ChevronRight,
+  Flag,
+  CheckCircle,
+  XCircle,
+  BookOpen,
+  RotateCcw,
+  Home,
+  Lock,
+  Crown,
+  ArrowLeft,
+  Printer,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/auth-context";
 
-const FREE_QUESTION_LIMIT = 5
+const FREE_QUESTION_LIMIT = 5;
 
 interface Question {
-  id: number
-  type: "reading" | "vocabulary" | "grammar" | "writing"
-  skill: string
-  question: string
-  options: string[]
-  correctAnswer: number
-  explanation: string
+  id: number;
+  type: "reading" | "vocabulary" | "grammar" | "writing";
+  skill: string;
+  question: string;
+  options: string[];
+  correctAnswer: number;
+  explanation: string;
 }
+
+/* ============================================================
+   DIFFICULT 8  ·  Passage 1: Water Conservation
+                   Passage 2: Community Resource Management
+   ============================================================ */
+
+const P1 = `Marcus and his cousin Zara stood at the edge of the limestone hill in St. Ann, staring at the faded piece of paper in Marcus's hand. It was a map, drawn by their grandfather thirty years ago, showing a path to a cave he had discovered as a boy. The ink had smudged in places, and one entire corner was torn away, taking a section of the trail with it.
+
+"We'll never find it," Zara said, squinting at the paper. "Half the directions are missing."
+
+Marcus folded the map carefully and put it in his pocket. "Grandpa didn't draw this for fun. He marked landmarks—specific trees and rock shapes. If we follow the ones we can read, we can figure out the rest."
+
+For the next hour, they climbed through the bush. The first landmark, a mahogany tree split by lightning, was exactly where the map said it would be. Zara's confidence grew a little. The second landmark, a flat rock shaped like a turtle, was harder to spot, but Marcus found it hiding under a tangle of wild coffee vines.
+
+Then they hit the torn section. The map showed a fork in the path, but the tear removed the mark telling them which way to go. One path sloped upward toward a ridge covered in guinea grass. The other dipped down into a shady hollow thick with ferns and fern allies.
+
+Zara wanted to take the upper path. "It makes more sense," she argued, wiping sweat from her forehead. "Caves are usually higher up in limestone hills. Everyone knows that."
+
+Marcus knelt and looked at the ground. "Maybe. But look at these rocks." He pointed to small, smooth stones scattered along the lower path. "Grandpa was a geologist. He would have noticed limestone gravel like this. It usually means water has washed it out from somewhere nearby—like a cave opening."
+
+Zara studied the stones, then looked back at the upper path, which was dry and bare. She bit her lip, thinking. "You might be right," she admitted. "But what if you're wrong? We've been walking for a long time, and it's getting hot."
+
+"If we go up and it's a dead end, we come back down and try the other way. We don't quit just because the map isn't perfect," Marcus said firmly.
+
+They took the lower path. It was narrow and damp, and they had to push through thick ferns that brushed their arms. Just as Zara was about to suggest turning back, the ground beneath them sloped sharply downward, and the ferns parted to reveal a dark, cool opening in the rock. A faint breeze blew from inside, carrying the smell of damp earth and old rain.
+
+They stood at the entrance, breathless. It was not a grand cavern, but it was a cave, exactly as their grandfather had described it. Inside, they could see stalactites hanging from the ceiling like frozen stone fountains.
+
+Marcus smiled and looked at Zara. "We didn't have the whole map," he said. "But we had enough clues to think our way through."
+
+Zara nodded, catching her breath. "Grandpa would have liked that. He always said the best tool you can carry is a good question."`;
+
+const P2 = `If you have ever walked along the coast of Jamaica, you have probably seen mangroves. They are the short, leafy trees that grow right at the edge of the sea, their roots twisted and tangled together like a giant net. To some people, they might look like messy, unimportant bushes. But scientists call mangroves "guardians of the coast," and for good reason.
+
+Mangroves have a remarkable ability: they can live in saltwater, which would quickly kill most other plants. They do this through special roots called pneumatophores. These roots stick up out of the mud like tiny snorkels, allowing the tree to take in oxygen even when the tide covers the ground. At the same time, their thick, waxy leaves filter out the salt, sometimes pushing tiny salt crystals out through their surfaces so the plant does not become poisoned.
+
+Beyond surviving in salty conditions, mangroves do extraordinary work for the environment. Their tangled root systems act as a massive natural barrier. When hurricanes bring powerful waves crashing toward the shore, the roots catch and absorb the energy of the water. This protects the land behind them from serious flooding and erosion. Without mangroves, coastal villages and farmland would face much greater damage during storm season.
+
+Mangroves also serve as underwater nurseries for ocean life. The maze of roots provides a safe hiding place for young fish, shrimp, and crabs. These small creatures grow strong in the calm, shady waters among the roots before swimming out to coral reefs or the open sea. In fact, a large percentage of the fish that Jamaicans catch and eat begin their lives sheltered by mangrove forests. If the mangroves disappear, the fish populations would drop significantly.
+
+Additionally, mangroves store huge amounts of carbon in their muddy soil—far more than most rainforests do. Carbon is a gas that contributes to climate change, so keeping mangrove forests healthy is one of the most effective natural ways to fight global warming.
+
+Despite all of these benefits, mangroves are disappearing around the world. In many coastal areas, they are cleared to make room for hotels, resorts, and shrimp farms. People sometimes see them as swampy wastelands that attract mosquitoes, not understanding what is lost when the trees are removed.
+
+Conservationists are working hard to protect remaining mangrove forests. Some countries have passed strict laws to make it illegal to cut down mangroves. In Jamaica, community groups and students regularly plant new mangrove seedlings along shorelines that have been damaged. It takes years for a mangrove forest to grow back to full strength, but the effort is considered worthwhile because of everything these quiet trees provide.
+
+Understanding mangroves helps us see that nature is not just a collection of separate plants and animals. Everything is connected, and sometimes the most important living things are the ones working quietly in the background.`;
 
 const g5LaDiff8Questions: Question[] = [
   {
     id: 1,
     type: "reading",
-    skill: "Literary Technique",
+    skill: "Detail",
     question: `Read the passage then answer the question.
 
-"There is a common misconception that science and imagination are opposed — that the scientist deals in facts while the artist deals in fictions. In reality, the greatest scientific breakthroughs have depended not on the mechanical accumulation of data, but on the imaginative leap: the willingness to see the familiar as strange, and the strange as potentially illuminating. Einstein imagined himself riding a beam of light. Darwin imagined time stretching backwards for millions of years. The hypothesis — that wild, unverified idea that might become a theory — is science's equivalent of the poet's first draft: necessary, improbable, and the beginning of everything."
+${P1}
 
-How does the writer use language to make an abstract idea feel immediate and personal?`,
+What was the first landmark Marcus and Zara found?`,
     options: [
-      "By using only statistics",
-      "By using passive constructions",
-      "Through vivid, specific word choices and direct address that draw the reader into the argument",
-      "By avoiding all figurative language",
+      "A flat rock shaped like a turtle",
+      "A mahogany tree split by lightning",
+      "A dark opening in the rock",
+      "A tangle of wild coffee vines"
     ],
-    correctAnswer: 2,
-    explanation: `Abstract arguments become powerful through concrete language, direct address, and specific detail — techniques all skilled writers use to connect intellectual ideas to human feeling.`
+    correctAnswer: 1,
+    explanation: `The passage states that "the first landmark, a mahogany tree split by lightning, was exactly where the map said it would be."`
   },
   {
     id: 2,
     type: "reading",
-    skill: "Author's Argument",
+    skill: "Inference",
     question: `Read the passage then answer the question.
 
-"There is a common misconception that science and imagination are opposed — that the scientist deals in facts while the artist deals in fictions. In reality, the greatest scientific breakthroughs have depended not on the mechanical accumulation of data, but on the imaginative leap: the willingness to see the familiar as strange, and the strange as potentially illuminating. Einstein imagined himself riding a beam of light. Darwin imagined time stretching backwards for millions of years. The hypothesis — that wild, unverified idea that might become a theory — is science's equivalent of the poet's first draft: necessary, improbable, and the beginning of everything."
+${P1}
 
-What is the CENTRAL claim the author is making in this passage?`,
+Why did Marcus put the map in his pocket instead of giving up when Zara complained?`,
     options: [
-      "The topic is unimportant",
-      "There is no clear argument",
-      "The author makes a specific, arguable claim that challenges a conventional assumption about the topic",
-      "The author simply describes the topic",
+      "He believed the remaining clues were enough to guide them if they thought carefully.",
+      "He was frustrated that the map was torn and didn't want to look at it anymore.",
+      "He knew exactly where the cave was and no longer needed the map.",
+      "He wanted to hide the map so Zara would stop complaining about it."
     ],
-    correctAnswer: 2,
-    explanation: `Difficult passages always contain a central argument — a position the writer takes that is specific, arguable, and supported by the language of the text.`
+    correctAnswer: 0,
+    explanation: `Marcus says, "If we follow the ones we can read, we can figure out the rest." This shows he believed the visible landmarks were sufficient to complete the journey.`
   },
   {
     id: 3,
@@ -70,730 +128,947 @@ What is the CENTRAL claim the author is making in this passage?`,
     skill: "Inference",
     question: `Read the passage then answer the question.
 
-"There is a common misconception that science and imagination are opposed — that the scientist deals in facts while the artist deals in fictions. In reality, the greatest scientific breakthroughs have depended not on the mechanical accumulation of data, but on the imaginative leap: the willingness to see the familiar as strange, and the strange as potentially illuminating. Einstein imagined himself riding a beam of light. Darwin imagined time stretching backwards for millions of years. The hypothesis — that wild, unverified idea that might become a theory — is science's equivalent of the poet's first draft: necessary, improbable, and the beginning of everything."
+${P1}
 
-What does the passage imply about the relationship between the topic and power?`,
+When Zara said, "Caves are usually higher up in limestone hills. Everyone knows that," she was mostly relying on`,
     options: [
-      "The topic has nothing to do with power",
-      "Power is irrelevant to understanding the topic",
-      "The topic is not politically or socially neutral — it is shaped by and shapes relationships of power",
-      "Only governments are interested in the topic",
+      "what her grandfather had specifically told her about this cave",
+      "careful observation of the landscape around her",
+      "a general assumption rather than proof specific to their situation",
+      "scientific evidence she had read in a textbook"
     ],
     correctAnswer: 2,
-    explanation: `Difficult texts consistently reveal that their topics are entangled with questions of power — who decides, who is heard, who is erased.`
+    explanation: `Zara uses a general rule ("Everyone knows that") instead of looking at the specific evidence right in front of her, like the limestone gravel Marcus pointed out.`
   },
   {
     id: 4,
     type: "reading",
-    skill: "Tone",
+    skill: "Theme",
     question: `Read the passage then answer the question.
 
-"There is a common misconception that science and imagination are opposed — that the scientist deals in facts while the artist deals in fictions. In reality, the greatest scientific breakthroughs have depended not on the mechanical accumulation of data, but on the imaginative leap: the willingness to see the familiar as strange, and the strange as potentially illuminating. Einstein imagined himself riding a beam of light. Darwin imagined time stretching backwards for millions of years. The hypothesis — that wild, unverified idea that might become a theory — is science's equivalent of the poet's first draft: necessary, improbable, and the beginning of everything."
+${P1}
 
-The tone of this passage is BEST described as:`,
+What is the most important idea the author wants to share through this story?`,
     options: [
-      "Angry and dismissive",
-      "Entirely neutral and objective",
-      "Intellectually engaged and critically rigorous — the writer takes a clear position while acknowledging complexity",
-      "Humorous and ironic",
+      "Having a perfect plan is less important than being able to think through problems.",
+      "Old maps are unreliable and should never be used for exploring.",
+      "It is too dangerous to explore the Jamaican countryside without an adult.",
+      "Geologists are the only people who can successfully find caves."
     ],
-    correctAnswer: 2,
-    explanation: `Difficult analytical passages are characterised by intellectual rigour — a clear position held with nuance and awareness of counter-positions.`
+    correctAnswer: 0,
+    explanation: `Even though the map was torn, Marcus and Zara succeeded by observing their surroundings and reasoning through the missing information. This highlights the value of critical thinking.`
   },
   {
     id: 5,
     type: "reading",
-    skill: "Figurative Language",
+    skill: "Prediction",
     question: `Read the passage then answer the question.
 
-"There is a common misconception that science and imagination are opposed — that the scientist deals in facts while the artist deals in fictions. In reality, the greatest scientific breakthroughs have depended not on the mechanical accumulation of data, but on the imaginative leap: the willingness to see the familiar as strange, and the strange as potentially illuminating. Einstein imagined himself riding a beam of light. Darwin imagined time stretching backwards for millions of years. The hypothesis — that wild, unverified idea that might become a theory — is science's equivalent of the poet's first draft: necessary, improbable, and the beginning of everything."
+${P1}
 
-Identify a KEY figurative or rhetorical technique in this passage and explain its purpose.`,
+Based on the story, what would Marcus and Zara most likely do if they found another torn map in the future?`,
     options: [
-      "There is no figurative language",
-      "Figurative language is used randomly",
-      "A specific figurative technique is used deliberately to make an abstract argument more vivid, concrete, or emotionally resonant",
-      "The passage is too difficult to analyse",
+      "Throw it away immediately",
+      "Give it to a professional explorer to solve",
+      "Copy the map and sell it to a museum",
+      "Study the visible clues and try to reason out the missing parts"
     ],
-    correctAnswer: 2,
-    explanation: `All difficult texts use figurative or rhetorical language purposefully — the skill is identifying the technique, locating it in the text, and explaining its specific function.`
+    correctAnswer: 3,
+    explanation: `Their success in this story was built on studying visible clues and reasoning out the rest. It is logical to predict they would use the same successful strategy again.`
   },
   {
     id: 6,
     type: "reading",
-    skill: "Vocabulary in Context",
+    skill: "Compare and Contrast",
     question: `Read the passage then answer the question.
 
-"There is a common misconception that science and imagination are opposed — that the scientist deals in facts while the artist deals in fictions. In reality, the greatest scientific breakthroughs have depended not on the mechanical accumulation of data, but on the imaginative leap: the willingness to see the familiar as strange, and the strange as potentially illuminating. Einstein imagined himself riding a beam of light. Darwin imagined time stretching backwards for millions of years. The hypothesis — that wild, unverified idea that might become a theory — is science's equivalent of the poet's first draft: necessary, improbable, and the beginning of everything."
+${P1}
 
-The writer chooses specific academic vocabulary throughout. What effect does this have?`,
+How do Marcus's and Zara's approaches to the fork in the path differ?`,
     options: [
-      "It makes the passage inaccessible",
-      "It shows off the writer's vocabulary",
-      "It signals the register and intended audience — positioning this as a serious intellectual argument for a thoughtful reader",
-      "Academic vocabulary has no effect",
+      "Marcus relies on specific evidence in the environment, while Zara relies on a general rule.",
+      "Zara wants to observe the ground, while Marcus wants to guess randomly.",
+      "Both of them want to go back home, but neither wants to admit it.",
+      "Marcus wants to split up to search both paths, but Zara wants to stay together."
     ],
-    correctAnswer: 2,
-    explanation: `Register and vocabulary choices signal the text's seriousness and its intended audience — a sophisticated reader capable of engaging with complex ideas.`
+    correctAnswer: 0,
+    explanation: `Marcus looks at the limestone gravel on the ground as specific evidence. Zara relies on the general idea that caves are usually higher up.`
   },
   {
     id: 7,
     type: "reading",
-    skill: "Critical Reading",
+    skill: "Drawing Conclusions",
     question: `Read the passage then answer the question.
 
-"There is a common misconception that science and imagination are opposed — that the scientist deals in facts while the artist deals in fictions. In reality, the greatest scientific breakthroughs have depended not on the mechanical accumulation of data, but on the imaginative leap: the willingness to see the familiar as strange, and the strange as potentially illuminating. Einstein imagined himself riding a beam of light. Darwin imagined time stretching backwards for millions of years. The hypothesis — that wild, unverified idea that might become a theory — is science's equivalent of the poet's first draft: necessary, improbable, and the beginning of everything."
+${P1}
 
-What might a critical reader ask about the argument presented in this passage?`,
+What can the reader conclude about Marcus and Zara's grandfather?`,
     options: [
-      "Critical readers simply accept all arguments",
-      "A critical reader would ask: Is there evidence for this? What perspective is missing? What assumptions does the writer make?",
-      "Critical reading is too difficult at this level",
-      "Critical readers find no value in questioning texts",
+      "He was careless and often lost his belongings in the bush.",
+      "He valued observation, reasoning, and curiosity about the natural world.",
+      "He never actually found the cave himself but just drew a picture of it.",
+      "He wanted to keep the cave a secret from his family forever."
     ],
     correctAnswer: 1,
-    explanation: `Critical reading means interrogating texts: asking about evidence, perspective, assumptions, and what has been left out. These are higher-order reading skills.`
+    explanation: `He drew a detailed map with specific landmarks and was a geologist who noticed things like limestone gravel. The story shows he passed down a legacy of curiosity and observation.`
   },
   {
     id: 8,
     type: "reading",
-    skill: "Theme",
+    skill: "Detail",
     question: `Read the passage then answer the question.
 
-"There is a common misconception that science and imagination are opposed — that the scientist deals in facts while the artist deals in fictions. In reality, the greatest scientific breakthroughs have depended not on the mechanical accumulation of data, but on the imaginative leap: the willingness to see the familiar as strange, and the strange as potentially illuminating. Einstein imagined himself riding a beam of light. Darwin imagined time stretching backwards for millions of years. The hypothesis — that wild, unverified idea that might become a theory — is science's equivalent of the poet's first draft: necessary, improbable, and the beginning of everything."
+${P2}
 
-The CENTRAL theme of this passage concerns which fundamental human question?`,
+According to the passage, how do mangrove leaves handle the salt from seawater?`,
     options: [
-      "A minor practical concern",
-      "A question about food or sport",
-      "A fundamental question about identity, power, knowledge, or justice",
-      "A topic with no relevance to human life",
+      "They absorb it and store it in the trunk for later use.",
+      "They drop all their leaves whenever salt touches them.",
+      "They filter it out and sometimes push salt crystals out through their surfaces.",
+      "They use the salt to make their roots grow taller and stronger."
     ],
     correctAnswer: 2,
-    explanation: `Difficult passages always engage with fundamental human themes — identity, power, truth, justice, belonging — even when their surface topic appears specific.`
+    explanation: `The passage explains that mangrove leaves "filter out the salt, sometimes pushing tiny salt crystals out through their surfaces."`
   },
   {
     id: 9,
     type: "reading",
-    skill: "Text Structure",
+    skill: "Evaluating Evidence",
     question: `Read the passage then answer the question.
 
-"There is a common misconception that science and imagination are opposed — that the scientist deals in facts while the artist deals in fictions. In reality, the greatest scientific breakthroughs have depended not on the mechanical accumulation of data, but on the imaginative leap: the willingness to see the familiar as strange, and the strange as potentially illuminating. Einstein imagined himself riding a beam of light. Darwin imagined time stretching backwards for millions of years. The hypothesis — that wild, unverified idea that might become a theory — is science's equivalent of the poet's first draft: necessary, improbable, and the beginning of everything."
+${P2}
 
-How does the writer structure their argument?`,
+The author supports the idea that mangroves protect the coast by pointing out that`,
     options: [
-      "Randomly, with no organisation",
-      "By simply listing unrelated facts",
-      "By establishing a position, complicating or challenging assumptions, and building toward a conclusion that reframes the opening question",
-      "By presenting only one side of a debate",
+      "hotels are often built where mangroves used to be",
+      "mangroves are the tallest and strongest trees in the Caribbean",
+      "their tangled roots absorb the energy of hurricane waves",
+      "mangroves attract mosquitoes that keep tourists away"
     ],
     correctAnswer: 2,
-    explanation: `Sophisticated arguments are structured: they begin with a position, develop through evidence and complexity, and conclude with the position deepened or reframed.`
+    explanation: `The author states that "when hurricanes bring powerful waves crashing toward the shore, the roots catch and absorb the energy of the water." This is the direct evidence provided.`
   },
   {
     id: 10,
     type: "reading",
-    skill: "Implied Meaning",
+    skill: "Author's Purpose",
     question: `Read the passage then answer the question.
 
-"There is a common misconception that science and imagination are opposed — that the scientist deals in facts while the artist deals in fictions. In reality, the greatest scientific breakthroughs have depended not on the mechanical accumulation of data, but on the imaginative leap: the willingness to see the familiar as strange, and the strange as potentially illuminating. Einstein imagined himself riding a beam of light. Darwin imagined time stretching backwards for millions of years. The hypothesis — that wild, unverified idea that might become a theory — is science's equivalent of the poet's first draft: necessary, improbable, and the beginning of everything."
+${P2}
 
-What does the passage ultimately suggest the reader should DO or THINK differently?`,
+Why does the author mention that mangroves store more carbon than rainforests?`,
     options: [
-      "Nothing — the passage is purely descriptive",
-      "The reader should simply agree with the author",
-      "The passage invites the reader to question an assumption, see something familiar in a new way, or feel the urgency of an issue they may have taken for granted",
-      "The reader should ignore the topic",
+      "To show that rainforests are not important for the environment",
+      "To encourage people to cut down rainforests and replace them with mangroves",
+      "To explain exactly how carbon is created deep in the ocean",
+      "To persuade readers that protecting mangroves is a powerful way to fight climate change"
     ],
-    correctAnswer: 2,
-    explanation: `The highest purpose of analytical writing is to change how the reader thinks or sees — to shift a perspective or heighten awareness.`
+    correctAnswer: 3,
+    explanation: `By comparing mangroves to rainforests and mentioning their role in storing carbon, the author emphasizes how crucial they are in the fight against global warming.`
   },
   {
     id: 11,
     type: "reading",
-    skill: "Author's Craft — Sentence Level",
+    skill: "Compare and Contrast",
     question: `Read the passage then answer the question.
 
-"There is a common misconception that science and imagination are opposed — that the scientist deals in facts while the artist deals in fictions. In reality, the greatest scientific breakthroughs have depended not on the mechanical accumulation of data, but on the imaginative leap: the willingness to see the familiar as strange, and the strange as potentially illuminating. Einstein imagined himself riding a beam of light. Darwin imagined time stretching backwards for millions of years. The hypothesis — that wild, unverified idea that might become a theory — is science's equivalent of the poet's first draft: necessary, improbable, and the beginning of everything."
+${P2}
 
-Why might the writer vary their sentence length in this passage?`,
+How are the roles of mangrove roots described differently in the passage?`,
     options: [
-      "By accident",
-      "Short sentences are always better",
-      "Varied sentence length creates rhythm, emphasis, and pace — short sentences punch key ideas; longer ones develop complexity",
-      "Long sentences are always more impressive",
+      "They act only as snorkels for oxygen and serve no other purpose.",
+      "They look like a net on the surface but act as a protective barrier and nursery underwater.",
+      "They are described as dangerous obstacles for fish and crabs.",
+      "They are only useful during the dry season when the tide is out."
     ],
-    correctAnswer: 2,
-    explanation: `Sentence variety is a deliberate craft choice — short sentences land key points with impact; longer sentences build argument and texture.`
+    correctAnswer: 1,
+    explanation: `The passage compares their appearance ("like a giant net") to their actual functions: absorbing wave energy (barrier) and hiding young sea creatures (nursery).`
   },
   {
     id: 12,
     type: "reading",
-    skill: "Evidence and Credibility",
+    skill: "Drawing Conclusions",
     question: `Read the passage then answer the question.
 
-"There is a common misconception that science and imagination are opposed — that the scientist deals in facts while the artist deals in fictions. In reality, the greatest scientific breakthroughs have depended not on the mechanical accumulation of data, but on the imaginative leap: the willingness to see the familiar as strange, and the strange as potentially illuminating. Einstein imagined himself riding a beam of light. Darwin imagined time stretching backwards for millions of years. The hypothesis — that wild, unverified idea that might become a theory — is science's equivalent of the poet's first draft: necessary, improbable, and the beginning of everything."
+${P2}
 
-Does the author provide sufficient evidence for their claims in this passage?`,
+What can the reader conclude about the people who clear mangroves for hotels?`,
     options: [
-      "Yes — the author's opinions are always sufficient",
-      "No evidence of any kind is given",
-      "The passage provides reasoning and illustrative detail, but a critical reader would benefit from verifiable evidence to support the most significant claims",
-      "Evidence is unnecessary for good writing",
+      "They likely do not understand the full environmental benefits the trees provide.",
+      "They have studied mangroves carefully and decided they are completely useless.",
+      "They are trying to help local fish populations grow much faster.",
+      "They know that mangroves contribute heavily to climate change."
     ],
-    correctAnswer: 2,
-    explanation: `Strong critical reading acknowledges what the text does well while identifying where more evidence would strengthen the argument — this is sophisticated analysis.`
+    correctAnswer: 0,
+    explanation: `The passage states people see them as "swampy wastelands... not understanding what is lost when the trees are removed." This implies a lack of awareness about their true value.`
   },
   {
     id: 13,
     type: "reading",
-    skill: "Audience and Purpose",
+    skill: "Prediction",
     question: `Read the passage then answer the question.
 
-"There is a common misconception that science and imagination are opposed — that the scientist deals in facts while the artist deals in fictions. In reality, the greatest scientific breakthroughs have depended not on the mechanical accumulation of data, but on the imaginative leap: the willingness to see the familiar as strange, and the strange as potentially illuminating. Einstein imagined himself riding a beam of light. Darwin imagined time stretching backwards for millions of years. The hypothesis — that wild, unverified idea that might become a theory — is science's equivalent of the poet's first draft: necessary, improbable, and the beginning of everything."
+${P2}
 
-What type of reader is this passage MOST designed for?`,
+If a coastal community stops protecting its mangroves, what is the most likely long-term result according to the passage?`,
     options: [
-      "Children under ten",
-      "People who already fully agree with the argument",
-      "A thoughtful reader capable of engaging with complex ideas and willing to have their assumptions questioned",
-      "People who know nothing about the topic",
+      "The coastline will become more protected from storms over time.",
+      "Fish populations in the area will likely decrease, and the coast will be more vulnerable to storms.",
+      "The mangroves will grow back much faster on their own without human interference.",
+      "Hurricanes will stop happening in that region entirely."
     ],
-    correctAnswer: 2,
-    explanation: `The vocabulary, structure, and level of assumed knowledge all point to a reader comfortable with intellectual complexity — not necessarily an expert, but a serious, curious thinker.`
+    correctAnswer: 1,
+    explanation: `The passage states that without mangroves, coastal villages face greater storm damage and that fish populations would drop significantly if mangroves disappear.`
   },
   {
     id: 14,
     type: "reading",
-    skill: "Summarise",
+    skill: "Evaluating Evidence",
     question: `Read the passage then answer the question.
 
-"There is a common misconception that science and imagination are opposed — that the scientist deals in facts while the artist deals in fictions. In reality, the greatest scientific breakthroughs have depended not on the mechanical accumulation of data, but on the imaginative leap: the willingness to see the familiar as strange, and the strange as potentially illuminating. Einstein imagined himself riding a beam of light. Darwin imagined time stretching backwards for millions of years. The hypothesis — that wild, unverified idea that might become a theory — is science's equivalent of the poet's first draft: necessary, improbable, and the beginning of everything."
+${P2}
 
-Which statement BEST summarises the MAIN argument of this passage?`,
+The author includes the detail about community groups planting seedlings to`,
     options: [
-      "The passage simply describes a topic without argument",
-      "The topic is not important",
-      "The passage makes a specific, challenging argument about its topic that invites the reader to reconsider a familiar assumption",
-      "The passage has no clear conclusion",
+      "prove that mangroves grow better in cities than in rural areas",
+      "argue that passing laws is the only way to protect the environment",
+      "explain the correct process for starting a successful shrimp farm",
+      "show that people are taking action to restore the damage caused by clearing mangroves"
     ],
-    correctAnswer: 2,
-    explanation: `Difficult passages always have a central, arguable claim — the skill is identifying it clearly and concisely.`
+    correctAnswer: 3,
+    explanation: `This detail follows the section on mangroves being cleared. It shows a practical, positive response to the problem of destruction, highlighting conservation efforts.`
   },
   {
     id: 15,
     type: "reading",
-    skill: "Close Reading — Final Sentence",
-    question: `Read the passage then answer the question.
+    skill: "Compare and Contrast",
+    question: `Read the passages then answer the question.
 
-"There is a common misconception that science and imagination are opposed — that the scientist deals in facts while the artist deals in fictions. In reality, the greatest scientific breakthroughs have depended not on the mechanical accumulation of data, but on the imaginative leap: the willingness to see the familiar as strange, and the strange as potentially illuminating. Einstein imagined himself riding a beam of light. Darwin imagined time stretching backwards for millions of years. The hypothesis — that wild, unverified idea that might become a theory — is science's equivalent of the poet's first draft: necessary, improbable, and the beginning of everything."
+${P1}
 
-The final sentence of the passage typically performs which function?`,
+${P2}
+
+Both passages suggest that`,
     options: [
-      "It introduces a new, unrelated topic",
-      "It simply restates the first sentence",
-      "It either resolves the argument, deepens the central question, or opens onto something larger — leaving the reader with the most resonant thought",
-      "It summarises the passage's evidence",
+      "looking closely at small details can lead to a better understanding of a larger situation",
+      "it is always better to work alone than in a group",
+      "older people always know more than younger people do",
+      "exploring nature is too dangerous for students to attempt"
     ],
-    correctAnswer: 2,
-    explanation: `In analytical writing, the final sentence carries particular weight — it is the last thing the reader hears and should leave them with the passage's most powerful insight.`
+    correctAnswer: 0,
+    explanation: `Marcus looks at small stones to understand the landscape, and understanding mangroves helps us see how nature is connected. Both emphasize careful observation for bigger insights.`
   },
   {
     id: 16,
     type: "vocabulary",
-    skill: "Etymology",
-    question: `The word 'democracy' comes from the Greek 'demos' (people) and 'kratos' (power/rule). What does this etymology tell us?`,
+    skill: "Synonym",
+    question: `Which word is the closest synonym for "extraordinary" as used in Passage 2?`,
     options: [
-      "Democracy is a type of religion",
-      "Democracy literally means rule by the people",
-      "Democracy was invented by the Greeks only",
-      "Democracy and monarchy have the same root",
+      "unusual",
+      "ordinary",
+      "dangerous",
+      "tiny"
     ],
-    correctAnswer: 1,
-    explanation: `Etymology reveals that 'democracy' literally means 'people's rule' — understanding word roots deepens vocabulary and meaning.`
+    correctAnswer: 0,
+    explanation: `"Extraordinary" means something out of the ordinary or highly remarkable, making "unusual" the closest synonym.`
   },
   {
     id: 17,
     type: "vocabulary",
-    skill: "Nuanced Connotation",
-    question: `Which sentence uses the word 'calculated' with a NEGATIVE connotation?`,
+    skill: "Antonym",
+    question: `Which word means the OPPOSITE of "bare" as used in the sentence "the upper path, which was dry and bare"?`,
     options: [
-      "His calculated approach to solving the problem impressed everyone",
-      "She made a calculated decision based on evidence",
-      "His cold, calculated manipulation of the situation shocked his colleagues",
-      "The scientist's calculated observations led to a breakthrough",
+      "exposed",
+      "empty",
+      "smooth",
+      "covered"
     ],
-    correctAnswer: 2,
-    explanation: `'Calculated' here implies deliberate and cold manipulation of others — a negative, sinister connotation.`
+    correctAnswer: 3,
+    explanation: `"Bare" means lacking vegetation or covering. "Covered" is the opposite, meaning something is hidden or protected by a layer.`
   },
   {
     id: 18,
     type: "vocabulary",
-    skill: "Irony in Language",
-    question: `'Oh, what a wonderful day!' said as it poured rain. This is an example of:`,
+    skill: "Prefix",
+    question: `The word "underwater" begins with the prefix "under-." What does "underwater nurseries" mean?`,
     options: [
-      "Hyperbole",
-      "Simile",
-      "Verbal irony / sarcasm",
-      "Personification",
+      "nurseries that are built above the surface of the water",
+      "nurseries that have no water at all",
+      "nurseries that are located beneath the surface of the water",
+      "nurseries that are only used during the winter"
     ],
     correctAnswer: 2,
-    explanation: `Verbal irony means saying the opposite of what you mean for effect. Calling a rainy day 'wonderful' is verbal irony or sarcasm.`
+    explanation: `The prefix "under-" means below or beneath. "Underwater" means beneath the surface of the water.`
   },
   {
     id: 19,
     type: "vocabulary",
-    skill: "Extended Metaphor Analysis",
-    question: `A poet describes life as a river: 'It begins in rushing, impatient youth, grows wide and slow in middle age, and finally flows quietly into the sea.' The sea likely represents:`,
+    skill: "Suffix",
+    question: `The suffix "-ist" means "one who." In Passage 1, a "geologist" is`,
     options: [
-      "The ocean literally",
-      "Wealth and prosperity",
-      "Death and the end of life's journey",
-      "A holiday destination",
+      "a person who studies rocks and the Earth's physical structure",
+      "a person who draws maps for a living",
+      "a person who plants trees along the coast",
+      "a person who catches fish to sell at the market"
     ],
-    correctAnswer: 2,
-    explanation: `In extended metaphors about life and rivers, the sea typically symbolises death — the final destination where the journey ends.`
+    correctAnswer: 0,
+    explanation: `"Geo" relates to the earth, and "-ist" means one who studies. A geologist is a scientist who studies the Earth and rocks.`
   },
   {
     id: 20,
     type: "vocabulary",
-    skill: "Academic Vocabulary",
-    question: `In academic writing, 'substantiate' means:`,
+    skill: "Context Clues",
+    question: `In Passage 2, mangroves are described as "guardians of the coast." What does this phrase suggest?`,
     options: [
-      "to undermine completely",
-      "to provide evidence that supports a claim",
-      "to ignore a point",
-      "to make something smaller",
+      "The trees provide a natural defense that protects the shoreline from harm.",
+      "The trees hire security guards to patrol the beach.",
+      "The trees are the only plants allowed to grow near the ocean.",
+      "The trees are dangerous and should be avoided by swimmers."
     ],
-    correctAnswer: 1,
-    explanation: `To substantiate is to provide concrete evidence or proof to support a claim or argument.`
+    correctAnswer: 0,
+    explanation: `A guardian is someone or something that protects. The passage goes on to explain how mangroves protect the land from waves and flooding.`
   },
   {
     id: 21,
     type: "vocabulary",
-    skill: "Figurative Language — Juxtaposition",
-    question: `A writer places a description of a lavish royal feast immediately next to a description of starving peasants. This technique is called:`,
+    skill: "Multiple Meaning",
+    question: `Which sentence uses the word "pool" in the same way as it would be used to describe water trapped in mangrove roots?`,
     options: [
-      "Alliteration",
-      "Simile",
-      "Juxtaposition",
-      "Onomatopoeia",
+      "Marcus shot the ball into the pool table pocket.",
+      "A small pool of water collected in the hollow among the roots.",
+      "The workers decided to pool their money to buy supplies.",
+      "The group formed a pool of experts to advise the government."
     ],
-    correctAnswer: 2,
-    explanation: `Juxtaposition places contrasting elements side by side to highlight the contrast between them.`
+    correctAnswer: 1,
+    explanation: `In the context of mangroves, a "pool" refers to a small body of standing water, which matches option B. The other options use "pool" in game, collective, or resource contexts.`
   },
   {
     id: 22,
     type: "vocabulary",
-    skill: "Word Meaning — Nuance",
-    question: `Which sentence uses 'notorious' correctly?`,
+    skill: "Word Relationships",
+    question: `Root is to tree as foundation is to`,
     options: [
-      "She was notorious for her generous charity work",
-      "He was notorious for breaking the law repeatedly",
-      "The school was notorious for its excellent exam results",
-      "She was notorious for being very kind",
+      "roof",
+      "soil",
+      "building",
+      "seed"
     ],
-    correctAnswer: 1,
-    explanation: `'Notorious' means famous for something BAD. It is always negative — unlike 'famous' or 'renowned.'`
+    correctAnswer: 2,
+    explanation: `Roots anchor a tree and provide it with a base, just as a foundation anchors a building and provides it with a base.`
   },
   {
     id: 23,
     type: "vocabulary",
-    skill: "Figurative Language — Paradox",
-    question: `'The silence was deafening.' This is a paradox because:`,
+    skill: "Replacing a Word",
+    question: `Which phrase could best replace "bush" in "they climbed through the bush" without changing the meaning?`,
     options: [
-      "Silence and sound are not related",
-      "It combines two contradictory ideas — silence cannot literally be deafening — to express overwhelming quiet",
-      "The sentence is grammatically wrong",
-      "Deafening is not a real word",
+      "a wide-open sandy beach",
+      "a dense area of wild plants and trees",
+      "a crowded city street",
+      "a deep, fast-moving river"
     ],
     correctAnswer: 1,
-    explanation: `A paradox contains contradictory elements that reveal a deeper truth. The overwhelming silence had the impact of loud noise.`
+    explanation: `In Caribbean English, "bush" commonly refers to wild, uncultivated land covered in thick vegetation.`
   },
   {
     id: 24,
     type: "vocabulary",
-    skill: "Connotation — Register",
-    question: `Which word carries the MOST formal register?`,
+    skill: "Academic Vocabulary",
+    question: `Which meaning best fits the word "vulnerable" as it relates to a coast without mangroves?`,
     options: [
-      "kids",
-      "youngsters",
-      "children",
-      "youths",
+      "very famous or well-known",
+      "difficult to see or find",
+      "open to harm or damage",
+      "extremely large in size"
     ],
     correctAnswer: 2,
-    explanation: `'Children' is the standard formal register. 'Kids' is informal/colloquial; 'youngsters' is semi-informal; 'youths' has neutral-to-negative connotations in some contexts.`
+    explanation: `Without mangroves to act as a barrier, the coast is "open to harm or damage" from storms and flooding.`
   },
   {
     id: 25,
     type: "vocabulary",
-    skill: "Figurative Language — Euphemism",
-    question: `A euphemism is used when a writer:`,
+    skill: "Choosing the Best Word",
+    question: `Choose the best word to complete the sentence: "Marcus had to ______ his way through the thick ferns to reach the cave entrance."`,
     options: [
-      "Uses very direct, blunt language",
-      "Exaggerates for effect",
-      "Replaces harsh or uncomfortable language with a milder alternative",
-      "Uses rhyme to create rhythm",
+      "paint",
+      "fly",
+      "push",
+      "sleep"
     ],
     correctAnswer: 2,
-    explanation: `A euphemism softens uncomfortable truths — e.g., 'passed away' instead of 'died.'`
+    explanation: `Ferns are physical obstacles. "Push" implies using physical force to move through them, which fits the context perfectly.`
   },
   {
     id: 26,
     type: "grammar",
-    skill: "Subjunctive Mood",
-    question: `Which sentence correctly uses the SUBJUNCTIVE mood?`,
+    skill: "Pronouns",
+    question: `Which sentence uses the pronoun correctly?`,
     options: [
-      "If I was you, I would apologise",
-      "If I were you, I would apologise",
-      "If I am you, I apologise",
-      "If I be you, I will apologise",
+      "Him and Zara climbed the hill to find the cave.",
+      "Marcus and her found the map in the drawer.",
+      "Me and Marcus studied the roots of the mangrove tree.",
+      "The mangroves protected the coast during the storm, which saved the village."
     ],
-    correctAnswer: 1,
-    explanation: `The subjunctive uses 'were' (not 'was') for hypothetical or contrary-to-fact conditions: 'If I were you...'`
+    correctAnswer: 3,
+    explanation: `"Which" correctly refers to the entire preceding clause (the mangroves protecting the coast). The other options incorrectly use object pronouns ("Him," "her," "Me") as subjects.`
   },
   {
     id: 27,
     type: "grammar",
-    skill: "Inversion for Emphasis",
-    question: `Which sentence uses INVERSION for emphasis?`,
+    skill: "Subject-Verb Agreement",
+    question: `Which sentence is written correctly?`,
     options: [
-      "She had never seen such beauty before",
-      "Never had she seen such beauty",
-      "She never saw such beauty",
-      "Such beauty she had never seen before",
+      "The tangled roots of the mangroves acts as a natural barrier.",
+      "The tangled roots of the mangroves act as a natural barrier.",
+      "The tangled roots of the mangroves acting as a natural barrier.",
+      "The tangled roots of the mangroves has acted as a natural barrier."
     ],
     correctAnswer: 1,
-    explanation: `Inversion places the auxiliary verb before the subject after a negative adverb: 'Never had she seen...' — a formal literary device.`
+    explanation: `The subject "roots" is plural, so it requires the plural verb "act" without an -s ending.`
   },
   {
     id: 28,
     type: "grammar",
-    skill: "Complex Tense — Future Perfect Continuous",
-    question: `Which sentence uses the FUTURE PERFECT CONTINUOUS tense?`,
+    skill: "Verb Tense",
+    question: `Which sentence keeps the verb tense consistent?`,
     options: [
-      "She will finish by then",
-      "She has been working for three hours",
-      "By next year, she will have been teaching for twenty years",
-      "She will be working tomorrow",
+      "Marcus folded the map and puts it in his pocket.",
+      "Marcus folds the map and put it in his pocket.",
+      "Marcus folded the map and put it in his pocket.",
+      "Marcus will fold the map and put it in his pocket."
     ],
     correctAnswer: 2,
-    explanation: `Future perfect continuous: will have been + -ing. Shows an ongoing action that will be in progress up to a future point.`
+    explanation: `Both actions happened in the past, so "folded" and "put" are both past tense and consistent.`
   },
   {
     id: 29,
     type: "grammar",
-    skill: "Dangling Modifier",
-    question: `Identify the DANGLING MODIFIER in: 'Walking through the park, the rain began to fall.'`,
+    skill: "Punctuation",
+    question: `Which sentence is punctuated correctly?`,
     options: [
-      "Walking through the park",
-      "the rain began to fall",
-      "began to fall",
-      "through the park",
+      "After they pushed through the ferns the cave entrance appeared.",
+      "After they pushed through the ferns, the cave entrance appeared.",
+      "After, they pushed through the ferns the cave entrance appeared.",
+      "After they pushed, through the ferns the cave entrance appeared."
     ],
-    correctAnswer: 0,
-    explanation: `'Walking through the park' is a dangling modifier — it implies the rain was walking, which is illogical. The subject it modifies (a person) is missing.`
+    correctAnswer: 1,
+    explanation: `A comma is needed after the introductory dependent clause "After they pushed through the ferns" to separate it from the main clause.`
   },
   {
     id: 30,
     type: "grammar",
-    skill: "Ellipsis in Grammar",
-    question: `In grammar, ELLIPSIS refers to:`,
+    skill: "Quotation Marks",
+    question: `Which sentence uses quotation marks correctly?`,
     options: [
-      "The punctuation mark (…)",
-      "The deliberate omission of words that are understood from context",
-      "A type of relative clause",
-      "A figure of speech",
+      `"The best tool you can carry is a good question Zara said."`,
+      `The best tool you can carry is a good question," Zara said.`,
+      `"The best tool you can carry is a good question" Zara said.`,
+      `"The best tool you can carry is a good question," Zara said.`
     ],
-    correctAnswer: 1,
-    explanation: `Grammatical ellipsis omits words that the reader can infer from context: 'She can swim and [she can] dive.'`
+    correctAnswer: 3,
+    explanation: `The spoken words are fully enclosed in quotation marks, with the comma placed inside the closing quotation marks before the speaker tag.`
   },
   {
     id: 31,
     type: "grammar",
-    skill: "Cleft Sentences",
-    question: `Which is a CLEFT SENTENCE (used to emphasise one element)?`,
+    skill: "Parallel Structure",
+    question: `Which sentence uses parallel structure?`,
     options: [
-      "She gave the book to Maria yesterday",
-      "It was Maria whom she gave the book to",
-      "She gave the book",
-      "Maria received the book",
+      "Mangroves protect the coast, filtering saltwater, and they provide shelter for fish.",
+      "Mangroves protect the coast, filter saltwater, and provide shelter for fish.",
+      "Mangroves protecting the coast, filtered saltwater, and providing shelter for fish.",
+      "Mangroves protect the coast, to filter saltwater, and providing shelter for fish."
     ],
     correctAnswer: 1,
-    explanation: `A cleft sentence splits a clause into two to highlight one element: 'It was Maria whom...' emphasises who received the book.`
+    explanation: `The three actions use the exact same verb form: protect, filter, and provide. This creates a smooth, parallel structure.`
   },
   {
     id: 32,
     type: "grammar",
-    skill: "Nominalisations",
-    question: `Nominalisation converts a verb into a noun. Which shows nominalisation of 'decide'?`,
+    skill: "Run-on Correction",
+    question: `Which choice correctly repairs the run-on sentence?`,
     options: [
-      "deciding",
-      "decided",
-      "decision",
-      "decisive",
+      "Mangroves store carbon they fight climate change.",
+      "Mangroves store carbon, they fight climate change.",
+      "Mangroves store carbon, so they help fight climate change.",
+      "Mangroves storing carbon and they fight climate change."
     ],
     correctAnswer: 2,
-    explanation: `'Decision' is the noun form of 'decide' — a nominalisation. Nominalisations are common in formal/academic writing.`
+    explanation: `Using a comma and the coordinating conjunction "so" correctly joins the two independent clauses by showing cause and effect.`
   },
   {
     id: 33,
     type: "grammar",
-    skill: "Fronting for Emphasis",
-    question: `'This book I have read three times.' In this sentence, 'this book' is moved to the front to:`,
+    skill: "Sentence Combining",
+    question: `Which choice best combines the ideas? "The map was torn. Marcus still used it."`,
     options: [
-      "Correct a grammar mistake",
-      "Create confusion",
-      "Emphasise the object by placing it before the subject",
-      "Show the book is important physically",
+      "Although the map was torn, Marcus still used it.",
+      "The map was torn, Marcus still used it.",
+      "Torn map but Marcus still used it.",
+      "Although the map was torn, but Marcus still used it."
     ],
-    correctAnswer: 2,
-    explanation: `Fronting moves a sentence element to the beginning for emphasis. 'This book' (normally the object) is fronted to highlight it.`
+    correctAnswer: 0,
+    explanation: `"Although" is a subordinating conjunction that correctly shows the contrast between the torn map and Marcus using it, without creating a run-on or a double conjunction error.`
   },
   {
     id: 34,
     type: "grammar",
-    skill: "Complex Conditional — Third",
-    question: `Which is a THIRD CONDITIONAL sentence?`,
+    skill: "Transitions",
+    question: `Which transition best completes the sentence? "Mangroves are often cleared for buildings; _____, this destroys important fish habitats."`,
     options: [
-      "If it rains, I stay inside",
-      "If it rained, I would stay inside",
-      "If it had rained, I would have stayed inside",
-      "I will stay inside if it rains",
+      "therefore",
+      "however",
+      "for example",
+      "meanwhile"
     ],
-    correctAnswer: 2,
-    explanation: `Third conditional: if + past perfect, would have + past participle. Describes an unreal past condition and its imagined result.`
+    correctAnswer: 0,
+    explanation: `"Therefore" shows a cause-and-effect relationship: because mangroves are cleared, the result is the destruction of fish habitats.`
   },
   {
     id: 35,
     type: "grammar",
-    skill: "Cohesive Devices",
-    question: `Which sentence uses a COHESIVE DEVICE (other than a conjunction) to link ideas?`,
+    skill: "Word Choice",
+    question: `Which word choice is most precise? "The mangrove roots ______ the energy of the hurricane waves."`,
     options: [
-      "She was tired. She slept.",
-      "She was tired, so she slept",
-      "She was tired. Consequently, she slept.",
-      "She was tired and sleepy",
+      "did",
+      "made",
+      "absorbed",
+      "got"
     ],
     correctAnswer: 2,
-    explanation: `'Consequently' is a cohesive adverb that explicitly shows the logical relationship (cause-effect) between sentences.`
+    explanation: `"Absorbed" is the precise scientific term for taking in energy, which accurately describes how the roots deal with the wave energy.`
   },
   {
     id: 36,
     type: "writing",
-    skill: "Literary Criticism — Purpose",
-    question: `When writing a literary critical essay, the writer's PRIMARY purpose is:`,
+    skill: "Strong Introduction",
+    question: `Which of the following would be the strongest introduction for a paragraph about why mangroves should be protected?`,
     options: [
-      "To retell the story in their own words",
-      "To share personal feelings about the characters",
-      "To analyse how the writer uses language and technique to create meaning and affect the reader",
-      "To describe what happens in each chapter",
+      "Mangroves are trees that grow near the water.",
+      "I am going to write about mangroves in this paragraph.",
+      "Many people do not like mangroves because they are swampy.",
+      "Mangroves may look like ordinary bushes, but they are powerful protectors of our coastlines, our fish populations, and our climate."
     ],
-    correctAnswer: 2,
-    explanation: `Literary criticism analyses HOW texts work — techniques, effects, and meanings — not just WHAT happens.`
+    correctAnswer: 3,
+    explanation: `A strong introduction grabs attention and states a clear, specific main idea. Option D uses a contrast to hook the reader and lists the specific points the paragraph will cover.`
   },
   {
     id: 37,
     type: "writing",
-    skill: "Point-Evidence-Explanation",
-    question: `In the PEE paragraph structure, the EXPLANATION step requires the writer to:`,
+    skill: "Supporting Detail",
+    question: `Which sentence provides the best supporting detail for the topic sentence "Mangrove forests are essential for healthy oceans"?`,
     options: [
-      "Simply quote from the text",
-      "State the next point",
-      "Analyse how the quoted evidence supports the point and what effect it creates",
-      "Summarise the whole text",
+      "The trees have waxy leaves that look shiny in the sunlight.",
+      "Young fish and crabs shelter in the roots until they are large enough to survive in the open sea.",
+      "Mangroves can be found in many different countries around the world.",
+      "Some people think mangroves are ugly and want to remove them."
     ],
-    correctAnswer: 2,
-    explanation: `The explanation unpacks the evidence — explaining HOW the technique works and WHY it creates a particular effect on the reader.`
+    correctAnswer: 1,
+    explanation: `A good supporting detail directly proves the topic sentence. Option B explains exactly how mangroves help ocean life by acting as a nursery for young marine animals.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "Evaluating Effectiveness",
-    question: `When a student writes 'The writer uses a metaphor,' this response is:`,
+    skill: "Transitions",
+    question: `Which transition word best fills the blank in this sentence? "Mangroves absorb storm waves; _____, they also provide a home for marine life."`,
     options: [
-      "Complete — identifying the technique is enough",
-      "Incomplete — the student must also identify which metaphor, explain its effect, and evaluate its success",
-      "Too detailed",
-      "Incorrect — metaphors are not relevant to analysis",
+      "however",
+      "although",
+      "instead",
+      "furthermore"
     ],
-    correctAnswer: 1,
-    explanation: `Identifying a technique alone is insufficient. Effective literary analysis requires: technique + evidence (quotation) + effect + evaluation.`
+    correctAnswer: 3,
+    explanation: `"Furthermore" is used to add another supporting point to a list. It correctly shows that providing a home for marine life is an additional benefit.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Thesis Statement",
-    question: `Which is the STRONGEST thesis statement for an essay arguing that social media harms young people?`,
+    skill: "Relevance",
+    question: `Read the paragraph below. Which sentence should be removed because it does not belong?
+
+(1) Mangroves play a vital role in protecting coastal areas from hurricane damage. (2) Their dense root systems slow down incoming waves and prevent erosion. (3) Pineapples are a major export crop in several Caribbean islands. (4) Without these trees, storm surges would cause much more flooding inland.`,
     options: [
-      "Social media is used by many young people around the world",
-      "Social media can be both good and bad for young people",
-      "Unrestricted social media use significantly harms young people's mental health, social development, and academic performance",
-      "Young people use social media every day",
+      "Sentence 1",
+      "Sentence 2",
+      "Sentence 4",
+      "Sentence 3"
     ],
-    correctAnswer: 2,
-    explanation: `A strong thesis makes a specific, arguable claim that the essay will prove. Option C is precise, arguable, and names three specific areas.`
+    correctAnswer: 3,
+    explanation: `Sentence 3 is about pineapples and agriculture, which has nothing to do with the topic of mangroves protecting coastlines from hurricanes.`
   },
   {
     id: 40,
     type: "writing",
-    skill: "Synthesising Sources",
-    question: `When a writer SYNTHESISES multiple sources, they:`,
+    skill: "Strong Conclusion",
+    question: `Which of the following would be the most effective concluding sentence for an essay about exploring nature?`,
     options: [
-      "Copy information from each source in turn",
-      "Simply list what each source says",
-      "Weave together ideas from different sources to build a coherent, original argument",
-      "Use only one source at a time",
+      "So that is why exploring nature is good.",
+      "In conclusion, I have told you about exploring.",
+      "Whether following a faded map to a hidden cave or examining roots in a coastal swamp, exploring nature teaches us to look closely, think carefully, and appreciate the world around us.",
+      "You should go outside sometimes if you want to."
     ],
     correctAnswer: 2,
-    explanation: `Synthesis integrates ideas from multiple sources into an original argument — not a series of summaries, but a woven, analytical whole.`
+    explanation: `A strong conclusion leaves a lasting impression by restating the main idea in a fresh, memorable way. Option C ties back to the essay's examples and uses parallel structure for impact.`
   }
-]
+];
+
+const shuffleAnswerOptions = (questions: Question[]): Question[] => {
+  return questions.map((question) => {
+    const optionsWithOriginalIndex = question.options.map((option, index) => ({
+      option,
+      index,
+    }));
+
+    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
+        optionsWithOriginalIndex[j],
+        optionsWithOriginalIndex[i],
+      ];
+    }
+
+    const correctAnswer = optionsWithOriginalIndex.findIndex(
+      (item) => item.index === question.correctAnswer,
+    );
+
+    return {
+      ...question,
+      options: optionsWithOriginalIndex.map((item) => item.option),
+      correctAnswer,
+    };
+  });
+};
 
 const SECTION_CONFIG = [
-  { type: "reading" as const,    label: "Reading Comprehension",   note: "literary criticism, complex inference, authorial intent, irony, subtext" },
-  { type: "vocabulary" as const, label: "Vocabulary & Word Study",  note: "etymology, nuanced connotation, complex figurative language, academic vocabulary" },
-  { type: "grammar" as const,    label: "Grammar & Language Use",   note: "subjunctive, complex transformations, ellipsis, advanced punctuation, style" },
-  { type: "writing" as const,    label: "Writing Skills",           note: "literary analysis, extended argument, evaluating effectiveness, complex technique" },
-]
+  {
+    type: "reading" as const,
+    label: "Reading Comprehension",
+    note: "main idea, details, inference, purpose, point of view, evidence",
+  },
+  {
+    type: "vocabulary" as const,
+    label: "Vocabulary & Word Study",
+    note: "meaning in context, synonyms, antonyms, connotation, precise word choice",
+  },
+  {
+    type: "grammar" as const,
+    label: "Grammar & Language Use",
+    note: "agreement, tense, punctuation, pronouns, sentence structure, transitions",
+  },
+  {
+    type: "writing" as const,
+    label: "Writing Skills",
+    note: "topic sentences, support, organization, transitions, revision",
+  },
+];
 
 export default function G5LaDiff8MockTest() {
-  const { isPremium, user } = useAuth()
-  const [started, setStarted]                 = useState(false)
-  const [showResults, setShowResults]         = useState(false)
-  const [currentQuestion, setCurrentQuestion] = useState(0)
-  const [answers, setAnswers]                 = useState<(number | null)[]>([])
-  const [timeLeft, setTimeLeft]               = useState(60 * 60)
+  const { isPremium, user } = useAuth();
+  const [started, setStarted] = useState(false);
+  const [showResults, setShowResults] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answers, setAnswers] = useState<(number | null)[]>([]);
+  const [timeLeft, setTimeLeft] = useState(60 * 60);
+  const [randomizedQuestions, setRandomizedQuestions] = useState<Question[]>(
+    [],
+  );
+  const hasSavedResult = useRef(false);
 
-  const availableQuestions = isPremium ? g5LaDiff8Questions : g5LaDiff8Questions.slice(0, FREE_QUESTION_LIMIT)
-  const totalQuestions = availableQuestions.length
+  const sourceQuestions = isPremium
+    ? g5LaDiff8Questions
+    : g5LaDiff8Questions.slice(0, FREE_QUESTION_LIMIT);
+  const availableQuestions =
+    randomizedQuestions.length > 0 ? randomizedQuestions : sourceQuestions;
+  const totalQuestions = availableQuestions.length;
 
   useEffect(() => {
-    if (answers.length !== totalQuestions) setAnswers(new Array(totalQuestions).fill(null))
-  }, [totalQuestions, answers.length])
+    if (answers.length !== totalQuestions)
+      setAnswers(new Array(totalQuestions).fill(null));
+  }, [totalQuestions, answers.length]);
+
+  useEffect(() => {
+    setCurrentQuestion((prev) =>
+      Math.min(prev, Math.max(totalQuestions - 1, 0)),
+    );
+  }, [totalQuestions]);
 
   const formatTime = useCallback((s: number) => {
-    const m = Math.floor(s / 60)
-    return `${m.toString().padStart(2, "0")}:${(s % 60).toString().padStart(2, "0")}`
-  }, [])
+    const m = Math.floor(s / 60);
+    return `${m.toString().padStart(2, "0")}:${(s % 60).toString().padStart(2, "0")}`;
+  }, []);
 
   useEffect(() => {
-    if (!started || showResults) return
-    const t = setInterval(() => setTimeLeft((p) => { if (p <= 1) { setShowResults(true); return 0 } return p - 1 }), 1000)
-    return () => clearInterval(t)
-  }, [started, showResults])
+    if (!started || showResults) return;
+    const t = setInterval(
+      () =>
+        setTimeLeft((p) => {
+          if (p <= 1) {
+            setShowResults(true);
+            return 0;
+          }
+          return p - 1;
+        }),
+      1000,
+    );
+    return () => clearInterval(t);
+  }, [started, showResults]);
 
-  const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
+  const handleAnswer = (idx: number) => {
+    const a = [...answers];
+    a[currentQuestion] = idx;
+    setAnswers(a);
+  };
 
-  const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
-  const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
+  const calcScore = () =>
+    answers.reduce<number>(
+      (c, a, i) =>
+        i < totalQuestions && a === availableQuestions[i].correctAnswer
+          ? c + 1
+          : c,
+      0,
+    );
+  const scorePct = () => Math.round((calcScore() / totalQuestions) * 100);
 
-  const handleSubmit = async () => {
-    setShowResults(true)
+  useEffect(() => {
+    if (!showResults || !user?.id || hasSavedResult.current) return;
 
-    if (!user?.id) return
-
-    try {
-      await saveStudentTestResult({
-        parentId: user.id,
-        studentName: user?.childName ?? "Student",
-        grade: "grade5",
-        subject: "Language Arts",
-        testName: "Difficult 8",
-        difficulty: "Difficult",
-        score: calcScore(),
-        totalQuestions,
-        percentage: scorePct(),
-        completedAt: new Date().toISOString(),
-      })
-    } catch (error) {
-      console.error("Failed to save test result:", error)
-    }
-  }
+    hasSavedResult.current = true;
+    const completedAtIso = new Date().toISOString();
+    void saveStudentTestResult({
+      parentId: user.id,
+      studentName: user?.childName ?? "Student",
+      grade: "grade5",
+      subject: "Literacy",
+      testName: "Difficult 8",
+      difficulty: "Difficult",
+      score: calcScore(),
+      totalQuestions,
+      percentage: scorePct(),
+      completedAt: completedAtIso,
+    }).catch(() => {
+      hasSavedResult.current = false;
+    });
+  }, [showResults, user?.id, user?.childName, totalQuestions, answers]);
 
   const getGrade = () => {
-    const p = scorePct()
-    if (p >= 85) return { grade: "Excellent",         color: "text-green-600" }
-    if (p >= 70) return { grade: "Good",              color: "text-blue-600" }
-    if (p >= 50) return { grade: "Fair",              color: "text-amber-600" }
-    return              { grade: "Needs Improvement", color: "text-red-600" }
-  }
+    const p = scorePct();
+    if (p >= 85) return { grade: "Excellent", color: "text-green-600" };
+    if (p >= 70) return { grade: "Good", color: "text-blue-600" };
+    if (p >= 50) return { grade: "Fair", color: "text-amber-600" };
+    return { grade: "Needs Improvement", color: "text-red-600" };
+  };
 
   const getSectionStats = (type: Question["type"]) => {
-    const sq = availableQuestions.filter((q) => q.type === type)
-    const correct = sq.filter((q) => { const i = availableQuestions.findIndex((x) => x.id === q.id); return answers[i] === q.correctAnswer }).length
-    const total = sq.length
-    const pct = total === 0 ? 0 : Math.round((correct / total) * 100)
-    const rating = pct >= 85 ? "Excellent" : pct >= 70 ? "Good" : pct >= 50 ? "Fair" : "Needs Improvement"
-    const color  = pct >= 85 ? "text-green-600" : pct >= 70 ? "text-blue-600" : pct >= 50 ? "text-amber-600" : "text-red-600"
-    return { correct, total, percentage: pct, rating, ratingColor: color }
-  }
+    const sq = availableQuestions.filter((q) => q.type === type);
+    const correct = sq.filter((q) => {
+      const i = availableQuestions.findIndex((x) => x.id === q.id);
+      return answers[i] === q.correctAnswer;
+    }).length;
+    const total = sq.length;
+    const pct = total === 0 ? 0 : Math.round((correct / total) * 100);
+    const rating =
+      pct >= 85
+        ? "Excellent"
+        : pct >= 70
+          ? "Good"
+          : pct >= 50
+            ? "Fair"
+            : "Needs Improvement";
+    const color =
+      pct >= 85
+        ? "text-green-600"
+        : pct >= 70
+          ? "text-blue-600"
+          : pct >= 50
+            ? "text-amber-600"
+            : "text-red-600";
+    return { correct, total, percentage: pct, rating, ratingColor: color };
+  };
+
+  const startTest = () => {
+    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions);
+    setRandomizedQuestions(shuffledQuestions);
+    setAnswers(new Array(shuffledQuestions.length).fill(null));
+    setCurrentQuestion(0);
+    setTimeLeft(60 * 60);
+    setShowResults(false);
+    hasSavedResult.current = false;
+    setStarted(true);
+  };
 
   const resetTest = () => {
-    setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setStarted(false);
+    setShowResults(false);
+    setCurrentQuestion(0);
+    setRandomizedQuestions([]);
+    setAnswers(new Array(sourceQuestions.length).fill(null));
+    setTimeLeft(60 * 60);
+    hasSavedResult.current = false;
+  };
+
+  const handleSubmit = () => {
+    setShowResults(true);
+  };
+
+  const q = availableQuestions[currentQuestion];
+  const answeredCount = answers.filter((a) => a !== null).length;
+
+  if (!q) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
+        <Header />
+        <main className="container mx-auto px-4 py-10">
+          <Card className="mx-auto max-w-xl border-amber-200">
+            <CardHeader className="bg-amber-50">
+              <CardTitle className="text-amber-800">Preview Complete</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4 p-6">
+              <p className="text-slate-700">
+                You completed the free preview for this test. Upgrade to Premium
+                to unlock all 40 questions.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/pricing">
+                  <Button className="bg-amber-500 hover:bg-amber-600">
+                    <Crown className="mr-2 h-4 w-4" />
+                    Upgrade to Premium
+                  </Button>
+                </Link>
+                <Link href="/mock-tests/language-arts">
+                  <Button variant="outline">Back to Language Arts Tests</Button>
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+        </main>
+        <Footer />
+      </div>
+    );
   }
-
-  const q = availableQuestions[currentQuestion]
-  const answeredCount = answers.filter((a) => a !== null).length
   const secLabel = (t: Question["type"]) =>
-    t === "reading" ? "Reading Comprehension" : t === "vocabulary" ? "Vocabulary & Word Study"
-    : t === "grammar" ? "Grammar & Language Use" : "Writing Skills"
+    t === "reading"
+      ? "Reading Comprehension"
+      : t === "vocabulary"
+        ? "Vocabulary & Word Study"
+        : t === "grammar"
+          ? "Grammar & Language Use"
+          : "Writing Skills";
   const secColor = (t: Question["type"]) =>
-    t === "reading" ? "bg-blue-50 text-blue-700" : t === "vocabulary" ? "bg-purple-50 text-purple-700"
-    : t === "grammar" ? "bg-green-50 text-green-700" : "bg-amber-50 text-amber-700"
+    t === "reading"
+      ? "bg-blue-50 text-blue-700"
+      : t === "vocabulary"
+        ? "bg-purple-50 text-purple-700"
+        : t === "grammar"
+          ? "bg-green-50 text-green-700"
+          : "bg-amber-50 text-amber-700";
 
-  if (!started) return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
-      <Header />
-      <main className="container mx-auto px-4 py-10">
-        <Link href="/mock-tests/language-arts"><Button variant="ghost" className="mb-6"><ArrowLeft className="mr-2 h-4 w-4" />Back to Language Arts Mock Tests</Button></Link>
-        <Card className="mx-auto max-w-3xl border-blue-200 shadow-lg">
-          <CardHeader className="bg-blue-50 text-center">
-            <BookOpen className="mx-auto mb-4 h-14 w-14 text-blue-600" />
-            <CardTitle className="text-2xl text-blue-800">Language Arts Difficult 8</CardTitle>
-            <p className="text-slate-600">Grade 5 PEP Language Arts · Difficult Level</p>
-          </CardHeader>
-          <CardContent className="space-y-6 p-6">
-            {!isPremium && (
-              <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
-                <div className="flex items-start gap-3">
-                  <Lock className="mt-1 h-5 w-5 flex-shrink-0 text-amber-600" />
-                  <div>
-                    <p className="font-semibold text-amber-800">Free Preview Mode</p>
-                    <p className="text-sm text-amber-700">Try {FREE_QUESTION_LIMIT} questions free. Upgrade to unlock all 40.</p>
-                    <Link href="/pricing" className="mt-3 inline-block"><Button className="bg-amber-500 hover:bg-amber-600"><Crown className="mr-2 h-4 w-4" />Upgrade to Premium</Button></Link>
+  if (!started)
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
+        <Header />
+        <main className="container mx-auto px-4 py-10">
+          <Link href="/mock-tests/language-arts">
+            <Button variant="ghost" className="mb-6">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Language Arts Mock Tests
+            </Button>
+          </Link>
+          <Card className="mx-auto max-w-3xl border-blue-200 shadow-lg">
+            <CardHeader className="bg-blue-50 text-center">
+              <BookOpen className="mx-auto mb-4 h-14 w-14 text-blue-600" />
+              <CardTitle className="text-2xl text-blue-800">
+                Language Arts Difficult 8
+              </CardTitle>
+              <p className="text-slate-600">
+                Grade 5 PEP Language Arts · Difficult Level
+              </p>
+            </CardHeader>
+            <CardContent className="space-y-6 p-6">
+              {!isPremium && (
+                <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
+                  <div className="flex items-start gap-3">
+                    <Lock className="mt-1 h-5 w-5 flex-shrink-0 text-amber-600" />
+                    <div>
+                      <p className="font-semibold text-amber-800">
+                        Free Preview Mode
+                      </p>
+                      <p className="text-sm text-amber-700">
+                        Try {FREE_QUESTION_LIMIT} questions free. Upgrade to
+                        unlock all 40.
+                      </p>
+                      <Link href="/pricing" className="mt-3 inline-block">
+                        <Button className="bg-amber-500 hover:bg-amber-600">
+                          <Crown className="mr-2 h-4 w-4" />
+                          Upgrade to Premium
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
+              )}
+              <div className="rounded-lg border border-blue-200 bg-white p-4">
+                <h3 className="mb-2 font-semibold text-slate-800">
+                  Test Overview
+                </h3>
+                <p className="text-slate-700">
+                  This Grade 5 Language Arts test covers reading comprehension,
+                  vocabulary in context, grammar and language use, and writing
+                  skills — all aligned to the NSC curriculum.
+                </p>
               </div>
-            )}
-            <div className="rounded-lg border border-red-100 bg-red-50 p-4">
-              <h3 className="mb-2 font-semibold text-red-800">Difficult Level Focus</h3>
-              <p className="text-slate-700">This test requires literary criticism, complex inference, evaluation of authorial technique, advanced grammar transformations, and sophisticated analytical writing — the highest NSC Grade 5 Language Arts standard.</p>
-            </div>
-            <div className="rounded-lg bg-sky-50 p-4">
-              <h3 className="mb-2 font-semibold text-sky-800">21st-Century Skills</h3>
-              <ul className="space-y-1 text-sm text-slate-700">
-                <li>Critical Thinking: evaluating how language constructs meaning</li>
-                <li>Communication: producing sophisticated written and analytical responses</li>
-                <li>Creativity: recognising and evaluating complex literary technique</li>
-                <li>Collaboration: understanding how texts position and persuade audiences</li>
-              </ul>
-            </div>
-            <div className="grid grid-cols-2 gap-4 text-center">
-              <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-blue-600">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
-              <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-blue-600">60</p><p className="text-sm text-slate-600">Minutes</p></div>
-            </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-blue-600 py-6 text-lg hover:bg-blue-700">Start Test</Button>
-          </CardContent>
-        </Card>
-      </main>
-      <Footer />
-    </div>
-  )
+              <div className="rounded-lg bg-sky-50 p-4">
+                <h3 className="mb-2 font-semibold text-sky-800">
+                  21st-Century Skills
+                </h3>
+                <ul className="space-y-1 text-sm text-slate-700">
+                  <li>
+                    Critical Thinking: analysing texts and evaluating language
+                    choices
+                  </li>
+                  <li>
+                    Communication: understanding how language works in context
+                  </li>
+                  <li>
+                    Creativity: recognising and applying effective writing
+                    techniques
+                  </li>
+                  <li>
+                    Collaboration: understanding how writers address their
+                    audience
+                  </li>
+                </ul>
+              </div>
+              <div className="grid grid-cols-2 gap-4 text-center">
+                <div className="rounded-lg bg-gray-50 p-4">
+                  <p className="text-2xl font-bold text-blue-600">
+                    {totalQuestions}
+                  </p>
+                  <p className="text-sm text-slate-600">
+                    Questions {!isPremium && "(Preview)"}
+                  </p>
+                </div>
+                <div className="rounded-lg bg-gray-50 p-4">
+                  <p className="text-2xl font-bold text-blue-600">60</p>
+                  <p className="text-sm text-slate-600">Minutes</p>
+                </div>
+              </div>
+              <Button
+                onClick={startTest}
+                className="w-full bg-blue-600 py-6 text-lg hover:bg-blue-700"
+              >
+                Start Test
+              </Button>
+            </CardContent>
+          </Card>
+        </main>
+        <Footer />
+      </div>
+    );
 
   if (showResults) {
-    const sc = calcScore(); const pct = scorePct(); const { grade, color } = getGrade()
+    const sc = calcScore();
+    const pct = scorePct();
+    const { grade, color } = getGrade();
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
         <Header />
@@ -801,68 +1076,163 @@ export default function G5LaDiff8MockTest() {
           <Card className="mx-auto max-w-4xl border-blue-200 shadow-lg">
             <CardHeader className="bg-blue-50 text-center">
               <CheckCircle className="mx-auto mb-4 h-14 w-14 text-blue-600" />
-              <CardTitle className="text-2xl text-blue-800">Language Arts Test Completed</CardTitle>
+              <CardTitle className="text-2xl text-blue-800">
+                Language Arts Test Completed
+              </CardTitle>
               <p className="text-slate-600">Language Arts Difficult 8</p>
             </CardHeader>
             <CardContent className="space-y-6 p-6">
               <div className="rounded-lg bg-gray-50 p-6 text-center">
-                <p className="text-5xl font-bold text-blue-600">{sc}/{totalQuestions}</p>
+                <p className="text-5xl font-bold text-blue-600">
+                  {sc}/{totalQuestions}
+                </p>
                 <p className="mt-2 text-slate-600">Questions Correct</p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-                <div className="rounded-lg bg-gray-50 p-4"><p className="text-3xl font-bold text-blue-600">{pct}%</p><p className="text-sm text-slate-600">Score</p></div>
-                <div className="rounded-lg bg-gray-50 p-4"><p className={cn("text-2xl font-bold", color)}>{grade}</p><p className="text-sm text-slate-600">Performance</p></div>
-                <div className="rounded-lg bg-gray-50 p-4"><p className="text-sm font-semibold text-slate-700">{new Date().toLocaleDateString()}</p><p className="text-sm text-slate-600">Completed</p></div>
+                <div className="rounded-lg bg-gray-50 p-4">
+                  <p className="text-3xl font-bold text-blue-600">{pct}%</p>
+                  <p className="text-sm text-slate-600">Score</p>
+                </div>
+                <div className="rounded-lg bg-gray-50 p-4">
+                  <p className={cn("text-2xl font-bold", color)}>{grade}</p>
+                  <p className="text-sm text-slate-600">Performance</p>
+                </div>
+                <div className="rounded-lg bg-gray-50 p-4">
+                  <p className="text-sm font-semibold text-slate-700">
+                    {new Date().toLocaleDateString()}
+                  </p>
+                  <p className="text-sm text-slate-600">Completed</p>
+                </div>
               </div>
-              {!isPremium && (<div className="rounded-lg border border-amber-200 bg-amber-50 p-4"><p className="font-semibold text-amber-800">Upgrade to access all 40 questions.</p><Link href="/pricing" className="mt-2 inline-block"><Button className="bg-amber-500 hover:bg-amber-600"><Crown className="mr-2 h-4 w-4" />Upgrade</Button></Link></div>)}
+              {!isPremium && (
+                <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
+                  <p className="font-semibold text-amber-800">
+                    You completed the free preview.
+                  </p>
+                  <p className="text-sm text-amber-700">
+                    Upgrade to unlock all 40 questions.
+                  </p>
+                  <Link href="/pricing" className="mt-3 inline-block">
+                    <Button className="bg-amber-500 hover:bg-amber-600">
+                      <Crown className="mr-2 h-4 w-4" />
+                      Upgrade
+                    </Button>
+                  </Link>
+                </div>
+              )}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {SECTION_CONFIG.map((s) => { const st = getSectionStats(s.type); return (
-                  <div key={s.type} className="rounded-xl border border-blue-100 bg-blue-50 p-4">
-                    <p className="font-semibold text-blue-800">{s.label}</p>
-                    <p className="text-sm text-slate-500 mt-1">{s.note}</p>
-                    <div className="mt-3 flex items-center justify-between">
-                      <span className="text-sm text-slate-700">{st.correct}/{st.total} correct</span>
-                      <span className={cn("text-sm font-semibold", st.ratingColor)}>{st.rating}</span>
+                {SECTION_CONFIG.map((s) => {
+                  const st = getSectionStats(s.type);
+                  return (
+                    <div
+                      key={s.type}
+                      className="rounded-xl border border-blue-100 bg-blue-50 p-4"
+                    >
+                      <p className="font-semibold text-blue-800">{s.label}</p>
+                      <p className="text-sm text-slate-500 mt-1">{s.note}</p>
+                      <div className="mt-3 flex items-center justify-between">
+                        <span className="text-sm text-slate-700">
+                          {st.correct}/{st.total} correct
+                        </span>
+                        <span
+                          className={cn(
+                            "text-sm font-semibold",
+                            st.ratingColor,
+                          )}
+                        >
+                          {st.rating}
+                        </span>
+                      </div>
+                      <Progress value={st.percentage} className="h-2 mt-2" />
+                      <p className="text-xs text-slate-500 mt-1">
+                        {st.percentage}%
+                      </p>
                     </div>
-                    <Progress value={st.percentage} className="h-2 mt-2" />
-                    <p className="text-xs text-slate-500 mt-1">{st.percentage}%</p>
-                  </div>
-                )})}
-              </div>
-              <div className="rounded-lg border border-sky-200 bg-sky-50 p-4">
-                <h3 className="mb-2 font-semibold text-sky-800">Teacher-Style Feedback</h3>
-                <p className="text-slate-700">This difficult test requires literary analysis and advanced language skills. For each question you found challenging, study the explanation carefully — focus on identifying the technique, understanding its effect, and practising applying this to new texts.</p>
+                  );
+                })}
               </div>
               <div className="space-y-4">
                 {availableQuestions.map((q, i) => {
-                  const correct = answers[i] === q.correctAnswer
+                  const correct = answers[i] === q.correctAnswer;
                   return (
-                    <div key={q.id} className={cn("rounded-lg border-2 p-4", correct ? "border-green-200 bg-green-50" : "border-red-200 bg-red-50")}>
+                    <div
+                      key={q.id}
+                      className={cn(
+                        "rounded-lg border-2 p-4",
+                        correct
+                          ? "border-green-200 bg-green-50"
+                          : "border-red-200 bg-red-50",
+                      )}
+                    >
                       <div className="flex items-start gap-3">
-                        {correct ? <CheckCircle className="mt-1 h-5 w-5 text-green-600" /> : <XCircle className="mt-1 h-5 w-5 text-red-600" />}
+                        {correct ? (
+                          <CheckCircle className="mt-1 h-5 w-5 text-green-600" />
+                        ) : (
+                          <XCircle className="mt-1 h-5 w-5 text-red-600" />
+                        )}
                         <div className="flex-1">
-                          <p className="font-semibold text-slate-800">Q{i + 1} · <span className="text-blue-700">{q.skill}</span></p>
-                          <p className="mt-1 text-slate-700 text-sm">{q.question}</p>
-                          <p className="mt-2 text-sm text-slate-600">Your answer: <span className={correct ? "text-green-700 font-medium" : "text-red-700 font-medium"}>{answers[i] !== null ? q.options[answers[i]!] : "Not answered"}</span></p>
-                          <p className="text-sm text-green-700">Correct: {q.options[q.correctAnswer]}</p>
-                          <p className="mt-1 text-sm text-slate-700">Explanation: {q.explanation}</p>
+                          <p className="font-semibold text-slate-800">
+                            Q{i + 1} ·{" "}
+                            <span className="text-blue-700">{q.skill}</span>
+                          </p>
+                          <p className="mt-1 text-slate-700 text-sm">
+                            {q.question}
+                          </p>
+                          <p className="mt-2 text-sm text-slate-600">
+                            Your answer:{" "}
+                            <span
+                              className={
+                                correct
+                                  ? "text-green-700 font-medium"
+                                  : "text-red-700 font-medium"
+                              }
+                            >
+                              {answers[i] !== null
+                                ? q.options[answers[i]!]
+                                : "Not answered"}
+                            </span>
+                          </p>
+                          <p className="text-sm text-green-700">
+                            Correct: {q.options[q.correctAnswer]}
+                          </p>
+                          <p className="mt-1 text-sm text-slate-700">
+                            Explanation: {q.explanation}
+                          </p>
                         </div>
                       </div>
                     </div>
-                  )
+                  );
                 })}
               </div>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <Button onClick={() => window.print()} className="flex-1 bg-blue-600 hover:bg-blue-700"><Printer className="mr-2 h-4 w-4" />Print / Save Report</Button>
-                <Button onClick={resetTest} variant="outline" className="flex-1"><RotateCcw className="mr-2 h-4 w-4" />Try Again</Button>
-                <Link href="/mock-tests/language-arts" className="flex-1"><Button variant="outline" className="w-full"><Home className="mr-2 h-4 w-4" />Back to Language Arts Tests</Button></Link>
+                <Button
+                  onClick={() => window.print()}
+                  className="flex-1 bg-blue-600 hover:bg-blue-700"
+                >
+                  <Printer className="mr-2 h-4 w-4" />
+                  Print / Save Report
+                </Button>
+                <Button
+                  onClick={resetTest}
+                  variant="outline"
+                  className="flex-1"
+                >
+                  <RotateCcw className="mr-2 h-4 w-4" />
+                  Try Again
+                </Button>
+                <Link href="/mock-tests/language-arts" className="flex-1">
+                  <Button variant="outline" className="w-full">
+                    <Home className="mr-2 h-4 w-4" />
+                    Back to Language Arts Tests
+                  </Button>
+                </Link>
               </div>
             </CardContent>
           </Card>
         </main>
         <Footer />
       </div>
-    )
+    );
   }
 
   return (
@@ -871,71 +1241,166 @@ export default function G5LaDiff8MockTest() {
       <header className="bg-blue-800 text-white sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Link href="/mock-tests/language-arts" className="p-2 hover:bg-white/10 rounded-lg transition-colors"><ArrowLeft className="h-5 w-5" /></Link>
+            <Link
+              href="/mock-tests/language-arts"
+              className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </Link>
             <BookOpen className="h-8 w-8" />
-            <div><h1 className="text-lg font-bold">Language Arts Difficult 8</h1><p className="text-blue-100 text-xs">Question {currentQuestion + 1} of {totalQuestions}</p></div>
+            <div>
+              <h1 className="text-lg font-bold">Language Arts Difficult 8</h1>
+              <p className="text-blue-100 text-xs">
+                Question {currentQuestion + 1} of {totalQuestions}
+              </p>
+            </div>
           </div>
-          <div className={cn("flex items-center gap-2 px-4 py-2 rounded-lg font-mono text-lg", timeLeft <= 300 ? "bg-red-500" : "bg-green-600")}>
-            <Clock className="h-5 w-5" />{formatTime(timeLeft)}
+          <div
+            className={cn(
+              "flex items-center gap-2 px-4 py-2 rounded-lg font-mono text-lg",
+              timeLeft <= 300 ? "bg-red-500" : "bg-green-600",
+            )}
+          >
+            <Clock className="h-5 w-5" />
+            {formatTime(timeLeft)}
           </div>
         </div>
       </header>
       <div className="bg-white border-b shadow-sm sticky top-[72px] z-10">
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between text-sm text-gray-600 mb-2">
-            <span>Progress: {answeredCount}/{totalQuestions} answered</span>
-            <span>{Math.round((answeredCount / totalQuestions) * 100)}% complete</span>
+            <span>
+              Progress: {answeredCount}/{totalQuestions} answered
+            </span>
+            <span>
+              {Math.round((answeredCount / totalQuestions) * 100)}% complete
+            </span>
           </div>
-          <Progress value={(answeredCount / totalQuestions) * 100} className="h-2" />
+          <Progress
+            value={(answeredCount / totalQuestions) * 100}
+            className="h-2"
+          />
         </div>
       </div>
       <main className="container mx-auto px-4 py-6">
         <div className="max-w-4xl mx-auto">
-          {!isPremium && (<div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 p-4"><p className="font-semibold text-amber-800">Free Preview: {FREE_QUESTION_LIMIT} of 40 questions</p><p className="text-sm text-amber-700">Upgrade to Premium for full access.</p></div>)}
+          {!isPremium && (
+            <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
+              <p className="font-semibold text-amber-800">
+                Free Preview: {FREE_QUESTION_LIMIT} of 40 questions
+              </p>
+              <p className="text-sm text-amber-700">
+                Upgrade to Premium to access the full test.
+              </p>
+            </div>
+          )}
           <Card className="mb-6 border-blue-100">
             <CardHeader className={cn("rounded-t-lg", secColor(q.type))}>
               <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold uppercase tracking-wide">{q.skill}</span>
-                <span className="text-xs uppercase tracking-wide opacity-70">{secLabel(q.type)}</span>
+                <span className="text-sm font-semibold uppercase tracking-wide">
+                  {q.skill}
+                </span>
+                <span className="text-xs uppercase tracking-wide opacity-70">
+                  {secLabel(q.type)}
+                </span>
               </div>
             </CardHeader>
             <CardContent className="p-6">
-              <p className="text-base font-medium text-slate-800 mb-6 leading-relaxed whitespace-pre-line">{q.question}</p>
+              <p className="text-base font-medium text-slate-800 mb-6 leading-relaxed whitespace-pre-line">
+                {q.question}
+              </p>
               <div className="space-y-3">
                 {q.options.map((opt, idx) => (
-                  <button key={idx} onClick={() => handleAnswer(idx)}
-                    className={cn("w-full p-4 text-left rounded-lg border-2 transition-all",
-                      answers[currentQuestion] === idx ? "border-blue-600 bg-blue-50" : "border-gray-200 hover:border-blue-300 hover:bg-blue-50/50")}>
-                    <span className="font-medium text-blue-700 mr-3">{String.fromCharCode(65 + idx)}.</span>{opt}
+                  <button
+                    key={idx}
+                    onClick={() => handleAnswer(idx)}
+                    className={cn(
+                      "w-full p-4 text-left rounded-lg border-2 transition-all",
+                      answers[currentQuestion] === idx
+                        ? "border-blue-600 bg-blue-50"
+                        : "border-gray-200 hover:border-blue-300 hover:bg-blue-50/50",
+                    )}
+                  >
+                    <span className="font-medium text-blue-700 mr-3">
+                      {String.fromCharCode(65 + idx)}.
+                    </span>
+                    {opt}
                   </button>
                 ))}
               </div>
             </CardContent>
           </Card>
           <div className="flex items-center justify-between mb-6">
-            <Button variant="outline" onClick={() => setCurrentQuestion((p) => p - 1)} disabled={currentQuestion === 0}><ChevronLeft className="h-4 w-4 mr-2" />Previous</Button>
-            {currentQuestion === totalQuestions - 1
-              ? <Button onClick={handleSubmit} className="bg-blue-600 hover:bg-blue-700"><Flag className="h-4 w-4 mr-2" />Submit Test</Button>
-              : <Button onClick={() => setCurrentQuestion((p) => p + 1)} className="bg-blue-600 hover:bg-blue-700">Next<ChevronRight className="h-4 w-4 ml-2" /></Button>}
+            <Button
+              variant="outline"
+              onClick={() => setCurrentQuestion((p) => Math.max(p - 1, 0))}
+              disabled={currentQuestion === 0}
+            >
+              <ChevronLeft className="h-4 w-4 mr-2" />
+              Previous
+            </Button>
+            {currentQuestion === totalQuestions - 1 ? (
+              <Button
+                onClick={handleSubmit}
+                className="bg-blue-600 hover:bg-blue-700"
+              >
+                <Flag className="h-4 w-4 mr-2" />
+                Submit Test
+              </Button>
+            ) : (
+              <Button
+                onClick={() =>
+                  setCurrentQuestion((p) => Math.min(p + 1, totalQuestions - 1))
+                }
+                className="bg-blue-600 hover:bg-blue-700"
+              >
+                Next
+                <ChevronRight className="h-4 w-4 ml-2" />
+              </Button>
+            )}
           </div>
           <Card className="border-blue-100">
-            <CardHeader className="py-3"><CardTitle className="text-sm text-blue-700">Question Navigator</CardTitle></CardHeader>
+            <CardHeader className="py-3">
+              <CardTitle className="text-sm text-blue-700">
+                Question Navigator
+              </CardTitle>
+            </CardHeader>
             <CardContent className="pb-4">
               <div className="grid grid-cols-10 gap-2">
                 {availableQuestions.map((_, idx) => (
-                  <button key={idx} onClick={() => setCurrentQuestion(idx)}
-                    className={cn("w-8 h-8 rounded text-sm font-medium transition-colors",
-                      currentQuestion === idx ? "bg-blue-600 text-white"
-                      : answers[idx] !== null ? "bg-blue-100 text-blue-700"
-                      : "bg-gray-100 text-gray-600 hover:bg-gray-200")}>
+                  <button
+                    key={idx}
+                    onClick={() =>
+                      setCurrentQuestion(
+                        Math.min(Math.max(idx, 0), totalQuestions - 1),
+                      )
+                    }
+                    className={cn(
+                      "w-8 h-8 rounded text-sm font-medium transition-colors",
+                      currentQuestion === idx
+                        ? "bg-blue-600 text-white"
+                        : answers[idx] !== null
+                          ? "bg-blue-100 text-blue-700"
+                          : "bg-gray-100 text-gray-600 hover:bg-gray-200",
+                    )}
+                  >
                     {idx + 1}
                   </button>
                 ))}
               </div>
               <div className="flex items-center gap-4 mt-4 text-xs text-gray-500">
-                <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-blue-600" /><span>Current</span></div>
-                <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-blue-100" /><span>Answered</span></div>
-                <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-gray-100" /><span>Unanswered</span></div>
+                <div className="flex items-center gap-1">
+                  <div className="w-3 h-3 rounded bg-blue-600" />
+                  <span>Current</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="w-3 h-3 rounded bg-blue-100" />
+                  <span>Answered</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="w-3 h-3 rounded bg-gray-100" />
+                  <span>Unanswered</span>
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -943,5 +1408,5 @@ export default function G5LaDiff8MockTest() {
       </main>
       <Footer />
     </div>
-  )
+  );
 }
