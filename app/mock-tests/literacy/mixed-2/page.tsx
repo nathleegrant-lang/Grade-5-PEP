@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -27,6 +27,18 @@ interface Question {
   explanation: string
 }
 
+const P1 = `Reading widely is one of the most valuable habits a young person can develop. Each book opens a doorway into a different world—a different time, a different culture, or a different way of thinking. Students who read for pleasure often develop larger vocabularies, stronger writing skills, and deeper empathy for people whose lives differ from their own.
+
+Research suggests that reading for even twenty minutes each day can support learning across several subjects. A student who reads a science article may encounter new facts and technical words. A historical novel may help the reader imagine how people lived in another period. A biography can show how a real person responded to difficulty, failure, or opportunity.
+
+However, developing a reading habit is not always easy. Screens, games, social media, chores, and other activities compete for attention. Some students also believe they dislike reading because they have not yet found material that matches their interests. A child who avoids long novels may enjoy short mysteries, comics, sports reports, magazines, or audiobooks.
+
+Many educators therefore argue that technology should not be treated only as an enemy of reading. E-books can make many titles available on one device. Audiobooks allow students to listen while following the written text. Reading apps can help readers set goals, learn unfamiliar words, and track progress. These tools are most helpful when they support focused reading rather than constantly interrupting it.
+
+The type of book matters less than the quality of attention the reader gives it. Reading should not become a race to finish the greatest number of pages. Strong readers pause to ask questions, make predictions, connect ideas, and reconsider what they think. They sometimes reread a difficult paragraph instead of rushing past it.
+
+A lasting reading habit is usually built through small, regular choices. Setting aside a quiet time, keeping a book nearby, visiting a library, and sharing recommendations with friends can all help. Twenty thoughtful minutes may seem small, but repeated day after day, those minutes can open many doors.`
+
 const g5LaMix2Questions: Question[] = [
   {
     id: 1,
@@ -34,17 +46,17 @@ const g5LaMix2Questions: Question[] = [
     skill: "Main Idea",
     question: `Read the passage then answer the question.
 
-"Reading widely is one of the most powerful habits a young person can develop. Each book opens a doorway into a different world — a different time, a different culture, a different way of thinking. Students who read for pleasure tend to have larger vocabularies, stronger writing skills, and deeper empathy for people whose lives differ from their own. Research consistently shows that reading for just twenty minutes a day significantly improves academic performance across all subjects. Yet in a world of screens and social media, finding time and motivation to read can feel like a challenge. The answer, many educators argue, is not to fight technology, but to use it wisely — e-books, audiobooks, and reading apps can all help build the habit."
+${P1}
 
-What is this passage MAINLY about?`,
+What is the passage mainly about?`,
     options: [
-      "How to use e-books",
-      "The benefits of reading widely and how to build the reading habit in a digital world",
-      "Why schools fail to teach reading",
-      "The history of books",
+      "The benefits of reading and practical ways to build a lasting reading habit",
+      "Why printed books should replace technology",
+      "How students can finish books as quickly as possible",
+      "Why every student should read the same kind of book"
     ],
-    correctAnswer: 1,
-    explanation: `The passage argues for the value of reading, presents evidence of its benefits, then addresses the challenge of building the habit in a digital era.`
+    correctAnswer: 0,
+    explanation: `The passage explains the benefits of reading, acknowledges barriers, and suggests practical ways to develop the habit.`
   },
   {
     id: 2,
@@ -52,603 +64,632 @@ What is this passage MAINLY about?`,
     skill: "Detail",
     question: `Read the passage then answer the question.
 
-"Reading widely is one of the most powerful habits a young person can develop. Each book opens a doorway into a different world — a different time, a different culture, a different way of thinking. Students who read for pleasure tend to have larger vocabularies, stronger writing skills, and deeper empathy for people whose lives differ from their own. Research consistently shows that reading for just twenty minutes a day significantly improves academic performance across all subjects. Yet in a world of screens and social media, finding time and motivation to read can feel like a challenge. The answer, many educators argue, is not to fight technology, but to use it wisely — e-books, audiobooks, and reading apps can all help build the habit."
+${P1}
 
-According to the passage, how long should a student read daily to significantly improve academic performance?`,
+Which benefit of reading is directly mentioned in the passage?`,
     options: [
-      "One hour",
-      "Thirty minutes",
-      "Twenty minutes",
-      "Ten minutes",
+      "Improved athletic ability",
+      "Stronger writing skills",
+      "Faster running speed",
+      "Better eyesight"
     ],
-    correctAnswer: 2,
-    explanation: `The passage states 'reading for just twenty minutes a day significantly improves academic performance across all subjects.'`
+    correctAnswer: 1,
+    explanation: `The passage states that students who read for pleasure often develop stronger writing skills.`
   },
   {
     id: 3,
     type: "reading",
-    skill: "Vocabulary in Context",
+    skill: "Inference",
     question: `Read the passage then answer the question.
 
-"Reading widely is one of the most powerful habits a young person can develop. Each book opens a doorway into a different world — a different time, a different culture, a different way of thinking. Students who read for pleasure tend to have larger vocabularies, stronger writing skills, and deeper empathy for people whose lives differ from their own. Research consistently shows that reading for just twenty minutes a day significantly improves academic performance across all subjects. Yet in a world of screens and social media, finding time and motivation to read can feel like a challenge. The answer, many educators argue, is not to fight technology, but to use it wisely — e-books, audiobooks, and reading apps can all help build the habit."
+${P1}
 
-The word 'empathy' in the passage means:`,
+Why might a student who says, “I do not like reading,” change that opinion?`,
     options: [
-      "academic skill",
-      "physical strength",
-      "the ability to understand and share the feelings of others",
-      "speed of reading",
+      "The student may be forced to read longer novels.",
+      "The student may stop using all technology.",
+      "The student may discover reading material that matches personal interests.",
+      "The student may avoid visiting libraries."
     ],
     correctAnswer: 2,
-    explanation: `'Empathy' is the capacity to understand and share what others feel — the passage links it to reading about different lives.`
+    explanation: `The passage suggests that some students have not yet found material suited to their interests.`
   },
   {
     id: 4,
     type: "reading",
-    skill: "Literal Comprehension",
+    skill: "Author's Purpose",
     question: `Read the passage then answer the question.
 
-"Reading widely is one of the most powerful habits a young person can develop. Each book opens a doorway into a different world — a different time, a different culture, a different way of thinking. Students who read for pleasure tend to have larger vocabularies, stronger writing skills, and deeper empathy for people whose lives differ from their own. Research consistently shows that reading for just twenty minutes a day significantly improves academic performance across all subjects. Yet in a world of screens and social media, finding time and motivation to read can feel like a challenge. The answer, many educators argue, is not to fight technology, but to use it wisely — e-books, audiobooks, and reading apps can all help build the habit."
+${P1}
 
-Which of the following does the passage NOT mention as a benefit of reading?`,
+Why does the author mention comics, sports reports, magazines, and audiobooks?`,
     options: [
-      "Larger vocabulary",
-      "Better writing skills",
-      "Improved athletic performance",
-      "Deeper empathy",
+      "To prove that novels are no longer useful",
+      "To argue that students should avoid challenging texts",
+      "To advertise particular products",
+      "To show that worthwhile reading can take different forms"
     ],
-    correctAnswer: 2,
-    explanation: `The passage lists vocabulary, writing skills, and empathy as benefits — but never mentions athletic performance.`
+    correctAnswer: 3,
+    explanation: `These examples show that students can build reading habits through many kinds of material.`
   },
   {
     id: 5,
     type: "reading",
-    skill: "Fact vs Opinion",
+    skill: "Cause and Effect",
     question: `Read the passage then answer the question.
 
-"Reading widely is one of the most powerful habits a young person can develop. Each book opens a doorway into a different world — a different time, a different culture, a different way of thinking. Students who read for pleasure tend to have larger vocabularies, stronger writing skills, and deeper empathy for people whose lives differ from their own. Research consistently shows that reading for just twenty minutes a day significantly improves academic performance across all subjects. Yet in a world of screens and social media, finding time and motivation to read can feel like a challenge. The answer, many educators argue, is not to fight technology, but to use it wisely — e-books, audiobooks, and reading apps can all help build the habit."
+${P1}
 
-Which statement from the passage is a FACT that could be tested?`,
+According to the passage, what is one likely effect of reading a biography?`,
     options: [
-      "Reading is the most powerful habit a young person can develop",
-      "Reading for twenty minutes a day significantly improves academic performance",
-      "E-books are better than printed books",
-      "Finding time to read is a serious challenge",
+      "The reader may understand how a real person handled challenges.",
+      "The reader will automatically become famous.",
+      "The reader will no longer need teachers.",
+      "The reader will learn only scientific vocabulary."
     ],
-    correctAnswer: 1,
-    explanation: `The twenty-minutes claim is presented as research-backed — a verifiable factual claim. The others are opinions or judgements.`
+    correctAnswer: 0,
+    explanation: `The passage says biographies can show how real people responded to difficulty, failure, or opportunity.`
   },
   {
     id: 6,
     type: "reading",
-    skill: "Inference",
+    skill: "Compare and Contrast",
     question: `Read the passage then answer the question.
 
-"Reading widely is one of the most powerful habits a young person can develop. Each book opens a doorway into a different world — a different time, a different culture, a different way of thinking. Students who read for pleasure tend to have larger vocabularies, stronger writing skills, and deeper empathy for people whose lives differ from their own. Research consistently shows that reading for just twenty minutes a day significantly improves academic performance across all subjects. Yet in a world of screens and social media, finding time and motivation to read can feel like a challenge. The answer, many educators argue, is not to fight technology, but to use it wisely — e-books, audiobooks, and reading apps can all help build the habit."
+${P1}
 
-What does the phrase 'a doorway into a different world' suggest about books?`,
+How does the passage compare focused reading with racing through pages?`,
     options: [
-      "Books are physically large",
-      "Books are expensive",
-      "Reading transports the reader into new experiences, perspectives, and realities",
-      "Books are about travel",
+      "Both are described as equally useful.",
+      "Focused reading involves thinking, while racing values speed over understanding.",
+      "Racing is recommended for difficult books.",
+      "Focused reading requires reading only printed books."
     ],
-    correctAnswer: 2,
-    explanation: `The doorway metaphor implies books are portals — they provide access to entirely different worlds of experience and understanding.`
+    correctAnswer: 1,
+    explanation: `The author values questioning, predicting, connecting, and rereading rather than simply finishing quickly.`
   },
   {
     id: 7,
     type: "reading",
-    skill: "Author's Technique",
+    skill: "Drawing Conclusions",
     question: `Read the passage then answer the question.
 
-"Reading widely is one of the most powerful habits a young person can develop. Each book opens a doorway into a different world — a different time, a different culture, a different way of thinking. Students who read for pleasure tend to have larger vocabularies, stronger writing skills, and deeper empathy for people whose lives differ from their own. Research consistently shows that reading for just twenty minutes a day significantly improves academic performance across all subjects. Yet in a world of screens and social media, finding time and motivation to read can feel like a challenge. The answer, many educators argue, is not to fight technology, but to use it wisely — e-books, audiobooks, and reading apps can all help build the habit."
+${P1}
 
-The author presents a problem (screens and social media) and then a solution (technology used wisely). Why is this structure effective?`,
+What can the reader conclude about technology from the passage?`,
     options: [
-      "It makes the passage longer",
-      "It confuses the reader",
-      "It acknowledges a real obstacle and then offers a practical, balanced response — making the argument more credible",
-      "It avoids the main point",
+      "Technology always prevents students from learning.",
+      "Technology should replace libraries completely.",
+      "Technology can support reading when it is used carefully and purposefully.",
+      "Technology is useful only for listening to books."
     ],
     correctAnswer: 2,
-    explanation: `Presenting a problem then a nuanced solution shows intellectual honesty — the author doesn't ignore obstacles but addresses them constructively.`
+    explanation: `The passage presents e-books, audiobooks, and apps as useful when they support focused reading.`
   },
   {
     id: 8,
     type: "reading",
-    skill: "Tone",
+    skill: "Vocabulary in Context",
     question: `Read the passage then answer the question.
 
-"Reading widely is one of the most powerful habits a young person can develop. Each book opens a doorway into a different world — a different time, a different culture, a different way of thinking. Students who read for pleasure tend to have larger vocabularies, stronger writing skills, and deeper empathy for people whose lives differ from their own. Research consistently shows that reading for just twenty minutes a day significantly improves academic performance across all subjects. Yet in a world of screens and social media, finding time and motivation to read can feel like a challenge. The answer, many educators argue, is not to fight technology, but to use it wisely — e-books, audiobooks, and reading apps can all help build the habit."
+${P1}
 
-The tone of this passage is BEST described as:`,
+In the final sentence, the phrase “open many doors” suggests that reading can`,
     options: [
-      "Angry at screen users",
-      "Entirely negative about technology",
-      "Balanced and encouraging — making a case for reading while acknowledging real challenges",
-      "Indifferent to the topic",
+      "teach readers how to build doors",
+      "make every task easy",
+      "replace all other school subjects",
+      "create many opportunities for learning and growth"
     ],
-    correctAnswer: 2,
-    explanation: `The passage is positive about reading, honest about challenges, and ends with a practical solution — a balanced, constructive tone.`
+    correctAnswer: 3,
+    explanation: `The phrase is figurative and refers to new opportunities, ideas, and experiences.`
   },
   {
     id: 9,
     type: "reading",
-    skill: "Cause and Effect",
+    skill: "Evaluating Evidence",
     question: `Read the passage then answer the question.
 
-"Reading widely is one of the most powerful habits a young person can develop. Each book opens a doorway into a different world — a different time, a different culture, a different way of thinking. Students who read for pleasure tend to have larger vocabularies, stronger writing skills, and deeper empathy for people whose lives differ from their own. Research consistently shows that reading for just twenty minutes a day significantly improves academic performance across all subjects. Yet in a world of screens and social media, finding time and motivation to read can feel like a challenge. The answer, many educators argue, is not to fight technology, but to use it wisely — e-books, audiobooks, and reading apps can all help build the habit."
+${P1}
 
-According to the passage, what effect does reading widely have on empathy?`,
+Which detail best supports the claim that small daily choices can build a reading habit?`,
     options: [
-      "No effect",
-      "Reading widely decreases empathy",
-      "Students develop deeper empathy for people whose lives differ from their own",
-      "Only some students develop empathy through reading",
+      "Twenty thoughtful minutes repeated each day can make a difference.",
+      "Some books are very long.",
+      "Libraries contain many shelves.",
+      "Students sometimes use social media."
     ],
-    correctAnswer: 2,
-    explanation: `The passage directly links wide reading to 'deeper empathy for people whose lives differ from their own.'`
+    correctAnswer: 0,
+    explanation: `The final paragraph directly explains how regular daily reading builds a lasting habit.`
   },
   {
     id: 10,
     type: "reading",
-    skill: "Figurative Language",
+    skill: "Prediction",
     question: `Read the passage then answer the question.
 
-"Reading widely is one of the most powerful habits a young person can develop. Each book opens a doorway into a different world — a different time, a different culture, a different way of thinking. Students who read for pleasure tend to have larger vocabularies, stronger writing skills, and deeper empathy for people whose lives differ from their own. Research consistently shows that reading for just twenty minutes a day significantly improves academic performance across all subjects. Yet in a world of screens and social media, finding time and motivation to read can feel like a challenge. The answer, many educators argue, is not to fight technology, but to use it wisely — e-books, audiobooks, and reading apps can all help build the habit."
+${P1}
 
-'Each book opens a doorway into a different world.' What is this figure of speech?`,
+What would the author most likely recommend to a student who struggles with long novels?`,
     options: [
-      "Simile",
-      "Alliteration",
-      "Metaphor — directly comparing a book to a doorway without using 'like' or 'as'",
-      "Personification",
+      "Stop reading until secondary school",
+      "Try shorter texts or formats connected to the student's interests",
+      "Read only dictionaries",
+      "Choose the longest available book"
     ],
-    correctAnswer: 2,
-    explanation: `This is a metaphor — 'is a doorway' directly compares the book to a door, without 'like' or 'as.'`
+    correctAnswer: 1,
+    explanation: `The passage recommends alternatives such as mysteries, comics, reports, magazines, and audiobooks.`
   },
   {
     id: 11,
     type: "reading",
-    skill: "Critical Reading",
+    skill: "Tone",
     question: `Read the passage then answer the question.
 
-"Reading widely is one of the most powerful habits a young person can develop. Each book opens a doorway into a different world — a different time, a different culture, a different way of thinking. Students who read for pleasure tend to have larger vocabularies, stronger writing skills, and deeper empathy for people whose lives differ from their own. Research consistently shows that reading for just twenty minutes a day significantly improves academic performance across all subjects. Yet in a world of screens and social media, finding time and motivation to read can feel like a challenge. The answer, many educators argue, is not to fight technology, but to use it wisely — e-books, audiobooks, and reading apps can all help build the habit."
+${P1}
 
-A sceptical reader might challenge the claim that 'reading for twenty minutes a day significantly improves academic performance.' What question would they ask?`,
+Which word best describes the tone of the passage?`,
     options: [
-      "Is twenty minutes too short?",
-      "Was this research conducted in Jamaica specifically, and are those findings applicable here?",
-      "Should students read less?",
-      "Are books expensive?",
+      "Mocking",
+      "Angry",
+      "Encouraging",
+      "Hopeless"
     ],
-    correctAnswer: 1,
-    explanation: `A critical reader questions the applicability of research — is this finding universal or context-specific? Were Jamaican students part of the study?`
+    correctAnswer: 2,
+    explanation: `The author acknowledges challenges but offers practical, hopeful strategies.`
   },
   {
     id: 12,
     type: "reading",
-    skill: "Author's Argument",
+    skill: "Fact and Opinion",
     question: `Read the passage then answer the question.
 
-"Reading widely is one of the most powerful habits a young person can develop. Each book opens a doorway into a different world — a different time, a different culture, a different way of thinking. Students who read for pleasure tend to have larger vocabularies, stronger writing skills, and deeper empathy for people whose lives differ from their own. Research consistently shows that reading for just twenty minutes a day significantly improves academic performance across all subjects. Yet in a world of screens and social media, finding time and motivation to read can feel like a challenge. The answer, many educators argue, is not to fight technology, but to use it wisely — e-books, audiobooks, and reading apps can all help build the habit."
+${P1}
 
-What is the author's IMPLICIT argument about technology?`,
+Which statement is presented as an opinion or recommendation rather than a directly testable fact?`,
     options: [
-      "Technology is destroying literacy",
-      "Technology and reading are incompatible",
-      "Technology is not inherently the enemy of reading — it depends on how it is used",
-      "All students prefer technology to books",
+      "Audiobooks contain recorded speech.",
+      "Some reading apps track progress.",
+      "Books can be stored on electronic devices.",
+      "Students should give careful attention to what they read."
     ],
-    correctAnswer: 2,
-    explanation: `The author's suggestion to use e-books and audiobooks implies technology can support reading — the problem is careless use, not technology itself.`
+    correctAnswer: 3,
+    explanation: `The claim about what students should do is a recommendation rather than a directly testable fact.`
   },
   {
     id: 13,
     type: "reading",
-    skill: "Theme",
+    skill: "Text Structure",
     question: `Read the passage then answer the question.
 
-"Reading widely is one of the most powerful habits a young person can develop. Each book opens a doorway into a different world — a different time, a different culture, a different way of thinking. Students who read for pleasure tend to have larger vocabularies, stronger writing skills, and deeper empathy for people whose lives differ from their own. Research consistently shows that reading for just twenty minutes a day significantly improves academic performance across all subjects. Yet in a world of screens and social media, finding time and motivation to read can feel like a challenge. The answer, many educators argue, is not to fight technology, but to use it wisely — e-books, audiobooks, and reading apps can all help build the habit."
+${P1}
 
-The CENTRAL theme of this passage is:`,
+How is the passage mainly organised?`,
     options: [
-      "Technology is dangerous",
-      "School is the most important place to learn",
-      "The habit of reading, built wisely and consistently, is one of the most valuable investments a young person can make",
-      "Only long books have value",
+      "A problem is described, benefits are explained, and practical solutions are offered.",
+      "Events are presented in the order they happened during one day.",
+      "Two fictional characters argue throughout the passage.",
+      "Instructions are given without any explanation."
     ],
-    correctAnswer: 2,
-    explanation: `The passage consistently argues for reading's profound value and argues that the habit can be built even in a digital age.`
+    correctAnswer: 0,
+    explanation: `The passage explains benefits, identifies barriers, and then offers strategies and solutions.`
   },
   {
     id: 14,
     type: "reading",
-    skill: "Summarise",
+    skill: "Synthesis",
     question: `Read the passage then answer the question.
 
-"Reading widely is one of the most powerful habits a young person can develop. Each book opens a doorway into a different world — a different time, a different culture, a different way of thinking. Students who read for pleasure tend to have larger vocabularies, stronger writing skills, and deeper empathy for people whose lives differ from their own. Research consistently shows that reading for just twenty minutes a day significantly improves academic performance across all subjects. Yet in a world of screens and social media, finding time and motivation to read can feel like a challenge. The answer, many educators argue, is not to fight technology, but to use it wisely — e-books, audiobooks, and reading apps can all help build the habit."
+${P1}
 
-Which BEST summarises this passage?`,
+Which statement best combines two major ideas from the passage?`,
     options: [
-      "Students should avoid all technology",
-      "Reading books is boring but useful",
-      "Wide reading builds vocabulary, empathy, and academic skills, and technology — used wisely — can help build the reading habit",
-      "Academic performance is not important",
+      "Reading matters only when students choose printed novels.",
+      "Reading is valuable, and technology can help when used with focus.",
+      "Technology makes thoughtful reading impossible.",
+      "The number of pages read is more important than understanding."
     ],
-    correctAnswer: 2,
-    explanation: `This captures the benefits, the challenge, and the solution — the complete arc of the passage's argument.`
+    correctAnswer: 1,
+    explanation: `The passage supports reading while explaining that carefully used technology can strengthen the habit.`
   },
   {
     id: 15,
     type: "reading",
-    skill: "Implied Meaning",
+    skill: "Summary",
     question: `Read the passage then answer the question.
 
-"Reading widely is one of the most powerful habits a young person can develop. Each book opens a doorway into a different world — a different time, a different culture, a different way of thinking. Students who read for pleasure tend to have larger vocabularies, stronger writing skills, and deeper empathy for people whose lives differ from their own. Research consistently shows that reading for just twenty minutes a day significantly improves academic performance across all subjects. Yet in a world of screens and social media, finding time and motivation to read can feel like a challenge. The answer, many educators argue, is not to fight technology, but to use it wisely — e-books, audiobooks, and reading apps can all help build the habit."
+${P1}
 
-When the author says the answer is 'not to fight technology, but to use it wisely,' they imply:`,
+Which sentence is the best summary of the passage?`,
     options: [
-      "Technology is always harmful",
-      "Fighting technology is always the best approach",
-      "A rigid anti-technology stance misses the opportunity technology provides to support positive habits like reading",
-      "Students should use only social media",
+      "Reading twenty minutes daily guarantees perfect grades.",
+      "Students should remove every screen from their homes.",
+      "Regular, thoughtful reading in suitable formats can strengthen skills, understanding, and empathy.",
+      "Only difficult books help young people learn."
     ],
     correctAnswer: 2,
-    explanation: `'Not to fight but to use wisely' implies that the problem is not technology itself but the absence of intentionality — a nuanced, practical position.`
+    explanation: `This choice captures the passage's central ideas without adding unsupported claims.`
   },
   {
     id: 16,
     type: "vocabulary",
-    skill: "Synonyms",
-    question: `Which word is a SYNONYM for 'extensive'?`,
+    skill: "Synonym",
+    question: `Which word is closest in meaning to “valuable”?`,
     options: [
-      "limited",
-      "narrow",
-      "short",
-      "wide-ranging",
+      "costly",
+      "hidden",
+      "ordinary",
+      "useful"
     ],
     correctAnswer: 3,
-    explanation: `'Wide-ranging' means covering a large area or many topics — a synonym for 'extensive.'`
+    explanation: `In the passage, valuable means useful or important.`
   },
   {
     id: 17,
     type: "vocabulary",
-    skill: "Antonyms",
-    question: `The ANTONYM of 'motivate' is:`,
+    skill: "Antonym",
+    question: `Which word is the opposite of “focused”?`,
     options: [
-      "inspire",
-      "encourage",
-      "discourage",
-      "energise",
+      "distracted",
+      "attentive",
+      "careful",
+      "prepared"
     ],
-    correctAnswer: 2,
-    explanation: `'Discourage' means to reduce someone's confidence or willingness — the opposite of 'motivate.'`
+    correctAnswer: 0,
+    explanation: `Focused means giving close attention; distracted means unable to keep attention on the task.`
   },
   {
     id: 18,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `The teacher used INNOVATIVE methods that students had never experienced before. 'Innovative' means:`,
+    skill: "Prefix",
+    question: `The prefix “re-” in “reread” means`,
     options: [
-      "old-fashioned and proven",
-      "creative, new, and original",
-      "strict and traditional",
-      "simple and repetitive",
+      "before",
+      "again",
+      "without",
+      "under"
     ],
     correctAnswer: 1,
-    explanation: `'Innovative' describes new and creative approaches — methods that break from tradition to try something fresh.`
+    explanation: `To reread means to read again.`
   },
   {
     id: 19,
     type: "vocabulary",
-    skill: "Idiom",
-    question: `'She devoured every book she could find.' The word 'devoured' here means:`,
+    skill: "Suffix",
+    question: `The suffix “-ful” in “thoughtful” suggests`,
     options: [
-      "ate the books literally",
-      "read the books very quickly and eagerly",
-      "destroyed the books",
-      "collected the books",
+      "without thought",
+      "able to read quickly",
+      "full of thought or careful consideration",
+      "related to technology"
     ],
-    correctAnswer: 1,
-    explanation: `'Devoured' is a metaphor for reading eagerly and quickly — like consuming food enthusiastically.`
+    correctAnswer: 2,
+    explanation: `Thoughtful means showing careful thought or consideration.`
   },
   {
     id: 20,
     type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'Words are the building blocks of the mind.' This metaphor suggests:`,
+    skill: "Context Clues",
+    question: `In the passage, “compete for attention” means that several activities`,
     options: [
-      "Words are made of concrete",
-      "The mind is a physical building",
-      "Words are the fundamental materials from which thought and intelligence are constructed",
-      "Only writers need words",
+      "work together quietly",
+      "are all completed at once",
+      "become easier with practice",
+      "try to gain a person's limited time and focus"
     ],
-    correctAnswer: 2,
-    explanation: `Like building blocks that construct structures, words are the basic units from which ideas, knowledge, and thinking are built.`
+    correctAnswer: 3,
+    explanation: `Games, social media, chores, and other activities all try to take the student's attention.`
   },
   {
     id: 21,
     type: "vocabulary",
-    skill: "Connotation",
-    question: `Which sentence uses the word 'curious' with a POSITIVE connotation?`,
+    skill: "Multiple Meaning",
+    question: `Which sentence uses “track” in the same way as “track progress”?`,
     options: [
-      "That's a curious smell — something must have gone wrong",
-      "His curious questions led to groundbreaking discoveries",
-      "She gave a curious look and quickly walked away",
-      "The curious stain appeared on the wall",
+      "The teacher used a chart to track each student's reading.",
+      "The runners trained on the track.",
+      "The animal left tracks in the mud.",
+      "The train moved along the track."
     ],
-    correctAnswer: 1,
-    explanation: `'Curious questions' here means driven by intellectual curiosity — a positive, admirable quality linked to discovery.`
+    correctAnswer: 0,
+    explanation: `Here, track means to monitor or record progress over time.`
   },
   {
     id: 22,
     type: "vocabulary",
-    skill: "Word Meaning",
-    question: `The word 'literacy' means:`,
+    skill: "Word Relationships",
+    question: `Library is to books as gallery is to`,
     options: [
-      "the ability to do mathematics",
-      "skill in reading and writing",
-      "knowledge of science",
-      "physical fitness",
+      "readers",
+      "paintings",
+      "shelves",
+      "stories"
     ],
     correctAnswer: 1,
-    explanation: `'Literacy' refers to the ability to read and write — and more broadly, to competence in using written language.`
+    explanation: `A library contains and displays books, while a gallery contains and displays paintings or other artworks.`
   },
   {
     id: 23,
     type: "vocabulary",
-    skill: "Extended Metaphor",
-    question: `A writer describes the mind as a 'garden: some thoughts are flowers, others are weeds.' In this metaphor, 'weeding' the garden would represent:`,
+    skill: "Replacing a Word",
+    question: `Which phrase could best replace “set aside” in “setting aside a quiet time”?`,
     options: [
-      "physical gardening",
-      "random thinking",
-      "deliberately removing harmful or unproductive thoughts from the mind",
-      "adding more information",
+      "cancel completely",
+      "forget about",
+      "reserve for a purpose",
+      "divide into pieces"
     ],
     correctAnswer: 2,
-    explanation: `The extended metaphor maps garden maintenance onto mental activity — weeding = removing negative or unhelpful thoughts.`
+    explanation: `Set aside means to reserve time for a particular purpose.`
   },
   {
     id: 24,
     type: "vocabulary",
-    skill: "Etymology",
-    question: `The word 'educate' comes from the Latin 'educere' meaning 'to lead out.' This suggests:`,
+    skill: "Academic Vocabulary",
+    question: `What does “recommendation” mean?`,
     options: [
-      "Education means teaching facts",
-      "Education is simply instruction from teacher to student",
-      "True education draws out what is already within the learner — it reveals potential rather than just filling a vessel",
-      "Education is always formal",
+      "a rule that must never be questioned",
+      "a list of difficult words",
+      "a record of past mistakes",
+      "a suggestion about what may be useful or suitable"
     ],
-    correctAnswer: 2,
-    explanation: `The etymology reveals that education is about drawing out, not filling up — a philosophy that prioritises the student's inner capacity.`
+    correctAnswer: 3,
+    explanation: `A recommendation is advice or a suggestion about a suitable choice.`
   },
   {
     id: 25,
     type: "vocabulary",
-    skill: "Academic Vocabulary",
-    question: `In an essay, 'furthermore' is used to:`,
+    skill: "Precise Word Choice",
+    question: `Which word best completes the sentence? “The student _____ the difficult paragraph to understand it better.”`,
     options: [
-      "contradict the previous point",
-      "end the essay",
-      "add an additional point that supports the same argument",
-      "introduce a counterargument",
+      "reread",
+      "ignored",
+      "rushed",
+      "removed"
     ],
-    correctAnswer: 2,
-    explanation: `'Furthermore' adds supporting information — it means 'and in addition, here is more evidence for the same point.'`
+    correctAnswer: 0,
+    explanation: `Reread precisely describes reading the paragraph again for better understanding.`
   },
   {
     id: 26,
     type: "grammar",
-    skill: "Verbs",
-    question: `Which sentence contains an ACTION VERB?`,
+    skill: "Subject-Verb Agreement",
+    question: `Which sentence is written correctly?`,
     options: [
-      "The book seems interesting",
-      "She appears confident",
-      "Reading improves vocabulary",
-      "The library is quiet",
+      "A collection of short stories are on the table.",
+      "A collection of short stories is on the table.",
+      "A collection of short stories were on the table.",
+      "A collection of short stories be on the table."
     ],
-    correctAnswer: 2,
-    explanation: `'Improves' is an action verb — it describes what reading does.`
+    correctAnswer: 1,
+    explanation: `The subject collection is singular, so it takes the singular verb is.`
   },
   {
     id: 27,
     type: "grammar",
-    skill: "Adverbs",
-    question: `Which word is an ADVERB in: 'Students who read regularly perform consistently better.'?`,
+    skill: "Pronouns",
+    question: `Which sentence uses the pronoun correctly?`,
     options: [
-      "students",
-      "perform",
-      "better",
-      "regularly",
+      "Me and Jada visited the library.",
+      "Her and Jada visited the library.",
+      "Jada and I visited the library.",
+      "Jada gave I the book."
     ],
-    correctAnswer: 3,
-    explanation: `'Regularly' describes HOW students read — it is an adverb of frequency modifying 'read.'`
+    correctAnswer: 2,
+    explanation: `I is the correct subject pronoun in the compound subject Jada and I.`
   },
   {
     id: 28,
     type: "grammar",
-    skill: "Sentence Types",
-    question: `Which is a COMPLEX sentence?`,
+    skill: "Verb Tense",
+    question: `Which sentence keeps the verb tense consistent?`,
     options: [
-      "She reads every night",
-      "She reads every night and she sleeps well",
-      "Although she was tired, she finished her book",
-      "Reading and sleeping are both important",
+      "Mika chose a book and begins reading.",
+      "Mika chooses a book and began reading.",
+      "Mika will choose a book and began reading.",
+      "Mika chose a book and began reading."
     ],
-    correctAnswer: 2,
-    explanation: `A complex sentence = main clause + subordinate clause. 'Although she was tired' is the subordinate clause.`
+    correctAnswer: 3,
+    explanation: `Chose and began are both past-tense verbs.`
   },
   {
     id: 29,
     type: "grammar",
-    skill: "Passive Voice",
-    question: `Rewrite in ACTIVE VOICE: 'Books are read by millions of students every day.'`,
+    skill: "Punctuation",
+    question: `Which sentence is punctuated correctly?`,
     options: [
-      "Millions of students are reading books every day",
-      "Millions of students read books every day",
-      "Books will be read by millions",
-      "Reading is done by millions daily",
+      "After reading for twenty minutes, Kofi closed the book.",
+      "After reading for twenty minutes Kofi closed the book.",
+      "After, reading for twenty minutes Kofi closed the book.",
+      "After reading, for twenty minutes, Kofi closed the book."
     ],
-    correctAnswer: 1,
-    explanation: `Active: subject (millions of students) performs the action (read) on the object (books).`
+    correctAnswer: 0,
+    explanation: `A comma follows the introductory phrase.`
   },
   {
     id: 30,
     type: "grammar",
-    skill: "Reported Speech",
-    question: `Change to REPORTED SPEECH: 'Reading has changed my life,' she told her teacher.`,
+    skill: "Quotation Marks",
+    question: `Which sentence uses quotation marks correctly?`,
     options: [
-      "She told her teacher that reading has changed her life",
-      "She told her teacher that reading had changed her life",
-      "She told her teacher reading changes life",
-      "She said reading changes my life",
+      "\"This story is exciting\" Maya said.",
+      "\"This story is exciting,\" Maya said.",
+      "This story is exciting,\" Maya said.",
+      "\"This story is exciting, Maya said.\""
     ],
     correctAnswer: 1,
-    explanation: `Reported speech shifts 'has changed' (present perfect) to 'had changed' (past perfect) and 'my' to 'her.'`
+    explanation: `The spoken words are enclosed in quotation marks, and the comma appears before the speaker tag.`
   },
   {
     id: 31,
     type: "grammar",
-    skill: "Conditional Sentence",
-    question: `Which is a FIRST CONDITIONAL sentence (realistic future)?`,
+    skill: "Relative Pronouns",
+    question: `Which sentence contains a correctly used relative pronoun?`,
     options: [
-      "If she reads, she will improve",
-      "If she read, she would improve",
-      "If she had read, she would have improved",
-      "She improves when she reads",
+      "The book who I borrowed was exciting.",
+      "The librarian which helped me was kind.",
+      "The story that won the prize was written by a student.",
+      "The student which read aloud spoke clearly."
     ],
-    correctAnswer: 0,
-    explanation: `First conditional: if + present simple, will + infinitive. Shows a realistic future outcome.`
+    correctAnswer: 2,
+    explanation: `That correctly introduces a clause describing the story.`
   },
   {
     id: 32,
     type: "grammar",
-    skill: "Gerunds",
-    question: `In 'Reading widely expands the mind,' 'Reading' functions as:`,
+    skill: "Sentence Combining",
+    question: `Which sentence best combines the ideas? “The book was long. It remained interesting.”`,
     options: [
-      "a verb",
-      "an adjective",
-      "a noun (gerund) — the subject of the sentence",
-      "an adverb",
+      "The book was long, it remained interesting.",
+      "Although the book was long, but it remained interesting.",
+      "The book long and remained interesting.",
+      "Although the book was long, it remained interesting."
     ],
-    correctAnswer: 2,
-    explanation: `A gerund is a verb form (-ing) acting as a noun. 'Reading' is the subject here.`
+    correctAnswer: 3,
+    explanation: `Although correctly shows contrast and avoids a run-on sentence.`
   },
   {
     id: 33,
     type: "grammar",
-    skill: "Fronting for Emphasis",
-    question: `'Only by reading widely can a student truly develop empathy.' What grammatical feature does this sentence use?`,
+    skill: "Run-on Correction",
+    question: `Which sentence correctly repairs the run-on? “I finished the chapter I wrote a summary.”`,
     options: [
-      "A relative clause",
-      "Passive voice",
-      "Inversion — the auxiliary 'can' comes before the subject for emphasis",
-      "A conditional structure",
+      "I finished the chapter and wrote a summary.",
+      "I finished the chapter, I wrote a summary.",
+      "I finished the chapter wrote a summary.",
+      "Finishing the chapter and I wrote a summary."
     ],
-    correctAnswer: 2,
-    explanation: `Inversion after a negative or restrictive adverb ('Only by...') places the auxiliary before the subject: 'can a student' instead of 'a student can.'`
+    correctAnswer: 0,
+    explanation: `The conjunction and correctly joins the related actions.`
   },
   {
     id: 34,
     type: "grammar",
-    skill: "Ellipsis",
-    question: `In 'She prefers fiction, her brother non-fiction,' words have been left out. What is missing?`,
+    skill: "Transitions",
+    question: `Which transition best completes the sentence? “Printed books are useful; _____, e-books can also support reading.”`,
     options: [
-      "She prefers",
-      "her brother prefers",
-      "fiction and",
-      "her brother reading",
+      "however",
+      "similarly",
+      "for example",
+      "because"
     ],
     correctAnswer: 1,
-    explanation: `The second clause omits 'prefers' (understood from context): 'her brother [prefers] non-fiction.' This is grammatical ellipsis.`
+    explanation: `Similarly shows that e-books can provide a comparable benefit.`
   },
   {
     id: 35,
     type: "grammar",
-    skill: "Nominalisation",
-    question: `Which sentence uses NOMINALISATION (converting a verb to a noun)?`,
+    skill: "Precise Word Choice",
+    question: `Which verb is most precise? “The class _____ the author's main argument.”`,
     options: [
-      "She improved significantly after reading more",
-      "Her improvement was significant after reading more",
-      "She reads and improves her skills",
-      "Reading made her improve",
+      "looked",
+      "found",
+      "analysed",
+      "did"
     ],
-    correctAnswer: 1,
-    explanation: `'Improvement' is the nominalised form of 'improved' — converting the verb to a noun makes the sentence more formal and abstract.`
+    correctAnswer: 2,
+    explanation: `Analysed precisely describes careful examination of the author's argument.`
   },
   {
     id: 36,
     type: "writing",
-    skill: "Audience and Register",
-    question: `A student writes a reading list recommendation for peers her own age. Which tone is MOST appropriate?`,
+    skill: "Strong Introduction",
+    question: `Which is the strongest introduction for a paragraph about daily reading?`,
     options: [
-      "Very formal academic language",
-      "Casual, enthusiastic, and accessible — like a recommendation from a trusted friend",
-      "Extremely technical literary analysis",
-      "Impersonal and detached",
+      "Reading is a thing people do.",
+      "I will now tell you about reading.",
+      "Books have pages.",
+      "Just twenty thoughtful minutes of reading each day can strengthen a student's skills and imagination."
     ],
-    correctAnswer: 1,
-    explanation: `A recommendation to peers should be warm, accessible, and enthusiastic — formal language would create distance.`
+    correctAnswer: 3,
+    explanation: `The sentence introduces a clear topic and gives the reader a meaningful reason to continue.`
   },
   {
     id: 37,
     type: "writing",
-    skill: "Persuasive Technique — Anecdote",
-    question: `A persuasive essay opens with a short story about a student who struggled until she started reading for pleasure. This technique is called:`,
+    skill: "Supporting Detail",
+    question: `Which detail best supports the topic sentence “Reading helps students understand other people”?`,
     options: [
-      "A rhetorical question",
-      "A statistic",
-      "An anecdote — a brief personal story used to make an argument feel real and relatable",
-      "An extended metaphor",
+      "Stories allow readers to experience situations from another person's point of view.",
+      "Some books have colourful covers.",
+      "Libraries usually organise books on shelves.",
+      "Many books contain more than one chapter."
     ],
-    correctAnswer: 2,
-    explanation: `An anecdote opens with a human story — making the argument immediately concrete, relatable, and emotionally engaging.`
+    correctAnswer: 0,
+    explanation: `The detail directly explains how reading can build empathy and understanding.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "Linking Ideas",
-    question: `Which sentence BEST links a paragraph arguing that reading improves vocabulary to a new paragraph about academic performance?`,
+    skill: "Transitions",
+    question: `Which transition best adds another benefit? “Reading develops vocabulary. _____, it can strengthen writing skills.”`,
     options: [
-      "Reading is also good for other things",
-      "These vocabulary gains do not stand alone — they translate directly into stronger academic performance across all subjects.",
-      "Next I will talk about academic performance",
-      "Academic performance is also improved",
+      "However",
+      "Furthermore",
+      "Instead",
+      "Otherwise"
     ],
     correctAnswer: 1,
-    explanation: `'These vocabulary gains do not stand alone' creates cohesion — it connects the previous point to the next while signalling the argument is building.`
+    explanation: `Furthermore adds another related supporting point.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Counter-Argument",
-    question: `A student argues 'reading is always better than screen time.' A stronger essay would:`,
+    skill: "Relevance",
+    question: `Which sentence should be removed from this paragraph?
+
+(1) A quiet reading routine can improve concentration. (2) Choosing a regular time helps the habit become familiar. (3) Basketball teams usually have five players on the court. (4) Turning off unnecessary notifications can reduce distractions.`,
     options: [
-      "Ignore all opposing views",
-      "Only quote experts who agree",
-      "Acknowledge that screens can support reading (e-books, audiobooks) before explaining why the reading habit matters regardless of format",
-      "Argue that screens are evil",
+      "Sentence 1",
+      "Sentence 2",
+      "Sentence 3",
+      "Sentence 4"
     ],
     correctAnswer: 2,
-    explanation: `Acknowledging and addressing a counterargument shows intellectual honesty and strengthens the overall argument — it shows the writer has considered multiple views.`
+    explanation: `Sentence 3 is unrelated to building a focused reading routine.`
   },
   {
     id: 40,
     type: "writing",
-    skill: "Evaluating a Text",
-    question: `When EVALUATING whether a writer is effective in persuading readers to value reading, a student should:`,
+    skill: "Strong Conclusion",
+    question: `Which is the strongest conclusion for an essay about developing a reading habit?`,
     options: [
-      "Simply say whether they liked the text",
-      "Count how many sentences the writer uses",
-      "Identify specific techniques the writer uses, explain their effect, and judge how successfully the writer achieves their purpose",
-      "Summarise the entire text",
+      "That is all about reading.",
+      "Books are available in many places.",
+      "Everyone should read because I said so.",
+      "By choosing suitable material and reading thoughtfully each day, students can build a habit that continues opening doors throughout life."
     ],
-    correctAnswer: 2,
-    explanation: `Evaluation = identification of technique + effect + judgement of success. All three steps are required for a complete evaluative response.`
+    correctAnswer: 3,
+    explanation: `The sentence restates the central idea in a fresh, memorable way and connects to the passage's doorway image.`
   }
-]
+];
+
+const shuffleAnswerOptions = (questions: Question[]): Question[] => {
+  return questions.map((question) => {
+    const optionsWithOriginalIndex = question.options.map((option, index) => ({
+      option,
+      index,
+    }))
+
+    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
+        optionsWithOriginalIndex[j],
+        optionsWithOriginalIndex[i],
+      ]
+    }
+
+    const correctAnswer = optionsWithOriginalIndex.findIndex(
+      (item) => item.index === question.correctAnswer,
+    )
+
+    return {
+      ...question,
+      options: optionsWithOriginalIndex.map((item) => item.option),
+      correctAnswer,
+    }
+  })
+}
 
 const SECTION_CONFIG = [
   { type: "reading" as const,    label: "Reading Comprehension",   note: "literal, inferential, and analytical reading across all difficulty levels" },
@@ -664,8 +705,11 @@ export default function G5LaMix2MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]                 = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]               = useState(60 * 60)
+  const [randomizedQuestions, setRandomizedQuestions] = useState<Question[]>([])
+  const hasSavedResult = useRef(false)
 
-  const availableQuestions = isPremium ? g5LaMix2Questions : g5LaMix2Questions.slice(0, FREE_QUESTION_LIMIT)
+  const sourceQuestions = isPremium ? g5LaMix2Questions : g5LaMix2Questions.slice(0, FREE_QUESTION_LIMIT)
+  const availableQuestions = randomizedQuestions.length > 0 ? randomizedQuestions : sourceQuestions
   const totalQuestions = availableQuestions.length
 
   useEffect(() => {
@@ -688,27 +732,39 @@ export default function G5LaMix2MockTest() {
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
 
-  const handleSubmit = async () => {
+  useEffect(() => {
+    if (!showResults || !user?.id || hasSavedResult.current) return
+
+    hasSavedResult.current = true
+    void saveStudentTestResult({
+      parentId: user.id,
+      studentName: user?.childName ?? "Student",
+      grade: "grade5",
+      subject: "Literacy",
+      testName: "Mixed 2",
+      difficulty: "Mixed",
+      score: calcScore(),
+      totalQuestions,
+      percentage: scorePct(),
+      completedAt: new Date().toISOString(),
+    }).catch(() => {
+      hasSavedResult.current = false
+    })
+  }, [showResults, user?.id, user?.childName, totalQuestions, answers])
+
+  const startTest = () => {
+    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions)
+    setRandomizedQuestions(shuffledQuestions)
+    setAnswers(new Array(shuffledQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    hasSavedResult.current = false
+    setStarted(true)
+  }
+
+  const handleSubmit = () => {
     setShowResults(true)
-
-    if (!user?.id) return
-
-    try {
-      await saveStudentTestResult({
-        parentId: user.id,
-        studentName: user?.childName ?? "Student",
-        grade: "grade5",
-        subject: "Language Arts",
-        testName: "Mixed 2",
-        difficulty: "Mixed",
-        score: calcScore(),
-        totalQuestions,
-        percentage: scorePct(),
-        completedAt: new Date().toISOString(),
-      })
-    } catch (error) {
-      console.error("Failed to save test result:", error)
-    }
   }
 
   const getGrade = () => {
@@ -730,8 +786,13 @@ export default function G5LaMix2MockTest() {
   }
 
   const resetTest = () => {
-    setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setStarted(false)
+    setShowResults(false)
+    setCurrentQuestion(0)
+    setRandomizedQuestions([])
+    setAnswers(new Array(sourceQuestions.length).fill(null))
+    setTimeLeft(60 * 60)
+    hasSavedResult.current = false
   }
 
   const q = availableQuestions[currentQuestion]
@@ -769,7 +830,7 @@ export default function G5LaMix2MockTest() {
             )}
             <div className="rounded-lg border border-blue-200 bg-white p-4">
               <h3 className="mb-2 font-semibold text-slate-800">Mixed Level Overview</h3>
-              <p className="text-slate-700">This test blends easy, moderate, and challenging questions across reading, vocabulary, grammar, and writing — giving you a complete picture of your Grade 5 Language Arts skills.</p>
+              <p className="text-slate-700">This mixed-level test uses reading as its central theme while assessing comprehension, vocabulary, grammar, and writing across a balanced range of Grade 5 skills.</p>
             </div>
             <div className="rounded-lg bg-sky-50 p-4">
               <h3 className="mb-2 font-semibold text-sky-800">What to Expect</h3>
@@ -784,7 +845,7 @@ export default function G5LaMix2MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-blue-600">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-blue-600">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-blue-600 py-6 text-lg hover:bg-blue-700">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-blue-600 py-6 text-lg hover:bg-blue-700">Start Test</Button>
           </CardContent>
         </Card>
       </main>
