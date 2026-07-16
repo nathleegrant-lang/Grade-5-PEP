@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -27,23 +27,24 @@ interface Question {
   explanation: string
 }
 
-const g5LaMix1Questions: Question[] = [
-  {
+const P1 = `In 1865, Paul Bogle led hundreds of men and women from Stony Gut to Morant Bay courthouse to protest against poverty, injustice, and the brutality of the colonial justice system. What began as a protest became a rebellion that changed Jamaican history. Though Bogle was captured and executed, the aftermath of the Morant Bay Rebellion forced the British government to take notice. Jamaica's status was changed from a self-governing colony to a Crown Colony under direct British rule — a step backward in some ways, but one that led to important social reforms. Paul Bogle was later declared one of Jamaica's seven National Heroes, remembered as a man who gave his life in the pursuit of justice for ordinary people.`
+
+const g5LaMix1Questions: Question[] = [  {
     id: 1,
     type: "reading",
     skill: "Main Idea",
     question: `Read the passage then answer the question.
 
-"In 1865, Paul Bogle led hundreds of men and women from Stony Gut to Morant Bay courthouse to protest against poverty, injustice, and the brutality of the colonial justice system. What began as a protest became a rebellion that changed Jamaican history. Though Bogle was captured and executed, the aftermath of the Morant Bay Rebellion forced the British government to take notice. Jamaica's status was changed from a self-governing colony to a Crown Colony under direct British rule — a step backward in some ways, but one that led to important social reforms. Paul Bogle was later declared one of Jamaica's seven National Heroes, remembered as a man who gave his life in the pursuit of justice for ordinary people."
+${P1}
 
 What is this passage MAINLY about?`,
     options: [
-      "Paul Bogle's family life",
       "The Morant Bay Rebellion and Paul Bogle's role in Jamaican history",
+      "Paul Bogle's family life",
       "How the British governed Jamaica",
       "The location of Stony Gut",
     ],
-    correctAnswer: 1,
+    correctAnswer: 0,
     explanation: `The passage traces Bogle's protest, the rebellion it sparked, its political consequences, and his legacy as a National Hero.`
   },
   {
@@ -52,16 +53,16 @@ What is this passage MAINLY about?`,
     skill: "Detail",
     question: `Read the passage then answer the question.
 
-"In 1865, Paul Bogle led hundreds of men and women from Stony Gut to Morant Bay courthouse to protest against poverty, injustice, and the brutality of the colonial justice system. What began as a protest became a rebellion that changed Jamaican history. Though Bogle was captured and executed, the aftermath of the Morant Bay Rebellion forced the British government to take notice. Jamaica's status was changed from a self-governing colony to a Crown Colony under direct British rule — a step backward in some ways, but one that led to important social reforms. Paul Bogle was later declared one of Jamaica's seven National Heroes, remembered as a man who gave his life in the pursuit of justice for ordinary people."
+${P1}
 
 What did Paul Bogle protest against?`,
     options: [
       "Bad weather conditions",
-      "Poor road conditions",
       "Poverty, injustice, and colonial brutality",
+      "Poor road conditions",
       "The lack of churches",
     ],
-    correctAnswer: 2,
+    correctAnswer: 1,
     explanation: `The passage lists 'poverty, injustice, and the brutality of the colonial justice system' as Bogle's targets.`
   },
   {
@@ -70,7 +71,7 @@ What did Paul Bogle protest against?`,
     skill: "Literal Comprehension",
     question: `Read the passage then answer the question.
 
-"In 1865, Paul Bogle led hundreds of men and women from Stony Gut to Morant Bay courthouse to protest against poverty, injustice, and the brutality of the colonial justice system. What began as a protest became a rebellion that changed Jamaican history. Though Bogle was captured and executed, the aftermath of the Morant Bay Rebellion forced the British government to take notice. Jamaica's status was changed from a self-governing colony to a Crown Colony under direct British rule — a step backward in some ways, but one that led to important social reforms. Paul Bogle was later declared one of Jamaica's seven National Heroes, remembered as a man who gave his life in the pursuit of justice for ordinary people."
+${P1}
 
 What happened to Paul Bogle after the rebellion?`,
     options: [
@@ -88,16 +89,16 @@ What happened to Paul Bogle after the rebellion?`,
     skill: "Vocabulary in Context",
     question: `Read the passage then answer the question.
 
-"In 1865, Paul Bogle led hundreds of men and women from Stony Gut to Morant Bay courthouse to protest against poverty, injustice, and the brutality of the colonial justice system. What began as a protest became a rebellion that changed Jamaican history. Though Bogle was captured and executed, the aftermath of the Morant Bay Rebellion forced the British government to take notice. Jamaica's status was changed from a self-governing colony to a Crown Colony under direct British rule — a step backward in some ways, but one that led to important social reforms. Paul Bogle was later declared one of Jamaica's seven National Heroes, remembered as a man who gave his life in the pursuit of justice for ordinary people."
+${P1}
 
 The word 'aftermath' in the passage most nearly means:`,
     options: [
       "the cause",
       "the beginning",
-      "the result or consequences that follow an event",
       "a type of punishment",
+      "the result or consequences that follow an event",
     ],
-    correctAnswer: 2,
+    correctAnswer: 3,
     explanation: `'Aftermath' refers to the consequences or effects that follow a significant event.`
   },
   {
@@ -106,16 +107,16 @@ The word 'aftermath' in the passage most nearly means:`,
     skill: "Fact Check",
     question: `Read the passage then answer the question.
 
-"In 1865, Paul Bogle led hundreds of men and women from Stony Gut to Morant Bay courthouse to protest against poverty, injustice, and the brutality of the colonial justice system. What began as a protest became a rebellion that changed Jamaican history. Though Bogle was captured and executed, the aftermath of the Morant Bay Rebellion forced the British government to take notice. Jamaica's status was changed from a self-governing colony to a Crown Colony under direct British rule — a step backward in some ways, but one that led to important social reforms. Paul Bogle was later declared one of Jamaica's seven National Heroes, remembered as a man who gave his life in the pursuit of justice for ordinary people."
+${P1}
 
 According to the passage, how many National Heroes does Jamaica have?`,
     options: [
+      "Seven",
       "Five",
       "Six",
-      "Seven",
       "Eight",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `The passage states Bogle 'was later declared one of Jamaica's seven National Heroes.'`
   },
   {
@@ -124,7 +125,7 @@ According to the passage, how many National Heroes does Jamaica have?`,
     skill: "Inference",
     question: `Read the passage then answer the question.
 
-"In 1865, Paul Bogle led hundreds of men and women from Stony Gut to Morant Bay courthouse to protest against poverty, injustice, and the brutality of the colonial justice system. What began as a protest became a rebellion that changed Jamaican history. Though Bogle was captured and executed, the aftermath of the Morant Bay Rebellion forced the British government to take notice. Jamaica's status was changed from a self-governing colony to a Crown Colony under direct British rule — a step backward in some ways, but one that led to important social reforms. Paul Bogle was later declared one of Jamaica's seven National Heroes, remembered as a man who gave his life in the pursuit of justice for ordinary people."
+${P1}
 
 The passage says Jamaica's change to Crown Colony status was 'a step backward in some ways.' What does this imply?`,
     options: [
@@ -142,7 +143,7 @@ The passage says Jamaica's change to Crown Colony status was 'a step backward in
     skill: "Author's Technique",
     question: `Read the passage then answer the question.
 
-"In 1865, Paul Bogle led hundreds of men and women from Stony Gut to Morant Bay courthouse to protest against poverty, injustice, and the brutality of the colonial justice system. What began as a protest became a rebellion that changed Jamaican history. Though Bogle was captured and executed, the aftermath of the Morant Bay Rebellion forced the British government to take notice. Jamaica's status was changed from a self-governing colony to a Crown Colony under direct British rule — a step backward in some ways, but one that led to important social reforms. Paul Bogle was later declared one of Jamaica's seven National Heroes, remembered as a man who gave his life in the pursuit of justice for ordinary people."
+${P1}
 
 Why does the author describe Bogle's memorial as a man who 'gave his life in the pursuit of justice for ordinary people'?`,
     options: [
@@ -160,16 +161,16 @@ Why does the author describe Bogle's memorial as a man who 'gave his life in the
     skill: "Cause and Effect",
     question: `Read the passage then answer the question.
 
-"In 1865, Paul Bogle led hundreds of men and women from Stony Gut to Morant Bay courthouse to protest against poverty, injustice, and the brutality of the colonial justice system. What began as a protest became a rebellion that changed Jamaican history. Though Bogle was captured and executed, the aftermath of the Morant Bay Rebellion forced the British government to take notice. Jamaica's status was changed from a self-governing colony to a Crown Colony under direct British rule — a step backward in some ways, but one that led to important social reforms. Paul Bogle was later declared one of Jamaica's seven National Heroes, remembered as a man who gave his life in the pursuit of justice for ordinary people."
+${P1}
 
 What was the DIRECT cause of Jamaica's change to Crown Colony status?`,
     options: [
       "Paul Bogle's execution",
-      "The Morant Bay Rebellion forced the British government to take notice and act",
       "The Jamaican government requested direct British rule",
       "A natural disaster",
+      "The Morant Bay Rebellion forced the British government to take notice and act",
     ],
-    correctAnswer: 1,
+    correctAnswer: 3,
     explanation: `The passage states the 'aftermath of the Morant Bay Rebellion forced the British government to take notice' — leading directly to the change in status.`
   },
   {
@@ -178,16 +179,16 @@ What was the DIRECT cause of Jamaica's change to Crown Colony status?`,
     skill: "Tone",
     question: `Read the passage then answer the question.
 
-"In 1865, Paul Bogle led hundreds of men and women from Stony Gut to Morant Bay courthouse to protest against poverty, injustice, and the brutality of the colonial justice system. What began as a protest became a rebellion that changed Jamaican history. Though Bogle was captured and executed, the aftermath of the Morant Bay Rebellion forced the British government to take notice. Jamaica's status was changed from a self-governing colony to a Crown Colony under direct British rule — a step backward in some ways, but one that led to important social reforms. Paul Bogle was later declared one of Jamaica's seven National Heroes, remembered as a man who gave his life in the pursuit of justice for ordinary people."
+${P1}
 
 The tone of this passage is BEST described as:`,
     options: [
+      "Respectful and historically informative — presenting Bogle as a significant and admirable figure",
       "Critical of Paul Bogle",
       "Entirely neutral with no perspective",
-      "Respectful and historically informative — presenting Bogle as a significant and admirable figure",
       "Humorous and light",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `The language is historically engaged and respectful — presenting Bogle's actions as significant and his designation as a National Hero as deserved.`
   },
   {
@@ -196,16 +197,16 @@ The tone of this passage is BEST described as:`,
     skill: "Theme",
     question: `Read the passage then answer the question.
 
-"In 1865, Paul Bogle led hundreds of men and women from Stony Gut to Morant Bay courthouse to protest against poverty, injustice, and the brutality of the colonial justice system. What began as a protest became a rebellion that changed Jamaican history. Though Bogle was captured and executed, the aftermath of the Morant Bay Rebellion forced the British government to take notice. Jamaica's status was changed from a self-governing colony to a Crown Colony under direct British rule — a step backward in some ways, but one that led to important social reforms. Paul Bogle was later declared one of Jamaica's seven National Heroes, remembered as a man who gave his life in the pursuit of justice for ordinary people."
+${P1}
 
 What THEME does this passage MOST clearly express?`,
     options: [
       "Violence is never the answer",
-      "Colonial rule was always fair",
       "Courage in the pursuit of justice can create lasting historical change even at great personal cost",
+      "Colonial rule was always fair",
       "Jamaica has too many National Heroes",
     ],
-    correctAnswer: 2,
+    correctAnswer: 1,
     explanation: `Bogle's sacrifice led to real change — the passage illustrates how courageous action for justice can alter history.`
   },
   {
@@ -214,16 +215,16 @@ What THEME does this passage MOST clearly express?`,
     skill: "Critical Reading",
     question: `Read the passage then answer the question.
 
-"In 1865, Paul Bogle led hundreds of men and women from Stony Gut to Morant Bay courthouse to protest against poverty, injustice, and the brutality of the colonial justice system. What began as a protest became a rebellion that changed Jamaican history. Though Bogle was captured and executed, the aftermath of the Morant Bay Rebellion forced the British government to take notice. Jamaica's status was changed from a self-governing colony to a Crown Colony under direct British rule — a step backward in some ways, but one that led to important social reforms. Paul Bogle was later declared one of Jamaica's seven National Heroes, remembered as a man who gave his life in the pursuit of justice for ordinary people."
+${P1}
 
 The passage says the change to Crown Colony was 'a step backward in some ways, but one that led to important social reforms.' What does this tension reveal?`,
     options: [
       "The British were confused about what to do",
-      "Historical change is never straightforward — events can simultaneously represent loss and progress",
       "Crown Colony status was entirely positive",
+      "Historical change is never straightforward — events can simultaneously represent loss and progress",
       "The reforms were unimportant",
     ],
-    correctAnswer: 1,
+    correctAnswer: 2,
     explanation: `The 'both/and' framing shows sophisticated historical thinking — acknowledging that significant events can be simultaneously regressive and progressive.`
   },
   {
@@ -232,16 +233,16 @@ The passage says the change to Crown Colony was 'a step backward in some ways, b
     skill: "Author's Argument",
     question: `Read the passage then answer the question.
 
-"In 1865, Paul Bogle led hundreds of men and women from Stony Gut to Morant Bay courthouse to protest against poverty, injustice, and the brutality of the colonial justice system. What began as a protest became a rebellion that changed Jamaican history. Though Bogle was captured and executed, the aftermath of the Morant Bay Rebellion forced the British government to take notice. Jamaica's status was changed from a self-governing colony to a Crown Colony under direct British rule — a step backward in some ways, but one that led to important social reforms. Paul Bogle was later declared one of Jamaica's seven National Heroes, remembered as a man who gave his life in the pursuit of justice for ordinary people."
+${P1}
 
 What implicit argument does the author make about why Bogle should be remembered?`,
     options: [
       "Because he organised a large march",
       "Because he was a religious leader",
-      "Because he sacrificed his life fighting for justice for ordinary people — the test of true heroism",
       "Because he was famous in his time",
+      "Because he sacrificed his life fighting for justice for ordinary people — the test of true heroism",
     ],
-    correctAnswer: 2,
+    correctAnswer: 3,
     explanation: `The passage implies heroism is defined by sacrifice for others, not personal gain — positioning Bogle's execution as evidence of genuine heroism.`
   },
   {
@@ -250,16 +251,16 @@ What implicit argument does the author make about why Bogle should be remembered
     skill: "Vocabulary in Context",
     question: `Read the passage then answer the question.
 
-"In 1865, Paul Bogle led hundreds of men and women from Stony Gut to Morant Bay courthouse to protest against poverty, injustice, and the brutality of the colonial justice system. What began as a protest became a rebellion that changed Jamaican history. Though Bogle was captured and executed, the aftermath of the Morant Bay Rebellion forced the British government to take notice. Jamaica's status was changed from a self-governing colony to a Crown Colony under direct British rule — a step backward in some ways, but one that led to important social reforms. Paul Bogle was later declared one of Jamaica's seven National Heroes, remembered as a man who gave his life in the pursuit of justice for ordinary people."
+${P1}
 
 When the passage says Bogle 'gave his life in the pursuit of justice,' the word 'pursuit' suggests:`,
     options: [
+      "That justice was an active, ongoing struggle he consciously chose to chase at personal cost",
       "That justice was easy to find",
       "That he accidentally died",
-      "That justice was an active, ongoing struggle he consciously chose to chase at personal cost",
       "That he was running away",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `'Pursuit' implies active, conscious chasing of a goal — suggesting justice required deliberate effort and sacrifice, not passive hoping.`
   },
   {
@@ -268,16 +269,16 @@ When the passage says Bogle 'gave his life in the pursuit of justice,' the word 
     skill: "Summarise",
     question: `Read the passage then answer the question.
 
-"In 1865, Paul Bogle led hundreds of men and women from Stony Gut to Morant Bay courthouse to protest against poverty, injustice, and the brutality of the colonial justice system. What began as a protest became a rebellion that changed Jamaican history. Though Bogle was captured and executed, the aftermath of the Morant Bay Rebellion forced the British government to take notice. Jamaica's status was changed from a self-governing colony to a Crown Colony under direct British rule — a step backward in some ways, but one that led to important social reforms. Paul Bogle was later declared one of Jamaica's seven National Heroes, remembered as a man who gave his life in the pursuit of justice for ordinary people."
+${P1}
 
 Which statement BEST summarises this passage?`,
     options: [
       "Paul Bogle was a man who organised a protest",
-      "The British changed Jamaica's colonial status",
       "Paul Bogle's courageous rebellion against injustice changed Jamaican history and earned him recognition as a National Hero",
+      "The British changed Jamaica's colonial status",
       "The Morant Bay Rebellion failed completely",
     ],
-    correctAnswer: 2,
+    correctAnswer: 1,
     explanation: `This captures the rebellion, its consequences, and Bogle's lasting legacy — all the key elements of the passage.`
   },
   {
@@ -286,7 +287,7 @@ Which statement BEST summarises this passage?`,
     skill: "Implied Meaning",
     question: `Read the passage then answer the question.
 
-"In 1865, Paul Bogle led hundreds of men and women from Stony Gut to Morant Bay courthouse to protest against poverty, injustice, and the brutality of the colonial justice system. What began as a protest became a rebellion that changed Jamaican history. Though Bogle was captured and executed, the aftermath of the Morant Bay Rebellion forced the British government to take notice. Jamaica's status was changed from a self-governing colony to a Crown Colony under direct British rule — a step backward in some ways, but one that led to important social reforms. Paul Bogle was later declared one of Jamaica's seven National Heroes, remembered as a man who gave his life in the pursuit of justice for ordinary people."
+${P1}
 
 When the passage notes Jamaica's status changed from 'self-governing colony to a Crown Colony under direct British rule,' it implies that Bogle's rebellion:`,
     options: [
@@ -306,10 +307,10 @@ When the passage notes Jamaica's status changed from 'self-governing colony to a
     options: [
       "support",
       "ignore",
-      "demonstrate",
       "celebrate",
+      "demonstrate",
     ],
-    correctAnswer: 2,
+    correctAnswer: 3,
     explanation: `'Demonstrate' (to publicly show opposition or support) is a synonym for 'protest.'`
   },
   {
@@ -318,12 +319,12 @@ When the passage notes Jamaica's status changed from 'self-governing colony to a
     skill: "Antonyms",
     question: `The ANTONYM of 'brutal' is:`,
     options: [
+      "gentle",
       "cruel",
       "harsh",
-      "gentle",
       "fierce",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `'Brutal' means savagely cruel. 'Gentle' — mild and kind — is its antonym.`
   },
   {
@@ -362,10 +363,10 @@ When the passage notes Jamaica's status changed from 'self-governing colony to a
     options: [
       "Legal proceedings take place in the dark",
       "The law cannot see anything",
-      "Justice should apply equally to everyone, regardless of who they are",
       "Judges have poor eyesight",
+      "Justice should apply equally to everyone, regardless of who they are",
     ],
-    correctAnswer: 2,
+    correctAnswer: 3,
     explanation: `The metaphor implies justice should be impartial — blind to a person's status, wealth, or identity.`
   },
   {
@@ -374,12 +375,12 @@ When the passage notes Jamaica's status changed from 'self-governing colony to a
     skill: "Connotation",
     question: `Which word has the MOST negative connotation when describing a political leader?`,
     options: [
+      "ruthless",
       "strong",
       "decisive",
       "firm",
-      "ruthless",
     ],
-    correctAnswer: 3,
+    correctAnswer: 0,
     explanation: `'Ruthless' implies willingness to cause harm without mercy — a strongly negative connotation.`
   },
   {
@@ -389,54 +390,54 @@ When the passage notes Jamaica's status changed from 'self-governing colony to a
     question: `The word 'sovereignty' means:`,
     options: [
       "a type of ceremony",
-      "a national holiday",
       "the right to self-govern — supreme power over a country or territory",
+      "a national holiday",
       "a form of protest",
     ],
-    correctAnswer: 2,
+    correctAnswer: 1,
     explanation: `'Sovereignty' is the supreme authority of a nation to govern itself — independence and self-rule.`
   },
   {
     id: 23,
     type: "vocabulary",
-    skill: "Figurative Language — Paradox",
-    question: `'The rebellion was both a defeat and a beginning.' This is a paradox because:`,
+    skill: "Word Relationships",
+    question: `Leader is to group as captain is to`,
     options: [
-      "Defeats and beginnings are the same thing",
-      "It contradicts itself but reveals a deeper truth — losing a battle can be the start of a larger movement",
-      "The author made an error",
-      "Rebellions always fail",
+      "harbour",
+      "ocean",
+      "ship",
+      "anchor",
     ],
-    correctAnswer: 1,
-    explanation: `A paradox seems contradictory but is true at a deeper level — Bogle's defeat sparked the chain of events leading to reform.`
+    correctAnswer: 2,
+    explanation: `A leader guides a group, just as a captain guides a ship.`
   },
   {
     id: 24,
     type: "vocabulary",
-    skill: "Etymology",
-    question: `The word 'justice' comes from the Latin 'jus' meaning 'law' or 'right.' This etymology suggests:`,
+    skill: "Prefix",
+    question: `The word "injustice" begins with the prefix "in-." What does "injustice" mean?`,
     options: [
-      "Justice is only about the law",
-      "Justice means following rules only",
-      "Justice concerns what is legally and morally right — it combines law with moral correctness",
-      "Justice is an ancient concept with no modern relevance",
+      "a fair decision",
+      "a written law",
+      "a peaceful protest",
+      "the absence of fairness or justice",
     ],
-    correctAnswer: 2,
-    explanation: `Understanding 'jus' reveals that justice combines legal and moral dimensions — it is about what is right, not just what is legal.`
+    correctAnswer: 3,
+    explanation: `The prefix "in-" can mean "not." Injustice therefore means a condition that is not fair or just.`
   },
   {
     id: 25,
     type: "vocabulary",
-    skill: "Academic Vocabulary",
-    question: `In academic writing, 'consequently' is used to:`,
+    skill: "Choosing the Best Word",
+    question: `Choose the best word to complete the sentence: "Paul Bogle showed great ______ when he stood against injustice."`,
     options: [
-      "introduce a contrasting idea",
-      "show that two ideas are unrelated",
-      "show that something is the direct result of what was described before",
-      "ask a question",
+      "courage",
+      "confusion",
+      "silence",
+      "carelessness",
     ],
-    correctAnswer: 2,
-    explanation: `'Consequently' introduces a result or consequence — it signals cause and effect in formal writing.`
+    correctAnswer: 0,
+    explanation: `"Courage" precisely describes the bravery needed to stand against injustice despite danger.`
   },
   {
     id: 26,
@@ -445,11 +446,11 @@ When the passage notes Jamaica's status changed from 'self-governing colony to a
     question: `Which word is a PROPER NOUN?`,
     options: [
       "court",
-      "rebellion",
       "Morant Bay",
+      "rebellion",
       "protest",
     ],
-    correctAnswer: 2,
+    correctAnswer: 1,
     explanation: `'Morant Bay' names a specific place — it is a proper noun and begins with capital letters.`
   },
   {
@@ -460,10 +461,10 @@ When the passage notes Jamaica's status changed from 'self-governing colony to a
     options: [
       "organised",
       "leader",
-      "the",
       "brave",
+      "the",
     ],
-    correctAnswer: 3,
+    correctAnswer: 2,
     explanation: `'Brave' describes what kind of leader — it is an adjective.`
   },
   {
@@ -472,111 +473,111 @@ When the passage notes Jamaica's status changed from 'self-governing colony to a
     skill: "Punctuation",
     question: `Which sentence is correctly punctuated?`,
     options: [
-      "Paul Bogle, a Baptist deacon, led the rebellion.",
       "Paul Bogle a Baptist deacon led the rebellion.",
       "Paul Bogle, a Baptist deacon led the rebellion.",
       "Paul Bogle a Baptist deacon, led the rebellion.",
+      "Paul Bogle, a Baptist deacon, led the rebellion.",
     ],
-    correctAnswer: 0,
+    correctAnswer: 3,
     explanation: `A non-essential phrase ('a Baptist deacon') is enclosed in commas on both sides.`
   },
   {
     id: 29,
     type: "grammar",
-    skill: "Passive Voice",
-    question: `Which sentence is in the PASSIVE VOICE?`,
+    skill: "Subject-Verb Agreement",
+    question: `Which sentence is written correctly?`,
     options: [
-      "Bogle organised the march to Morant Bay",
-      "Hundreds followed Bogle to the courthouse",
-      "Bogle was captured and executed by the colonial authorities",
-      "The rebellion began in December",
+      "The group of protesters was walking to Morant Bay.",
+      "The group of protesters were walking to Morant Bay.",
+      "The group of protesters walk to Morant Bay yesterday.",
+      "The group of protesters have walked to Morant Bay yesterday.",
     ],
-    correctAnswer: 2,
-    explanation: `Passive voice: subject (Bogle) receives the action (was captured/executed) performed by an agent.`
+    correctAnswer: 0,
+    explanation: `The subject "group" is singular, so it takes the singular verb "was."`
   },
   {
     id: 30,
     type: "grammar",
-    skill: "Reported Speech",
-    question: `Change to REPORTED SPEECH: 'We demand justice,' they said.`,
+    skill: "Quotation Marks",
+    question: `Which sentence uses quotation marks correctly?`,
     options: [
-      "They said that they demand justice",
-      "They said that we demanded justice",
-      "They said that they demanded justice",
-      "They demanded justice, they said",
+      `We deserve justice," the people declared."`,
+      `"We deserve justice," the people declared.`,
+      `"We deserve justice" the people declared.`,
+      `"We deserve justice, the people declared."`,
     ],
-    correctAnswer: 2,
-    explanation: `In reported speech, 'we' → 'they'; present tense shifts to past; 'demanded' replaces 'demand.'`
+    correctAnswer: 1,
+    explanation: `The spoken words are enclosed in quotation marks, and the comma appears inside the closing quotation mark before the speaker tag.`
   },
   {
     id: 31,
     type: "grammar",
-    skill: "Relative Clauses",
-    question: `Which sentence contains a RELATIVE CLAUSE?`,
+    skill: "Relative Pronouns",
+    question: `Which sentence uses a relative pronoun correctly?`,
     options: [
-      "Paul Bogle was a Baptist deacon",
-      "He led the rebellion",
-      "Paul Bogle, who was a Baptist deacon, led the Morant Bay Rebellion",
-      "He was executed",
+      "Paul Bogle, which led the protest, became a National Hero.",
+      "Paul Bogle, whom led the protest, became a National Hero.",
+      "Paul Bogle, who led the protest, became a National Hero.",
+      "Paul Bogle, whose led the protest, became a National Hero.",
     ],
     correctAnswer: 2,
-    explanation: `'Who was a Baptist deacon' is a relative clause — it gives extra information about Bogle using the relative pronoun 'who.'`
+    explanation: `"Who" correctly refers to a person and acts as the subject of the relative clause.`
   },
   {
     id: 32,
     type: "grammar",
-    skill: "Tense — Past Perfect",
-    question: `Which sentence uses the PAST PERFECT tense correctly?`,
+    skill: "Verb Tense",
+    question: `Which sentence keeps the verb tense consistent?`,
     options: [
-      "Before the trial began, Bogle was captured",
-      "Bogle had been captured before the trial began",
-      "Bogle captured before the trial",
-      "Bogle was capturing before the trial",
+      "The people marched to Morant Bay and demand justice.",
+      "The people march to Morant Bay and demanded justice.",
+      "The people will march to Morant Bay and demanded justice.",
+      "The people marched to Morant Bay and demanded justice.",
     ],
-    correctAnswer: 1,
-    explanation: `Past perfect (had + past participle) shows an action completed before another past event: 'had been captured' = happened before the trial.`
+    correctAnswer: 3,
+    explanation: `Both "marched" and "demanded" are in the past tense, so the sentence is consistent.`
   },
   {
     id: 33,
     type: "grammar",
-    skill: "Modal Verbs",
-    question: `'The colonial authorities should have listened to the grievances of ordinary people.' The modal 'should have' expresses:`,
+    skill: "Sentence Combining",
+    question: `Which choice best combines the ideas? "The protest began peacefully. It later became a rebellion."`,
     options: [
-      "ability in the past",
-      "certainty about the past",
-      "regret or criticism about a past action that did not happen",
-      "permission in the past",
+      "Although the protest began peacefully, it later became a rebellion.",
+      "The protest began peacefully, it later became a rebellion.",
+      "The protest began peacefully but later becoming a rebellion.",
+      "Although the protest began peacefully, but it later became a rebellion.",
     ],
-    correctAnswer: 2,
-    explanation: `'Should have + past participle' expresses regret or criticism — indicating something that was morally right but did not occur.`
+    correctAnswer: 0,
+    explanation: `"Although" correctly shows the contrast and joins the dependent and independent clauses without creating a run-on.`
   },
   {
     id: 34,
     type: "grammar",
-    skill: "Subjunctive",
-    question: `Which sentence uses the SUBJUNCTIVE mood?`,
+    skill: "Transitions",
+    question: `Which transition best completes the sentence? "Bogle was executed; ______, his struggle for justice continued to influence Jamaica."`,
     options: [
-      "If justice was available to all, there would be no need for protest",
-      "If justice were available to all, there would be no need for protest",
-      "Justice is available if you seek it",
-      "They demanded that justice is served",
+      "for example",
+      "however",
+      "meanwhile",
+      "therefore",
     ],
     correctAnswer: 1,
-    explanation: `The subjunctive uses 'were' (not 'was') in hypothetical conditions: 'If justice were available' (it is not — this is contrary to fact).`
+    explanation: `"However" shows the contrast between Bogle's death and the continued influence of his struggle.`
   },
   {
     id: 35,
     type: "grammar",
-    skill: "Cleft Sentence",
-    question: `Which is a CLEFT SENTENCE used to emphasise who led the rebellion?`,
+    skill: "Precise Word Choice",
+    question: `Which word most precisely completes the sentence? "The rebellion ______ the British government to examine conditions in Jamaica."`,
     options: [
-      "Paul Bogle led the rebellion in 1865",
-      "The rebellion of 1865 was led by Bogle",
-      "It was Paul Bogle who led the Morant Bay Rebellion in 1865",
-      "Bogle led it in 1865",
+      "made",
+      "did",
+      "forced",
+      "got",
     ],
     correctAnswer: 2,
-    explanation: `A cleft sentence uses 'It was... who/that...' to highlight one element. 'It was Paul Bogle who...' emphasises Bogle specifically.`
+    explanation: `"Forced" precisely shows that the rebellion created strong pressure for the government to respond.`
   },
   {
     id: 36,
@@ -586,10 +587,10 @@ When the passage notes Jamaica's status changed from 'self-governing colony to a
     options: [
       "Entertain with a fictional adventure",
       "Persuade readers that all rebellions are justified",
-      "Inform readers about Bogle's life, actions, and historical significance",
       "Describe what Jamaica looks like",
+      "Inform readers about Bogle's life, actions, and historical significance",
     ],
-    correctAnswer: 2,
+    correctAnswer: 3,
     explanation: `A biographical article's primary purpose is to inform readers about a person's life and significance.`
   },
   {
@@ -598,41 +599,43 @@ When the passage notes Jamaica's status changed from 'self-governing colony to a
     skill: "Evidence in Persuasive Writing",
     question: `Which type of evidence MOST strengthens a persuasive argument?`,
     options: [
+      "Specific verified facts, statistics, or expert opinion",
       "A personal opinion",
       "General knowledge",
-      "Specific verified facts, statistics, or expert opinion",
       "A story about the writer's own experience",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `Verified facts and expert opinions are the strongest evidence — they are objective and harder to dispute than personal opinion.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "PEE Analysis",
-    question: `In a PEE paragraph, after identifying a technique and quoting it, the EXPLANATION step requires:`,
+    skill: "Transitions",
+    question: `Which transition best connects these ideas? "Bogle was captured and executed. ______, his actions helped bring attention to injustice in Jamaica."`,
     options: [
-      "Copying the quote again",
-      "Identifying the next technique",
-      "Analysing WHAT the technique does and WHY it creates a specific effect on the reader",
-      "Writing a new paragraph",
+      "For example",
+      "Nevertheless",
+      "Similarly",
+      "First",
     ],
-    correctAnswer: 2,
-    explanation: `Explanation is the analytical layer — it unpacks HOW the technique works and WHAT effect it creates, which is the heart of literary analysis.`
+    correctAnswer: 1,
+    explanation: `"Nevertheless" shows that, despite Bogle's execution, his actions still had an important effect.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Evaluating Effectiveness",
-    question: `A student writes: 'The writer uses repetition to make the reader feel the urgency of the situation.' Is this complete analysis?`,
+    skill: "Relevance",
+    question: `Read the paragraph. Which sentence should be removed because it does not belong?
+
+(1) Paul Bogle is remembered for standing against injustice. (2) He led people from Stony Gut to Morant Bay in 1865. (3) Jamaica has many beautiful beaches and waterfalls. (4) His sacrifice later earned him recognition as a National Hero.`,
     options: [
-      "Yes — identifying technique and effect is complete",
-      "No — the student should also quote specific words from the text and evaluate whether the technique succeeds",
-      "Yes — naming the effect is enough",
-      "No — literary analysis never mentions effects",
+      "Sentence 1",
+      "Sentence 2",
+      "Sentence 3",
+      "Sentence 4",
     ],
-    correctAnswer: 1,
-    explanation: `Complete analysis requires: technique + quotation + effect + evaluation of success. Identifying technique and effect is a good start, but the quotation and evaluation are missing.`
+    correctAnswer: 2,
+    explanation: `Sentence 3 is about Jamaica's scenery and does not support the paragraph's focus on Paul Bogle and his legacy.`
   },
   {
     id: 40,
@@ -642,13 +645,40 @@ When the passage notes Jamaica's status changed from 'self-governing colony to a
     options: [
       "Paul Bogle is important in Jamaican history",
       "Some people think Paul Bogle was a hero",
-      "Paul Bogle deserves recognition as a National Hero because his courageous protest against injustice, though brutally suppressed, directly contributed to political reforms that improved the lives of ordinary Jamaicans",
       "Paul Bogle lived in the nineteenth century and led a rebellion",
+      "Paul Bogle deserves recognition as a National Hero because his courageous protest against injustice, though brutally suppressed, directly contributed to political reforms that improved the lives of ordinary Jamaicans",
     ],
-    correctAnswer: 2,
+    correctAnswer: 3,
     explanation: `A strong thesis makes a specific, arguable, supported claim. Option C names who, why, and what the consequences were — it is specific and arguable.`
   }
 ]
+
+const shuffleAnswerOptions = (questions: Question[]): Question[] => {
+  return questions.map((question) => {
+    const optionsWithOriginalIndex = question.options.map((option, index) => ({
+      option,
+      index,
+    }))
+
+    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
+        optionsWithOriginalIndex[j],
+        optionsWithOriginalIndex[i],
+      ]
+    }
+
+    const correctAnswer = optionsWithOriginalIndex.findIndex(
+      (item) => item.index === question.correctAnswer,
+    )
+
+    return {
+      ...question,
+      options: optionsWithOriginalIndex.map((item) => item.option),
+      correctAnswer,
+    }
+  })
+}
 
 const SECTION_CONFIG = [
   { type: "reading" as const,    label: "Reading Comprehension",   note: "literal, inferential, and analytical reading across all difficulty levels" },
@@ -664,8 +694,11 @@ export default function G5LaMix1MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]                 = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]               = useState(60 * 60)
+  const [randomizedQuestions, setRandomizedQuestions] = useState<Question[]>([])
+  const hasSavedResult = useRef(false)
 
-  const availableQuestions = isPremium ? g5LaMix1Questions : g5LaMix1Questions.slice(0, FREE_QUESTION_LIMIT)
+  const sourceQuestions = isPremium ? g5LaMix1Questions : g5LaMix1Questions.slice(0, FREE_QUESTION_LIMIT)
+  const availableQuestions = randomizedQuestions.length > 0 ? randomizedQuestions : sourceQuestions
   const totalQuestions = availableQuestions.length
 
   useEffect(() => {
@@ -688,27 +721,39 @@ export default function G5LaMix1MockTest() {
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
 
-  const handleSubmit = async () => {
+  useEffect(() => {
+    if (!showResults || !user?.id || hasSavedResult.current) return
+
+    hasSavedResult.current = true
+    void saveStudentTestResult({
+      parentId: user.id,
+      studentName: user?.childName ?? "Student",
+      grade: "grade5",
+      subject: "Literacy",
+      testName: "Mixed 1",
+      difficulty: "Mixed",
+      score: calcScore(),
+      totalQuestions,
+      percentage: scorePct(),
+      completedAt: new Date().toISOString(),
+    }).catch(() => {
+      hasSavedResult.current = false
+    })
+  }, [showResults, user?.id, user?.childName, totalQuestions, answers])
+
+  const startTest = () => {
+    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions)
+    setRandomizedQuestions(shuffledQuestions)
+    setAnswers(new Array(shuffledQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    hasSavedResult.current = false
+    setStarted(true)
+  }
+
+  const handleSubmit = () => {
     setShowResults(true)
-
-    if (!user?.id) return
-
-    try {
-      await saveStudentTestResult({
-        parentId: user.id,
-        studentName: user?.childName ?? "Student",
-        grade: "grade5",
-        subject: "Language Arts",
-        testName: "Mixed 1",
-        difficulty: "Mixed",
-        score: calcScore(),
-        totalQuestions,
-        percentage: scorePct(),
-        completedAt: new Date().toISOString(),
-      })
-    } catch (error) {
-      console.error("Failed to save test result:", error)
-    }
   }
 
   const getGrade = () => {
@@ -730,8 +775,13 @@ export default function G5LaMix1MockTest() {
   }
 
   const resetTest = () => {
-    setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setStarted(false)
+    setShowResults(false)
+    setCurrentQuestion(0)
+    setRandomizedQuestions([])
+    setAnswers(new Array(sourceQuestions.length).fill(null))
+    setTimeLeft(60 * 60)
+    hasSavedResult.current = false
   }
 
   const q = availableQuestions[currentQuestion]
@@ -784,7 +834,7 @@ export default function G5LaMix1MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-blue-600">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-blue-600">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-blue-600 py-6 text-lg hover:bg-blue-700">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-blue-600 py-6 text-lg hover:bg-blue-700">Start Test</Button>
           </CardContent>
         </Card>
       </main>
