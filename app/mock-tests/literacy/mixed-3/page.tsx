@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -27,6 +27,20 @@ interface Question {
   explanation: string
 }
 
+const P1 = `Bamboo is one of the most useful plants in the world. Although it often looks like a tree, bamboo is actually a type of grass. Some species can grow almost a metre in a single day, making bamboo one of the fastest-growing plants on Earth.
+
+Bamboo is strong, light, and flexible. These qualities allow it to bend in strong winds without breaking easily. For centuries, people in Jamaica and many other countries have used bamboo to make fences, baskets, furniture, musical instruments, and parts of houses. In some places, builders now use carefully treated bamboo for floors, walls, and roof supports.
+
+Bamboo may also help communities respond to environmental problems. Unlike a tree that may take many years to mature, bamboo can be harvested after a much shorter period. When it is cut correctly, the underground root system remains alive and sends up new shoots. This means farmers do not always need to replant the entire crop.
+
+As bamboo grows, it takes in carbon dioxide from the air. Carbon dioxide is one of the gases connected to climate change. Bamboo products can also replace some materials that require large amounts of energy to produce. Concrete and steel are extremely useful, but producing them releases significant amounts of pollution. Using bamboo in suitable situations may reduce some of that impact.
+
+However, bamboo is not a perfect solution for every building problem. Untreated bamboo can be damaged by insects, moisture, or rot. Builders must select mature poles, dry them properly, and protect them before use. Bamboo also behaves differently from concrete and steel, so safe construction requires trained workers and careful design.
+
+The strongest approach is not to claim that bamboo should replace every other material. Instead, builders and communities should study where bamboo works best. In a small shelter, garden structure, piece of furniture, or low-rise building, it may be an affordable and sustainable choice. In other situations, it may work best when combined with materials such as concrete, wood, or metal.
+
+Bamboo's real value lies in matching its strengths to the right purpose. It grows quickly, can be renewed, stores carbon, and has many practical uses. With knowledge, treatment, and good design, this familiar Jamaican plant may play an important role in building a more sustainable future.`
+
 const g5LaMix3Questions: Question[] = [
   {
     id: 1,
@@ -34,17 +48,17 @@ const g5LaMix3Questions: Question[] = [
     skill: "Main Idea",
     question: `Read the passage then answer the question.
 
-"Bamboo is one of the most versatile and remarkable plants on Earth. It grows faster than any other plant — some species can grow as much as a metre in a single day. It is stronger than many types of wood, yet flexible enough to bend without breaking in strong winds. In Jamaica, bamboo has been used for centuries in construction, crafts, and even as a musical instrument (the bamboo flute). Today, scientists and architects around the world are rediscovering bamboo as a sustainable building material that could help address both the housing crisis and climate change. Where concrete consumes enormous amounts of energy to produce, bamboo grows quickly, sequesters carbon, and can be harvested without killing the plant."
+${P1}
 
-What is the MAIN topic of this passage?`,
+What is the passage mainly about?`,
     options: [
-      "A minor fact about bamboo",
-      "Bamboo as a plant with no particular significance",
-      "Bamboo as a remarkable, versatile plant with properties that make it valuable for sustainable development",
-      "Bamboo farming techniques only",
+      "The useful qualities, environmental benefits, and limitations of bamboo",
+      "Why bamboo should replace every building material",
+      "How to grow bamboo only for decoration",
+      "Why concrete should no longer be used"
     ],
-    correctAnswer: 2,
-    explanation: `The passage covers bamboo's remarkable growth, strength, historical uses in Jamaica, and potential as a sustainable material — making its value the main topic.`
+    correctAnswer: 0,
+    explanation: `The passage presents bamboo's strengths, uses, environmental value, and limitations.`
   },
   {
     id: 2,
@@ -52,603 +66,632 @@ What is the MAIN topic of this passage?`,
     skill: "Detail",
     question: `Read the passage then answer the question.
 
-"Bamboo is one of the most versatile and remarkable plants on Earth. It grows faster than any other plant — some species can grow as much as a metre in a single day. It is stronger than many types of wood, yet flexible enough to bend without breaking in strong winds. In Jamaica, bamboo has been used for centuries in construction, crafts, and even as a musical instrument (the bamboo flute). Today, scientists and architects around the world are rediscovering bamboo as a sustainable building material that could help address both the housing crisis and climate change. Where concrete consumes enormous amounts of energy to produce, bamboo grows quickly, sequesters carbon, and can be harvested without killing the plant."
+${P1}
 
-According to the passage, how fast can some species of bamboo grow?`,
+What type of plant is bamboo?`,
     options: [
-      "A centimetre a day",
-      "Up to a metre a day",
-      "Ten centimetres a week",
-      "A metre a month",
+      "A tree",
+      "A grass",
+      "A vine",
+      "A shrub"
     ],
     correctAnswer: 1,
-    explanation: `The passage states 'some species can grow as much as a metre in a single day.'`
+    explanation: `The passage states that bamboo is actually a type of grass.`
   },
   {
     id: 3,
     type: "reading",
-    skill: "Vocabulary in Context",
+    skill: "Inference",
     question: `Read the passage then answer the question.
 
-"Bamboo is one of the most versatile and remarkable plants on Earth. It grows faster than any other plant — some species can grow as much as a metre in a single day. It is stronger than many types of wood, yet flexible enough to bend without breaking in strong winds. In Jamaica, bamboo has been used for centuries in construction, crafts, and even as a musical instrument (the bamboo flute). Today, scientists and architects around the world are rediscovering bamboo as a sustainable building material that could help address both the housing crisis and climate change. Where concrete consumes enormous amounts of energy to produce, bamboo grows quickly, sequesters carbon, and can be harvested without killing the plant."
+${P1}
 
-The word 'sequesters' in the passage most nearly means:`,
+Why is bamboo described as renewable?`,
     options: [
-      "releases",
-      "burns",
-      "stores and removes from the atmosphere",
-      "destroys",
+      "It produces metal underground.",
+      "It never needs water.",
+      "Its roots can remain alive and grow new shoots after harvesting.",
+      "It cannot be damaged by insects."
     ],
     correctAnswer: 2,
-    explanation: `'Sequesters carbon' means captures and stores carbon dioxide — removing it from the atmosphere. This is a key environmental benefit.`
+    explanation: `The underground root system can survive cutting and produce new growth.`
   },
   {
     id: 4,
     type: "reading",
-    skill: "Literal Comprehension",
+    skill: "Compare and Contrast",
     question: `Read the passage then answer the question.
 
-"Bamboo is one of the most versatile and remarkable plants on Earth. It grows faster than any other plant — some species can grow as much as a metre in a single day. It is stronger than many types of wood, yet flexible enough to bend without breaking in strong winds. In Jamaica, bamboo has been used for centuries in construction, crafts, and even as a musical instrument (the bamboo flute). Today, scientists and architects around the world are rediscovering bamboo as a sustainable building material that could help address both the housing crisis and climate change. Where concrete consumes enormous amounts of energy to produce, bamboo grows quickly, sequesters carbon, and can be harvested without killing the plant."
+${P1}
 
-Which of the following is NOT mentioned as a use of bamboo in Jamaica?`,
+How is bamboo different from many trees?`,
     options: [
-      "Construction",
-      "Crafts",
-      "The bamboo flute",
-      "Bamboo paper",
+      "Bamboo usually takes longer to mature.",
+      "Bamboo cannot be used for building.",
+      "Bamboo produces more steel.",
+      "Bamboo often grows much faster and can regrow from its roots."
     ],
     correctAnswer: 3,
-    explanation: `The passage mentions construction, crafts, and the bamboo flute as Jamaican uses — but not bamboo paper.`
+    explanation: `The passage contrasts bamboo's rapid growth and regrowth with the longer time many trees need.`
   },
   {
     id: 5,
     type: "reading",
-    skill: "Comparison",
+    skill: "Cause and Effect",
     question: `Read the passage then answer the question.
 
-"Bamboo is one of the most versatile and remarkable plants on Earth. It grows faster than any other plant — some species can grow as much as a metre in a single day. It is stronger than many types of wood, yet flexible enough to bend without breaking in strong winds. In Jamaica, bamboo has been used for centuries in construction, crafts, and even as a musical instrument (the bamboo flute). Today, scientists and architects around the world are rediscovering bamboo as a sustainable building material that could help address both the housing crisis and climate change. Where concrete consumes enormous amounts of energy to produce, bamboo grows quickly, sequesters carbon, and can be harvested without killing the plant."
+${P1}
 
-How does the passage contrast bamboo with concrete?`,
+Why must bamboo be treated before construction?`,
     options: [
-      "Bamboo is weaker and cheaper",
-      "Concrete is better for the environment",
-      "Bamboo grows quickly and sequesters carbon, whereas concrete requires enormous energy to produce",
-      "They are exactly the same in their environmental impact",
+      "To protect it from insects, moisture, and rot",
+      "To make it grow taller",
+      "To change it into concrete",
+      "To make it heavier than steel"
     ],
-    correctAnswer: 2,
-    explanation: `The passage directly contrasts the two: bamboo is renewably grown and carbon-sequestering; concrete is energy-intensive to produce.`
+    correctAnswer: 0,
+    explanation: `Treatment helps protect bamboo from damage and decay.`
   },
   {
     id: 6,
     type: "reading",
-    skill: "Inference",
+    skill: "Author's Purpose",
     question: `Read the passage then answer the question.
 
-"Bamboo is one of the most versatile and remarkable plants on Earth. It grows faster than any other plant — some species can grow as much as a metre in a single day. It is stronger than many types of wood, yet flexible enough to bend without breaking in strong winds. In Jamaica, bamboo has been used for centuries in construction, crafts, and even as a musical instrument (the bamboo flute). Today, scientists and architects around the world are rediscovering bamboo as a sustainable building material that could help address both the housing crisis and climate change. Where concrete consumes enormous amounts of energy to produce, bamboo grows quickly, sequesters carbon, and can be harvested without killing the plant."
+${P1}
 
-What does the phrase 'scientists and architects are rediscovering bamboo' suggest?`,
+Why does the author mention concrete and steel?`,
     options: [
-      "Bamboo is a new plant",
-      "Bamboo was unknown before this century",
-      "Bamboo's value has been overlooked and is now being appreciated again after a period of neglect",
-      "Bamboo was only recently imported to Jamaica",
+      "To show that they are completely useless",
+      "To compare their environmental impact with bamboo",
+      "To explain how to manufacture them",
+      "To prove bamboo is always stronger"
     ],
-    correctAnswer: 2,
-    explanation: `'Rediscovering' implies bamboo was known, then overlooked, and is now being valued again — particularly for sustainable construction.`
+    correctAnswer: 1,
+    explanation: `The comparison shows that bamboo may reduce environmental impact in suitable uses.`
   },
   {
     id: 7,
     type: "reading",
-    skill: "Author's Technique",
+    skill: "Drawing Conclusions",
     question: `Read the passage then answer the question.
 
-"Bamboo is one of the most versatile and remarkable plants on Earth. It grows faster than any other plant — some species can grow as much as a metre in a single day. It is stronger than many types of wood, yet flexible enough to bend without breaking in strong winds. In Jamaica, bamboo has been used for centuries in construction, crafts, and even as a musical instrument (the bamboo flute). Today, scientists and architects around the world are rediscovering bamboo as a sustainable building material that could help address both the housing crisis and climate change. Where concrete consumes enormous amounts of energy to produce, bamboo grows quickly, sequesters carbon, and can be harvested without killing the plant."
+${P1}
 
-Why does the author include the statistic that bamboo can grow 'a metre in a single day'?`,
+What can the reader conclude about the author's view of bamboo?`,
     options: [
-      "To suggest bamboo is out of control",
-      "To make the passage seem scientific",
-      "To immediately capture the reader's attention with a striking, concrete fact that demonstrates bamboo's exceptional nature",
-      "To explain why bamboo is dangerous",
+      "It is a perfect solution for every problem.",
+      "It should be used only for musical instruments.",
+      "It is valuable when used carefully and for suitable purposes.",
+      "It is too weak to be useful."
     ],
     correctAnswer: 2,
-    explanation: `A vivid statistic at the opening grabs attention and gives the reader a concrete, memorable image of bamboo's remarkable speed.`
+    explanation: `The author gives a balanced view, praising bamboo while explaining its limitations.`
   },
   {
     id: 8,
     type: "reading",
-    skill: "Author's Purpose",
+    skill: "Vocabulary in Context",
     question: `Read the passage then answer the question.
 
-"Bamboo is one of the most versatile and remarkable plants on Earth. It grows faster than any other plant — some species can grow as much as a metre in a single day. It is stronger than many types of wood, yet flexible enough to bend without breaking in strong winds. In Jamaica, bamboo has been used for centuries in construction, crafts, and even as a musical instrument (the bamboo flute). Today, scientists and architects around the world are rediscovering bamboo as a sustainable building material that could help address both the housing crisis and climate change. Where concrete consumes enormous amounts of energy to produce, bamboo grows quickly, sequesters carbon, and can be harvested without killing the plant."
+${P1}
 
-The MAIN purpose of this passage is to:`,
+What does “mature poles” mean in the passage?`,
     options: [
-      "Argue that concrete should be banned",
-      "Entertain readers with interesting plant facts",
-      "Inform readers about bamboo's properties while arguing for its potential as a sustainable solution to real global problems",
-      "Teach readers how to grow bamboo",
+      "Bamboo poles painted dark",
+      "Bamboo poles that are very short",
+      "Bamboo poles made from metal",
+      "Bamboo poles that are fully grown"
     ],
-    correctAnswer: 2,
-    explanation: `The passage informs (properties, uses) while building an argument (bamboo as a sustainable solution to housing and climate challenges).`
+    correctAnswer: 3,
+    explanation: `Mature means fully developed or grown.`
   },
   {
     id: 9,
     type: "reading",
-    skill: "Cause and Effect",
+    skill: "Evaluating Evidence",
     question: `Read the passage then answer the question.
 
-"Bamboo is one of the most versatile and remarkable plants on Earth. It grows faster than any other plant — some species can grow as much as a metre in a single day. It is stronger than many types of wood, yet flexible enough to bend without breaking in strong winds. In Jamaica, bamboo has been used for centuries in construction, crafts, and even as a musical instrument (the bamboo flute). Today, scientists and architects around the world are rediscovering bamboo as a sustainable building material that could help address both the housing crisis and climate change. Where concrete consumes enormous amounts of energy to produce, bamboo grows quickly, sequesters carbon, and can be harvested without killing the plant."
+${P1}
 
-According to the passage, WHY is bamboo a good material for addressing climate change?`,
+Which detail best supports the idea that bamboo can be sustainable?`,
     options: [
-      "It is very colourful",
-      "It grows in tropical regions",
-      "It can be harvested without killing the plant, grows quickly, and sequesters carbon — unlike energy-intensive concrete",
-      "It is cheaper than other materials",
+      "Its roots can produce new shoots after harvesting.",
+      "It is green in colour.",
+      "It is used for flutes.",
+      "It bends in strong winds."
     ],
-    correctAnswer: 2,
-    explanation: `The passage links bamboo's environmental benefits directly to climate change solutions: fast growth, carbon sequestration, and renewable harvesting.`
+    correctAnswer: 0,
+    explanation: `Regrowth after harvesting directly supports sustainability.`
   },
   {
     id: 10,
     type: "reading",
-    skill: "Tone",
+    skill: "Prediction",
     question: `Read the passage then answer the question.
 
-"Bamboo is one of the most versatile and remarkable plants on Earth. It grows faster than any other plant — some species can grow as much as a metre in a single day. It is stronger than many types of wood, yet flexible enough to bend without breaking in strong winds. In Jamaica, bamboo has been used for centuries in construction, crafts, and even as a musical instrument (the bamboo flute). Today, scientists and architects around the world are rediscovering bamboo as a sustainable building material that could help address both the housing crisis and climate change. Where concrete consumes enormous amounts of energy to produce, bamboo grows quickly, sequesters carbon, and can be harvested without killing the plant."
+${P1}
 
-The tone of this passage is BEST described as:`,
+What would likely happen if builders used untreated bamboo in a damp place?`,
     options: [
-      "Dismissive of traditional building materials",
-      "Purely objective with no opinion",
-      "Enthusiastically informative — the writer clearly believes in bamboo's potential and wants to persuade readers of its significance",
-      "Alarmed and fearful about the housing crisis",
+      "It would become stronger than steel.",
+      "It could be damaged by moisture or rot.",
+      "It would grow new leaves indoors.",
+      "It would produce electricity."
     ],
-    correctAnswer: 2,
-    explanation: `The writer's admiration for bamboo ('remarkable,' 'astonishing') and the case built for its potential shows an enthusiastic, informative tone with a persuasive edge.`
+    correctAnswer: 1,
+    explanation: `The passage warns that untreated bamboo can be damaged by moisture and rot.`
   },
   {
     id: 11,
     type: "reading",
-    skill: "Critical Reading",
+    skill: "Tone",
     question: `Read the passage then answer the question.
 
-"Bamboo is one of the most versatile and remarkable plants on Earth. It grows faster than any other plant — some species can grow as much as a metre in a single day. It is stronger than many types of wood, yet flexible enough to bend without breaking in strong winds. In Jamaica, bamboo has been used for centuries in construction, crafts, and even as a musical instrument (the bamboo flute). Today, scientists and architects around the world are rediscovering bamboo as a sustainable building material that could help address both the housing crisis and climate change. Where concrete consumes enormous amounts of energy to produce, bamboo grows quickly, sequesters carbon, and can be harvested without killing the plant."
+${P1}
 
-A sceptical reader might challenge the passage by asking which question?`,
+Which word best describes the tone of the passage?`,
     options: [
-      "Is bamboo really a plant?",
-      "Is bamboo available in Jamaica?",
-      "Does bamboo actually perform as well as concrete in all building contexts, or are there limitations not mentioned here?",
-      "Is concrete used in Jamaica?",
+      "Sarcastic",
+      "Fearful",
+      "Balanced",
+      "Careless"
     ],
     correctAnswer: 2,
-    explanation: `Critical reading questions the limits of claims — bamboo may not be superior in all conditions. The passage does not acknowledge any weaknesses.`
+    explanation: `The author presents both advantages and limitations.`
   },
   {
     id: 12,
     type: "reading",
-    skill: "Theme",
+    skill: "Text Structure",
     question: `Read the passage then answer the question.
 
-"Bamboo is one of the most versatile and remarkable plants on Earth. It grows faster than any other plant — some species can grow as much as a metre in a single day. It is stronger than many types of wood, yet flexible enough to bend without breaking in strong winds. In Jamaica, bamboo has been used for centuries in construction, crafts, and even as a musical instrument (the bamboo flute). Today, scientists and architects around the world are rediscovering bamboo as a sustainable building material that could help address both the housing crisis and climate change. Where concrete consumes enormous amounts of energy to produce, bamboo grows quickly, sequesters carbon, and can be harvested without killing the plant."
+${P1}
 
-The CENTRAL theme of this passage is:`,
+How is the passage mainly organised?`,
     options: [
-      "The history of construction in Jamaica",
-      "Climate science and its implications",
-      "Nature provides sustainable solutions to modern problems — if we look carefully at what is already around us",
-      "Bamboo is better than all other plants",
+      "It gives a fictional story about one builder.",
+      "It lists instructions without reasons.",
+      "It compares only two musical instruments.",
+      "It explains bamboo’s features, benefits, limitations, and best uses."
     ],
-    correctAnswer: 2,
-    explanation: `The passage uses bamboo as a case study for a broader idea: natural, renewable materials can address modern challenges in ways that industrial materials cannot.`
+    correctAnswer: 3,
+    explanation: `The passage moves from description to benefits, limits, and appropriate uses.`
   },
   {
     id: 13,
     type: "reading",
-    skill: "Figurative Language",
+    skill: "Fact and Opinion",
     question: `Read the passage then answer the question.
 
-"Bamboo is one of the most versatile and remarkable plants on Earth. It grows faster than any other plant — some species can grow as much as a metre in a single day. It is stronger than many types of wood, yet flexible enough to bend without breaking in strong winds. In Jamaica, bamboo has been used for centuries in construction, crafts, and even as a musical instrument (the bamboo flute). Today, scientists and architects around the world are rediscovering bamboo as a sustainable building material that could help address both the housing crisis and climate change. Where concrete consumes enormous amounts of energy to produce, bamboo grows quickly, sequesters carbon, and can be harvested without killing the plant."
+${P1}
 
-'Stronger than many types of wood, yet flexible enough to bend without breaking in strong winds.' What quality does this suggest bamboo has?`,
+Which statement is an opinion or recommendation?`,
     options: [
-      "Weakness",
-      "Brittle rigidity",
-      "Resilience — strength combined with adaptability, able to withstand force without snapping",
-      "Only physical strength",
+      "Builders should study where bamboo works best.",
+      "Bamboo is a type of grass.",
+      "Some bamboo species grow rapidly.",
+      "Untreated bamboo can be damaged by moisture."
     ],
-    correctAnswer: 2,
-    explanation: `The combination of strength and flexibility defines resilience — the ability to withstand force through adaptation rather than rigid resistance.`
+    correctAnswer: 0,
+    explanation: `The word should signals a recommendation.`
   },
   {
     id: 14,
     type: "reading",
-    skill: "Summarise",
+    skill: "Synthesis",
     question: `Read the passage then answer the question.
 
-"Bamboo is one of the most versatile and remarkable plants on Earth. It grows faster than any other plant — some species can grow as much as a metre in a single day. It is stronger than many types of wood, yet flexible enough to bend without breaking in strong winds. In Jamaica, bamboo has been used for centuries in construction, crafts, and even as a musical instrument (the bamboo flute). Today, scientists and architects around the world are rediscovering bamboo as a sustainable building material that could help address both the housing crisis and climate change. Where concrete consumes enormous amounts of energy to produce, bamboo grows quickly, sequesters carbon, and can be harvested without killing the plant."
+${P1}
 
-Which BEST summarises this passage?`,
+Which statement best combines two major ideas from the passage?`,
     options: [
-      "Bamboo is a fast-growing plant",
-      "Bamboo has been used in Jamaica for crafts",
-      "Bamboo is a remarkable, fast-growing material with great strength and environmental benefits that make it a potential solution to both housing and climate challenges",
-      "Bamboo is better than concrete for all purposes",
+      "Bamboo grows quickly, so it should replace all concrete.",
+      "Bamboo is renewable, but safe use requires treatment and good design.",
+      "Bamboo is useful only in Jamaica.",
+      "Bamboo needs no preparation before use."
     ],
-    correctAnswer: 2,
-    explanation: `This captures bamboo's key properties (fast growth, strength, environmental benefit) and the argument about its potential — a complete summary.`
+    correctAnswer: 1,
+    explanation: `This choice combines the environmental benefit with the practical caution.`
   },
   {
     id: 15,
     type: "reading",
-    skill: "Implied Meaning",
+    skill: "Summary",
     question: `Read the passage then answer the question.
 
-"Bamboo is one of the most versatile and remarkable plants on Earth. It grows faster than any other plant — some species can grow as much as a metre in a single day. It is stronger than many types of wood, yet flexible enough to bend without breaking in strong winds. In Jamaica, bamboo has been used for centuries in construction, crafts, and even as a musical instrument (the bamboo flute). Today, scientists and architects around the world are rediscovering bamboo as a sustainable building material that could help address both the housing crisis and climate change. Where concrete consumes enormous amounts of energy to produce, bamboo grows quickly, sequesters carbon, and can be harvested without killing the plant."
+${P1}
 
-When the passage says bamboo 'can be harvested without killing the plant,' it implies:`,
+Which sentence best summarises the passage?`,
     options: [
-      "Bamboo is not really a plant",
-      "Harvesting trees and other materials kills them — bamboo offers a genuinely renewable alternative",
-      "Bamboo grows back immediately after harvesting",
-      "Bamboo harvesting is too difficult",
+      "Bamboo is only useful for fences.",
+      "Concrete and steel should be banned.",
+      "Bamboo is fast-growing and useful, but it must be properly treated and matched to suitable purposes.",
+      "Bamboo has no weaknesses."
     ],
-    correctAnswer: 1,
-    explanation: `The implication is that most building materials (timber, concrete raw materials) involve destructive extraction — bamboo stands apart as truly renewable.`
+    correctAnswer: 2,
+    explanation: `This summary captures the passage's central balanced message.`
   },
   {
     id: 16,
     type: "vocabulary",
-    skill: "Synonyms",
-    question: `Which word is a SYNONYM for 'durable'?`,
+    skill: "Synonym",
+    question: `Which word is closest in meaning to “flexible”?`,
     options: [
+      "rigid",
       "fragile",
-      "delicate",
-      "weak",
-      "long-lasting",
+      "heavy",
+      "bendable"
     ],
     correctAnswer: 3,
-    explanation: `'Long-lasting' means able to withstand use over time — a synonym for 'durable.'`
+    explanation: `Flexible means able to bend without breaking.`
   },
   {
     id: 17,
     type: "vocabulary",
-    skill: "Antonyms",
-    question: `The ANTONYM of 'flexible' is:`,
+    skill: "Antonym",
+    question: `Which word is the opposite of “mature”?`,
     options: [
-      "adaptable",
-      "rigid",
-      "elastic",
-      "bendable",
+      "young",
+      "fully grown",
+      "strong",
+      "treated"
     ],
-    correctAnswer: 1,
-    explanation: `'Rigid' means stiff and unable to bend or adapt — the opposite of 'flexible.'`
+    correctAnswer: 0,
+    explanation: `Young is the opposite of mature.`
   },
   {
     id: 18,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `The building material was highly SUSTAINABLE — it could be produced indefinitely without depleting natural resources. 'Sustainable' means:`,
+    skill: "Prefix",
+    question: `What does the prefix “re-” mean in “replant”?`,
     options: [
-      "expensive and rare",
-      "fast to produce",
-      "able to be maintained without causing permanent harm to the environment",
-      "very strong and durable",
+      "before",
+      "again",
+      "without",
+      "under"
     ],
-    correctAnswer: 2,
-    explanation: `'Sustainable' describes something that can continue without exhausting resources or causing lasting damage.`
+    correctAnswer: 1,
+    explanation: `Replant means to plant again.`
   },
   {
     id: 19,
     type: "vocabulary",
-    skill: "Idiom",
-    question: `'We should strike while the iron is hot.' This idiom means:`,
+    skill: "Suffix",
+    question: `What does the suffix “-able” suggest in “renewable”?`,
     options: [
-      "Blacksmiths work quickly",
-      "Act immediately while conditions are favourable",
-      "Iron is dangerous when heated",
-      "Wait for the right season",
+      "full of",
+      "without",
+      "capable of",
+      "related to colour"
     ],
-    correctAnswer: 1,
-    explanation: `'Strike while the iron is hot' advises acting at the right moment, when conditions are most favourable for success.`
+    correctAnswer: 2,
+    explanation: `Renewable means capable of being renewed.`
   },
   {
     id: 20,
     type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'Bamboo bends in the storm but never breaks.' What quality does this image suggest?`,
+    skill: "Context Clues",
+    question: `In the passage, “suitable situations” means situations that are`,
     options: [
-      "Bamboo is weak and easily damaged",
-      "Bamboo is rigid and cannot move",
-      "Resilience — the ability to adapt to pressure without being destroyed",
-      "Bamboo is not useful as a material",
+      "impossible to understand",
+      "dangerous in every case",
+      "very expensive",
+      "appropriate for the purpose"
     ],
-    correctAnswer: 2,
-    explanation: `Bending without breaking is a classic image of resilience — strength through flexibility rather than rigid resistance.`
+    correctAnswer: 3,
+    explanation: `Suitable means appropriate or fitting.`
   },
   {
     id: 21,
     type: "vocabulary",
-    skill: "Connotation",
-    question: `The word 'ancient' can be used positively or negatively. Which sentence uses it POSITIVELY?`,
+    skill: "Multiple Meaning",
+    question: `Which sentence uses “shoots” as it is used in the passage?`,
     options: [
-      "The ancient, crumbling building was an eyesore",
-      "The ancient traditions of the community carried centuries of wisdom",
-      "The ancient road was impossible to drive on",
-      "Their ancient equipment could not compete with modern technology",
+      "New green shoots appeared after the rain.",
+      "The player shoots the ball.",
+      "The camera shoots a video.",
+      "The hunter shoots at a target."
     ],
-    correctAnswer: 1,
-    explanation: `'Ancient traditions carrying wisdom' values age — it is a positive connotation suggesting depth and accumulated knowledge.`
+    correctAnswer: 0,
+    explanation: `In the passage, shoots are new plant growth.`
   },
   {
     id: 22,
     type: "vocabulary",
-    skill: "Word Meaning",
-    question: `The word 'versatile' means:`,
+    skill: "Word Relationships",
+    question: `Bamboo is to pole as cotton is to`,
     options: [
-      "expensive and rare",
-      "able to be used in many different ways",
-      "extremely strong",
-      "quick to grow",
+      "stone",
+      "fabric",
+      "metal",
+      "glass"
     ],
     correctAnswer: 1,
-    explanation: `'Versatile' describes something capable of doing or being used for many different things — multi-purpose.`
+    explanation: `Bamboo can be made into poles, while cotton can be made into fabric.`
   },
   {
     id: 23,
     type: "vocabulary",
-    skill: "Figurative Language — Symbolism",
-    question: `In environmental writing, the destruction of a forest is often used as a symbol for:`,
+    skill: "Replacing a Word",
+    question: `Which phrase best replaces “significant amounts”?`,
     options: [
-      "economic development",
-      "political freedom",
-      "the loss of natural heritage and the consequences of human short-sightedness",
-      "ancient history",
+      "very small amounts",
+      "unknown amounts",
+      "important or large amounts",
+      "equal amounts"
     ],
     correctAnswer: 2,
-    explanation: `Destroyed forests symbolise the cost of prioritising short-term gain over long-term environmental health — a powerful symbol of loss.`
+    explanation: `Significant means considerable or important in size.`
   },
   {
     id: 24,
     type: "vocabulary",
-    skill: "Etymology",
-    question: `The word 'ecology' comes from the Greek 'oikos' (house) and 'logos' (study). This etymology tells us:`,
+    skill: "Academic Vocabulary",
+    question: `What does “sustainable” mean?`,
     options: [
-      "Ecology is about household chores",
-      "Ecology is the study of the natural home — the environment as a living system",
-      "Ecology is only relevant to scientists",
-      "Logos means writing",
+      "designed to break quickly",
+      "made only from plastic",
+      "too costly to use",
+      "able to continue without causing serious long-term harm"
     ],
-    correctAnswer: 1,
-    explanation: `'Oikos' = home/house. Ecology literally means the study of our natural home — the environment as a system of interrelated parts.`
+    correctAnswer: 3,
+    explanation: `Sustainable practices can continue while limiting long-term environmental harm.`
   },
   {
     id: 25,
     type: "vocabulary",
-    skill: "Academic Vocabulary",
-    question: `In academic writing, 'nevertheless' is used to:`,
+    skill: "Precise Word Choice",
+    question: `Which word best completes the sentence? “Workers must _____ the bamboo before using it outdoors.”`,
     options: [
-      "add a supporting point",
-      "show cause and effect",
-      "introduce a contrasting idea despite what was just said",
-      "ask a question",
+      "treat",
+      "ignore",
+      "scatter",
+      "erase"
     ],
-    correctAnswer: 2,
-    explanation: `'Nevertheless' introduces a contrast or qualification — 'despite what I just said, consider this opposing point.'`
+    correctAnswer: 0,
+    explanation: `Treat precisely describes preparing bamboo to resist damage.`
   },
   {
     id: 26,
     type: "grammar",
-    skill: "Nouns",
-    question: `Which sentence uses a COLLECTIVE NOUN correctly?`,
+    skill: "Subject-Verb Agreement",
+    question: `Which sentence is written correctly?`,
     options: [
-      "A flock of birds migrate south each year",
-      "The birds flock was flying south",
-      "Flock birds were flying south",
-      "A flock migrate south",
+      "A bundle of bamboo poles are beside the shed.",
+      "A bundle of bamboo poles is beside the shed.",
+      "A bundle of bamboo poles were beside the shed.",
+      "A bundle of bamboo poles be beside the shed."
     ],
-    correctAnswer: 0,
-    explanation: `'A flock of birds' correctly uses the collective noun. Note: 'A flock... migrates' (singular) is standard, but 'migrate' is accepted in some dialects.`
+    correctAnswer: 1,
+    explanation: `The subject bundle is singular, so the verb is is correct.`
   },
   {
     id: 27,
     type: "grammar",
-    skill: "Comparative Adjectives",
-    question: `Which correctly uses the COMPARATIVE form?`,
+    skill: "Pronouns",
+    question: `Which sentence uses the pronoun correctly?`,
     options: [
-      "Bamboo is more stronger than wood",
-      "Bamboo is strongest than wood",
-      "Bamboo is stronger than many types of wood",
-      "Bamboo is more strong than wood",
+      "Me and Ravi carried the poles.",
+      "Him and Ravi carried the poles.",
+      "Ravi and I carried the poles.",
+      "Ravi gave I a rope."
     ],
     correctAnswer: 2,
-    explanation: `For short adjectives like 'strong', add '-er' for comparison. 'Stronger than' is correct.`
+    explanation: `I is the correct subject pronoun.`
   },
   {
     id: 28,
     type: "grammar",
-    skill: "Punctuation — Colon",
-    question: `Which sentence correctly uses a COLON?`,
+    skill: "Verb Tense",
+    question: `Which sentence keeps the verb tense consistent?`,
     options: [
-      "Bamboo has many uses: construction, crafts, and music",
-      "Bamboo has: many uses including construction",
-      "Bamboo: is used in construction, crafts, and music",
-      "Bamboo has many: uses in Jamaica",
+      "The workers cut the bamboo and dry it.",
+      "The workers cut the bamboo and will dried it.",
+      "The workers cutting the bamboo and dried it.",
+      "The workers cut the bamboo and dried it."
     ],
-    correctAnswer: 0,
-    explanation: `A colon introduces a list or explanation after a complete clause. Option A does this correctly.`
+    correctAnswer: 3,
+    explanation: `Cut and dried are both past tense.`
   },
   {
     id: 29,
     type: "grammar",
-    skill: "Passive Voice",
-    question: `Which sentence correctly uses the PASSIVE VOICE in the present perfect tense?`,
+    skill: "Punctuation",
+    question: `Which sentence is punctuated correctly?`,
     options: [
-      "Scientists discovered bamboo's benefits",
-      "Scientists have discovered bamboo's benefits",
-      "Bamboo's benefits have been discovered by scientists",
-      "Scientists discovering bamboo's benefits",
+      "Before using the bamboo, the workers dried it.",
+      "Before using the bamboo the workers dried it.",
+      "Before, using the bamboo the workers dried it.",
+      "Before using, the bamboo, the workers dried it."
     ],
-    correctAnswer: 2,
-    explanation: `Present perfect passive: have/has been + past participle. 'Have been discovered by scientists' is correct.`
+    correctAnswer: 0,
+    explanation: `A comma follows the introductory phrase.`
   },
   {
     id: 30,
     type: "grammar",
-    skill: "Conditional — Second",
-    question: `Which is a SECOND CONDITIONAL sentence?`,
+    skill: "Quotation Marks",
+    question: `Which sentence uses quotation marks correctly?`,
     options: [
-      "If we use bamboo, we will reduce emissions",
-      "If we used bamboo more, we would reduce emissions significantly",
-      "We used bamboo to reduce emissions",
-      "If we had used bamboo, we would have reduced emissions",
+      "\"Bamboo is surprisingly strong\" the builder said.",
+      "\"Bamboo is surprisingly strong,\" the builder said.",
+      "Bamboo is surprisingly strong,\" the builder said.",
+      "\"Bamboo is surprisingly strong, the builder said.\""
     ],
     correctAnswer: 1,
-    explanation: `Second conditional: if + past simple, would + infinitive. Used for hypothetical or unlikely situations.`
+    explanation: `The quotation marks and comma are correctly placed.`
   },
   {
     id: 31,
     type: "grammar",
-    skill: "Relative Clauses",
-    question: `Which correctly uses a NON-DEFINING relative clause?`,
+    skill: "Relative Pronouns",
+    question: `Which sentence uses a relative pronoun correctly?`,
     options: [
-      "The bamboo that grows in Jamaica is used for construction",
-      "Bamboo which is versatile is used widely",
-      "Bamboo, which can grow a metre a day, is one of the fastest-growing plants on Earth",
-      "The bamboo growing in the garden is tall",
+      "The house who used bamboo was cool.",
+      "The builder which designed the wall was skilled.",
+      "The shelter that used treated bamboo remained strong.",
+      "The pole who cracked was replaced."
     ],
     correctAnswer: 2,
-    explanation: `A non-defining relative clause adds non-essential information, enclosed in commas. 'Which can grow a metre a day' is extra information — the sentence makes sense without it.`
+    explanation: `That correctly introduces a clause describing the shelter.`
   },
   {
     id: 32,
     type: "grammar",
-    skill: "Dangling Modifiers",
-    question: `Identify the DANGLING MODIFIER: 'Growing at extraordinary speed, the engineers used bamboo to build bridges.'`,
+    skill: "Sentence Combining",
+    question: `Which sentence best combines the ideas? “Bamboo is light. Bamboo is strong.”`,
     options: [
-      "Growing at extraordinary speed",
-      "the engineers",
-      "used bamboo",
-      "to build bridges",
+      "Bamboo is light, it is strong.",
+      "Bamboo light and strong.",
+      "Because bamboo is light, but strong.",
+      "Bamboo is both light and strong."
     ],
-    correctAnswer: 0,
-    explanation: `'Growing at extraordinary speed' should describe bamboo, not the engineers. This is a dangling modifier — the subject it modifies (bamboo) is missing from the main clause.`
+    correctAnswer: 3,
+    explanation: `Both...and combines the related qualities clearly.`
   },
   {
     id: 33,
     type: "grammar",
-    skill: "Cleft Sentences",
-    question: `Which is a CLEFT SENTENCE emphasising the location?`,
+    skill: "Run-on Correction",
+    question: `Which sentence correctly repairs the run-on? “The bamboo was untreated it began to rot.”`,
     options: [
-      "Bamboo grows very fast in tropical regions",
-      "It is in tropical regions that bamboo grows most rapidly",
-      "Tropical regions have fast-growing bamboo",
-      "Bamboo, which grows rapidly, is found in tropical regions",
+      "The bamboo was untreated, so it began to rot.",
+      "The bamboo was untreated, it began to rot.",
+      "The bamboo untreated and began to rot.",
+      "Being untreated it began rot."
     ],
-    correctAnswer: 1,
-    explanation: `'It is in tropical regions that...' is a cleft structure emphasising the location — the prepositional phrase is highlighted.`
+    correctAnswer: 0,
+    explanation: `The comma and conjunction so correctly join the clauses.`
   },
   {
     id: 34,
     type: "grammar",
-    skill: "Subjunctive",
-    question: `Which correctly uses the SUBJUNCTIVE?`,
+    skill: "Transitions",
+    question: `Which transition best completes the sentence? “Bamboo grows quickly; _____, it can be harvested sooner than many trees.”`,
     options: [
-      "It is vital that everyone knows about bamboo",
-      "It is vital that everyone know about bamboo",
-      "Everyone should know about bamboo",
-      "Knowing about bamboo is vital",
+      "however",
+      "therefore",
+      "meanwhile",
+      "for example"
     ],
     correctAnswer: 1,
-    explanation: `The subjunctive uses the base form of the verb after expressions of necessity: 'It is vital that everyone KNOW' (not 'knows').`
+    explanation: `Therefore shows the result of bamboo’s rapid growth.`
   },
   {
     id: 35,
     type: "grammar",
-    skill: "Cohesive Devices",
-    question: `Which sentence uses a COHESIVE DEVICE to link ideas?`,
+    skill: "Precise Word Choice",
+    question: `Which verb is most precise? “Engineers _____ the bamboo structure before people used it.”`,
     options: [
-      "Bamboo grows quickly. It is very strong.",
-      "Bamboo grows quickly. Bamboo is very strong.",
-      "Bamboo grows quickly; moreover, it is among the strongest natural materials available.",
-      "Bamboo is strong. Bamboo grows fast.",
+      "looked",
+      "did",
+      "tested",
+      "made"
     ],
     correctAnswer: 2,
-    explanation: `'Moreover' is a conjunctive adverb that adds a further supporting point — it creates cohesion by explicitly connecting and relating the two clauses.`
+    explanation: `Tested precisely describes checking the structure’s safety and strength.`
   },
   {
     id: 36,
     type: "writing",
-    skill: "Informative Writing",
-    question: `An informative leaflet about bamboo should include:`,
+    skill: "Strong Introduction",
+    question: `Which is the strongest introduction for a paragraph about bamboo construction?`,
     options: [
-      "Only the writer's opinions about bamboo",
-      "Fiction stories about bamboo forests",
-      "Accurate factual information clearly organised, with headings, to educate readers about bamboo's properties and uses",
-      "As much technical language as possible",
+      "Bamboo is a plant.",
+      "I am going to write about bamboo.",
+      "Many things are made from plants.",
+      "Fast-growing, strong, and renewable, bamboo can be a valuable building material when it is prepared correctly."
     ],
-    correctAnswer: 2,
-    explanation: `Informative writing prioritises accurate, well-organised facts — headings help readers navigate and find information quickly.`
+    correctAnswer: 3,
+    explanation: `The sentence introduces the topic clearly and previews the main idea.`
   },
   {
     id: 37,
     type: "writing",
-    skill: "Descriptive Language",
-    question: `Which sentence uses MOST effective descriptive language?`,
+    skill: "Supporting Detail",
+    question: `Which detail best supports the topic sentence “Bamboo can be environmentally friendly”?`,
     options: [
-      "Bamboo grows quickly",
-      "Bamboo is tall and green",
-      "Shooting upward with extraordinary speed, bamboo rises from the earth like a living tower — patient, flexible, and astonishing",
-      "Bamboo is a type of plant",
+      "It can regrow from its roots after careful harvesting.",
+      "Some bamboo poles are green.",
+      "Bamboo flutes make music.",
+      "Many fences are tall."
     ],
-    correctAnswer: 2,
-    explanation: `Precise verbs ('shooting,' 'rises'), a simile ('like a living tower'), and adjectives ('patient, flexible, astonishing') create a vivid, dynamic description.`
+    correctAnswer: 0,
+    explanation: `Regrowth after harvesting directly supports environmental friendliness.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "Extended Argument",
-    question: `When building a SUSTAINED argument over several paragraphs, a writer should:`,
+    skill: "Transitions",
+    question: `Which transition best adds a contrasting idea? “Bamboo grows quickly; _____, it still requires careful treatment before construction.”`,
     options: [
-      "Start a new argument in each paragraph",
-      "Use the same evidence repeatedly",
-      "Ensure each paragraph adds a new, distinct point that advances the overall argument, while linking back to the thesis",
-      "Write very short paragraphs with no evidence",
+      "furthermore",
+      "however",
+      "therefore",
+      "for example"
     ],
-    correctAnswer: 2,
-    explanation: `An extended argument progresses — each paragraph adds something new while the whole remains unified by the central thesis.`
+    correctAnswer: 1,
+    explanation: `However introduces a contrast.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Rhetorical Devices",
-    question: `'If bamboo can hold up a house, why can we not trust it to hold up our future?' This rhetorical question:`,
+    skill: "Relevance",
+    question: `Which sentence should be removed?
+
+(1) Bamboo can be used in furniture and small buildings. (2) Proper drying helps protect it from rot. (3) Sea turtles return to beaches to lay eggs. (4) Trained builders must understand how bamboo behaves.`,
     options: [
-      "Asks for a literal answer about engineering",
-      "Has no persuasive purpose",
-      "Engages readers' reasoning and creates a sense of urgency — challenging them to question their own assumptions about sustainable materials",
-      "Is grammatically incorrect",
+      "Sentence 1",
+      "Sentence 2",
+      "Sentence 3",
+      "Sentence 4"
     ],
     correctAnswer: 2,
-    explanation: `The rhetorical question invites readers to reason alongside the writer — it creates engagement and challenges a sceptical assumption.`
+    explanation: `Sentence 3 is unrelated to bamboo construction.`
   },
   {
     id: 40,
     type: "writing",
-    skill: "Literary Analysis",
-    question: `A student writes: 'The writer uses the metaphor of bamboo bending without breaking to argue that resilience is more powerful than rigid strength.' Evaluate this analysis.`,
+    skill: "Strong Conclusion",
+    question: `Which is the strongest conclusion for an essay about bamboo?`,
     options: [
-      "It is incorrect — bamboo is not a metaphor",
-      "It is complete and sophisticated — it identifies the technique, explains the argument it carries, and connects it to a broader idea",
-      "It is too long",
-      "It needs more quotations",
+      "That is all about bamboo.",
+      "Bamboo is green.",
+      "Everyone must build only with bamboo.",
+      "When communities match bamboo’s strengths to the right purpose and prepare it carefully, this familiar plant can support a more sustainable future."
     ],
-    correctAnswer: 1,
-    explanation: `This analysis correctly identifies the technique (metaphor), explains its meaning (bending = adapting), and draws a conclusion about the argument it supports — this is strong literary analysis.`
+    correctAnswer: 3,
+    explanation: `The sentence restates the balanced central idea in a memorable way.`
   }
-]
+];
+
+const shuffleAnswerOptions = (questions: Question[]): Question[] => {
+  return questions.map((question) => {
+    const optionsWithOriginalIndex = question.options.map((option, index) => ({
+      option,
+      index,
+    }))
+
+    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
+        optionsWithOriginalIndex[j],
+        optionsWithOriginalIndex[i],
+      ]
+    }
+
+    const correctAnswer = optionsWithOriginalIndex.findIndex(
+      (item) => item.index === question.correctAnswer,
+    )
+
+    return {
+      ...question,
+      options: optionsWithOriginalIndex.map((item) => item.option),
+      correctAnswer,
+    }
+  })
+}
 
 const SECTION_CONFIG = [
   { type: "reading" as const,    label: "Reading Comprehension",   note: "literal, inferential, and analytical reading across all difficulty levels" },
@@ -664,8 +707,11 @@ export default function G5LaMix3MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]                 = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]               = useState(60 * 60)
+  const [randomizedQuestions, setRandomizedQuestions] = useState<Question[]>([])
+  const hasSavedResult = useRef(false)
 
-  const availableQuestions = isPremium ? g5LaMix3Questions : g5LaMix3Questions.slice(0, FREE_QUESTION_LIMIT)
+  const sourceQuestions = isPremium ? g5LaMix3Questions : g5LaMix3Questions.slice(0, FREE_QUESTION_LIMIT)
+  const availableQuestions = randomizedQuestions.length > 0 ? randomizedQuestions : sourceQuestions
   const totalQuestions = availableQuestions.length
 
   useEffect(() => {
@@ -688,27 +734,39 @@ export default function G5LaMix3MockTest() {
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
 
-  const handleSubmit = async () => {
+  useEffect(() => {
+    if (!showResults || !user?.id || hasSavedResult.current) return
+
+    hasSavedResult.current = true
+    void saveStudentTestResult({
+      parentId: user.id,
+      studentName: user?.childName ?? "Student",
+      grade: "grade5",
+      subject: "Literacy",
+      testName: "Mixed 3",
+      difficulty: "Mixed",
+      score: calcScore(),
+      totalQuestions,
+      percentage: scorePct(),
+      completedAt: new Date().toISOString(),
+    }).catch(() => {
+      hasSavedResult.current = false
+    })
+  }, [showResults, user?.id, user?.childName, totalQuestions, answers])
+
+  const startTest = () => {
+    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions)
+    setRandomizedQuestions(shuffledQuestions)
+    setAnswers(new Array(shuffledQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    hasSavedResult.current = false
+    setStarted(true)
+  }
+
+  const handleSubmit = () => {
     setShowResults(true)
-
-    if (!user?.id) return
-
-    try {
-      await saveStudentTestResult({
-        parentId: user.id,
-        studentName: user?.childName ?? "Student",
-        grade: "grade5",
-        subject: "Language Arts",
-        testName: "Mixed 3",
-        difficulty: "Mixed",
-        score: calcScore(),
-        totalQuestions,
-        percentage: scorePct(),
-        completedAt: new Date().toISOString(),
-      })
-    } catch (error) {
-      console.error("Failed to save test result:", error)
-    }
   }
 
   const getGrade = () => {
@@ -730,8 +788,13 @@ export default function G5LaMix3MockTest() {
   }
 
   const resetTest = () => {
-    setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setStarted(false)
+    setShowResults(false)
+    setCurrentQuestion(0)
+    setRandomizedQuestions([])
+    setAnswers(new Array(sourceQuestions.length).fill(null))
+    setTimeLeft(60 * 60)
+    hasSavedResult.current = false
   }
 
   const q = availableQuestions[currentQuestion]
@@ -769,7 +832,7 @@ export default function G5LaMix3MockTest() {
             )}
             <div className="rounded-lg border border-blue-200 bg-white p-4">
               <h3 className="mb-2 font-semibold text-slate-800">Mixed Level Overview</h3>
-              <p className="text-slate-700">This test blends easy, moderate, and challenging questions across reading, vocabulary, grammar, and writing — giving you a complete picture of your Grade 5 Language Arts skills.</p>
+              <p className="text-slate-700">This mixed-level test uses bamboo and sustainable building as its central theme while assessing comprehension, vocabulary, grammar, and writing across a balanced range of Grade 5 skills.</p>
             </div>
             <div className="rounded-lg bg-sky-50 p-4">
               <h3 className="mb-2 font-semibold text-sky-800">What to Expect</h3>
@@ -784,7 +847,7 @@ export default function G5LaMix3MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-blue-600">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-blue-600">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-blue-600 py-6 text-lg hover:bg-blue-700">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-blue-600 py-6 text-lg hover:bg-blue-700">Start Test</Button>
           </CardContent>
         </Card>
       </main>
