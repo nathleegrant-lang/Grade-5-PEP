@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -27,6 +27,18 @@ interface Question {
   explanation: string
 }
 
+const P1 = `Louise Bennett-Coverley, affectionately known as Miss Lou, became one of Jamaica’s most important cultural voices. She was born in Kingston in 1919 and grew up hearing Jamaican Creole, also called Patois, spoken in homes, markets, yards, and communities. At that time, many people believed that only Standard English belonged in classrooms, books, theatres, and formal public life.
+
+Miss Lou challenged that belief. She wrote poems, performed on stage and radio, taught audiences, and used humour to show that Jamaican Creole could carry intelligence, emotion, history, and truth. Her work did not reject Standard English. Instead, it showed that Jamaicans could value both language forms and use each one appropriately.
+
+Through her performances, Miss Lou allowed ordinary Jamaicans to hear familiar speech presented with pride rather than shame. Her characters spoke in ways that sounded like real people. They joked, questioned authority, told stories, and commented on social issues. Audiences laughed, but they also recognised themselves and thought more deeply about Jamaican life.
+
+Miss Lou’s work helped preserve expressions, rhythms, proverbs, and ways of speaking that might otherwise have been ignored. She demonstrated that language is closely connected to identity. When people are taught that their home language is inferior, they may begin to feel that their culture and experiences are inferior too. By celebrating Jamaican Creole, she encouraged people to value their heritage.
+
+Her influence extended far beyond entertainment. She became a teacher, cultural ambassador, writer, broadcaster, and performer. Her poems are studied in schools and universities, her recordings are preserved, and her contribution is recognised nationally. Her image appears on Jamaican currency, showing how greatly the country values her legacy.
+
+Miss Lou’s achievement was not simply that she made people laugh. She changed how many people understood Jamaican language and culture. She proved that a language spoken by ordinary people could also belong in literature, education, and national life. Her courage helped future generations speak with greater confidence about who they are.`
+
 const g5LaMix4Questions: Question[] = [
   {
     id: 1,
@@ -34,17 +46,17 @@ const g5LaMix4Questions: Question[] = [
     skill: "Main Idea",
     question: `Read the passage then answer the question.
 
-"Louise Bennett-Coverley — Miss Lou — was one of Jamaica's most beloved cultural figures. She performed, taught, and wrote at a time when Jamaican Creole (Patois) was dismissed by many as a lesser language unworthy of literature or performance. Miss Lou disagreed. She saw Jamaican language as a rich, living, and powerful medium for poetry, comedy, and cultural truth. Her decision to write and perform in Patois was not simply a stylistic choice — it was a political and cultural act of resistance. She insisted that ordinary Jamaican people deserved to see themselves and their language celebrated on stage. Today, her work is studied as literature, her face appears on Jamaican currency, and her recordings are archived as treasures of Caribbean cultural heritage."
+${P1}
 
-What is this passage MAINLY about?`,
+What is the passage mainly about?`,
     options: [
-      "Miss Lou's personal life",
-      "A famous Jamaican comedian",
-      "Miss Lou's deliberate use of Jamaican Creole as a political and cultural act of resistance",
-      "The history of the Jamaican language",
+      "How Miss Lou used Jamaican Creole to strengthen cultural pride and identity",
+      "Miss Lou’s childhood games",
+      "Why Standard English should disappear",
+      "The history of Jamaican currency"
     ],
-    correctAnswer: 2,
-    explanation: `The passage focuses on Miss Lou's choice to write and perform in Patois as a political and cultural decision — this is the central subject.`
+    correctAnswer: 0,
+    explanation: `The passage focuses on Miss Lou’s use of Jamaican Creole and her lasting cultural influence.`
   },
   {
     id: 2,
@@ -52,603 +64,632 @@ What is this passage MAINLY about?`,
     skill: "Detail",
     question: `Read the passage then answer the question.
 
-"Louise Bennett-Coverley — Miss Lou — was one of Jamaica's most beloved cultural figures. She performed, taught, and wrote at a time when Jamaican Creole (Patois) was dismissed by many as a lesser language unworthy of literature or performance. Miss Lou disagreed. She saw Jamaican language as a rich, living, and powerful medium for poetry, comedy, and cultural truth. Her decision to write and perform in Patois was not simply a stylistic choice — it was a political and cultural act of resistance. She insisted that ordinary Jamaican people deserved to see themselves and their language celebrated on stage. Today, her work is studied as literature, her face appears on Jamaican currency, and her recordings are archived as treasures of Caribbean cultural heritage."
+${P1}
 
-What was the common criticism of Jamaican Creole at the time Miss Lou was performing?`,
+Where was Miss Lou born?`,
     options: [
-      "It was too difficult to learn",
-      "It was a lesser language unfit for literature",
-      "It was only spoken by older people",
-      "It was too similar to English",
+      "Montego Bay",
+      "Kingston",
+      "Spanish Town",
+      "Port Antonio"
     ],
     correctAnswer: 1,
-    explanation: `The passage states Jamaican Creole was 'dismissed by many as a lesser language unworthy of literature or performance.'`
+    explanation: `The passage states that Miss Lou was born in Kingston.`
   },
   {
     id: 3,
     type: "reading",
-    skill: "Vocabulary in Context",
+    skill: "Inference",
     question: `Read the passage then answer the question.
 
-"Louise Bennett-Coverley — Miss Lou — was one of Jamaica's most beloved cultural figures. She performed, taught, and wrote at a time when Jamaican Creole (Patois) was dismissed by many as a lesser language unworthy of literature or performance. Miss Lou disagreed. She saw Jamaican language as a rich, living, and powerful medium for poetry, comedy, and cultural truth. Her decision to write and perform in Patois was not simply a stylistic choice — it was a political and cultural act of resistance. She insisted that ordinary Jamaican people deserved to see themselves and their language celebrated on stage. Today, her work is studied as literature, her face appears on Jamaican currency, and her recordings are archived as treasures of Caribbean cultural heritage."
+${P1}
 
-The phrase 'act of resistance' in the passage means:`,
+Why did Miss Lou’s work require courage?`,
     options: [
-      "A theatre performance",
-      "A criminal action",
-      "A deliberate challenge to an established power or norm",
-      "An act of self-defence",
+      "She performed without an audience.",
+      "She refused to learn any language.",
+      "She challenged the belief that Jamaican Creole did not belong in formal spaces.",
+      "She wrote only about foreign countries."
     ],
     correctAnswer: 2,
-    explanation: `'Act of resistance' means a deliberate, principled challenge to something in power — here, Miss Lou challenged the colonial idea that Patois was inferior.`
+    explanation: `She challenged widely accepted attitudes about which language forms were considered respectable.`
   },
   {
     id: 4,
     type: "reading",
-    skill: "Literal Comprehension",
+    skill: "Author's Purpose",
     question: `Read the passage then answer the question.
 
-"Louise Bennett-Coverley — Miss Lou — was one of Jamaica's most beloved cultural figures. She performed, taught, and wrote at a time when Jamaican Creole (Patois) was dismissed by many as a lesser language unworthy of literature or performance. Miss Lou disagreed. She saw Jamaican language as a rich, living, and powerful medium for poetry, comedy, and cultural truth. Her decision to write and perform in Patois was not simply a stylistic choice — it was a political and cultural act of resistance. She insisted that ordinary Jamaican people deserved to see themselves and their language celebrated on stage. Today, her work is studied as literature, her face appears on Jamaican currency, and her recordings are archived as treasures of Caribbean cultural heritage."
+${P1}
 
-According to the passage, Miss Lou's face appears on:`,
+Why does the author explain that Miss Lou did not reject Standard English?`,
     options: [
-      "The Jamaican flag",
-      "Jamaican currency",
-      "The cover of a famous book",
-      "A statue in Kingston",
+      "To prove that Jamaican Creole is not useful",
+      "To suggest she stopped using Patois",
+      "To explain why she became a teacher",
+      "To show that she valued both language forms appropriately"
     ],
-    correctAnswer: 1,
-    explanation: `The passage states 'her face appears on Jamaican currency.'`
+    correctAnswer: 3,
+    explanation: `The detail prevents the reader from assuming that valuing Creole required rejecting Standard English.`
   },
   {
     id: 5,
     type: "reading",
-    skill: "Fact vs Opinion",
+    skill: "Cause and Effect",
     question: `Read the passage then answer the question.
 
-"Louise Bennett-Coverley — Miss Lou — was one of Jamaica's most beloved cultural figures. She performed, taught, and wrote at a time when Jamaican Creole (Patois) was dismissed by many as a lesser language unworthy of literature or performance. Miss Lou disagreed. She saw Jamaican language as a rich, living, and powerful medium for poetry, comedy, and cultural truth. Her decision to write and perform in Patois was not simply a stylistic choice — it was a political and cultural act of resistance. She insisted that ordinary Jamaican people deserved to see themselves and their language celebrated on stage. Today, her work is studied as literature, her face appears on Jamaican currency, and her recordings are archived as treasures of Caribbean cultural heritage."
+${P1}
 
-Which statement is an OPINION?`,
+What was one effect of Miss Lou presenting familiar Jamaican speech with pride?`,
     options: [
-      "Miss Lou's work is studied as literature",
-      "Her face appears on Jamaican currency",
-      "Miss Lou was the greatest artist Jamaica ever produced",
-      "Her recordings are archived as cultural treasures",
+      "People could recognise themselves and value their heritage.",
+      "Audiences became ashamed of their culture.",
+      "Schools stopped teaching language.",
+      "Jamaican proverbs disappeared."
     ],
-    correctAnswer: 2,
-    explanation: `'Greatest artist Jamaica ever produced' is a subjective judgement — an opinion. The others are factual statements from the passage.`
+    correctAnswer: 0,
+    explanation: `Her performances helped people see their language and culture as worthy of pride.`
   },
   {
     id: 6,
     type: "reading",
-    skill: "Inference",
+    skill: "Compare and Contrast",
     question: `Read the passage then answer the question.
 
-"Louise Bennett-Coverley — Miss Lou — was one of Jamaica's most beloved cultural figures. She performed, taught, and wrote at a time when Jamaican Creole (Patois) was dismissed by many as a lesser language unworthy of literature or performance. Miss Lou disagreed. She saw Jamaican language as a rich, living, and powerful medium for poetry, comedy, and cultural truth. Her decision to write and perform in Patois was not simply a stylistic choice — it was a political and cultural act of resistance. She insisted that ordinary Jamaican people deserved to see themselves and their language celebrated on stage. Today, her work is studied as literature, her face appears on Jamaican currency, and her recordings are archived as treasures of Caribbean cultural heritage."
+${P1}
 
-What does the passage imply about the political context in which Miss Lou performed?`,
+How did Miss Lou’s characters differ from formal public speech of the time?`,
     options: [
-      "Jamaica was fully independent and culturally confident",
-      "There was no pressure to conform to any particular language standard",
-      "Colonial values about language and culture still strongly influenced what was considered legitimate — Miss Lou's choice was therefore bold",
-      "Everyone supported Patois performance",
+      "They never discussed Jamaican life.",
+      "They used familiar Jamaican speech and sounded like ordinary people.",
+      "They spoke only in silence.",
+      "They avoided humour and stories."
     ],
-    correctAnswer: 2,
-    explanation: `By describing the pressure to use Standard English and Miss Lou's choice as 'political,' the passage implies colonial values still dominated — making her choice genuinely courageous.`
+    correctAnswer: 1,
+    explanation: `Her characters sounded like real Jamaicans rather than using only formal Standard English.`
   },
   {
     id: 7,
     type: "reading",
-    skill: "Author's Technique",
+    skill: "Drawing Conclusions",
     question: `Read the passage then answer the question.
 
-"Louise Bennett-Coverley — Miss Lou — was one of Jamaica's most beloved cultural figures. She performed, taught, and wrote at a time when Jamaican Creole (Patois) was dismissed by many as a lesser language unworthy of literature or performance. Miss Lou disagreed. She saw Jamaican language as a rich, living, and powerful medium for poetry, comedy, and cultural truth. Her decision to write and perform in Patois was not simply a stylistic choice — it was a political and cultural act of resistance. She insisted that ordinary Jamaican people deserved to see themselves and their language celebrated on stage. Today, her work is studied as literature, her face appears on Jamaican currency, and her recordings are archived as treasures of Caribbean cultural heritage."
+${P1}
 
-Why does the author emphasise that Miss Lou's language choice was 'not simply a stylistic choice' but 'a political and cultural act of resistance'?`,
+What can the reader conclude about Miss Lou’s humour?`,
     options: [
-      "To suggest she was breaking the law",
-      "To correct a possible misreading — readers might see her Patois as a quirk rather than a deliberate, principled decision",
-      "To argue all writers should use Patois",
-      "To praise her style only",
+      "It was used only to entertain.",
+      "It prevented people from understanding her message.",
+      "It helped audiences laugh while also thinking about serious social issues.",
+      "It was unrelated to Jamaican culture."
     ],
-    correctAnswer: 1,
-    explanation: `The author pre-empts a shallow reading by insisting the choice was political — elevating Miss Lou from entertainer to cultural activist.`
+    correctAnswer: 2,
+    explanation: `The passage says audiences laughed but also thought more deeply about Jamaican life.`
   },
   {
     id: 8,
     type: "reading",
-    skill: "Cause and Effect",
+    skill: "Vocabulary in Context",
     question: `Read the passage then answer the question.
 
-"Louise Bennett-Coverley — Miss Lou — was one of Jamaica's most beloved cultural figures. She performed, taught, and wrote at a time when Jamaican Creole (Patois) was dismissed by many as a lesser language unworthy of literature or performance. Miss Lou disagreed. She saw Jamaican language as a rich, living, and powerful medium for poetry, comedy, and cultural truth. Her decision to write and perform in Patois was not simply a stylistic choice — it was a political and cultural act of resistance. She insisted that ordinary Jamaican people deserved to see themselves and their language celebrated on stage. Today, her work is studied as literature, her face appears on Jamaican currency, and her recordings are archived as treasures of Caribbean cultural heritage."
+${P1}
 
-What was the EFFECT of Miss Lou's decision to perform in Patois?`,
+In the passage, “heritage” most nearly means`,
     options: [
-      "She became unpopular with all audiences",
-      "Nothing changed",
-      "She demonstrated that Jamaican language was a rich, valid medium — contributing to the recognition of Jamaican culture as worthy of celebration and study",
-      "The government was angry",
+      "money earned from work",
+      "a type of school subject",
+      "a public performance",
+      "traditions and culture passed from earlier generations"
     ],
-    correctAnswer: 2,
-    explanation: `Miss Lou's long-term effect was to legitimise Patois as a cultural and literary medium — her legacy is now studied, archived, and appears on currency.`
+    correctAnswer: 3,
+    explanation: `Heritage refers to inherited culture, traditions, and identity.`
   },
   {
     id: 9,
     type: "reading",
-    skill: "Tone",
+    skill: "Evaluating Evidence",
     question: `Read the passage then answer the question.
 
-"Louise Bennett-Coverley — Miss Lou — was one of Jamaica's most beloved cultural figures. She performed, taught, and wrote at a time when Jamaican Creole (Patois) was dismissed by many as a lesser language unworthy of literature or performance. Miss Lou disagreed. She saw Jamaican language as a rich, living, and powerful medium for poetry, comedy, and cultural truth. Her decision to write and perform in Patois was not simply a stylistic choice — it was a political and cultural act of resistance. She insisted that ordinary Jamaican people deserved to see themselves and their language celebrated on stage. Today, her work is studied as literature, her face appears on Jamaican currency, and her recordings are archived as treasures of Caribbean cultural heritage."
+${P1}
 
-The tone of the passage is BEST described as:`,
+Which detail best shows Miss Lou’s national importance?`,
     options: [
-      "Critical of Miss Lou's choices",
-      "Completely neutral with no perspective",
-      "Admiring and celebratory — presenting Miss Lou as a cultural hero whose choices had lasting significance",
-      "Dismissive of Jamaican Creole",
+      "Her image appears on Jamaican currency.",
+      "She enjoyed telling jokes.",
+      "She heard Patois in markets.",
+      "She wrote about ordinary people."
     ],
-    correctAnswer: 2,
-    explanation: `The rich, positive language ('beloved,' 'treasures,' 'celebrated') and the presentation of Miss Lou's legacy shows clear admiration.`
+    correctAnswer: 0,
+    explanation: `Appearing on national currency is strong evidence of national recognition.`
   },
   {
     id: 10,
     type: "reading",
-    skill: "Theme",
+    skill: "Tone",
     question: `Read the passage then answer the question.
 
-"Louise Bennett-Coverley — Miss Lou — was one of Jamaica's most beloved cultural figures. She performed, taught, and wrote at a time when Jamaican Creole (Patois) was dismissed by many as a lesser language unworthy of literature or performance. Miss Lou disagreed. She saw Jamaican language as a rich, living, and powerful medium for poetry, comedy, and cultural truth. Her decision to write and perform in Patois was not simply a stylistic choice — it was a political and cultural act of resistance. She insisted that ordinary Jamaican people deserved to see themselves and their language celebrated on stage. Today, her work is studied as literature, her face appears on Jamaican currency, and her recordings are archived as treasures of Caribbean cultural heritage."
+${P1}
 
-The CENTRAL theme of this passage is:`,
+Which word best describes the tone of the passage?`,
     options: [
-      "The history of the Jamaican entertainment industry",
-      "Why Patois is easier than Standard English",
-      "Language is not merely a communication tool — it is a site of power, identity, and resistance, and Miss Lou's choice to use it was a profound cultural act",
-      "Miss Lou was very popular",
+      "Mocking",
+      "Admiring",
+      "Uncertain",
+      "Angry"
     ],
-    correctAnswer: 2,
-    explanation: `The passage consistently argues that language choices are political — Miss Lou's Patois was not just a way of speaking but an assertion of cultural identity and dignity.`
+    correctAnswer: 1,
+    explanation: `The author presents Miss Lou with respect and admiration.`
   },
   {
     id: 11,
     type: "reading",
-    skill: "Critical Reading",
+    skill: "Theme",
     question: `Read the passage then answer the question.
 
-"Louise Bennett-Coverley — Miss Lou — was one of Jamaica's most beloved cultural figures. She performed, taught, and wrote at a time when Jamaican Creole (Patois) was dismissed by many as a lesser language unworthy of literature or performance. Miss Lou disagreed. She saw Jamaican language as a rich, living, and powerful medium for poetry, comedy, and cultural truth. Her decision to write and perform in Patois was not simply a stylistic choice — it was a political and cultural act of resistance. She insisted that ordinary Jamaican people deserved to see themselves and their language celebrated on stage. Today, her work is studied as literature, her face appears on Jamaican currency, and her recordings are archived as treasures of Caribbean cultural heritage."
+${P1}
 
-A critical reader might ask: 'Was Miss Lou the only person performing in Patois, or were there others?' What would this question reveal?`,
+Which theme is best supported by the passage?`,
     options: [
-      "It reveals the reader is disrespectful",
-      "It is irrelevant to the passage",
-      "It probes the passage's tendency to individualise what might have been a broader cultural movement — asking whether Miss Lou was unique or representative",
-      "It suggests Miss Lou was not important",
+      "Only formal speech has value.",
+      "Humour should never address serious topics.",
+      "Language can shape identity and cultural pride.",
+      "Education must use one language form only."
     ],
     correctAnswer: 2,
-    explanation: `Critical reading questions whether the passage oversimplifies by focusing on one individual — was Miss Lou exceptional, or part of a broader cultural shift?`
+    explanation: `The passage repeatedly connects language with identity, dignity, and heritage.`
   },
   {
     id: 12,
     type: "reading",
-    skill: "Author's Argument",
+    skill: "Fact and Opinion",
     question: `Read the passage then answer the question.
 
-"Louise Bennett-Coverley — Miss Lou — was one of Jamaica's most beloved cultural figures. She performed, taught, and wrote at a time when Jamaican Creole (Patois) was dismissed by many as a lesser language unworthy of literature or performance. Miss Lou disagreed. She saw Jamaican language as a rich, living, and powerful medium for poetry, comedy, and cultural truth. Her decision to write and perform in Patois was not simply a stylistic choice — it was a political and cultural act of resistance. She insisted that ordinary Jamaican people deserved to see themselves and their language celebrated on stage. Today, her work is studied as literature, her face appears on Jamaican currency, and her recordings are archived as treasures of Caribbean cultural heritage."
+${P1}
 
-What is the author's IMPLICIT argument about what Miss Lou's legacy proves?`,
+Which statement is an opinion?`,
     options: [
-      "That performers should always entertain",
-      "That Patois is better than Standard English",
-      "That cultural forms created by ordinary people and in everyday language can achieve lasting, legitimate artistic and political significance",
-      "That only famous people create lasting culture",
+      "Miss Lou was born in Kingston in 1919.",
+      "Her image appears on Jamaican currency.",
+      "Her recordings are preserved.",
+      "Miss Lou was the most entertaining person in Jamaican history."
     ],
-    correctAnswer: 2,
-    explanation: `Miss Lou's archive status, currency image, and academic study prove her implicit argument: grassroots, vernacular culture has enduring value.`
+    correctAnswer: 3,
+    explanation: `“Most entertaining” is a personal judgement that cannot be proved as a fact.`
   },
   {
     id: 13,
     type: "reading",
-    skill: "Vocabulary in Context",
+    skill: "Text Structure",
     question: `Read the passage then answer the question.
 
-"Louise Bennett-Coverley — Miss Lou — was one of Jamaica's most beloved cultural figures. She performed, taught, and wrote at a time when Jamaican Creole (Patois) was dismissed by many as a lesser language unworthy of literature or performance. Miss Lou disagreed. She saw Jamaican language as a rich, living, and powerful medium for poetry, comedy, and cultural truth. Her decision to write and perform in Patois was not simply a stylistic choice — it was a political and cultural act of resistance. She insisted that ordinary Jamaican people deserved to see themselves and their language celebrated on stage. Today, her work is studied as literature, her face appears on Jamaican currency, and her recordings are archived as treasures of Caribbean cultural heritage."
+${P1}
 
-The word 'vernacular' (related to the passage's theme) means:`,
+How is the passage mainly organised?`,
     options: [
-      "foreign and imported",
-      "formal and official",
-      "the language or dialect spoken by ordinary people in a particular region",
-      "academic and technical",
+      "It describes a problem, explains Miss Lou’s response, and shows her lasting influence.",
+      "It gives instructions for writing a poem.",
+      "It tells events from one single day.",
+      "It compares two countries without a conclusion."
     ],
-    correctAnswer: 2,
-    explanation: `'Vernacular' refers to the native language of a place or community — the language of ordinary people, as opposed to formal or official language.`
+    correctAnswer: 0,
+    explanation: `The passage explains negative attitudes, Miss Lou’s challenge to them, and her legacy.`
   },
   {
     id: 14,
     type: "reading",
-    skill: "Summarise",
+    skill: "Synthesis",
     question: `Read the passage then answer the question.
 
-"Louise Bennett-Coverley — Miss Lou — was one of Jamaica's most beloved cultural figures. She performed, taught, and wrote at a time when Jamaican Creole (Patois) was dismissed by many as a lesser language unworthy of literature or performance. Miss Lou disagreed. She saw Jamaican language as a rich, living, and powerful medium for poetry, comedy, and cultural truth. Her decision to write and perform in Patois was not simply a stylistic choice — it was a political and cultural act of resistance. She insisted that ordinary Jamaican people deserved to see themselves and their language celebrated on stage. Today, her work is studied as literature, her face appears on Jamaican currency, and her recordings are archived as treasures of Caribbean cultural heritage."
+${P1}
 
-Which BEST summarises the passage?`,
+Which statement best combines two important ideas from the passage?`,
     options: [
-      "Miss Lou was a funny performer",
-      "Miss Lou used Jamaican Creole because she could not speak Standard English",
-      "Miss Lou was a pioneering cultural figure whose deliberate choice to perform in Jamaican Creole was a political act that validated ordinary Jamaican identity and left a lasting cultural legacy",
-      "Miss Lou was very popular in Jamaica",
+      "Miss Lou used only Standard English in public.",
+      "Miss Lou used humour and Jamaican Creole to entertain while also strengthening cultural confidence.",
+      "Miss Lou believed language had nothing to do with identity.",
+      "Miss Lou’s work mattered only during her lifetime."
     ],
-    correctAnswer: 2,
-    explanation: `This captures who she was, what she did, why it mattered, and her legacy — a complete summary of the passage's argument.`
+    correctAnswer: 1,
+    explanation: `This choice combines her entertaining style with her deeper cultural purpose.`
   },
   {
     id: 15,
     type: "reading",
-    skill: "Implied Meaning",
+    skill: "Summary",
     question: `Read the passage then answer the question.
 
-"Louise Bennett-Coverley — Miss Lou — was one of Jamaica's most beloved cultural figures. She performed, taught, and wrote at a time when Jamaican Creole (Patois) was dismissed by many as a lesser language unworthy of literature or performance. Miss Lou disagreed. She saw Jamaican language as a rich, living, and powerful medium for poetry, comedy, and cultural truth. Her decision to write and perform in Patois was not simply a stylistic choice — it was a political and cultural act of resistance. She insisted that ordinary Jamaican people deserved to see themselves and their language celebrated on stage. Today, her work is studied as literature, her face appears on Jamaican currency, and her recordings are archived as treasures of Caribbean cultural heritage."
+${P1}
 
-When the passage says Miss Lou 'insisted that ordinary Jamaican people deserved to see themselves and their language celebrated,' the word 'deserved' implies:`,
+Which sentence best summarises the passage?`,
     options: [
-      "It was a privilege, not a right",
-      "That ordinary Jamaicans were superior to others",
-      "That the celebration of ordinary Jamaican identity was a matter of justice — not a gift but something owed",
-      "That only unusual people deserve celebration",
+      "Miss Lou became famous only because her image appears on money.",
+      "Miss Lou rejected education and formal language.",
+      "Miss Lou helped Jamaicans value their language and culture through writing, teaching, humour, and performance.",
+      "Miss Lou wrote only for children."
     ],
     correctAnswer: 2,
-    explanation: `'Deserved' frames cultural recognition as a matter of justice and dignity — not a favour granted but a right belonging to ordinary people.`
+    explanation: `This sentence captures her methods and lasting cultural contribution.`
   },
   {
     id: 16,
     type: "vocabulary",
-    skill: "Synonyms",
-    question: `Which word is a SYNONYM for 'resist'?`,
+    skill: "Synonym",
+    question: `Which word is closest in meaning to “preserve”?`,
     options: [
-      "accept",
-      "surrender",
-      "oppose",
-      "welcome",
+      "destroy",
+      "forget",
+      "scatter",
+      "protect"
     ],
-    correctAnswer: 2,
-    explanation: `'Oppose' means to actively work against something — a synonym for 'resist.'`
+    correctAnswer: 3,
+    explanation: `To preserve means to protect or keep safe.`
   },
   {
     id: 17,
     type: "vocabulary",
-    skill: "Antonyms",
-    question: `The ANTONYM of 'suppress' is:`,
+    skill: "Antonym",
+    question: `Which word is the opposite of “inferior”?`,
     options: [
-      "hide",
-      "oppress",
-      "silence",
-      "liberate",
+      "superior",
+      "lesser",
+      "ordinary",
+      "similar"
     ],
-    correctAnswer: 3,
-    explanation: `'Liberate' means to set free — the direct opposite of 'suppress' (to hold down or silence).`
+    correctAnswer: 0,
+    explanation: `Superior is the opposite of inferior.`
   },
   {
     id: 18,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `The artist's work was SUBVERSIVE — it challenged the dominant culture in ways that made the authorities uncomfortable. 'Subversive' means:`,
+    skill: "Prefix",
+    question: `What does the prefix “re-” mean in “recognised” when thinking of “recognise again”?`,
     options: [
-      "very popular with everyone",
-      "approved by the government",
-      "deliberately undermining established power or values",
-      "simple and traditional",
+      "before",
+      "again",
+      "under",
+      "without"
     ],
-    correctAnswer: 2,
-    explanation: `'Subversive' describes work that quietly or openly challenges and undermines established authority or conventional values.`
+    correctAnswer: 1,
+    explanation: `The prefix re- commonly means again.`
   },
   {
     id: 19,
     type: "vocabulary",
-    skill: "Idiom",
-    question: `'Miss Lou held her ground despite pressure to conform.' 'Held her ground' means:`,
+    skill: "Suffix",
+    question: `What does the suffix “-ful” suggest in “powerful”?`,
     options: [
-      "She stood still physically",
-      "She refused to change her position or give in to pressure",
-      "She was afraid",
-      "She agreed with everyone",
+      "without power",
+      "before power",
+      "full of power",
+      "against power"
     ],
-    correctAnswer: 1,
-    explanation: `'Holding one's ground' means maintaining one's position and principles despite pressure to change or give way.`
+    correctAnswer: 2,
+    explanation: `Powerful means full of power or strength.`
   },
   {
     id: 20,
     type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'Language is the blood of culture — when it stops flowing, the culture dies.' What does this extended metaphor argue?`,
+    skill: "Context Clues",
+    question: `In the passage, “formal public life” refers to`,
     options: [
-      "Language and blood are both liquids",
-      "Culture is not important",
-      "Language is as essential to cultural life as blood is to physical life — without it, the culture cannot survive",
-      "Only some languages matter",
+      "private conversations at home",
+      "games played by children",
+      "shopping in a market",
+      "official settings such as schools, theatres, and public events"
     ],
-    correctAnswer: 2,
-    explanation: `The metaphor equates language with blood: just as blood circulates life through a body, language carries a culture's vitality. Without it, the culture perishes.`
+    correctAnswer: 3,
+    explanation: `The surrounding examples show that formal public life means official or recognised settings.`
   },
   {
     id: 21,
     type: "vocabulary",
-    skill: "Connotation",
-    question: `Which word has the MOST positive connotation when describing someone who speaks their mind?`,
+    skill: "Multiple Meaning",
+    question: `Which sentence uses “voice” in the same way as “cultural voice”?`,
     options: [
-      "rude",
-      "outspoken",
-      "loud",
-      "aggressive",
+      "The writer became a strong voice for young people.",
+      "She lost her voice after shouting.",
+      "His voice was very soft.",
+      "The singer warmed up her voice."
     ],
-    correctAnswer: 1,
-    explanation: `'Outspoken' suggests confident, honest expression of views — a positive quality. The others suggest negativity.`
+    correctAnswer: 0,
+    explanation: `Here, voice means a person who represents or speaks for ideas and people.`
   },
   {
     id: 22,
     type: "vocabulary",
-    skill: "Word Meaning",
-    question: `The word 'heritage' as used in cultural contexts means:`,
+    skill: "Word Relationships",
+    question: `Poet is to poem as musician is to`,
     options: [
-      "a financial inheritance",
-      "old buildings only",
-      "the traditions, values, and history passed from one generation to the next",
-      "government property",
+      "stage",
+      "song",
+      "audience",
+      "book"
     ],
-    correctAnswer: 2,
-    explanation: `'Cultural heritage' refers to what a community inherits from the past — language, customs, values, art, and history.`
+    correctAnswer: 1,
+    explanation: `A poet creates a poem, while a musician creates or performs a song.`
   },
   {
     id: 23,
     type: "vocabulary",
-    skill: "Juxtaposition",
-    question: `A writer places a description of a grand colonial theatre next to a description of Miss Lou performing in a small village yard. This contrast is called:`,
+    skill: "Replacing a Word",
+    question: `Which phrase best replaces “ordinary people”?`,
     options: [
-      "Alliteration",
-      "Simile",
-      "Juxtaposition — to highlight the difference between elite, official culture and the vibrant, grassroots culture Miss Lou championed",
-      "Metaphor",
+      "royal leaders only",
+      "foreign visitors",
+      "people from everyday life",
+      "famous performers"
     ],
     correctAnswer: 2,
-    explanation: `Juxtaposition places contrasting elements side by side to highlight a meaningful difference — here, between high and low culture.`
+    explanation: `Ordinary people means people from everyday life.`
   },
   {
     id: 24,
     type: "vocabulary",
-    skill: "Etymology",
-    question: `The word 'dialect' comes from the Greek 'dialektos' meaning 'conversation' or 'way of speaking.' This etymology suggests:`,
+    skill: "Academic Vocabulary",
+    question: `What does “identity” mean?`,
     options: [
-      "Dialects are wrong versions of language",
-      "A dialect is simply a way of speaking — as natural and legitimate as any other variety of language",
-      "Only educated people speak dialects",
-      "Dialects are used only in poetry",
+      "a list of school rules",
+      "a type of currency",
+      "a public holiday",
+      "the qualities and beliefs that help define who a person or group is"
     ],
-    correctAnswer: 1,
-    explanation: `The etymology reveals that a dialect is simply 'a way of speaking' — not inferior, just different. This supports Miss Lou's argument that Patois is a legitimate language.`
+    correctAnswer: 3,
+    explanation: `Identity refers to who a person or group is.`
   },
   {
     id: 25,
     type: "vocabulary",
-    skill: "Academic Vocabulary",
-    question: `In formal writing, 'albeit' means:`,
+    skill: "Precise Word Choice",
+    question: `Which word best completes the sentence? “Miss Lou _____ Jamaican Creole through poetry and performance.”`,
     options: [
-      "therefore",
-      "in addition",
-      "although or even though",
-      "because",
+      "celebrated",
+      "hid",
+      "weakened",
+      "avoided"
     ],
-    correctAnswer: 2,
-    explanation: `'Albeit' is a formal conjunction meaning 'although' — 'The protest was peaceful, albeit disruptive.'`
+    correctAnswer: 0,
+    explanation: `Celebrated precisely shows that she honoured and valued the language.`
   },
   {
     id: 26,
     type: "grammar",
-    skill: "Parts of Speech",
-    question: `Which word is an ADVERB in: 'Miss Lou boldly chose to perform in Jamaican dialect.'?`,
+    skill: "Subject-Verb Agreement",
+    question: `Which sentence is written correctly?`,
     options: [
-      "chose",
-      "boldly",
-      "dialect",
-      "perform",
+      "A collection of Miss Lou’s poems are on the shelf.",
+      "A collection of Miss Lou’s poems is on the shelf.",
+      "A collection of Miss Lou’s poems were on the shelf.",
+      "A collection of Miss Lou’s poems be on the shelf."
     ],
     correctAnswer: 1,
-    explanation: `'Boldly' describes HOW she chose — it is an adverb modifying the verb 'chose.'`
+    explanation: `The subject collection is singular, so it takes is.`
   },
   {
     id: 27,
     type: "grammar",
-    skill: "Verbs",
-    question: `Which sentence uses a STATE VERB (not an action)?`,
+    skill: "Pronouns",
+    question: `Which sentence uses the pronoun correctly?`,
     options: [
-      "She performed on stage every weekend",
-      "She believed in the power of her language",
-      "She wrote new poems for the performance",
-      "She taught students across Jamaica",
+      "Me and Alana read the poem.",
+      "Her and Alana read the poem.",
+      "Alana and I read the poem.",
+      "Alana gave I the book."
     ],
-    correctAnswer: 1,
-    explanation: `'Believed' is a state verb — it describes a mental state, not a physical action. State verbs are not usually used in continuous tenses.`
+    correctAnswer: 2,
+    explanation: `I is the correct subject pronoun.`
   },
   {
     id: 28,
     type: "grammar",
-    skill: "Punctuation",
-    question: `Which sentence punctuates a DIRECT QUOTE correctly?`,
+    skill: "Verb Tense",
+    question: `Which sentence keeps the verb tense consistent?`,
     options: [
-      "Miss Lou said \"I will not apologise for speaking my language\".",
-      "Miss Lou said, \"I will not apologise for speaking my language.\"",
-      "Miss Lou said \"I will not apologise, for speaking my language.\"",
-      "Miss Lou said. \"I will not apologise for speaking my language\"",
+      "Miss Lou wrote poems and performs them.",
+      "Miss Lou writes poems and performed them.",
+      "Miss Lou will write poems and performed them.",
+      "Miss Lou wrote poems and performed them."
     ],
-    correctAnswer: 1,
-    explanation: `Direct speech: comma after reporting verb, opening quote, capital letter, closing punctuation BEFORE final quote mark.`
+    correctAnswer: 3,
+    explanation: `Wrote and performed are both past tense.`
   },
   {
     id: 29,
     type: "grammar",
-    skill: "Passive Voice",
-    question: `Change to PASSIVE VOICE: 'Scholars around the world now study Miss Lou's poetry.'`,
+    skill: "Punctuation",
+    question: `Which sentence is punctuated correctly?`,
     options: [
-      "Miss Lou's poetry has been studied by scholars",
-      "Miss Lou's poetry is now studied by scholars around the world",
-      "Scholars study Miss Lou's poetry now",
-      "Miss Lou's poetry was studied around the world",
+      "After the performance, the audience applauded.",
+      "After the performance the audience applauded.",
+      "After, the performance the audience applauded.",
+      "After the performance the audience, applauded."
     ],
-    correctAnswer: 1,
-    explanation: `Passive (present): subject (Miss Lou's poetry) + is + past participle (studied) + by agent.`
+    correctAnswer: 0,
+    explanation: `A comma follows the introductory phrase.`
   },
   {
     id: 30,
     type: "grammar",
-    skill: "Reported Speech",
-    question: `Change to REPORTED SPEECH: 'Language is our greatest inheritance,' Miss Lou once said.`,
+    skill: "Quotation Marks",
+    question: `Which sentence uses quotation marks correctly?`,
     options: [
-      "Miss Lou once said language is our greatest inheritance",
-      "Miss Lou once said that language was their greatest inheritance",
-      "Miss Lou once said that language is our greatest inheritance",
-      "Miss Lou told language was our greatest inheritance",
+      "\"That poem was funny\" Dario said.",
+      "\"That poem was funny,\" Dario said.",
+      "That poem was funny,\" Dario said.",
+      "\"That poem was funny, Dario said.\""
     ],
     correctAnswer: 1,
-    explanation: `Reported speech: tense shifts back ('is' → 'was'); 'our' shifts to 'their' since the speaker changes. 'That' introduces the reported clause.`
+    explanation: `The spoken words are enclosed correctly, with a comma before the speaker tag.`
   },
   {
     id: 31,
     type: "grammar",
-    skill: "Conditional — Third",
-    question: `Which sentence uses the THIRD CONDITIONAL correctly?`,
+    skill: "Relative Pronouns",
+    question: `Which sentence uses a relative pronoun correctly?`,
     options: [
-      "If Miss Lou had not performed in Patois, Caribbean literature would be very different",
-      "If Miss Lou didn't perform in Patois, Caribbean literature would be different",
-      "If Miss Lou performs in Patois, Caribbean literature changes",
-      "Miss Lou performed in Patois and changed Caribbean literature",
+      "The poem who we read was humorous.",
+      "The radio programme which host spoke clearly was popular.",
+      "The poet who inspired the class was Miss Lou.",
+      "The students which performed were confident."
     ],
-    correctAnswer: 0,
-    explanation: `Third conditional: if + past perfect, would have + past participle. 'Had not performed... would be' — a mixed form is acceptable for expressing a hypothetical past effect on the present.`
+    correctAnswer: 2,
+    explanation: `Who correctly refers to a person.`
   },
   {
     id: 32,
     type: "grammar",
-    skill: "Inversion",
-    question: `Which sentence uses INVERSION for emphasis?`,
+    skill: "Sentence Combining",
+    question: `Which sentence best combines the ideas? “Miss Lou entertained audiences. She also taught them.”`,
     options: [
-      "Miss Lou never stopped believing in her language",
-      "Never did Miss Lou stop believing in her language",
-      "She never stopped believing in her language",
-      "Her belief in her language never stopped",
+      "Miss Lou entertained audiences, she also taught them.",
+      "Miss Lou entertained audiences also teaching.",
+      "Because Miss Lou entertained audiences but taught them.",
+      "Miss Lou entertained audiences and also taught them."
     ],
-    correctAnswer: 1,
-    explanation: `'Never did Miss Lou stop...' places the auxiliary (did) before the subject (Miss Lou) after the negative adverb 'Never' — a formal inversion for emphasis.`
+    correctAnswer: 3,
+    explanation: `And also correctly joins the two related actions.`
   },
   {
     id: 33,
     type: "grammar",
-    skill: "Gerunds and Infinitives",
-    question: `Which sentence correctly uses a GERUND after a preposition?`,
+    skill: "Run-on Correction",
+    question: `Which sentence correctly repairs the run-on? “The poem was humorous it carried a serious message.”`,
     options: [
-      "She was known for to perform in Patois",
-      "She was known for performing in Patois",
-      "She was known for perform in Patois",
-      "She was known for performed in Patois",
+      "The poem was humorous, but it carried a serious message.",
+      "The poem was humorous, it carried a serious message.",
+      "The poem humorous and carried a serious message.",
+      "Being humorous it carried serious."
     ],
-    correctAnswer: 1,
-    explanation: `After prepositions, use a gerund (-ing form): 'known FOR performing' is correct.`
+    correctAnswer: 0,
+    explanation: `The comma and conjunction but correctly join the contrasting clauses.`
   },
   {
     id: 34,
     type: "grammar",
-    skill: "Complex Sentences",
-    question: `Which sentence uses a CONCESSIVE CLAUSE correctly?`,
+    skill: "Transitions",
+    question: `Which transition best completes the sentence? “Many people dismissed Patois; _____, Miss Lou celebrated it.”`,
     options: [
-      "Although critics dismissed Patois, Miss Lou continued to write in it",
-      "Although critics dismissed Patois. Miss Lou continued",
-      "Miss Lou continued to write despite, critics dismissed Patois",
-      "Although, critics dismissed Patois, Miss Lou continued",
+      "therefore",
+      "however",
+      "for example",
+      "similarly"
     ],
-    correctAnswer: 0,
-    explanation: `A concessive clause uses 'although/though/even though' + subject + verb: 'Although critics dismissed Patois, Miss Lou continued...'`
+    correctAnswer: 1,
+    explanation: `However introduces the contrast.`
   },
   {
     id: 35,
     type: "grammar",
-    skill: "Nominalisation",
-    question: `Which correctly uses NOMINALISATION to create a more formal sentence?`,
+    skill: "Precise Word Choice",
+    question: `Which verb is most precise? “The class _____ how language shapes identity.”`,
     options: [
-      "She performed and this resistance was important",
-      "Her performance was an act of important resistance",
-      "She resisted by performing",
-      "She was performing resistance",
+      "did",
+      "looked",
+      "analysed",
+      "made"
     ],
-    correctAnswer: 1,
-    explanation: `'Her performance was an act of resistance' nominalisations 'performed' → 'performance' and 'resisted' → 'resistance' — creating a formal, abstract academic style.`
+    correctAnswer: 2,
+    explanation: `Analysed precisely describes careful examination.`
   },
   {
     id: 36,
     type: "writing",
-    skill: "Register",
-    question: `Miss Lou performed in Jamaican Creole at a time when it was not considered 'proper.' A student writing about this should use:`,
+    skill: "Strong Introduction",
+    question: `Which is the strongest introduction for a paragraph about Miss Lou?`,
     options: [
-      "Only Jamaican Creole throughout the essay",
-      "Standard English for clarity, but can quote Miss Lou's Patois where appropriate",
-      "Only Standard English and never quote Patois",
-      "Whichever register comes naturally",
+      "Miss Lou was a person.",
+      "I will now write about Miss Lou.",
+      "Jamaica has many people.",
+      "Through courage, humour, and language, Miss Lou helped Jamaicans see their culture with greater pride."
     ],
-    correctAnswer: 1,
-    explanation: `Academic writing typically uses Standard English, but quoting Miss Lou's language in Patois where relevant preserves authenticity and avoids erasure of the very thing being discussed.`
+    correctAnswer: 3,
+    explanation: `This sentence clearly introduces the topic and central idea.`
   },
   {
     id: 37,
     type: "writing",
-    skill: "Thesis Statement",
-    question: `Which is the STRONGEST thesis for an essay arguing Miss Lou should be recognised as a political figure, not just an entertainer?`,
+    skill: "Supporting Detail",
+    question: `Which detail best supports the topic sentence “Miss Lou strengthened Jamaican cultural pride”?`,
     options: [
-      "Miss Lou was very funny",
-      "Miss Lou performed in Jamaican Creole",
-      "Miss Lou was not merely an entertainer — her deliberate choice to write and perform in Jamaican Creole was a political act that challenged colonial ideas about language and culture",
-      "Miss Lou was a National Hero",
+      "She performed familiar Jamaican speech on stage with confidence.",
+      "She was born in 1919.",
+      "Some poems are short.",
+      "Currency is used to buy things."
     ],
-    correctAnswer: 2,
-    explanation: `This thesis is specific, arguable, and makes a claim about WHY Miss Lou's work was political — it gives the essay a clear, defensible position.`
+    correctAnswer: 0,
+    explanation: `This detail directly shows how she publicly valued Jamaican culture.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "Analytical Writing — Point-Evidence-Explanation",
-    question: `A student writes: 'Miss Lou used Jamaican Creole as a political act. She wrote in Patois. This was resistance.' Identify the weakness:`,
+    skill: "Transitions",
+    question: `Which transition best adds another contribution? “Miss Lou wrote poetry. _____, she taught and performed for audiences.”`,
     options: [
-      "The point is wrong",
-      "The writing is too formal",
-      "The analysis is incomplete — the student states a point and gives evidence but fails to explain HOW the use of Patois constitutes resistance and WHY that matters",
-      "The student uses too many sentences",
+      "However",
+      "Furthermore",
+      "Instead",
+      "Otherwise"
     ],
-    correctAnswer: 2,
-    explanation: `The missing step is EXPLANATION — the student says what she did but not how it works as resistance or why it was politically significant. PEE requires all three steps.`
+    correctAnswer: 1,
+    explanation: `Furthermore adds another related point.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Evaluating Argument",
-    question: `A student argues: 'Miss Lou's work shows that language is a site of political struggle.' Evaluate this claim.`,
+    skill: "Relevance",
+    question: `Which sentence should be removed?
+
+(1) Miss Lou used Jamaican Creole in poetry and performance. (2) Her work helped people value their language. (3) Blue whales are the largest animals on Earth. (4) Her influence is still recognised today.`,
     options: [
-      "This is factually wrong",
-      "This is too vague — all language is used for communication",
-      "This is a sophisticated, well-supported claim — language choices reflect and enact power relations, and Miss Lou's Patois was a deliberate intervention in those relations",
-      "This requires no evidence",
+      "Sentence 1",
+      "Sentence 2",
+      "Sentence 3",
+      "Sentence 4"
     ],
     correctAnswer: 2,
-    explanation: `The claim is evaluable: it connects the specific (Miss Lou's language choice) to the general (language as a political site) — a sophisticated thesis that can be supported with textual evidence.`
+    explanation: `Sentence 3 is unrelated to Miss Lou’s cultural influence.`
   },
   {
     id: 40,
     type: "writing",
-    skill: "Synthesising Ideas",
-    question: `An essay uses Miss Lou's work, Louise Bennett's scholarship, and academic research on Caribbean linguistics. A student SYNTHESISES these by:`,
+    skill: "Strong Conclusion",
+    question: `Which is the strongest conclusion for an essay about Miss Lou?`,
     options: [
-      "Listing what each source says in separate paragraphs",
-      "Copying from each source in turn",
-      "Weaving ideas from all three sources into a coherent argument that goes beyond any single source",
-      "Using only one source at a time",
+      "That is all about Miss Lou.",
+      "Miss Lou performed many times.",
+      "Everyone should become a poet.",
+      "By honouring Jamaican language and ordinary people, Miss Lou helped a nation speak about itself with greater confidence and pride."
     ],
-    correctAnswer: 2,
-    explanation: `Synthesis integrates multiple sources into a new, original argument — it is the highest-order writing skill, going beyond summary to create something new from the combined material.`
+    correctAnswer: 3,
+    explanation: `This conclusion restates the central idea in a thoughtful, memorable way.`
   }
-]
+];
+
+const shuffleAnswerOptions = (questions: Question[]): Question[] => {
+  return questions.map((question) => {
+    const optionsWithOriginalIndex = question.options.map((option, index) => ({
+      option,
+      index,
+    }))
+
+    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
+        optionsWithOriginalIndex[j],
+        optionsWithOriginalIndex[i],
+      ]
+    }
+
+    const correctAnswer = optionsWithOriginalIndex.findIndex(
+      (item) => item.index === question.correctAnswer,
+    )
+
+    return {
+      ...question,
+      options: optionsWithOriginalIndex.map((item) => item.option),
+      correctAnswer,
+    }
+  })
+}
 
 const SECTION_CONFIG = [
   { type: "reading" as const,    label: "Reading Comprehension",   note: "literal, inferential, and analytical reading across all difficulty levels" },
@@ -664,8 +705,11 @@ export default function G5LaMix4MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]                 = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]               = useState(60 * 60)
+  const [randomizedQuestions, setRandomizedQuestions] = useState<Question[]>([])
+  const hasSavedResult = useRef(false)
 
-  const availableQuestions = isPremium ? g5LaMix4Questions : g5LaMix4Questions.slice(0, FREE_QUESTION_LIMIT)
+  const sourceQuestions = isPremium ? g5LaMix4Questions : g5LaMix4Questions.slice(0, FREE_QUESTION_LIMIT)
+  const availableQuestions = randomizedQuestions.length > 0 ? randomizedQuestions : sourceQuestions
   const totalQuestions = availableQuestions.length
 
   useEffect(() => {
@@ -688,27 +732,39 @@ export default function G5LaMix4MockTest() {
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
 
-  const handleSubmit = async () => {
+  useEffect(() => {
+    if (!showResults || !user?.id || hasSavedResult.current) return
+
+    hasSavedResult.current = true
+    void saveStudentTestResult({
+      parentId: user.id,
+      studentName: user?.childName ?? "Student",
+      grade: "grade5",
+      subject: "Literacy",
+      testName: "Mixed 4",
+      difficulty: "Mixed",
+      score: calcScore(),
+      totalQuestions,
+      percentage: scorePct(),
+      completedAt: new Date().toISOString(),
+    }).catch(() => {
+      hasSavedResult.current = false
+    })
+  }, [showResults, user?.id, user?.childName, totalQuestions, answers])
+
+  const startTest = () => {
+    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions)
+    setRandomizedQuestions(shuffledQuestions)
+    setAnswers(new Array(shuffledQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    hasSavedResult.current = false
+    setStarted(true)
+  }
+
+  const handleSubmit = () => {
     setShowResults(true)
-
-    if (!user?.id) return
-
-    try {
-      await saveStudentTestResult({
-        parentId: user.id,
-        studentName: user?.childName ?? "Student",
-        grade: "grade5",
-        subject: "Language Arts",
-        testName: "Mixed 4",
-        difficulty: "Mixed",
-        score: calcScore(),
-        totalQuestions,
-        percentage: scorePct(),
-        completedAt: new Date().toISOString(),
-      })
-    } catch (error) {
-      console.error("Failed to save test result:", error)
-    }
   }
 
   const getGrade = () => {
@@ -730,8 +786,13 @@ export default function G5LaMix4MockTest() {
   }
 
   const resetTest = () => {
-    setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setStarted(false)
+    setShowResults(false)
+    setCurrentQuestion(0)
+    setRandomizedQuestions([])
+    setAnswers(new Array(sourceQuestions.length).fill(null))
+    setTimeLeft(60 * 60)
+    hasSavedResult.current = false
   }
 
   const q = availableQuestions[currentQuestion]
@@ -769,7 +830,7 @@ export default function G5LaMix4MockTest() {
             )}
             <div className="rounded-lg border border-blue-200 bg-white p-4">
               <h3 className="mb-2 font-semibold text-slate-800">Mixed Level Overview</h3>
-              <p className="text-slate-700">This test blends easy, moderate, and challenging questions across reading, vocabulary, grammar, and writing — giving you a complete picture of your Grade 5 Language Arts skills.</p>
+              <p className="text-slate-700">This mixed-level test uses Miss Lou and Jamaican language as its central theme while assessing comprehension, vocabulary, grammar, and writing across a balanced range of Grade 5 skills.</p>
             </div>
             <div className="rounded-lg bg-sky-50 p-4">
               <h3 className="mb-2 font-semibold text-sky-800">What to Expect</h3>
@@ -784,7 +845,7 @@ export default function G5LaMix4MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-blue-600">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-blue-600">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-blue-600 py-6 text-lg hover:bg-blue-700">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-blue-600 py-6 text-lg hover:bg-blue-700">Start Test</Button>
           </CardContent>
         </Card>
       </main>
