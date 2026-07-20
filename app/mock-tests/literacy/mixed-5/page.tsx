@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -27,6 +27,18 @@ interface Question {
   explanation: string
 }
 
+const P1 = `At the edge of Cedar Grove stood a narrow stream called Mango River. Older residents remembered when its water ran clear enough to reveal tiny fish beneath the stones. Over time, however, plastic bottles, food containers, and soil washed from nearby slopes collected in the stream. After heavy rain, the water sometimes overflowed onto the road.
+
+When Grade 5 students at Cedar Grove Primary began studying how human activity affects the environment, their teacher, Ms. Daley, suggested that they investigate the stream. The class did not begin by rushing outside with garbage bags. First, they interviewed residents, examined old photographs, and recorded what they observed at three different points along the river. They discovered that litter was only part of the problem. Bare patches on the hillside allowed rain to carry loose soil into the water, while a blocked drain caused water to back up near the road.
+
+The students called their project the Mango River Guardians. They prepared a simple plan and presented it to the school principal, the citizens’ association, and a nearby hardware store. The store donated gloves and tools, residents provided seedlings, and the parish council arranged to remove the filled garbage bags. On cleanup day, volunteers separated recyclable materials from other waste. Another group planted grass and small trees on the bare slope to help hold the soil in place.
+
+The work was not completed in one day. Every Friday for six weeks, teams measured the water level, photographed the riverbank, and checked whether new litter had appeared. They also made signs reminding people that drains and streams are not dumping grounds. At first, a few students felt disappointed because the water did not become clear immediately. Ms. Daley explained that restoring a damaged environment takes patience and repeated effort.
+
+By the end of the term, less rubbish was collecting near the bridge, and the newly planted slope remained more stable after rain. The students could not solve every problem affecting Mango River, but their records showed noticeable improvement. More importantly, the project changed how many people viewed the stream. It was no longer treated as an ignored space behind the community. It became a shared responsibility.
+
+The Mango River Guardians learned that useful action begins with careful observation. They also learned that lasting change is stronger when people combine knowledge, resources, and persistence. Their project started with a school lesson, but it grew into a community promise to protect a place that belonged to everyone.`
+
 const g5LaMix5Questions: Question[] = [
   {
     id: 1,
@@ -34,17 +46,27 @@ const g5LaMix5Questions: Question[] = [
     skill: "Main Idea",
     question: `Read the passage then answer the question.
 
-"Water covers seventy percent of the Earth's surface, yet fresh, clean water is one of the most precious and threatened resources on the planet. In Jamaica, water scarcity affects thousands of communities — particularly in rural areas — where drought, aging infrastructure, and pollution have made access to clean water unreliable. Scientists warn that climate change will make this worse: longer dry seasons, more intense storms, and rising sea levels will threaten freshwater supplies across the Caribbean. Yet solutions exist. Rainwater harvesting, watershed protection, and repairing leaking pipes can all significantly reduce water loss. The challenge is not technology — it is will, funding, and the political commitment to treat water as a right rather than a commodity."
+At the edge of Cedar Grove stood a narrow stream called Mango River. Older residents remembered when its water ran clear enough to reveal tiny fish beneath the stones. Over time, however, plastic bottles, food containers, and soil washed from nearby slopes collected in the stream. After heavy rain, the water sometimes overflowed onto the road.
 
-What is this passage MAINLY about?`,
+When Grade 5 students at Cedar Grove Primary began studying how human activity affects the environment, their teacher, Ms. Daley, suggested that they investigate the stream. The class did not begin by rushing outside with garbage bags. First, they interviewed residents, examined old photographs, and recorded what they observed at three different points along the river. They discovered that litter was only part of the problem. Bare patches on the hillside allowed rain to carry loose soil into the water, while a blocked drain caused water to back up near the road.
+
+The students called their project the Mango River Guardians. They prepared a simple plan and presented it to the school principal, the citizens’ association, and a nearby hardware store. The store donated gloves and tools, residents provided seedlings, and the parish council arranged to remove the filled garbage bags. On cleanup day, volunteers separated recyclable materials from other waste. Another group planted grass and small trees on the bare slope to help hold the soil in place.
+
+The work was not completed in one day. Every Friday for six weeks, teams measured the water level, photographed the riverbank, and checked whether new litter had appeared. They also made signs reminding people that drains and streams are not dumping grounds. At first, a few students felt disappointed because the water did not become clear immediately. Ms. Daley explained that restoring a damaged environment takes patience and repeated effort.
+
+By the end of the term, less rubbish was collecting near the bridge, and the newly planted slope remained more stable after rain. The students could not solve every problem affecting Mango River, but their records showed noticeable improvement. More importantly, the project changed how many people viewed the stream. It was no longer treated as an ignored space behind the community. It became a shared responsibility.
+
+The Mango River Guardians learned that useful action begins with careful observation. They also learned that lasting change is stronger when people combine knowledge, resources, and persistence. Their project started with a school lesson, but it grew into a community promise to protect a place that belonged to everyone.
+
+What is the passage mainly about?`,
     options: [
-      "Water chemistry",
-      "The general importance of water",
-      "Jamaica's water scarcity crisis, its causes, and the solutions that exist if the political will is present",
-      "How rainfall works",
+      "How students used investigation and teamwork to improve a neglected stream",
+      "Why the hardware store opened near Cedar Grove",
+      "How to catch fish in a shallow river",
+      "Why all environmental problems can be solved in one day"
     ],
-    correctAnswer: 2,
-    explanation: `The passage covers the crisis, its causes (climate, infrastructure, pollution), and solutions — framed as a question of political will.`
+    correctAnswer: 0,
+    explanation: `The passage explains how students studied the causes of the stream’s problems and worked with the community to improve it.`
   },
   {
     id: 2,
@@ -52,603 +74,772 @@ What is this passage MAINLY about?`,
     skill: "Detail",
     question: `Read the passage then answer the question.
 
-"Water covers seventy percent of the Earth's surface, yet fresh, clean water is one of the most precious and threatened resources on the planet. In Jamaica, water scarcity affects thousands of communities — particularly in rural areas — where drought, aging infrastructure, and pollution have made access to clean water unreliable. Scientists warn that climate change will make this worse: longer dry seasons, more intense storms, and rising sea levels will threaten freshwater supplies across the Caribbean. Yet solutions exist. Rainwater harvesting, watershed protection, and repairing leaking pipes can all significantly reduce water loss. The challenge is not technology — it is will, funding, and the political commitment to treat water as a right rather than a commodity."
+At the edge of Cedar Grove stood a narrow stream called Mango River. Older residents remembered when its water ran clear enough to reveal tiny fish beneath the stones. Over time, however, plastic bottles, food containers, and soil washed from nearby slopes collected in the stream. After heavy rain, the water sometimes overflowed onto the road.
 
-According to the passage, which group is particularly affected by water scarcity in Jamaica?`,
+When Grade 5 students at Cedar Grove Primary began studying how human activity affects the environment, their teacher, Ms. Daley, suggested that they investigate the stream. The class did not begin by rushing outside with garbage bags. First, they interviewed residents, examined old photographs, and recorded what they observed at three different points along the river. They discovered that litter was only part of the problem. Bare patches on the hillside allowed rain to carry loose soil into the water, while a blocked drain caused water to back up near the road.
+
+The students called their project the Mango River Guardians. They prepared a simple plan and presented it to the school principal, the citizens’ association, and a nearby hardware store. The store donated gloves and tools, residents provided seedlings, and the parish council arranged to remove the filled garbage bags. On cleanup day, volunteers separated recyclable materials from other waste. Another group planted grass and small trees on the bare slope to help hold the soil in place.
+
+The work was not completed in one day. Every Friday for six weeks, teams measured the water level, photographed the riverbank, and checked whether new litter had appeared. They also made signs reminding people that drains and streams are not dumping grounds. At first, a few students felt disappointed because the water did not become clear immediately. Ms. Daley explained that restoring a damaged environment takes patience and repeated effort.
+
+By the end of the term, less rubbish was collecting near the bridge, and the newly planted slope remained more stable after rain. The students could not solve every problem affecting Mango River, but their records showed noticeable improvement. More importantly, the project changed how many people viewed the stream. It was no longer treated as an ignored space behind the community. It became a shared responsibility.
+
+The Mango River Guardians learned that useful action begins with careful observation. They also learned that lasting change is stronger when people combine knowledge, resources, and persistence. Their project started with a school lesson, but it grew into a community promise to protect a place that belonged to everyone.
+
+What did the students do before beginning the cleanup?`,
     options: [
-      "Urban communities",
-      "Coastal fishing communities",
-      "Rural communities, where drought and aging infrastructure reduce access",
-      "School children",
+      "They planted trees beside the school.",
+      "They interviewed residents, studied photographs, and recorded observations.",
+      "They closed the road near the bridge.",
+      "They asked people to stop using the river."
     ],
-    correctAnswer: 2,
-    explanation: `The passage states water scarcity 'affects thousands of communities — particularly in rural areas.'`
+    correctAnswer: 1,
+    explanation: `The class first gathered information through interviews, photographs, and observations.`
   },
   {
     id: 3,
     type: "reading",
-    skill: "Vocabulary in Context",
+    skill: "Cause and Effect",
     question: `Read the passage then answer the question.
 
-"Water covers seventy percent of the Earth's surface, yet fresh, clean water is one of the most precious and threatened resources on the planet. In Jamaica, water scarcity affects thousands of communities — particularly in rural areas — where drought, aging infrastructure, and pollution have made access to clean water unreliable. Scientists warn that climate change will make this worse: longer dry seasons, more intense storms, and rising sea levels will threaten freshwater supplies across the Caribbean. Yet solutions exist. Rainwater harvesting, watershed protection, and repairing leaking pipes can all significantly reduce water loss. The challenge is not technology — it is will, funding, and the political commitment to treat water as a right rather than a commodity."
+At the edge of Cedar Grove stood a narrow stream called Mango River. Older residents remembered when its water ran clear enough to reveal tiny fish beneath the stones. Over time, however, plastic bottles, food containers, and soil washed from nearby slopes collected in the stream. After heavy rain, the water sometimes overflowed onto the road.
 
-The word 'commodity' in the passage means:`,
+When Grade 5 students at Cedar Grove Primary began studying how human activity affects the environment, their teacher, Ms. Daley, suggested that they investigate the stream. The class did not begin by rushing outside with garbage bags. First, they interviewed residents, examined old photographs, and recorded what they observed at three different points along the river. They discovered that litter was only part of the problem. Bare patches on the hillside allowed rain to carry loose soil into the water, while a blocked drain caused water to back up near the road.
+
+The students called their project the Mango River Guardians. They prepared a simple plan and presented it to the school principal, the citizens’ association, and a nearby hardware store. The store donated gloves and tools, residents provided seedlings, and the parish council arranged to remove the filled garbage bags. On cleanup day, volunteers separated recyclable materials from other waste. Another group planted grass and small trees on the bare slope to help hold the soil in place.
+
+The work was not completed in one day. Every Friday for six weeks, teams measured the water level, photographed the riverbank, and checked whether new litter had appeared. They also made signs reminding people that drains and streams are not dumping grounds. At first, a few students felt disappointed because the water did not become clear immediately. Ms. Daley explained that restoring a damaged environment takes patience and repeated effort.
+
+By the end of the term, less rubbish was collecting near the bridge, and the newly planted slope remained more stable after rain. The students could not solve every problem affecting Mango River, but their records showed noticeable improvement. More importantly, the project changed how many people viewed the stream. It was no longer treated as an ignored space behind the community. It became a shared responsibility.
+
+The Mango River Guardians learned that useful action begins with careful observation. They also learned that lasting change is stronger when people combine knowledge, resources, and persistence. Their project started with a school lesson, but it grew into a community promise to protect a place that belonged to everyone.
+
+Why was loose soil being washed into the stream?`,
     options: [
-      "a natural right belonging to everyone",
-      "a scientific element",
-      "something bought and sold on the market — implying value defined by price rather than need",
-      "a type of water source",
+      "The river contained too many fish.",
+      "The hardware store donated tools.",
+      "Bare hillside patches allowed rain to carry the soil away.",
+      "Students measured the water every Friday."
     ],
-    correctAnswer: 0,
-    explanation: `The passage contrasts treating water as a 'right' versus a 'commodity' (something sold) — the distinction is central to the argument.`
+    correctAnswer: 2,
+    explanation: `The passage directly links the bare hillside to soil washing into the stream during rain.`
   },
   {
     id: 4,
     type: "reading",
-    skill: "Literal Comprehension",
+    skill: "Inference",
     question: `Read the passage then answer the question.
 
-"Water covers seventy percent of the Earth's surface, yet fresh, clean water is one of the most precious and threatened resources on the planet. In Jamaica, water scarcity affects thousands of communities — particularly in rural areas — where drought, aging infrastructure, and pollution have made access to clean water unreliable. Scientists warn that climate change will make this worse: longer dry seasons, more intense storms, and rising sea levels will threaten freshwater supplies across the Caribbean. Yet solutions exist. Rainwater harvesting, watershed protection, and repairing leaking pipes can all significantly reduce water loss. The challenge is not technology — it is will, funding, and the political commitment to treat water as a right rather than a commodity."
+At the edge of Cedar Grove stood a narrow stream called Mango River. Older residents remembered when its water ran clear enough to reveal tiny fish beneath the stones. Over time, however, plastic bottles, food containers, and soil washed from nearby slopes collected in the stream. After heavy rain, the water sometimes overflowed onto the road.
 
-Which of the following does the passage list as a solution to water scarcity?`,
+When Grade 5 students at Cedar Grove Primary began studying how human activity affects the environment, their teacher, Ms. Daley, suggested that they investigate the stream. The class did not begin by rushing outside with garbage bags. First, they interviewed residents, examined old photographs, and recorded what they observed at three different points along the river. They discovered that litter was only part of the problem. Bare patches on the hillside allowed rain to carry loose soil into the water, while a blocked drain caused water to back up near the road.
+
+The students called their project the Mango River Guardians. They prepared a simple plan and presented it to the school principal, the citizens’ association, and a nearby hardware store. The store donated gloves and tools, residents provided seedlings, and the parish council arranged to remove the filled garbage bags. On cleanup day, volunteers separated recyclable materials from other waste. Another group planted grass and small trees on the bare slope to help hold the soil in place.
+
+The work was not completed in one day. Every Friday for six weeks, teams measured the water level, photographed the riverbank, and checked whether new litter had appeared. They also made signs reminding people that drains and streams are not dumping grounds. At first, a few students felt disappointed because the water did not become clear immediately. Ms. Daley explained that restoring a damaged environment takes patience and repeated effort.
+
+By the end of the term, less rubbish was collecting near the bridge, and the newly planted slope remained more stable after rain. The students could not solve every problem affecting Mango River, but their records showed noticeable improvement. More importantly, the project changed how many people viewed the stream. It was no longer treated as an ignored space behind the community. It became a shared responsibility.
+
+The Mango River Guardians learned that useful action begins with careful observation. They also learned that lasting change is stronger when people combine knowledge, resources, and persistence. Their project started with a school lesson, but it grew into a community promise to protect a place that belonged to everyone.
+
+Why did the class present its plan to several community groups?`,
     options: [
-      "Building desalination plants",
-      "Importing water from other countries",
-      "Rainwater harvesting, watershed protection, and repairing leaking pipes",
-      "Restricting water use entirely",
+      "They wanted to avoid doing any work themselves.",
+      "They needed permission to rename the river.",
+      "They planned to turn the stream into a playground.",
+      "They understood that different groups could provide different kinds of help."
     ],
-    correctAnswer: 2,
-    explanation: `The passage specifically lists 'rainwater harvesting, watershed protection, and repairing leaking pipes' as available solutions.`
+    correctAnswer: 3,
+    explanation: `Each group contributed something useful, such as tools, seedlings, or waste removal.`
   },
   {
     id: 5,
     type: "reading",
-    skill: "Cause and Effect",
+    skill: "Sequence",
     question: `Read the passage then answer the question.
 
-"Water covers seventy percent of the Earth's surface, yet fresh, clean water is one of the most precious and threatened resources on the planet. In Jamaica, water scarcity affects thousands of communities — particularly in rural areas — where drought, aging infrastructure, and pollution have made access to clean water unreliable. Scientists warn that climate change will make this worse: longer dry seasons, more intense storms, and rising sea levels will threaten freshwater supplies across the Caribbean. Yet solutions exist. Rainwater harvesting, watershed protection, and repairing leaking pipes can all significantly reduce water loss. The challenge is not technology — it is will, funding, and the political commitment to treat water as a right rather than a commodity."
+At the edge of Cedar Grove stood a narrow stream called Mango River. Older residents remembered when its water ran clear enough to reveal tiny fish beneath the stones. Over time, however, plastic bottles, food containers, and soil washed from nearby slopes collected in the stream. After heavy rain, the water sometimes overflowed onto the road.
 
-According to the passage, what will climate change do to Jamaica's water supplies?`,
+When Grade 5 students at Cedar Grove Primary began studying how human activity affects the environment, their teacher, Ms. Daley, suggested that they investigate the stream. The class did not begin by rushing outside with garbage bags. First, they interviewed residents, examined old photographs, and recorded what they observed at three different points along the river. They discovered that litter was only part of the problem. Bare patches on the hillside allowed rain to carry loose soil into the water, while a blocked drain caused water to back up near the road.
+
+The students called their project the Mango River Guardians. They prepared a simple plan and presented it to the school principal, the citizens’ association, and a nearby hardware store. The store donated gloves and tools, residents provided seedlings, and the parish council arranged to remove the filled garbage bags. On cleanup day, volunteers separated recyclable materials from other waste. Another group planted grass and small trees on the bare slope to help hold the soil in place.
+
+The work was not completed in one day. Every Friday for six weeks, teams measured the water level, photographed the riverbank, and checked whether new litter had appeared. They also made signs reminding people that drains and streams are not dumping grounds. At first, a few students felt disappointed because the water did not become clear immediately. Ms. Daley explained that restoring a damaged environment takes patience and repeated effort.
+
+By the end of the term, less rubbish was collecting near the bridge, and the newly planted slope remained more stable after rain. The students could not solve every problem affecting Mango River, but their records showed noticeable improvement. More importantly, the project changed how many people viewed the stream. It was no longer treated as an ignored space behind the community. It became a shared responsibility.
+
+The Mango River Guardians learned that useful action begins with careful observation. They also learned that lasting change is stronger when people combine knowledge, resources, and persistence. Their project started with a school lesson, but it grew into a community promise to protect a place that belonged to everyone.
+
+Which event happened first?`,
     options: [
-      "Improve them through more rainfall",
-      "Have no effect",
-      "Worsen them through longer dry seasons, intense storms, and rising sea levels threatening freshwater",
-      "Only affect coastal areas",
+      "The students investigated the stream and its problems.",
+      "Volunteers planted the bare slope.",
+      "The parish council removed garbage bags.",
+      "The class checked the river every Friday."
     ],
-    correctAnswer: 2,
-    explanation: `The passage lists specific climate impacts: 'longer dry seasons, more intense storms, and rising sea levels will threaten freshwater supplies.'`
+    correctAnswer: 0,
+    explanation: `The investigation came before the plan, cleanup, planting, and follow-up checks.`
   },
   {
     id: 6,
     type: "reading",
-    skill: "Inference",
+    skill: "Vocabulary in Context",
     question: `Read the passage then answer the question.
 
-"Water covers seventy percent of the Earth's surface, yet fresh, clean water is one of the most precious and threatened resources on the planet. In Jamaica, water scarcity affects thousands of communities — particularly in rural areas — where drought, aging infrastructure, and pollution have made access to clean water unreliable. Scientists warn that climate change will make this worse: longer dry seasons, more intense storms, and rising sea levels will threaten freshwater supplies across the Caribbean. Yet solutions exist. Rainwater harvesting, watershed protection, and repairing leaking pipes can all significantly reduce water loss. The challenge is not technology — it is will, funding, and the political commitment to treat water as a right rather than a commodity."
+At the edge of Cedar Grove stood a narrow stream called Mango River. Older residents remembered when its water ran clear enough to reveal tiny fish beneath the stones. Over time, however, plastic bottles, food containers, and soil washed from nearby slopes collected in the stream. After heavy rain, the water sometimes overflowed onto the road.
 
-What does the phrase 'the challenge is not technology — it is will, funding, and political commitment' imply?`,
+When Grade 5 students at Cedar Grove Primary began studying how human activity affects the environment, their teacher, Ms. Daley, suggested that they investigate the stream. The class did not begin by rushing outside with garbage bags. First, they interviewed residents, examined old photographs, and recorded what they observed at three different points along the river. They discovered that litter was only part of the problem. Bare patches on the hillside allowed rain to carry loose soil into the water, while a blocked drain caused water to back up near the road.
+
+The students called their project the Mango River Guardians. They prepared a simple plan and presented it to the school principal, the citizens’ association, and a nearby hardware store. The store donated gloves and tools, residents provided seedlings, and the parish council arranged to remove the filled garbage bags. On cleanup day, volunteers separated recyclable materials from other waste. Another group planted grass and small trees on the bare slope to help hold the soil in place.
+
+The work was not completed in one day. Every Friday for six weeks, teams measured the water level, photographed the riverbank, and checked whether new litter had appeared. They also made signs reminding people that drains and streams are not dumping grounds. At first, a few students felt disappointed because the water did not become clear immediately. Ms. Daley explained that restoring a damaged environment takes patience and repeated effort.
+
+By the end of the term, less rubbish was collecting near the bridge, and the newly planted slope remained more stable after rain. The students could not solve every problem affecting Mango River, but their records showed noticeable improvement. More importantly, the project changed how many people viewed the stream. It was no longer treated as an ignored space behind the community. It became a shared responsibility.
+
+The Mango River Guardians learned that useful action begins with careful observation. They also learned that lasting change is stronger when people combine knowledge, resources, and persistence. Their project started with a school lesson, but it grew into a community promise to protect a place that belonged to everyone.
+
+In the passage, the word “stable” most nearly means`,
     options: [
-      "Jamaica lacks the technology to solve the water crisis",
-      "The solutions to the water crisis are technically available — the barrier is human decision-making, not capability",
-      "Technology is not relevant to water problems",
-      "Politicians are unaware of the crisis",
+      "covered with flowers",
+      "less likely to move or wash away",
+      "hidden from the road",
+      "completely dry"
     ],
     correctAnswer: 1,
-    explanation: `The passage implies that the technical solutions exist — the barrier is human choice: whether governments choose to prioritise and fund them.`
+    explanation: `The planted slope remained more secure and was less likely to erode after rain.`
   },
   {
     id: 7,
     type: "reading",
-    skill: "Author's Technique",
+    skill: "Author’s Purpose",
     question: `Read the passage then answer the question.
 
-"Water covers seventy percent of the Earth's surface, yet fresh, clean water is one of the most precious and threatened resources on the planet. In Jamaica, water scarcity affects thousands of communities — particularly in rural areas — where drought, aging infrastructure, and pollution have made access to clean water unreliable. Scientists warn that climate change will make this worse: longer dry seasons, more intense storms, and rising sea levels will threaten freshwater supplies across the Caribbean. Yet solutions exist. Rainwater harvesting, watershed protection, and repairing leaking pipes can all significantly reduce water loss. The challenge is not technology — it is will, funding, and the political commitment to treat water as a right rather than a commodity."
+At the edge of Cedar Grove stood a narrow stream called Mango River. Older residents remembered when its water ran clear enough to reveal tiny fish beneath the stones. Over time, however, plastic bottles, food containers, and soil washed from nearby slopes collected in the stream. After heavy rain, the water sometimes overflowed onto the road.
 
-Why does the author frame water as a 'right rather than a commodity' at the end?`,
+When Grade 5 students at Cedar Grove Primary began studying how human activity affects the environment, their teacher, Ms. Daley, suggested that they investigate the stream. The class did not begin by rushing outside with garbage bags. First, they interviewed residents, examined old photographs, and recorded what they observed at three different points along the river. They discovered that litter was only part of the problem. Bare patches on the hillside allowed rain to carry loose soil into the water, while a blocked drain caused water to back up near the road.
+
+The students called their project the Mango River Guardians. They prepared a simple plan and presented it to the school principal, the citizens’ association, and a nearby hardware store. The store donated gloves and tools, residents provided seedlings, and the parish council arranged to remove the filled garbage bags. On cleanup day, volunteers separated recyclable materials from other waste. Another group planted grass and small trees on the bare slope to help hold the soil in place.
+
+The work was not completed in one day. Every Friday for six weeks, teams measured the water level, photographed the riverbank, and checked whether new litter had appeared. They also made signs reminding people that drains and streams are not dumping grounds. At first, a few students felt disappointed because the water did not become clear immediately. Ms. Daley explained that restoring a damaged environment takes patience and repeated effort.
+
+By the end of the term, less rubbish was collecting near the bridge, and the newly planted slope remained more stable after rain. The students could not solve every problem affecting Mango River, but their records showed noticeable improvement. More importantly, the project changed how many people viewed the stream. It was no longer treated as an ignored space behind the community. It became a shared responsibility.
+
+The Mango River Guardians learned that useful action begins with careful observation. They also learned that lasting change is stronger when people combine knowledge, resources, and persistence. Their project started with a school lesson, but it grew into a community promise to protect a place that belonged to everyone.
+
+Why does the author mention that the water did not become clear immediately?`,
     options: [
-      "To explain water chemistry",
-      "To confuse readers",
-      "To elevate the argument from a technical problem to a moral one — framing water access as a matter of justice, not just efficiency",
-      "To argue against water pricing",
+      "To prove that the project failed",
+      "To show that the students chose the wrong stream",
+      "To emphasize that environmental repair requires patience and continued effort",
+      "To explain why the class stopped collecting data"
     ],
     correctAnswer: 2,
-    explanation: `Framing water as a right (not a commodity) shifts the argument from technical to moral — it implies denial of water access is not just a failure but an injustice.`
+    explanation: `The detail supports the lesson that restoration takes time and repeated effort.`
   },
   {
     id: 8,
     type: "reading",
-    skill: "Author's Purpose",
+    skill: "Drawing Conclusions",
     question: `Read the passage then answer the question.
 
-"Water covers seventy percent of the Earth's surface, yet fresh, clean water is one of the most precious and threatened resources on the planet. In Jamaica, water scarcity affects thousands of communities — particularly in rural areas — where drought, aging infrastructure, and pollution have made access to clean water unreliable. Scientists warn that climate change will make this worse: longer dry seasons, more intense storms, and rising sea levels will threaten freshwater supplies across the Caribbean. Yet solutions exist. Rainwater harvesting, watershed protection, and repairing leaking pipes can all significantly reduce water loss. The challenge is not technology — it is will, funding, and the political commitment to treat water as a right rather than a commodity."
+At the edge of Cedar Grove stood a narrow stream called Mango River. Older residents remembered when its water ran clear enough to reveal tiny fish beneath the stones. Over time, however, plastic bottles, food containers, and soil washed from nearby slopes collected in the stream. After heavy rain, the water sometimes overflowed onto the road.
 
-The MAIN purpose of this passage is to:`,
+When Grade 5 students at Cedar Grove Primary began studying how human activity affects the environment, their teacher, Ms. Daley, suggested that they investigate the stream. The class did not begin by rushing outside with garbage bags. First, they interviewed residents, examined old photographs, and recorded what they observed at three different points along the river. They discovered that litter was only part of the problem. Bare patches on the hillside allowed rain to carry loose soil into the water, while a blocked drain caused water to back up near the road.
+
+The students called their project the Mango River Guardians. They prepared a simple plan and presented it to the school principal, the citizens’ association, and a nearby hardware store. The store donated gloves and tools, residents provided seedlings, and the parish council arranged to remove the filled garbage bags. On cleanup day, volunteers separated recyclable materials from other waste. Another group planted grass and small trees on the bare slope to help hold the soil in place.
+
+The work was not completed in one day. Every Friday for six weeks, teams measured the water level, photographed the riverbank, and checked whether new litter had appeared. They also made signs reminding people that drains and streams are not dumping grounds. At first, a few students felt disappointed because the water did not become clear immediately. Ms. Daley explained that restoring a damaged environment takes patience and repeated effort.
+
+By the end of the term, less rubbish was collecting near the bridge, and the newly planted slope remained more stable after rain. The students could not solve every problem affecting Mango River, but their records showed noticeable improvement. More importantly, the project changed how many people viewed the stream. It was no longer treated as an ignored space behind the community. It became a shared responsibility.
+
+The Mango River Guardians learned that useful action begins with careful observation. They also learned that lasting change is stronger when people combine knowledge, resources, and persistence. Their project started with a school lesson, but it grew into a community promise to protect a place that belonged to everyone.
+
+What can the reader conclude about Ms. Daley?`,
     options: [
-      "Explain the water cycle",
-      "Scare readers about drought",
-      "Inform readers about Jamaica's water crisis and persuade them — and decision-makers — that political commitment is the key to solving it",
-      "Advertise water treatment products",
+      "She cared only about finishing the science textbook.",
+      "She expected residents to complete the entire project.",
+      "She believed photographs were more useful than action.",
+      "She guided students to investigate carefully and persist when results were slow."
     ],
-    correctAnswer: 2,
-    explanation: `The passage builds from problem to solutions, ending with a moral argument — its purpose is both informative and persuasive.`
+    correctAnswer: 3,
+    explanation: `Her actions show that she valued evidence, planning, and perseverance.`
   },
   {
     id: 9,
     type: "reading",
-    skill: "Tone",
+    skill: "Evidence",
     question: `Read the passage then answer the question.
 
-"Water covers seventy percent of the Earth's surface, yet fresh, clean water is one of the most precious and threatened resources on the planet. In Jamaica, water scarcity affects thousands of communities — particularly in rural areas — where drought, aging infrastructure, and pollution have made access to clean water unreliable. Scientists warn that climate change will make this worse: longer dry seasons, more intense storms, and rising sea levels will threaten freshwater supplies across the Caribbean. Yet solutions exist. Rainwater harvesting, watershed protection, and repairing leaking pipes can all significantly reduce water loss. The challenge is not technology — it is will, funding, and the political commitment to treat water as a right rather than a commodity."
+At the edge of Cedar Grove stood a narrow stream called Mango River. Older residents remembered when its water ran clear enough to reveal tiny fish beneath the stones. Over time, however, plastic bottles, food containers, and soil washed from nearby slopes collected in the stream. After heavy rain, the water sometimes overflowed onto the road.
 
-The tone of this passage is BEST described as:`,
+When Grade 5 students at Cedar Grove Primary began studying how human activity affects the environment, their teacher, Ms. Daley, suggested that they investigate the stream. The class did not begin by rushing outside with garbage bags. First, they interviewed residents, examined old photographs, and recorded what they observed at three different points along the river. They discovered that litter was only part of the problem. Bare patches on the hillside allowed rain to carry loose soil into the water, while a blocked drain caused water to back up near the road.
+
+The students called their project the Mango River Guardians. They prepared a simple plan and presented it to the school principal, the citizens’ association, and a nearby hardware store. The store donated gloves and tools, residents provided seedlings, and the parish council arranged to remove the filled garbage bags. On cleanup day, volunteers separated recyclable materials from other waste. Another group planted grass and small trees on the bare slope to help hold the soil in place.
+
+The work was not completed in one day. Every Friday for six weeks, teams measured the water level, photographed the riverbank, and checked whether new litter had appeared. They also made signs reminding people that drains and streams are not dumping grounds. At first, a few students felt disappointed because the water did not become clear immediately. Ms. Daley explained that restoring a damaged environment takes patience and repeated effort.
+
+By the end of the term, less rubbish was collecting near the bridge, and the newly planted slope remained more stable after rain. The students could not solve every problem affecting Mango River, but their records showed noticeable improvement. More importantly, the project changed how many people viewed the stream. It was no longer treated as an ignored space behind the community. It became a shared responsibility.
+
+The Mango River Guardians learned that useful action begins with careful observation. They also learned that lasting change is stronger when people combine knowledge, resources, and persistence. Their project started with a school lesson, but it grew into a community promise to protect a place that belonged to everyone.
+
+Which detail best shows that the project produced measurable improvement?`,
     options: [
-      "Hopeless — the problem is too large to solve",
-      "Angry at specific politicians",
-      "Urgently concerned but ultimately hopeful — solutions exist if the will to use them is present",
-      "Entirely neutral and scientific",
+      "Less rubbish collected near the bridge, and the planted slope stayed more stable after rain.",
+      "The students gave the project a name.",
+      "Older residents remembered seeing fish.",
+      "The class studied human activity."
     ],
-    correctAnswer: 2,
-    explanation: `The passage is urgent (crisis is real) but not hopeless (solutions exist) — a balanced, engaged tone.`
+    correctAnswer: 0,
+    explanation: `This detail reports observable changes after the project.`
   },
   {
     id: 10,
     type: "reading",
-    skill: "Critical Reading",
+    skill: "Compare and Contrast",
     question: `Read the passage then answer the question.
 
-"Water covers seventy percent of the Earth's surface, yet fresh, clean water is one of the most precious and threatened resources on the planet. In Jamaica, water scarcity affects thousands of communities — particularly in rural areas — where drought, aging infrastructure, and pollution have made access to clean water unreliable. Scientists warn that climate change will make this worse: longer dry seasons, more intense storms, and rising sea levels will threaten freshwater supplies across the Caribbean. Yet solutions exist. Rainwater harvesting, watershed protection, and repairing leaking pipes can all significantly reduce water loss. The challenge is not technology — it is will, funding, and the political commitment to treat water as a right rather than a commodity."
+At the edge of Cedar Grove stood a narrow stream called Mango River. Older residents remembered when its water ran clear enough to reveal tiny fish beneath the stones. Over time, however, plastic bottles, food containers, and soil washed from nearby slopes collected in the stream. After heavy rain, the water sometimes overflowed onto the road.
 
-The author argues that 'the challenge is political commitment.' A critical reader would ask:`,
+When Grade 5 students at Cedar Grove Primary began studying how human activity affects the environment, their teacher, Ms. Daley, suggested that they investigate the stream. The class did not begin by rushing outside with garbage bags. First, they interviewed residents, examined old photographs, and recorded what they observed at three different points along the river. They discovered that litter was only part of the problem. Bare patches on the hillside allowed rain to carry loose soil into the water, while a blocked drain caused water to back up near the road.
+
+The students called their project the Mango River Guardians. They prepared a simple plan and presented it to the school principal, the citizens’ association, and a nearby hardware store. The store donated gloves and tools, residents provided seedlings, and the parish council arranged to remove the filled garbage bags. On cleanup day, volunteers separated recyclable materials from other waste. Another group planted grass and small trees on the bare slope to help hold the soil in place.
+
+The work was not completed in one day. Every Friday for six weeks, teams measured the water level, photographed the riverbank, and checked whether new litter had appeared. They also made signs reminding people that drains and streams are not dumping grounds. At first, a few students felt disappointed because the water did not become clear immediately. Ms. Daley explained that restoring a damaged environment takes patience and repeated effort.
+
+By the end of the term, less rubbish was collecting near the bridge, and the newly planted slope remained more stable after rain. The students could not solve every problem affecting Mango River, but their records showed noticeable improvement. More importantly, the project changed how many people viewed the stream. It was no longer treated as an ignored space behind the community. It became a shared responsibility.
+
+The Mango River Guardians learned that useful action begins with careful observation. They also learned that lasting change is stronger when people combine knowledge, resources, and persistence. Their project started with a school lesson, but it grew into a community promise to protect a place that belonged to everyone.
+
+How did people’s view of the stream change?`,
     options: [
-      "Why is water important?",
-      "Is water expensive in Jamaica?",
-      "What specific political actions would constitute this commitment, and what barriers prevent politicians from taking them?",
-      "Are the solutions mentioned proven to work?",
+      "They first valued it and later ignored it.",
+      "They began to see it as a shared responsibility instead of a forgotten space.",
+      "They decided it belonged only to the school.",
+      "They stopped believing that it could overflow."
     ],
-    correctAnswer: 2,
-    explanation: `A critical reader moves from identification of the problem to specific analysis of the solution — what would political commitment actually require, and what stands in the way?`
+    correctAnswer: 1,
+    explanation: `The passage contrasts an ignored space with a place the community felt responsible for protecting.`
   },
   {
     id: 11,
     type: "reading",
-    skill: "Figurative Language",
+    skill: "Theme",
     question: `Read the passage then answer the question.
 
-"Water covers seventy percent of the Earth's surface, yet fresh, clean water is one of the most precious and threatened resources on the planet. In Jamaica, water scarcity affects thousands of communities — particularly in rural areas — where drought, aging infrastructure, and pollution have made access to clean water unreliable. Scientists warn that climate change will make this worse: longer dry seasons, more intense storms, and rising sea levels will threaten freshwater supplies across the Caribbean. Yet solutions exist. Rainwater harvesting, watershed protection, and repairing leaking pipes can all significantly reduce water loss. The challenge is not technology — it is will, funding, and the political commitment to treat water as a right rather than a commodity."
+At the edge of Cedar Grove stood a narrow stream called Mango River. Older residents remembered when its water ran clear enough to reveal tiny fish beneath the stones. Over time, however, plastic bottles, food containers, and soil washed from nearby slopes collected in the stream. After heavy rain, the water sometimes overflowed onto the road.
 
-'A leaking pipe wastes more water than a drought.' Even if not in the exact passage, this type of comparison would be used to:`,
+When Grade 5 students at Cedar Grove Primary began studying how human activity affects the environment, their teacher, Ms. Daley, suggested that they investigate the stream. The class did not begin by rushing outside with garbage bags. First, they interviewed residents, examined old photographs, and recorded what they observed at three different points along the river. They discovered that litter was only part of the problem. Bare patches on the hillside allowed rain to carry loose soil into the water, while a blocked drain caused water to back up near the road.
+
+The students called their project the Mango River Guardians. They prepared a simple plan and presented it to the school principal, the citizens’ association, and a nearby hardware store. The store donated gloves and tools, residents provided seedlings, and the parish council arranged to remove the filled garbage bags. On cleanup day, volunteers separated recyclable materials from other waste. Another group planted grass and small trees on the bare slope to help hold the soil in place.
+
+The work was not completed in one day. Every Friday for six weeks, teams measured the water level, photographed the riverbank, and checked whether new litter had appeared. They also made signs reminding people that drains and streams are not dumping grounds. At first, a few students felt disappointed because the water did not become clear immediately. Ms. Daley explained that restoring a damaged environment takes patience and repeated effort.
+
+By the end of the term, less rubbish was collecting near the bridge, and the newly planted slope remained more stable after rain. The students could not solve every problem affecting Mango River, but their records showed noticeable improvement. More importantly, the project changed how many people viewed the stream. It was no longer treated as an ignored space behind the community. It became a shared responsibility.
+
+The Mango River Guardians learned that useful action begins with careful observation. They also learned that lasting change is stronger when people combine knowledge, resources, and persistence. Their project started with a school lesson, but it grew into a community promise to protect a place that belonged to everyone.
+
+Which theme is best supported by the passage?`,
     options: [
-      "Confuse readers",
-      "Compare unrelated things randomly",
-      "Dramatise the scale of preventable waste by comparing man-made inefficiency to a natural disaster",
-      "Make the passage longer",
+      "Young people should avoid difficult community problems.",
+      "Natural places repair themselves without assistance.",
+      "Careful study and cooperation can lead to meaningful change.",
+      "Only government agencies can protect the environment."
     ],
     correctAnswer: 2,
-    explanation: `This comparison makes the scale of preventable water loss vivid — if a man-made problem is worse than a natural disaster, the urgency of fixing it is clear.`
+    explanation: `The students combined investigation, cooperation, and persistence to create improvement.`
   },
   {
     id: 12,
     type: "reading",
-    skill: "Theme",
+    skill: "Text Structure",
     question: `Read the passage then answer the question.
 
-"Water covers seventy percent of the Earth's surface, yet fresh, clean water is one of the most precious and threatened resources on the planet. In Jamaica, water scarcity affects thousands of communities — particularly in rural areas — where drought, aging infrastructure, and pollution have made access to clean water unreliable. Scientists warn that climate change will make this worse: longer dry seasons, more intense storms, and rising sea levels will threaten freshwater supplies across the Caribbean. Yet solutions exist. Rainwater harvesting, watershed protection, and repairing leaking pipes can all significantly reduce water loss. The challenge is not technology — it is will, funding, and the political commitment to treat water as a right rather than a commodity."
+At the edge of Cedar Grove stood a narrow stream called Mango River. Older residents remembered when its water ran clear enough to reveal tiny fish beneath the stones. Over time, however, plastic bottles, food containers, and soil washed from nearby slopes collected in the stream. After heavy rain, the water sometimes overflowed onto the road.
 
-The CENTRAL theme of this passage is:`,
+When Grade 5 students at Cedar Grove Primary began studying how human activity affects the environment, their teacher, Ms. Daley, suggested that they investigate the stream. The class did not begin by rushing outside with garbage bags. First, they interviewed residents, examined old photographs, and recorded what they observed at three different points along the river. They discovered that litter was only part of the problem. Bare patches on the hillside allowed rain to carry loose soil into the water, while a blocked drain caused water to back up near the road.
+
+The students called their project the Mango River Guardians. They prepared a simple plan and presented it to the school principal, the citizens’ association, and a nearby hardware store. The store donated gloves and tools, residents provided seedlings, and the parish council arranged to remove the filled garbage bags. On cleanup day, volunteers separated recyclable materials from other waste. Another group planted grass and small trees on the bare slope to help hold the soil in place.
+
+The work was not completed in one day. Every Friday for six weeks, teams measured the water level, photographed the riverbank, and checked whether new litter had appeared. They also made signs reminding people that drains and streams are not dumping grounds. At first, a few students felt disappointed because the water did not become clear immediately. Ms. Daley explained that restoring a damaged environment takes patience and repeated effort.
+
+By the end of the term, less rubbish was collecting near the bridge, and the newly planted slope remained more stable after rain. The students could not solve every problem affecting Mango River, but their records showed noticeable improvement. More importantly, the project changed how many people viewed the stream. It was no longer treated as an ignored space behind the community. It became a shared responsibility.
+
+The Mango River Guardians learned that useful action begins with careful observation. They also learned that lasting change is stronger when people combine knowledge, resources, and persistence. Their project started with a school lesson, but it grew into a community promise to protect a place that belonged to everyone.
+
+Which text structure is used most strongly in the passage?`,
     options: [
-      "Climate science and rainfall patterns",
-      "Water is a technical engineering problem",
-      "Access to clean water is a matter of justice and political will, not just technology — and the solutions exist if decision-makers choose to act",
-      "Water crises are inevitable and unavoidable",
+      "A list of unrelated facts",
+      "A comparison of two schools",
+      "Instructions for building a bridge",
+      "A problem-and-solution account presented mainly in time order"
     ],
-    correctAnswer: 2,
-    explanation: `The passage consistently argues that water access is about choices (political will, funding) — linking resource management to justice.`
+    correctAnswer: 3,
+    explanation: `The author describes the stream’s problems, the steps taken, and the resulting changes in sequence.`
   },
   {
     id: 13,
     type: "reading",
-    skill: "Summarise",
+    skill: "Character Motivation",
     question: `Read the passage then answer the question.
 
-"Water covers seventy percent of the Earth's surface, yet fresh, clean water is one of the most precious and threatened resources on the planet. In Jamaica, water scarcity affects thousands of communities — particularly in rural areas — where drought, aging infrastructure, and pollution have made access to clean water unreliable. Scientists warn that climate change will make this worse: longer dry seasons, more intense storms, and rising sea levels will threaten freshwater supplies across the Caribbean. Yet solutions exist. Rainwater harvesting, watershed protection, and repairing leaking pipes can all significantly reduce water loss. The challenge is not technology — it is will, funding, and the political commitment to treat water as a right rather than a commodity."
+At the edge of Cedar Grove stood a narrow stream called Mango River. Older residents remembered when its water ran clear enough to reveal tiny fish beneath the stones. Over time, however, plastic bottles, food containers, and soil washed from nearby slopes collected in the stream. After heavy rain, the water sometimes overflowed onto the road.
 
-Which BEST summarises this passage?`,
+When Grade 5 students at Cedar Grove Primary began studying how human activity affects the environment, their teacher, Ms. Daley, suggested that they investigate the stream. The class did not begin by rushing outside with garbage bags. First, they interviewed residents, examined old photographs, and recorded what they observed at three different points along the river. They discovered that litter was only part of the problem. Bare patches on the hillside allowed rain to carry loose soil into the water, while a blocked drain caused water to back up near the road.
+
+The students called their project the Mango River Guardians. They prepared a simple plan and presented it to the school principal, the citizens’ association, and a nearby hardware store. The store donated gloves and tools, residents provided seedlings, and the parish council arranged to remove the filled garbage bags. On cleanup day, volunteers separated recyclable materials from other waste. Another group planted grass and small trees on the bare slope to help hold the soil in place.
+
+The work was not completed in one day. Every Friday for six weeks, teams measured the water level, photographed the riverbank, and checked whether new litter had appeared. They also made signs reminding people that drains and streams are not dumping grounds. At first, a few students felt disappointed because the water did not become clear immediately. Ms. Daley explained that restoring a damaged environment takes patience and repeated effort.
+
+By the end of the term, less rubbish was collecting near the bridge, and the newly planted slope remained more stable after rain. The students could not solve every problem affecting Mango River, but their records showed noticeable improvement. More importantly, the project changed how many people viewed the stream. It was no longer treated as an ignored space behind the community. It became a shared responsibility.
+
+The Mango River Guardians learned that useful action begins with careful observation. They also learned that lasting change is stronger when people combine knowledge, resources, and persistence. Their project started with a school lesson, but it grew into a community promise to protect a place that belonged to everyone.
+
+Why did the students continue checking the river for six weeks?`,
     options: [
-      "Water is important to life",
-      "Jamaica has rivers and rainfall",
-      "Jamaica faces a water scarcity crisis driven by climate change, aging infrastructure, and pollution — but solutions exist if there is political will to treat water as a right, not a commodity",
-      "Water pricing is too high in Jamaica",
+      "They wanted to track progress and see whether the improvements lasted.",
+      "They were searching for a missing tool.",
+      "They planned to cancel the cleanup.",
+      "They wanted to avoid their regular lessons."
     ],
-    correctAnswer: 2,
-    explanation: `This captures the crisis, causes, solutions, and the framing around rights — the full argument of the passage.`
+    correctAnswer: 0,
+    explanation: `Repeated measurements and photographs allowed them to monitor change over time.`
   },
   {
     id: 14,
     type: "reading",
-    skill: "Implied Meaning",
+    skill: "Fact and Opinion",
     question: `Read the passage then answer the question.
 
-"Water covers seventy percent of the Earth's surface, yet fresh, clean water is one of the most precious and threatened resources on the planet. In Jamaica, water scarcity affects thousands of communities — particularly in rural areas — where drought, aging infrastructure, and pollution have made access to clean water unreliable. Scientists warn that climate change will make this worse: longer dry seasons, more intense storms, and rising sea levels will threaten freshwater supplies across the Caribbean. Yet solutions exist. Rainwater harvesting, watershed protection, and repairing leaking pipes can all significantly reduce water loss. The challenge is not technology — it is will, funding, and the political commitment to treat water as a right rather than a commodity."
+At the edge of Cedar Grove stood a narrow stream called Mango River. Older residents remembered when its water ran clear enough to reveal tiny fish beneath the stones. Over time, however, plastic bottles, food containers, and soil washed from nearby slopes collected in the stream. After heavy rain, the water sometimes overflowed onto the road.
 
-When the author says solutions 'exist' but the challenge is 'will, funding, and political commitment,' they imply:`,
+When Grade 5 students at Cedar Grove Primary began studying how human activity affects the environment, their teacher, Ms. Daley, suggested that they investigate the stream. The class did not begin by rushing outside with garbage bags. First, they interviewed residents, examined old photographs, and recorded what they observed at three different points along the river. They discovered that litter was only part of the problem. Bare patches on the hillside allowed rain to carry loose soil into the water, while a blocked drain caused water to back up near the road.
+
+The students called their project the Mango River Guardians. They prepared a simple plan and presented it to the school principal, the citizens’ association, and a nearby hardware store. The store donated gloves and tools, residents provided seedlings, and the parish council arranged to remove the filled garbage bags. On cleanup day, volunteers separated recyclable materials from other waste. Another group planted grass and small trees on the bare slope to help hold the soil in place.
+
+The work was not completed in one day. Every Friday for six weeks, teams measured the water level, photographed the riverbank, and checked whether new litter had appeared. They also made signs reminding people that drains and streams are not dumping grounds. At first, a few students felt disappointed because the water did not become clear immediately. Ms. Daley explained that restoring a damaged environment takes patience and repeated effort.
+
+By the end of the term, less rubbish was collecting near the bridge, and the newly planted slope remained more stable after rain. The students could not solve every problem affecting Mango River, but their records showed noticeable improvement. More importantly, the project changed how many people viewed the stream. It was no longer treated as an ignored space behind the community. It became a shared responsibility.
+
+The Mango River Guardians learned that useful action begins with careful observation. They also learned that lasting change is stronger when people combine knowledge, resources, and persistence. Their project started with a school lesson, but it grew into a community promise to protect a place that belonged to everyone.
+
+Which statement from the passage is a fact that could be checked?`,
     options: [
-      "The crisis cannot be solved",
-      "The crisis is not real",
-      "The water crisis is a political failure, not a technological inevitability — those in power are responsible for acting",
-      "Only individuals can solve the water crisis",
+      "Mango River was the most beautiful stream in Jamaica.",
+      "Teams measured the water level every Friday for six weeks.",
+      "The students created the perfect environmental project.",
+      "Every resident felt proud of the signs."
     ],
-    correctAnswer: 2,
-    explanation: `Saying solutions exist but political will is lacking makes a clear argument: the crisis is a choice — a political failure — not an unavoidable fate.`
+    correctAnswer: 1,
+    explanation: `The schedule and duration of the measurements are specific details that can be verified.`
   },
   {
     id: 15,
     type: "reading",
-    skill: "Figurative Language",
+    skill: "Summary",
     question: `Read the passage then answer the question.
 
-"Water covers seventy percent of the Earth's surface, yet fresh, clean water is one of the most precious and threatened resources on the planet. In Jamaica, water scarcity affects thousands of communities — particularly in rural areas — where drought, aging infrastructure, and pollution have made access to clean water unreliable. Scientists warn that climate change will make this worse: longer dry seasons, more intense storms, and rising sea levels will threaten freshwater supplies across the Caribbean. Yet solutions exist. Rainwater harvesting, watershed protection, and repairing leaking pipes can all significantly reduce water loss. The challenge is not technology — it is will, funding, and the political commitment to treat water as a right rather than a commodity."
+At the edge of Cedar Grove stood a narrow stream called Mango River. Older residents remembered when its water ran clear enough to reveal tiny fish beneath the stones. Over time, however, plastic bottles, food containers, and soil washed from nearby slopes collected in the stream. After heavy rain, the water sometimes overflowed onto the road.
 
-The writer uses figurative language to describe the topic. What is the effect?`,
+When Grade 5 students at Cedar Grove Primary began studying how human activity affects the environment, their teacher, Ms. Daley, suggested that they investigate the stream. The class did not begin by rushing outside with garbage bags. First, they interviewed residents, examined old photographs, and recorded what they observed at three different points along the river. They discovered that litter was only part of the problem. Bare patches on the hillside allowed rain to carry loose soil into the water, while a blocked drain caused water to back up near the road.
+
+The students called their project the Mango River Guardians. They prepared a simple plan and presented it to the school principal, the citizens’ association, and a nearby hardware store. The store donated gloves and tools, residents provided seedlings, and the parish council arranged to remove the filled garbage bags. On cleanup day, volunteers separated recyclable materials from other waste. Another group planted grass and small trees on the bare slope to help hold the soil in place.
+
+The work was not completed in one day. Every Friday for six weeks, teams measured the water level, photographed the riverbank, and checked whether new litter had appeared. They also made signs reminding people that drains and streams are not dumping grounds. At first, a few students felt disappointed because the water did not become clear immediately. Ms. Daley explained that restoring a damaged environment takes patience and repeated effort.
+
+By the end of the term, less rubbish was collecting near the bridge, and the newly planted slope remained more stable after rain. The students could not solve every problem affecting Mango River, but their records showed noticeable improvement. More importantly, the project changed how many people viewed the stream. It was no longer treated as an ignored space behind the community. It became a shared responsibility.
+
+The Mango River Guardians learned that useful action begins with careful observation. They also learned that lasting change is stronger when people combine knowledge, resources, and persistence. Their project started with a school lesson, but it grew into a community promise to protect a place that belonged to everyone.
+
+Which sentence is the best summary of the passage?`,
     options: [
-      "It makes the writing unnecessarily long",
-      "It confuses readers",
-      "It makes abstract or complex ideas vivid and concrete, creating emotional resonance",
-      "Figurative language has no place in informative writing",
+      "A class collected rubbish from a stream during one afternoon.",
+      "Residents remembered that fish once lived in Mango River.",
+      "Students investigated a damaged stream, organized community support, monitored their work, and helped create lasting responsibility for it.",
+      "A hardware store gave gloves to a school."
     ],
     correctAnswer: 2,
-    explanation: `In informative writing, figurative language brings ideas to life — it makes the abstract tangible and the distant immediate.`
+    explanation: `This choice includes the investigation, action, monitoring, and broader community impact.`
   },
   {
     id: 16,
     type: "vocabulary",
     skill: "Synonyms",
-    question: `Which word is a SYNONYM for 'scarce'?`,
+    question: `Which word is closest in meaning to “persistent”?`,
     options: [
-      "abundant",
-      "plentiful",
-      "rare",
-      "common",
+      "careless",
+      "silent",
+      "temporary",
+      "determined"
     ],
-    correctAnswer: 2,
-    explanation: `'Rare' means not found in large quantities — a synonym for 'scarce.'`
+    correctAnswer: 3,
+    explanation: `Persistent means continuing firmly despite difficulty or delay.`
   },
   {
     id: 17,
     type: "vocabulary",
     skill: "Antonyms",
-    question: `The ANTONYM of 'pollute' is:`,
+    question: `Which word is the opposite of “scarce”?`,
     options: [
-      "contaminate",
-      "poison",
-      "dirty",
-      "purify",
+      "abundant",
+      "hidden",
+      "costly",
+      "fragile"
     ],
-    correctAnswer: 3,
-    explanation: `'Purify' means to make clean or pure — the opposite of 'pollute.'`
+    correctAnswer: 0,
+    explanation: `Scarce means limited or hard to find; abundant means plentiful.`
   },
   {
     id: 18,
     type: "vocabulary",
     skill: "Context Clues",
-    question: `The government declared water INFRASTRUCTURE to be a priority. 'Infrastructure' means:`,
+    question: `The path was so **narrow** that the hikers had to walk in a single line. What does “narrow” mean in this sentence?`,
     options: [
-      "the decorative features of a system",
-      "the basic physical systems — pipes, treatment plants, networks — that support a service",
-      "the financial cost of water",
-      "the scientists who study water",
+      "covered with stones",
+      "not wide",
+      "very steep",
+      "poorly marked"
     ],
     correctAnswer: 1,
-    explanation: `'Infrastructure' refers to the basic physical systems and structures that a service or society depends on to function.`
+    explanation: `The need to walk in a single line shows that the path was not wide.`
   },
   {
     id: 19,
     type: "vocabulary",
-    skill: "Idiom",
-    question: `'We are running out of time to address this problem.' 'Running out of time' means:`,
+    skill: "Prefixes",
+    question: `What does the prefix “re-” mean in the word “rebuild”?`,
     options: [
-      "jogging away from problems",
-      "time is literally ending",
-      "the time available to take action is rapidly decreasing",
-      "there is plenty of time still",
+      "before",
+      "without",
+      "again",
+      "under"
     ],
     correctAnswer: 2,
-    explanation: `'Running out of time' means the available time is being exhausted — urgency is building.`
+    explanation: `The prefix re- commonly means again, so rebuild means build again.`
   },
   {
     id: 20,
     type: "vocabulary",
     skill: "Figurative Language",
-    question: `'Every drop of clean water is a gift we are squandering.' What does 'squandering' suggest?`,
+    question: `What does the sentence “The classroom was a beehive of activity” mean?`,
     options: [
-      "Using water carefully",
-      "Wasting something precious through carelessness",
-      "Giving water to people who need it",
-      "Saving water for emergencies",
+      "Bees entered the classroom.",
+      "The room was completely empty.",
+      "Students were afraid of being stung.",
+      "Many people were busy and active."
     ],
-    correctAnswer: 1,
-    explanation: `'Squandering' means wasting a valuable resource through carelessness — the metaphor of a 'gift' makes the waste seem morally irresponsible.`
+    correctAnswer: 3,
+    explanation: `A beehive is used metaphorically to describe a place filled with busy activity.`
   },
   {
     id: 21,
     type: "vocabulary",
-    skill: "Connotation",
-    question: `Which phrase has the MOST urgent and alarming connotation?`,
+    skill: "Multiple-Meaning Words",
+    question: `In which sentence does “current” mean a flow of water?`,
     options: [
-      "water management challenges",
-      "water access issues",
-      "water crisis",
-      "water planning needs",
+      "The swimmer felt the strong current pulling toward the rocks.",
+      "Please read the current issue of the magazine.",
+      "The current principal greeted the visitors.",
+      "We discussed current events in class."
     ],
-    correctAnswer: 2,
-    explanation: `'Crisis' implies immediate danger and severe consequence — the strongest, most alarming connotation of the four options.`
+    correctAnswer: 0,
+    explanation: `In the first sentence, current refers to moving water.`
   },
   {
     id: 22,
     type: "vocabulary",
-    skill: "Word Meaning",
-    question: `The word 'commodity' means:`,
+    skill: "Suffixes",
+    question: `Which word means “a person who studies science”?`,
     options: [
-      "a gift or donation",
-      "something produced for sale or trade, often implying it has a market value",
-      "a government service",
-      "a natural right",
+      "scientific",
+      "scientist",
+      "scientifically",
+      "science"
     ],
     correctAnswer: 1,
-    explanation: `A 'commodity' is a product or resource that is bought and sold — treating water as a commodity means valuing it by market price rather than as a human right.`
+    explanation: `The suffix -ist can identify a person who practices or studies a field.`
   },
   {
     id: 23,
     type: "vocabulary",
-    skill: "Figurative Language — Metaphor",
-    question: `'The pipeline of political will is the most critical one to fix.' In this metaphor, 'political will' is compared to:`,
+    skill: "Idioms",
+    question: `What does the idiom “lend a hand” mean?`,
     options: [
-      "a broken water pipe",
-      "a river",
-      "water flowing through pipes — suggesting political commitment is the resource most urgently needed",
-      "an election",
+      "borrow something",
+      "wave to someone",
+      "give help",
+      "write a note"
     ],
-    correctAnswer: 0,
-    explanation: `The metaphor extends the water-system imagery to politics: just as pipes carry water, political will 'carries' the commitment needed for reform.`
+    correctAnswer: 2,
+    explanation: `To lend a hand means to assist someone.`
   },
   {
     id: 24,
     type: "vocabulary",
-    skill: "Etymology",
-    question: `The word 'aquifer' comes from Latin 'aqua' (water) and 'ferre' (to carry). This etymology tells us:`,
+    skill: "Connotation",
+    question: `Which word has the most positive connotation for describing someone who saves money carefully?`,
     options: [
-      "An aquifer is a type of pipe",
-      "An aquifer carries water — it is an underground rock layer that holds and carries groundwater",
-      "Aquifers are only found in deserts",
-      "Aquifers are artificial",
+      "stingy",
+      "miserly",
+      "cheap",
+      "thrifty"
     ],
-    correctAnswer: 1,
-    explanation: `'Aqua' = water, 'ferre' = to carry. An aquifer is literally something that carries water — an underground reservoir.`
+    correctAnswer: 3,
+    explanation: `Thrifty suggests wise and careful use of money, while the others sound more negative.`
   },
   {
     id: 25,
     type: "vocabulary",
-    skill: "Academic Vocabulary",
-    question: `In a persuasive essay, 'moreover' is used to:`,
+    skill: "Word Relationships",
+    question: `Bird is to nest as bee is to`,
     options: [
-      "contradict the previous argument",
-      "end the essay",
-      "introduce an additional and stronger supporting point",
-      "ask the reader a question",
+      "hive",
+      "web",
+      "den",
+      "pond"
     ],
-    correctAnswer: 2,
-    explanation: `'Moreover' adds a stronger, additional point — 'and what is more, here is an even more compelling reason.'`
+    correctAnswer: 0,
+    explanation: `A bird lives in a nest, and a bee lives in a hive.`
   },
   {
     id: 26,
     type: "grammar",
-    skill: "Sentence Types",
-    question: `Which sentence is IMPERATIVE?`,
+    skill: "Subject-Verb Agreement",
+    question: `Which sentence has correct subject-verb agreement?`,
     options: [
-      "Is water a human right?",
-      "Water is a human right",
-      "Treat water as a human right, not a commodity!",
-      "Water should be a human right",
+      "The basket of mangoes were on the table.",
+      "The basket of mangoes is on the table.",
+      "The baskets of mangoes is on the table.",
+      "The basket of mangoes are on the table."
     ],
-    correctAnswer: 2,
-    explanation: `An imperative gives a command. 'Treat water as a human right' is a direct command addressed to the reader.`
+    correctAnswer: 1,
+    explanation: `The subject basket is singular, so it takes the singular verb is.`
   },
   {
     id: 27,
     type: "grammar",
-    skill: "Adjectives",
-    question: `Choose the SUPERLATIVE form of 'precious':`,
+    skill: "Pronoun Agreement",
+    question: `Choose the sentence with correct pronoun agreement.`,
     options: [
-      "more precious",
-      "most precious",
-      "precious-est",
-      "preciouser",
+      "Every student packed their books, and he left.",
+      "The girls completed her project.",
+      "Maria and Jada presented their poster.",
+      "Neither boy remembered our lunch."
     ],
-    correctAnswer: 1,
-    explanation: `For longer adjectives, use 'most' to form the superlative: 'most precious.'`
+    correctAnswer: 2,
+    explanation: `The plural subject Maria and Jada correctly agrees with the plural pronoun their.`
   },
   {
     id: 28,
     type: "grammar",
-    skill: "Punctuation — Semicolon",
-    question: `Which correctly uses a SEMICOLON?`,
+    skill: "Punctuation",
+    question: `Which sentence is punctuated correctly?`,
     options: [
-      "Water is scarce; but we waste it daily.",
-      "Water is scarce; we waste it daily.",
-      "Water; is scarce and we waste it daily.",
-      "Water is scarce and; we waste it daily.",
+      "After lunch we, visited the library.",
+      "After lunch we visited, the library.",
+      "After lunch; we visited the library.",
+      "After lunch, we visited the library."
     ],
-    correctAnswer: 1,
-    explanation: `A semicolon joins two independent clauses without a conjunction. 'Water is scarce; we waste it daily' — both are complete clauses.`
+    correctAnswer: 3,
+    explanation: `An introductory phrase is followed by a comma.`
   },
   {
     id: 29,
     type: "grammar",
-    skill: "Active and Passive",
-    question: `Choose the PASSIVE sentence:`,
+    skill: "Verb Tense",
+    question: `Which sentence is written in the past tense?`,
     options: [
-      "Communities waste millions of litres daily",
-      "Millions of litres are wasted by communities daily",
-      "Communities are wasting water",
-      "The wastage is enormous",
+      "The team completed the experiment yesterday.",
+      "The team completes the experiment today.",
+      "The team will complete the experiment tomorrow.",
+      "The team is completing the experiment now."
     ],
-    correctAnswer: 1,
-    explanation: `Passive: subject (millions of litres) receives the action (are wasted) performed by an agent (communities).`
+    correctAnswer: 0,
+    explanation: `Completed is the simple past-tense verb.`
   },
   {
     id: 30,
     type: "grammar",
-    skill: "Relative Clauses",
-    question: `Which correctly uses a DEFINING relative clause?`,
+    skill: "Adjectives and Adverbs",
+    question: `Which sentence uses the adverb correctly?`,
     options: [
-      "Fresh water, which is essential for life, is becoming scarce",
-      "Fresh water which is essential for life is becoming scarce",
-      "Communities that lack access to clean water face serious health risks",
-      "Communities, that lack clean water, face health risks",
+      "The careful driver stopped sudden.",
+      "The careful driver stopped suddenly.",
+      "The carefully driver stopped sudden.",
+      "The driver sudden stopped careful."
     ],
-    correctAnswer: 2,
-    explanation: `A defining relative clause identifies WHICH communities are meant — no commas, as it is essential to the meaning.`
+    correctAnswer: 1,
+    explanation: `Suddenly correctly describes how the driver stopped.`
   },
   {
     id: 31,
     type: "grammar",
-    skill: "Modal Verbs — Necessity",
-    question: `Which modal expresses NECESSITY most strongly?`,
+    skill: "Sentence Types",
+    question: `Which sentence is a compound sentence?`,
     options: [
-      "could",
-      "might",
-      "should",
-      "must",
+      "Because the rain fell heavily.",
+      "The children waiting beside the gate.",
+      "The rain stopped, and the players returned to the field.",
+      "Running quickly toward the shelter."
     ],
-    correctAnswer: 3,
-    explanation: `'Must' expresses the strongest obligation or necessity — something that is absolutely required.`
+    correctAnswer: 2,
+    explanation: `It joins two complete independent clauses with the coordinating conjunction and.`
   },
   {
     id: 32,
     type: "grammar",
-    skill: "Reported Speech — Question",
-    question: `Change to INDIRECT SPEECH: 'Is water a human right or a commodity?' the activist asked.`,
+    skill: "Capitalization",
+    question: `Which sentence uses capital letters correctly?`,
     options: [
-      "The activist asked is water a human right or a commodity",
-      "The activist asked whether water was a human right or a commodity",
-      "The activist questioned water is a human right",
-      "The activist asked that water is a human right",
+      "My aunt visited kingston in july.",
+      "My Aunt visited Kingston in July.",
+      "My aunt visited Kingston in july.",
+      "My aunt visited Kingston in July."
     ],
-    correctAnswer: 1,
-    explanation: `Indirect questions use 'whether/if' and shift tenses: 'is' → 'was.' No question mark in reported speech.`
+    correctAnswer: 3,
+    explanation: `The proper noun Kingston and the month July are capitalized; aunt is not capitalized here.`
   },
   {
     id: 33,
     type: "grammar",
-    skill: "Conditional",
-    question: `'If we do not act now, future generations will inherit a water crisis.' This is a:`,
+    skill: "Possessive Nouns",
+    question: `Which sentence correctly shows that one teacher owns the desk?`,
     options: [
-      "Zero conditional (always true)",
-      "First conditional (realistic future)",
-      "Second conditional (hypothetical)",
-      "Third conditional (past hypothetical)",
+      "The teacher’s desk is near the window.",
+      "The teachers desk is near the window.",
+      "The teachers’ desk is near the window.",
+      "The teacher desk’s is near the window."
     ],
-    correctAnswer: 1,
-    explanation: `First conditional: if + present simple, will + infinitive. Realistic, foreseeable future consequence.`
+    correctAnswer: 0,
+    explanation: `Teacher’s is the singular possessive form.`
   },
   {
     id: 34,
     type: "grammar",
-    skill: "Inversion",
-    question: `'Only by conserving water now ___ we secure supplies for the future.'`,
+    skill: "Conjunctions",
+    question: `Choose the best conjunction: “We carried umbrellas ___ the sky looked clear.”`,
     options: [
-      "will",
-      "are",
-      "have",
-      "do",
+      "because",
+      "although",
+      "unless",
+      "so"
     ],
-    correctAnswer: 0,
-    explanation: `After 'Only by...', inversion places the modal auxiliary before the subject: 'Only by conserving... will we secure...'`
+    correctAnswer: 1,
+    explanation: `Although shows the contrast between carrying umbrellas and the clear sky.`
   },
   {
     id: 35,
     type: "grammar",
-    skill: "Ellipsis",
-    question: `In 'Some communities have water; others do not,' what has been omitted?`,
+    skill: "Complete Sentences",
+    question: `Which group of words is a complete sentence?`,
     options: [
-      "have water",
-      "some communities",
-      "others",
-      "communities do not",
+      "While the choir practised.",
+      "Across the busy courtyard.",
+      "The audience applauded after the final song.",
+      "Running toward the school bus."
     ],
-    correctAnswer: 0,
-    explanation: `'Have water' is omitted from the second clause (understood from context): 'others do not [have water].' This is grammatical ellipsis.`
+    correctAnswer: 2,
+    explanation: `It contains a complete subject and predicate and expresses a full thought.`
   },
   {
     id: 36,
     type: "writing",
-    skill: "Persuasive Purpose",
-    question: `A student writes a letter to a water authority demanding improved access to clean water for rural communities. The PRIMARY purpose is:`,
+    skill: "Topic Sentence",
+    question: `Which is the strongest topic sentence for a paragraph about school gardens?`,
     options: [
-      "To entertain the authority with a story",
-      "To describe what rural communities look like",
-      "To persuade the authority to take specific action by presenting evidence of need and injustice",
-      "To inform the authority about water chemistry",
+      "Gardens have soil.",
+      "Some schools are large.",
+      "I saw a tomato yesterday.",
+      "A well-planned school garden can provide food, practical lessons, and opportunities for teamwork."
     ],
-    correctAnswer: 2,
-    explanation: `The letter is a persuasive instrument — its purpose is to move the authority to action by combining evidence with moral argument.`
+    correctAnswer: 3,
+    explanation: `It clearly introduces the main idea and previews the paragraph’s supporting points.`
   },
   {
     id: 37,
     type: "writing",
-    skill: "Formal Letter Structure",
-    question: `Which is an ESSENTIAL feature of a formal persuasive letter?`,
+    skill: "Supporting Details",
+    question: `Which detail best supports the statement “Regular reading strengthens vocabulary”?`,
     options: [
-      "A casual, friendly greeting",
-      "No clear structure",
-      "A formal salutation, clearly organised paragraphs, a specific request or demand, and a formal closing",
-      "A long list of facts with no argument",
+      "Readers repeatedly meet unfamiliar words in meaningful sentences and learn how those words are used.",
+      "Libraries often have chairs and tables.",
+      "Some books have colourful covers.",
+      "People read at different times of day."
     ],
-    correctAnswer: 2,
-    explanation: `A formal persuasive letter requires professional structure: proper salutation, organised evidence-based paragraphs, a specific request, and formal closing.`
+    correctAnswer: 0,
+    explanation: `The detail directly explains how reading helps people learn new words.`
   },
   {
     id: 38,
     type: "writing",
-    skill: "Evidence and Argument",
-    question: `Which BEST supports the argument that water access is a human rights issue?`,
+    skill: "Transitions",
+    question: `Choose the best transition: “The first experiment failed. ___, the team studied the results and tried a better method.”`,
     options: [
-      "Water tastes good",
-      "Some people do not have clean water",
-      "Data showing that rural communities in Jamaica have significantly higher rates of waterborne disease due to lack of clean water infrastructure",
-      "Water is important to most people",
+      "For example",
+      "However",
+      "Meanwhile",
+      "Similarly"
     ],
-    correctAnswer: 2,
-    explanation: `Specific, data-backed evidence directly links lack of water access to health consequences — making the human rights argument concrete and hard to dismiss.`
+    correctAnswer: 1,
+    explanation: `However signals the contrast between failure and the decision to continue.`
   },
   {
     id: 39,
     type: "writing",
-    skill: "Rhetorical Devices in Persuasion",
-    question: `'Thousands of children go to school without a clean glass of water to drink. Thousands of adults work without adequate sanitation. Thousands of elderly people suffer preventable illness.' What persuasive device is used?`,
+    skill: "Organization",
+    question: `Which sentence does NOT belong in a paragraph about preparing for a hurricane?
+
+(1) Families should store clean water and non-perishable food. (2) Flashlights and batteries should be checked. (3) Hummingbirds can fly backwards. (4) Important documents should be kept in a waterproof container.`,
     options: [
-      "Alliteration",
-      "A rhetorical question",
-      "Anaphora — the repetition of 'Thousands' at the beginning of each clause to create emphasis and cumulative impact",
-      "A simile",
+      "Sentence 1",
+      "Sentence 2",
+      "Sentence 3",
+      "Sentence 4"
     ],
     correctAnswer: 2,
-    explanation: `Anaphora (repetition at the start of consecutive clauses) creates rhythm, emphasis, and cumulative emotional weight — a powerful persuasive technique.`
+    explanation: `Sentence 3 is unrelated to hurricane preparation.`
   },
   {
     id: 40,
     type: "writing",
-    skill: "Evaluating Persuasive Writing",
-    question: `A student argues: 'The most effective persuasive writers are those who acknowledge the opposing view before demolishing it.' Evaluate this claim.`,
+    skill: "Strong Conclusion",
+    question: `Which is the strongest conclusion for an essay about protecting community spaces?`,
     options: [
-      "This is completely wrong",
-      "Acknowledging the opposing view weakens the argument",
-      "This is a sophisticated and well-founded claim — acknowledging counterarguments shows intellectual honesty, pre-empts objections, and strengthens the overall argument by showing its superior reasoning",
-      "Only experts should acknowledge opposing views",
+      "That is everything about community spaces.",
+      "Community spaces are places in communities.",
+      "Some people like parks more than others.",
+      "When residents care for shared spaces together, they create safer, healthier places and strengthen pride in their community."
     ],
-    correctAnswer: 2,
-    explanation: `Engaging with counterarguments is a hallmark of sophisticated persuasion — it demonstrates that the writer has considered the issue fully and shows confidence in the strength of their own position.`
+    correctAnswer: 3,
+    explanation: `This conclusion restates the central idea and leaves the reader with a meaningful final thought.`
   }
-]
+];
+
+const shuffleAnswerOptions = (questions: Question[]): Question[] => {
+  return questions.map((question) => {
+    const optionsWithOriginalIndex = question.options.map((option, index) => ({
+      option,
+      index,
+    }))
+
+    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
+        optionsWithOriginalIndex[j],
+        optionsWithOriginalIndex[i],
+      ]
+    }
+
+    const correctAnswer = optionsWithOriginalIndex.findIndex(
+      (item) => item.index === question.correctAnswer,
+    )
+
+    return {
+      ...question,
+      options: optionsWithOriginalIndex.map((item) => item.option),
+      correctAnswer,
+    }
+  })
+}
 
 const SECTION_CONFIG = [
   { type: "reading" as const,    label: "Reading Comprehension",   note: "literal, inferential, and analytical reading across all difficulty levels" },
@@ -664,8 +855,11 @@ export default function G5LaMix5MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]                 = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]               = useState(60 * 60)
+  const [randomizedQuestions, setRandomizedQuestions] = useState<Question[]>([])
+  const hasSavedResult = useRef(false)
 
-  const availableQuestions = isPremium ? g5LaMix5Questions : g5LaMix5Questions.slice(0, FREE_QUESTION_LIMIT)
+  const sourceQuestions = isPremium ? g5LaMix5Questions : g5LaMix5Questions.slice(0, FREE_QUESTION_LIMIT)
+  const availableQuestions = randomizedQuestions.length > 0 ? randomizedQuestions : sourceQuestions
   const totalQuestions = availableQuestions.length
 
   useEffect(() => {
@@ -688,27 +882,39 @@ export default function G5LaMix5MockTest() {
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
 
-  const handleSubmit = async () => {
+  useEffect(() => {
+    if (!showResults || !user?.id || hasSavedResult.current) return
+
+    hasSavedResult.current = true
+    void saveStudentTestResult({
+      parentId: user.id,
+      studentName: user?.childName ?? "Student",
+      grade: "grade5",
+      subject: "Literacy",
+      testName: "Mixed 5",
+      difficulty: "Mixed",
+      score: calcScore(),
+      totalQuestions,
+      percentage: scorePct(),
+      completedAt: new Date().toISOString(),
+    }).catch(() => {
+      hasSavedResult.current = false
+    })
+  }, [showResults, user?.id, user?.childName, totalQuestions, answers])
+
+  const startTest = () => {
+    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions)
+    setRandomizedQuestions(shuffledQuestions)
+    setAnswers(new Array(shuffledQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    hasSavedResult.current = false
+    setStarted(true)
+  }
+
+  const handleSubmit = () => {
     setShowResults(true)
-
-    if (!user?.id) return
-
-    try {
-      await saveStudentTestResult({
-        parentId: user.id,
-        studentName: user?.childName ?? "Student",
-        grade: "grade5",
-        subject: "Language Arts",
-        testName: "Mixed 5",
-        difficulty: "Mixed",
-        score: calcScore(),
-        totalQuestions,
-        percentage: scorePct(),
-        completedAt: new Date().toISOString(),
-      })
-    } catch (error) {
-      console.error("Failed to save test result:", error)
-    }
   }
 
   const getGrade = () => {
@@ -730,8 +936,13 @@ export default function G5LaMix5MockTest() {
   }
 
   const resetTest = () => {
-    setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setStarted(false)
+    setShowResults(false)
+    setCurrentQuestion(0)
+    setRandomizedQuestions([])
+    setAnswers(new Array(sourceQuestions.length).fill(null))
+    setTimeLeft(60 * 60)
+    hasSavedResult.current = false
   }
 
   const q = availableQuestions[currentQuestion]
@@ -769,7 +980,7 @@ export default function G5LaMix5MockTest() {
             )}
             <div className="rounded-lg border border-blue-200 bg-white p-4">
               <h3 className="mb-2 font-semibold text-slate-800">Mixed Level Overview</h3>
-              <p className="text-slate-700">This test blends easy, moderate, and challenging questions across reading, vocabulary, grammar, and writing — giving you a complete picture of your Grade 5 Language Arts skills.</p>
+              <p className="text-slate-700">This mixed-level test uses Miss Lou and Jamaican language as its central theme while assessing comprehension, vocabulary, grammar, and writing across a balanced range of Grade 5 skills.</p>
             </div>
             <div className="rounded-lg bg-sky-50 p-4">
               <h3 className="mb-2 font-semibold text-sky-800">What to Expect</h3>
@@ -784,7 +995,7 @@ export default function G5LaMix5MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-blue-600">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-blue-600">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-blue-600 py-6 text-lg hover:bg-blue-700">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-blue-600 py-6 text-lg hover:bg-blue-700">Start Test</Button>
           </CardContent>
         </Card>
       </main>
