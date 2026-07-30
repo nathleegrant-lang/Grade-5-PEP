@@ -1,31 +1,23 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
-import { saveStudentTestResult } from "@/lib/student-test-results"
+import { useCallback, useEffect, useRef, useState } from "react"
 import Link from "next/link"
+import { ArrowLeft, BookOpen, CheckCircle, ChevronLeft, ChevronRight, Clock, Crown, Flag, Home, Lock, Printer, RotateCcw, XCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import {
-  Clock, ChevronLeft, ChevronRight, Flag, CheckCircle, XCircle,
-  BookOpen, RotateCcw, Home, Lock, Crown, ArrowLeft, Printer
-} from "lucide-react"
-import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/auth-context"
+import { cn } from "@/lib/utils"
+import { saveStudentTestResult } from "@/lib/student-test-results"
+import { calculateAssessmentScore, prepareAssessment, preparePreview } from "@/lib/assessment-engine"
 
 const FREE_QUESTION_LIMIT = 5
+const TEST_SECONDS = 60 * 60
 
-interface Question {
-  id: number
-  type: "reading" | "vocabulary" | "grammar" | "writing"
-  skill: string
-  question: string
-  options: string[]
-  correctAnswer: number
-  explanation: string
-}
+type QuestionType = "reading" | "vocabulary" | "grammar" | "writing"
+interface Question { id: number; type: QuestionType; skill: string; question: string; options: string[]; correctAnswer: number; explanation: string }
 
 const passage = `The Garden Behind the Library
 
@@ -43,344 +35,98 @@ Over the next three months, the neglected lot became a community garden. A paint
 
 Maya was proud of the vegetables, but she valued another result even more. Neighbours who had barely greeted one another were now exchanging ideas, tools, and recipes. The garden had not solved every problem in Cedar Grove, yet it had changed what people believed was possible when they worked together.`
 
-const g5LaMix9Questions: Question[] = [
-  { id: 1, type: "reading", skill: "Main Idea", question: `${passage}\n\nWhat is the main idea of the passage?`, options: ["Students inspire their community to transform a neglected lot by planning and working together.", "A librarian teaches children how to grow vegetables behind the community library.", "Residents wait for municipal workers to remove rubbish from an abandoned property.", "Businesses compete to donate the most supplies to a neighbourhood gardening project."], correctAnswer: 0, explanation: "The passage focuses on how the students' initiative and the community's cooperation transformed both the lot and relationships." },
-  { id: 2, type: "reading", skill: "Supporting Detail", question: `${passage}\n\nWhich detail BEST shows that the project required more than enthusiasm?`, options: ["Maya stopped beside the gate while walking to the library.", "The class needed permission, tools, supervision, and a maintenance plan.", "The students posted a notice inviting people to return the next Saturday.", "Teachers later used the completed garden during their science lessons."], correctAnswer: 1, explanation: "Mr. Ellis lists practical requirements that had to be addressed before the idea could succeed." },
-  { id: 3, type: "reading", skill: "Sequence", question: `${passage}\n\nWhat happened immediately AFTER the students divided the work?`, options: ["Teachers began using the garden for outdoor science lessons.", "Miss Ruby taught the children how to plant callaloo and thyme.", "Groups contacted officials, interviewed residents, and requested donations.", "The volunteers filled twelve bags and cleared a narrow walking path."], correctAnswer: 2, explanation: "After dividing the work, the groups wrote letters, conducted interviews, and asked businesses for supplies." },
-  { id: 4, type: "reading", skill: "Cause and Effect", question: `${passage}\n\nWhy did more people attend the second clean-up day?`, options: ["The municipal office required every resident to take part.", "The library promised free vegetables to all volunteers.", "The first group completed the entire garden before the rain.", "The students showed visible progress and invited others to join them."], correctAnswer: 3, explanation: "The photographs, notice, and evidence that work had begun encouraged more residents to participate." },
-  { id: 5, type: "reading", skill: "Character Trait", question: `${passage}\n\nWhich trait BEST describes Maya?`, options: ["Initiative, because she suggests beginning instead of continuing to wait.", "Impatience, because she expects the whole project to finish in one day.", "Carelessness, because she enters a dangerous lot without adult permission.", "Shyness, because she depends on others to explain her idea to the class."], correctAnswer: 0, explanation: "Maya takes initiative by proposing a realistic first action when others have only complained." },
-  { id: 6, type: "reading", skill: "Inference", question: `${passage}\n\nWhat can the reader infer about Mr. Ellis?`, options: ["He opposes the garden because it may distract students from reading.", "He supports the idea but wants the students to plan responsibly.", "He expects the municipal office to complete every part of the project.", "He believes children should work without help from any adults."], correctAnswer: 1, explanation: "His warning is practical rather than discouraging; he helps the students understand what success will require." },
-  { id: 7, type: "reading", skill: "Vocabulary in Context", question: `${passage}\n\nWhat does the word "neglected" mean as used in the passage?`, options: ["Recently purchased and prepared for development", "Carefully protected from visitors and bad weather", "Not properly cared for over a period of time", "Temporarily closed while repairs are being completed"], correctAnswer: 2, explanation: "The rubbish, weeds, and flooding show that the lot had not been properly cared for." },
-  { id: 8, type: "reading", skill: "Author's Purpose", question: `${passage}\n\nWhat is the author's main purpose?`, options: ["To explain the exact steps for growing callaloo in a small garden", "To warn children never to enter unused land without an adult", "To compare municipal workers with volunteers from local businesses", "To show how organised community action can create meaningful change"], correctAnswer: 3, explanation: "The passage demonstrates that planning, persistence, and cooperation can improve both a place and a community." },
-  { id: 9, type: "reading", skill: "Fact and Opinion", question: `${passage}\n\nWhich statement from the passage is a FACT?`, options: ["The volunteers filled twelve bags with rubbish on the first clean-up day.", "The community garden was the most beautiful place in Cedar Grove.", "Miss Ruby was the wisest gardener in the entire neighbourhood.", "The painted rain barrel was the project's most valuable feature."], correctAnswer: 0, explanation: "The number of bags collected is a verifiable detail; the other choices express judgments." },
-  { id: 10, type: "reading", skill: "Text Structure", question: `${passage}\n\nHow is the passage mainly organised?`, options: ["By comparing two different community gardens", "By presenting events in the order they occurred", "By listing instructions for maintaining a garden", "By describing one location without showing change"], correctAnswer: 1, explanation: "The passage follows the project from the neglected lot through planning, setbacks, progress, and completion." },
-  { id: 11, type: "reading", skill: "Problem and Solution", question: `${passage}\n\nWhich option correctly matches a problem with its solution?`, options: ["Problem: the garden had too much produce; solution: teachers stopped using it.", "Problem: residents lacked recipes; solution: the students closed the library.", "Problem: the lot was neglected; solution: students organised a planned community effort.", "Problem: rain filled the barrel; solution: volunteers removed the library roof."], correctAnswer: 2, explanation: "The central problem is the neglected lot, and the organised community project becomes the solution." },
-  { id: 12, type: "reading", skill: "Theme", question: `${passage}\n\nWhich theme is BEST supported by the passage?`, options: ["Adults should always solve community problems before children become involved.", "Successful projects depend mainly on receiving expensive equipment.", "A first attempt is a failure whenever fewer people attend than expected.", "Small beginnings can grow into lasting change through cooperation and persistence."], correctAnswer: 3, explanation: "The project begins with one student's suggestion and grows because people keep working together despite setbacks." },
-  { id: 13, type: "reading", skill: "Compare and Contrast", question: `${passage}\n\nHow was the second clean-up day different from the first?`, options: ["More volunteers attended, and additional community resources were available.", "The students worked alone because every adult had stopped supporting them.", "Heavy rain ended the second day before any useful work could be completed.", "Municipal workers replaced the volunteers and took control of the project."], correctAnswer: 0, explanation: "Attendance increased from six adults to twenty-three people, and volunteers brought tools and gardening knowledge." },
-  { id: 14, type: "reading", skill: "Drawing Conclusions", question: `${passage}\n\nWhat conclusion can be drawn about the garden's greatest impact?`, options: ["It produced enough vegetables to supply every household in Cedar Grove.", "It strengthened relationships and changed residents' belief in collective action.", "It removed the need for the municipal office to provide community services.", "It became more important to students than the library and their schoolwork."], correctAnswer: 1, explanation: "Maya values the new cooperation among neighbours and their changed sense of what is possible." },
-  { id: 15, type: "reading", skill: "Summary", question: `${passage}\n\nWhich is the BEST summary of the passage?`, options: ["Maya notices an empty lot, and Miss Ruby later plants several vegetables there.", "Residents complain about rubbish until municipal workers create a garden behind the library.", "Students plan a community project, overcome a slow start, and help transform a neglected lot and neighbourhood relationships.", "Businesses donate supplies to a library, while teachers use a rain barrel during science lessons."], correctAnswer: 2, explanation: "This choice includes the problem, the organised response, the setback, and the two main results without unnecessary details." },
-
-  { id: 16, type: "vocabulary", skill: "Synonym", question: `Which word is closest in meaning to "maintaining" in the sentence "They needed a plan for maintaining the space"?`, options: ["discovering", "measuring", "decorating", "caring for"], correctAnswer: 3, explanation: "Maintaining means continuing to care for something so it remains in good condition." },
-  { id: 17, type: "vocabulary", skill: "Antonym", question: `Which word is an ANTONYM for "narrow"?`, options: ["wide", "short", "curved", "rough"], correctAnswer: 0, explanation: "Wide is the opposite of narrow." },
-  { id: 18, type: "vocabulary", skill: "Prefix", question: `What does the prefix "re-" mean in the word "reused"?`, options: ["not", "again", "before", "under"], correctAnswer: 1, explanation: "The prefix re- means again; reused means used again." },
-  { id: 19, type: "vocabulary", skill: "Suffix", question: `In the word "disappointing," the suffix "-ing" helps show that the word describes:`, options: ["a person who completed an action", "a place where an action happened", "something producing a particular feeling", "an action that happened long ago"], correctAnswer: 2, explanation: "Disappointing describes something that causes disappointment." },
-  { id: 20, type: "vocabulary", skill: "Idiom", question: `What does the expression "give up" mean in "Instead of giving up, the students divided the work"?`, options: ["donate their supplies", "raise their hands", "share their plan", "stop trying"], correctAnswer: 3, explanation: "To give up means to stop trying." },
-  { id: 21, type: "vocabulary", skill: "Multiple Meaning", question: `Which sentence uses "lot" with the SAME meaning as in "the empty lot behind the library"?`, options: ["The new clinic was built on a vacant lot near the road.", "We learned a lot during the gardening project.", "A lot of volunteers arrived early on Saturday.", "The teacher divided the seeds into each student's lot."], correctAnswer: 0, explanation: "In both sentences, lot means a piece of land." },
-  { id: 22, type: "vocabulary", skill: "Context Clues", question: `The garden became "thriving," with healthy plants, visiting insects, and regular activity. What does "thriving" mean?`, options: ["becoming untidy", "growing successfully", "remaining unfinished", "changing ownership"], correctAnswer: 1, explanation: "The clues healthy plants and regular activity show that thriving means growing or doing well." },
-  { id: 23, type: "vocabulary", skill: "Connotation", question: `Which word has the MOST positive connotation for describing the volunteers?`, options: ["busy", "present", "dedicated", "available"], correctAnswer: 2, explanation: "Dedicated suggests strong commitment and willing effort." },
-  { id: 24, type: "vocabulary", skill: "Figurative Language", question: `What does the sentence "The garden became the heart of the community" suggest?`, options: ["The garden was shaped exactly like a heart.", "The garden was located in the geographic centre.", "The garden supplied medicine for heart conditions.", "The garden became an important centre of community life."], correctAnswer: 3, explanation: "Heart is used metaphorically to show that the garden became central and important." },
-  { id: 25, type: "vocabulary", skill: "Word Relationship", question: `Which pair of words has the same relationship as "problem : solution"?`, options: ["question : answer", "garden : shovel", "rain : cloud", "student : library"], correctAnswer: 0, explanation: "An answer responds to a question just as a solution responds to a problem." },
-
-  { id: 26, type: "grammar", skill: "Subject-Verb Agreement", question: `Choose the sentence with correct subject-verb agreement.`, options: ["The group of students write several letters.", "The group of students writes several letters.", "The group of students writing several letters.", "The group of students have wrote several letters."], correctAnswer: 1, explanation: "The subject group is singular, so it takes the singular verb writes." },
-  { id: 27, type: "grammar", skill: "Verb Tense", question: `Which sentence correctly uses the past tense?`, options: ["The volunteers clear the path last Saturday.", "The volunteers will cleared the path last Saturday.", "The volunteers cleared the path last Saturday.", "The volunteers are clear the path last Saturday."], correctAnswer: 2, explanation: "Cleared is the correct simple-past form for an action completed last Saturday." },
-  { id: 28, type: "grammar", skill: "Pronoun Agreement", question: `Choose the sentence with correct pronoun agreement.`, options: ["Maya and Joel shared her ideas with the class.", "The students carried his tools to the garden.", "Mrs. Blake thanked them for her hard work.", "The volunteers brought their gloves and tools."], correctAnswer: 3, explanation: "The plural pronoun their correctly refers to the plural noun volunteers." },
-  { id: 29, type: "grammar", skill: "Comma Use", question: `Which sentence uses commas correctly?`, options: ["The students collected gloves, bags, seedlings, and paint.", "The students collected, gloves bags seedlings and paint.", "The students collected gloves bags, seedlings and, paint.", "The students, collected gloves bags seedlings, and paint."], correctAnswer: 0, explanation: "Commas correctly separate items in a series." },
-  { id: 30, type: "grammar", skill: "Apostrophe", question: `Which sentence uses an apostrophe correctly?`, options: ["The students plan impressed the residents.", "The students' plan impressed the residents.", "The student's plan impressed all of their classmates plans.", "The students's plan impressed the residents."], correctAnswer: 1, explanation: "Students is plural, so the possessive form is students'." },
-  { id: 31, type: "grammar", skill: "Conjunction", question: `Choose the best conjunction: "The first clean-up day was difficult, ___ the students returned the following week."`, options: ["because", "unless", "but", "so that"], correctAnswer: 2, explanation: "But shows the contrast between the difficult first day and the students' decision to return." },
-  { id: 32, type: "grammar", skill: "Adverb", question: `Which word is the adverb in the sentence "The volunteers worked carefully around the broken glass"?`, options: ["volunteers", "worked", "broken", "carefully"], correctAnswer: 3, explanation: "Carefully tells how the volunteers worked, so it is an adverb." },
-  { id: 33, type: "grammar", skill: "Sentence Type", question: `What type of sentence is "Could we clean one small section ourselves?"`, options: ["Interrogative", "Declarative", "Imperative", "Exclamatory"], correctAnswer: 0, explanation: "The sentence asks a question, so it is interrogative." },
-  { id: 34, type: "grammar", skill: "Complete Sentence", question: `Which option is a complete sentence?`, options: ["Because the rain began before noon.", "The volunteers stored the tools inside the library.", "Working together behind the old library.", "The bright flowers beside the wooden benches."], correctAnswer: 1, explanation: "This option contains a complete subject and predicate and expresses a full thought." },
-  { id: 35, type: "grammar", skill: "Direct Speech", question: `Which sentence punctuates direct speech correctly?`, options: ["Maya said “We can begin today”.", "Maya said, We can begin today.", "Maya said, “We can begin today.”", "Maya said “We can begin,” today."], correctAnswer: 2, explanation: "A comma introduces the quotation, and the full stop appears inside the closing quotation mark." },
-
-  { id: 36, type: "writing", skill: "Topic Sentence", question: `Which is the BEST topic sentence for a paragraph about the project's benefits?`, options: ["The garden had vegetables, and some people visited it on Saturdays.", "Several students liked callaloo, while others preferred the marigolds.", "The library stood beside a road that became muddy during heavy rain.", "The community garden improved the neighbourhood in both practical and social ways."], correctAnswer: 3, explanation: "This sentence clearly states the controlling idea that the paragraph can develop with different kinds of benefits." },
-  { id: 37, type: "writing", skill: "Formal Letter", question: `Which opening is MOST appropriate for a formal letter requesting supplies from a business?`, options: ["Dear Ms. Brown, Our class is requesting gardening gloves for a supervised community project.", "Hi there! We really need some stuff, so please send whatever you have.", "My friends said your shop has tools, and we want some of them right away.", "Good morning, neighbour. You should already know why our garden needs help."], correctAnswer: 0, explanation: "The opening is polite, specific, and suitable for a formal request." },
-  { id: 38, type: "writing", skill: "Supporting Evidence", question: `Which sentence provides the STRONGEST evidence that the project united the community?`, options: ["The garden contained callaloo, thyme, and several rows of marigolds.", "Neighbours began sharing tools, recipes, ideas, and responsibility for the space.", "The library roof directed rainwater into a brightly painted collection barrel.", "Students photographed twelve rubbish bags after the first clean-up day."], correctAnswer: 1, explanation: "Sharing resources and responsibility directly demonstrates stronger community relationships." },
-  { id: 39, type: "writing", skill: "Conclusion", question: `Which is the BEST concluding sentence for a report about the project?`, options: ["That is all the information I have about the garden behind the library.", "The marigolds were orange, yellow, and red beside the vegetable beds.", "The Cedar Grove project shows that thoughtful planning and shared effort can turn a small idea into lasting change.", "First, the students wrote letters; second, they interviewed residents; third, they requested tools."], correctAnswer: 2, explanation: "The sentence restates the central lesson and gives the report a meaningful ending without merely repeating details." },
-  { id: 40, type: "writing", skill: "Revision", question: `Which revision BEST improves this sentence: "The garden was good and it did many good things for everyone"?`, options: ["The garden was very, very good and did good things for many people.", "The garden was nice, and everyone thought its different features were nice.", "The garden did things for the people, and those things were mostly good.", "The garden provided fresh produce, learning opportunities, and a stronger sense of community."], correctAnswer: 3, explanation: "The revision replaces vague repeated words with precise details." }
+const questions: Question[] = [
+{id:1,type:"reading",skill:"Main Idea",question:`${passage}\n\nWhat is the main idea of the passage?`,options:["The project improved the lot mainly because businesses supplied equipment.","The students' initiative led neighbours to improve a neglected space together.","The library created a garden so teachers could conduct science lessons outdoors.","The residents transformed the lot after municipal workers organised a clean-up."],correctAnswer:1,explanation:"The passage centres on the students beginning an organised effort that eventually brought the community together."},
+{id:2,type:"reading",skill:"Supporting Detail",question:`${passage}\n\nWhich detail BEST supports the idea that planning helped the project succeed?`,options:["The lot was located behind the community library.","Maya stopped walking when she reached the gate.","The students divided tasks among groups before the clean-up.","The garden later contained callaloo, thyme, and marigolds."],correctAnswer:2,explanation:"Dividing the work allowed the students to secure permission, gather knowledge, and request supplies."},
+{id:3,type:"reading",skill:"Sequence",question:`${passage}\n\nWhich event happened immediately BEFORE the first clean-up day?`,options:["The students contacted officials, residents, and businesses.","Families shared produce with elderly community members.","Miss Ruby demonstrated how to plant several crops.","Teachers began taking classes into the completed garden."],correctAnswer:0,explanation:"The students completed their planning and outreach before the first clean-up day."},
+{id:4,type:"reading",skill:"Cause and Effect",question:`${passage}\n\nWhat most likely encouraged more people to attend the second clean-up?`,options:["The first volunteers had already shown that progress was possible.","The municipal office had promised to pay everyone who attended.","The students had finished planting all the vegetables themselves.","The library had cancelled its regular Saturday activities."],correctAnswer:0,explanation:"The photographs, notice, and visible first-day progress made the project seem real and worth joining."},
+{id:5,type:"reading",skill:"Character Trait",question:`${passage}\n\nWhich trait is MOST clearly shown by Maya's first suggestion?`,options:["Leadership, because she identifies a problem and proposes a practical beginning.","Patience, because she decides to wait until municipal workers arrive.","Independence, because she plans to complete the work without anyone's help.","Caution, because she advises the class not to enter the unused lot."],correctAnswer:0,explanation:"Maya moves the group from complaining to considering a realistic first action."},
+{id:6,type:"reading",skill:"Inference",question:`${passage}\n\nWhat can the reader infer about Mr. Ellis?`,options:["He doubts that children should participate in community projects.","He supports the idea but understands that enthusiasm needs responsible planning.","He wants the library to control every decision made by the volunteers.","He expects the students to abandon the project after the first difficulty."],correctAnswer:1,explanation:"His warning identifies practical needs rather than dismissing the students' idea."},
+{id:7,type:"reading",skill:"Vocabulary in Context",question:`${passage}\n\nWhat does “neglected” mean as used in the passage?`,options:["Left without proper care for a long time","Protected until it could be safely developed","Reserved for a future community project","Damaged recently by heavy rainfall"],correctAnswer:0,explanation:"The weeds, rubbish, and flooding show that the lot had not been properly cared for."},
+{id:8,type:"reading",skill:"Author's Purpose",question:`${passage}\n\nWhat is the author's main purpose?`,options:["To provide detailed instructions for starting a vegetable garden","To show how organised effort can improve both a place and its community","To argue that municipal workers should manage all unused public land","To compare traditional gardening methods with modern environmental practices"],correctAnswer:1,explanation:"The passage shows physical improvement as well as stronger relationships and shared confidence."},
+{id:9,type:"reading",skill:"Fact and Opinion",question:`${passage}\n\nWhich statement is an OPINION?`,options:["Twenty-three people attended the second clean-up day.","The volunteers filled twelve bags with rubbish.","The community garden was Cedar Grove's finest achievement.","A rain barrel collected water from the library roof."],correctAnswer:2,explanation:"Calling the garden the community's finest achievement is a judgment that cannot be verified as fact."},
+{id:10,type:"reading",skill:"Text Structure",question:`${passage}\n\nHow is the passage mainly organised?`,options:["It compares two approaches to solving the same problem.","It presents the stages of a project in chronological order.","It lists gardening instructions from easiest to hardest.","It explains several causes of flooding in Cedar Grove."],correctAnswer:1,explanation:"The passage follows the project from the initial observation through planning, setbacks, growth, and results."},
+{id:11,type:"reading",skill:"Problem and Solution",question:`${passage}\n\nWhich statement BEST describes the central problem and solution?`,options:["A library lacked space, so residents built an outdoor classroom.","A neglected lot troubled residents, so students organised community action.","Older residents lacked food, so businesses planted vegetables for them.","Heavy rain damaged a garden, so children installed a rain barrel."],correctAnswer:1,explanation:"The neglected lot is the central problem, and the students' organised effort begins the solution."},
+{id:12,type:"reading",skill:"Theme",question:`${passage}\n\nWhich theme is BEST supported by the passage?`,options:["Community projects succeed only when many adults participate from the beginning.","Young people can begin meaningful change when they combine initiative with cooperation.","Public problems should be left to the organisations officially responsible for them.","A disappointing first attempt usually shows that a plan should be abandoned."],correctAnswer:1,explanation:"The students begin small, plan carefully, persist, and inspire broader community participation."},
+{id:13,type:"reading",skill:"Compare and Contrast",question:`${passage}\n\nHow did the second clean-up day differ from the first?`,options:["It had more participants and greater access to tools and gardening knowledge.","It focused on planning, while the first day focused on planting vegetables.","It ended early because of rain, while the first continued throughout the day.","It was managed by municipal workers instead of students and residents."],correctAnswer:0,explanation:"Attendance rose, and community members contributed wheelbarrows and gardening knowledge."},
+{id:14,type:"reading",skill:"Drawing Conclusions",question:`${passage}\n\nWhy does Maya value the neighbours' changed relationships more than the vegetables?`,options:["She believes the vegetables will not survive for very long.","She sees stronger cooperation as a benefit that can influence future challenges.","She prefers community meetings to gardening and outdoor science lessons.","She thinks the produce should have been sold rather than shared."],correctAnswer:1,explanation:"The new cooperation changes what residents believe they can accomplish together beyond this single project."},
+{id:15,type:"reading",skill:"Summary",question:`${passage}\n\nWhich is the BEST summary?`,options:["Students organise a community project, persist after a slow start, and transform both a neglected lot and relationships among neighbours.","Maya asks her class to clean a lot, and several adults later teach the children how to plant vegetables.","Residents wait for municipal help until businesses provide tools and the library begins outdoor science lessons.","A community garden supplies vegetables to elderly residents after rain interrupts the first clean-up day."],correctAnswer:0,explanation:"This choice includes the problem, response, setback, and two major outcomes without focusing on minor details."},
+{id:16,type:"vocabulary",skill:"Synonym",question:`Which word is closest in meaning to “maintaining” in “a plan for maintaining the space”?`,options:["caring for","measuring","redesigning","discovering"],correctAnswer:0,explanation:"Maintaining means continuing to care for something so it remains in good condition."},
+{id:17,type:"vocabulary",skill:"Antonym",question:`Which word is an ANTONYM for “narrow”?`,options:["shallow","wide","curved","rough"],correctAnswer:1,explanation:"Wide is the opposite of narrow."},
+{id:18,type:"vocabulary",skill:"Prefix",question:`What does the prefix “re-” mean in “reused”?`,options:["before","again","under","not"],correctAnswer:1,explanation:"Re- means again; reused means used again."},
+{id:19,type:"vocabulary",skill:"Suffix",question:`In the word “disappointing,” the suffix “-ing” helps the word describe:`,options:["something that causes a feeling","a person who completed an action","a place where an event occurred","an action completed in the distant past"],correctAnswer:0,explanation:"Disappointing describes something that causes disappointment."},
+{id:20,type:"vocabulary",skill:"Idiom",question:`What does “giving up” mean in the passage?`,options:["sharing responsibility","requesting assistance","stopping the effort","donating equipment"],correctAnswer:2,explanation:"To give up means to stop trying."},
+{id:21,type:"vocabulary",skill:"Multiple Meaning",question:`Which sentence uses “lot” with the SAME meaning as in the passage?`,options:["We learned a lot during the project.","A lot of people volunteered.","The clinic was built on a vacant lot.","Each student received a lot of seeds."],correctAnswer:2,explanation:"Here, lot means a piece of land."},
+{id:22,type:"vocabulary",skill:"Context Clues",question:`A thriving garden has healthy plants and regular activity. What does “thriving” mean?`,options:["growing successfully","remaining unfinished","changing ownership","becoming crowded"],correctAnswer:0,explanation:"The context shows that thriving means growing or doing well."},
+{id:23,type:"vocabulary",skill:"Connotation",question:`Which word has the MOST positive connotation for the volunteers?`,options:["present","busy","available","dedicated"],correctAnswer:3,explanation:"Dedicated suggests commitment and willing effort."},
+{id:24,type:"vocabulary",skill:"Figurative Language",question:`What does “The garden became the heart of the community” suggest?`,options:["It was shaped like a heart.","It became an important centre of community life.","It stood at the exact centre of Cedar Grove.","It provided medicine for residents with heart conditions."],correctAnswer:1,explanation:"Heart is used metaphorically to show central importance."},
+{id:25,type:"vocabulary",skill:"Word Relationship",question:`Which pair has the same relationship as “problem : solution”?`,options:["question : answer","garden : shovel","rain : cloud","student : library"],correctAnswer:0,explanation:"An answer responds to a question just as a solution responds to a problem."},
+{id:26,type:"grammar",skill:"Subject-Verb Agreement",question:`Choose the sentence with correct subject-verb agreement.`,options:["The group of students write several letters.","The group of students writes several letters.","The group of students writing several letters.","The group of students have wrote several letters."],correctAnswer:1,explanation:"The subject group is singular, so it takes writes."},
+{id:27,type:"grammar",skill:"Verb Tense",question:`Which sentence correctly uses the past tense?`,options:["The volunteers clear the path last Saturday.","The volunteers cleared the path last Saturday.","The volunteers will cleared the path last Saturday.","The volunteers are clear the path last Saturday."],correctAnswer:1,explanation:"Cleared is the simple-past form for a completed action."},
+{id:28,type:"grammar",skill:"Pronoun Agreement",question:`Choose the sentence with correct pronoun agreement.`,options:["Maya and Joel shared her ideas.","The students carried his tools.","Mrs. Blake thanked them for her work.","The volunteers brought their gloves."],correctAnswer:3,explanation:"Their correctly refers to the plural noun volunteers."},
+{id:29,type:"grammar",skill:"Comma Use",question:`Which sentence uses commas correctly?`,options:["The students collected gloves, bags, seedlings, and paint.","The students collected, gloves bags seedlings and paint.","The students collected gloves bags, seedlings and, paint.","The students, collected gloves bags seedlings, and paint."],correctAnswer:0,explanation:"Commas correctly separate the items in the series."},
+{id:30,type:"grammar",skill:"Apostrophe",question:`Which sentence uses an apostrophe correctly?`,options:["The students plan impressed the residents.","The students' plan impressed the residents.","The student's plan impressed all their classmates plans.","The students's plan impressed the residents."],correctAnswer:1,explanation:"Students is plural, so its possessive form is students'."},
+{id:31,type:"grammar",skill:"Conjunction",question:`Choose the best conjunction: “The first clean-up was difficult, ___ the students returned.”`,options:["because","unless","but","so that"],correctAnswer:2,explanation:"But shows contrast."},
+{id:32,type:"grammar",skill:"Adverb",question:`Which word is the adverb in “The volunteers worked carefully around the glass”?`,options:["volunteers","worked","carefully","glass"],correctAnswer:2,explanation:"Carefully tells how they worked."},
+{id:33,type:"grammar",skill:"Sentence Type",question:`What type of sentence is “Could we clean one small section ourselves?”`,options:["Declarative","Interrogative","Imperative","Exclamatory"],correctAnswer:1,explanation:"It asks a question, so it is interrogative."},
+{id:34,type:"grammar",skill:"Complete Sentence",question:`Which option is a complete sentence?`,options:["Because the rain began before noon.","Working together behind the library.","The volunteers stored the tools inside the library.","The bright flowers beside the benches."],correctAnswer:2,explanation:"It has a complete subject, predicate, and thought."},
+{id:35,type:"grammar",skill:"Direct Speech",question:`Which sentence punctuates direct speech correctly?`,options:["Maya said “We can begin today”.","Maya said, We can begin today.","Maya said, “We can begin today.”","Maya said “We can begin,” today."],correctAnswer:2,explanation:"A comma introduces the quotation, and the full stop is inside the closing quotation mark."},
+{id:36,type:"writing",skill:"Topic Sentence",question:`Which is the BEST topic sentence for a paragraph about the project's benefits?`,options:["The garden contained vegetables and flowers.","Several people visited the garden on Saturdays.","The community garden improved the neighbourhood in practical and social ways.","The library stood beside a road that became muddy."],correctAnswer:2,explanation:"It gives a clear controlling idea that can be supported with several benefits."},
+{id:37,type:"writing",skill:"Formal Letter",question:`Which opening is MOST appropriate for a formal request to a business?`,options:["Hi! We need some stuff, so send what you have.","Dear Ms. Brown, Our class is requesting gardening gloves for a supervised community project.","My friends said you have tools, and we want them right away.","Good morning. You should already know why our garden needs help."],correctAnswer:1,explanation:"It is polite, specific, and appropriately formal."},
+{id:38,type:"writing",skill:"Supporting Evidence",question:`Which sentence provides the STRONGEST evidence that the project united the community?`,options:["The garden contained callaloo, thyme, and marigolds.","The rain barrel was painted before it was installed.","Neighbours shared tools, recipes, ideas, and responsibility.","Students photographed twelve bags after the clean-up."],correctAnswer:2,explanation:"Sharing resources and responsibility directly shows stronger community relationships."},
+{id:39,type:"writing",skill:"Conclusion",question:`Which is the BEST concluding sentence for a report about the project?`,options:["That is all the information about the garden.","The marigolds grew beside the vegetable beds.","First, the students wrote letters and requested tools.","The project shows that planning and shared effort can turn a small idea into lasting change."],correctAnswer:3,explanation:"It restates the central lesson and provides a meaningful close."},
+{id:40,type:"writing",skill:"Revision",question:`Which revision BEST improves “The garden was good and did many good things”?`,options:["The garden was very good and did good things.","The garden was nice, and its features were nice.","The garden did things that were mostly good.","The garden provided fresh produce, learning opportunities, and stronger community ties."],correctAnswer:3,explanation:"It replaces vague repetition with precise details."}
 ]
 
-const SECTION_CONFIG = [
-  { type: "reading" as const,    label: "Reading Comprehension",   note: "literal, inferential, and analytical reading across all difficulty levels" },
-  { type: "vocabulary" as const, label: "Vocabulary & Word Study",  note: "word meaning, figurative language, connotation, idioms, etymology" },
-  { type: "grammar" as const,    label: "Grammar & Language Use",   note: "from basic parts of speech to complex clauses and transformations" },
-  { type: "writing" as const,    label: "Writing Skills",           note: "purpose, audience, technique, structure, and analytical writing" },
+const sections=[
+{type:"reading" as const,label:"Reading Comprehension",note:"literal, inferential, and analytical reading"},
+{type:"vocabulary" as const,label:"Vocabulary & Word Study",note:"meaning, context, word structure, and figurative language"},
+{type:"grammar" as const,label:"Grammar & Language Use",note:"sentence structure, agreement, tense, and punctuation"},
+{type:"writing" as const,label:"Writing Skills",note:"purpose, evidence, organisation, and revision"}
 ]
 
-export default function G5LaMix9MockTest() {
-  const { isPremium, user } = useAuth()
-  const [started, setStarted]                 = useState(false)
-  const [showResults, setShowResults]         = useState(false)
-  const [currentQuestion, setCurrentQuestion] = useState(0)
-  const [answers, setAnswers]                 = useState<(number | null)[]>([])
-  const [timeLeft, setTimeLeft]               = useState(60 * 60)
+export default function G5LaMix9MockTest(){
+ const {isPremium,user}=useAuth()
+ const [started,setStarted]=useState(false)
+ const [showResults,setShowResults]=useState(false)
+ const [attemptQuestions,setAttemptQuestions]=useState<Question[]>([])
+ const [currentQuestion,setCurrentQuestion]=useState(0)
+ const [answers,setAnswers]=useState<(number|null)[]>([])
+ const [timeLeft,setTimeLeft]=useState(TEST_SECONDS)
+ const submittedRef=useRef(false)
+ const totalQuestions=attemptQuestions.length
+ const q=attemptQuestions[currentQuestion]
 
-  const availableQuestions = isPremium ? g5LaMix9Questions : g5LaMix9Questions.slice(0, FREE_QUESTION_LIMIT)
-  const totalQuestions = availableQuestions.length
+ const buildAttempt=useCallback(()=>isPremium?prepareAssessment(questions):preparePreview(questions,FREE_QUESTION_LIMIT),[isPremium])
+ const initialiseAttempt=useCallback(()=>{const prepared=buildAttempt();setAttemptQuestions(prepared);setAnswers(new Array(prepared.length).fill(null));setCurrentQuestion(0);setTimeLeft(TEST_SECONDS);setShowResults(false);submittedRef.current=false},[buildAttempt])
+ const startTest=()=>{initialiseAttempt();setStarted(true)}
+ const calcScore=useCallback(()=>calculateAssessmentScore(attemptQuestions,answers),[attemptQuestions,answers])
+ const scorePct=useCallback(()=>totalQuestions?Math.round(calcScore()/totalQuestions*100):0,[calcScore,totalQuestions])
 
-  useEffect(() => {
-    if (answers.length !== totalQuestions) setAnswers(new Array(totalQuestions).fill(null))
-  }, [totalQuestions, answers.length])
+ const submitTest=useCallback(async()=>{
+  if(submittedRef.current)return
+  submittedRef.current=true
+  setShowResults(true)
+  if(!user?.id)return
+  try{await saveStudentTestResult({parentId:user.id,studentName:user.childName??"Student",grade:"grade5",subject:"Literacy",testName:"Mixed 9",difficulty:"Mixed",score:calcScore(),totalQuestions,percentage:scorePct(),completedAt:new Date().toISOString()})}
+  catch(error){console.error("Failed to save test result:",error)}
+ },[user,calcScore,totalQuestions,scorePct])
 
-  const formatTime = useCallback((s: number) => {
-    const m = Math.floor(s / 60)
-    return `${m.toString().padStart(2, "0")}:${(s % 60).toString().padStart(2, "0")}`
-  }, [])
+ useEffect(()=>{if(!started||showResults)return;const timer=setInterval(()=>setTimeLeft(previous=>{if(previous<=1){clearInterval(timer);void submitTest();return 0}return previous-1}),1000);return()=>clearInterval(timer)},[started,showResults,submitTest])
 
-  useEffect(() => {
-    if (!started || showResults) return
-    const t = setInterval(() => setTimeLeft((p) => { if (p <= 1) { setShowResults(true); return 0 } return p - 1 }), 1000)
-    return () => clearInterval(t)
-  }, [started, showResults])
+ const formatTime=(seconds:number)=>`${Math.floor(seconds/60).toString().padStart(2,"0")}:${(seconds%60).toString().padStart(2,"0")}`
+ const handleAnswer=(index:number)=>setAnswers(previous=>previous.map((answer,i)=>i===currentQuestion?index:answer))
+ const resetTest=()=>{setStarted(false);setShowResults(false);setAttemptQuestions([]);setAnswers([]);setCurrentQuestion(0);setTimeLeft(TEST_SECONDS);submittedRef.current=false}
+ const getGrade=()=>{const p=scorePct();if(p>=85)return{grade:"Excellent",color:"text-green-600"};if(p>=70)return{grade:"Good",color:"text-blue-600"};if(p>=50)return{grade:"Fair",color:"text-amber-600"};return{grade:"Needs Improvement",color:"text-red-600"}}
+ const getSectionStats=(type:QuestionType)=>{const selected=attemptQuestions.map((question,index)=>({question,index})).filter(item=>item.question.type===type);const correct=selected.filter(item=>answers[item.index]===item.question.correctAnswer).length;const total=selected.length;const percentage=total?Math.round(correct/total*100):0;const rating=percentage>=85?"Excellent":percentage>=70?"Good":percentage>=50?"Fair":"Needs Improvement";const ratingColor=percentage>=85?"text-green-600":percentage>=70?"text-blue-600":percentage>=50?"text-amber-600":"text-red-600";return{correct,total,percentage,rating,ratingColor}}
+ const secLabel=(type:QuestionType)=>type==="reading"?"Reading Comprehension":type==="vocabulary"?"Vocabulary & Word Study":type==="grammar"?"Grammar & Language Use":"Writing Skills"
+ const secColor=(type:QuestionType)=>type==="reading"?"bg-blue-50 text-blue-700":type==="vocabulary"?"bg-purple-50 text-purple-700":type==="grammar"?"bg-green-50 text-green-700":"bg-amber-50 text-amber-700"
 
-  const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
+ if(!started)return <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50"><Header/><main className="container mx-auto px-4 py-10"><Link href="/mock-tests/language-arts"><Button variant="ghost" className="mb-6"><ArrowLeft className="mr-2 h-4 w-4"/>Back to Language Arts Mock Tests</Button></Link><Card className="mx-auto max-w-3xl border-blue-200 shadow-lg"><CardHeader className="bg-blue-50 text-center"><BookOpen className="mx-auto mb-4 h-14 w-14 text-blue-600"/><CardTitle className="text-2xl text-blue-800">Language Arts Mixed 9</CardTitle><p className="text-slate-600">Grade 5 PEP Language Arts · Mixed Level Practice</p></CardHeader><CardContent className="space-y-6 p-6">{!isPremium&&<div className="rounded-lg border border-amber-200 bg-amber-50 p-4"><div className="flex items-start gap-3"><Lock className="mt-1 h-5 w-5 text-amber-600"/><div><p className="font-semibold text-amber-800">Free Preview Mode</p><p className="text-sm text-amber-700">Try {FREE_QUESTION_LIMIT} randomly selected questions free.</p><Link href="/pricing" className="mt-3 inline-block"><Button className="bg-amber-500 hover:bg-amber-600"><Crown className="mr-2 h-4 w-4"/>Upgrade to Premium</Button></Link></div></div></div>}<div className="rounded-lg border border-blue-200 bg-white p-4"><h3 className="mb-2 font-semibold">Mixed Level Overview</h3><p className="text-slate-700">Questions and answer choices are shuffled for each new attempt. Your choices remain fixed while you complete the test.</p></div><div className="grid grid-cols-2 gap-4 text-center"><div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-blue-600">{isPremium?40:FREE_QUESTION_LIMIT}</p><p className="text-sm text-slate-600">Questions</p></div><div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-blue-600">60</p><p className="text-sm text-slate-600">Minutes</p></div></div><Button onClick={startTest} className="w-full bg-blue-600 py-6 text-lg hover:bg-blue-700">Start Test</Button></CardContent></Card></main><Footer/></div>
 
-  const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
-  const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
+ if(showResults){const sc=calcScore(),pct=scorePct(),{grade,color}=getGrade();return <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50"><Header/><main className="container mx-auto px-4 py-10"><Card className="mx-auto max-w-4xl border-blue-200 shadow-lg"><CardHeader className="bg-blue-50 text-center"><CheckCircle className="mx-auto mb-4 h-14 w-14 text-blue-600"/><CardTitle className="text-2xl text-blue-800">Language Arts Test Completed</CardTitle><p className="text-slate-600">Language Arts Mixed 9</p></CardHeader><CardContent className="space-y-6 p-6"><div className="rounded-lg bg-gray-50 p-6 text-center"><p className="text-5xl font-bold text-blue-600">{sc}/{totalQuestions}</p><p className="mt-2 text-slate-600">Questions Correct</p></div><div className="grid grid-cols-1 gap-4 text-center sm:grid-cols-3"><div className="rounded-lg bg-gray-50 p-4"><p className="text-3xl font-bold text-blue-600">{pct}%</p><p className="text-sm text-slate-600">Score</p></div><div className="rounded-lg bg-gray-50 p-4"><p className={cn("text-2xl font-bold",color)}>{grade}</p><p className="text-sm text-slate-600">Performance</p></div><div className="rounded-lg bg-gray-50 p-4"><p className="text-sm font-semibold">{new Date().toLocaleDateString()}</p><p className="text-sm text-slate-600">Completed</p></div></div>{!isPremium&&<div className="rounded-lg border border-amber-200 bg-amber-50 p-4"><p className="font-semibold text-amber-800">Upgrade to access all 40 questions.</p></div>}<div className="grid grid-cols-1 gap-4 md:grid-cols-2">{sections.map(section=>{const stats=getSectionStats(section.type);return <div key={section.type} className="rounded-xl border border-blue-100 bg-blue-50 p-4"><p className="font-semibold text-blue-800">{section.label}</p><p className="mt-1 text-sm text-slate-500">{section.note}</p><div className="mt-3 flex justify-between"><span className="text-sm">{stats.correct}/{stats.total} correct</span><span className={cn("text-sm font-semibold",stats.ratingColor)}>{stats.rating}</span></div><Progress value={stats.percentage} className="mt-2 h-2"/></div>})}</div><div className="space-y-4">{attemptQuestions.map((question,index)=>{const correct=answers[index]===question.correctAnswer;return <div key={question.id} className={cn("rounded-lg border-2 p-4",correct?"border-green-200 bg-green-50":"border-red-200 bg-red-50")}><div className="flex gap-3">{correct?<CheckCircle className="mt-1 h-5 w-5 text-green-600"/>:<XCircle className="mt-1 h-5 w-5 text-red-600"/>}<div className="flex-1"><p className="font-semibold">Q{index+1} · <span className="text-blue-700">{question.skill}</span></p><p className="mt-1 whitespace-pre-line text-sm text-slate-700">{question.question}</p><p className="mt-2 text-sm">Your answer: {answers[index]!==null?question.options[answers[index]!]:"Not answered"}</p><p className="text-sm text-green-700">Correct: {question.options[question.correctAnswer]}</p><p className="mt-1 text-sm">Explanation: {question.explanation}</p></div></div></div>})}</div><div className="flex flex-col gap-3 sm:flex-row"><Button onClick={()=>window.print()} className="flex-1 bg-blue-600"><Printer className="mr-2 h-4 w-4"/>Print / Save Report</Button><Button onClick={resetTest} variant="outline" className="flex-1"><RotateCcw className="mr-2 h-4 w-4"/>Try Again</Button><Link href="/mock-tests/language-arts" className="flex-1"><Button variant="outline" className="w-full"><Home className="mr-2 h-4 w-4"/>Back to Tests</Button></Link></div></CardContent></Card></main><Footer/></div>}
 
-  const handleSubmit = async () => {
-    setShowResults(true)
-
-    if (!user?.id) return
-
-    try {
-      await saveStudentTestResult({
-        parentId: user.id,
-        studentName: user?.childName ?? "Student",
-        grade: "grade5",
-        subject: "Language Arts",
-        testName: "Mixed 9",
-        difficulty: "Mixed",
-        score: calcScore(),
-        totalQuestions,
-        percentage: scorePct(),
-        completedAt: new Date().toISOString(),
-      })
-    } catch (error) {
-      console.error("Failed to save test result:", error)
-    }
-  }
-
-  const getGrade = () => {
-    const p = scorePct()
-    if (p >= 85) return { grade: "Excellent",         color: "text-green-600" }
-    if (p >= 70) return { grade: "Good",              color: "text-blue-600" }
-    if (p >= 50) return { grade: "Fair",              color: "text-amber-600" }
-    return              { grade: "Needs Improvement", color: "text-red-600" }
-  }
-
-  const getSectionStats = (type: Question["type"]) => {
-    const sq = availableQuestions.filter((q) => q.type === type)
-    const correct = sq.filter((q) => { const i = availableQuestions.findIndex((x) => x.id === q.id); return answers[i] === q.correctAnswer }).length
-    const total = sq.length
-    const pct = total === 0 ? 0 : Math.round((correct / total) * 100)
-    const rating = pct >= 85 ? "Excellent" : pct >= 70 ? "Good" : pct >= 50 ? "Fair" : "Needs Improvement"
-    const color  = pct >= 85 ? "text-green-600" : pct >= 70 ? "text-blue-600" : pct >= 50 ? "text-amber-600" : "text-red-600"
-    return { correct, total, percentage: pct, rating, ratingColor: color }
-  }
-
-  const resetTest = () => {
-    setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
-  }
-
-  const q = availableQuestions[currentQuestion]
-  const answeredCount = answers.filter((a) => a !== null).length
-  const secLabel = (t: Question["type"]) =>
-    t === "reading" ? "Reading Comprehension" : t === "vocabulary" ? "Vocabulary & Word Study"
-    : t === "grammar" ? "Grammar & Language Use" : "Writing Skills"
-  const secColor = (t: Question["type"]) =>
-    t === "reading" ? "bg-blue-50 text-blue-700" : t === "vocabulary" ? "bg-purple-50 text-purple-700"
-    : t === "grammar" ? "bg-green-50 text-green-700" : "bg-amber-50 text-amber-700"
-
-  if (!started) return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
-      <Header />
-      <main className="container mx-auto px-4 py-10">
-        <Link href="/mock-tests/language-arts"><Button variant="ghost" className="mb-6"><ArrowLeft className="mr-2 h-4 w-4" />Back to Language Arts Mock Tests</Button></Link>
-        <Card className="mx-auto max-w-3xl border-blue-200 shadow-lg">
-          <CardHeader className="bg-blue-50 text-center">
-            <BookOpen className="mx-auto mb-4 h-14 w-14 text-blue-600" />
-            <CardTitle className="text-2xl text-blue-800">Language Arts Mixed 9</CardTitle>
-            <p className="text-slate-600">Grade 5 PEP Language Arts · Mixed Level Practice</p>
-          </CardHeader>
-          <CardContent className="space-y-6 p-6">
-            {!isPremium && (
-              <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
-                <div className="flex items-start gap-3">
-                  <Lock className="mt-1 h-5 w-5 flex-shrink-0 text-amber-600" />
-                  <div>
-                    <p className="font-semibold text-amber-800">Free Preview Mode</p>
-                    <p className="text-sm text-amber-700">Try {FREE_QUESTION_LIMIT} questions free. Upgrade to unlock all 40.</p>
-                    <Link href="/pricing" className="mt-3 inline-block"><Button className="bg-amber-500 hover:bg-amber-600"><Crown className="mr-2 h-4 w-4" />Upgrade to Premium</Button></Link>
-                  </div>
-                </div>
-              </div>
-            )}
-            <div className="rounded-lg border border-blue-200 bg-white p-4">
-              <h3 className="mb-2 font-semibold text-slate-800">Mixed Level Overview</h3>
-              <p className="text-slate-700">This test blends easy, moderate, and challenging questions across reading, vocabulary, grammar, and writing — giving you a complete picture of your Grade 5 Language Arts skills.</p>
-            </div>
-            <div className="rounded-lg bg-sky-50 p-4">
-              <h3 className="mb-2 font-semibold text-sky-800">What to Expect</h3>
-              <ul className="space-y-1 text-sm text-slate-700">
-                <li>Reading: literal comprehension → inference → literary analysis</li>
-                <li>Vocabulary: word meaning → figurative language → nuanced connotation</li>
-                <li>Grammar: basic parts of speech → complex clauses and transformations</li>
-                <li>Writing: paragraph structure → persuasive technique → analytical writing</li>
-              </ul>
-            </div>
-            <div className="grid grid-cols-2 gap-4 text-center">
-              <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-blue-600">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
-              <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-blue-600">60</p><p className="text-sm text-slate-600">Minutes</p></div>
-            </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-blue-600 py-6 text-lg hover:bg-blue-700">Start Test</Button>
-          </CardContent>
-        </Card>
-      </main>
-      <Footer />
-    </div>
-  )
-
-  if (showResults) {
-    const sc = calcScore(); const pct = scorePct(); const { grade, color } = getGrade()
-    return (
-      <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
-        <Header />
-        <main className="container mx-auto px-4 py-10">
-          <Card className="mx-auto max-w-4xl border-blue-200 shadow-lg">
-            <CardHeader className="bg-blue-50 text-center">
-              <CheckCircle className="mx-auto mb-4 h-14 w-14 text-blue-600" />
-              <CardTitle className="text-2xl text-blue-800">Language Arts Test Completed</CardTitle>
-              <p className="text-slate-600">Language Arts Mixed 9</p>
-            </CardHeader>
-            <CardContent className="space-y-6 p-6">
-              <div className="rounded-lg bg-gray-50 p-6 text-center">
-                <p className="text-5xl font-bold text-blue-600">{sc}/{totalQuestions}</p>
-                <p className="mt-2 text-slate-600">Questions Correct</p>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-                <div className="rounded-lg bg-gray-50 p-4"><p className="text-3xl font-bold text-blue-600">{pct}%</p><p className="text-sm text-slate-600">Score</p></div>
-                <div className="rounded-lg bg-gray-50 p-4"><p className={cn("text-2xl font-bold", color)}>{grade}</p><p className="text-sm text-slate-600">Performance</p></div>
-                <div className="rounded-lg bg-gray-50 p-4"><p className="text-sm font-semibold text-slate-700">{new Date().toLocaleDateString()}</p><p className="text-sm text-slate-600">Completed</p></div>
-              </div>
-              {!isPremium && (<div className="rounded-lg border border-amber-200 bg-amber-50 p-4"><p className="font-semibold text-amber-800">Upgrade to access all 40 questions.</p><Link href="/pricing" className="mt-2 inline-block"><Button className="bg-amber-500 hover:bg-amber-600"><Crown className="mr-2 h-4 w-4" />Upgrade</Button></Link></div>)}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {SECTION_CONFIG.map((s) => { const st = getSectionStats(s.type); return (
-                  <div key={s.type} className="rounded-xl border border-blue-100 bg-blue-50 p-4">
-                    <p className="font-semibold text-blue-800">{s.label}</p>
-                    <p className="text-sm text-slate-500 mt-1">{s.note}</p>
-                    <div className="mt-3 flex items-center justify-between">
-                      <span className="text-sm text-slate-700">{st.correct}/{st.total} correct</span>
-                      <span className={cn("text-sm font-semibold", st.ratingColor)}>{st.rating}</span>
-                    </div>
-                    <Progress value={st.percentage} className="h-2 mt-2" />
-                    <p className="text-xs text-slate-500 mt-1">{st.percentage}%</p>
-                  </div>
-                )})}
-              </div>
-              <div className="rounded-lg border border-sky-200 bg-sky-50 p-4">
-                <h3 className="mb-2 font-semibold text-sky-800">Teacher-Style Feedback</h3>
-                <p className="text-slate-700">This mixed test spans all difficulty levels. Review each explanation carefully — questions you found challenging reveal which areas to focus on as you prepare for the PEP Language Arts paper.</p>
-              </div>
-              <div className="space-y-4">
-                {availableQuestions.map((q, i) => {
-                  const correct = answers[i] === q.correctAnswer
-                  return (
-                    <div key={q.id} className={cn("rounded-lg border-2 p-4", correct ? "border-green-200 bg-green-50" : "border-red-200 bg-red-50")}>
-                      <div className="flex items-start gap-3">
-                        {correct ? <CheckCircle className="mt-1 h-5 w-5 text-green-600" /> : <XCircle className="mt-1 h-5 w-5 text-red-600" />}
-                        <div className="flex-1">
-                          <p className="font-semibold text-slate-800">Q{i + 1} · <span className="text-blue-700">{q.skill}</span></p>
-                          <p className="mt-1 text-slate-700 text-sm whitespace-pre-line">{q.question}</p>
-                          <p className="mt-2 text-sm text-slate-600">Your answer: <span className={correct ? "text-green-700 font-medium" : "text-red-700 font-medium"}>{answers[i] !== null ? q.options[answers[i]!] : "Not answered"}</span></p>
-                          <p className="text-sm text-green-700">Correct: {q.options[q.correctAnswer]}</p>
-                          <p className="mt-1 text-sm text-slate-700">Explanation: {q.explanation}</p>
-                        </div>
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <Button onClick={() => window.print()} className="flex-1 bg-blue-600 hover:bg-blue-700"><Printer className="mr-2 h-4 w-4" />Print / Save Report</Button>
-                <Button onClick={resetTest} variant="outline" className="flex-1"><RotateCcw className="mr-2 h-4 w-4" />Try Again</Button>
-                <Link href="/mock-tests/language-arts" className="flex-1"><Button variant="outline" className="w-full"><Home className="mr-2 h-4 w-4" />Back to Language Arts Tests</Button></Link>
-              </div>
-            </CardContent>
-          </Card>
-        </main>
-        <Footer />
-      </div>
-    )
-  }
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
-      <Header />
-      <header className="bg-blue-800 text-white sticky top-0 z-10">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Link href="/mock-tests/language-arts" className="p-2 hover:bg-white/10 rounded-lg transition-colors"><ArrowLeft className="h-5 w-5" /></Link>
-            <BookOpen className="h-8 w-8" />
-            <div><h1 className="text-lg font-bold">Language Arts Mixed 9</h1><p className="text-blue-100 text-xs">Question {currentQuestion + 1} of {totalQuestions}</p></div>
-          </div>
-          <div className={cn("flex items-center gap-2 px-4 py-2 rounded-lg font-mono text-lg", timeLeft <= 300 ? "bg-red-500" : "bg-green-600")}>
-            <Clock className="h-5 w-5" />{formatTime(timeLeft)}
-          </div>
-        </div>
-      </header>
-      <div className="bg-white border-b shadow-sm sticky top-[72px] z-10">
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center justify-between text-sm text-gray-600 mb-2">
-            <span>Progress: {answeredCount}/{totalQuestions} answered</span>
-            <span>{Math.round((answeredCount / totalQuestions) * 100)}% complete</span>
-          </div>
-          <Progress value={(answeredCount / totalQuestions) * 100} className="h-2" />
-        </div>
-      </div>
-      <main className="container mx-auto px-4 py-6">
-        <div className="max-w-4xl mx-auto">
-          {!isPremium && (<div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 p-4"><p className="font-semibold text-amber-800">Free Preview: {FREE_QUESTION_LIMIT} of 40 questions</p><p className="text-sm text-amber-700">Upgrade to Premium for full access.</p></div>)}
-          <Card className="mb-6 border-blue-100">
-            <CardHeader className={cn("rounded-t-lg", secColor(q.type))}>
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold uppercase tracking-wide">{q.skill}</span>
-                <span className="text-xs uppercase tracking-wide opacity-70">{secLabel(q.type)}</span>
-              </div>
-            </CardHeader>
-            <CardContent className="p-6">
-              <p className="text-base font-medium text-slate-800 mb-6 leading-relaxed whitespace-pre-line">{q.question}</p>
-              <div className="space-y-3">
-                {q.options.map((opt, idx) => (
-                  <button key={idx} onClick={() => handleAnswer(idx)}
-                    className={cn("w-full p-4 text-left rounded-lg border-2 transition-all",
-                      answers[currentQuestion] === idx ? "border-blue-600 bg-blue-50" : "border-gray-200 hover:border-blue-300 hover:bg-blue-50/50")}>
-                    <span className="font-medium text-blue-700 mr-3">{String.fromCharCode(65 + idx)}.</span>{opt}
-                  </button>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-          <div className="flex items-center justify-between mb-6">
-            <Button variant="outline" onClick={() => setCurrentQuestion((p) => p - 1)} disabled={currentQuestion === 0}><ChevronLeft className="h-4 w-4 mr-2" />Previous</Button>
-            {currentQuestion === totalQuestions - 1
-              ? <Button onClick={handleSubmit} className="bg-blue-600 hover:bg-blue-700"><Flag className="h-4 w-4 mr-2" />Submit Test</Button>
-              : <Button onClick={() => setCurrentQuestion((p) => p + 1)} className="bg-blue-600 hover:bg-blue-700">Next<ChevronRight className="h-4 w-4 ml-2" /></Button>}
-          </div>
-          <Card className="border-blue-100">
-            <CardHeader className="py-3"><CardTitle className="text-sm text-blue-700">Question Navigator</CardTitle></CardHeader>
-            <CardContent className="pb-4">
-              <div className="grid grid-cols-10 gap-2">
-                {availableQuestions.map((_, idx) => (
-                  <button key={idx} onClick={() => setCurrentQuestion(idx)}
-                    className={cn("w-8 h-8 rounded text-sm font-medium transition-colors",
-                      currentQuestion === idx ? "bg-blue-600 text-white"
-                      : answers[idx] !== null ? "bg-blue-100 text-blue-700"
-                      : "bg-gray-100 text-gray-600 hover:bg-gray-200")}>
-                    {idx + 1}
-                  </button>
-                ))}
-              </div>
-              <div className="flex items-center gap-4 mt-4 text-xs text-gray-500">
-                <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-blue-600" /><span>Current</span></div>
-                <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-blue-100" /><span>Answered</span></div>
-                <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-gray-100" /><span>Unanswered</span></div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </main>
-      <Footer />
-    </div>
-  )
+ if(!q)return null
+ const answeredCount=answers.filter(answer=>answer!==null).length
+ return <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50"><Header/><header className="sticky top-0 z-10 bg-blue-800 text-white"><div className="container mx-auto flex items-center justify-between px-4 py-4"><div className="flex items-center gap-3"><BookOpen className="h-8 w-8"/><div><h1 className="font-bold">Language Arts Mixed 9</h1><p className="text-xs text-blue-100">Question {currentQuestion+1} of {totalQuestions}</p></div></div><div className={cn("flex items-center gap-2 rounded-lg px-4 py-2 font-mono text-lg",timeLeft<=300?"bg-red-500":"bg-green-600")}><Clock className="h-5 w-5"/>{formatTime(timeLeft)}</div></div></header><div className="sticky top-[72px] z-10 border-b bg-white shadow-sm"><div className="container mx-auto px-4 py-3"><div className="mb-2 flex justify-between text-sm text-gray-600"><span>{answeredCount}/{totalQuestions} answered</span><span>{Math.round(answeredCount/totalQuestions*100)}% complete</span></div><Progress value={answeredCount/totalQuestions*100} className="h-2"/></div></div><main className="container mx-auto px-4 py-6"><div className="mx-auto max-w-4xl"><Card className="mb-6 border-blue-100"><CardHeader className={cn("rounded-t-lg",secColor(q.type))}><div className="flex justify-between"><span className="text-sm font-semibold uppercase">{q.skill}</span><span className="text-xs uppercase opacity-70">{secLabel(q.type)}</span></div></CardHeader><CardContent className="p-6"><p className="mb-6 whitespace-pre-line text-base font-medium leading-relaxed">{q.question}</p><div className="space-y-3">{q.options.map((option,index)=><button key={option} onClick={()=>handleAnswer(index)} className={cn("w-full rounded-lg border-2 p-4 text-left transition-all",answers[currentQuestion]===index?"border-blue-600 bg-blue-50":"border-gray-200 hover:border-blue-300")}><span className="mr-3 font-medium text-blue-700">{String.fromCharCode(65+index)}.</span>{option}</button>)}</div></CardContent></Card><div className="mb-6 flex justify-between"><Button variant="outline" onClick={()=>setCurrentQuestion(value=>value-1)} disabled={currentQuestion===0}><ChevronLeft className="mr-2 h-4 w-4"/>Previous</Button>{currentQuestion===totalQuestions-1?<Button onClick={()=>void submitTest()} className="bg-blue-600"><Flag className="mr-2 h-4 w-4"/>Submit Test</Button>:<Button onClick={()=>setCurrentQuestion(value=>value+1)} className="bg-blue-600">Next<ChevronRight className="ml-2 h-4 w-4"/></Button>}</div><Card><CardHeader className="py-3"><CardTitle className="text-sm text-blue-700">Question Navigator</CardTitle></CardHeader><CardContent><div className="grid grid-cols-10 gap-2">{attemptQuestions.map((_,index)=><button key={index} onClick={()=>setCurrentQuestion(index)} className={cn("h-8 w-8 rounded text-sm font-medium",currentQuestion===index?"bg-blue-600 text-white":answers[index]!==null?"bg-blue-100 text-blue-700":"bg-gray-100 text-gray-600")}>{index+1}</button>)}</div></CardContent></Card></div></main><Footer/></div>
 }
