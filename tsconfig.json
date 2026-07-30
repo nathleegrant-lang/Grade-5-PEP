@@ -23,6 +23,9 @@
       }
     ],
     "paths": {
+      "@/contexts/auth-context": [
+        "./contexts/auth-context-reviewer"
+      ],
       "@/*": [
         "./*"
       ]
