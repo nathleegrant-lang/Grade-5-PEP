@@ -27,627 +27,66 @@ interface Question {
   explanation: string
 }
 
+const passage = `The Garden Behind the Library
+
+For years, the empty lot behind Cedar Grove Library was easy to ignore. Tall weeds covered broken bottles, food containers, and old tyres. During heavy rain, muddy water flowed from the lot into the road. Most residents complained about the mess, but they assumed the municipal workers would eventually clear it.
+
+One Monday, Mrs. Blake's Grade 5 class visited the library for a research lesson. As the students passed the lot, eleven-year-old Maya stopped beside the gate. "We keep waiting for someone else," she said. "Could we start by cleaning one small section ourselves?"
+
+The class liked the idea, but Mr. Ellis, the librarian, warned them that enthusiasm alone would not be enough. They would need permission, tools, adult supervision, and a plan for maintaining the space. Instead of giving up, the students divided the work. One group wrote to the municipal office. Another interviewed older residents about plants that grew well in the area. A third group asked nearby businesses to donate gloves, garbage bags, seedlings, and paint.
+
+The first clean-up day was disappointing. Only six adults arrived, and afternoon rain ended the work early. Still, the volunteers filled twelve bags with rubbish and cleared a narrow path. The students photographed their progress and posted a notice at the library: "We have begun. Join us next Saturday."
+
+The following week, twenty-three people came. Mr. Chen from the hardware shop lent wheelbarrows, while Miss Ruby showed the children how to plant callaloo, thyme, and marigolds. The marigolds would add colour, she explained, but they could also help keep some harmful insects away from the vegetables.
+
+Over the next three months, the neglected lot became a community garden. A painted rain barrel collected water from the library roof. Benches were built from safe, reused wood. Teachers began using the garden for science lessons, and families shared some of the produce with elderly residents.
+
+Maya was proud of the vegetables, but she valued another result even more. Neighbours who had barely greeted one another were now exchanging ideas, tools, and recipes. The garden had not solved every problem in Cedar Grove, yet it had changed what people believed was possible when they worked together.`
+
 const g5LaMix9Questions: Question[] = [
-  {
-    id: 1,
-    type: "reading",
-    skill: "Main Idea",
-    question: `Read the passage then answer the question.
+  { id: 1, type: "reading", skill: "Main Idea", question: `${passage}\n\nWhat is the main idea of the passage?`, options: ["Students inspire their community to transform a neglected lot by planning and working together.", "A librarian teaches children how to grow vegetables behind the community library.", "Residents wait for municipal workers to remove rubbish from an abandoned property.", "Businesses compete to donate the most supplies to a neighbourhood gardening project."], correctAnswer: 0, explanation: "The passage focuses on how the students' initiative and the community's cooperation transformed both the lot and relationships." },
+  { id: 2, type: "reading", skill: "Supporting Detail", question: `${passage}\n\nWhich detail BEST shows that the project required more than enthusiasm?`, options: ["Maya stopped beside the gate while walking to the library.", "The class needed permission, tools, supervision, and a maintenance plan.", "The students posted a notice inviting people to return the next Saturday.", "Teachers later used the completed garden during their science lessons."], correctAnswer: 1, explanation: "Mr. Ellis lists practical requirements that had to be addressed before the idea could succeed." },
+  { id: 3, type: "reading", skill: "Sequence", question: `${passage}\n\nWhat happened immediately AFTER the students divided the work?`, options: ["Teachers began using the garden for outdoor science lessons.", "Miss Ruby taught the children how to plant callaloo and thyme.", "Groups contacted officials, interviewed residents, and requested donations.", "The volunteers filled twelve bags and cleared a narrow walking path."], correctAnswer: 2, explanation: "After dividing the work, the groups wrote letters, conducted interviews, and asked businesses for supplies." },
+  { id: 4, type: "reading", skill: "Cause and Effect", question: `${passage}\n\nWhy did more people attend the second clean-up day?`, options: ["The municipal office required every resident to take part.", "The library promised free vegetables to all volunteers.", "The first group completed the entire garden before the rain.", "The students showed visible progress and invited others to join them."], correctAnswer: 3, explanation: "The photographs, notice, and evidence that work had begun encouraged more residents to participate." },
+  { id: 5, type: "reading", skill: "Character Trait", question: `${passage}\n\nWhich trait BEST describes Maya?`, options: ["Initiative, because she suggests beginning instead of continuing to wait.", "Impatience, because she expects the whole project to finish in one day.", "Carelessness, because she enters a dangerous lot without adult permission.", "Shyness, because she depends on others to explain her idea to the class."], correctAnswer: 0, explanation: "Maya takes initiative by proposing a realistic first action when others have only complained." },
+  { id: 6, type: "reading", skill: "Inference", question: `${passage}\n\nWhat can the reader infer about Mr. Ellis?`, options: ["He opposes the garden because it may distract students from reading.", "He supports the idea but wants the students to plan responsibly.", "He expects the municipal office to complete every part of the project.", "He believes children should work without help from any adults."], correctAnswer: 1, explanation: "His warning is practical rather than discouraging; he helps the students understand what success will require." },
+  { id: 7, type: "reading", skill: "Vocabulary in Context", question: `${passage}\n\nWhat does the word "neglected" mean as used in the passage?`, options: ["Recently purchased and prepared for development", "Carefully protected from visitors and bad weather", "Not properly cared for over a period of time", "Temporarily closed while repairs are being completed"], correctAnswer: 2, explanation: "The rubbish, weeds, and flooding show that the lot had not been properly cared for." },
+  { id: 8, type: "reading", skill: "Author's Purpose", question: `${passage}\n\nWhat is the author's main purpose?`, options: ["To explain the exact steps for growing callaloo in a small garden", "To warn children never to enter unused land without an adult", "To compare municipal workers with volunteers from local businesses", "To show how organised community action can create meaningful change"], correctAnswer: 3, explanation: "The passage demonstrates that planning, persistence, and cooperation can improve both a place and a community." },
+  { id: 9, type: "reading", skill: "Fact and Opinion", question: `${passage}\n\nWhich statement from the passage is a FACT?`, options: ["The volunteers filled twelve bags with rubbish on the first clean-up day.", "The community garden was the most beautiful place in Cedar Grove.", "Miss Ruby was the wisest gardener in the entire neighbourhood.", "The painted rain barrel was the project's most valuable feature."], correctAnswer: 0, explanation: "The number of bags collected is a verifiable detail; the other choices express judgments." },
+  { id: 10, type: "reading", skill: "Text Structure", question: `${passage}\n\nHow is the passage mainly organised?`, options: ["By comparing two different community gardens", "By presenting events in the order they occurred", "By listing instructions for maintaining a garden", "By describing one location without showing change"], correctAnswer: 1, explanation: "The passage follows the project from the neglected lot through planning, setbacks, progress, and completion." },
+  { id: 11, type: "reading", skill: "Problem and Solution", question: `${passage}\n\nWhich option correctly matches a problem with its solution?`, options: ["Problem: the garden had too much produce; solution: teachers stopped using it.", "Problem: residents lacked recipes; solution: the students closed the library.", "Problem: the lot was neglected; solution: students organised a planned community effort.", "Problem: rain filled the barrel; solution: volunteers removed the library roof."], correctAnswer: 2, explanation: "The central problem is the neglected lot, and the organised community project becomes the solution." },
+  { id: 12, type: "reading", skill: "Theme", question: `${passage}\n\nWhich theme is BEST supported by the passage?`, options: ["Adults should always solve community problems before children become involved.", "Successful projects depend mainly on receiving expensive equipment.", "A first attempt is a failure whenever fewer people attend than expected.", "Small beginnings can grow into lasting change through cooperation and persistence."], correctAnswer: 3, explanation: "The project begins with one student's suggestion and grows because people keep working together despite setbacks." },
+  { id: 13, type: "reading", skill: "Compare and Contrast", question: `${passage}\n\nHow was the second clean-up day different from the first?`, options: ["More volunteers attended, and additional community resources were available.", "The students worked alone because every adult had stopped supporting them.", "Heavy rain ended the second day before any useful work could be completed.", "Municipal workers replaced the volunteers and took control of the project."], correctAnswer: 0, explanation: "Attendance increased from six adults to twenty-three people, and volunteers brought tools and gardening knowledge." },
+  { id: 14, type: "reading", skill: "Drawing Conclusions", question: `${passage}\n\nWhat conclusion can be drawn about the garden's greatest impact?`, options: ["It produced enough vegetables to supply every household in Cedar Grove.", "It strengthened relationships and changed residents' belief in collective action.", "It removed the need for the municipal office to provide community services.", "It became more important to students than the library and their schoolwork."], correctAnswer: 1, explanation: "Maya values the new cooperation among neighbours and their changed sense of what is possible." },
+  { id: 15, type: "reading", skill: "Summary", question: `${passage}\n\nWhich is the BEST summary of the passage?`, options: ["Maya notices an empty lot, and Miss Ruby later plants several vegetables there.", "Residents complain about rubbish until municipal workers create a garden behind the library.", "Students plan a community project, overcome a slow start, and help transform a neglected lot and neighbourhood relationships.", "Businesses donate supplies to a library, while teachers use a rain barrel during science lessons."], correctAnswer: 2, explanation: "This choice includes the problem, the organised response, the setback, and the two main results without unnecessary details." },
 
-"Climate change is not a future threat — it is a present reality in Jamaica and across the Caribbean. Sea levels have risen by approximately fifteen centimetres over the past century, threatening low-lying coastal communities. Coral reefs, which protect coastlines from wave damage and support fishing communities, are bleaching and dying at alarming rates. Hurricane seasons are becoming more intense, and the island's water supplies are increasingly disrupted by drought. The people who contributed least to global greenhouse gas emissions — Caribbean islanders — are among those facing the most severe consequences. This moral imbalance lies at the heart of the international climate justice movement: those who caused the crisis must be held responsible for helping those who are suffering its effects."
+  { id: 16, type: "vocabulary", skill: "Synonym", question: `Which word is closest in meaning to "maintaining" in the sentence "They needed a plan for maintaining the space"?`, options: ["discovering", "measuring", "decorating", "caring for"], correctAnswer: 3, explanation: "Maintaining means continuing to care for something so it remains in good condition." },
+  { id: 17, type: "vocabulary", skill: "Antonym", question: `Which word is an ANTONYM for "narrow"?`, options: ["wide", "short", "curved", "rough"], correctAnswer: 0, explanation: "Wide is the opposite of narrow." },
+  { id: 18, type: "vocabulary", skill: "Prefix", question: `What does the prefix "re-" mean in the word "reused"?`, options: ["not", "again", "before", "under"], correctAnswer: 1, explanation: "The prefix re- means again; reused means used again." },
+  { id: 19, type: "vocabulary", skill: "Suffix", question: `In the word "disappointing," the suffix "-ing" helps show that the word describes:`, options: ["a person who completed an action", "a place where an action happened", "something producing a particular feeling", "an action that happened long ago"], correctAnswer: 2, explanation: "Disappointing describes something that causes disappointment." },
+  { id: 20, type: "vocabulary", skill: "Idiom", question: `What does the expression "give up" mean in "Instead of giving up, the students divided the work"?`, options: ["donate their supplies", "raise their hands", "share their plan", "stop trying"], correctAnswer: 3, explanation: "To give up means to stop trying." },
+  { id: 21, type: "vocabulary", skill: "Multiple Meaning", question: `Which sentence uses "lot" with the SAME meaning as in "the empty lot behind the library"?`, options: ["The new clinic was built on a vacant lot near the road.", "We learned a lot during the gardening project.", "A lot of volunteers arrived early on Saturday.", "The teacher divided the seeds into each student's lot."], correctAnswer: 0, explanation: "In both sentences, lot means a piece of land." },
+  { id: 22, type: "vocabulary", skill: "Context Clues", question: `The garden became "thriving," with healthy plants, visiting insects, and regular activity. What does "thriving" mean?`, options: ["becoming untidy", "growing successfully", "remaining unfinished", "changing ownership"], correctAnswer: 1, explanation: "The clues healthy plants and regular activity show that thriving means growing or doing well." },
+  { id: 23, type: "vocabulary", skill: "Connotation", question: `Which word has the MOST positive connotation for describing the volunteers?`, options: ["busy", "present", "dedicated", "available"], correctAnswer: 2, explanation: "Dedicated suggests strong commitment and willing effort." },
+  { id: 24, type: "vocabulary", skill: "Figurative Language", question: `What does the sentence "The garden became the heart of the community" suggest?`, options: ["The garden was shaped exactly like a heart.", "The garden was located in the geographic centre.", "The garden supplied medicine for heart conditions.", "The garden became an important centre of community life."], correctAnswer: 3, explanation: "Heart is used metaphorically to show that the garden became central and important." },
+  { id: 25, type: "vocabulary", skill: "Word Relationship", question: `Which pair of words has the same relationship as "problem : solution"?`, options: ["question : answer", "garden : shovel", "rain : cloud", "student : library"], correctAnswer: 0, explanation: "An answer responds to a question just as a solution responds to a problem." },
 
-What is the CENTRAL subject of this passage?`,
-    options: [
-      "An unrelated topic",
-      "A minor background detail",
-      "The main topic of the passage, explored through evidence and argument",
-      "The writer's personal history",
-    ],
-    correctAnswer: 2,
-    explanation: `The passage introduces its subject and builds a sustained argument about its significance — the central subject unifies all the details.`
-  },
-  {
-    id: 2,
-    type: "reading",
-    skill: "Detail",
-    question: `Read the passage then answer the question.
+  { id: 26, type: "grammar", skill: "Subject-Verb Agreement", question: `Choose the sentence with correct subject-verb agreement.`, options: ["The group of students write several letters.", "The group of students writes several letters.", "The group of students writing several letters.", "The group of students have wrote several letters."], correctAnswer: 1, explanation: "The subject group is singular, so it takes the singular verb writes." },
+  { id: 27, type: "grammar", skill: "Verb Tense", question: `Which sentence correctly uses the past tense?`, options: ["The volunteers clear the path last Saturday.", "The volunteers will cleared the path last Saturday.", "The volunteers cleared the path last Saturday.", "The volunteers are clear the path last Saturday."], correctAnswer: 2, explanation: "Cleared is the correct simple-past form for an action completed last Saturday." },
+  { id: 28, type: "grammar", skill: "Pronoun Agreement", question: `Choose the sentence with correct pronoun agreement.`, options: ["Maya and Joel shared her ideas with the class.", "The students carried his tools to the garden.", "Mrs. Blake thanked them for her hard work.", "The volunteers brought their gloves and tools."], correctAnswer: 3, explanation: "The plural pronoun their correctly refers to the plural noun volunteers." },
+  { id: 29, type: "grammar", skill: "Comma Use", question: `Which sentence uses commas correctly?`, options: ["The students collected gloves, bags, seedlings, and paint.", "The students collected, gloves bags seedlings and paint.", "The students collected gloves bags, seedlings and, paint.", "The students, collected gloves bags seedlings, and paint."], correctAnswer: 0, explanation: "Commas correctly separate items in a series." },
+  { id: 30, type: "grammar", skill: "Apostrophe", question: `Which sentence uses an apostrophe correctly?`, options: ["The students plan impressed the residents.", "The students' plan impressed the residents.", "The student's plan impressed all of their classmates plans.", "The students's plan impressed the residents."], correctAnswer: 1, explanation: "Students is plural, so the possessive form is students'." },
+  { id: 31, type: "grammar", skill: "Conjunction", question: `Choose the best conjunction: "The first clean-up day was difficult, ___ the students returned the following week."`, options: ["because", "unless", "but", "so that"], correctAnswer: 2, explanation: "But shows the contrast between the difficult first day and the students' decision to return." },
+  { id: 32, type: "grammar", skill: "Adverb", question: `Which word is the adverb in the sentence "The volunteers worked carefully around the broken glass"?`, options: ["volunteers", "worked", "broken", "carefully"], correctAnswer: 3, explanation: "Carefully tells how the volunteers worked, so it is an adverb." },
+  { id: 33, type: "grammar", skill: "Sentence Type", question: `What type of sentence is "Could we clean one small section ourselves?"`, options: ["Interrogative", "Declarative", "Imperative", "Exclamatory"], correctAnswer: 0, explanation: "The sentence asks a question, so it is interrogative." },
+  { id: 34, type: "grammar", skill: "Complete Sentence", question: `Which option is a complete sentence?`, options: ["Because the rain began before noon.", "The volunteers stored the tools inside the library.", "Working together behind the old library.", "The bright flowers beside the wooden benches."], correctAnswer: 1, explanation: "This option contains a complete subject and predicate and expresses a full thought." },
+  { id: 35, type: "grammar", skill: "Direct Speech", question: `Which sentence punctuates direct speech correctly?`, options: ["Maya said “We can begin today”.", "Maya said, We can begin today.", "Maya said, “We can begin today.”", "Maya said “We can begin,” today."], correctAnswer: 2, explanation: "A comma introduces the quotation, and the full stop appears inside the closing quotation mark." },
 
-"Climate change is not a future threat — it is a present reality in Jamaica and across the Caribbean. Sea levels have risen by approximately fifteen centimetres over the past century, threatening low-lying coastal communities. Coral reefs, which protect coastlines from wave damage and support fishing communities, are bleaching and dying at alarming rates. Hurricane seasons are becoming more intense, and the island's water supplies are increasingly disrupted by drought. The people who contributed least to global greenhouse gas emissions — Caribbean islanders — are among those facing the most severe consequences. This moral imbalance lies at the heart of the international climate justice movement: those who caused the crisis must be held responsible for helping those who are suffering its effects."
-
-Which specific detail from the passage directly supports the main argument?`,
-    options: [
-      "An opening sentence only",
-      "The passage contains no specific details",
-      "At least one verifiable, specific detail that supports the main claim",
-      "Only the final sentence",
-    ],
-    correctAnswer: 2,
-    explanation: `Details in a well-constructed passage serve the central argument — identifying the most supportive detail shows purposeful reading.`
-  },
-  {
-    id: 3,
-    type: "reading",
-    skill: "Vocabulary in Context",
-    question: `Read the passage then answer the question.
-
-"Climate change is not a future threat — it is a present reality in Jamaica and across the Caribbean. Sea levels have risen by approximately fifteen centimetres over the past century, threatening low-lying coastal communities. Coral reefs, which protect coastlines from wave damage and support fishing communities, are bleaching and dying at alarming rates. Hurricane seasons are becoming more intense, and the island's water supplies are increasingly disrupted by drought. The people who contributed least to global greenhouse gas emissions — Caribbean islanders — are among those facing the most severe consequences. This moral imbalance lies at the heart of the international climate justice movement: those who caused the crisis must be held responsible for helping those who are suffering its effects."
-
-Based on context, what does the MOST IMPORTANT descriptive word or phrase in the passage convey?`,
-    options: [
-      "A minor physical characteristic",
-      "An irrelevant quality",
-      "A quality central to the passage's argument — significant, complex, or uniquely valuable",
-      "A technical scientific term with no broader meaning",
-    ],
-    correctAnswer: 2,
-    explanation: `The most important word in an analytical passage carries the argument — it signals the quality that makes the subject matter.`
-  },
-  {
-    id: 4,
-    type: "reading",
-    skill: "Literal Comprehension",
-    question: `Read the passage then answer the question.
-
-"Climate change is not a future threat — it is a present reality in Jamaica and across the Caribbean. Sea levels have risen by approximately fifteen centimetres over the past century, threatening low-lying coastal communities. Coral reefs, which protect coastlines from wave damage and support fishing communities, are bleaching and dying at alarming rates. Hurricane seasons are becoming more intense, and the island's water supplies are increasingly disrupted by drought. The people who contributed least to global greenhouse gas emissions — Caribbean islanders — are among those facing the most severe consequences. This moral imbalance lies at the heart of the international climate justice movement: those who caused the crisis must be held responsible for helping those who are suffering its effects."
-
-Which statement is DIRECTLY stated in the passage?`,
-    options: [
-      "A personal opinion of the reader",
-      "An inference not supported by the text",
-      "A verifiable fact explicitly present in the passage",
-      "An idea completely absent from the passage",
-    ],
-    correctAnswer: 2,
-    explanation: `Literal comprehension distinguishes between what is stated and what is inferred — the skill is identifying what is explicitly present in the text.`
-  },
-  {
-    id: 5,
-    type: "reading",
-    skill: "Cause and Effect",
-    question: `Read the passage then answer the question.
-
-"Climate change is not a future threat — it is a present reality in Jamaica and across the Caribbean. Sea levels have risen by approximately fifteen centimetres over the past century, threatening low-lying coastal communities. Coral reefs, which protect coastlines from wave damage and support fishing communities, are bleaching and dying at alarming rates. Hurricane seasons are becoming more intense, and the island's water supplies are increasingly disrupted by drought. The people who contributed least to global greenhouse gas emissions — Caribbean islanders — are among those facing the most severe consequences. This moral imbalance lies at the heart of the international climate justice movement: those who caused the crisis must be held responsible for helping those who are suffering its effects."
-
-What specific cause-and-effect relationship does the passage describe?`,
-    options: [
-      "Events happen without causes",
-      "All events are equally important",
-      "A specific condition or action leads to a significant outcome that the writer considers important",
-      "The writer makes no causal claims",
-    ],
-    correctAnswer: 2,
-    explanation: `Strong analytical passages identify causation — showing HOW one thing leads to another, not just that two things exist.`
-  },
-  {
-    id: 6,
-    type: "reading",
-    skill: "Inference",
-    question: `Read the passage then answer the question.
-
-"Climate change is not a future threat — it is a present reality in Jamaica and across the Caribbean. Sea levels have risen by approximately fifteen centimetres over the past century, threatening low-lying coastal communities. Coral reefs, which protect coastlines from wave damage and support fishing communities, are bleaching and dying at alarming rates. Hurricane seasons are becoming more intense, and the island's water supplies are increasingly disrupted by drought. The people who contributed least to global greenhouse gas emissions — Caribbean islanders — are among those facing the most severe consequences. This moral imbalance lies at the heart of the international climate justice movement: those who caused the crisis must be held responsible for helping those who are suffering its effects."
-
-What does the passage IMPLY but not directly state?`,
-    options: [
-      "Nothing — the passage states everything explicitly",
-      "An unrelated idea",
-      "A deeper significance beyond the surface facts — something the reader must infer from the language, structure, or argument",
-      "That the writer has no opinion",
-    ],
-    correctAnswer: 2,
-    explanation: `Inference is the skill of reading beyond explicit statements — identifying what the text suggests through its choices.`
-  },
-  {
-    id: 7,
-    type: "reading",
-    skill: "Author's Technique",
-    question: `Read the passage then answer the question.
-
-"Climate change is not a future threat — it is a present reality in Jamaica and across the Caribbean. Sea levels have risen by approximately fifteen centimetres over the past century, threatening low-lying coastal communities. Coral reefs, which protect coastlines from wave damage and support fishing communities, are bleaching and dying at alarming rates. Hurricane seasons are becoming more intense, and the island's water supplies are increasingly disrupted by drought. The people who contributed least to global greenhouse gas emissions — Caribbean islanders — are among those facing the most severe consequences. This moral imbalance lies at the heart of the international climate justice movement: those who caused the crisis must be held responsible for helping those who are suffering its effects."
-
-How does the author make their argument more persuasive?`,
-    options: [
-      "By presenting only one fact",
-      "By using emotional language alone",
-      "Through a combination of specific evidence, precise language, and a logical structure that builds to a conclusion",
-      "By avoiding any clear argument",
-    ],
-    correctAnswer: 2,
-    explanation: `Persuasive analytical writing works through evidence + precision + structure — all three are needed for a strong argument.`
-  },
-  {
-    id: 8,
-    type: "reading",
-    skill: "Author's Purpose",
-    question: `Read the passage then answer the question.
-
-"Climate change is not a future threat — it is a present reality in Jamaica and across the Caribbean. Sea levels have risen by approximately fifteen centimetres over the past century, threatening low-lying coastal communities. Coral reefs, which protect coastlines from wave damage and support fishing communities, are bleaching and dying at alarming rates. Hurricane seasons are becoming more intense, and the island's water supplies are increasingly disrupted by drought. The people who contributed least to global greenhouse gas emissions — Caribbean islanders — are among those facing the most severe consequences. This moral imbalance lies at the heart of the international climate justice movement: those who caused the crisis must be held responsible for helping those who are suffering its effects."
-
-The MAIN purpose of this passage is to:`,
-    options: [
-      "Simply entertain with stories",
-      "Give instructions for a practical task",
-      "Inform readers about a significant subject while making an argument about its importance",
-      "List unrelated facts",
-    ],
-    correctAnswer: 2,
-    explanation: `Analytical passages always have a double purpose: informing readers about the topic AND arguing for a specific perspective on its significance.`
-  },
-  {
-    id: 9,
-    type: "reading",
-    skill: "Tone",
-    question: `Read the passage then answer the question.
-
-"Climate change is not a future threat — it is a present reality in Jamaica and across the Caribbean. Sea levels have risen by approximately fifteen centimetres over the past century, threatening low-lying coastal communities. Coral reefs, which protect coastlines from wave damage and support fishing communities, are bleaching and dying at alarming rates. Hurricane seasons are becoming more intense, and the island's water supplies are increasingly disrupted by drought. The people who contributed least to global greenhouse gas emissions — Caribbean islanders — are among those facing the most severe consequences. This moral imbalance lies at the heart of the international climate justice movement: those who caused the crisis must be held responsible for helping those who are suffering its effects."
-
-The author's tone throughout this passage is BEST described as:`,
-    options: [
-      "Indifferent and uninvested",
-      "Purely emotional with no evidence",
-      "Intellectually engaged — the writer takes a clear, supported position on the topic",
-      "Angry and accusatory",
-    ],
-    correctAnswer: 2,
-    explanation: `Good analytical writing is characterised by intellectual engagement — a clear position held with evidence and nuance.`
-  },
-  {
-    id: 10,
-    type: "reading",
-    skill: "Theme",
-    question: `Read the passage then answer the question.
-
-"Climate change is not a future threat — it is a present reality in Jamaica and across the Caribbean. Sea levels have risen by approximately fifteen centimetres over the past century, threatening low-lying coastal communities. Coral reefs, which protect coastlines from wave damage and support fishing communities, are bleaching and dying at alarming rates. Hurricane seasons are becoming more intense, and the island's water supplies are increasingly disrupted by drought. The people who contributed least to global greenhouse gas emissions — Caribbean islanders — are among those facing the most severe consequences. This moral imbalance lies at the heart of the international climate justice movement: those who caused the crisis must be held responsible for helping those who are suffering its effects."
-
-What SIGNIFICANT HUMAN THEME does this passage engage with?`,
-    options: [
-      "A trivial technical matter",
-      "A topic irrelevant to human experience",
-      "A meaningful theme about identity, justice, knowledge, community, power, or cultural value",
-      "A theme only relevant to specialists",
-    ],
-    correctAnswer: 2,
-    explanation: `The best analytical passages connect their specific subject to a broader human theme — showing why it matters beyond its immediate context.`
-  },
-  {
-    id: 11,
-    type: "reading",
-    skill: "Critical Reading",
-    question: `Read the passage then answer the question.
-
-"Climate change is not a future threat — it is a present reality in Jamaica and across the Caribbean. Sea levels have risen by approximately fifteen centimetres over the past century, threatening low-lying coastal communities. Coral reefs, which protect coastlines from wave damage and support fishing communities, are bleaching and dying at alarming rates. Hurricane seasons are becoming more intense, and the island's water supplies are increasingly disrupted by drought. The people who contributed least to global greenhouse gas emissions — Caribbean islanders — are among those facing the most severe consequences. This moral imbalance lies at the heart of the international climate justice movement: those who caused the crisis must be held responsible for helping those who are suffering its effects."
-
-What question would a CRITICAL READER ask when engaging with this passage?`,
-    options: [
-      "Nothing — all claims are obviously true",
-      "Only questions about the writer's credentials",
-      "What evidence supports the key claims? What perspective might be missing? What assumptions does the argument rest on?",
-      "Whether the passage is interesting",
-    ],
-    correctAnswer: 2,
-    explanation: `Critical reading is active — it interrogates evidence, identifies omissions, and examines the assumptions underlying the argument.`
-  },
-  {
-    id: 12,
-    type: "reading",
-    skill: "Author's Argument",
-    question: `Read the passage then answer the question.
-
-"Climate change is not a future threat — it is a present reality in Jamaica and across the Caribbean. Sea levels have risen by approximately fifteen centimetres over the past century, threatening low-lying coastal communities. Coral reefs, which protect coastlines from wave damage and support fishing communities, are bleaching and dying at alarming rates. Hurricane seasons are becoming more intense, and the island's water supplies are increasingly disrupted by drought. The people who contributed least to global greenhouse gas emissions — Caribbean islanders — are among those facing the most severe consequences. This moral imbalance lies at the heart of the international climate justice movement: those who caused the crisis must be held responsible for helping those who are suffering its effects."
-
-What IMPLICIT ARGUMENT does the author make in this passage?`,
-    options: [
-      "No argument is made",
-      "The topic is unimportant",
-      "The subject is more significant, complex, or valuable than it might initially appear — and readers should care about it",
-      "Arguments are only explicit in persuasive essays",
-    ],
-    correctAnswer: 2,
-    explanation: `Analytical passages always carry an implicit argument — the writer's position on WHY the topic matters and what the reader should understand differently.`
-  },
-  {
-    id: 13,
-    type: "reading",
-    skill: "Language Analysis",
-    question: `Read the passage then answer the question.
-
-"Climate change is not a future threat — it is a present reality in Jamaica and across the Caribbean. Sea levels have risen by approximately fifteen centimetres over the past century, threatening low-lying coastal communities. Coral reefs, which protect coastlines from wave damage and support fishing communities, are bleaching and dying at alarming rates. Hurricane seasons are becoming more intense, and the island's water supplies are increasingly disrupted by drought. The people who contributed least to global greenhouse gas emissions — Caribbean islanders — are among those facing the most severe consequences. This moral imbalance lies at the heart of the international climate justice movement: those who caused the crisis must be held responsible for helping those who are suffering its effects."
-
-Why does the author choose SPECIFIC, PRECISE language throughout the passage?`,
-    options: [
-      "To show off their vocabulary",
-      "By accident",
-      "Precise language signals the writer's authority and guides the reader toward the intended interpretation — vague language would weaken the argument",
-      "Precise language has no special function",
-    ],
-    correctAnswer: 2,
-    explanation: `Word choice in analytical writing is deliberate — precision signals expertise, builds credibility, and shapes the reader's interpretation.`
-  },
-  {
-    id: 14,
-    type: "reading",
-    skill: "Summarise",
-    question: `Read the passage then answer the question.
-
-"Climate change is not a future threat — it is a present reality in Jamaica and across the Caribbean. Sea levels have risen by approximately fifteen centimetres over the past century, threatening low-lying coastal communities. Coral reefs, which protect coastlines from wave damage and support fishing communities, are bleaching and dying at alarming rates. Hurricane seasons are becoming more intense, and the island's water supplies are increasingly disrupted by drought. The people who contributed least to global greenhouse gas emissions — Caribbean islanders — are among those facing the most severe consequences. This moral imbalance lies at the heart of the international climate justice movement: those who caused the crisis must be held responsible for helping those who are suffering its effects."
-
-Which statement BEST summarises the MAIN ARGUMENT of this passage?`,
-    options: [
-      "The topic exists and has some properties",
-      "The writer has no clear position",
-      "The passage makes a specific, supported argument that its subject is significant in ways that go beyond first appearances — and that readers should understand it differently as a result",
-      "The passage has no conclusion",
-    ],
-    correctAnswer: 2,
-    explanation: `A good summary captures the argument, not just the topic — what the writer claims and why it matters.`
-  },
-  {
-    id: 15,
-    type: "reading",
-    skill: "Implied Meaning",
-    question: `Read the passage then answer the question.
-
-"Climate change is not a future threat — it is a present reality in Jamaica and across the Caribbean. Sea levels have risen by approximately fifteen centimetres over the past century, threatening low-lying coastal communities. Coral reefs, which protect coastlines from wave damage and support fishing communities, are bleaching and dying at alarming rates. Hurricane seasons are becoming more intense, and the island's water supplies are increasingly disrupted by drought. The people who contributed least to global greenhouse gas emissions — Caribbean islanders — are among those facing the most severe consequences. This moral imbalance lies at the heart of the international climate justice movement: those who caused the crisis must be held responsible for helping those who are suffering its effects."
-
-What does the FINAL SENTENCE or ENDING of the passage suggest the reader should feel or do differently?`,
-    options: [
-      "Nothing — the ending is random",
-      "The reader should simply stop reading",
-      "The ending invites the reader to see the topic in a new way, feel its urgency, or commit to a different way of thinking about it",
-      "The ending restates the introduction with no new thought",
-    ],
-    correctAnswer: 2,
-    explanation: `Strong endings in analytical writing leave the reader with the most resonant, important thought — they change something in the reader's perspective or feeling.`
-  },
-  {
-    id: 16,
-    type: "vocabulary",
-    skill: "Synonyms",
-    question: `Which word is a SYNONYM for 'severe'?`,
-    options: [
-      "mild",
-      "gentle",
-      "slight",
-      "intense",
-    ],
-    correctAnswer: 3,
-    explanation: `'Intense' — extreme in degree — is a synonym for 'severe.'`
-  },
-  {
-    id: 17,
-    type: "vocabulary",
-    skill: "Antonyms",
-    question: `The ANTONYM of 'vulnerable' is:`,
-    options: [
-      "exposed",
-      "at risk",
-      "defenceless",
-      "protected",
-    ],
-    correctAnswer: 3,
-    explanation: `'Protected' means defended from harm — the opposite of 'vulnerable' (exposed to harm or risk).`
-  },
-  {
-    id: 18,
-    type: "vocabulary",
-    skill: "Context Clues",
-    question: `The small island nation was DISPROPORTIONATELY affected by climate change given its minimal contribution to emissions. 'Disproportionately' means:`,
-    options: [
-      "equally and fairly",
-      "in a way that is balanced and proportional",
-      "to a degree far greater than would be fair or expected given its level of responsibility",
-      "slightly",
-    ],
-    correctAnswer: 2,
-    explanation: `'Disproportionately' means the impact is far greater than the island's contribution would justify — an unfair distribution of consequences.`
-  },
-  {
-    id: 19,
-    type: "vocabulary",
-    skill: "Idiom",
-    question: `'Caribbean nations are caught between a rock and a hard place on climate change.' This idiom means:`,
-    options: [
-      "They are surrounded by rocks and water",
-      "They have easy choices to make",
-      "They face a situation with no good options — harmed whether they act or not",
-      "They should move their countries",
-    ],
-    correctAnswer: 2,
-    explanation: `'Between a rock and a hard place' describes an impossible dilemma where all options are bad — often applied to situations of no good choices.`
-  },
-  {
-    id: 20,
-    type: "vocabulary",
-    skill: "Figurative Language",
-    question: `'Rising seas are writing the final chapter of coastal communities.' This metaphor argues:`,
-    options: [
-      "Communities need better libraries",
-      "Sea levels are rising slowly",
-      "The destruction of coastal communities by rising seas is as inevitable and irreversible as the final pages of a book approaching its end",
-      "Communities should build sea walls",
-    ],
-    correctAnswer: 2,
-    explanation: `The metaphor frames sea-level rise as an authorial force writing an ending — powerful and perhaps inevitable — for these communities.`
-  },
-  {
-    id: 21,
-    type: "vocabulary",
-    skill: "Connotation",
-    question: `The phrase 'climate justice' carries which connotation?`,
-    options: [
-      "a technical scientific term",
-      "an emotionally neutral descriptor",
-      "a morally charged phrase demanding accountability and fairness",
-      "a phrase used only by politicians",
-    ],
-    correctAnswer: 2,
-    explanation: `'Justice' adds a moral dimension — it implies wrongdoing, responsibility, and the need for remedy, not just a neutral environmental discussion.`
-  },
-  {
-    id: 22,
-    type: "vocabulary",
-    skill: "Word Meaning",
-    question: `In the passage, 'emissions' refers to:`,
-    options: [
-      "money paid to governments",
-      "goods exported by countries",
-      "greenhouse gases released into the atmosphere, particularly from burning fossil fuels",
-      "wildlife displaced by development",
-    ],
-    correctAnswer: 2,
-    explanation: `'Emissions' in environmental contexts means gases (especially carbon dioxide) released into the atmosphere — the primary cause of climate change.`
-  },
-  {
-    id: 23,
-    type: "vocabulary",
-    skill: "Figurative Language — Irony",
-    question: `It is ironic that Caribbean islands — contributing least to climate change — suffer its worst effects. This irony is called:`,
-    options: [
-      "Dramatic irony",
-      "Verbal irony",
-      "Situational irony — the outcome is the opposite of what fairness would dictate",
-      "Comic irony",
-    ],
-    correctAnswer: 2,
-    explanation: `Situational irony occurs when what happens is the opposite of what justice or expectation would suggest — those least responsible suffer most.`
-  },
-  {
-    id: 24,
-    type: "vocabulary",
-    skill: "Etymology",
-    question: `The word 'climate' comes from the Greek 'klima' meaning 'slope' or 'zone' — referring to the slope of the Earth from equator to poles. This etymology reveals:`,
-    options: [
-      "Climate is only about temperature",
-      "Climate was always understood as a geographic phenomenon tied to Earth's regions and their relationship to the sun",
-      "Climate is a modern concept",
-      "Only tropical zones have climates",
-    ],
-    correctAnswer: 1,
-    explanation: `The etymology reveals that 'climate' originally described geographic zones — the ancient Greeks understood that location relative to the sun determines weather patterns.`
-  },
-  {
-    id: 25,
-    type: "vocabulary",
-    skill: "Academic Vocabulary",
-    question: `In academic writing, 'to attribute' means:`,
-    options: [
-      "to create something new",
-      "to connect a cause, quality, or work to its source or reason",
-      "to copy without credit",
-      "to ignore the source",
-    ],
-    correctAnswer: 1,
-    explanation: `'Attribute' means to connect something to its cause or origin — 'The temperature rise is attributed to increased carbon emissions.'`
-  },
-  {
-    id: 26,
-    type: "grammar",
-    skill: "Nouns",
-    question: `'The injustice of climate change falls disproportionately on the Caribbean.' The word 'injustice' is:`,
-    options: [
-      "A verb",
-      "An adjective",
-      "An abstract noun",
-      "A proper noun",
-    ],
-    correctAnswer: 2,
-    explanation: `'Injustice' names an abstract concept (the quality of being unjust) — it is an abstract noun.`
-  },
-  {
-    id: 27,
-    type: "grammar",
-    skill: "Comparative/Superlative",
-    question: `Which uses the SUPERLATIVE correctly?`,
-    options: [
-      "Caribbean nations are most affected than any other region",
-      "Caribbean nations are more affected than other regions",
-      "Caribbean nations are among the most severely affected regions on Earth",
-      "Caribbean nations are more severely than other regions",
-    ],
-    correctAnswer: 2,
-    explanation: `For multi-syllable adverbs, use 'most' for superlative: 'most severely affected.' Option C is correct.`
-  },
-  {
-    id: 28,
-    type: "grammar",
-    skill: "Punctuation — Colon and Semicolon",
-    question: `Which sentence uses BOTH a colon and semicolon correctly?`,
-    options: [
-      "Caribbean nations face three main threats: rising seas; intensifying hurricanes; and prolonged droughts.",
-      "Caribbean: nations face rising seas; hurricanes; and droughts.",
-      "Caribbean nations face: rising seas; hurricanes and droughts.",
-      "Caribbean nations; face three threats: seas, hurricanes, droughts.",
-    ],
-    correctAnswer: 0,
-    explanation: `Colon introduces the list; semicolons separate complex list items. Option A uses both correctly.`
-  },
-  {
-    id: 29,
-    type: "grammar",
-    skill: "Passive Voice — Complex",
-    question: `Which correctly uses the PASSIVE VOICE in the PRESENT PERFECT PASSIVE?`,
-    options: [
-      "Rising sea levels have caused coastal damage",
-      "Coastal areas have been damaged by rising sea levels",
-      "Rising sea levels caused coastal damage",
-      "The sea is damaging coastal areas",
-    ],
-    correctAnswer: 1,
-    explanation: `Present perfect passive: have/has been + past participle. 'Have been damaged by' is correct.`
-  },
-  {
-    id: 30,
-    type: "grammar",
-    skill: "Conditional — Third",
-    question: `'If Caribbean nations had contributed more emissions, the moral argument for climate justice would be more complex.' This is a:`,
-    options: [
-      "First conditional",
-      "Second conditional",
-      "Third conditional",
-      "Zero conditional",
-    ],
-    correctAnswer: 2,
-    explanation: `Third conditional: if + past perfect, would have + past participle. Imagines an alternative past.`
-  },
-  {
-    id: 31,
-    type: "grammar",
-    skill: "Inversion — Formal",
-    question: `'Rarely ___ a crisis been so clearly predicted yet so inadequately addressed.'`,
-    options: [
-      "has",
-      "have",
-      "had",
-      "is",
-    ],
-    correctAnswer: 0,
-    explanation: `After 'Rarely', inversion: 'Rarely has a crisis been...' — formal literary or academic register.`
-  },
-  {
-    id: 32,
-    type: "grammar",
-    skill: "Relative Pronouns",
-    question: `Choose the correct relative pronoun: 'The island nations, ___ contributions to emissions are minimal, face the most severe consequences.'`,
-    options: [
-      "that",
-      "who",
-      "whose",
-      "which",
-    ],
-    correctAnswer: 2,
-    explanation: `'Whose' is the possessive relative pronoun. 'Nations whose contributions are minimal' — the contributions belong to the nations.`
-  },
-  {
-    id: 33,
-    type: "grammar",
-    skill: "Reported Speech — Complex",
-    question: `Change to REPORTED SPEECH: 'We are suffering the consequences of other people's choices,' the prime minister stated.`,
-    options: [
-      "The prime minister stated that they were suffering the consequences of other people's choices",
-      "The prime minister stated that we are suffering the consequences of other people's choices",
-      "The prime minister stated they suffer the consequences",
-      "The prime minister told that they were suffering",
-    ],
-    correctAnswer: 0,
-    explanation: `'We' → 'they'; present continuous 'are suffering' → past continuous 'were suffering'; 'other people's' remains unchanged.`
-  },
-  {
-    id: 34,
-    type: "grammar",
-    skill: "Subjunctive — Formal",
-    question: `Which correctly uses the SUBJUNCTIVE?`,
-    options: [
-      "It is imperative that every nation is held accountable",
-      "It is imperative that every nation be held accountable",
-      "It is imperative every nation should be held accountable",
-      "Every nation must be held accountable — it is imperative",
-    ],
-    correctAnswer: 1,
-    explanation: `After 'It is imperative that...', the subjunctive uses the base form: 'be held' (not 'is held').`
-  },
-  {
-    id: 35,
-    type: "grammar",
-    skill: "Cohesive Devices",
-    question: `Which sentence uses COHESIVE DEVICES most effectively to build an argument?`,
-    options: [
-      "Climate change is bad. Island nations suffer. We must act.",
-      "Climate change threatens island nations. They suffer. Action must be taken.",
-      "Climate change disproportionately harms island nations; consequently, those responsible must be held accountable for the damage they have caused.",
-      "Climate change is a problem for island nations who suffer and need help.",
-    ],
-    correctAnswer: 2,
-    explanation: `'Disproportionately' (precise modifier) + 'consequently' (causal connector) + clear logical structure — sophisticated, cohesive academic writing.`
-  },
-  {
-    id: 36,
-    type: "writing",
-    skill: "Persuasive Purpose — Climate",
-    question: `A student writes a speech to the United Nations about climate justice for Caribbean nations. The PRIMARY goal is:`,
-    options: [
-      "To describe Jamaica's geography",
-      "To entertain delegates with stories",
-      "To persuade world leaders that those responsible for climate change must take urgent, concrete action to protect the most vulnerable nations",
-      "To explain the science of climate change",
-    ],
-    correctAnswer: 2,
-    explanation: `A climate justice speech aims to persuade powerful actors to take specific action — combining moral argument with evidence.`
-  },
-  {
-    id: 37,
-    type: "writing",
-    skill: "Emotional and Logical Appeal",
-    question: `Which BEST combines EMOTIONAL and LOGICAL appeal?`,
-    options: [
-      "Stop climate change immediately",
-      "Caribbean islands did not cause this crisis. Data shows they produce less than 1% of global emissions yet face sea level rise, intensifying hurricanes, and water scarcity. This is not bad luck — it is injustice.",
-      "Climate change is really bad and we should do something",
-      "Statistics show that emissions cause climate change",
-    ],
-    correctAnswer: 1,
-    explanation: `Option B combines specific data (logical appeal) with clear moral indignation (emotional appeal) — the most effective persuasive combination.`
-  },
-  {
-    id: 38,
-    type: "writing",
-    skill: "Structural Argument",
-    question: `A student argues for climate justice. Which structure is MOST effective for a formal speech?`,
-    options: [
-      "Start with the conclusion",
-      "Present arguments in random order",
-      "Open with a compelling hook, build the argument with evidence, address counterarguments, and close with a specific call to action",
-      "List all possible solutions first",
-    ],
-    correctAnswer: 2,
-    explanation: `A well-structured persuasive speech: hook → evidence-based argument → counterargument → call to action. Each step builds toward the conclusion.`
-  },
-  {
-    id: 39,
-    type: "writing",
-    skill: "Irony as a Writing Technique",
-    question: `'The nations that did least to create this crisis are being asked to pay most to survive it.' What technique does this sentence use?`,
-    options: [
-      "Alliteration",
-      "A rhetorical question",
-      "Antithesis — placing contrasting ideas in parallel to highlight the injustice",
-      "An anecdote",
-    ],
-    correctAnswer: 2,
-    explanation: `Antithesis places opposing ideas in parallel structure ('did least' vs 'pay most') — the contrast highlights the injustice more powerfully than a straightforward statement would.`
-  },
-  {
-    id: 40,
-    type: "writing",
-    skill: "Evaluating a Climate Justice Argument",
-    question: `A student argues: 'The moral case for climate justice is unanswerable.' A critical reader might challenge this by saying:`,
-    options: [
-      "The moral case is clear — no challenge is needed",
-      "Morality is always simple and clear",
-      "Even strong moral cases can be complicated by questions of causation, political feasibility, and disagreement about who exactly owes what to whom",
-      "Climate science is disputed",
-    ],
-    correctAnswer: 2,
-    explanation: `Even the strongest moral arguments have complications — a critical reader identifies where the argument might be contested. This is not a rejection of climate justice, but intellectual rigour.`
-  }
+  { id: 36, type: "writing", skill: "Topic Sentence", question: `Which is the BEST topic sentence for a paragraph about the project's benefits?`, options: ["The garden had vegetables, and some people visited it on Saturdays.", "Several students liked callaloo, while others preferred the marigolds.", "The library stood beside a road that became muddy during heavy rain.", "The community garden improved the neighbourhood in both practical and social ways."], correctAnswer: 3, explanation: "This sentence clearly states the controlling idea that the paragraph can develop with different kinds of benefits." },
+  { id: 37, type: "writing", skill: "Formal Letter", question: `Which opening is MOST appropriate for a formal letter requesting supplies from a business?`, options: ["Dear Ms. Brown, Our class is requesting gardening gloves for a supervised community project.", "Hi there! We really need some stuff, so please send whatever you have.", "My friends said your shop has tools, and we want some of them right away.", "Good morning, neighbour. You should already know why our garden needs help."], correctAnswer: 0, explanation: "The opening is polite, specific, and suitable for a formal request." },
+  { id: 38, type: "writing", skill: "Supporting Evidence", question: `Which sentence provides the STRONGEST evidence that the project united the community?`, options: ["The garden contained callaloo, thyme, and several rows of marigolds.", "Neighbours began sharing tools, recipes, ideas, and responsibility for the space.", "The library roof directed rainwater into a brightly painted collection barrel.", "Students photographed twelve rubbish bags after the first clean-up day."], correctAnswer: 1, explanation: "Sharing resources and responsibility directly demonstrates stronger community relationships." },
+  { id: 39, type: "writing", skill: "Conclusion", question: `Which is the BEST concluding sentence for a report about the project?`, options: ["That is all the information I have about the garden behind the library.", "The marigolds were orange, yellow, and red beside the vegetable beds.", "The Cedar Grove project shows that thoughtful planning and shared effort can turn a small idea into lasting change.", "First, the students wrote letters; second, they interviewed residents; third, they requested tools."], correctAnswer: 2, explanation: "The sentence restates the central lesson and gives the report a meaningful ending without merely repeating details." },
+  { id: 40, type: "writing", skill: "Revision", question: `Which revision BEST improves this sentence: "The garden was good and it did many good things for everyone"?`, options: ["The garden was very, very good and did good things for many people.", "The garden was nice, and everyone thought its different features were nice.", "The garden did things for the people, and those things were mostly good.", "The garden provided fresh produce, learning opportunities, and a stronger sense of community."], correctAnswer: 3, explanation: "The revision replaces vague repeated words with precise details." }
 ]
 
 const SECTION_CONFIG = [
@@ -842,7 +281,7 @@ export default function G5LaMix9MockTest() {
                         {correct ? <CheckCircle className="mt-1 h-5 w-5 text-green-600" /> : <XCircle className="mt-1 h-5 w-5 text-red-600" />}
                         <div className="flex-1">
                           <p className="font-semibold text-slate-800">Q{i + 1} · <span className="text-blue-700">{q.skill}</span></p>
-                          <p className="mt-1 text-slate-700 text-sm">{q.question}</p>
+                          <p className="mt-1 text-slate-700 text-sm whitespace-pre-line">{q.question}</p>
                           <p className="mt-2 text-sm text-slate-600">Your answer: <span className={correct ? "text-green-700 font-medium" : "text-red-700 font-medium"}>{answers[i] !== null ? q.options[answers[i]!] : "Not answered"}</span></p>
                           <p className="text-sm text-green-700">Correct: {q.options[q.correctAnswer]}</p>
                           <p className="mt-1 text-sm text-slate-700">Explanation: {q.explanation}</p>
