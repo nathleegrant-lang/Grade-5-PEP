@@ -64,15 +64,15 @@ What is the MAIN idea of Passage 1?`,
     id: 3,
     type: "reading",
     skill: "Author's Purpose",
-    question: `Why did the teacher want the display to be clear and helpful?`,
+    question: `Why did the author most likely include Passage 1?`,
     options: [
-      "So parents could buy food",
-      "So younger students could learn",
-      "So the class could leave early",
-      "So the labels could be removed",
+      "To persuade readers to celebrate Jamaica Day every Monday",
+      "To inform readers about students sharing Jamaican culture through a school display",
+      "To entertain readers with an imaginary story about national heroes",
+      "To explain how to prepare traditional Jamaican foods",
     ],
     correctAnswer: 1,
-    explanation: `The teacher wanted the display to help younger students learn about Jamaican culture.`
+    explanation: `Passage 1 primarily informs readers about students creating a school display to share Jamaican culture with younger students.`
   },
   {
     id: 4,
@@ -111,7 +111,7 @@ What is the MAIN idea of Passage 1?`,
       "It was prepared on Monday morning",
       "It included labels children could read",
       "It was finished before lunchtime",
-      "It was placed in a quiet corner",
+      "Many children stopped by lunchtime.",
     ],
     correctAnswer: 1,
     explanation: `Labels helped students read information and learn from the display.`
@@ -427,7 +427,7 @@ What does "abandoned" most likely mean?`,
     type: "grammar",
     skill: "Apostrophes",
     question: `Which sentence shows possession correctly?`,
-    options: ["The boys bag was torn.", "The boy's bag was torn.", "The boys's bag was torn.", "The boys bag was torn."],
+    options: ["The boys bag was torn.", "The boy's bag was torn.", "The boys's bag was torn.", "The boys' bag's was torn."],
     correctAnswer: 1,
     explanation: `The apostrophe shows that the bag belongs to the boy.`
   },
@@ -476,9 +476,9 @@ What is the MAIN purpose of the letter?`,
     type: "writing",
     skill: "Audience",
     question: `A safety notice about wet floors is mainly written for:`,
-    options: ["school visitors and students", "only librarians", "radio presenters", "shop owners"],
+    options: ["school visitors and students", "only the school principal", "students taking part in sports", "parents attending a scheduled meeting"],
     correctAnswer: 0,
-    explanation: `Anyone walking through the area needs the warning.`
+    explanation: `A general wet-floor safety notice is for school visitors and students because anyone walking through the area may need the warning; the other audiences are too narrow.`
   },
   {
     id: 38,
@@ -505,9 +505,9 @@ What is the MAIN purpose of the letter?`,
     type: "writing",
     skill: "Descriptive Writing",
     question: `Which sentence uses the strongest descriptive language?`,
-    options: ["The bird flew away.", "The bright blue bird soared gracefully across the sky.", "There was a bird.", "A bird moved."],
+    options: ["The small bird flew quickly toward the tall tree.", "The bright blue bird soared gracefully across the cloudless sky.", "The colourful bird moved quietly beside the green bushes.", "The young bird rested briefly on a narrow branch."],
     correctAnswer: 1,
-    explanation: `Strong descriptive writing uses vivid details and precise word choice.`
+    explanation: `The words "bright blue," "soared gracefully," and "cloudless sky" create the clearest and most vivid picture through precise description and strong verb choice.`
   },
 ]
 
