@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -6,7 +7,16 @@ import { BookOpen, Users } from "lucide-react"
 export function WelcomeCard() {
   return (
     <div className="grid gap-6 md:grid-cols-2">
-      <Card className="h-full border border-sky-100 bg-sky-50/45 shadow-sm">
+      <Card className="h-full overflow-hidden border border-sky-100 bg-sky-50/45 shadow-sm">
+        <div className="relative h-56 w-full overflow-hidden">
+          <Image
+            src="/images/grade5-student-practice.jpg"
+            alt="Grade 5 learner practising independently with a laptop and notebook"
+            fill
+            className="object-cover"
+            sizes="(min-width: 768px) 50vw, 100vw"
+          />
+        </div>
         <CardContent className="p-7 md:p-8">
           <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
             <BookOpen className="h-6 w-6 text-blue-700" />
@@ -22,7 +32,16 @@ export function WelcomeCard() {
         </CardContent>
       </Card>
 
-      <Card className="h-full border border-amber-100 bg-amber-50/45 shadow-sm">
+      <Card className="h-full overflow-hidden border border-amber-100 bg-amber-50/45 shadow-sm">
+        <div className="relative h-56 w-full overflow-hidden">
+          <Image
+            src="/images/grade5-parent-support.jpg"
+            alt="Parent supporting a Grade 5 learner who is actively working on a laptop"
+            fill
+            className="object-cover"
+            sizes="(min-width: 768px) 50vw, 100vw"
+          />
+        </div>
         <CardContent className="p-7 md:p-8">
           <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-amber-100">
             <Users className="h-6 w-6 text-amber-700" />
