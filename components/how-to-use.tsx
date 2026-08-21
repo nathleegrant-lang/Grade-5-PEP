@@ -1,8 +1,8 @@
 const steps = [
-  { number: 1, text: "Choose a subject" },
-  { number: 2, text: "Review a topic" },
-  { number: 3, text: "Complete practice activities" },
-  { number: 4, text: "Move on to mock tests" },
+  { number: 1, text: "Choose a subject", tone: "bg-pink-500" },
+  { number: 2, text: "Review a topic", tone: "bg-blue-600" },
+  { number: 3, text: "Complete practice activities", tone: "bg-emerald-600" },
+  { number: 4, text: "Move on to mock tests", tone: "bg-amber-500" },
 ]
 
 export function HowToUse() {
@@ -14,7 +14,7 @@ export function HowToUse() {
       <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {steps.map((step) => (
           <div key={step.number} className="rounded-xl border border-teal-100 bg-white px-4 py-5 shadow-sm">
-            <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-full bg-[#0d6f70] text-sm font-bold text-white">{step.number}</div>
+            <div className={`mx-auto flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold text-white ${step.tone}`}>{step.number}</div>
             <p className="mt-3 text-sm font-semibold text-[#0b3555]">{step.text}</p>
           </div>
         ))}
