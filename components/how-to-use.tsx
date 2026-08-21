@@ -7,13 +7,13 @@ const steps = [
 
 export function HowToUse() {
   return (
-    <section className="rounded-2xl bg-white py-2 text-center">
+    <section className="rounded-3xl border border-cyan-200 bg-gradient-to-br from-[#dff7ff] via-[#e8fff7] to-[#fff4cc] px-5 py-7 text-center shadow-sm md:px-7">
       <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#0d6f70]">PEP PRACTICE — Grade 5</p>
       <h2 className="mt-2 text-2xl font-bold text-[#0b3555]">How to Use This Site</h2>
       <p className="mt-2 text-sm text-slate-600">A simple path to purposeful Grade 5 practice.</p>
       <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {steps.map((step) => (
-          <div key={step.number} className="rounded-xl border border-teal-100 bg-white px-4 py-5 shadow-sm">
+          <div key={step.number} className="rounded-xl border border-white bg-white/95 px-4 py-5 shadow-sm">
             <div className={`mx-auto flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold text-white ${step.tone}`}>{step.number}</div>
             <p className="mt-3 text-sm font-semibold text-[#0b3555]">{step.text}</p>
           </div>
