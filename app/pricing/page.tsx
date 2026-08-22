@@ -128,7 +128,7 @@ export default function PricingPage() {
 
       <main className="container mx-auto px-4 py-10">
         <div className="max-w-3xl mx-auto text-center mb-10">
-          <h1 className="text-4xl font-bold text-slate-800 mb-4">Grade 5 PEP Pricing</h1>
+          <h1 className="text-4xl font-bold text-slate-800 mb-4">PEP PRACTICE — Grade 5 Pricing</h1>
           <p className="text-lg text-slate-600">
             Each Grade 5 plan is sold separately and applies to this Grade 5 programme only.
             It does not include Grade 4 or future Grade 6 access.
@@ -241,7 +241,7 @@ export default function PricingPage() {
                         : tier.id === "free"
                         ? isAuthenticated
                           ? "Go to Dashboard"
-                          : "Start Free"
+                          : "Start Free Practice"
                         : `Choose ${tier.name}`}
                     </Button>
                   </CardContent>

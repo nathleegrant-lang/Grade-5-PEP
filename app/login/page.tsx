@@ -57,11 +57,11 @@ export default function LoginPage() {
         <CardHeader className="text-center">
           <Link href="/" className="flex justify-center mb-4">
             <Image
-              src="/images/logo.png"
-              alt="Grade 5 PEP Logo"
-              width={80}
-              height={80}
-              className="w-20 h-20"
+              src="/images/pep-practice-grade5-primary.jpg"
+              alt="PEP PRACTICE Grade 5 — Practice, Review, Confidence"
+              width={700}
+              height={251}
+              className="h-auto w-[230px] object-contain"
               priority
             />
           </Link>
@@ -135,7 +135,7 @@ export default function LoginPage() {
             <p className="text-gray-600">
               Don&apos;t have an account?{" "}
               <Link href="/register" className="text-[#0d9488] hover:underline font-semibold">
-                Sign up for free
+                Create Account
               </Link>
             </p>
           </div>

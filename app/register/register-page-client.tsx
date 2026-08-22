@@ -112,9 +112,9 @@ export default function RegisterPageClient() {
               <div className="w-16 h-16 rounded-full bg-sky-100 flex items-center justify-center mx-auto mb-4">
                 <UserPlus className="h-8 w-8 text-sky-600" />
               </div>
-              <CardTitle className="text-2xl text-slate-800">Create Parent Account</CardTitle>
+              <CardTitle className="text-2xl text-slate-800">Create your PEP PRACTICE — Grade 5 parent account</CardTitle>
               <CardDescription>
-                Set up your free Grade 5 parent account first, then continue to your plan or mock tests.
+                Set up your free parent account first, then continue to your plan or mock tests.
               </CardDescription>
             </CardHeader>
 

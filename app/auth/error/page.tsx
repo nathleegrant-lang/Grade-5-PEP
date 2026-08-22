@@ -10,7 +10,13 @@ export default function AuthErrorPage() {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <Link href="/" className="flex justify-center mb-4">
-            <Image src="/images/logo.png" alt="Grade 5 PEP Logo" width={80} height={80} className="w-20 h-20" />
+            <Image
+              src="/images/pep-practice-grade5-primary.jpg"
+              alt="PEP PRACTICE Grade 5 — Practice, Review, Confidence"
+              width={700}
+              height={251}
+              className="h-auto w-[230px] object-contain"
+            />
           </Link>
           <div className="flex justify-center mb-4">
             <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
@@ -31,7 +37,7 @@ export default function AuthErrorPage() {
             </Link>
             <Link href="/register">
               <Button variant="outline" className="w-full">
-                Create New Account
+                Create Account
               </Button>
             </Link>
           </div>

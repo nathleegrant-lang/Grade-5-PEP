@@ -27,13 +27,13 @@ export default async function RegisterSuccessPage({
       <main className="flex-1 container mx-auto px-4 py-10 flex items-center justify-center">
         <div className="w-full max-w-2xl overflow-hidden rounded-2xl border border-sky-200 bg-white shadow-sm">
           <div className="bg-[#072247] px-6 py-10 flex justify-center">
-            <div className="rounded-xl bg-black/80 p-4 shadow-lg">
+            <div className="rounded-xl bg-white p-4 shadow-lg">
               <Image
-                src="/images/shazoniques-inspiration-logo.png"
-                alt="Shazonique's Inspiration logo"
-                width={260}
-                height={120}
-                className="h-auto w-[220px]"
+                src="/images/pep-practice-grade5-primary.jpg"
+                alt="PEP PRACTICE Grade 5 — Practice, Review, Confidence"
+                width={700}
+                height={251}
+                className="h-auto w-[280px] object-contain"
                 priority
               />
             </div>
