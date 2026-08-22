@@ -312,7 +312,7 @@ function CheckoutContent() {
                 <Crown className="h-8 w-8 text-amber-600" />
               </div>
               <CardTitle className="text-2xl text-slate-800">
-                Submit Your Grade 5 Payment
+                PEP PRACTICE — Grade 5 Payment
               </CardTitle>
               <CardDescription>
                 {plan.name} for {user?.childName ?? "your student"}
