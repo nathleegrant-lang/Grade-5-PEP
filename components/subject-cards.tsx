@@ -15,7 +15,7 @@ export function SubjectCards() {
       <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-amber-300/15" />
       <div className="relative mb-6 text-center text-white">
         <p className="text-xs font-bold uppercase tracking-[0.18em] text-amber-200">Choose your next challenge</p>
-        <h3 className="mt-2 text-2xl font-bold">Start Practicing</h3>
+        <h3 className="mt-2 text-2xl font-bold">Start Practising</h3>
         <p className="mt-2 text-teal-50">Choose a subject below to begin your review and purposeful Grade 5 practice.</p>
       </div>
       <div className="relative grid gap-4 md:grid-cols-2">
