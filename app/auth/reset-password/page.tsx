@@ -32,7 +32,7 @@ export default function ResetPasswordPage() {
 
     const verifyRecoverySession = async () => {
       const { data } = await supabase.auth.getSession()
-      if (!mounted || state === "ready") return
+      if (!mounted) return
 
       if (recoveryLinkSeen && data.session) {
         setState("ready")
@@ -49,7 +49,7 @@ export default function ResetPasswordPage() {
       mounted = false
       listener.subscription.unsubscribe()
     }
-  }, [supabase, state])
+  }, [supabase])
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
