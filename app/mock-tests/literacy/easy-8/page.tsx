@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -121,7 +122,7 @@ Why did the author most likely write this passage?`,
   {
     id: 6,
     type: "reading",
-    skill: "Cause and Effect",
+    skill: `Sequence`,
     question: `Read the passage then answer the question.
 
 "Jamaica Heritage Day began with drums echoing across the school hall. Grade 5 pupils wore bandana colours, displayed drawings of national heroes, and labelled tables with traditional foods such as ackee, bammy, and sweet potato pudding. During the celebration, each group explained a custom from a different parish. By the end of the morning, the pupils understood that heritage is more than old stories; it is the music, food, language, and respect people continue to share."
@@ -139,7 +140,7 @@ What happened after the pupils displayed drawings and labelled tables?`,
   {
     id: 7,
     type: "reading",
-    skill: "Text Evidence",
+    skill: `Cause and Effect`,
     question: `Read the passage then answer the question.
 
 "Jamaica Heritage Day began with drums echoing across the school hall. Grade 5 pupils wore bandana colours, displayed drawings of national heroes, and labelled tables with traditional foods such as ackee, bammy, and sweet potato pudding. During the celebration, each group explained a custom from a different parish. By the end of the morning, the pupils understood that heritage is more than old stories; it is the music, food, language, and respect people continue to share."
@@ -157,7 +158,7 @@ What was one effect of the Heritage Day activities?`,
   {
     id: 8,
     type: "reading",
-    skill: "Main Idea",
+    skill: `Text Evidence`,
     question: `Read the passage then answer the question.
 
 "Jamaica Heritage Day began with drums echoing across the school hall. Grade 5 pupils wore bandana colours, displayed drawings of national heroes, and labelled tables with traditional foods such as ackee, bammy, and sweet potato pudding. During the celebration, each group explained a custom from a different parish. By the end of the morning, the pupils understood that heritage is more than old stories; it is the music, food, language, and respect people continue to share."
@@ -175,7 +176,7 @@ Which detail best supports the idea that the pupils shared Jamaican culture?`,
   {
     id: 9,
     type: "reading",
-    skill: "Detail",
+    skill: `Main Idea`,
     question: `Read the passage then answer the question.
 
 "On Friday, Mr. Henry took the class to the Seville Heritage Park. A guide led them past stone ruins, old maps, and a small room filled with clay pots and tools. The pupils moved quietly because the objects were fragile. Amara sketched a tiny pot while Daniel wrote notes about how people traded goods long ago. On the ride back to school, the class agreed that visiting a historical site helped them imagine real people from the past."
@@ -193,7 +194,7 @@ What is the main idea of this passage?`,
   {
     id: 10,
     type: "reading",
-    skill: "Inference",
+    skill: `Detail`,
     question: `Read the passage then answer the question.
 
 "On Friday, Mr. Henry took the class to the Seville Heritage Park. A guide led them past stone ruins, old maps, and a small room filled with clay pots and tools. The pupils moved quietly because the objects were fragile. Amara sketched a tiny pot while Daniel wrote notes about how people traded goods long ago. On the ride back to school, the class agreed that visiting a historical site helped them imagine real people from the past."
@@ -211,7 +212,7 @@ Who led the class around the historical site?`,
   {
     id: 11,
     type: "reading",
-    skill: "Vocabulary in Context",
+    skill: `Cause and Effect`,
     question: `Read the passage then answer the question.
 
 "On Friday, Mr. Henry took the class to the Seville Heritage Park. A guide led them past stone ruins, old maps, and a small room filled with clay pots and tools. The pupils moved quietly because the objects were fragile. Amara sketched a tiny pot while Daniel wrote notes about how people traded goods long ago. On the ride back to school, the class agreed that visiting a historical site helped them imagine real people from the past."
@@ -229,7 +230,7 @@ Why did the pupils move quietly?`,
   {
     id: 12,
     type: "reading",
-    skill: "Character Response",
+    skill: `Vocabulary in Context`,
     question: `Read the passage then answer the question.
 
 "On Friday, Mr. Henry took the class to the Seville Heritage Park. A guide led them past stone ruins, old maps, and a small room filled with clay pots and tools. The pupils moved quietly because the objects were fragile. Amara sketched a tiny pot while Daniel wrote notes about how people traded goods long ago. On the ride back to school, the class agreed that visiting a historical site helped them imagine real people from the past."
@@ -247,7 +248,7 @@ What does fragile mean in the passage?`,
   {
     id: 13,
     type: "reading",
-    skill: "Text Evidence",
+    skill: `Author's Purpose`,
     question: `Read the passage then answer the question.
 
 "On Friday, Mr. Henry took the class to the Seville Heritage Park. A guide led them past stone ruins, old maps, and a small room filled with clay pots and tools. The pupils moved quietly because the objects were fragile. Amara sketched a tiny pot while Daniel wrote notes about how people traded goods long ago. On the ride back to school, the class agreed that visiting a historical site helped them imagine real people from the past."
@@ -283,7 +284,7 @@ How were Amara and Daniel alike during the visit?`,
   {
     id: 15,
     type: "reading",
-    skill: "Theme",
+    skill: `Problem and Solution`,
     question: `Read the passage then answer the question.
 
 "On Friday, Mr. Henry took the class to the Seville Heritage Park. A guide led them past stone ruins, old maps, and a small room filled with clay pots and tools. The pupils moved quietly because the objects were fragile. Amara sketched a tiny pot while Daniel wrote notes about how people traded goods long ago. On the ride back to school, the class agreed that visiting a historical site helped them imagine real people from the past."
@@ -483,7 +484,7 @@ Which sentence best states a problem and solution from the passage?`,
   {
     id: 29,
     type: "grammar",
-    skill: "Capitalization",
+    skill: `Dialogue Punctuation`,
     question: `Which sentence uses capital letters correctly?`,
     options: [
       `"Please walk carefully," said the guide.`,
@@ -526,15 +527,15 @@ Which sentence best states a problem and solution from the passage?`,
     id: 32,
     type: "grammar",
     skill: "Conjunctions",
-    question: `Choose the best word: The pupils observed the pottery, ___ they wrote notes.`,
+    question: `The pupils observed the pottery, ___ they wrote notes about what they saw.`,
     options: [
-      "because",
+      "so",
       "but",
       "or",
       "although",
     ],
     correctAnswer: 0,
-    explanation: `Because correctly explains why the pupils wrote notes after observing the pottery.`
+    explanation: `So shows that writing notes followed from observing the pottery.`
   },
   {
     id: 33,
@@ -554,7 +555,7 @@ Which sentence best states a problem and solution from the passage?`,
     id: 34,
     type: "grammar",
     skill: "Possessive Apostrophes",
-    question: `Which option is a complete sentence?`,
+    question: `Which sentence uses a possessive apostrophe correctly?`,
     options: [
       "The guides badge was blue.",
       "The guide's badge was blue.",
@@ -585,9 +586,9 @@ Which sentence best states a problem and solution from the passage?`,
     question: `You are writing a notice inviting Grade 5 pupils to a Jamaica Heritage Day celebration. What should you include?`,
     options: [
       "the date, time, place, activities, and polite instructions",
-      "only a joke about the drums",
-      "a secret message with no location",
-      "a list of unrelated football scores",
+      "the date, time, and place, but no activities or instructions",
+      "the activities and polite instructions, but no date or time",
+      "the place and activities, but no information about when it begins",
     ],
     correctAnswer: 0,
     explanation: `A notice should clearly give important details such as date, time, place, activities, and instructions for its audience.`
@@ -598,10 +599,10 @@ Which sentence best states a problem and solution from the passage?`,
     skill: "Topic Sentence",
     question: `Which is the best topic sentence for a paragraph about a museum visit?`,
     options: [
-      "The bus had windows and seats.",
+      "The guide showed us clay pots and old maps.",
       "Our visit to the museum taught us many facts about Jamaica's past.",
-      "I sharpened my pencil before lunch.",
-      "The sky was blue on Tuesday.",
+      "Amara sketched a tiny pot.",
+      "We rode back to school after the visit.",
     ],
     correctAnswer: 1,
     explanation: `The best topic sentence clearly introduces the main idea of learning about Jamaica's past at the museum.`
@@ -613,9 +614,9 @@ Which sentence best states a problem and solution from the passage?`,
     question: `Which detail best supports this sentence? Heritage Day helped our class appreciate Jamaican culture.`,
     options: [
       "We learned folk songs and explained customs from several parishes.",
-      "The classroom door was painted brown.",
-      "My pencil case has three zippers.",
-      "The rain stopped before bedtime.",
+      "Pupils wore bandana colours during the celebration.",
+      "Tables displayed ackee, bammy, and sweet potato pudding.",
+      "Groups prepared and labelled tables in the school hall.",
     ],
     correctAnswer: 0,
     explanation: `Learning folk songs and explaining customs directly supports the idea of appreciating Jamaican culture.`
@@ -626,10 +627,10 @@ Which sentence best states a problem and solution from the passage?`,
     skill: "Revision",
     question: `Which revision makes this sentence clearer? We went there and saw things.`,
     options: [
-      "We went and there saw and things.",
-      "Things saw us when we went there.",
+      "We went to the heritage park and saw many interesting things.",
+      "The class visited a historical place and learned about the past.",
       "Our class visited Seville Heritage Park and saw clay pots, old maps, and stone ruins.",
-      "We went there things saw.",
+      "We saw old objects during our trip to the heritage park.",
     ],
     correctAnswer: 2,
     explanation: `The correct revision adds specific details that make the sentence clear and informative.`
@@ -641,33 +642,14 @@ Which sentence best states a problem and solution from the passage?`,
     question: `Which sentence would best conclude a report about the historical site visit?`,
     options: [
       "In conclusion, the visit helped us understand and respect Jamaica's history.",
-      "The bus tyres were round and black.",
-      "My friend forgot a red pencil at home.",
-      "Next week I might eat a sandwich.",
+      "The guide showed us clay pots, old maps, and stone ruins.",
+      "Our class visited Seville Heritage Park on Friday.",
+      "First, the guide led us through rooms filled with historical objects.",
     ],
     correctAnswer: 0,
     explanation: `A concluding sentence should sum up the report's main idea, and this option restates what the class learned from the visit.`
   },
 ]
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({ option, index }))
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [optionsWithOriginalIndex[j], optionsWithOriginalIndex[i]]
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex((item) => item.index === question.correctAnswer)
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    }
-  })
-}
-
 const SECTION_CONFIG = [
   { type: "reading" as const,    label: "Reading Comprehension",  note: "main idea, inference, author's purpose, tone, text structure" },
   { type: "vocabulary" as const, label: "Vocabulary & Word Study", note: "context clues, synonyms, antonyms, figurative language, word meaning" },
@@ -754,9 +736,11 @@ export default function G5LaEasy8MockTest() {
   }
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions)
-    setRandomizedQuestions(shuffledQuestions)
-    setAnswers(new Array(shuffledQuestions.length).fill(null))
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaEasy8Questions)
+      : preparePreview(g5LaEasy8Questions, FREE_QUESTION_LIMIT)
+    setRandomizedQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
     setCurrentQuestion(0)
     setTimeLeft(60 * 60)
     setShowResults(false)
