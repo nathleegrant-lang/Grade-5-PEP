@@ -24,7 +24,7 @@ export default function ResendConfirmationPage() {
     setMessage("")
 
     try {
-      const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || window.location.origin
+      const siteUrl = window.location.origin.replace(/\/$/, "")
       const supabase = getSupabaseBrowserClient()
       const { error } = await supabase.auth.resend({
         type: "signup",
