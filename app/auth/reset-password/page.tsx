@@ -23,7 +23,8 @@ export default function ResetPasswordPage() {
 
   useEffect(() => {
     let mounted = true
-    const recoveryLinkSeen = window.location.hash.includes("type=recovery")
+    const hashParams = new URLSearchParams(window.location.hash.replace(/^#/, ""))
+    const recoveryToken = hashParams.get("type") === "recovery" ? hashParams.get("access_token") : null
 
     const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
       if (!mounted) return
@@ -34,7 +35,7 @@ export default function ResetPasswordPage() {
       const { data } = await supabase.auth.getSession()
       if (!mounted) return
 
-      if (recoveryLinkSeen && data.session) {
+      if (recoveryToken && data.session?.access_token === recoveryToken) {
         setState("ready")
         return
       }
