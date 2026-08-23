@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -452,15 +453,15 @@ Several parents donated craft paper for the charity project.`,
     id: 26,
     type: "grammar",
     skill: "Subject-Verb Agreement",
-    question: `Choose the sentence with correct subject-verb agreement.`,
+    question: `The student teams ___ fruit cups at the fair.`,
     options: [
-      "The teams sells fruit cups at the fair.",
-      "The team sell fruit cups at the fair.",
-      "The teams sell fruit cups at the fair.",
-      "The teams selling fruit cups at the fair.",
+      "sell",
+      "sells",
+      "selling",
+      "has sold",
     ],
-    correctAnswer: 2,
-    explanation: `The plural subject teams agrees with the plural verb sell.`
+    correctAnswer: 0,
+    explanation: `The plural subject "teams" agrees with the plural verb "sell."`
   },
   {
     id: 27,
@@ -556,14 +557,12 @@ The customers waited patiently at the table.`,
     id: 33,
     type: "grammar",
     skill: "Conjunctions",
-    question: `Choose the conjunction that best completes the sentence.
-
-The bracelets were colourful, _____ the plant pots sold first.`,
+    question: `The bracelets were colourful, ___ they did not sell as quickly as the plant pots.`,
     options: [
       "and",
       "but",
-      "under",
-      "quickly",
+      "because",
+      "although",
     ],
     correctAnswer: 1,
     explanation: `But correctly joins two related ideas with a contrast.`
@@ -603,9 +602,9 @@ The bracelets were colourful, _____ the plant pots sold first.`,
     question: `Which sentence would be the best topic sentence for a paragraph about the Junior Entrepreneurship Fair?`,
     options: [
       "The Junior Entrepreneurship Fair helped Grade 5 pupils learn useful business skills.",
-      "My pencil fell under the desk during lunch.",
-      "The sky was dark long before the rain began.",
-      "A puppy slept beside the classroom door.",
+      "Students sold fruit cups, bracelets, and plant pots at the fair.",
+      "Pupils counted the money after customers bought their products.",
+      "The class gave part of the money earned to charity.",
     ],
     correctAnswer: 0,
     explanation: `A topic sentence should introduce the main idea of the paragraph, which is learning business skills at the fair.`
@@ -619,9 +618,9 @@ The bracelets were colourful, _____ the plant pots sold first.`,
 The charity sale was carefully organized.`,
     options: [
       "Students labelled prices, arranged products, and counted the money after the sale.",
-      "The playground gate is painted green.",
-      "Some birds flew over the school roof.",
-      "My favourite story has twelve chapters.",
+      "The charity sale was held during the school fair.",
+      "Students sold fruit cups, bracelets, cards, and plant pots.",
+      "Many customers visited the tables during the sale.",
     ],
     correctAnswer: 0,
     explanation: `Labelling prices, arranging products, and counting money are details that show the sale was organized.`
@@ -651,9 +650,9 @@ The charity sale was carefully organized.`,
     question: `Which sentence is the best conclusion for a paragraph about selling products to help charity?`,
     options: [
       "The project showed that small acts of teamwork can make a kind difference.",
-      "The red ball rolled under the mango tree.",
-      "My cousin prefers swimming on Saturday mornings.",
-      "The classroom clock stopped at nine o'clock.",
+      "Students made bracelets and cards before the sale.",
+      "The charity sale took place during the school fair.",
+      "First, the pupils arranged their products on the tables.",
     ],
     correctAnswer: 0,
     explanation: `This sentence wraps up the paragraph by restating the value of teamwork and kindness in the charity project.`
@@ -665,33 +664,14 @@ The charity sale was carefully organized.`,
     question: `Choose the clearest sentence.`,
     options: [
       "We sold the cards, and then we recorded the amount earned.",
-      "Cards sold amount then recorded we earned.",
-      "The cards and amount because sold recorded.",
-      "We amount sold the recorded cards earned then.",
+      "After we sold the cards, we wrote down how much money there was.",
+      "We sold the cards and recorded the amount, which was the amount earned.",
+      "The amount earned from the cards was recorded after they were sold by us.",
     ],
     correctAnswer: 0,
     explanation: `The correct sentence clearly explains that the cards were sold and the amount earned was recorded.`
   },
 ]
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({ option, index }))
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [optionsWithOriginalIndex[j], optionsWithOriginalIndex[i]]
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex((item) => item.index === question.correctAnswer)
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    }
-  })
-}
 
 const SECTION_CONFIG = [
   { type: "reading" as const,    label: "Reading Comprehension",  note: "main idea, inference, author's purpose, tone, text structure" },
@@ -779,9 +759,11 @@ export default function G5LaEasy9MockTest() {
   }
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions)
-    setRandomizedQuestions(shuffledQuestions)
-    setAnswers(new Array(shuffledQuestions.length).fill(null))
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaEasy9Questions)
+      : preparePreview(g5LaEasy9Questions, FREE_QUESTION_LIMIT)
+    setRandomizedQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
     setCurrentQuestion(0)
     setTimeLeft(60 * 60)
     setShowResults(false)
