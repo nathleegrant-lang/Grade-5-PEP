@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -360,15 +361,15 @@ In the passage, "gathered" most nearly means:`,
 
 "On Saturday, families gathered at the community centre for Clean-Up Day. Mr. Brown handed out gloves, garbage bags, and rakes. Teams swept the sidewalks, removed plastic bottles from the drain, and planted bright flowers near the bus stop. By noon, the area looked neat and welcoming. The volunteers promised to keep working together so the community would stay clean."
 
-What happened because the teams cleaned and planted flowers?`,
+In the passage, the teams "removed plastic bottles from the drain." What does "removed" mean?`,
     options: [
-      `The area looked neat and welcoming`,
-      `The community centre disappeared`,
-      `The bus stop was closed forever`,
-      `Mr. Brown cancelled Clean-Up Day`,
+      "took away",
+      "added more",
+      "counted carefully",
+      "painted brightly",
     ],
     correctAnswer: 0,
-    explanation: `The teams swept, removed bottles, and planted flowers; as a result, the area looked neat and welcoming by noon.`,
+    explanation: `The teams took the plastic bottles out of the drain, so "removed" means took away.`,
   },
   {
     id: 20,
@@ -378,15 +379,15 @@ What happened because the teams cleaned and planted flowers?`,
 
 "On Saturday, families gathered at the community centre for Clean-Up Day. Mr. Brown handed out gloves, garbage bags, and rakes. Teams swept the sidewalks, removed plastic bottles from the drain, and planted bright flowers near the bus stop. By noon, the area looked neat and welcoming. The volunteers promised to keep working together so the community would stay clean."
 
-Which lesson best fits the passage?`,
+The volunteers "promised to keep working together." What does "promised" mean in this sentence?`,
     options: [
-      `Working together can improve a shared space`,
-      `Only one person should do community work`,
-      `Clean places do not need regular care`,
-      `Flowers should never be planted near roads`,
+      "gave their word that they would do something",
+      "forgot what they had planned",
+      "asked someone a question",
+      "refused to continue",
     ],
     correctAnswer: 0,
-    explanation: `The volunteers worked as teams and promised continued effort, showing that cooperation can improve a shared space.`,
+    explanation: `"Promised" means they gave their word that they would continue working together.`,
   },
   {
     id: 21,
@@ -522,7 +523,7 @@ Which lesson best fits the passage?`,
     options: [
       `The clubs schedule was helpful.`,
       `The club’s schedule was helpful.`,
-      `The clubs’ schedule were helpful.`,
+      `The club's' schedule was helpful.`,
       `The club schedule’s was helpful.`,
     ],
     correctAnswer: 1,
@@ -646,10 +647,10 @@ Which lesson best fits the passage?`,
     skill: `Clear Sentence`,
     question: `Which sentence is clearest?`,
     options: [
-      `The teams swept the sidewalks and put the litter in garbage bags.`,
-      `Swept sidewalks teams litter bags the.`,
-      `The sidewalks, because teams and bags.`,
-      `Garbage bags were teams sweeping in them.`,
+      "The teams swept the sidewalks and put the litter in garbage bags.",
+      "The teams swept them and put it in the bags.",
+      "The sidewalks were swept, and the litter was put into bags by the teams.",
+      "After sweeping them, the teams put the litter into the bags they had.",
     ],
     correctAnswer: 0,
     explanation: `The clearest sentence has a logical word order and clearly explains what the teams did.`,
@@ -660,35 +661,16 @@ Which lesson best fits the passage?`,
     skill: `Formal Tone`,
     question: `Which sentence has the best formal tone for a school report?`,
     options: [
-      `The Environmental Club planted young trees to improve the school grounds.`,
-      `The club did some cool stuff by the fence.`,
-      `Those kids were kinda messing with dirt.`,
-      `It was like, trees and things everywhere.`,
+      "The Environmental Club planted young trees to improve the school grounds.",
+      "The club planted trees near the fence to make the grounds more attractive.",
+      "Students from the club planted some trees beside the fence.",
+      "The Environmental Club worked near the fence and planted trees there.",
     ],
     correctAnswer: 0,
     explanation: `A school report needs clear, respectful language; this sentence is formal and specific.`,
   },
 ]
 
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({ option, index }))
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [optionsWithOriginalIndex[j], optionsWithOriginalIndex[i]]
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex((item) => item.index === question.correctAnswer)
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    }
-  })
-}
 
 const SECTION_CONFIG = [
   { type: "reading" as const,    label: "Reading Comprehension",  note: "main idea, inference, author's purpose, tone, text structure" },
@@ -775,9 +757,11 @@ export default function G5LaEasy6MockTest() {
   }
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions)
-    setRandomizedQuestions(shuffledQuestions)
-    setAnswers(new Array(shuffledQuestions.length).fill(null))
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaEasy6Questions)
+      : preparePreview(g5LaEasy6Questions, FREE_QUESTION_LIMIT)
+    setRandomizedQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
     setCurrentQuestion(0)
     setTimeLeft(60 * 60)
     setShowResults(false)
