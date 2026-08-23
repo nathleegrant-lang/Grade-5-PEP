@@ -58,8 +58,8 @@ Where did the students place the labelled bins?`,
     options: [
       "Beside the football field and office",
       "Near the canteen and library",
-      "Inside the principal's car",
-      "Behind Ms. Brown's desk",
+      "Near the classroom and canteen.",
+      "Near the library and school office.",
     ],
     correctAnswer: 1,
     explanation: `The passage states that the labelled bins were placed near the canteen and library.`
@@ -200,10 +200,10 @@ What is the main idea of this passage?`,
 
 Which item did the teacher say families should keep in a safe place?`,
     options: [
-      "A beach ball",
+      "A blanket",
       "A first-aid kit",
-      "A science trophy",
-      "A paintbrush",
+      "A raincoat",
+      "A toolbox",
     ],
     correctAnswer: 1,
     explanation: `The teacher listed water, canned food, batteries, and a first-aid kit as supplies to keep in a safe place.`
@@ -236,13 +236,13 @@ Why did Nia feel ready when the storm watch was announced?`,
 
 Which sentence best summarizes the passage?`,
     options: [
-      "Nia forgot to charge the flashlight before a storm",
-      "Mr. Clarke's class spent June learning only about batteries",
-      "The school windows were broken before hurricane season began",
-      "Mr. Clarke's class and Nia's family prepared for hurricane season by making safety plans",
+      "Nia's family prepared supplies after hearing a storm watch.",
+      "Mr. Clarke's class learned mainly how to protect classroom windows.",
+      "Students and families discussed different dangers caused by storms.",
+      "Mr. Clarke's class and Nia's family prepared for hurricane season by making safety plans.",
     ],
     correctAnswer: 3,
-    explanation: `This summary includes the most important ideas: the class, Nia's family, and their hurricane safety plans.`
+    explanation: `The correct option best summarizes the whole passage because it includes both Mr. Clarke's class and Nia's family preparing safety plans for hurricane season, rather than focusing on only one detail.`
   },
   {
     id: 13,
@@ -521,7 +521,7 @@ Yesterday, the students _____ posters for the recycling drive.`,
     question: `Choose the sentence that uses an apostrophe correctly.`,
     options: [
       "The students bins were full by Friday.",
-      "The student's bins were full by Friday.",
+      "The student's' bins were full by Friday.",
       "The students' bins were full by Friday.",
       "The students's bins were full by Friday.",
     ],
@@ -606,13 +606,13 @@ The teacher asked us to _____ the paper and plastic into different bins.`,
     skill: "Audience",
     question: `Leah is writing a note to Grade 5 families about hurricane supplies to keep at home. Which greeting best matches her audience?`,
     options: [
-      "Yo, people on my team,",
+      "Dear Grade 5 students,",
       "Dear Grade 5 families,",
-      "Dear weather machine,",
-      "Hey, empty batteries,",
+      "Attention Grade 5 teachers,",
+      "Dear members of the school sports team,",
     ],
     correctAnswer: 1,
-    explanation: `"Dear Grade 5 families" is polite and directly addresses the intended audience.`
+    explanation: `"Dear Grade 5 families" directly and appropriately addresses the specified audience: families of Grade 5 students.`
   },
   {
     id: 38,
@@ -636,13 +636,13 @@ Our class recycling drive made the school cleaner.`,
     skill: "Paragraph Organisation",
     question: `Which sentence would make the best closing sentence for a paragraph about hurricane preparation?`,
     options: [
-      "My favourite lunch is rice and peas",
-      "That is why planning early can help families stay safe during a storm",
-      "The puppy chased a ball across the yard",
-      "There are twelve crayons in my box",
+      "Families should keep water and batteries in an emergency kit.",
+      "That is why planning early can help families stay safe during a storm.",
+      "Hurricane season usually requires several kinds of preparation.",
+      "First, families should check that emergency supplies are ready.",
     ],
     correctAnswer: 1,
-    explanation: `This sentence wraps up the paragraph by restating the main idea about planning early for safety.`
+    explanation: `The correct option concludes the paragraph by drawing together its main idea about early planning and safety. The other choices function as a supporting detail, a general introductory statement, or a sequencing sentence.`
   },
   {
     id: 40,
@@ -650,13 +650,13 @@ Our class recycling drive made the school cleaner.`,
     skill: "Descriptive Writing",
     question: `Which sentence uses the best descriptive details for a story about a stormy afternoon at school?`,
     options: [
-      "It was weather outside the school",
-      "The day happened and students were there",
-      "Things were not normal after lunch",
-      "Dark clouds rolled over the roof while rain tapped against the classroom windows",
+      "Grey clouds covered the school while students hurried inside.",
+      "Heavy rain fell steadily across the wet schoolyard.",
+      "Strong wind shook the trees beside the classroom block.",
+      "Dark clouds rolled over the roof while rain tapped against the classroom windows.",
     ],
     correctAnswer: 3,
-    explanation: `This sentence uses clear details about clouds, rain, the roof, and windows to help readers picture the scene.`
+    explanation: `The correct option creates the strongest vivid image through specific details—dark clouds rolling over the roof and rain tapping against the classroom windows—rather than relying on sentence length.`
   }
 ]
 
