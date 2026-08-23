@@ -180,16 +180,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       if (resolvedStudents.length === 0) {
         const [{ data: resultNameRows }, { data: certificateNameRows }] = await Promise.all([
-          supabase
-            .from("student_test_results")
-            .select("student_name")
-            .eq("parent_id", authUser.id)
-            .not("student_name", "is", null),
-          supabase
-            .from("certificates")
-            .select("student_name")
-            .eq("parent_id", authUser.id)
-            .not("student_name", "is", null),
+          supabase.from("student_test_results").select("student_name").eq("parent_id", authUser.id).not("student_name", "is", null),
+          supabase.from("certificates").select("student_name").eq("parent_id", authUser.id).not("student_name", "is", null),
         ])
 
         const names = new Set<string>()
@@ -201,64 +193,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (names.size > 0) {
           const { data: insertedStudents, error: insertBackfillError } = await supabase
             .from("students")
-            .insert(
-              Array.from(names).map((name) => ({
-                parent_id: authUser.id,
-                full_name: name,
-                grade_level: 5,
-              })),
-            )
+            .insert(Array.from(names).map((name) => ({ parent_id: authUser.id, full_name: name, grade_level: 5 })))
             .select("id, full_name, grade_level, subscription_id, created_at")
 
           if (insertBackfillError) console.error("Could not backfill students from existing records:", insertBackfillError)
-          if (insertedStudents?.length) {
-            resolvedStudents = insertedStudents.map((row) => mapStudent(row as SupabaseStudentRow))
-          }
+          if (insertedStudents?.length) resolvedStudents = insertedStudents.map((row) => mapStudent(row as SupabaseStudentRow))
         }
       }
 
-      const signupChildName =
-        typeof authUser.user_metadata?.child_name === "string"
-          ? authUser.user_metadata.child_name.trim()
-          : ""
-
+      const signupChildName = typeof authUser.user_metadata?.child_name === "string" ? authUser.user_metadata.child_name.trim() : ""
       if (resolvedStudents.length === 0 && signupChildName) {
         const { data: insertedStudent, error: insertStudentError } = await supabase
           .from("students")
-          .insert({
-            parent_id: authUser.id,
-            full_name: signupChildName,
-            grade_level: 5,
-          })
+          .insert({ parent_id: authUser.id, full_name: signupChildName, grade_level: 5 })
           .select("id, full_name, grade_level, subscription_id, created_at")
           .single<SupabaseStudentRow>()
-
-        if (insertStudentError) {
-          console.error("Could not create signup student record:", insertStudentError)
-        }
-
-        if (insertedStudent) {
-          resolvedStudents = [mapStudent(insertedStudent)]
-        }
+        if (insertStudentError) console.error("Could not create signup student record:", insertStudentError)
+        if (insertedStudent) resolvedStudents = [mapStudent(insertedStudent)]
       }
 
-      const subscription = mapSubscription(
-        (subscriptionRows?.[0] as SupabaseSubscriptionRow | undefined) ?? null,
-      )
+      const subscription = mapSubscription((subscriptionRows?.[0] as SupabaseSubscriptionRow | undefined) ?? null)
       const latestVerifiedPayment = mapPayment((paymentRows?.[0] as SupabasePaymentRow | undefined) ?? null)
       const active = isSubscriptionActive(subscription) || isPaymentAccessActive(latestVerifiedPayment)
-
-      const effectivePlanCode = active
-        ? (subscription?.planCode ?? latestVerifiedPayment?.planCode ?? "free")
-        : "free"
+      const effectivePlanCode = active ? (subscription?.planCode ?? latestVerifiedPayment?.planCode ?? "free") : "free"
       const effectiveExpiry = active
-        ? (subscription?.expiresAt
-          ? new Date(subscription.expiresAt)
-          : latestVerifiedPayment?.verifiedAt
-            ? calculatePaymentExpiry(latestVerifiedPayment.planCode, latestVerifiedPayment.verifiedAt)
-            : latestVerifiedPayment?.submittedAt
-              ? calculatePaymentExpiry(latestVerifiedPayment.planCode, latestVerifiedPayment.submittedAt)
-              : undefined)
+        ? (subscription?.expiresAt ? new Date(subscription.expiresAt) : latestVerifiedPayment?.verifiedAt ? calculatePaymentExpiry(latestVerifiedPayment.planCode, latestVerifiedPayment.verifiedAt) : latestVerifiedPayment?.submittedAt ? calculatePaymentExpiry(latestVerifiedPayment.planCode, latestVerifiedPayment.submittedAt) : undefined)
         : undefined
 
       setStudents(resolvedStudents)
@@ -286,7 +245,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let mounted = true
-
     const initialize = async () => {
       try {
         const { data, error } = await supabase.auth.getSession()
@@ -295,164 +253,75 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         await loadUser(data.session)
       } catch (err) {
         console.error("Session initialization error:", err)
-        if (mounted) {
-          setUser(null)
-          setStudents([])
-          setActiveSubscription(null)
-          setIsLoading(false)
-        }
+        if (mounted) { setUser(null); setStudents([]); setActiveSubscription(null); setIsLoading(false) }
       }
     }
-
     void initialize()
-
-    const { data: listener } = supabase.auth.onAuthStateChange(
-      (_event: AuthChangeEvent, session) => {
-        if (!mounted) return
-        setIsLoading(true)
-        setTimeout(() => {
-          if (!mounted) return
-          void loadUser(session)
-        }, 0)
-      },
-    )
-
-    return () => {
-      mounted = false
-      listener.subscription.unsubscribe()
-    }
+    const { data: listener } = supabase.auth.onAuthStateChange((_event: AuthChangeEvent, session) => {
+      if (!mounted) return
+      setIsLoading(true)
+      setTimeout(() => { if (mounted) void loadUser(session) }, 0)
+    })
+    return () => { mounted = false; listener.subscription.unsubscribe() }
   }, [supabase])
 
   const login = async (email: string, password: string) => {
     try {
       const { error } = await supabase.auth.signInWithPassword({ email, password })
-      if (error) {
-        console.error("Login failed:", error)
-        return false
-      }
+      if (error) { console.error("Login failed:", error); return false }
       return true
-    } catch (err) {
-      console.error("Unexpected login error:", err)
-      return false
-    }
+    } catch (err) { console.error("Unexpected login error:", err); return false }
   }
 
   const register = async (data: RegisterData): Promise<RegisterResult> => {
-    const siteUrl =
-      process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || window.location.origin
-
+    const siteUrl = window.location.origin.replace(/\/$/, "")
     const { data: result, error } = await supabase.auth.signUp({
       email: data.email,
       password: data.password,
       options: {
         emailRedirectTo: `${siteUrl}/login`,
-        data: {
-          full_name: data.parentName,
-          phone: data.phone ?? null,
-          role: "parent",
-          child_name: data.childName.trim(),
-        },
+        data: { full_name: data.parentName, phone: data.phone ?? null, role: "parent", child_name: data.childName.trim() },
       },
     })
 
     if (error) {
       const rawError = error.message?.toLowerCase() || ""
-
-      if (rawError.includes("invalid email")) {
-        return { success: false, error: "Please enter a valid email address." }
-      }
-
-      if (rawError.includes("password")) {
-        return { success: false, error: "Please use a stronger password and try again." }
-      }
-
-      if (rawError.includes("user already registered")) {
-        return { success: true, needsEmailConfirmation: true }
-      }
-
-      if (rawError.includes("rate limit")) {
-        return {
-          success: false,
-          error: "We couldn’t send the next email step right now. Please wait a few minutes and try again.",
-        }
-      }
-
-      return {
-        success: false,
-        error: "We couldn’t complete this registration request right now. Please try again.",
-      }
+      if (rawError.includes("invalid email")) return { success: false, error: "Please enter a valid email address." }
+      if (rawError.includes("password")) return { success: false, error: "Please use a stronger password and try again." }
+      if (rawError.includes("user already registered")) return { success: true, needsEmailConfirmation: true }
+      if (rawError.includes("rate limit")) return { success: false, error: "We couldn’t send the next email step right now. Please wait a few minutes and try again." }
+      return { success: false, error: "We couldn’t complete this registration request right now. Please try again." }
     }
 
-    if (result.session) {
-      await loadUser(result.session)
-    }
-
-    return {
-      success: true,
-      needsEmailConfirmation: !result.session,
-    }
+    if (result.session) await loadUser(result.session)
+    return { success: true, needsEmailConfirmation: !result.session }
   }
 
-  const logout = async () => {
-    await supabase.auth.signOut()
-    setUser(null)
-    setStudents([])
-    setActiveSubscription(null)
-  }
-
+  const logout = async () => { await supabase.auth.signOut(); setUser(null); setStudents([]); setActiveSubscription(null) }
   const refreshUser = async () => {
     try {
       setIsLoading(true)
       const { data, error } = await supabase.auth.getSession()
       if (error) console.error("Could not refresh session:", error)
       await loadUser(data.session)
-    } catch (err) {
-      console.error("Refresh user error:", err)
-      setUser(null)
-      setStudents([])
-      setActiveSubscription(null)
-      setIsLoading(false)
-    }
+    } catch (err) { console.error("Refresh user error:", err); setUser(null); setStudents([]); setActiveSubscription(null); setIsLoading(false) }
   }
 
   const calculatePaymentExpiry = (planCode: PlanCode, startAt: string) => {
     const date = new Date(startAt)
     if (Number.isNaN(date.getTime())) return undefined
-
-    if (planCode === "standard_weekly") {
-      date.setDate(date.getDate() + 7)
-      return date
-    }
-
-    if (planCode === "standard_monthly" || planCode === "premium_family_monthly") {
-      date.setMonth(date.getMonth() + 1)
-      return date
-    }
-
+    if (planCode === "standard_weekly") { date.setDate(date.getDate() + 7); return date }
+    if (planCode === "standard_monthly" || planCode === "premium_family_monthly") { date.setMonth(date.getMonth() + 1); return date }
     return undefined
   }
 
   const addStudent = async (childName: string) => {
     if (!user) return { success: false, error: "Please sign in first." }
     if (!childName.trim()) return { success: false, error: "Enter a student name." }
-
     const allowed = activeSubscription?.maxStudents ?? 1
-    if (students.length >= allowed) {
-      return {
-        success: false,
-        error: `This plan allows up to ${allowed} student${allowed === 1 ? "" : "s"}.`,
-      }
-    }
-
-    const { error } = await supabase.from("students").insert({
-      parent_id: user.id,
-      subscription_id: activeSubscription?.id ?? null,
-      full_name: childName.trim(),
-      grade_level: 5,
-    })
-
+    if (students.length >= allowed) return { success: false, error: `This plan allows up to ${allowed} student${allowed === 1 ? "" : "s"}.` }
+    const { error } = await supabase.from("students").insert({ parent_id: user.id, subscription_id: activeSubscription?.id ?? null, full_name: childName.trim(), grade_level: 5 })
     if (error) return { success: false, error: error.message }
-
     await refreshUser()
     return { success: true }
   }
@@ -460,32 +329,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const isPremium = user?.subscriptionTier !== "free"
   const isAdmin = user?.role === "admin"
 
-  return (
-    <AuthContext.Provider
-      value={{
-        user,
-        students,
-        activeSubscription,
-        isLoading,
-        isAuthenticated: !!user,
-        isPremium,
-        isAdmin,
-        login,
-        register,
-        logout,
-        refreshUser,
-        addStudent,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  )
+  return <AuthContext.Provider value={{ user, students, activeSubscription, isLoading, isAuthenticated: !!user, isPremium, isAdmin, login, register, logout, refreshUser, addStudent }}>{children}</AuthContext.Provider>
 }
 
 export function useAuth() {
   const context = useContext(AuthContext)
-  if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider")
-  }
+  if (context === undefined) throw new Error("useAuth must be used within an AuthProvider")
   return context
 }
