@@ -562,7 +562,7 @@ The customers waited patiently at the table.`,
       "and",
       "but",
       "because",
-      "although",
+      "so",
     ],
     correctAnswer: 1,
     explanation: `But correctly joins two related ideas with a contrast.`

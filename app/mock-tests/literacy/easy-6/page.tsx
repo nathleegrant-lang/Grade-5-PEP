@@ -662,9 +662,9 @@ The volunteers "promised to keep working together." What does "promised" mean in
     question: `Which sentence has the best formal tone for a school report?`,
     options: [
       "The Environmental Club planted young trees to improve the school grounds.",
-      "The club planted trees near the fence to make the grounds more attractive.",
-      "Students from the club planted some trees beside the fence.",
-      "The Environmental Club worked near the fence and planted trees there.",
+      "Our club planted some really nice trees beside the fence.",
+      "The students did a good job putting trees around the school.",
+      "We planted trees by the fence and the place looked much better.",
     ],
     correctAnswer: 0,
     explanation: `A school report needs clear, respectful language; this sentence is formal and specific.`,
