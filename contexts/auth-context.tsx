@@ -46,7 +46,6 @@ interface SupabaseStudentRow {
   created_at: string
 }
 
-
 interface SupabasePaymentRow {
   id: string
   parent_id: string
@@ -76,7 +75,6 @@ interface SupabaseSubscriptionRow {
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
-const PENDING_CHILD_PREFIX = "grade5_pending_child_"
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const supabase = useMemo(() => getSupabaseBrowserClient(), [])
@@ -108,7 +106,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }
 
-
   const mapPayment = (row: SupabasePaymentRow | null) => {
     if (!row) return null
     return {
@@ -126,20 +123,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       verifiedAt: row.verified_at,
       rejectionReason: row.rejection_reason,
     }
-  }
-  const persistPendingChild = (email: string, childName: string) => {
-    if (typeof window === "undefined") return
-    localStorage.setItem(`${PENDING_CHILD_PREFIX}${email.toLowerCase()}`, childName)
-  }
-
-  const readPendingChild = (email: string) => {
-    if (typeof window === "undefined") return null
-    return localStorage.getItem(`${PENDING_CHILD_PREFIX}${email.toLowerCase()}`)
-  }
-
-  const clearPendingChild = (email: string) => {
-    if (typeof window === "undefined") return
-    localStorage.removeItem(`${PENDING_CHILD_PREFIX}${email.toLowerCase()}`)
   }
 
   const loadUser = async (session: Session | null) => {
@@ -188,23 +171,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           .limit(1),
       ])
 
-      if (profileError) {
-        console.error("Could not load profile:", profileError)
-      }
-      if (subscriptionError) {
-        console.error("Could not load subscriptions:", subscriptionError)
-      }
-      if (studentError) {
-        console.error("Could not load students:", studentError)
-      }
-      if (paymentError) {
-        console.error("Could not load payments:", paymentError)
-      }
+      if (profileError) console.error("Could not load profile:", profileError)
+      if (subscriptionError) console.error("Could not load subscriptions:", subscriptionError)
+      if (studentError) console.error("Could not load students:", studentError)
+      if (paymentError) console.error("Could not load payments:", paymentError)
 
       let resolvedStudents = (studentRows ?? []).map((row) => mapStudent(row as SupabaseStudentRow))
-
-      const pendingChild = authUser.email ? readPendingChild(authUser.email) : null
-
 
       if (resolvedStudents.length === 0) {
         const [{ data: resultNameRows }, { data: certificateNameRows }] = await Promise.all([
@@ -238,34 +210,35 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             )
             .select("id, full_name, grade_level, subscription_id, created_at")
 
-          if (insertBackfillError) {
-            console.error("Could not backfill students from existing records:", insertBackfillError)
-          }
-
+          if (insertBackfillError) console.error("Could not backfill students from existing records:", insertBackfillError)
           if (insertedStudents?.length) {
             resolvedStudents = insertedStudents.map((row) => mapStudent(row as SupabaseStudentRow))
           }
         }
       }
 
-      if (resolvedStudents.length === 0 && pendingChild) {
+      const signupChildName =
+        typeof authUser.user_metadata?.child_name === "string"
+          ? authUser.user_metadata.child_name.trim()
+          : ""
+
+      if (resolvedStudents.length === 0 && signupChildName) {
         const { data: insertedStudent, error: insertStudentError } = await supabase
           .from("students")
           .insert({
             parent_id: authUser.id,
-            full_name: pendingChild,
+            full_name: signupChildName,
             grade_level: 5,
           })
           .select("id, full_name, grade_level, subscription_id, created_at")
           .single<SupabaseStudentRow>()
 
         if (insertStudentError) {
-          console.error("Could not create pending child record:", insertStudentError)
+          console.error("Could not create signup student record:", insertStudentError)
         }
 
         if (insertedStudent) {
           resolvedStudents = [mapStudent(insertedStudent)]
-          if (authUser.email) clearPendingChild(authUser.email)
         }
       }
 
@@ -317,9 +290,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const initialize = async () => {
       try {
         const { data, error } = await supabase.auth.getSession()
-        if (error) {
-          console.error("Could not get session:", error)
-        }
+        if (error) console.error("Could not get session:", error)
         if (!mounted) return
         await loadUser(data.session)
       } catch (err) {
@@ -339,7 +310,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       (_event: AuthChangeEvent, session) => {
         if (!mounted) return
         setIsLoading(true)
-
         setTimeout(() => {
           if (!mounted) return
           void loadUser(session)
@@ -356,12 +326,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = async (email: string, password: string) => {
     try {
       const { error } = await supabase.auth.signInWithPassword({ email, password })
-
       if (error) {
         console.error("Login failed:", error)
         return false
       }
-
       return true
     } catch (err) {
       console.error("Unexpected login error:", err)
@@ -370,8 +338,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   const register = async (data: RegisterData): Promise<RegisterResult> => {
-    persistPendingChild(data.email, data.childName)
-
     const siteUrl =
       process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || window.location.origin
 
@@ -384,6 +350,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           full_name: data.parentName,
           phone: data.phone ?? null,
           role: "parent",
+          child_name: data.childName.trim(),
         },
       },
     })
@@ -391,38 +358,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (error) {
       const rawError = error.message?.toLowerCase() || ""
 
-      if (rawError.includes("email rate limit exceeded")) {
-        return {
-          success: false,
-          error:
-            "This email may already be registered, or too many confirmation requests were made in a short time. Please sign in if you already have an account, or wait a few minutes and try again.",
-        }
-      }
-
-      if (rawError.includes("user already registered")) {
-        return {
-          success: false,
-          error: "An account with this email already exists. Please sign in instead.",
-        }
-      }
-
       if (rawError.includes("invalid email")) {
-        return {
-          success: false,
-          error: "Please enter a valid email address.",
-        }
+        return { success: false, error: "Please enter a valid email address." }
       }
 
       if (rawError.includes("password")) {
+        return { success: false, error: "Please use a stronger password and try again." }
+      }
+
+      if (rawError.includes("user already registered")) {
+        return { success: true, needsEmailConfirmation: true }
+      }
+
+      if (rawError.includes("rate limit")) {
         return {
           success: false,
-          error: "Please use a stronger password and try again.",
+          error: "We couldn’t send the next email step right now. Please wait a few minutes and try again.",
         }
       }
 
       return {
         success: false,
-        error: "We couldn’t create your account right now. Please try again.",
+        error: "We couldn’t complete this registration request right now. Please try again.",
       }
     }
 
@@ -447,9 +404,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       setIsLoading(true)
       const { data, error } = await supabase.auth.getSession()
-      if (error) {
-        console.error("Could not refresh session:", error)
-      }
+      if (error) console.error("Could not refresh session:", error)
       await loadUser(data.session)
     } catch (err) {
       console.error("Refresh user error:", err)
@@ -459,7 +414,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setIsLoading(false)
     }
   }
-
 
   const calculatePaymentExpiry = (planCode: PlanCode, startAt: string) => {
     const date = new Date(startAt)
@@ -497,9 +451,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       grade_level: 5,
     })
 
-    if (error) {
-      return { success: false, error: error.message }
-    }
+    if (error) return { success: false, error: error.message }
 
     await refreshUser()
     return { success: true }
