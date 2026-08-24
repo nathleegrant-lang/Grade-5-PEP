@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { saveStudentTestResult } from "@/lib/student-test-results";
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -86,39 +87,12 @@ const g5LaModerate7Questions: Question[] = [
   {id:33,type:"grammar",skill:"Apostrophes",question:"Which sentence uses an apostrophe correctly?",options:['The community’s plan included monthly beach clean-ups.', 'The communitys plan included monthly beach clean-ups.', 'The communities plan included monthly beach clean-up’s.', 'The community’s plan included monthly beach clean-up’s.'],correctAnswer:0,explanation:"Community’s shows possession; clean-ups is a plural."},
   {id:34,type:"grammar",skill:"Sentence Combining",question:"Which choice best combines the sentences?\nThe water became rough. The boat moved away from the reef.",options:['When the water became rough, the boat moved away from the reef.', 'The water became rough the boat moved away from the reef.', 'Moved away from the reef when rough.', 'The boat, the water became, rough moved.'],correctAnswer:0,explanation:"When combines the ideas clearly."},
   {id:35,type:"grammar",skill:"Complete Sentences",question:"Which choice is a complete sentence?",options:['The students designed posters about protecting coral reefs.', 'Because the students designed posters.', 'Posters about protecting coral reefs.', 'Designing posters near the classroom door.'],correctAnswer:0,explanation:"It has a subject, verb, and complete thought."},
-  {id:36,type:"writing",skill:"Persuasive Opening",question:"Which sentence best begins a persuasive paragraph about protecting beaches?",options:['Our community should reduce beach litter because clean shores protect animals and families.', 'Beaches have sand, and sand is usually outside.', 'I once saw a blue bucket near the road.', 'There are many places in Jamaica.'],correctAnswer:0,explanation:"It states a clear opinion and reason."},
-  {id:37,type:"writing",skill:"Campaign Slogan",question:"Which slogan best fits an environmental campaign about coral reefs?",options:['Protect the Reef: Look, Learn, and Leave Coral Untouched', 'Touch Every Coral to See If It Is Real', 'Anchors Belong on Living Reefs', 'Plastic Bottles Make Beaches Better'],correctAnswer:0,explanation:"The slogan encourages safe, reef-friendly behaviour."},
-  {id:38,type:"writing",skill:"Supporting Details",question:"Which detail best supports a paragraph about mangroves?",options:['Young fish shelter among mangrove roots before moving into deeper water.', 'The poster was coloured with a green marker.', 'Some pupils wore blue shirts on Monday.', 'The classroom clock stopped at noon.'],correctAnswer:0,explanation:"It explains an important role of mangroves from the passage."},
-  {id:39,type:"writing",skill:"Organisation",question:"Which order best organises a beach protection article?",options:['Describe the problem, explain its effects on marine life, then suggest actions residents can take.', 'List unrelated jokes, describe lunch, then mention the beach once.', 'Start with the ending, remove details, and repeat the title.', 'Give opinions only and leave out possible solutions.'],correctAnswer:0,explanation:"This order moves clearly from problem to effects to solutions."},
-  {id:40,type:"writing",skill:"Revision",question:"Which revision makes this environmental sentence stronger?\nPeople should help the sea.",options:['Residents can protect the sea by using reusable bottles, tying garbage bags, and reporting oil spills.', 'People should help because helping is good.', 'The sea is there and people are there too.', 'Everyone should do things at some time.'],correctAnswer:0,explanation:"The revision gives specific actions from the passage."},
+  {id:36,type:"writing",skill:"Persuasive Opening",question:"Which sentence best begins a persuasive paragraph about protecting beaches?",options:["Our community should reduce beach litter because clean shores protect animals and families.","Beach litter can harm animals along Jamaica's coastline.","Many residents and visitors enjoy spending time on clean beaches.","Community groups sometimes organise beach clean-ups during the year."],correctAnswer:0,explanation:"It states a clear opinion and reason."},
+  {id:37,type:"writing",skill:"Campaign Slogan",question:"Which slogan best fits an environmental campaign about coral reefs?",options:["Protect the Reef: Look, Learn, and Leave Coral Untouched","Coral Reefs Are Important to Jamaica","Care About Coral Reefs and Marine Life","Healthy Reefs Matter for Jamaica's Future"],correctAnswer:0,explanation:"The slogan encourages safe, reef-friendly behaviour."},
+  {id:38,type:"writing",skill:"Supporting Details",question:"Which detail best supports a paragraph about mangroves?",options:["Young fish shelter among mangrove roots before moving into deeper water.","Mangroves grow along several coastal areas in Jamaica.","Students observed mangrove roots during their field visit.","The class discussed ways communities can protect coastal habitats."],correctAnswer:0,explanation:"It explains an important role of mangroves from the passage."},
+  {id:39,type:"writing",skill:"Organisation",question:"Which order best organises a beach protection article?",options:["Describe the problem, explain its effects on marine life, then suggest actions residents can take.","Suggest actions residents can take, describe the problem, then explain its effects on marine life.","Explain the effects on marine life, describe the beach problem, then give actions residents can take.","Describe the problem, suggest actions immediately, then explain why marine life is affected."],correctAnswer:0,explanation:"This order moves clearly from problem to effects to solutions."},
+  {id:40,type:"writing",skill:"Revision",question:"Which revision makes this environmental sentence stronger?\nPeople should help the sea.",options:["Residents can protect the sea by using reusable bottles, tying garbage bags, and reporting oil spills.","Residents can protect the sea by reducing litter and making environmentally responsible choices.","People should help protect coastal areas because marine environments are important.","Communities can take several useful actions to keep beaches and the sea cleaner."],correctAnswer:0,explanation:"The revision gives specific actions from the passage."},
 ];
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }));
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ];
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    );
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    };
-  });
-};
 
 const SECTION_CONFIG = [
   {
@@ -267,9 +241,11 @@ export default function G5LaModerate7MockTest() {
   };
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions);
-    setRandomizedQuestions(shuffledQuestions);
-    setAnswers(new Array(shuffledQuestions.length).fill(null));
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaModerate7Questions)
+      : preparePreview(g5LaModerate7Questions, FREE_QUESTION_LIMIT);
+    setRandomizedQuestions(preparedQuestions);
+    setAnswers(new Array(preparedQuestions.length).fill(null));
     setCurrentQuestion(0);
     setTimeLeft(60 * 60);
     setShowResults(false);
