@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { saveStudentTestResult } from "@/lib/student-test-results";
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -90,39 +91,12 @@ const g5LaModerate9Questions: Question[] = [
   {id:33,type:"grammar",skill:"Apostrophes",question:"Which sentence uses an apostrophe correctly?",options:["Kayla’s measurements helped the team balance the bridge.","Kaylas measurements helped the team balance the bridge.","Kayla’s measurements helped the teams’ balance the bridge.","Kaylas’ measurement’s helped the team balance the bridge."],correctAnswer:0,explanation:"Kayla’s shows possession by one person."},
   {id:34,type:"grammar",skill:"Sentence Combining",question:"Which choice best combines the sentences?\nThe sensor saw shiny tape. The robot stopped at the turn.",options:["When the sensor saw shiny tape, the robot stopped at the turn.","The sensor saw shiny tape the robot stopped at the turn.","Stopped at the turn because shiny.","The robot, the sensor saw, tape stopped."],correctAnswer:0,explanation:"When clearly combines the cause and event."},
   {id:35,type:"grammar",skill:"Fragments",question:"Which choice is a complete sentence, not a fragment?",options:["The team explained its changes during the presentation.","Because the team explained its changes.","During the presentation about changes.","Explaining the robot's sensor problem."],correctAnswer:0,explanation:"It includes a subject, verb, and complete thought."},
-  {id:36,type:"writing",skill:"Report Topic Sentence",question:"Which sentence best begins a report about a STEM challenge?",options:["Our team improved a bridge design by testing it, studying weak points, and making balanced changes.","There were sticks, and sticks are thin.","I like competitions because they happen sometimes.","The room had desks and people."],correctAnswer:0,explanation:"It clearly previews the engineering process used by the team."},
-  {id:37,type:"writing",skill:"Supporting Evidence",question:"Which detail best supports a paragraph about problem solving in robotics?",options:["The team discovered that shiny tape confused the sensor, so Omar changed the code.","The robot had a short name that was easy to say.","Several students groaned after the first round.","The trophy was taller than the paper shelter."],correctAnswer:0,explanation:"This detail connects a specific problem with a specific solution."},
-  {id:38,type:"writing",skill:"Organisation",question:"Which order best organises an engineering report?",options:["Describe the challenge, explain each test result, then discuss improvements and final performance.","List team names, describe lunch, then mention the bridge at the end.","Start with the award, skip the tests, and repeat the title.","Give only opinions without explaining evidence."],correctAnswer:0,explanation:"A strong report follows the design process from challenge to tests to improvements."},
-  {id:39,type:"writing",skill:"Revision",question:"Which revision makes this sentence stronger?\nThe robot had a problem.",options:["Rio stopped at the narrow turn because its sensor mistook shiny tape for the black line.","The robot had a problem and it was a problem.","There was a robot and something happened.","The problem was not good for the robot."],correctAnswer:0,explanation:"The revision names the robot, the location, the cause, and the sensor issue."},
-  {id:40,type:"writing",skill:"Presentation Closing",question:"Which closing sentence best fits a team presentation about invention?",options:["Our results show that careful testing and teamwork can turn a weak design into a stronger solution.","That is all, and bridges can be brown or grey.","We finished because the time ended and everyone went home.","Robots are nice, and competitions have chairs."],correctAnswer:0,explanation:"It reflects on testing, teamwork, and improvement, which match both STEM passages."},
+  {id:36,type:"writing",skill:"Report Topic Sentence",question:"Which sentence best begins a report about a STEM challenge?",options:["Our team improved a bridge design by testing it, studying weak points, and making balanced changes.","Our team built a bridge from craft materials and tested how much weight it could hold.","The first bridge design twisted when the team added more weight.","Triangles were added to some parts of the bridge during later tests."],correctAnswer:0,explanation:"It clearly previews the engineering process used by the team."},
+  {id:37,type:"writing",skill:"Supporting Evidence",question:"Which detail best supports a paragraph about problem solving in robotics?",options:["The team discovered that shiny tape confused the sensor, so Omar changed the code.","The robot stopped at a narrow turn during one test.","The team observed the robot carefully during each practice run.","Omar adjusted part of the robot's program before another trial."],correctAnswer:0,explanation:"This detail connects a specific problem with a specific solution."},
+  {id:38,type:"writing",skill:"Organisation",question:"Which order best organises an engineering report?",options:["Describe the challenge, explain each test result, then discuss improvements and final performance.","Describe the final design, explain the challenge, then list earlier test results and improvements.","Explain the first test, describe the final result, then introduce the original challenge and design changes.","Describe the challenge, discuss the final performance, then explain the tests and changes that produced it."],correctAnswer:0,explanation:"A strong report follows the design process from challenge to tests to improvements."},
+  {id:39,type:"writing",skill:"Revision",question:"Which revision makes this sentence stronger?\nThe robot had a problem.",options:["Rio stopped at the narrow turn because its sensor mistook shiny tape for the black line.","Rio had trouble at the narrow turn because something affected its sensor.","The robot stopped at one part of the course when the sensor read the line incorrectly.","Rio experienced a sensor problem while trying to complete the narrow turn."],correctAnswer:0,explanation:"The revision names the robot, the location, the cause, and the sensor issue."},
+  {id:40,type:"writing",skill:"Presentation Closing",question:"Which closing sentence best fits a team presentation about invention?",options:["Our results show that careful testing and teamwork can turn a weak design into a stronger solution.","Our team completed several tests and made changes before the final presentation.","The final design performed better than the first design during testing.","Testing helped our group discover weaknesses and make useful improvements."],correctAnswer:0,explanation:"It reflects on testing, teamwork, and improvement, which match both STEM passages."},
 ];
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }));
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ];
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    );
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    };
-  });
-};
 
 const SECTION_CONFIG = [
   {
@@ -271,9 +245,11 @@ export default function G5LaModerate9MockTest() {
   };
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions);
-    setRandomizedQuestions(shuffledQuestions);
-    setAnswers(new Array(shuffledQuestions.length).fill(null));
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaModerate9Questions)
+      : preparePreview(g5LaModerate9Questions, FREE_QUESTION_LIMIT);
+    setRandomizedQuestions(preparedQuestions);
+    setAnswers(new Array(preparedQuestions.length).fill(null));
     setCurrentQuestion(0);
     setTimeLeft(60 * 60);
     setShowResults(false);
