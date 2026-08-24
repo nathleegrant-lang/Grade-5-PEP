@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { saveStudentTestResult } from "@/lib/student-test-results";
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -281,9 +282,9 @@ const g5LaModerate5Questions: Question[] = [
     type: "grammar",
     skill: "Subject-Verb Agreement",
     question: "Which sentence is written correctly?",
-    options: ["The emergency team checks the shelter list each month.", "The emergency team check the shelter list each month.", "The emergency team checking the shelter list each month.", "The emergency team were checks the shelter list each month."],
+    options: ["The emergency coordinator checks the shelter list each month.", "The emergency coordinator check the shelter list each month.", "The emergency coordinator checking the shelter list each month.", "The emergency coordinator were checks the shelter list each month."],
     correctAnswer: 0,
-    explanation: "The singular subject “team” takes the verb “checks.”",
+    explanation: "The singular subject “coordinator” takes the singular verb “checks.”",
   },
   {
     id: 27,
@@ -298,10 +299,10 @@ const g5LaModerate5Questions: Question[] = [
     id: 28,
     type: "grammar",
     skill: "Pronouns",
-    question: "Choose the sentence with the correct pronoun.",
-    options: ["Maya and I packed the supplies carefully.", "Me and Maya packed the supplies carefully.", "Maya and me packed the supplies carefully.", "I and Maya packed the supplies carefully."],
+    question: "Maya and ___ packed the supplies carefully.",
+    options: ["I", "me", "my", "mine"],
     correctAnswer: 0,
-    explanation: "“Maya and I” is the correct subject of the sentence.",
+    explanation: "The pronoun is part of the subject, so the subject pronoun “I” is correct.",
   },
   {
     id: 29,
@@ -380,7 +381,7 @@ const g5LaModerate5Questions: Question[] = [
     type: "writing",
     skill: "Paragraph Improvement",
     question: "Which sentence best improves a paragraph about innovation?",
-    options: ["Inventors often test, record results, and improve a design after an experiment fails.", "Innovation is good and nice for everybody always.", "People do things, and some things are ideas.", "A display table can be near a window."],
+    options: ["Inventors often test, record results, and improve a design after an experiment fails.", "Inventors often begin with ideas for things that people may find useful.", "Many inventions are displayed after the design has been completed.", "A useful invention can help solve a problem in a community."],
     correctAnswer: 0,
     explanation: "This sentence gives precise actions that match the passage’s ideas about testing and improving.",
   },
@@ -389,7 +390,7 @@ const g5LaModerate5Questions: Question[] = [
     type: "writing",
     skill: "Organisation",
     question: "Which order best organises a career reflection?",
-    options: ["Name an interest, connect it to a career, then explain which school skills can help.", "List every visitor, describe lunch, then choose a random uniform.", "Explain the ending first, skip the interest, then repeat the same sentence.", "Begin with a joke, add unrelated sports scores, then stop suddenly."],
+    options: ["Name an interest, connect it to a career, then explain which school skills can help.", "Name a career, list useful school skills, then explain the personal interest.", "Explain useful school skills, name an interest, then connect it to a career.", "Name an interest, explain school skills first, then identify a possible career."],
     correctAnswer: 0,
     explanation: "A clear reflection moves from personal interest to a possible career and helpful skills.",
   },
@@ -407,38 +408,11 @@ const g5LaModerate5Questions: Question[] = [
     type: "writing",
     skill: "Revision",
     question: "Which revision makes this informational sentence stronger?\nPeople make inventions and they are useful.",
-    options: ["Innovators design and improve inventions to solve problems such as watering crops during dry months.", "People make things and those things are around.", "Inventions are useful because useful things are inventions.", "There are many people and many inventions everywhere."],
+    options: ["Innovators design and improve inventions to solve problems such as watering crops during dry months.", "Inventors make useful things to solve different kinds of problems.", "People create inventions because useful ideas can help communities.", "Inventions are designed by people who want to improve how things work."],
     correctAnswer: 0,
     explanation: "The revision adds specific information about innovation and the crop-watering problem from the passage.",
   }
 ];
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }));
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ];
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    );
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    };
-  });
-};
 
 const SECTION_CONFIG = [
   {
@@ -587,9 +561,11 @@ export default function G5LaModerate5MockTest() {
   };
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions);
-    setRandomizedQuestions(shuffledQuestions);
-    setAnswers(new Array(shuffledQuestions.length).fill(null));
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaModerate5Questions)
+      : preparePreview(g5LaModerate5Questions, FREE_QUESTION_LIMIT);
+    setRandomizedQuestions(preparedQuestions);
+    setAnswers(new Array(preparedQuestions.length).fill(null));
     setCurrentQuestion(0);
     setTimeLeft(60 * 60);
     setShowResults(false);
