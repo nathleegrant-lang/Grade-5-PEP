@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { saveStudentTestResult } from "@/lib/student-test-results";
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -305,7 +306,7 @@ What can the reader conclude from the information about acousticians?`,
   {
     id: 13,
     type: "reading",
-    skill: "Prediction",
+    skill: "Extending Understanding",
     question: `Read the passage then answer the question.
 
 ${P2}
@@ -644,9 +645,9 @@ Both passages include the idea that`,
     skill: "Strong Introduction",
     question: `Which of the following would be the strongest introduction for a paragraph about the importance of school gardens?`,
     options: [
-      "School gardens are nice to look at.",
-      "I like gardens because they have flowers.",
-      "This paragraph is about school gardens and why they matter.",
+      "School gardens give pupils opportunities to learn important lessons outside the classroom.",
+      "Growing plants at school can teach pupils about care, patience, and the natural world.",
+      "A well-planned school garden can support learning while also improving the school environment.",
       "School gardens do more than grow plants—they grow young minds, teaching students patience, responsibility, and an appreciation for nature."
     ],
     correctAnswer: 3,
@@ -659,9 +660,9 @@ Both passages include the idea that`,
     question: `Which sentence provides the best supporting detail for the topic sentence "Gardening teaches students responsibility"?`,
     options: [
       "When students must water plants regularly and pull weeds on schedule, they learn that living things depend on consistent care.",
-      "Gardening is a fun activity that many students enjoy.",
-      "Schools should have more gardens because they look attractive.",
-      "Some students do not like getting their hands dirty."
+      "Students can take turns recording plant growth in a garden notebook each week.",
+      "Garden groups may decide together which seedlings should be moved into larger beds.",
+      "Pupils often use simple tools to loosen soil and prepare planting spaces."
     ],
     correctAnswer: 0,
     explanation: `A good supporting detail should directly prove or explain the topic sentence. Option A gives a specific example of how gardening teaches responsibility—by requiring regular, consistent care of living things. The other options do not support the topic sentence.`
@@ -686,7 +687,7 @@ Both passages include the idea that`,
     skill: "Relevance",
     question: `Read the paragraph below. Which sentence should be removed because it does not belong?
 
-(1) School gardens provide students with hands-on learning experiences. (2) Students can observe how seeds sprout and grow into mature plants. (3) Mathematics lessons can also take place in the classroom using textbooks. (4) In addition, students learn about nutrition by growing their own vegetables.`,
+(1) School gardens provide students with hands-on learning experiences. (2) Students can observe how seeds sprout and grow into mature plants. (3) The school also uses part of the garden area for an outdoor reading circle on Friday afternoons. (4) In addition, students learn about nutrition by growing their own vegetables.`,
     options: [
       "Sentence 1",
       "Sentence 3",
@@ -702,42 +703,15 @@ Both passages include the idea that`,
     skill: "Strong Conclusion",
     question: `Which of the following would be the most effective concluding sentence for an essay about the benefits of reading?`,
     options: [
-      "Reading is something people do.",
-      "Those are some good things about reading.",
-      "In conclusion, I have told you about reading.",
+      "Reading can introduce people to unfamiliar ideas while also strengthening knowledge they already have.",
+      "Books and articles allow readers to learn about places, people, and subjects they may never experience directly.",
+      "Regular reading can help people continue learning and thinking about new ideas throughout their lives.",
       "Whether exploring distant lands through a novel or discovering new facts in an article, reading opens doors to a lifetime of learning and imagination."
     ],
     correctAnswer: 3,
     explanation: `A strong conclusion restates the main idea in a fresh way and leaves the reader with a memorable thought. Option D does this by using vivid imagery and connecting back to the essay's theme. The other options are weak, vague, or simply announce that the essay is ending.`
   }
 ];
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }));
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ];
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    );
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    };
-  });
-};
 
 const SECTION_CONFIG = [
   {
@@ -886,9 +860,11 @@ export default function G5LaDiff7MockTest() {
   };
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions);
-    setRandomizedQuestions(shuffledQuestions);
-    setAnswers(new Array(shuffledQuestions.length).fill(null));
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaDiff7Questions)
+      : preparePreview(g5LaDiff7Questions, FREE_QUESTION_LIMIT);
+    setRandomizedQuestions(preparedQuestions);
+    setAnswers(new Array(preparedQuestions.length).fill(null));
     setCurrentQuestion(0);
     setTimeLeft(60 * 60);
     setShowResults(false);
