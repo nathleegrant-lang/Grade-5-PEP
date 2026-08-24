@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { saveStudentTestResult } from "@/lib/student-test-results";
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -79,7 +80,7 @@ const g5LaModerate10Questions: Question[] = [
   {id:22,type:"vocabulary",skill:"Vocabulary in Context",question:"In the culture passage, a “festival” is—",options:["a special event with activities that celebrate something","a private interview that no one may attend","a single object locked inside a library cupboard","a problem caused by rainy weather only"],correctAnswer:0,explanation:"Heritage Day includes booths, music, food, displays, and a ceremony, making it a festival."},
   {id:23,type:"vocabulary",skill:"Vocabulary in Context",question:"In the tourism passage, an “artisan” is—",options:["a skilled person who makes things by hand","a tourist who buys every souvenir in a shop","a driver who takes pupils back to school","a person who repairs only old verandas"],correctAnswer:0,explanation:"The artisan shows handmade baskets and carved key rings."},
   {id:24,type:"vocabulary",skill:"Vocabulary in Context",question:"In the tourism passage, “economy” means—",options:["the system of money, jobs, buying, and selling in a place","the number of photographs visitors take at a fountain","the exact route from Seaview Primary to Devon House","the colour chosen for shutters on a great house"],correctAnswer:0,explanation:"Visitor spending on tickets, meals, souvenirs, and transport supports money and jobs in Jamaica."},
-  {id:25,type:"vocabulary",skill:"Vocabulary in Context",question:"In the culture passage, to “restore” a damaged old photograph would mean to—",options:["repair it so it is closer to its original condition","hide it because it shows people from the past","sell it before anyone can study it","rename it without looking at its details"],correctAnswer:0,explanation:"Restore means repair or bring back; this fits cultural preservation work with old photographs."},
+  {id:25,type:"vocabulary",skill:"Word Meaning",question:"To restore a damaged old photograph would mean to—",options:["repair it so it is closer to its original condition","hide it because it shows people from the past","sell it before anyone can study it","rename it without looking at its details"],correctAnswer:0,explanation:"Restore means repair or bring back; this fits cultural preservation work with old photographs."},
   {id:26,type:"grammar",skill:"Subject-Verb Agreement",question:"Which sentence is written correctly?",options:["The guide explains the landmark's history to the visitors.","The guide explain the landmark's history to the visitors.","The guide explaining the landmark's history to the visitors.","The guide were explain the landmark's history to the visitors."],correctAnswer:0,explanation:"The singular subject guide needs the verb explains."},
   {id:27,type:"grammar",skill:"Verb Tense",question:"Which sentence uses past tense correctly?",options:["Yesterday, the students interviewed the elders for Heritage Day.","Yesterday, the students interview the elders for Heritage Day.","Yesterday, the students will interview the elders for Heritage Day.","Yesterday, the students interviewing the elders for Heritage Day."],correctAnswer:0,explanation:"Interviewed correctly shows an action completed yesterday."},
   {id:28,type:"grammar",skill:"Pronouns",question:"Choose the sentence with the correct pronoun.",options:["Mrs. Reid gave Asha and me display cards.","Mrs. Reid gave Asha and I display cards.","Mrs. Reid gave she and me display cards.","Mrs. Reid gave I and Asha display cards."],correctAnswer:0,explanation:"Me is the correct object pronoun after gave."},
@@ -90,39 +91,12 @@ const g5LaModerate10Questions: Question[] = [
   {id:33,type:"grammar",skill:"Apostrophes",question:"Which sentence uses an apostrophe correctly?",options:["Jamaica's landmarks attract many visitors each year.","Jamaicas landmarks attract many visitors each year.","Jamaicas' landmark's attract many visitors each year.","Jamaica's landmark's attract many visitor's each year."],correctAnswer:0,explanation:"Jamaica's correctly shows that the landmarks belong to or are connected with Jamaica."},
   {id:34,type:"grammar",skill:"Sentence Combining",question:"Which choice best combines the sentences?\nThe festival celebrates culture. It teaches children about heritage.",options:["The festival celebrates culture and teaches children about heritage.","The festival celebrates culture it teaches children about heritage.","Teaching children, the festival culture about heritage.","Because the festival celebrates culture and."],correctAnswer:0,explanation:"The conjunction and combines two related ideas into a complete sentence."},
   {id:35,type:"grammar",skill:"Fragments and Complete Sentences",question:"Which choice is a complete sentence, not a fragment?",options:["The students created display cards for the festival.","Because the students created display cards.","Under the veranda beside the craft tables.","Preserving songs, stories, and foods."],correctAnswer:0,explanation:"It has a subject, a verb, and a complete thought."},
-  {id:36,type:"writing",skill:"Tourism Brochure Writing",question:"Which sentence would be the best opening for a tourism brochure about Devon House?",options:["Visit Devon House to explore Jamaican history, beautiful gardens, local craft, and warm hospitality.","Devon House is a place and people sometimes go there.","There are many buildings in Kingston, and some have windows.","Tourists should read every sentence because brochures have words."],correctAnswer:0,explanation:"A brochure opening should attract visitors and name specific appealing features."},
-  {id:37,type:"writing",skill:"Festival Announcement",question:"Which detail should be included in an announcement for Heritage Day?",options:["The date, location, main activities, and why families should attend","Only the colour of the librarian's shoes","A list of unrelated television programmes","A warning that no one may ask elders questions"],correctAnswer:0,explanation:"An announcement must give practical visitor information and a reason to come."},
-  {id:38,type:"writing",skill:"Persuasive Writing",question:"Which sentence best supports an argument that Jamaican landmarks should be protected?",options:["Landmarks teach visitors and students about the people, stories, and achievements that shaped Jamaica.","Landmarks are old, so no one should talk about them.","A landmark is useful only if it sells the most snacks.","Protecting places is unnecessary when photographs exist online."],correctAnswer:0,explanation:"This sentence gives a clear reason connected to education and national heritage."},
-  {id:39,type:"writing",skill:"Organisation",question:"Which order best organises an informational paragraph about responsible tourism?",options:["Explain what responsible tourism means, give examples of respectful visitor behaviour, then describe how it protects attractions.","Begin with litter, repeat the word tourism, and end without a main point.","List souvenir prices first, then change to an unrelated story about football.","Describe every visitor's clothing before naming the attraction."],correctAnswer:0,explanation:"The strongest order defines the topic, gives examples, and explains the importance."},
-  {id:40,type:"writing",skill:"Revision",question:"Which revision makes this sentence stronger for a cultural festival report?\nThe event was nice and had things.",options:["The Heritage Day festival featured drumming, pottery displays, Anansi stories, and traditional foods that helped children learn about their culture.","The event was very nice and really had a lot of things there.","Things were at the event, and the event was nice with things.","It was a thing where people came and saw stuff."],correctAnswer:0,explanation:"The revision uses precise details from a cultural festival and explains why the event mattered."},
+  {id:36,type:"writing",skill:"Tourism Brochure Writing",question:"Which sentence would be the best opening for a tourism brochure about Devon House?",options:["Visit Devon House to explore Jamaican history, beautiful gardens, local craft, and warm hospitality.","Devon House is a historic Kingston landmark with gardens, shops, and spaces that visitors can explore.","Visitors to Devon House can learn about its history and walk through the surrounding grounds.","Devon House offers visitors information about Jamaican history along with craft and food experiences."],correctAnswer:0,explanation:"A brochure opening should attract visitors and name specific appealing features."},
+  {id:37,type:"writing",skill:"Festival Announcement",question:"Which detail should be included in an announcement for Heritage Day?",options:["The date, location, main activities, and why families should attend","The date, location, and names of several festival activities","The location, main activities, and a description of the cultural displays","The date, start time, and reason Heritage Day is being celebrated"],correctAnswer:0,explanation:"An announcement must give practical visitor information and a reason to come."},
+  {id:38,type:"writing",skill:"Persuasive Writing",question:"Which sentence best supports an argument that Jamaican landmarks should be protected?",options:["Landmarks teach visitors and students about the people, stories, and achievements that shaped Jamaica.","Historic landmarks attract visitors who are interested in Jamaican culture.","Many landmarks contain old buildings, objects, and displays from the past.","Protecting landmarks allows communities to continue using important historic places."],correctAnswer:0,explanation:"This sentence gives a clear reason connected to education and national heritage."},
+  {id:39,type:"writing",skill:"Organisation",question:"Which order best organises an informational paragraph about responsible tourism?",options:["Explain what responsible tourism means, give examples of respectful visitor behaviour, then describe how it protects attractions.","Give examples of respectful visitor behaviour, define responsible tourism, then describe how attractions are protected.","Explain how attractions are protected, define responsible tourism, then give visitor examples.","Define responsible tourism, describe how it protects attractions, then give examples of respectful visitor behaviour."],correctAnswer:0,explanation:"The strongest order defines the topic, gives examples, and explains the importance."},
+  {id:40,type:"writing",skill:"Revision",question:"Which revision makes this sentence stronger for a cultural festival report?\nThe event was nice and had things.",options:["The Heritage Day festival featured drumming, pottery displays, Anansi stories, and traditional foods that helped children learn about their culture.","Heritage Day included several traditional activities that helped pupils learn more about Jamaican culture.","The festival had music, food, stories, and craft displays for families and children.","Heritage Day was an enjoyable cultural event with many activities for visitors."],correctAnswer:0,explanation:"The revision uses precise details from a cultural festival and explains why the event mattered."},
 ];
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }));
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ];
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    );
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    };
-  });
-};
 
 const SECTION_CONFIG = [
   {
@@ -271,9 +245,11 @@ export default function G5LaModerate10MockTest() {
   };
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions);
-    setRandomizedQuestions(shuffledQuestions);
-    setAnswers(new Array(shuffledQuestions.length).fill(null));
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaModerate10Questions)
+      : preparePreview(g5LaModerate10Questions, FREE_QUESTION_LIMIT);
+    setRandomizedQuestions(preparedQuestions);
+    setAnswers(new Array(preparedQuestions.length).fill(null));
     setCurrentQuestion(0);
     setTimeLeft(60 * 60);
     setShowResults(false);
