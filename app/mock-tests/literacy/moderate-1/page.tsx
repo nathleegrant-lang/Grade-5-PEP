@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { saveStudentTestResult } from "@/lib/student-test-results";
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -448,9 +449,9 @@ const g5LaModerate1Questions: Question[] = [
     question: `Which sentence uses quotation marks correctly?`,
     options: [
       "Mrs. Campbell said, Let us plant callaloo.",
-      "Mrs. Campbell said, Let us plant callaloo.",
-      'Mrs. Campbell said, "Let us plant callaloo."',
-      'Mrs. Campbell said "Let us plant callaloo.',
+      "\"Mrs. Campbell said, Let us plant callaloo.\"",
+      "Mrs. Campbell said, \"Let us plant callaloo.\"",
+      "Mrs. Campbell said, \"Let us plant callaloo.",
     ],
     correctAnswer: 2,
     explanation: `The exact words spoken are enclosed in quotation marks, with punctuation inside the closing mark.`,
@@ -508,9 +509,9 @@ const g5LaModerate1Questions: Question[] = [
     question: `Which topic sentence best begins a paragraph about the community garden?`,
     options: [
       "The community garden improved the neighbourhood in several important ways.",
-      "My pencil broke before mathematics class began.",
-      "Some tomatoes are red, and some are not red.",
-      "Last night I watched a funny programme.",
+      "Volunteers brought tools, seedlings, and rainwater drums to the empty lot.",
+      "Families shared some of the first vegetables with elderly residents.",
+      "A carpenter built a sign asking visitors not to trample the beds.",
     ],
     correctAnswer: 0,
     explanation: `This sentence introduces the main idea that the paragraph can develop with several benefits of the garden.`,
@@ -521,12 +522,12 @@ const g5LaModerate1Questions: Question[] = [
     skill: "Supporting Details",
     question: `A pupil writes, "Recycling helps our school." Which detail best supports this idea?`,
     options: [
-      "Many pupils enjoy mango juice at lunch.",
       "The programme reduced bottles mixed with garbage and made the compound tidier.",
-      "The playing field is used for sports day practice.",
-      "Friday comes after Thursday each week.",
+      "The environmental club placed labelled containers around the school.",
+      "The parish recycling truck arrived on Fridays.",
+      "Pupils rinsed containers before the materials were collected.",
     ],
-    correctAnswer: 1,
+    correctAnswer: 0,
     explanation: `This detail directly explains how recycling helped the school.`,
   },
   {
@@ -559,41 +560,14 @@ const g5LaModerate1Questions: Question[] = [
     question: `Choose the best revision of this sentence: "The garden was good and helped people and it was nice."`,
     options: [
       "The garden strengthened the community by providing food, teaching skills, and creating pride.",
-      "The garden was very very good and nice for people and things.",
-      "Good garden helped nice people good.",
-      "The garden, and it was, because nice helped.",
+      "The garden was useful because it helped people in the community.",
+      "The garden was a good project that brought neighbours together.",
+      "The garden helped people, and many residents were pleased with it.",
     ],
     correctAnswer: 0,
     explanation: `The best revision is clear and specific, naming exactly how the garden helped the community.`,
   },
 ];
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }));
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ];
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    );
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    };
-  });
-};
 
 const SECTION_CONFIG = [
   {
@@ -742,9 +716,11 @@ export default function G5LaModerate1MockTest() {
   };
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions);
-    setRandomizedQuestions(shuffledQuestions);
-    setAnswers(new Array(shuffledQuestions.length).fill(null));
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaModerate1Questions)
+      : preparePreview(g5LaModerate1Questions, FREE_QUESTION_LIMIT);
+    setRandomizedQuestions(preparedQuestions);
+    setAnswers(new Array(preparedQuestions.length).fill(null));
     setCurrentQuestion(0);
     setTimeLeft(60 * 60);
     setShowResults(false);
