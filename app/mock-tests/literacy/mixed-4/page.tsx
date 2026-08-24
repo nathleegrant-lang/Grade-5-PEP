@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -341,16 +342,16 @@ Which sentence best summarises the passage?`,
   {
     id: 18,
     type: "vocabulary",
-    skill: "Prefix",
-    question: `What does the prefix “re-” mean in “recognised” when thinking of “recognise again”?`,
+    skill: "Word Meaning",
+    question: "What does \"recognised\" mean in the sentence \"Her influence is still recognised today\"?",
     options: [
-      "before",
-      "again",
-      "under",
-      "without"
+      "hidden from public attention",
+      "acknowledged or accepted as important",
+      "forgotten over time",
+      "questioned without evidence"
     ],
     correctAnswer: 1,
-    explanation: `The prefix re- commonly means again.`
+    explanation: "In this sentence, \"recognised\" means acknowledged or accepted as important."
   },
   {
     id: 19,
@@ -596,13 +597,13 @@ Which sentence best summarises the passage?`,
     skill: "Strong Introduction",
     question: `Which is the strongest introduction for a paragraph about Miss Lou?`,
     options: [
-      "Miss Lou was a person.",
-      "I will now write about Miss Lou.",
-      "Jamaica has many people.",
+      "Miss Lou became an important Jamaican cultural figure through poetry, performance, teaching, and humour.",
+      "By using Jamaican Creole publicly, Miss Lou helped challenge attitudes about whose language deserved respect.",
+      "Miss Lou's work connected language, entertainment, and cultural identity for generations of Jamaicans.",
       "Through courage, humour, and language, Miss Lou helped Jamaicans see their culture with greater pride."
     ],
     correctAnswer: 3,
-    explanation: `This sentence clearly introduces the topic and central idea.`
+    explanation: "The keyed introduction most clearly establishes both Miss Lou's methods and her impact on Jamaican cultural pride."
   },
   {
     id: 37,
@@ -611,12 +612,12 @@ Which sentence best summarises the passage?`,
     question: `Which detail best supports the topic sentence “Miss Lou strengthened Jamaican cultural pride”?`,
     options: [
       "She performed familiar Jamaican speech on stage with confidence.",
-      "She was born in 1919.",
-      "Some poems are short.",
-      "Currency is used to buy things."
+      "Her poems often used humour to describe the experiences of ordinary Jamaicans.",
+      "Her performances reached audiences through stage, radio, and other public settings.",
+      "She wrote and taught at a time when Standard English carried greater prestige in formal settings."
     ],
     correctAnswer: 0,
-    explanation: `This detail directly shows how she publicly valued Jamaican culture.`
+    explanation: "The keyed detail most directly shows Miss Lou strengthening cultural pride by treating familiar Jamaican speech as worthy of confident public performance."
   },
   {
     id: 38,
@@ -638,7 +639,7 @@ Which sentence best summarises the passage?`,
     skill: "Relevance",
     question: `Which sentence should be removed?
 
-(1) Miss Lou used Jamaican Creole in poetry and performance. (2) Her work helped people value their language. (3) Blue whales are the largest animals on Earth. (4) Her influence is still recognised today.`,
+(1) Miss Lou used Jamaican Creole in poetry and performance. (2) Her work helped people value their language. (3) Other Jamaican artists also helped preserve traditional music and dance. (4) Her influence is still recognised today.`,
     options: [
       "Sentence 1",
       "Sentence 2",
@@ -646,7 +647,7 @@ Which sentence best summarises the passage?`,
       "Sentence 4"
     ],
     correctAnswer: 2,
-    explanation: `Sentence 3 is unrelated to Miss Lou’s cultural influence.`
+    explanation: "The sentence is related to Jamaican culture generally, but it does not develop the paragraph's specific focus on Miss Lou's influence through language and performance."
   },
   {
     id: 40,
@@ -654,42 +655,15 @@ Which sentence best summarises the passage?`,
     skill: "Strong Conclusion",
     question: `Which is the strongest conclusion for an essay about Miss Lou?`,
     options: [
-      "That is all about Miss Lou.",
-      "Miss Lou performed many times.",
-      "Everyone should become a poet.",
+      "Miss Lou's work showed that Jamaican Creole could be used seriously as well as humorously in public life.",
+      "Her poetry, teaching, and performances helped preserve an important part of Jamaican cultural identity.",
+      "Miss Lou remains influential because she challenged attitudes toward language and encouraged Jamaicans to value their own voices.",
       "By honouring Jamaican language and ordinary people, Miss Lou helped a nation speak about itself with greater confidence and pride."
     ],
     correctAnswer: 3,
-    explanation: `This conclusion restates the central idea in a thoughtful, memorable way.`
+    explanation: "The keyed conclusion best synthesises language, ordinary people, and Miss Lou's impact on national confidence and pride."
   }
 ];
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }))
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ]
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    )
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    }
-  })
-}
 
 const SECTION_CONFIG = [
   { type: "reading" as const,    label: "Reading Comprehension",   note: "literal, inferential, and analytical reading across all difficulty levels" },
@@ -753,9 +727,11 @@ export default function G5LaMix4MockTest() {
   }, [showResults, user?.id, user?.childName, totalQuestions, answers])
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions)
-    setRandomizedQuestions(shuffledQuestions)
-    setAnswers(new Array(shuffledQuestions.length).fill(null))
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaMix4Questions)
+      : preparePreview(g5LaMix4Questions, FREE_QUESTION_LIMIT)
+    setRandomizedQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
     setCurrentQuestion(0)
     setTimeLeft(60 * 60)
     setShowResults(false)
