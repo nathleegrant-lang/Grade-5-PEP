@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -596,13 +597,13 @@ Which sentence is the best summary of the passage?`,
     skill: "Strong Introduction",
     question: `Which is the strongest introduction for a paragraph about daily reading?`,
     options: [
-      "Reading is a thing people do.",
-      "I will now tell you about reading.",
-      "Books have pages.",
+      "A regular reading routine can help students practise skills they use across many school subjects.",
+      "Students who make time for reading each day encounter a wide range of ideas, words, and stories.",
+      "Choosing suitable books and setting aside a quiet time can make reading easier to continue each day.",
       "Just twenty thoughtful minutes of reading each day can strengthen a student's skills and imagination."
     ],
     correctAnswer: 3,
-    explanation: `The sentence introduces a clear topic and gives the reader a meaningful reason to continue.`
+    explanation: "The keyed introduction is concise and engaging, and it previews both skill growth and imagination rather than only routine or process."
   },
   {
     id: 37,
@@ -611,12 +612,12 @@ Which sentence is the best summary of the passage?`,
     question: `Which detail best supports the topic sentence “Reading helps students understand other people”?`,
     options: [
       "Stories allow readers to experience situations from another person's point of view.",
-      "Some books have colourful covers.",
-      "Libraries usually organise books on shelves.",
-      "Many books contain more than one chapter."
+      "Readers often discover unfamiliar words when they read stories from different settings.",
+      "Characters may face problems that keep readers interested in what happens next.",
+      "Books can introduce readers to places and events that they have never experienced themselves."
     ],
     correctAnswer: 0,
-    explanation: `The detail directly explains how reading can build empathy and understanding.`
+    explanation: "The keyed detail directly supports understanding other people by showing how stories let readers experience another person's perspective."
   },
   {
     id: 38,
@@ -638,7 +639,7 @@ Which sentence is the best summary of the passage?`,
     skill: "Relevance",
     question: `Which sentence should be removed from this paragraph?
 
-(1) A quiet reading routine can improve concentration. (2) Choosing a regular time helps the habit become familiar. (3) Basketball teams usually have five players on the court. (4) Turning off unnecessary notifications can reduce distractions.`,
+(1) A quiet reading routine can improve concentration. (2) Choosing a regular time helps the habit become familiar. (3) The school library displays student book reviews near the entrance. (4) Turning off unnecessary notifications can reduce distractions.`,
     options: [
       "Sentence 1",
       "Sentence 2",
@@ -646,7 +647,7 @@ Which sentence is the best summary of the passage?`,
       "Sentence 4"
     ],
     correctAnswer: 2,
-    explanation: `Sentence 3 is unrelated to building a focused reading routine.`
+    explanation: "The library display is related to reading generally, but it does not explain how a student can build and maintain a focused reading routine."
   },
   {
     id: 40,
@@ -654,42 +655,15 @@ Which sentence is the best summary of the passage?`,
     skill: "Strong Conclusion",
     question: `Which is the strongest conclusion for an essay about developing a reading habit?`,
     options: [
-      "That is all about reading.",
-      "Books are available in many places.",
-      "Everyone should read because I said so.",
+      "A regular reading routine can strengthen useful skills that students continue using as they grow.",
+      "Choosing books carefully and making time to read can help students become more confident readers.",
+      "Reading regularly can expose students to new ideas and encourage them to keep learning beyond the classroom.",
       "By choosing suitable material and reading thoughtfully each day, students can build a habit that continues opening doors throughout life."
     ],
     correctAnswer: 3,
-    explanation: `The sentence restates the central idea in a fresh, memorable way and connects to the passage's doorway image.`
+    explanation: "The keyed conclusion best synthesises suitable material, thoughtful daily practice, and the long-term value of reading."
   }
 ];
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }))
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ]
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    )
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    }
-  })
-}
 
 const SECTION_CONFIG = [
   { type: "reading" as const,    label: "Reading Comprehension",   note: "literal, inferential, and analytical reading across all difficulty levels" },
@@ -753,9 +727,11 @@ export default function G5LaMix2MockTest() {
   }, [showResults, user?.id, user?.childName, totalQuestions, answers])
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions)
-    setRandomizedQuestions(shuffledQuestions)
-    setAnswers(new Array(shuffledQuestions.length).fill(null))
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaMix2Questions)
+      : preparePreview(g5LaMix2Questions, FREE_QUESTION_LIMIT)
+    setRandomizedQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
     setCurrentQuestion(0)
     setTimeLeft(60 * 60)
     setShowResults(false)
