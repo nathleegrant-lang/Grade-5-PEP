@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -596,29 +597,29 @@ Which sentence best summarises the passage?`,
     id: 36,
     type: "writing",
     skill: "Strong Introduction",
-    question: `Which is the strongest introduction for a paragraph about bamboo construction?`,
+    question: "Which sentence would make the strongest introduction to a paragraph about bamboo as a sustainable building material?",
     options: [
-      "Bamboo is a plant.",
-      "I am going to write about bamboo.",
-      "Many things are made from plants.",
+      "Bamboo is increasingly considered for construction because it grows quickly and can be used in several types of structures.",
+      "Builders can use bamboo successfully when they understand its strengths, limitations, and need for proper treatment.",
+      "In some communities, bamboo provides a locally available material for furniture, shelters, and other useful structures.",
       "Fast-growing, strong, and renewable, bamboo can be a valuable building material when it is prepared correctly."
     ],
     correctAnswer: 3,
-    explanation: `The sentence introduces the topic clearly and previews the main idea.`
+    explanation: "The keyed introduction gives the most balanced thesis by presenting bamboo's benefits together with the need for correct preparation."
   },
   {
     id: 37,
     type: "writing",
     skill: "Supporting Detail",
-    question: `Which detail best supports the topic sentence “Bamboo can be environmentally friendly”?`,
+    question: "Which sentence would best support the idea that bamboo is renewable?",
     options: [
       "It can regrow from its roots after careful harvesting.",
-      "Some bamboo poles are green.",
-      "Bamboo flutes make music.",
-      "Many fences are tall."
+      "Bamboo can be harvested sooner than many slower-growing hardwood trees.",
+      "Using locally grown bamboo can reduce the distance some building materials must be transported.",
+      "Properly treated bamboo can remain useful for a longer period before it needs replacement."
     ],
     correctAnswer: 0,
-    explanation: `Regrowth after harvesting directly supports environmental friendliness.`
+    explanation: "The keyed detail is the most direct biological evidence of renewability because bamboo regrows after harvesting."
   },
   {
     id: 38,
@@ -638,9 +639,7 @@ Which sentence best summarises the passage?`,
     id: 39,
     type: "writing",
     skill: "Relevance",
-    question: `Which sentence should be removed?
-
-(1) Bamboo can be used in furniture and small buildings. (2) Proper drying helps protect it from rot. (3) Sea turtles return to beaches to lay eggs. (4) Trained builders must understand how bamboo behaves.`,
+    question: "Which sentence should be removed because it does not support the paragraph's focus?",
     options: [
       "Sentence 1",
       "Sentence 2",
@@ -648,50 +647,23 @@ Which sentence best summarises the passage?`,
       "Sentence 4"
     ],
     correctAnswer: 2,
-    explanation: `Sentence 3 is unrelated to bamboo construction.`
+    explanation: "The sentence is about a real use of bamboo, but it does not support the paragraph's focus on bamboo as a construction material and the preparation needed for building."
   },
   {
     id: 40,
     type: "writing",
     skill: "Strong Conclusion",
-    question: `Which is the strongest conclusion for an essay about bamboo?`,
+    question: "Which sentence would make the strongest conclusion to a paragraph about bamboo as a sustainable building material?",
     options: [
-      "That is all about bamboo.",
-      "Bamboo is green.",
-      "Everyone must build only with bamboo.",
+      "Bamboo can provide communities with a renewable building material when it is harvested and used responsibly.",
+      "Builders who understand bamboo's strengths and weaknesses can decide when it is suitable for a construction project.",
+      "Bamboo's fast growth and usefulness make it an important material for communities seeking alternatives to some traditional building resources.",
       "When communities match bamboo’s strengths to the right purpose and prepare it carefully, this familiar plant can support a more sustainable future."
     ],
     correctAnswer: 3,
-    explanation: `The sentence restates the balanced central idea in a memorable way.`
+    explanation: "The keyed conclusion combines appropriate use, careful preparation, and sustainability, reflecting the passage's balanced message."
   }
 ];
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }))
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ]
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    )
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    }
-  })
-}
 
 const SECTION_CONFIG = [
   { type: "reading" as const,    label: "Reading Comprehension",   note: "literal, inferential, and analytical reading across all difficulty levels" },
@@ -755,9 +727,11 @@ export default function G5LaMix3MockTest() {
   }, [showResults, user?.id, user?.childName, totalQuestions, answers])
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions)
-    setRandomizedQuestions(shuffledQuestions)
-    setAnswers(new Array(shuffledQuestions.length).fill(null))
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaMix3Questions)
+      : preparePreview(g5LaMix3Questions, FREE_QUESTION_LIMIT)
+    setRandomizedQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
     setCurrentQuestion(0)
     setTimeLeft(60 * 60)
     setShowResults(false)
