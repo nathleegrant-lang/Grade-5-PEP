@@ -389,7 +389,7 @@ const g5LaModerate5Questions: Question[] = [
     id: 38,
     type: "writing",
     skill: "Organisation",
-    question: "Which order best organises a career reflection?",
+    question: "Which order best organises a career reflection that begins with a pupil\'s interests, connects those interests to a possible career, and then explains how school skills can help?",
     options: ["Name an interest, connect it to a career, then explain which school skills can help.", "Name a career, list useful school skills, then explain the personal interest.", "Explain useful school skills, name an interest, then connect it to a career.", "Name an interest, explain school skills first, then identify a possible career."],
     correctAnswer: 0,
     explanation: "A clear reflection moves from personal interest to a possible career and helpful skills.",
