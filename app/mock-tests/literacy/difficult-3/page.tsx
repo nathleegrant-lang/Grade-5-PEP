@@ -598,7 +598,7 @@ What can you infer about why the group made compost from kitchen scraps?`,
     ],
     correctAnswer: 3,
     explanation:
-      "A strong introduction states a clear, specific main idea; the others are vague or off-topic.",
+      "The keyed sentence provides the strongest thesis because it identifies the changing-climate problem, the response of observing and adapting, and the benefit to crops and communities. The other choices introduce relevant ideas but do not express the full controlling argument.",
   },
   {
     id: 37,
@@ -614,7 +614,7 @@ What can you infer about why the group made compost from kitchen scraps?`,
     ],
     correctAnswer: 0,
     explanation:
-      "Simple, friendly wording suits young children; the other choices use difficult adult vocabulary.",
+      "The keyed sentence uses direct, friendly and encouraging language that speaks naturally to young children. The other choices are understandable but use a more neutral or formal informational tone.",
   },
   {
     id: 38,

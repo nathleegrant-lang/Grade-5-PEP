@@ -590,7 +590,7 @@ Why does Aaliyah say the bridge itself "mattered less" than what the village dis
     ],
     correctAnswer: 2,
     explanation:
-      "A strong introduction states a clear, specific main idea that previews the essay. The others are vague or off-topic.",
+      "The keyed sentence provides the strongest controlling thesis because it identifies both the approach—careful planning and teamwork—and the result—solving difficult community problems. The other choices provide relevant background or examples but do not state the essay's central argument as completely.",
   },
   {
     id: 37,
@@ -640,7 +640,7 @@ Why does Aaliyah say the bridge itself "mattered less" than what the village dis
     type: "writing",
     skill: "Best Conclusion",
     question:
-      "Which sentence is the best conclusion for an essay about these two projects?",
+      "Which conclusion best emphasises how thoughtful planning and cooperation with others helped the young people create positive change?",
     options: [
       "Kemar's business and Aaliyah's bridge project both succeeded because young people chose to respond to problems around them.",
       "Both stories show that planning and teamwork let young people make a real difference.",

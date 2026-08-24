@@ -583,7 +583,7 @@ What does Mr. Reid mean by saying the goal is to grow smarter, not lazier?`,
     type: "writing",
     skill: "Purpose",
     question:
-      "A student wants to INFORM readers about online privacy. Which sentence best fits that purpose?",
+      "A student wants to INFORM readers what a private account does. Which sentence best fits that purpose?",
     options: [
       "A private account limits who can see your photos and personal details.",
       "Changing privacy settings can reduce the number of people who see information from an account.",
@@ -642,16 +642,16 @@ What does Mr. Reid mean by saying the goal is to grow smarter, not lazier?`,
     type: "writing",
     skill: "Best Conclusion",
     question:
-      "Which sentence is the best conclusion for an essay about using technology wisely?",
+      "Which conclusion best combines the passages' shared ideas about careful choices, honesty and learning when using technology?",
     options: [
-      "Used with care and honesty, technology can make us safer and smarter.",
+      "Used with care, understanding and honesty, technology can help people stay safer and learn more effectively.",
       "Digital tools can be useful when people understand both their benefits and their risks.",
       "Online privacy and artificial intelligence both require users to make thoughtful decisions.",
       "Technology works best when users understand how its features and information affect their choices."
     ],
     correctAnswer: 0,
     explanation:
-      "A strong conclusion restates the main idea with purpose, as the first choice does.",
+      "The keyed conclusion uniquely combines careful and responsible use, understanding, honesty, safety, and effective learning. The other conclusions are credible but express fewer parts of the passages' shared message.",
   }
 ];
 

@@ -598,7 +598,7 @@ In the passage, what does "interpretation" most nearly mean?`,
     ],
     correctAnswer: 1,
     explanation:
-      "A persuasive purpose calls for an opinion with reasons; the others inform, instruct, or tell a story instead.",
+      "The keyed sentence directly urges readers to support renewable energy and gives a reason for doing so. The other choices mainly provide information about renewable energy without explicitly trying to persuade the reader.",
   },
   {
     id: 37,
