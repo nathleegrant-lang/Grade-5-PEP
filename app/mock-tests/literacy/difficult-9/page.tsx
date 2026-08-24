@@ -597,7 +597,7 @@ const g5LaDiff9Questions: Question[] = [
     id: 37,
     type: "writing",
     skill: "Supporting Detail",
-    question: `Which sentence provides the best supporting detail for the topic sentence "Building with strong materials saves lives during hurricanes"?`,
+    question: `Which sentence provides the strongest evidence that reinforcing a building's roof can make it safer during hurricane winds?`,
     options: [
       "Roofs secured with straps are less likely to blow away during high winds.",
       "Concrete walls can resist some forms of storm damage better than weak, poorly maintained walls.",
