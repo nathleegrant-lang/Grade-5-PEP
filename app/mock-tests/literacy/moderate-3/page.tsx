@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { saveStudentTestResult } from "@/lib/student-test-results";
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -57,13 +58,13 @@ const g5LaModerate3Questions: Question[] = [
     skill: "Main Idea",
     question: `${technologyPassage}\n\nWhat is the main idea of the technology in learning passage?`,
     options: [
-      "The school cancels all classwork for the term.",
-      "Only adults can solve problems in a school.",
-      "The event is mainly about winning expensive prizes.",
-      "Pupils learn useful lessons while taking part in technology in learning.",
+      "Tablets replaced notebooks and textbooks in every subject.",
+      "Technology can enrich learning when pupils use it responsibly alongside careful thinking and other learning methods.",
+      "Pupils learned best only when lessons became games.",
+      "Internet speed determined whether pupils could continue learning.",
     ],
-    correctAnswer: 3,
-    explanation: `The passage focuses on pupils participating in technology in learning and learning important habits and ideas.`,
+    correctAnswer: 1,
+    explanation: `The passage shows tablets helping pupils practise, investigate, and present ideas, while careful thinking, notebooks, textbooks, questions, and responsible use still remain important.`,
   },
   {
     id: 2,
@@ -111,29 +112,29 @@ const g5LaModerate3Questions: Question[] = [
     id: 5,
     type: "reading",
     skill: "Cause and Effect",
-    question: `${technologyPassage}\n\nWhich cause-and-effect relationship is shown in the passage?`,
+    question: `${technologyPassage}\n\nWhat happened when the internet became slow?`,
     options: [
-      "Because the event was cancelled, pupils learned nothing.",
-      "Because adults did all the work, pupils became less responsible.",
-      "Because no one listened, the project immediately failed.",
-      "Because pupils prepared and reflected, they gained confidence and understanding.",
+      "Groups continued with textbooks and discussion questions.",
+      "The social studies project was cancelled.",
+      "Pupils opened unrelated websites instead.",
+      "Mr. Henry stopped the class from researching Jamaican parishes.",
     ],
-    correctAnswer: 3,
-    explanation: `The passage shows preparation and reflection leading to learning and growth.`,
+    correctAnswer: 0,
+    explanation: `The passage says that when the internet slowed, groups continued learning with textbooks and discussion questions.`,
   },
   {
     id: 6,
     type: "reading",
     skill: "Vocabulary in Context",
-    question: `${technologyPassage}\n\nIn the passage, what does contributed most nearly mean?`,
+    question: `${technologyPassage}\n\nIn the passage, what does “investigate” most nearly mean?`,
     options: [
-      "copied without thinking",
-      "arrived late",
-      "hid quietly",
-      "took part or added help",
+      "examine or explore in order to learn more",
+      "copy information without checking it",
+      "finish an activity as quickly as possible",
+      "avoid asking questions",
     ],
-    correctAnswer: 3,
-    explanation: `Contributed means took part or added ideas, effort, or help.`,
+    correctAnswer: 0,
+    explanation: `The passage says technology helped pupils investigate information, meaning to examine or explore it in order to learn more.`,
   },
   {
     id: 7,
@@ -153,15 +154,15 @@ const g5LaModerate3Questions: Question[] = [
     id: 8,
     type: "reading",
     skill: "Text Evidence",
-    question: `${technologyPassage}\n\nWhich detail best supports the idea that the activity required teamwork?`,
+    question: `${technologyPassage}\n\nWhich detail BEST supports the idea that technology did not replace other ways of learning?`,
     options: [
-      "Pupils worked in groups and every member had a role.",
-      "The weather changed during the afternoon.",
-      "One pupil owned a new notebook.",
-      "The school gate was painted blue.",
+      "Pupils drew labelled diagrams in notebooks and showed their mathematics working on paper.",
+      "Tablets arrived at Fairfield Primary.",
+      "The fraction app gave instant feedback.",
+      "Groups viewed maps of Jamaican parishes.",
     ],
     correctAnswer: 0,
-    explanation: `Group work and shared roles are direct evidence of teamwork.`,
+    explanation: `Using notebooks and showing working on paper demonstrates that pupils continued using other learning methods alongside technology.`,
   },
   {
     id: 9,
@@ -169,27 +170,27 @@ const g5LaModerate3Questions: Question[] = [
     skill: "Theme",
     question: `${citizenshipPassage}\n\nWhich theme is most strongly shown in the digital citizenship passage?`,
     options: [
-      "Growth happens when people use help responsibly and respect one another.",
-      "Only the oldest person in a group can learn.",
-      "Good programmes never require patience.",
-      "People should avoid learning from others.",
+      "Responsible online choices can protect people and prevent harm or confusion.",
+      "Online jokes are harmless whenever the writer means well.",
+      "Checking information is only the teacher's responsibility.",
+      "What people do online has little connection to real life.",
     ],
     correctAnswer: 0,
-    explanation: `The passage shows people learning through support, respect, patience, and responsible choices.`,
+    explanation: `The passage shows that respectful communication, protecting personal information, giving credit, and checking facts can prevent harm and confusion.`,
   },
   {
     id: 10,
     type: "reading",
     skill: "Supporting Details",
-    question: `${citizenshipPassage}\n\nWhich detail from the passage shows responsible behaviour?`,
+    question: `${citizenshipPassage}\n\nWhich detail BEST shows a pupil applying the digital-citizenship lesson in a real situation?`,
     options: [
-      "Pupils or community members follow guidance and help others appropriately.",
-      "Everyone refuses to share materials.",
-      "Someone spreads confusion without checking facts.",
-      "Participants ignore instructions from adults.",
+      "Dena checked the sports-day rumour with her teacher instead of forwarding it.",
+      "Mrs. Morgan wrote three words on the board.",
+      "The class discussed why online behaviour matters.",
+      "One group explained why passwords should remain private.",
     ],
     correctAnswer: 0,
-    explanation: `Following guidance and helping appropriately are responsible actions described in the passage.`,
+    explanation: `Dena used the lesson independently when she checked a rumour before passing it on.`,
   },
   {
     id: 11,
@@ -223,43 +224,43 @@ const g5LaModerate3Questions: Question[] = [
     id: 13,
     type: "reading",
     skill: "Cause and Effect",
-    question: `${citizenshipPassage}\n\nWhat happened because people followed the guidance in the passage?`,
+    question: `${citizenshipPassage}\n\nWhat was the effect of Dena checking the sports-day rumour before forwarding it?`,
     options: [
-      "The situation improved or people avoided a problem.",
-      "The main characters lost interest immediately.",
-      "The activity became unsafe for everyone.",
-      "The school closed permanently.",
+      "She prevented confusion about whether sports day was cancelled.",
+      "The teacher cancelled the online research project.",
+      "The class stopped using group chats.",
+      "Her password was shared with other pupils.",
     ],
     correctAnswer: 0,
-    explanation: `The passage shows that responsible choices led to improvement or prevented confusion.`,
+    explanation: `The passage directly states that Dena's choice prevented confusion.`,
   },
   {
     id: 14,
     type: "reading",
     skill: "Vocabulary in Context",
-    question: `${citizenshipPassage}\n\nIn the passage, what does genuine most nearly mean?`,
+    question: `${citizenshipPassage}\n\nIn the passage, what does “rumour” most nearly mean?`,
     options: [
-      "hidden and silent",
-      "heavy and broken",
-      "real and sincere",
-      "quick and careless",
+      "information being passed around that has not yet been confirmed",
+      "an official announcement from the school",
+      "a private password used to enter an account",
+      "a message thanking someone for help",
     ],
-    correctAnswer: 2,
-    explanation: `Genuine means real, honest, or sincere in this context.`,
+    correctAnswer: 0,
+    explanation: `Dena checked the rumour with her teacher before forwarding it, showing that it was information whose truth had not yet been confirmed.`,
   },
   {
     id: 15,
     type: "reading",
     skill: "Text Evidence",
-    question: `${citizenshipPassage}\n\nWhich detail best supports the message that learning is connected to real life?`,
+    question: `${citizenshipPassage}\n\nWhich detail BEST supports the idea that online choices can affect people in real life?`,
     options: [
-      "The event has no effect after it ends.",
-      "Characters apply the lesson to choices outside a single worksheet.",
-      "The passage names the colour of every wall.",
-      "A character refuses to try anything new.",
+      "Dena checked a rumour with her teacher before forwarding it, which prevented confusion.",
+      "Mrs. Morgan wrote three words on the board.",
+      "The class read several sample messages.",
+      "One approved message thanked a partner for help.",
     ],
-    correctAnswer: 1,
-    explanation: `Applying the lesson to real choices shows that learning connects to life beyond the classroom.`,
+    correctAnswer: 0,
+    explanation: `Dena's action changed what happened outside the chat by preventing pupils from being confused about the real sports-day plans.`,
   },
   {
     id: 16,
@@ -547,41 +548,41 @@ const g5LaModerate3Questions: Question[] = [
     skill: "Topic Sentence",
     question: `Which topic sentence best begins a paragraph about technology in learning?`,
     options: [
-      "Technology in Learning taught pupils several important lessons.",
-      "My shoes were under the bed.",
-      "Some desks are brown and some are not.",
-      "Lunch tasted better on Friday.",
+      "Technology can enrich learning when pupils use it responsibly and continue thinking carefully.",
+      "The fraction app gave pupils instant feedback during mathematics.",
+      "Groups viewed maps of Jamaican parishes for social studies.",
+      "Mr. Henry required pupils to record the sources they used.",
     ],
     correctAnswer: 0,
-    explanation: `This sentence introduces a clear main idea for the paragraph.`,
+    explanation: `The correct option is broad enough to govern a paragraph; the other options are supporting details.`,
   },
   {
     id: 37,
     type: "writing",
     skill: "Supporting Details",
-    question: `Which detail best supports the idea that teamwork improves a project?`,
+    question: `Which detail best supports the idea that pupils collaborated while using technology?`,
     options: [
-      "The clock had two hands.",
-      "A pencil rolled off the desk.",
-      "The sky was sometimes cloudy.",
-      "Group members shared roles and listened to one another.",
+      "Pupils compared ideas with partners and worked in groups to research Jamaican communities.",
+      "The tablets were used during science and mathematics.",
+      "Mr. Henry told pupils to close unrelated pages.",
+      "The internet sometimes became slow during research.",
     ],
-    correctAnswer: 3,
-    explanation: `Shared roles and listening directly support teamwork.`,
+    correctAnswer: 0,
+    explanation: `Comparing ideas with partners and researching in groups directly support collaborative learning.`,
   },
   {
     id: 38,
     type: "writing",
     skill: "Organization",
-    question: `Which order is best for explaining a school project?`,
+    question: `Which order is best for organising a responsible online research project?`,
     options: [
-      "Carry out the plan; identify the problem; plan later; stop",
-      "Buy snacks; close books; ignore feedback; go home",
-      "Identify the problem; plan a solution; carry out the plan; reflect on results",
-      "Reflect on results; forget the plan; identify nothing; begin randomly",
+      "Choose a research question; use trusted sources; record information and sources; present the findings.",
+      "Present the findings; choose a question; search for information; record the sources.",
+      "Use websites first; present the project; choose the question; record sources last.",
+      "Choose a question; present conclusions; search for evidence; decide whether to record sources.",
     ],
-    correctAnswer: 2,
-    explanation: `This order follows a logical beginning, middle, and ending.`,
+    correctAnswer: 0,
+    explanation: `A responsible project begins with a question, gathers information from trusted sources, records evidence and sources, and then presents the findings.`,
   },
   {
     id: 39,
@@ -601,44 +602,17 @@ const g5LaModerate3Questions: Question[] = [
     id: 40,
     type: "writing",
     skill: "Revision",
-    question: `Choose the best revision of this sentence: "The event was good and helped us a lot."`,
+    question: `Choose the best revision of this sentence: "Technology was good and helped us a lot."`,
     options: [
-      "The event helped pupils build confidence, practise teamwork, and make responsible choices.",
-      "The event was good good and very nice for us.",
-      "Good event helped a lot things.",
-      "The event, because helped, was us.",
+      "Technology enriched learning by helping pupils practise skills, investigate information, and present ideas responsibly.",
+      "Technology was helpful because pupils used it for many things.",
+      "The tablets were good tools and helped the class with work.",
+      "Technology helped pupils learn, and the activities were useful.",
     ],
     correctAnswer: 0,
-    explanation: `The best revision is specific, clear, and complete.`,
+    explanation: `The correct option replaces vague wording with specific ways technology supported learning.`,
   }
 ];
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }));
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ];
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    );
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    };
-  });
-};
 
 const SECTION_CONFIG = [
   {
@@ -787,9 +761,11 @@ export default function G5LaModerate3MockTest() {
   };
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions);
-    setRandomizedQuestions(shuffledQuestions);
-    setAnswers(new Array(shuffledQuestions.length).fill(null));
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaModerate3Questions)
+      : preparePreview(g5LaModerate3Questions, FREE_QUESTION_LIMIT);
+    setRandomizedQuestions(preparedQuestions);
+    setAnswers(new Array(preparedQuestions.length).fill(null));
     setCurrentQuestion(0);
     setTimeLeft(60 * 60);
     setShowResults(false);
