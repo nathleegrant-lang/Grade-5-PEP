@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { saveStudentTestResult } from "@/lib/student-test-results";
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -334,10 +335,14 @@ What does Mr. Reid mean by saying the goal is to grow smarter, not lazier?`,
   {
     id: 18,
     type: "vocabulary",
-    skill: "Prefix",
-    question:
-      "The word \"artificial\" begins with a part meaning \"made by skill or art.\" Artificial intelligence is intelligence that is —",
-    options: ["made by people, not natural", "found only in animals", "older than human history", "impossible to control"],
+    skill: "Word Meaning",
+    question: "In \"artificial intelligence,\" what does \"artificial\" mean?",
+    options: [
+      "made by people, not natural",
+      "found only in animals",
+      "older than human history",
+      "impossible to control"
+    ],
     correctAnswer: 0,
     explanation:
       "Artificial means made by human skill rather than occurring naturally.",
@@ -565,13 +570,13 @@ What does Mr. Reid mean by saying the goal is to grow smarter, not lazier?`,
     question: "Which sentence is the clearest and most precise?",
     options: [
       "Renee turned off the setting that shared her location.",
-      "Renee did a thing with a setting about places.",
-      "There was a setting and a location and Renee.",
-      "Renee and the location setting were a situation."
+      "Renee changed a privacy setting because it was giving other people information about where she was.",
+      "The location-sharing setting was turned off by Renee after she reviewed the account settings.",
+      "Renee adjusted the setting connected with sharing her location so that the information would no longer be available."
     ],
     correctAnswer: 0,
     explanation:
-      "The first sentence names the action and object precisely; the others are vague.",
+      "The first sentence states the action and affected setting directly; the others are wordier, passive, or unnecessarily cumbersome.",
   },
   {
     id: 36,
@@ -581,13 +586,13 @@ What does Mr. Reid mean by saying the goal is to grow smarter, not lazier?`,
       "A student wants to INFORM readers about online privacy. Which sentence best fits that purpose?",
     options: [
       "A private account limits who can see your photos and personal details.",
-      "Please, everyone, you simply must protect your privacy today!",
-      "Once there was a girl who loved a photo-sharing app.",
-      "Step one: open the app and tap the settings button."
+      "Changing privacy settings can reduce the number of people who see information from an account.",
+      "Location-sharing features can reveal information about where a user is at certain times.",
+      "Users can review account settings to understand what information an app is allowed to share."
     ],
     correctAnswer: 0,
     explanation:
-      "An informing purpose calls for a clear fact; the others persuade, tell a story, or give instructions.",
+      "The first choice most directly and completely explains the central concept of online privacy in a concise informational sentence.",
   },
   {
     id: 37,
@@ -597,9 +602,9 @@ What does Mr. Reid mean by saying the goal is to grow smarter, not lazier?`,
       "Which detail best supports the claim that Renee acted wisely about privacy?",
     options: [
       "She made her account private and stopped sharing her location.",
-      "She had always loved using the photo app.",
-      "Her mother spoke to her one evening.",
-      "The app had many different features."
+      "She reviewed several account settings after speaking with her mother.",
+      "She removed some older posts that she no longer wanted strangers to view.",
+      "She became more careful about deciding what personal information to share online."
     ],
     correctAnswer: 0,
     explanation:
@@ -623,14 +628,14 @@ What does Mr. Reid mean by saying the goal is to grow smarter, not lazier?`,
     question:
       "These sentences appear in an essay about responsible AI use. Which should be REMOVED?",
     options: [
-      "The classroom walls were painted pale yellow last summer.",
+      "AI tools can produce answers quickly when pupils enter questions or instructions.",
       "Pupils must check the AI's answers for mistakes.",
       "They should write final work in their own words.",
       "Honesty means saying when the AI was used."
     ],
     correctAnswer: 0,
     explanation:
-      "The colour of the walls is unrelated to responsible AI use and should be removed.",
+      "The sentence describes what an AI tool can do, but it does not explain responsible behaviour such as checking answers, writing in one's own words, or being honest about AI use.",
   },
   {
     id: 40,
@@ -640,42 +645,15 @@ What does Mr. Reid mean by saying the goal is to grow smarter, not lazier?`,
       "Which sentence is the best conclusion for an essay about using technology wisely?",
     options: [
       "Used with care and honesty, technology can make us safer and smarter.",
-      "In the end, both passages show that using technology is always a bad idea for students.",
-      "Therefore, apps and artificial intelligence are completely different topics with nothing in common.",
-      "To conclude, people should let machines do all the thinking so they can relax."
+      "Digital tools can be useful when people understand both their benefits and their risks.",
+      "Online privacy and artificial intelligence both require users to make thoughtful decisions.",
+      "Technology works best when users understand how its features and information affect their choices."
     ],
     correctAnswer: 0,
     explanation:
       "A strong conclusion restates the main idea with purpose, as the first choice does.",
   }
 ];
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }));
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ];
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    );
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    };
-  });
-};
 
 const SECTION_CONFIG = [
   {
@@ -824,9 +802,11 @@ export default function G5LaDifficult5MockTest() {
   };
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions);
-    setRandomizedQuestions(shuffledQuestions);
-    setAnswers(new Array(shuffledQuestions.length).fill(null));
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaDifficult5Questions)
+      : preparePreview(g5LaDifficult5Questions, FREE_QUESTION_LIMIT);
+    setRandomizedQuestions(preparedQuestions);
+    setAnswers(new Array(preparedQuestions.length).fill(null));
     setCurrentQuestion(0);
     setTimeLeft(60 * 60);
     setShowResults(false);
