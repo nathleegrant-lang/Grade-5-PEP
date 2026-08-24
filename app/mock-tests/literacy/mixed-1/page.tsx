@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -485,15 +486,15 @@ When the passage notes Jamaica's status changed from 'self-governing colony to a
     id: 29,
     type: "grammar",
     skill: "Subject-Verb Agreement",
-    question: `Which sentence is written correctly?`,
+    question: "Which sentence is written correctly?",
     options: [
-      "The group of protesters was walking to Morant Bay.",
-      "The group of protesters were walking to Morant Bay.",
-      "The group of protesters walk to Morant Bay yesterday.",
-      "The group of protesters have walked to Morant Bay yesterday.",
+      "The procession of protesters was moving toward Morant Bay.",
+      "The procession of protesters were moving toward Morant Bay.",
+      "The procession of protesters have moved toward Morant Bay.",
+      "The procession of protesters are moving toward Morant Bay."
     ],
     correctAnswer: 0,
-    explanation: `The subject "group" is singular, so it takes the singular verb "was."`
+    explanation: "The singular subject \"procession\" takes the singular verb form \"was.\""
   },
   {
     id: 30,
@@ -627,7 +628,7 @@ When the passage notes Jamaica's status changed from 'self-governing colony to a
     skill: "Relevance",
     question: `Read the paragraph. Which sentence should be removed because it does not belong?
 
-(1) Paul Bogle is remembered for standing against injustice. (2) He led people from Stony Gut to Morant Bay in 1865. (3) Jamaica has many beautiful beaches and waterfalls. (4) His sacrifice later earned him recognition as a National Hero.`,
+(1) Paul Bogle is remembered for standing against injustice. (2) He led people from Stony Gut to Morant Bay in 1865. (3) Other important events also took place in Jamaica during the nineteenth century. (4) His sacrifice later earned him recognition as a National Hero.`,
     options: [
       "Sentence 1",
       "Sentence 2",
@@ -635,7 +636,7 @@ When the passage notes Jamaica's status changed from 'self-governing colony to a
       "Sentence 4",
     ],
     correctAnswer: 2,
-    explanation: `Sentence 3 is about Jamaica's scenery and does not support the paragraph's focus on Paul Bogle and his legacy.`
+    explanation: "Sentence 3 is historically related to Jamaica, but it does not develop the paragraph's focus on Paul Bogle, his actions, and his legacy."
   },
   {
     id: 40,
@@ -643,42 +644,15 @@ When the passage notes Jamaica's status changed from 'self-governing colony to a
     skill: "Thesis Statement",
     question: `Which is the STRONGEST thesis for an essay arguing Paul Bogle should be celebrated as a hero?`,
     options: [
-      "Paul Bogle is important in Jamaican history",
-      "Some people think Paul Bogle was a hero",
-      "Paul Bogle lived in the nineteenth century and led a rebellion",
-      "Paul Bogle deserves recognition as a National Hero because his courageous protest against injustice, though brutally suppressed, directly contributed to political reforms that improved the lives of ordinary Jamaicans",
+      "Paul Bogle should be remembered as a hero because he showed courage when ordinary Jamaicans faced unfair treatment.",
+      "Paul Bogle deserves recognition because his leadership at Morant Bay made him an important figure in Jamaica's struggle against injustice.",
+      "Paul Bogle should be celebrated because his actions drew national attention to unfair conditions faced by many Jamaicans.",
+      "Paul Bogle deserves recognition as a National Hero because his courageous protest against injustice, though brutally suppressed, directly contributed to political reforms that improved the lives of ordinary Jamaicans."
     ],
     correctAnswer: 3,
-    explanation: `A strong thesis makes a specific, arguable, supported claim. Option C names who, why, and what the consequences were — it is specific and arguable.`
+    explanation: "The keyed thesis makes a specific arguable claim and supports it with Bogle's courage, resistance to injustice, and historical impact."
   }
 ]
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }))
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ]
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    )
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    }
-  })
-}
 
 const SECTION_CONFIG = [
   { type: "reading" as const,    label: "Reading Comprehension",   note: "literal, inferential, and analytical reading across all difficulty levels" },
@@ -742,9 +716,11 @@ export default function G5LaMix1MockTest() {
   }, [showResults, user?.id, user?.childName, totalQuestions, answers])
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions)
-    setRandomizedQuestions(shuffledQuestions)
-    setAnswers(new Array(shuffledQuestions.length).fill(null))
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaMix1Questions)
+      : preparePreview(g5LaMix1Questions, FREE_QUESTION_LIMIT)
+    setRandomizedQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
     setCurrentQuestion(0)
     setTimeLeft(60 * 60)
     setShowResults(false)
