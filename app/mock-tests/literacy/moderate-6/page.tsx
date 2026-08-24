@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { saveStudentTestResult } from "@/lib/student-test-results";
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -66,7 +67,7 @@ const g5LaModerate6Questions: Question[] = [
   {id:13,type:"reading",skill:"Inference",question:`${journalismPassage}\n\nWhat can be inferred about Keisha Brown's reporting?`,options:["She tried to be fair by observing the drain, interviewing a resident, and contacting the council.","She blamed Mrs. Tulloch without visiting Grove Road.","She avoided speaking to officials because documents are enough.","She wanted to spread fear about every shower."],correctAnswer:0,explanation:"Keisha gathered information from the scene, a resident, and the parish council."},
   {id:14,type:"reading",skill:"Cause and Effect",question:`${journalismPassage}\n\nWhat happened after Keisha's article was published?`,options:["A youth club organised a clean-up and the council sent workers with tools.","Residents stopped reading local news completely.","The blocked drain was ignored for several years.","The weekly paper stopped interviewing shopkeepers."],correctAnswer:0,explanation:"The article led to a youth club clean-up and council workers coming with tools."},
   {id:15,type:"reading",skill:"Vocabulary in Context",question:`${journalismPassage}\n\nIn the passage, what does “contributed” mean?`,options:["helped cause something to happen","copied a story word for word","removed every problem immediately","announced news on the radio"],correctAnswer:0,explanation:"Littering, delayed maintenance, and heavy showers all helped cause the blocked-drain problem."},
-  {id:16,type:"vocabulary",skill:"Vocabulary in Context",question:"In the passage about the school newspaper, an “editorial” would most likely be—",options:['an article that gives the newspaper’s opinion about an issue', 'a list of football scores with no comments', 'a photograph caption with one name only', 'a weather chart from another country'],correctAnswer:0,explanation:"An editorial gives an opinion, unlike a straight news report."},
+  {id:16,type:"vocabulary",skill:"Journalism Vocabulary",question:"An editorial in a newspaper would most likely be—",options:["an article that gives the newspaper’s opinion about an issue","a list of football scores with no comments","a photograph caption with one name only","a weather chart from another country"],correctAnswer:0,explanation:"An editorial gives an opinion, unlike a straight news report."},
   {id:17,type:"vocabulary",skill:"Vocabulary in Context",question:"In the school newspaper passage, a “headline” is—",options:['the title that introduces a news story', 'the room where interviews are recorded', 'the person who plants trees near a canteen', 'the final paragraph in every report'],correctAnswer:0,explanation:"Malik designs headlines, including the title for the sports report."},
   {id:18,type:"vocabulary",skill:"Vocabulary in Context",question:"What does “interviewed” mean in the passage?",options:['asked someone questions to gather information', 'copied an article from a notice board', 'printed papers without reading them', 'changed a headline to a drawing'],correctAnswer:0,explanation:"The pupils interviewed Mr. Palmer by asking questions for their article."},
   {id:19,type:"vocabulary",skill:"Vocabulary in Context",question:"To “publish” a newspaper means to—",options:['prepare it so people can read it', 'hide it in a locked cupboard', 'erase every quotation', 'plant it beside a tree'],correctAnswer:0,explanation:"The club published copies by pinning them where pupils could read them."},
@@ -78,7 +79,7 @@ const g5LaModerate6Questions: Question[] = [
   {id:25,type:"vocabulary",skill:"Vocabulary in Context",question:"In both passages, “community” refers to—",options:['people living, learning, or working together in an area', 'one person writing secretly', 'a single headline on a page', 'a box of unused newspapers'],correctAnswer:0,explanation:"Community means a group connected by place or shared life."},
   {id:26,type:"grammar",skill:"Subject-Verb Agreement",question:"Which sentence is written correctly?",options:['The editor checks every fact before the article is printed.', 'The editor check every fact before the article is printed.', 'The editor checking every fact before the article is printed.', 'The editor were checks every fact before printing.'],correctAnswer:0,explanation:"The singular subject editor takes the verb checks."},
   {id:27,type:"grammar",skill:"Verb Tense",question:"Which sentence uses past tense correctly?",options:['Yesterday, Keisha interviewed residents on Grove Road.', 'Yesterday, Keisha interviews residents on Grove Road.', 'Yesterday, Keisha will interview residents on Grove Road.', 'Yesterday, Keisha interviewing residents on Grove Road.'],correctAnswer:0,explanation:"Interviewed shows the action happened yesterday."},
-  {id:28,type:"grammar",skill:"Pronouns",question:"Choose the sentence with the correct pronoun.",options:['Jada and I edited the article after school.', 'Me and Jada edited the article after school.', 'Jada and me edited the article after school.', 'I and Jada edited the article after school.'],correctAnswer:0,explanation:"Jada and I is correct as the subject."},
+  {id:28,type:"grammar",skill:"Pronouns",question:"Jada and ___ edited the article after school.",options:["I","me","my","mine"],correctAnswer:0,explanation:"The pronoun is part of the subject \"Jada and I,\" so the subject pronoun \"I\" is correct."},
   {id:29,type:"grammar",skill:"Punctuation",question:"Which sentence is punctuated correctly?",options:['After the interview, Malik wrote a careful headline.', 'After the interview Malik, wrote a careful headline.', 'After, the interview Malik wrote a careful headline.', 'After the interview Malik wrote, a careful headline.'],correctAnswer:0,explanation:"A comma follows the introductory phrase."},
   {id:30,type:"grammar",skill:"Quotation Marks",question:"Which sentence uses quotation marks correctly?",options:['“Please check the facts,” Miss Chen said.', 'Please check the facts, “Miss Chen said.”', '“Please check the facts, Miss Chen said.', 'Please check the facts,” Miss Chen said.”'],correctAnswer:0,explanation:"The exact words are enclosed in quotation marks."},
   {id:31,type:"grammar",skill:"Conjunctions",question:"Which conjunction best completes the sentence?\nThe article was short, ___ it included all the important facts.",options:['but', 'unless', 'because', 'while'],correctAnswer:0,explanation:"But shows contrast between being short and complete."},
@@ -86,39 +87,12 @@ const g5LaModerate6Questions: Question[] = [
   {id:33,type:"grammar",skill:"Apostrophes",question:"Which sentence uses an apostrophe correctly?",options:['The reporter’s notebook was filled with interview notes.', 'The reporters notebook was filled with interview notes.', 'The reporters’ notebook was filled with interview note’s.', 'The reporter’s notebook was filled with interview note’s.'],correctAnswer:0,explanation:"Reporter’s shows one reporter owns the notebook."},
   {id:34,type:"grammar",skill:"Sentence Combining",question:"Which choice best combines the sentences?\nThe bell rang. The club continued editing.",options:['Although the bell rang, the club continued editing.', 'The bell rang the club continued editing.', 'Continued editing although the bell.', 'The club, the bell rang, continued.'],correctAnswer:0,explanation:"Although creates a smooth complex sentence."},
   {id:35,type:"grammar",skill:"Fragments",question:"Which choice is a complete sentence?",options:['The newspaper included a notice about the poetry competition.', 'Because the newspaper included a notice.', 'A notice about the poetry competition.', 'Including a notice near the photographs.'],correctAnswer:0,explanation:"A complete sentence has a subject, verb, and full thought."},
-  {id:36,type:"writing",skill:"News Report Opening",question:"Which sentence best begins a newspaper report about a school clean-up?",options:['Students from Grade 5 cleaned the playfield on Friday to reduce litter before Sports Day.', 'Things happened at school and everyone was around.', 'The playfield is a place with grass and sky.', 'I like Fridays because lunch tastes nice.'],correctAnswer:0,explanation:"The best opening gives who, what, where, and when."},
-  {id:37,type:"writing",skill:"Headlines",question:"Which headline is most accurate for an article about two wins and one draw?",options:['School Team Finishes Three Matches Without a Loss', 'School Team Destroys Every Team in Jamaica', 'Footballers Win Hundreds of Matches', 'Nobody Can Ever Beat Our School Again'],correctAnswer:0,explanation:"It is exciting but stays true to the record."},
-  {id:38,type:"writing",skill:"Interview Questions",question:"Which interview question would best help a reporter write about the reading corner?",options:['How will the new reading corner help pupils choose books?', 'What is your favourite ice-cream flavour?', 'Can you spell the word newspaper backwards?', 'Did you watch television last night?'],correctAnswer:0,explanation:"The question gathers relevant information for the article."},
-  {id:39,type:"writing",skill:"Article Organisation",question:"Which order best organises a news report?",options:['Lead with the main event, add key details and quotes, then explain what happens next.', 'Begin with unrelated jokes, skip facts, then add a title at the end.', 'List opinions first, hide the event, and repeat the same sentence.', 'Put captions before every fact and leave out the ending.'],correctAnswer:0,explanation:"News reports usually move from main facts to details and next steps."},
-  {id:40,type:"writing",skill:"Editing a News Report",question:"Which revision makes this sentence more precise?\nThe club did a thing after school.",options:['The media club checked interview notes and edited headlines after school.', 'The club was there and it was nice.', 'Some people did something sometime.', 'After school was after school for the club.'],correctAnswer:0,explanation:"The revision names the group and specific actions."},
+  {id:36,type:"writing",skill:"News Report Opening",question:"Which sentence best begins a newspaper report about a school clean-up?",options:["Students from Grade 5 cleaned the playfield on Friday to reduce litter before Sports Day.","Grade 5 students cleaned the playfield before Sports Day.","On Friday, pupils worked together to remove litter from part of the school grounds.","A school clean-up was held to prepare an outdoor area for an upcoming event."],correctAnswer:0,explanation:"The best opening gives who, what, where, and when."},
+  {id:37,type:"writing",skill:"Headlines",question:"Which headline is most accurate for an article about two wins and one draw?",options:["School Team Finishes Three Matches Without a Loss","School Footballers Complete a Strong Three-Match Run","Two Wins Help School Team Finish Series on a High","Blue Mountain Team Earns Two Wins in Three Matches"],correctAnswer:0,explanation:"It is exciting but stays true to the record."},
+  {id:38,type:"writing",skill:"Interview Questions",question:"Which interview question would best help a reporter write about the reading corner?",options:["How will the new reading corner help pupils choose books?","How many books are currently displayed in the reading corner?","When was the new reading corner officially opened?","Which types of books have been placed in the reading corner?"],correctAnswer:0,explanation:"The question gathers relevant information for the article."},
+  {id:39,type:"writing",skill:"Article Organisation",question:"Which order best organises a news report?",options:["Lead with the main event, add key details and quotes, then explain what happens next.","Begin with a quotation, explain background details, then reveal the main event near the end.","Give background information first, describe the main event next, then add quotations without a closing update.","Lead with the main event, explain what happens next, then add important details and quotations at the end."],correctAnswer:0,explanation:"News reports usually move from main facts to details and next steps."},
+  {id:40,type:"writing",skill:"Editing a News Report",question:"Which revision makes this sentence more precise?\nThe club did a thing after school.",options:["The media club checked interview notes and edited headlines after school.","The media club completed some newspaper work after school.","After school, the club worked on several parts of the newspaper.","The club spent time checking its newspaper work after school."],correctAnswer:0,explanation:"The revision names the group and specific actions."},
 ];
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }));
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ];
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    );
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    };
-  });
-};
 
 const SECTION_CONFIG = [
   {
@@ -267,9 +241,11 @@ export default function G5LaModerate6MockTest() {
   };
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions);
-    setRandomizedQuestions(shuffledQuestions);
-    setAnswers(new Array(shuffledQuestions.length).fill(null));
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaModerate6Questions)
+      : preparePreview(g5LaModerate6Questions, FREE_QUESTION_LIMIT);
+    setRandomizedQuestions(preparedQuestions);
+    setAnswers(new Array(preparedQuestions.length).fill(null));
     setCurrentQuestion(0);
     setTimeLeft(60 * 60);
     setShowResults(false);
