@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { saveStudentTestResult } from "@/lib/student-test-results";
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -432,7 +433,7 @@ Both passages suggest that`,
     id: 21,
     type: "vocabulary",
     skill: "Multiple Meaning",
-    question: `Which sentence uses the word "pool" in the same way as it would be used to describe water trapped in mangrove roots?`,
+    question: "Which sentence uses \"pool\" to mean a small body of standing water?",
     options: [
       "Marcus shot the ball into the pool table pocket.",
       "A small pool of water collected in the hollow among the roots.",
@@ -502,14 +503,14 @@ Both passages suggest that`,
     id: 26,
     type: "grammar",
     skill: "Pronouns",
-    question: `Which sentence uses the pronoun correctly?`,
+    question: "Which sentence uses the relative pronoun correctly?",
     options: [
-      "Him and Zara climbed the hill to find the cave.",
-      "Marcus and her found the map in the drawer.",
-      "Me and Marcus studied the roots of the mangrove tree.",
-      "The mangroves protected the coast during the storm, which saved the village."
+      "The mangroves protected the coast during the storm, which reduced the force of the waves.",
+      "The mangroves protected the coast during the storm, who reduced the force of the waves.",
+      "The mangroves protected the coast during the storm, whom reduced the force of the waves.",
+      "The mangroves protected the coast during the storm, whose reduced the force of the waves."
     ],
-    correctAnswer: 3,
+    correctAnswer: 0,
     explanation: `"Which" correctly refers to the entire preceding clause (the mangroves protecting the coast). The other options incorrectly use object pronouns ("Him," "her," "Me") as subjects.`
   },
   {
@@ -644,9 +645,9 @@ Both passages suggest that`,
     skill: "Strong Introduction",
     question: `Which of the following would be the strongest introduction for a paragraph about why mangroves should be protected?`,
     options: [
-      "Mangroves are trees that grow near the water.",
-      "I am going to write about mangroves in this paragraph.",
-      "Many people do not like mangroves because they are swampy.",
+      "Mangroves are unusual coastal forests that support wildlife and influence the environments around them.",
+      "Protecting mangroves matters because these forests provide several benefits to coastal communities and marine life.",
+      "Along tropical coastlines, mangroves perform important environmental functions that are often overlooked.",
       "Mangroves may look like ordinary bushes, but they are powerful protectors of our coastlines, our fish populations, and our climate."
     ],
     correctAnswer: 3,
@@ -658,10 +659,10 @@ Both passages suggest that`,
     skill: "Supporting Detail",
     question: `Which sentence provides the best supporting detail for the topic sentence "Mangrove forests are essential for healthy oceans"?`,
     options: [
-      "The trees have waxy leaves that look shiny in the sunlight.",
+      "Mangrove roots slow moving water and trap sediment along the shoreline.",
       "Young fish and crabs shelter in the roots until they are large enough to survive in the open sea.",
-      "Mangroves can be found in many different countries around the world.",
-      "Some people think mangroves are ugly and want to remove them."
+      "Mangrove forests store large amounts of carbon in their soil and plant material.",
+      "Dense mangrove roots can reduce the force of waves before they reach inland areas."
     ],
     correctAnswer: 1,
     explanation: `A good supporting detail directly proves the topic sentence. Option B explains exactly how mangroves help ocean life by acting as a nursery for young marine animals.`
@@ -686,7 +687,7 @@ Both passages suggest that`,
     skill: "Relevance",
     question: `Read the paragraph below. Which sentence should be removed because it does not belong?
 
-(1) Mangroves play a vital role in protecting coastal areas from hurricane damage. (2) Their dense root systems slow down incoming waves and prevent erosion. (3) Pineapples are a major export crop in several Caribbean islands. (4) Without these trees, storm surges would cause much more flooding inland.`,
+(1) Mangroves play a vital role in protecting coastal areas from hurricane damage. (2) Their dense root systems slow down incoming waves and prevent erosion. (3) Coastal communities may also plant other salt-tolerant trees near roads and public spaces. (4) Without these trees, storm surges would cause much more flooding inland.`,
     options: [
       "Sentence 1",
       "Sentence 2",
@@ -702,42 +703,15 @@ Both passages suggest that`,
     skill: "Strong Conclusion",
     question: `Which of the following would be the most effective concluding sentence for an essay about exploring nature?`,
     options: [
-      "So that is why exploring nature is good.",
-      "In conclusion, I have told you about exploring.",
+      "Exploring natural places can help people notice details they might otherwise overlook and ask better questions about the world.",
+      "Caves, forests, wetlands, and other natural places can all teach visitors something about how environments work.",
       "Whether following a faded map to a hidden cave or examining roots in a coastal swamp, exploring nature teaches us to look closely, think carefully, and appreciate the world around us.",
-      "You should go outside sometimes if you want to."
+      "Careful exploration can turn an ordinary outdoor experience into an opportunity to learn about nature and its patterns."
     ],
     correctAnswer: 2,
     explanation: `A strong conclusion leaves a lasting impression by restating the main idea in a fresh, memorable way. Option C ties back to the essay's examples and uses parallel structure for impact.`
   }
 ];
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }));
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ];
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    );
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    };
-  });
-};
 
 const SECTION_CONFIG = [
   {
@@ -886,9 +860,11 @@ export default function G5LaDiff8MockTest() {
   };
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions);
-    setRandomizedQuestions(shuffledQuestions);
-    setAnswers(new Array(shuffledQuestions.length).fill(null));
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaDiff8Questions)
+      : preparePreview(g5LaDiff8Questions, FREE_QUESTION_LIMIT);
+    setRandomizedQuestions(preparedQuestions);
+    setAnswers(new Array(preparedQuestions.length).fill(null));
     setCurrentQuestion(0);
     setTimeLeft(60 * 60);
     setShowResults(false);
