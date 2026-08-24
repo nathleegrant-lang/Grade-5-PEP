@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { saveStudentTestResult } from "@/lib/student-test-results";
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -344,9 +345,8 @@ In the passage, what does "interpretation" most nearly mean?`,
   {
     id: 18,
     type: "vocabulary",
-    skill: "Antonym",
-    question:
-      "The report praised \"reliable\" data. Which word means the OPPOSITE of \"reliable\"?",
+    skill: "Antonyms",
+    question: "Which word means the OPPOSITE of \"reliable\"?",
     options: ["untrustworthy", "consistent", "careful", "exact"],
     correctAnswer: 0,
     explanation:
@@ -448,14 +448,14 @@ In the passage, what does "interpretation" most nearly mean?`,
     skill: "Subject-Verb Agreement",
     question: "Which sentence is written correctly?",
     options: [
-      "The team of pupils records data every ten minutes.",
-      "The team of pupils record data every ten minutes.",
-      "The team of pupils recording data every ten minutes.",
-      "The team of pupils are records data every ten minutes."
+      "The lead pupil records data every ten minutes.",
+      "The lead pupil record data every ten minutes.",
+      "The lead pupil recording data every ten minutes.",
+      "The lead pupil are records data every ten minutes."
     ],
     correctAnswer: 0,
     explanation:
-      "'Team' is singular, so it takes the singular verb 'records'.",
+      "The singular subject \"pupil\" takes the singular verb \"records.\"",
   },
   {
     id: 27,
@@ -591,10 +591,10 @@ In the passage, what does "interpretation" most nearly mean?`,
     question:
       "A student wants to PERSUADE readers to support renewable energy. Which sentence fits that purpose best?",
     options: [
-      "Renewable energy is a type of energy that comes from nature.",
+      "Renewable energy can reduce reliance on fuels that release pollution into the environment.",
       "We must choose renewable energy because it protects our health and our future.",
-      "Here are the steps for building a solar oven from cardboard.",
-      "Once upon a time, a science team built a small oven."
+      "Solar energy comes from sunlight and can be used for purposes such as heating or producing electricity.",
+      "Communities that use renewable energy may reduce some environmental pressures over time."
     ],
     correctAnswer: 1,
     explanation:
@@ -637,11 +637,11 @@ In the passage, what does "interpretation" most nearly mean?`,
       "The pupils tightened the loose plastic cover.",
       "They changed the oven's angle toward the sun.",
       "They recorded temperature data every ten minutes.",
-      "The school cafeteria serves lunch at noon each day."
+      "The science fair gave pupils an opportunity to view several projects made by other classes."
     ],
     correctAnswer: 3,
     explanation:
-      "Lunch times are unrelated to the solar oven study and should be removed; the others belong in the report.",
+      "The science-fair detail is relevant to the wider event but does not explain the solar oven's construction, testing, measurements, or improvements, so it should be removed.",
   },
   {
     id: 40,
@@ -650,43 +650,16 @@ In the passage, what does "interpretation" most nearly mean?`,
     question:
       "Which sentence is the best conclusion for an essay about these two science stories?",
     options: [
-      "In conclusion, both renewable energy and coral reefs are very interesting topics to study.",
+      "Both investigations show that scientific questions can lead researchers to change what they first expected.",
       "Both stories show that real science depends on evidence, patience, and honest testing.",
-      "These examples prove that students should always wait for adults to do the hard work.",
-      "As the passages show, the only way to do science is to build a model or use a microscope."
+      "The solar-oven and coral studies both demonstrate that careful observation can improve scientific understanding.",
+      "These stories show that useful scientific work often requires people to collect evidence and reconsider ideas."
     ],
     correctAnswer: 1,
     explanation:
       "A strong conclusion restates the shared main idea with purpose; the second choice ties both examples to the central point.",
   }
 ];
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }));
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ];
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    );
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    };
-  });
-};
 
 const SECTION_CONFIG = [
   {
@@ -835,9 +808,11 @@ export default function G5LaDifficult2MockTest() {
   };
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions);
-    setRandomizedQuestions(shuffledQuestions);
-    setAnswers(new Array(shuffledQuestions.length).fill(null));
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaDifficult2Questions)
+      : preparePreview(g5LaDifficult2Questions, FREE_QUESTION_LIMIT);
+    setRandomizedQuestions(preparedQuestions);
+    setAnswers(new Array(preparedQuestions.length).fill(null));
     setCurrentQuestion(0);
     setTimeLeft(60 * 60);
     setShowResults(false);
