@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { saveStudentTestResult } from "@/lib/student-test-results";
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -512,7 +513,7 @@ Why does Aaliyah say the bridge itself "mattered less" than what the village dis
     options: [
       "Kemar bought supplies, recording costs, and profits were donated.",
       "Kemar bought supplies, recorded costs, and donated profits.",
-      "Kemar bought his supplies, recorded the costs, and donated his profits.",
+      "Kemar bought his supplies, carefully recorded the costs, and the profits were donated.",
       "Kemar bought, to record costs, and donating profits."
     ],
     correctAnswer: 1,
@@ -523,7 +524,7 @@ Why does Aaliyah say the bridge itself "mattered less" than what the village dis
     id: 32,
     type: "grammar",
     skill: "Run-on Correction",
-    question: "Which choice corrects the run-on sentence?",
+    question: "Which choice corrects the run-on sentence AND clearly shows that the damage to the bridge caused the students to act?",
     options: [
       "The bridge was damaged the students decided to act.",
       "The bridge was damaged, the students decided to act.",
@@ -582,10 +583,10 @@ Why does Aaliyah say the bridge itself "mattered less" than what the village dis
     question:
       "Which sentence is the best introduction for an essay about young people solving community problems?",
     options: [
-      "Young people often face many different problems in their communities today.",
-      "In this essay, I am going to write about two young people who did things.",
+      "Young people can contribute to their communities in many different ways.",
+      "Community problems such as unhealthy choices and damaged facilities can affect many people.",
       "Careful planning and teamwork allow young people to solve difficult community problems.",
-      "There are many young people, and some of them live in places with bridges and shops."
+      "Kemar and Aaliyah each responded to a problem that affected people around them."
     ],
     correctAnswer: 2,
     explanation:
@@ -598,9 +599,9 @@ Why does Aaliyah say the bridge itself "mattered less" than what the village dis
     question:
       "Which detail best supports the idea that Kemar ran his business carefully?",
     options: [
-      "He was twelve years old and went to a primary school in his neighbourhood.",
-      "Granola can be made from fruit and oats mixed together in a simple way.",
-      "Some pupils at the school liked buying sugary drinks from the tuck shop.",
+      "He decided to sell granola rather than the sugary snacks pupils often bought.",
+      "His first batch of granola sold out after pupils tried the product.",
+      "He later used some of the money he earned to support another purpose.",
       "He kept a notebook of costs and profits and adjusted his plan when needed."
     ],
     correctAnswer: 3,
@@ -627,12 +628,12 @@ Why does Aaliyah say the bridge itself "mattered less" than what the village dis
     options: [
       "The students wrote letters requesting materials from a local hardware store.",
       "Parents helped to collect the necessary supplies for the building work.",
-      "Aaliyah's favourite colour is bright green, which she also painted her room.",
+      "Before the flooding, Aaliyah had taken part in several other school and community activities.",
       "The new crossing reopened for the whole community within three short weeks."
     ],
     correctAnswer: 2,
     explanation:
-      "Aaliyah's favourite colour has nothing to do with the project and should be removed; the others all advance the report.",
+      "Aaliyah's previous activities are about her, but they do not explain the bridge problem, the rebuilding effort, or its result, so the sentence weakens the report's focus.",
   },
   {
     id: 40,
@@ -641,43 +642,16 @@ Why does Aaliyah say the bridge itself "mattered less" than what the village dis
     question:
       "Which sentence is the best conclusion for an essay about these two projects?",
     options: [
-      "As you can see, bridges and granola are two things that can help a town.",
+      "Kemar's business and Aaliyah's bridge project both succeeded because young people chose to respond to problems around them.",
       "Both stories show that planning and teamwork let young people make a real difference.",
-      "In conclusion, these two projects happened and then they were completely finished.",
-      "To sum up, young people should always try to help out when they see a problem."
+      "These projects show that young people can contribute useful ideas when their communities give them support.",
+      "Both examples demonstrate that community problems can be improved when people are willing to take action."
     ],
     correctAnswer: 1,
     explanation:
-      "A strong conclusion restates the main idea with purpose; the first choice ties both examples to the central point.",
+      "A strong conclusion restates the main idea with purpose; the second choice ties both examples to the central point.",
   }
 ];
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }));
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ];
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    );
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    };
-  });
-};
 
 const SECTION_CONFIG = [
   {
@@ -826,9 +800,11 @@ export default function G5LaDifficult1MockTest() {
   };
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions);
-    setRandomizedQuestions(shuffledQuestions);
-    setAnswers(new Array(shuffledQuestions.length).fill(null));
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaDifficult1Questions)
+      : preparePreview(g5LaDifficult1Questions, FREE_QUESTION_LIMIT);
+    setRandomizedQuestions(preparedQuestions);
+    setAnswers(new Array(preparedQuestions.length).fill(null));
     setCurrentQuestion(0);
     setTimeLeft(60 * 60);
     setShowResults(false);
