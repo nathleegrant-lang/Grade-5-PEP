@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { saveStudentTestResult } from "@/lib/student-test-results";
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -363,7 +364,7 @@ What can you infer about why the group made compost from kitchen scraps?`,
     type: "vocabulary",
     skill: "Context Clues",
     question:
-      "\"They added compost so the soil could hold moisture.\" Using context, \"moisture\" most nearly means —",
+      "Mr. Campbell covered the soil with mulch so it held moisture. In this context, \"moisture\" most nearly means —",
     options: [
       "thick layers of mud",
       "tiny pieces of rock",
@@ -372,7 +373,7 @@ What can you infer about why the group made compost from kitchen scraps?`,
     ],
     correctAnswer: 3,
     explanation:
-      "Soil that holds moisture holds water, so 'small amounts of water' fits the context.",
+      "Mulch helps soil keep water from drying out quickly, so \"moisture\" means small amounts of water held in the soil.",
   },
   {
     id: 21,
@@ -590,9 +591,9 @@ What can you infer about why the group made compost from kitchen scraps?`,
     question:
       "Which sentence is the best introduction for an essay about adapting to a changing climate?",
     options: [
-      "Farming is a job that some people do in the countryside.",
-      "This essay will talk about a few things to do with farms.",
-      "There is soil and rain and many different plants in the world.",
+      "Changing rainfall and longer dry periods can create serious challenges for farmers.",
+      "Farmers use many methods to grow crops under different weather conditions.",
+      "Food security depends partly on how farms respond when growing conditions become difficult.",
       "As the climate changes, farmers who observe and adapt can protect their crops and their communities."
     ],
     correctAnswer: 3,
@@ -607,9 +608,9 @@ What can you infer about why the group made compost from kitchen scraps?`,
       "A student is writing for young children about saving food. Which sentence best suits that audience?",
     options: [
       "Don't waste food — save what you can't eat now so you can enjoy it later!",
-      "Optimising household consumption reduces aggregate nutritional shortfalls.",
-      "Food security frameworks require systemic agricultural reform.",
-      "The preservation of surplus produce mitigates economic loss."
+      "Saving extra food can help families make their supplies last longer.",
+      "Food should be stored properly so that less of it has to be thrown away.",
+      "When you have extra food, think carefully about how it can be kept for another day."
     ],
     correctAnswer: 0,
     explanation:
@@ -635,12 +636,12 @@ What can you infer about why the group made compost from kitchen scraps?`,
     options: [
       "The group tested the soil before planting.",
       "Compost was made from kitchen scraps.",
-      "The school's football team won a match last Friday.",
+      "Several families attended the first meeting because they were interested in growing more food locally.",
       "Families learned how to preserve their harvest."
     ],
     correctAnswer: 2,
     explanation:
-      "A football result has nothing to do with the garden report and should be removed.",
+      "The meeting-attendance detail gives background, but it does not explain the garden methods or food-preservation work developed in the report, so removing it keeps the paragraph more focused.",
   },
   {
     id: 40,
@@ -649,9 +650,9 @@ What can you infer about why the group made compost from kitchen scraps?`,
     question:
       "Which sentence is the best conclusion for an essay about these two stories?",
     options: [
-      "In the end, both Mr. Campbell and the group found that growing food is easy.",
-      "Yams and vegetables are two completely different types of plants.",
-      "So they grew some food and then the essay is now finished.",
+      "Both stories demonstrate that farmers and communities can respond to difficult growing conditions with practical changes.",
+      "The experiences show that local food production becomes stronger when people learn from problems and adjust their methods.",
+      "These examples suggest that protecting food supplies requires farmers and communities to prepare for changing conditions.",
       "Both stories show that observing, adapting, and sharing can help communities feed themselves."
     ],
     correctAnswer: 3,
@@ -659,33 +660,6 @@ What can you infer about why the group made compost from kitchen scraps?`,
       "A strong conclusion restates the shared main idea with purpose, as the last choice does.",
   }
 ];
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }));
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ];
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    );
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    };
-  });
-};
 
 const SECTION_CONFIG = [
   {
@@ -834,9 +808,11 @@ export default function G5LaDifficult3MockTest() {
   };
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions);
-    setRandomizedQuestions(shuffledQuestions);
-    setAnswers(new Array(shuffledQuestions.length).fill(null));
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaDifficult3Questions)
+      : preparePreview(g5LaDifficult3Questions, FREE_QUESTION_LIMIT);
+    setRandomizedQuestions(preparedQuestions);
+    setAnswers(new Array(preparedQuestions.length).fill(null));
     setCurrentQuestion(0);
     setTimeLeft(60 * 60);
     setShowResults(false);
