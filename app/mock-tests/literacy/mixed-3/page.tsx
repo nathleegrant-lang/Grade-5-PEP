@@ -639,7 +639,7 @@ Which sentence best summarises the passage?`,
     id: 39,
     type: "writing",
     skill: "Relevance",
-    question: "Which sentence should be removed because it does not support the paragraph's focus?",
+    question: `Which sentence should be removed because it does not support the paragraph's focus?\n\n(1) Bamboo can be used in furniture and small buildings. (2) Proper drying helps protect it from rot. (3) Bamboo is also used to make decorative baskets and musical instruments. (4) Trained builders must understand how bamboo behaves.`,
     options: [
       "Sentence 1",
       "Sentence 2",

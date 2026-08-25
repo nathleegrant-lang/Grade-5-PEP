@@ -787,7 +787,7 @@ Which sentence is the best summary of the passage?`,
     id: 39,
     type: "writing",
     skill: "Organization",
-    question: `Which sentence does NOT belong in a paragraph about preparing for a hurricane?
+    question: `Which sentence does NOT belong in a paragraph about steps families should take at home to prepare their own emergency supplies and important items for a hurricane?
 
 (1) Families should store clean water and non-perishable food. (2) Flashlights and batteries should be checked. (3) Some community centres are officially used as emergency shelters during hurricanes. (4) Important documents should be kept in a waterproof container.`,
     options: [
