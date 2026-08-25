@@ -505,7 +505,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { success: true }
   }
 
-  const isPremium = user?.subscriptionTier !== "free"
+  const isPremium =
+    !isLoading &&
+    !!user &&
+    user.subscriptionTier !== "free"
   const isAdmin = user?.role === "admin"
 
   return (
