@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -304,13 +305,13 @@ Which problem and solution are shown in the passage?`,
     skill: "Context Clues",
     question: `Choose the best meaning of “steady” as it is used in the Easy 7 reading passages.`,
     options: [
-      "continuing in a regular way",
-      "a loud sound made by traffic",
-      "a place where no books are allowed",
-      "the opposite of careful work",
+      "continuing regularly",
+      "changing often",
+      "stopping frequently",
+      "happening only once",
     ],
     correctAnswer: 0,
-    explanation: `In the reading context, “steady” means continuing in a regular way.`
+    explanation: `In the reading context, “steady” means continuing regularly.`
   },
   {
     id: 17,
@@ -319,9 +320,9 @@ Which problem and solution are shown in the passage?`,
     question: `Choose the best meaning of “recommended” as it is used in the Easy 7 reading passages.`,
     options: [
       "suggested as a good choice",
-      "a loud sound made by traffic",
-      "a place where no books are allowed",
-      "the opposite of careful work",
+      "required by a rule",
+      "borrowed temporarily",
+      "recorded in writing",
     ],
     correctAnswer: 0,
     explanation: `In the reading context, “recommended” means suggested as a good choice.`
@@ -332,13 +333,13 @@ Which problem and solution are shown in the passage?`,
     skill: "Context Clues",
     question: `Choose the best meaning of “novels” as it is used in the Easy 7 reading passages.`,
     options: [
-      "long storybooks",
-      "a loud sound made by traffic",
-      "a place where no books are allowed",
-      "the opposite of careful work",
+      "long fictional stories",
+      "collections of poems",
+      "short factual notices",
+      "picture labels",
     ],
     correctAnswer: 0,
-    explanation: `In the reading context, “novels” means long storybooks.`
+    explanation: `In the reading context, “novels” means long fictional stories.`
   },
   {
     id: 19,
@@ -347,9 +348,9 @@ Which problem and solution are shown in the passage?`,
     question: `Choose the best meaning of “organized” as it is used in the Easy 7 reading passages.`,
     options: [
       "planned and arranged",
-      "a loud sound made by traffic",
-      "a place where no books are allowed",
-      "the opposite of careful work",
+      "delayed",
+      "copied",
+      "cancelled",
     ],
     correctAnswer: 0,
     explanation: `In the reading context, “organized” means planned and arranged.`
@@ -360,13 +361,13 @@ Which problem and solution are shown in the passage?`,
     skill: "Context Clues",
     question: `Choose the best meaning of “infant department” as it is used in the Easy 7 reading passages.`,
     options: [
-      "the section of school for younger children",
-      "a loud sound made by traffic",
-      "a place where no books are allowed",
-      "the opposite of careful work",
+      "section for younger children",
+      "staff office",
+      "upper-grade block",
+      "sports area",
     ],
     correctAnswer: 0,
-    explanation: `In the reading context, “infant department” means the section of school for younger children.`
+    explanation: `In the reading context, “infant department” means section for younger children.`
   },
   {
     id: 21,
@@ -375,9 +376,9 @@ Which problem and solution are shown in the passage?`,
     question: `Choose the best meaning of “topic” as it is used in the Easy 7 reading passages.`,
     options: [
       "subject or main idea",
-      "a loud sound made by traffic",
-      "a place where no books are allowed",
-      "the opposite of careful work",
+      "author's name",
+      "page number",
+      "illustration",
     ],
     correctAnswer: 0,
     explanation: `In the reading context, “topic” means subject or main idea.`
@@ -389,9 +390,9 @@ Which problem and solution are shown in the passage?`,
     question: `Choose the best meaning of “volunteers” as it is used in the Easy 7 reading passages.`,
     options: [
       "people who choose to help",
-      "a loud sound made by traffic",
-      "a place where no books are allowed",
-      "the opposite of careful work",
+      "paid employees",
+      "spectators",
+      "people receiving assistance",
     ],
     correctAnswer: 0,
     explanation: `In the reading context, “volunteers” means people who choose to help.`
@@ -403,9 +404,9 @@ Which problem and solution are shown in the passage?`,
     question: `Choose the best meaning of “enjoyable” as it is used in the Easy 7 reading passages.`,
     options: [
       "pleasant or fun",
-      "a loud sound made by traffic",
-      "a place where no books are allowed",
-      "the opposite of careful work",
+      "difficult to understand",
+      "expensive",
+      "unfinished",
     ],
     correctAnswer: 0,
     explanation: `In the reading context, “enjoyable” means pleasant or fun.`
@@ -416,13 +417,13 @@ Which problem and solution are shown in the passage?`,
     skill: "Context Clues",
     question: `Choose the best meaning of “challenge” as it is used in the Easy 7 reading passages.`,
     options: [
-      "a task that encourages effort",
-      "a loud sound made by traffic",
-      "a place where no books are allowed",
-      "the opposite of careful work",
+      "task requiring effort",
+      "reward for winning",
+      "timetable",
+      "classroom rule",
     ],
     correctAnswer: 0,
-    explanation: `In the reading context, “challenge” means a task that encourages effort.`
+    explanation: `In the reading context, “challenge” means task requiring effort.`
   },
   {
     id: 25,
@@ -430,13 +431,13 @@ Which problem and solution are shown in the passage?`,
     skill: "Context Clues",
     question: `Choose the best meaning of “donation” as it is used in the Easy 7 reading passages.`,
     options: [
-      "something given to help others",
-      "a loud sound made by traffic",
-      "a place where no books are allowed",
-      "the opposite of careful work",
+      "something given to help",
+      "something borrowed",
+      "something sold for profit",
+      "something returned to its owner",
     ],
     correctAnswer: 0,
-    explanation: `In the reading context, “donation” means something given to help others.`
+    explanation: `In the reading context, “donation” means something given to help.`
   },
   {
     id: 26,
@@ -585,9 +586,9 @@ Which problem and solution are shown in the passage?`,
     question: `You are writing a notice about the School Library Reading Challenge. What should you include?`,
     options: [
       "A clear heading, the dates, what pupils must do, and polite language",
-      "Only jokes about reading and no important details",
-      "A secret message that does not say where to sign up",
-      "One long sentence with no punctuation",
+      "A heading and picture about reading, but no dates",
+      "The dates and a slogan, but no instructions for pupils",
+      "A description of the activity, but no sign-up information",
     ],
     correctAnswer: 0,
     explanation: `A notice should give clear details such as the heading, dates, actions, and polite language for readers.`
@@ -599,9 +600,9 @@ Which problem and solution are shown in the passage?`,
     question: `Which opening sentence best begins a paragraph about the Book Donation Drive?`,
     options: [
       "Our school’s Book Donation Drive helped younger students enjoy reading.",
-      "Books books books and then some other things happened.",
-      "Nobody knows what this paragraph will explain.",
-      "The sky was blue before I ate lunch.",
+      "Donated books were placed on tables in the hall.",
+      "Volunteers counted the books after lunch.",
+      "Younger pupils selected books to take to class.",
     ],
     correctAnswer: 0,
     explanation: `The correct opening sentence clearly introduces the topic of the paragraph.`
@@ -613,9 +614,9 @@ Which problem and solution are shown in the passage?`,
     question: `Which detail best supports a report about sharing books with younger students?`,
     options: [
       "Grade 5 volunteers read aloud and helped children choose books.",
-      "The tuck shop sold patties at lunch time.",
-      "A dog barked near the school gate.",
-      "The football team practised after school.",
+      "Volunteers sorted donated books into boxes.",
+      "The donation poster was displayed near the library.",
+      "Many donated books had colourful covers.",
     ],
     correctAnswer: 0,
     explanation: `The detail about volunteers reading aloud directly supports the report about sharing books.`
@@ -627,9 +628,9 @@ Which problem and solution are shown in the passage?`,
     question: `Which sentence is the best revision of “The drive was good”?`,
     options: [
       "The book drive was successful because many pupils donated clean picture books.",
-      "The drive good very much books stuff.",
-      "Good drive and thing happened there.",
-      "The drive was good good good.",
+      "The drive was good because many books were there.",
+      "The book drive was successful, and it was a good drive.",
+      "Many pupils donated books, and the drive went well.",
     ],
     correctAnswer: 0,
     explanation: `The revised sentence is clearer and gives a specific reason the drive was successful.`
@@ -641,33 +642,14 @@ Which problem and solution are shown in the passage?`,
     question: `Which sentence would make the best conclusion for a paragraph about Easy 7’s book themes?`,
     options: [
       "Reading and sharing books can help the whole school community learn together.",
-      "The paragraph will now start with a new topic.",
-      "Some books have pages and covers.",
-      "I forgot what happened in the library.",
+      "Posters about the drive were displayed near the library.",
+      "Volunteers sorted the donated books into groups.",
+      "The school plans another reading activity next term.",
     ],
     correctAnswer: 0,
     explanation: `The correct conclusion sums up the idea that reading and sharing books help the school community.`
   },
 ]
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({ option, index }))
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [optionsWithOriginalIndex[j], optionsWithOriginalIndex[i]]
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex((item) => item.index === question.correctAnswer)
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    }
-  })
-}
 
 const SECTION_CONFIG = [
   { type: "reading" as const,    label: "Reading Comprehension",  note: "main idea, inference, author's purpose, tone, text structure" },
@@ -755,9 +737,11 @@ export default function G5LaEasy7MockTest() {
   }
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions)
-    setRandomizedQuestions(shuffledQuestions)
-    setAnswers(new Array(shuffledQuestions.length).fill(null))
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaEasy7Questions)
+      : preparePreview(g5LaEasy7Questions, FREE_QUESTION_LIMIT)
+    setRandomizedQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
     setCurrentQuestion(0)
     setTimeLeft(60 * 60)
     setShowResults(false)

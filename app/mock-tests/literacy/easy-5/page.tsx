@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -400,15 +401,15 @@ Which statement is an opinion about the road safety lesson?`,
     id: 24,
     type: "vocabulary",
     skill: "Word Choice",
-    question: `Which word best completes the sentence? The teacher gave clear ______ before the practice race began.`,
+    question: `Before the practice race began, the teacher gave clear ___ so runners knew what to do.`,
     options: [
       "instructions",
-      "clouds",
-      "sandals",
-      "mangoes",
+      "equipment",
+      "scores",
+      "results",
     ],
     correctAnswer: 0,
-    explanation: `A teacher gives instructions before an activity so students know what to do.`
+    explanation: `Instructions tell the runners what they are expected to do before the activity begins.`
   },
   {
     id: 25,
@@ -598,10 +599,10 @@ Which statement is an opinion about the road safety lesson?`,
     skill: "Audience and Tone",
     question: `You are writing a notice to Grade 5 students about bus safety. Which tone is most suitable?`,
     options: [
-      "Angry and insulting",
-      "Silly and confusing",
+      "Formal and strict",
+      "Friendly and playful",
       "Clear, polite, and helpful",
-      "Secretive and mysterious",
+      "Casual and humorous",
     ],
     correctAnswer: 2,
     explanation: `A school notice should give information in a clear, polite, and helpful tone.`
@@ -612,9 +613,9 @@ Which statement is an opinion about the road safety lesson?`,
     skill: "Revision",
     question: `A student wrote: "Sports Day was nice." Which revision gives the clearest detail?`,
     options: [
-      "Sports Day was nice and also very nice.",
-      "Sports Day happened at school one day.",
-      "Sports Day was an event with some things.",
+      "Sports Day was enjoyable because several races were held.",
+      "Sports Day was lively because pupils gathered on the field for events.",
+      "Sports Day was memorable because each house took part in activities.",
       "Sports Day was exciting because students cheered, raced, and helped their teams.",
     ],
     correctAnswer: 3,
@@ -626,35 +627,16 @@ Which statement is an opinion about the road safety lesson?`,
     skill: "Concluding Sentence",
     question: `Which sentence best concludes a paragraph about road safety?`,
     options: [
-      "Drivers sometimes turn at the corner.",
+      "Students should look both ways before crossing the road.",
       "Therefore, taking a few careful seconds can help students get home safely.",
-      "The bus stop is near the school gate.",
-      "Some students carry blue schoolbags.",
+      "Road safety includes several rules that students should learn.",
+      "First, wait until the road is clear before stepping from the curb.",
     ],
     correctAnswer: 1,
     explanation: `This sentence wraps up the paragraph by restating the importance of careful road-safety choices.`
   }
 ]
 
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({ option, index }))
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [optionsWithOriginalIndex[j], optionsWithOriginalIndex[i]]
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex((item) => item.index === question.correctAnswer)
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    }
-  })
-}
 
 const SECTION_CONFIG = [
   { type: "reading" as const,    label: "Reading Comprehension",  note: "main idea, inference, author's purpose, tone, text structure" },
@@ -741,9 +723,11 @@ export default function G5LaEasy5MockTest() {
   }
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions)
-    setRandomizedQuestions(shuffledQuestions)
-    setAnswers(new Array(shuffledQuestions.length).fill(null))
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaEasy5Questions)
+      : preparePreview(g5LaEasy5Questions, FREE_QUESTION_LIMIT)
+    setRandomizedQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
     setCurrentQuestion(0)
     setTimeLeft(60 * 60)
     setShowResults(false)

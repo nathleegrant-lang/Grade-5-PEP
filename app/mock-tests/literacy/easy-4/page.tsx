@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -456,15 +457,15 @@ What happened because of the donation drive?`,
     id: 28,
     type: "grammar",
     skill: "Pronoun Agreement",
-    question: `Choose the correct pronoun: Each student brought ___ own water bottle to the garden.`,
+    question: `The students brought ___ own water bottles.`,
     options: [
       "their",
       "our",
       "your",
-      "his or her",
+      "its",
     ],
-    correctAnswer: 3,
-    explanation: `"Each student" is singular, so "his or her" agrees with it in this sentence.`
+    correctAnswer: 0,
+    explanation: `The plural noun "students" agrees with the plural possessive word "their."`
   },
   {
     id: 29,
@@ -627,34 +628,15 @@ What happened because of the donation drive?`,
     question: `A student wrote: "The library is good." Which revision gives the clearest detail?`,
     options: [
       "The library has new storybooks, quiet tables, and a helpful reading club.",
-      "The library is very, very, very good for everyone.",
-      "The library is a place and it is at school.",
-      "The library is good because it is not bad.",
+      "The library has several books and tables where students can read.",
+      "The library gives students a quiet place to read and borrow books.",
+      "The library has a reading club that meets with students after class.",
     ],
     correctAnswer: 0,
     explanation: `The revision gives specific details that explain what makes the library useful.`
   }
 ]
 
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({ option, index }))
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [optionsWithOriginalIndex[j], optionsWithOriginalIndex[i]]
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex((item) => item.index === question.correctAnswer)
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    }
-  })
-}
 
 const SECTION_CONFIG = [
   { type: "reading" as const,    label: "Reading Comprehension",  note: "main idea, inference, author's purpose, tone, text structure" },
@@ -741,9 +723,11 @@ export default function G5LaEasy4MockTest() {
   }
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions)
-    setRandomizedQuestions(shuffledQuestions)
-    setAnswers(new Array(shuffledQuestions.length).fill(null))
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaEasy4Questions)
+      : preparePreview(g5LaEasy4Questions, FREE_QUESTION_LIMIT)
+    setRandomizedQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
     setCurrentQuestion(0)
     setTimeLeft(60 * 60)
     setShowResults(false)

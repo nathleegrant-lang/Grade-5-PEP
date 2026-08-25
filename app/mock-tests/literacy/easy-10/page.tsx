@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -561,9 +562,9 @@ The presenter spoke clearly to the visitors.`,
 The poster was colourful, _____ the message was easy to read.`,
     options: [
       "and",
-      "under",
-      "quickly",
-      "beside",
+      "but",
+      "because",
+      "although",
     ],
     correctAnswer: 0,
     explanation: `And correctly joins two related ideas that both describe the poster.`
@@ -603,9 +604,9 @@ The poster was colourful, _____ the message was easy to read.`,
     question: `Which sentence would be the best topic sentence for a paragraph about the School Science Fair?`,
     options: [
       "The School Science Fair helped pupils practise asking questions and using evidence.",
-      "My shoes were beside the classroom door.",
-      "The mango tree dropped leaves near the gate.",
-      "A puppy slept under the library steps.",
+      "One group tested how sunlight affected plant growth.",
+      "Visitors asked pupils questions about their display boards.",
+      "At the end of the fair, groups explained their results.",
     ],
     correctAnswer: 0,
     explanation: `A topic sentence should introduce the main idea, which is pupils learning science skills through the fair.`
@@ -619,9 +620,9 @@ The poster was colourful, _____ the message was easy to read.`,
 The wellness campaign taught pupils simple healthy habits.`,
     options: [
       "Posters reminded pupils to drink water, eat fruits and vegetables, rest, and exercise.",
-      "The library shelf has many storybooks.",
-      "A bird flew over the playground fence.",
-      "The school bell rang loudly at noon.",
+      "The wellness campaign began on Monday.",
+      "Healthy habits are important for pupils.",
+      "In conclusion, small daily choices can improve health.",
     ],
     correctAnswer: 0,
     explanation: `The poster details directly support the idea that pupils learned simple healthy habits.`
@@ -651,9 +652,9 @@ The wellness campaign taught pupils simple healthy habits.`,
     question: `Which sentence is the best conclusion for a paragraph about the wellness campaign?`,
     options: [
       "Small healthy choices each day can help pupils feel ready to learn.",
-      "The blue pencil rolled across the desk.",
-      "My cousin likes cartoons on Saturdays.",
-      "The classroom window was open during rain.",
+      "Posters listed water, fruits, vegetables, rest, and exercise.",
+      "The wellness campaign began with classroom displays.",
+      "First, pupils read the health posters.",
     ],
     correctAnswer: 0,
     explanation: `This sentence wraps up the paragraph by restating the importance of daily healthy choices.`
@@ -665,33 +666,14 @@ The wellness campaign taught pupils simple healthy habits.`,
     question: `Choose the clearest sentence.`,
     options: [
       "We labelled the lunch choices so pupils could identify balanced meals.",
-      "Lunch choices pupils identify labelled balanced so meals.",
-      "Balanced so choices the pupils lunch labelled identify.",
-      "We meals choices because balanced labelled pupils.",
+      "We labelled the lunch choices so they could see which meals were balanced.",
+      "The lunch choices were labelled by us so balanced meals could be identified by pupils.",
+      "We labelled balanced lunch choices, and the labels showed the choices.",
     ],
     correctAnswer: 0,
     explanation: `The correct sentence clearly explains what was labelled and why.`
   },
 ]
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({ option, index }))
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [optionsWithOriginalIndex[j], optionsWithOriginalIndex[i]]
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex((item) => item.index === question.correctAnswer)
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    }
-  })
-}
 
 const SECTION_CONFIG = [
   { type: "reading" as const,    label: "Reading Comprehension",  note: "main idea, inference, author's purpose, tone, text structure" },
@@ -779,9 +761,11 @@ export default function G5LaEasy10MockTest() {
   }
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions)
-    setRandomizedQuestions(shuffledQuestions)
-    setAnswers(new Array(shuffledQuestions.length).fill(null))
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaEasy10Questions)
+      : preparePreview(g5LaEasy10Questions, FREE_QUESTION_LIMIT)
+    setRandomizedQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
     setCurrentQuestion(0)
     setTimeLeft(60 * 60)
     setShowResults(false)
