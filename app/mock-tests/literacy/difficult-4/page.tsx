@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { saveStudentTestResult } from "@/lib/student-test-results";
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -448,14 +449,14 @@ Why did some classmates complain about Marcus?`,
     skill: "Subject-Verb Agreement",
     question: "Which sentence is written correctly?",
     options: [
-      "The class of pupils honours the National Heroes each year.",
-      "The class of pupils honour the National Heroes each year.",
-      "The class of pupils honouring the National Heroes each year.",
-      "The class of pupils are honours the National Heroes each year."
+      "The teacher honours the National Heroes each year.",
+      "The teacher honour the National Heroes each year.",
+      "The teacher honouring the National Heroes each year.",
+      "The teacher are honours the National Heroes each year."
     ],
     correctAnswer: 0,
     explanation:
-      "'Class' is singular, so it takes the singular verb 'honours'.",
+      "The singular subject \"teacher\" takes the singular verb \"honours.\"",
   },
   {
     id: 28,
@@ -622,11 +623,11 @@ Why did some classmates complain about Marcus?`,
       "Good citizens care deeply about the people around them.",
       "They are willing to speak up against unfairness when they see it.",
       "Even small, brave actions can slowly improve a whole community.",
-      "Tanya's brother likes to play video games after school."
+      "Citizens may learn about national figures by reading biographies and visiting historical sites."
     ],
     correctAnswer: 3,
     explanation:
-      "Tanya's brother's hobby is unrelated to civic responsibility and should be removed.",
+      "Learning about national figures is related to citizenship, but it does not develop the paragraph's focus on the actions and qualities of responsible citizens.",
   },
   {
     id: 40,
@@ -635,43 +636,16 @@ Why did some classmates complain about Marcus?`,
     question:
       "Which sentence is the best conclusion for an essay about heroes and service?",
     options: [
-      "The best way to honour heroes is to learn their names and dates by heart.",
       "Whether famous or ordinary, true heroes serve others and stand up for what is right.",
-      "Being a good citizen is something that only adults can truly achieve.",
-      "In conclusion, both passages show that schools are the most important places for leaders."
+      "Jamaica's National Heroes and student leaders both show that leadership can influence other people.",
+      "Heroes are remembered because their actions affect communities and sometimes the whole country.",
+      "Learning about heroes can encourage young people to think about their own responsibilities as citizens."
     ],
-    correctAnswer: 1,
+    correctAnswer: 0,
     explanation:
-      "A strong conclusion restates the shared main idea with purpose, as the second choice does.",
+      "A strong conclusion synthesises both passages around service and moral courage, as the first choice does.",
   }
 ];
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }));
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ];
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    );
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    };
-  });
-};
 
 const SECTION_CONFIG = [
   {
@@ -820,9 +794,11 @@ export default function G5LaDifficult4MockTest() {
   };
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions);
-    setRandomizedQuestions(shuffledQuestions);
-    setAnswers(new Array(shuffledQuestions.length).fill(null));
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaDifficult4Questions)
+      : preparePreview(g5LaDifficult4Questions, FREE_QUESTION_LIMIT);
+    setRandomizedQuestions(preparedQuestions);
+    setAnswers(new Array(preparedQuestions.length).fill(null));
     setCurrentQuestion(0);
     setTimeLeft(60 * 60);
     setShowResults(false);
