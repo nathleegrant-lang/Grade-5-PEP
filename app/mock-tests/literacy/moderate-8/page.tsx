@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { saveStudentTestResult } from "@/lib/student-test-results";
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -74,7 +75,7 @@ const g5LaModerate8Questions: Question[] = [
   {id:17,type:"vocabulary",skill:"Vocabulary in Context",question:"In the campaign passage, a “campaign” is—",options:["an organised effort to share a message and encourage action","a container left outside after rain","a meal served at the tuck shop","a football match after school"],correctAnswer:0,explanation:"The health centre organised messages, posters, and a clean-up to prevent illness."},
   {id:18,type:"vocabulary",skill:"Vocabulary in Context",question:"“Prevention” in the campaign passage means—",options:["stopping a problem before it happens","waiting until a sickness spreads","decorating a school notice board","buying snacks from a stall"],correctAnswer:0,explanation:"Mr. Powell says prevention works best before people become sick."},
   {id:19,type:"vocabulary",skill:"Vocabulary in Context",question:"A “checklist” is—",options:["a list used to make sure important tasks are completed","a bottle cap filled with rainwater","a speech with no examples","a type of school uniform"],correctAnswer:0,explanation:"Students used checklists to inspect the school and prepare for the clean-up."},
-  {id:20,type:"vocabulary",skill:"Vocabulary in Context",question:"In the passage, “hygiene” would best describe—",options:["clean habits such as washing hands before eating","running fastest on the football field","recording a radio advertisement","drawing a parish map"],correctAnswer:0,explanation:"The reminder cards about washing hands for twenty seconds are about hygiene."},
+  {id:20,type:"vocabulary",skill:"Health Vocabulary",question:"“Hygiene” would best describe—",options:["clean habits such as washing hands before eating","running fastest on the football field","recording a radio advertisement","drawing a parish map"],correctAnswer:0,explanation:"The reminder cards about washing hands for twenty seconds are about hygiene."},
   {id:21,type:"vocabulary",skill:"Vocabulary in Context",question:"In the campaign passage, “respectful” means—",options:["showing consideration for other people","trying to embarrass neighbours","leaving drains blocked","refusing to share information"],correctAnswer:0,explanation:"Mr. Powell tells students not to shame neighbours but to teach them."},
   {id:22,type:"vocabulary",skill:"Vocabulary in Context",question:"In the healthy communities passage, “concentration” means—",options:["the ability to pay attention","a covered water cooler","a fruit-and-water chart","an empty soap container"],correctAnswer:0,explanation:"Poor concentration is listed as a problem that can affect students' learning."},
   {id:23,type:"vocabulary",skill:"Vocabulary in Context",question:"To “track improvements” means to—",options:["observe and record changes over time","hide problems from the principal","stop using checklists completely","sell fruit only once a term"],correctAnswer:0,explanation:"The class agreed to watch changes for a month after solutions began."},
@@ -90,39 +91,12 @@ const g5LaModerate8Questions: Question[] = [
   {id:33,type:"grammar",skill:"Apostrophes",question:"Which sentence uses an apostrophe correctly?",options:["The nurse’s advice helped the pupils plan their project.","The nurses advice helped the pupil’s plan their project.","The nurse’s advice helped the pupils’ plan their project’s.","The nurses’ advice helped the pupil plan’s their project."],correctAnswer:0,explanation:"Nurse’s shows that the advice belonged to one nurse."},
   {id:34,type:"grammar",skill:"Sentence Combining",question:"Which choice best combines the sentences?\nThe rain filled the tyres. Mosquitoes bred in the still water.",options:["After the rain filled the tyres, mosquitoes bred in the still water.","The rain filled the tyres mosquitoes bred in the still water.","Mosquitoes bred. The rain tyres in water.","Because still water and the rain filled."],correctAnswer:0,explanation:"After combines the two related events clearly and correctly."},
   {id:35,type:"grammar",skill:"Complete Sentences",question:"Which choice is a complete sentence?",options:["The students prepared a checklist for Saturday’s clean-up.","Because the students prepared a checklist.","A checklist for Saturday’s clean-up.","Preparing a checklist near the market."],correctAnswer:0,explanation:"It has a subject, a verb, and a complete thought."},
-  {id:36,type:"writing",skill:"Informational Topic Sentence",question:"Which sentence best begins an informational paragraph about healthy living at school?",options:["Students can improve school health by drinking water, washing hands, and choosing balanced meals.","School is a place with desks and windows.","I saw a lunch box on Wednesday.","Many things happen in many places."],correctAnswer:0,explanation:"It clearly introduces specific healthy living actions."},
-  {id:37,type:"writing",skill:"Organisation",question:"Which order best organises a public health notice about mosquitoes?",options:["State the risk, explain where mosquitoes breed, then list prevention steps.","Tell a joke, name three students, then mention rain once.","Begin with solutions, remove the risk, and end with an unrelated story.","List only names of lanes without explaining the problem."],correctAnswer:0,explanation:"A strong notice moves from problem to explanation to action."},
-  {id:38,type:"writing",skill:"Supporting Details",question:"Which detail best supports a paragraph about hygiene?",options:["Washing hands for twenty seconds before eating can reduce the spread of germs.","The market clock stands near the road.","Some pupils like drawing with green crayons.","A football field is larger than a classroom."],correctAnswer:0,explanation:"The detail directly explains why hand-washing matters."},
-  {id:39,type:"writing",skill:"Revision",question:"Which revision makes this sentence stronger?\nPeople should be healthy.",options:["Families can build healthy habits by covering water drums, washing hands, and choosing water instead of soda.","People should be healthy because health is healthy.","There are people and there is health.","Everyone should do some things sometimes."],correctAnswer:0,explanation:"The revision gives specific actions connected to community health."},
-  {id:40,type:"writing",skill:"Public Awareness",question:"Which slogan best fits a campaign about preventing mosquitoes?",options:["Tip It, Cover It, Clear It: Stop Mosquitoes Before They Breed","Mosquitoes Need More Water in Every Yard","Leave Old Tyres Where Rain Can Fill Them","Clean-Up Day Is Only for Health Workers"],correctAnswer:0,explanation:"The slogan gives short, memorable prevention actions from the campaign."},
+  {id:36,type:"writing",skill:"Informational Topic Sentence",question:"Which sentence best begins an informational paragraph about healthy living at school?",options:["Students can improve school health by drinking water, washing hands, and choosing balanced meals.","Drinking enough water can help pupils stay alert during the school day.","Hand-washing is one habit that can reduce the spread of germs at school.","Balanced meals can give pupils energy for lessons and activities."],correctAnswer:0,explanation:"It clearly introduces specific healthy living actions."},
+  {id:37,type:"writing",skill:"Organisation",question:"Which order best organises a public health notice about mosquitoes?",options:["State the risk, explain where mosquitoes breed, then list prevention steps.","List prevention steps, explain where mosquitoes breed, then describe the health risk.","Explain where mosquitoes breed, list prevention steps, then introduce the health risk at the end.","State the risk, list prevention steps, then explain where mosquitoes breed."],correctAnswer:0,explanation:"A strong notice moves from problem to explanation to action."},
+  {id:38,type:"writing",skill:"Supporting Details",question:"Which detail best supports a paragraph about hygiene?",options:["Washing hands for twenty seconds before eating can reduce the spread of germs.","The school placed hand-washing reminders near areas used by pupils.","Health workers encourage families to practise clean habits every day.","Pupils discussed hand-washing during the school health project."],correctAnswer:0,explanation:"The detail directly explains why hand-washing matters."},
+  {id:39,type:"writing",skill:"Revision",question:"Which revision makes this sentence stronger?\nPeople should be healthy.",options:["Families can build healthy habits by covering water drums, washing hands, and choosing water instead of soda.","Families can improve their health by making better choices every day.","People should practise healthy habits at home and in their communities.","Families can make several changes that may help everyone stay healthier."],correctAnswer:0,explanation:"The revision gives specific actions connected to community health."},
+  {id:40,type:"writing",skill:"Public Awareness",question:"Which slogan best fits a campaign about preventing mosquitoes?",options:["Tip It, Cover It, Clear It: Stop Mosquitoes Before They Breed","Keep Your Community Safer from Mosquitoes","Prevent Mosquitoes by Checking Water Around Your Home","Healthy Communities Work Together Against Mosquitoes"],correctAnswer:0,explanation:"The slogan gives short, memorable prevention actions from the campaign."},
 ];
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }));
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ];
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    );
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    };
-  });
-};
 
 const SECTION_CONFIG = [
   {
@@ -271,9 +245,11 @@ export default function G5LaModerate8MockTest() {
   };
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions);
-    setRandomizedQuestions(shuffledQuestions);
-    setAnswers(new Array(shuffledQuestions.length).fill(null));
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaModerate8Questions)
+      : preparePreview(g5LaModerate8Questions, FREE_QUESTION_LIMIT);
+    setRandomizedQuestions(preparedQuestions);
+    setAnswers(new Array(preparedQuestions.length).fill(null));
     setCurrentQuestion(0);
     setTimeLeft(60 * 60);
     setShowResults(false);
