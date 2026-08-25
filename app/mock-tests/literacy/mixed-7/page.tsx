@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { useAuth } from "@/contexts/auth-context"
 import { saveStudentTestResult } from "@/lib/student-test-results"
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine"
 import { ArrowLeft, BookOpen, CheckCircle, ChevronLeft, ChevronRight, Clock, Crown, Flag, Home, Lock, Printer, RotateCcw, XCircle } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -66,14 +67,9 @@ const QUESTIONS: Question[] = [
 {id:36,type:"writing",skill:"Topic Sentence",question:"Which is the strongest topic sentence for a paragraph about reducing electricity use?",options:["Schools can lower electricity use through simple and responsible habits.","Schools use electricity for lights, fans, computers, and other equipment.","Some school buildings receive more natural light than other buildings.","Students may notice that certain rooms feel warmer during the afternoon."],correctAnswer:0,explanation:"It presents a clear controlling idea that can be developed with supporting details."},
 {id:37,type:"writing",skill:"Supporting Detail",question:"Which detail best supports the claim that the improved library encouraged reading?",options:["The repaired roof used sheets donated by a building supplier.","The reading club attracted new members after the library reopened.","The electrician explained how the battery stored solar energy.","The students painted signs during the mid-term repair work."],correctAnswer:1,explanation:"The increase in reading-club membership directly supports the claim."},
 {id:38,type:"writing",skill:"Transitions",question:"Choose the best transition: “The school repaired the roof. ___, it installed solar panels.”",options:["Instead","For example","In addition","Otherwise"],correctAnswer:2,explanation:"In addition introduces another improvement."},
-{id:39,type:"writing",skill:"Organisation",question:"Which sentence does NOT belong in a paragraph about improving a library?",options:["Comfortable seating can make reading more enjoyable.","Suitable lighting helps readers see the pages clearly.","Clearly labelled shelves make books easier to locate.","Volcanoes can release lava, ash, and hot gases."],correctAnswer:3,explanation:"The volcano sentence is unrelated to library improvement."},
+{id:39,type:"writing",skill:"Organisation",question:"Which sentence does NOT belong in a paragraph about improving a library?",options:["Comfortable seating can make reading more enjoyable.","Suitable lighting helps readers see the pages clearly.","Clearly labelled shelves make books easier to locate.","The library displays photographs from previous school events near its entrance."],correctAnswer:3,explanation:"The photograph display belongs in the library setting, but it does not support the paragraph’s focus on changes that improve the library for reading and learning."},
 {id:40,type:"writing",skill:"Conclusion",question:"Which is the strongest conclusion for an essay about community cooperation?",options:["Communities include people with many different abilities and responsibilities.","Some projects require more time and planning than people first expect.","People often meet in groups when they need to discuss shared concerns.","Working together can turn shared ideas into lasting community improvements."],correctAnswer:3,explanation:"It restates the central idea and leaves a meaningful final thought."}
 ]
-
-function shuffleQuestions(source:Question[]){
-  const questions=[...source].sort(()=>Math.random()-.5)
-  return questions.map(q=>{const options=q.options.map((option,index)=>({option,index})).sort(()=>Math.random()-.5);return{...q,options:options.map(x=>x.option),correctAnswer:options.findIndex(x=>x.index===q.correctAnswer)}})
-}
 
 const sectionLabel=(t:QuestionType)=>t==="reading"?"Reading Comprehension":t==="vocabulary"?"Vocabulary & Word Study":t==="grammar"?"Grammar & Language Use":"Writing Skills"
 
@@ -90,7 +86,7 @@ export default function G5LaMix7MockTest(){
   useEffect(()=>{if(!started||showResults)return;const timer=setInterval(()=>setTimeLeft(v=>{if(v<=1){setShowResults(true);return 0}return v-1}),1000);return()=>clearInterval(timer)},[started,showResults])
   useEffect(()=>{if(!showResults||!user?.id||saved.current||!questions.length)return;saved.current=true;void saveStudentTestResult({parentId:user.id,studentName:user.childName??"Student",grade:"grade5",subject:"Literacy",testName:"Mixed 7",difficulty:"Mixed",score:score(),totalQuestions:questions.length,percentage:percentage(),completedAt:new Date().toISOString()}).catch(()=>{saved.current=false})},[showResults,user?.id,user?.childName,questions,answers,score,percentage])
 
-  const startTest=()=>{const q=shuffleQuestions(source);setQuestions(q);setAnswers(Array(q.length).fill(null));setCurrent(0);setTimeLeft(3600);setShowResults(false);saved.current=false;setStarted(true)}
+  const startTest=()=>{const q=isPremium?prepareAssessment(QUESTIONS):preparePreview(QUESTIONS,FREE_QUESTION_LIMIT);setQuestions(q);setAnswers(Array(q.length).fill(null));setCurrent(0);setTimeLeft(3600);setShowResults(false);saved.current=false;setStarted(true)}
   const reset=()=>{setStarted(false);setShowResults(false);setQuestions([]);setAnswers([]);setCurrent(0);setTimeLeft(3600);saved.current=false}
   const formatTime=(s:number)=>`${String(Math.floor(s/60)).padStart(2,"0")}:${String(s%60).padStart(2,"0")}`
 
