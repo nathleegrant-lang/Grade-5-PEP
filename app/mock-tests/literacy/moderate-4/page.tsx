@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { saveStudentTestResult } from "@/lib/student-test-results";
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -280,10 +281,15 @@ const g5LaModerate4Questions: Question[] = [
     id: 26,
     type: "grammar",
     skill: "Subject-Verb Agreement",
-    question: "Which sentence is written correctly?",
-    options: ["The emergency team checks the shelter list each month.", "The emergency team check the shelter list each month.", "The emergency team checking the shelter list each month.", "The emergency team were checks the shelter list each month."],
+    question: `Which sentence is written correctly?`,
+    options: [
+      "The emergency coordinator checks the shelter list each month.",
+      "The emergency coordinator check the shelter list each month.",
+      "The emergency coordinator checking the shelter list each month.",
+      "The emergency coordinator were checks the shelter list each month.",
+    ],
     correctAnswer: 0,
-    explanation: "The singular subject “team” takes the verb “checks.”",
+    explanation: `The singular subject “coordinator” takes the singular verb “checks.”`,
   },
   {
     id: 27,
@@ -298,10 +304,15 @@ const g5LaModerate4Questions: Question[] = [
     id: 28,
     type: "grammar",
     skill: "Pronouns",
-    question: "Choose the sentence with the correct pronoun.",
-    options: ["Maya and I packed the supplies carefully.", "Me and Maya packed the supplies carefully.", "Maya and me packed the supplies carefully.", "I and Maya packed the supplies carefully."],
+    question: `Maya and ___ packed the supplies carefully.`,
+    options: [
+      "I",
+      "me",
+      "my",
+      "mine",
+    ],
     correctAnswer: 0,
-    explanation: "“Maya and I” is the correct subject of the sentence.",
+    explanation: `The pronoun is part of the subject, so the subject pronoun “I” is correct.`,
   },
   {
     id: 29,
@@ -397,10 +408,16 @@ const g5LaModerate4Questions: Question[] = [
     id: 39,
     type: "writing",
     skill: "Revision",
-    question: "Which revision makes this sentence clearer?\nBad weather can be dangerous and things should be done.",
-    options: ["Before a hurricane, families should store water, check flashlights, and listen to official reports.", "Bad weather is a thing and people do stuff about it.", "It is dangerous when danger happens badly.", "Families and weather are there and then actions occur."],
+    question: `Which revision makes this sentence clearer?
+Bad weather can be dangerous and things should be done.`,
+    options: [
+      "Before a hurricane, families should store water, check flashlights, and listen to official reports.",
+      "Before bad weather, families should make several important preparations.",
+      "Storms can be dangerous, so people should get ready carefully.",
+      "Families should prepare before a hurricane so they can be safer.",
+    ],
     correctAnswer: 0,
-    explanation: "The revision replaces vague words with clear hurricane-preparedness actions.",
+    explanation: `The revision replaces vague words with clear hurricane-preparedness actions.`,
   },
   {
     id: 40,
@@ -412,33 +429,6 @@ const g5LaModerate4Questions: Question[] = [
     explanation: "This conclusion connects Jason’s specific actions to the larger idea of safety and calm preparedness.",
   }
 ];
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }));
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ];
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    );
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    };
-  });
-};
 
 const SECTION_CONFIG = [
   {
@@ -587,9 +577,11 @@ export default function G5LaModerate4MockTest() {
   };
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions);
-    setRandomizedQuestions(shuffledQuestions);
-    setAnswers(new Array(shuffledQuestions.length).fill(null));
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaModerate4Questions)
+      : preparePreview(g5LaModerate4Questions, FREE_QUESTION_LIMIT);
+    setRandomizedQuestions(preparedQuestions);
+    setAnswers(new Array(preparedQuestions.length).fill(null));
     setCurrentQuestion(0);
     setTimeLeft(60 * 60);
     setShowResults(false);

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { saveStudentTestResult } from "@/lib/student-test-results";
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -545,12 +546,12 @@ const g5LaModerate2Questions: Question[] = [
     id: 36,
     type: "writing",
     skill: "Topic Sentence",
-    question: `Which topic sentence best begins a paragraph about student leadership conference?`,
+    question: `Which topic sentence best begins a paragraph about the Student Leadership Conference?`,
     options: [
-      "Student Leadership Conference taught pupils several important lessons.",
-      "My shoes were under the bed.",
-      "Some desks are brown and some are not.",
-      "Lunch tasted better on Friday.",
+      "The Student Leadership Conference taught pupils several important lessons about leadership.",
+      "Pupils listened to speakers and worked in groups during the conference.",
+      "One activity asked pupils to discuss responsible choices.",
+      "At the end of the conference, groups presented their ideas.",
     ],
     correctAnswer: 0,
     explanation: `This sentence introduces a clear main idea for the paragraph.`,
@@ -561,12 +562,12 @@ const g5LaModerate2Questions: Question[] = [
     skill: "Supporting Details",
     question: `Which detail best supports the idea that teamwork improves a project?`,
     options: [
-      "The clock had two hands.",
-      "A pencil rolled off the desk.",
-      "The sky was sometimes cloudy.",
       "Group members shared roles and listened to one another.",
+      "The finished project was displayed in the school hall.",
+      "Pupils used charts and notes during the presentation.",
+      "The group presented its work at the end of the activity.",
     ],
-    correctAnswer: 3,
+    correctAnswer: 0,
     explanation: `Shared roles and listening directly support teamwork.`,
   },
   {
@@ -575,12 +576,12 @@ const g5LaModerate2Questions: Question[] = [
     skill: "Organization",
     question: `Which order is best for explaining a school project?`,
     options: [
-      "Carry out the plan; identify the problem; plan later; stop",
-      "Buy snacks; close books; ignore feedback; go home",
-      "Identify the problem; plan a solution; carry out the plan; reflect on results",
-      "Reflect on results; forget the plan; identify nothing; begin randomly",
+      "Identify the problem; plan a solution; carry out the plan; reflect on results.",
+      "Plan a solution; identify the problem; carry out the plan; reflect on results.",
+      "Identify the problem; carry out the plan; plan a solution; reflect on results.",
+      "Identify the problem; plan a solution; reflect on results; carry out the plan.",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `This order follows a logical beginning, middle, and ending.`,
   },
   {
@@ -604,41 +605,14 @@ const g5LaModerate2Questions: Question[] = [
     question: `Choose the best revision of this sentence: "The event was good and helped us a lot."`,
     options: [
       "The event helped pupils build confidence, practise teamwork, and make responsible choices.",
-      "The event was good good and very nice for us.",
-      "Good event helped a lot things.",
-      "The event, because helped, was us.",
+      "The event was helpful and taught pupils many useful things.",
+      "Pupils learned a lot during the event and enjoyed working together.",
+      "The event helped pupils in several ways and was a good experience.",
     ],
     correctAnswer: 0,
     explanation: `The best revision is specific, clear, and complete.`,
   }
 ];
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }));
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ];
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    );
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    };
-  });
-};
 
 const SECTION_CONFIG = [
   {
@@ -787,9 +761,11 @@ export default function G5LaModerate2MockTest() {
   };
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions);
-    setRandomizedQuestions(shuffledQuestions);
-    setAnswers(new Array(shuffledQuestions.length).fill(null));
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaModerate2Questions)
+      : preparePreview(g5LaModerate2Questions, FREE_QUESTION_LIMIT);
+    setRandomizedQuestions(preparedQuestions);
+    setAnswers(new Array(preparedQuestions.length).fill(null));
     setCurrentQuestion(0);
     setTimeLeft(60 * 60);
     setShowResults(false);
