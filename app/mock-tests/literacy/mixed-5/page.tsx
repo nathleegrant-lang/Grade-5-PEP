@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -746,13 +747,13 @@ Which sentence is the best summary of the passage?`,
     skill: "Topic Sentence",
     question: `Which is the strongest topic sentence for a paragraph about school gardens?`,
     options: [
-      "Gardens have soil.",
-      "Some schools are large.",
-      "I saw a tomato yesterday.",
+      "School gardens can give pupils practical experience caring for plants during the school year.",
+      "Growing vegetables at school can help pupils connect classroom lessons with real activities.",
+      "A school garden can provide useful produce while giving students a shared project to maintain.",
       "A well-planned school garden can provide food, practical lessons, and opportunities for teamwork."
     ],
     correctAnswer: 3,
-    explanation: `It clearly introduces the main idea and previews the paragraph’s supporting points.`
+    explanation: "The keyed topic sentence previews the full range of the paragraph: food, practical learning, and teamwork."
   },
   {
     id: 37,
@@ -761,12 +762,12 @@ Which sentence is the best summary of the passage?`,
     question: `Which detail best supports the statement “Regular reading strengthens vocabulary”?`,
     options: [
       "Readers repeatedly meet unfamiliar words in meaningful sentences and learn how those words are used.",
-      "Libraries often have chairs and tables.",
-      "Some books have colourful covers.",
-      "People read at different times of day."
+      "Readers can use illustrations and surrounding sentences to follow difficult parts of a story.",
+      "Reading many types of texts can expose students to different topics, characters, and writing styles.",
+      "Regular reading can help students become more comfortable reading longer and more complex texts."
     ],
     correctAnswer: 0,
-    explanation: `The detail directly explains how reading helps people learn new words.`
+    explanation: "The keyed detail directly explains vocabulary growth through repeated encounters with unfamiliar words in meaningful contexts."
   },
   {
     id: 38,
@@ -786,9 +787,9 @@ Which sentence is the best summary of the passage?`,
     id: 39,
     type: "writing",
     skill: "Organization",
-    question: `Which sentence does NOT belong in a paragraph about preparing for a hurricane?
+    question: `Which sentence does NOT belong in a paragraph about steps families should take at home to prepare their own emergency supplies and important items for a hurricane?
 
-(1) Families should store clean water and non-perishable food. (2) Flashlights and batteries should be checked. (3) Hummingbirds can fly backwards. (4) Important documents should be kept in a waterproof container.`,
+(1) Families should store clean water and non-perishable food. (2) Flashlights and batteries should be checked. (3) Some community centres are officially used as emergency shelters during hurricanes. (4) Important documents should be kept in a waterproof container.`,
     options: [
       "Sentence 1",
       "Sentence 2",
@@ -796,7 +797,7 @@ Which sentence is the best summary of the passage?`,
       "Sentence 4"
     ],
     correctAnswer: 2,
-    explanation: `Sentence 3 is unrelated to hurricane preparation.`
+    explanation: "Emergency shelters are related to hurricane safety, but the paragraph is specifically organised around steps families should take at home to prepare their own supplies, equipment, and documents."
   },
   {
     id: 40,
@@ -804,42 +805,15 @@ Which sentence is the best summary of the passage?`,
     skill: "Strong Conclusion",
     question: `Which is the strongest conclusion for an essay about protecting community spaces?`,
     options: [
-      "That is everything about community spaces.",
-      "Community spaces are places in communities.",
-      "Some people like parks more than others.",
+      "Shared parks, playgrounds, and other public spaces can improve daily life when residents help keep them clean and usable.",
+      "Community spaces are more likely to remain welcoming when people respect the facilities and cooperate in caring for them.",
+      "Caring for shared spaces gives residents a practical way to improve the environment in which they live.",
       "When residents care for shared spaces together, they create safer, healthier places and strengthen pride in their community."
     ],
     correctAnswer: 3,
-    explanation: `This conclusion restates the central idea and leaves the reader with a meaningful final thought.`
+    explanation: "The keyed conclusion best synthesises cooperation, safety, health, and community pride."
   }
 ];
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }))
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ]
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    )
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    }
-  })
-}
 
 const SECTION_CONFIG = [
   { type: "reading" as const,    label: "Reading Comprehension",   note: "literal, inferential, and analytical reading across all difficulty levels" },
@@ -903,9 +877,11 @@ export default function G5LaMix5MockTest() {
   }, [showResults, user?.id, user?.childName, totalQuestions, answers])
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions)
-    setRandomizedQuestions(shuffledQuestions)
-    setAnswers(new Array(shuffledQuestions.length).fill(null))
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaMix5Questions)
+      : preparePreview(g5LaMix5Questions, FREE_QUESTION_LIMIT)
+    setRandomizedQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
     setCurrentQuestion(0)
     setTimeLeft(60 * 60)
     setShowResults(false)
