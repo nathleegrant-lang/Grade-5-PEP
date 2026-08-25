@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { saveStudentTestResult } from "@/lib/student-test-results";
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -450,7 +451,7 @@ const g5LaDiff9Questions: Question[] = [
       "Mr. Lindo gave the instructions to she and her brother."
     ],
     correctAnswer: 2,
-    explanation: `"Which" correctly refers to the noun "roof" in the preceding clause. The other options incorrectly use object pronouns ("Him," "me," "she") as subjects or objects of prepositions where subject pronouns are needed.`
+    explanation: `“Which” correctly introduces a relative clause referring to “roof”. The other choices misuse personal-pronoun case—for example, subject positions require “he/I”, while the object of “to” requires “her”.`
   },
   {
     id: 27,
@@ -584,27 +585,27 @@ const g5LaDiff9Questions: Question[] = [
     skill: "Strong Introduction",
     question: `Which of the following would be the strongest introduction for a paragraph about hurricane preparedness?`,
     options: [
-      "Hurricanes are big storms.",
       "While we cannot stop hurricanes from forming, careful preparation can mean the difference between danger and safety.",
-      "I am going to tell you about how to get ready for a hurricane.",
-      "Hurricanes have wind and rain."
+      "Hurricanes can damage homes and communities when strong winds, rain, and flooding reach populated areas.",
+      "Families can reduce hurricane risks by understanding warnings and preparing before dangerous weather arrives.",
+      "Hurricane preparedness includes several decisions that households should make before a storm approaches."
     ],
-    correctAnswer: 1,
-    explanation: `A strong introduction states a clear main idea. Option B uses a contrast to hook the reader and sets up the paragraph's focus on preparation.`
+    correctAnswer: 0,
+    explanation: "The keyed introduction states the broadest controlling thesis and makes the consequences of preparation clear; the other choices provide relevant background or narrower points."
   },
   {
     id: 37,
     type: "writing",
     skill: "Supporting Detail",
-    question: `Which sentence provides the best supporting detail for the topic sentence "Building with strong materials saves lives during hurricanes"?`,
+    question: `Which sentence provides the strongest evidence that reinforcing a building's roof can make it safer during hurricane winds?`,
     options: [
       "Roofs secured with straps are less likely to blow away during high winds.",
-      "Many people like the look of wooden houses better than concrete ones.",
-      "Hurricanes usually happen between June and November.",
-      "Meteorologists use computers to predict the weather."
+      "Concrete walls can resist some forms of storm damage better than weak, poorly maintained walls.",
+      "Homes built on safer sites may face less exposure to floodwater during severe storms.",
+      "Builders can inspect older houses for weak points before hurricane season begins."
     ],
     correctAnswer: 0,
-    explanation: `A good supporting detail directly proves the topic sentence. Option A gives a specific example of how strong materials (straps) protect a building feature (roofs) during the storm.`
+    explanation: "The keyed detail most directly connects structural reinforcement with resisting hurricane winds; the other choices discuss related building considerations less directly."
   },
   {
     id: 38,
@@ -624,15 +625,15 @@ const g5LaDiff9Questions: Question[] = [
     id: 39,
     type: "writing",
     skill: "Relevance",
-    question: `Read the paragraph below. Which sentence should be removed because it does not belong?\n\n(1) Preparing for a hurricane requires careful planning. (2) Families should pack an emergency kit with water, food, and a radio. (3) Mangoes are a delicious fruit grown in many tropical countries. (4) Knowing your evacuation route is also essential for a safe escape.`,
+    question: `Read the paragraph below. Which sentence should be removed because it does not belong?\n\n(1) Preparing for a hurricane requires careful planning. (2) Families should pack an emergency kit with water, food, and a radio. (3) Some community centres keep lists of residents who may need help during an emergency. (4) Knowing your evacuation route is also essential for a safe escape.`,
     options: [
       "Sentence 1",
       "Sentence 2",
-      "Sentence 4",
-      "Sentence 3"
+      "Sentence 3",
+      "Sentence 4"
     ],
-    correctAnswer: 3,
-    explanation: `Sentence 3 is about mangoes and agriculture, which has nothing to do with the topic of preparing for a hurricane.`
+    correctAnswer: 2,
+    explanation: "The community-centre sentence concerns emergency planning generally, but it shifts away from the paragraph's focus on steps families should take to prepare their own homes and supplies."
   },
   {
     id: 40,
@@ -640,42 +641,15 @@ const g5LaDiff9Questions: Question[] = [
     skill: "Strong Conclusion",
     question: `Which of the following would be the most effective concluding sentence for an essay about community problem-solving?`,
     options: [
-      "So that is why communities should solve problems.",
-      "In conclusion, I wrote about Anika and her bridge.",
-      "You should try to build a bridge someday.",
-      "Whether building a footbridge over a flooded river or reinforcing homes against a storm, communities thrive when people combine knowledge, teamwork, and determination."
+      "Whether building a footbridge over a flooded river or reinforcing homes against a storm, communities thrive when people combine knowledge, teamwork, and determination.",
+      "Communities solve difficult problems more effectively when people contribute different skills and work toward a shared goal.",
+      "Both bridge building and hurricane preparation show that practical knowledge can reduce the effects of dangerous conditions.",
+      "Successful community projects often begin when people recognise a problem and decide to act before it becomes worse."
     ],
-    correctAnswer: 3,
-    explanation: `A strong conclusion leaves a lasting impression by restating the main idea in a fresh way. Option D ties back to the essay's examples using parallel structure for impact.`
+    correctAnswer: 0,
+    explanation: "The keyed conclusion best synthesises both examples while combining knowledge, teamwork, and determination; the other choices express narrower lessons."
   }
 ];
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }));
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ];
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    );
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    };
-  });
-};
 
 const SECTION_CONFIG = [
   {
@@ -824,9 +798,11 @@ export default function G5LaDiff9MockTest() {
   };
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions);
-    setRandomizedQuestions(shuffledQuestions);
-    setAnswers(new Array(shuffledQuestions.length).fill(null));
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaDiff9Questions)
+      : preparePreview(g5LaDiff9Questions, FREE_QUESTION_LIMIT);
+    setRandomizedQuestions(preparedQuestions);
+    setAnswers(new Array(preparedQuestions.length).fill(null));
     setCurrentQuestion(0);
     setTimeLeft(60 * 60);
     setShowResults(false);

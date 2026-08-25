@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { saveStudentTestResult } from "@/lib/student-test-results";
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -359,8 +360,8 @@ const g5LaDiff10Questions: Question[] = [
   {
     id: 20,
     type: "vocabulary",
-    skill: "Context Clues",
-    question: `In Passage 2, what does the phrase "trade-offs" most likely mean?`,
+    skill: "Word Meaning",
+    question: "What does the phrase \"trade-offs\" mean?",
     options: [
       "things that are traded between countries",
       "tools used by engineers to measure wind",
@@ -368,13 +369,13 @@ const g5LaDiff10Questions: Question[] = [
       "exchanges where you give up one thing to gain another"
     ],
     correctAnswer: 3,
-    explanation: `In the context of energy, trade-offs refer to accepting a downside (like cost or land use) to gain a benefit (like clean power).`
+    explanation: "A trade-off involves accepting a disadvantage or giving up one benefit in order to gain another."
   },
   {
     id: 21,
     type: "vocabulary",
     skill: "Multiple Meaning",
-    question: `Which sentence uses the word "seal" in the same way as it is used in Passage 1?`,
+    question: "Which meaning of \"seal\" matches its meaning in Passage 1?",
     options: [
       "The official stamp that made the document legal.",
       "A marine animal that lives in the ocean.",
@@ -435,10 +436,10 @@ const g5LaDiff10Questions: Question[] = [
       "painted",
       "dropped",
       "threw away",
-      "stored in an organised way"
+      "filed"
     ],
     correctAnswer: 3,
-    explanation: `"Filed" means stored in an organised way, usually in a folder or cabinet, which fits the context perfectly.`
+    explanation: "\"Filed\" means placed or stored in an organised system, often in a labelled folder or cabinet, so it completes the sentence correctly."
   },
   {
     id: 26,
@@ -502,13 +503,13 @@ const g5LaDiff10Questions: Question[] = [
     skill: "Quotation Marks",
     question: `Which sentence uses quotation marks correctly?`,
     options: [
-      `"You did it, Kofi," Miss Lorna said.`,
-      `"You did it," Kofi," Miss Lorna said.`,
-      `"You did it," Miss Lorna said.`,
-      `You did it," Miss Lorna said."`
+      "\"You did it, Kofi,\" Miss Lorna said.",
+      "\"You did it,\" Kofi,\" Miss Lorna said.",
+      "\"You did it\", Miss Lorna said.",
+      "You did it,\" Miss Lorna said.\""
     ],
     correctAnswer: 0,
-    explanation: `The spoken words are correctly enclosed in quotation marks, and the commas are correctly placed around the name and before the speaker tag.`
+    explanation: "The correct sentence encloses the spoken words in quotation marks and places the commas correctly around the direct address \"Kofi\" and before the speaker tag."
   },
   {
     id: 31,
@@ -542,7 +543,7 @@ const g5LaDiff10Questions: Question[] = [
     id: 33,
     type: "grammar",
     skill: "Sentence Combining",
-    question: `Which choice best combines the ideas? "Solar power is clean. It only works when the sun shines."`,
+    question: "Which choice correctly combines the ideas using a semicolon and a conjunctive adverb to show contrast?",
     options: [
       "Solar power is clean it only works when the sun shines.",
       "Solar power is clean, but it only works when the sun shines.",
@@ -586,13 +587,13 @@ const g5LaDiff10Questions: Question[] = [
     skill: "Strong Introduction",
     question: `Which of the following would be the strongest introduction for an essay about clean energy?`,
     options: [
-      "Clean energy is good.",
-      "This essay is about clean energy.",
-      "I like clean energy better than dirty energy.",
-      "As the world faces the growing challenges of climate change, shifting to clean energy sources has become one of the most important tasks of our time."
+      "As the world faces the growing challenges of climate change, shifting to clean energy sources has become one of the most important tasks of our time.",
+      "Clean energy technologies can reduce some forms of pollution while providing electricity from renewable sources.",
+      "Countries are considering several energy sources as they try to meet growing electricity needs with less environmental damage.",
+      "Solar, wind, hydroelectric, geothermal, and tidal power each offer possible alternatives to fossil fuels."
     ],
-    correctAnswer: 3,
-    explanation: `A strong introduction hooks the reader and states a clear, specific main idea. Option D provides context and sets up the essay's argument.`
+    correctAnswer: 0,
+    explanation: "The keyed introduction establishes context, urgency, and the essay's central argument; the other choices offer credible information but a less complete controlling thesis."
   },
   {
     id: 37,
@@ -601,32 +602,32 @@ const g5LaDiff10Questions: Question[] = [
     question: `Which sentence provides the best supporting detail for the topic sentence "Solar energy can benefit ordinary families"?`,
     options: [
       "Solar panels can be placed on rooftops to generate electricity for homes.",
-      "Many people enjoy looking at wind turbines.",
-      "Coal mines are very dark places.",
-      "Batteries are often coloured black."
+      "Large solar farms can supply electricity to thousands of buildings through the power grid.",
+      "Solar-powered calculators use small cells to operate without replaceable batteries.",
+      "Some remote facilities use solar panels where connecting to the national grid is difficult."
     ],
     correctAnswer: 0,
-    explanation: `Option A directly supports the topic sentence by explaining a specific way families benefit—by generating their own power via rooftop panels.`
+    explanation: "The rooftop example most directly demonstrates an ordinary household use of solar power. The other choices describe credible uses or advantages, but they are less direct examples of everyday household use."
   },
   {
     id: 38,
     type: "writing",
     skill: "Transitions",
-    question: `Which transition word best fills the blank in this sentence? "Solar panels generate electricity during the day; _____, wind turbines can provide power at night when the wind blows."`,
+    question: "Which transition word best fills the blank in this sentence? \"Solar panels cannot generate electricity after sunset; _____, wind turbines can still provide power at night when the wind blows.\"",
     options: [
       "however",
-      "similarly",
       "therefore",
-      "meanwhile"
+      "similarly",
+      "for example"
     ],
-    correctAnswer: 3,
-    explanation: `"Meanwhile" shows that something is happening at the same time—solar works during the day while wind works at night.`
+    correctAnswer: 0,
+    explanation: "\"However\" correctly signals the contrast between solar panels' limitation after sunset and wind turbines' ability to generate power at night when wind is available."
   },
   {
     id: 39,
     type: "writing",
     skill: "Relevance",
-    question: `Read the paragraph below. Which sentence should be removed because it does not belong?\n\n(1) Clean energy helps protect the environment. (2) Solar and wind power do not release harmful gases into the air. (3) Pineapples are a major export in many Caribbean countries. (4) By switching to these sources, we can reduce pollution and slow down climate change.`,
+    question: `Read the paragraph below. Which sentence should be removed because it does not belong?\n\n(1) Clean energy helps protect the environment. (2) Solar and wind power do not release harmful gases into the air. (3) Large renewable-energy projects may compete with farming or conservation for the use of limited land. (4) By switching to these sources, we can reduce pollution and slow down climate change.`,
     options: [
       "Sentence 1",
       "Sentence 2",
@@ -634,7 +635,7 @@ const g5LaDiff10Questions: Question[] = [
       "Sentence 4"
     ],
     correctAnswer: 2,
-    explanation: `Sentence 3 is about pineapples and agriculture, which has nothing to do with the topic of clean energy and the environment.`
+    explanation: "The land-use sentence is related to clean-energy planning, but it shifts away from the paragraph's focus on how renewable energy reduces pollution and dependence on fossil fuels."
   },
   {
     id: 40,
@@ -642,42 +643,15 @@ const g5LaDiff10Questions: Question[] = [
     skill: "Strong Conclusion",
     question: `Which of the following would be the most effective concluding sentence for an essay about clean energy?`,
     options: [
-      "So that is why clean energy is important.",
-      "Whether harnessing the power of the sun, the wind, or the ocean, the shift to clean energy represents our best hope for a healthier, more sustainable future.",
-      "In conclusion, clean energy is the best.",
-      "You should use clean energy if you want to."
+      "By investing thoughtfully in several renewable sources, societies can build a cleaner, more resilient energy future.",
+      "Clean-energy projects can create jobs while reducing some forms of environmental damage.",
+      "Solar and wind power will continue to improve as engineers develop more efficient technology.",
+      "Communities that understand the strengths and limits of each energy source can make better local choices."
     ],
-    correctAnswer: 1,
-    explanation: `A strong conclusion restates the main idea in a fresh, memorable way. Option B ties back to the essay's examples using parallel structure for impact.`
+    correctAnswer: 0,
+    explanation: "The keyed conclusion provides the broadest forward-looking synthesis by combining thoughtful investment, multiple renewable sources, cleanliness, and resilience; the alternatives offer credible but narrower conclusions."
   }
 ];
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }));
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ];
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    );
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    };
-  });
-};
 
 const SECTION_CONFIG = [
   {
@@ -826,9 +800,11 @@ export default function G5LaDiff10MockTest() {
   };
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions);
-    setRandomizedQuestions(shuffledQuestions);
-    setAnswers(new Array(shuffledQuestions.length).fill(null));
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaDiff10Questions)
+      : preparePreview(g5LaDiff10Questions, FREE_QUESTION_LIMIT);
+    setRandomizedQuestions(preparedQuestions);
+    setAnswers(new Array(preparedQuestions.length).fill(null));
     setCurrentQuestion(0);
     setTimeLeft(60 * 60);
     setShowResults(false);

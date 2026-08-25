@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { saveStudentTestResult } from "@/lib/student-test-results";
+import { prepareAssessment, preparePreview } from "@/lib/assessment-engine";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -162,7 +163,7 @@ What can you conclude about the families who fixed their leaks?`,
       "They stopped needing to collect water from the standpipe."
     ],
     correctAnswer: 2,
-    explanation: "Since fixing leaks prevents water loss, the logical conclusion is that these families retained more of the water they collected."
+    explanation: "Fixing leaks was one of Miss Pearl's recommended conservation habits, so families who repaired them were putting her advice about careful water use into practice."
   },
   {
     id: 8,
@@ -414,13 +415,13 @@ Why did a few fishers argue against the rules at first?`,
     skill: "Subject-Verb Agreement",
     question: "Which sentence is written correctly?",
     options: [
-      "The community of fishers share the same harbour.",
-      "The community of fishers have shared the same harbour.",
-      "The community of fishers shares the same harbour.",
-      "The community of fishers has sharing the same harbour."
+      "The fishing village share the same harbour.",
+      "The fishing village have shared the same harbour.",
+      "The fishing village shares the same harbour.",
+      "The fishing village are sharing the same harbour every day."
     ],
     correctAnswer: 2,
-    explanation: "The subject 'community' is singular, so it requires the singular verb 'shares', regardless of the plural phrase in between."
+    explanation: "The singular subject \"village\" takes the singular present-tense verb \"shares.\""
   },
   {
     id: 28,
@@ -531,12 +532,12 @@ Why did a few fishers argue against the rules at first?`,
     question: "Which sentence is the best introduction for an essay about protecting shared resources?",
     options: [
       "When communities face shortages, working together to manage shared resources can ensure survival for everyone.",
-      "Water and fish are just two of the important things that people use in their daily lives.",
-      "This essay is going to talk about two different places and explain exactly what happened there.",
-      "There are many small villages and busy harbours located all across the country."
+      "Scarce resources can force communities to make difficult choices about present needs and future supplies.",
+      "Strong leadership can help communities respond calmly when important resources become limited.",
+      "Water shortages and declining fish stocks can both create serious challenges for families who depend on shared resources."
     ],
     correctAnswer: 0,
-    explanation: "A strong introduction clearly states the essay's main idea or thesis, which the first option does effectively."
+    explanation: "The keyed sentence provides the strongest thesis because it combines cooperation, careful management of shared resources, and survival for everyone; the other choices develop only part of that broader idea."
   },
   {
     id: 37,
@@ -569,11 +570,11 @@ Why did a few fishers argue against the rules at first?`,
     options: [
       "She measured how much water a dripping tap wastes in a single day.",
       "Many families began catching rainwater in clean drums behind their homes.",
-      "Miss Pearl also enjoys baking cakes for the village fair on Saturdays.",
+      "Miss Pearl had taught several generations of children before retiring from the village school.",
       "Reusing dishwater helped keep the kitchen gardens green during the dry weeks."
     ],
     correctAnswer: 2,
-    explanation: "Baking cakes is unrelated to the topic of water conservation and breaks the focus of the paragraph."
+    explanation: "Miss Pearl's teaching history is relevant background, but it does not explain the water-conservation problem, methods, or results, so it should be removed."
   },
   {
     id: 40,
@@ -582,41 +583,14 @@ Why did a few fishers argue against the rules at first?`,
     question: "Which sentence is the best conclusion for an essay about these two communities?",
     options: [
       "Ultimately, both communities clearly show that protecting shared resources requires close cooperation and careful planning.",
-      "In conclusion, both water and fish are two very important things for people to have.",
-      "To end this essay, Miss Pearl and Mr. Dawes were very good leaders in their towns.",
-      "As you can clearly see, the drums filled up and the fish came back to the harbour."
+      "Both Miss Pearl and Mr. Dawes show that determined leadership can persuade people to change harmful habits.",
+      "The two communities recovered because people accepted short-term changes when important resources became scarce.",
+      "These examples show that communities become more resilient when people recognise a problem and agree to respond together."
     ],
     correctAnswer: 0,
-    explanation: "A strong conclusion synthesizes the main points into a broader takeaway, which the first option accomplishes."
+    explanation: "The keyed conclusion best synthesises both cooperation and deliberate management of shared resources; the other choices emphasise leadership, short-term sacrifice, or resilience without combining both central ideas."
   }
 ];
-
-const shuffleAnswerOptions = (questions: Question[]): Question[] => {
-  return questions.map((question) => {
-    const optionsWithOriginalIndex = question.options.map((option, index) => ({
-      option,
-      index,
-    }));
-
-    for (let i = optionsWithOriginalIndex.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [optionsWithOriginalIndex[i], optionsWithOriginalIndex[j]] = [
-        optionsWithOriginalIndex[j],
-        optionsWithOriginalIndex[i],
-      ];
-    }
-
-    const correctAnswer = optionsWithOriginalIndex.findIndex(
-      (item) => item.index === question.correctAnswer,
-    );
-
-    return {
-      ...question,
-      options: optionsWithOriginalIndex.map((item) => item.option),
-      correctAnswer,
-    };
-  });
-};
 
 const SECTION_CONFIG = [
   {
@@ -765,9 +739,11 @@ export default function G5LaDifficult6MockTest() {
   };
 
   const startTest = () => {
-    const shuffledQuestions = shuffleAnswerOptions(sourceQuestions);
-    setRandomizedQuestions(shuffledQuestions);
-    setAnswers(new Array(shuffledQuestions.length).fill(null));
+    const preparedQuestions = isPremium
+      ? prepareAssessment(g5LaDifficult6Questions)
+      : preparePreview(g5LaDifficult6Questions, FREE_QUESTION_LIMIT);
+    setRandomizedQuestions(preparedQuestions);
+    setAnswers(new Array(preparedQuestions.length).fill(null));
     setCurrentQuestion(0);
     setTimeLeft(60 * 60);
     setShowResults(false);
