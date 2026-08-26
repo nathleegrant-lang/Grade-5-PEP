@@ -637,6 +637,20 @@ Which statement is an opinion about the road safety lesson?`,
   }
 ]
 
+const extractPassage = (sourceQuestion: string) =>
+  sourceQuestion.split("\n\n").slice(1, -1).join("\n\n")
+
+const READING_PASSAGES = {
+  1: extractPassage(g5LaEasy5Questions.find((question) => question.id === 1)!.question),
+  2: extractPassage(g5LaEasy5Questions.find((question) => question.id === 9)!.question),
+}
+
+const PASSAGE_BEARING_QUESTION_IDS = new Set([1, 9])
+
+const getPassageNumber = (question?: Question): 1 | 2 | null => {
+  if (question?.type !== "reading") return null
+  return question.id <= 8 ? 1 : 2
+}
 
 const SECTION_CONFIG = [
   { type: "reading" as const,    label: "Reading Comprehension",  note: "main idea, inference, author's purpose, tone, text structure" },
@@ -746,6 +760,9 @@ export default function G5LaEasy5MockTest() {
   }
 
   const q = availableQuestions[currentQuestion]
+  const passageNumber = getPassageNumber(q)
+  const passageText = passageNumber ? READING_PASSAGES[passageNumber] : null
+  const showPassagePanel = Boolean(passageText && q && !PASSAGE_BEARING_QUESTION_IDS.has(q.id))
   const answeredCount = answers.filter((a) => a !== null).length
 
   if (!q) {
@@ -928,6 +945,12 @@ export default function G5LaEasy5MockTest() {
               </div>
             </CardHeader>
             <CardContent className="p-6">
+              {showPassagePanel && (
+                <div className="mb-6 rounded-lg border border-blue-200 bg-blue-50/60 p-4 sm:p-5">
+                  <p className="mb-2 text-sm font-semibold text-blue-900">Passage {passageNumber}</p>
+                  <p className="whitespace-pre-line text-sm leading-relaxed text-slate-700 sm:text-base">{passageText}</p>
+                </div>
+              )}
               <p className="text-base font-medium text-slate-800 mb-6 leading-relaxed whitespace-pre-line">{q.question}</p>
               <div className="space-y-3">
                 {q.options.map((opt, idx) => (

@@ -616,6 +616,20 @@ What is the MAIN purpose of the letter?`,
 
 ]
 
+const extractPassage = (sourceQuestion: string) =>
+  sourceQuestion.split("\n\n").slice(1, -1).join("\n\n")
+
+const READING_PASSAGES = {
+  1: extractPassage(g5LaEasy1Questions.find((question) => question.id === 1)!.question),
+  2: extractPassage(g5LaEasy1Questions.find((question) => question.id === 11)!.question),
+}
+
+const PASSAGE_BEARING_QUESTION_IDS = new Set([1, 11])
+
+const getPassageNumber = (question?: Question): 1 | 2 | null => {
+  if (question?.type !== "reading") return null
+  return question.id <= 10 ? 1 : 2
+}
 
 const SECTION_CONFIG = [
   { type: "reading" as const,    label: "Reading Comprehension",  note: "main idea, inference, author's purpose, tone, text structure" },
@@ -717,6 +731,9 @@ export default function G5LaEasy1MockTest() {
   }
 
   const q = availableQuestions[currentQuestion]
+  const passageNumber = getPassageNumber(q)
+  const passageText = passageNumber ? READING_PASSAGES[passageNumber] : null
+  const showPassagePanel = Boolean(passageText && q && !PASSAGE_BEARING_QUESTION_IDS.has(q.id))
   const answeredCount = answers.filter((a) => a !== null).length
   const secLabel = (t: Question["type"]) =>
     t === "reading" ? "Reading Comprehension" : t === "vocabulary" ? "Vocabulary & Word Study"
@@ -893,6 +910,12 @@ export default function G5LaEasy1MockTest() {
               </div>
             </CardHeader>
             <CardContent className="p-6">
+              {showPassagePanel && (
+                <div className="mb-6 rounded-lg border border-blue-200 bg-blue-50/60 p-4 sm:p-5">
+                  <p className="mb-2 text-sm font-semibold text-blue-900">Passage {passageNumber}</p>
+                  <p className="whitespace-pre-line text-sm leading-relaxed text-slate-700 sm:text-base">{passageText}</p>
+                </div>
+              )}
               <p className="text-base font-medium text-slate-800 mb-6 leading-relaxed whitespace-pre-line">{q.question}</p>
               <div className="space-y-3">
                 {q.options.map((opt, idx) => (
