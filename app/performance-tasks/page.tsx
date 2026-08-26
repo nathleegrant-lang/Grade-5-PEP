@@ -50,28 +50,28 @@ const topics = [
 ]
 
 export const metadata = {
-  title: "Grade 5 PEP Performance Tasks",
+  title: "PEP PRACTICE — Grade 5 Performance Tasks",
   description:
-    "Grade 5 PEP Performance Task practice to build reading, reasoning, and writing skills.",
+    "PEP PRACTICE — Grade 5 Performance Task practice to build reading, reasoning, and writing skills.",
 }
 
 export default function PerformanceTasksPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-light/30 to-gold-light/20">
+    <div className="min-h-screen bg-gradient-to-b from-rose-50/50 to-slate-50">
       <Header />
 
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-gold to-gold-light text-navy py-10">
+      <section className="border-y border-rose-200 bg-rose-50 py-10">
         <div className="container mx-auto px-4">
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-blue-700">PEP PRACTICE — Grade 5</p>
           <div className="flex items-center gap-4">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/30">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-rose-100 text-rose-700">
               <ClipboardList className="h-8 w-8" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold md:text-3xl">
+              <h2 className="text-2xl font-bold text-slate-800 md:text-3xl">
                 Performance Tasks
               </h2>
-              <p className="text-navy/70">
+              <p className="text-slate-600">
                 Apply your skills to real-world Grade 5 scenarios
               </p>
             </div>
@@ -80,21 +80,19 @@ export default function PerformanceTasksPage() {
       </section>
 
       <main className="container mx-auto px-4 py-10">
-        {/* Back Button */}
         <Link href="/">
           <Button
             variant="ghost"
-            className="mb-6 text-navy hover:bg-sky-light/30 hover:text-navy-light"
+            className="mb-6 text-slate-700 hover:bg-rose-50"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Home
           </Button>
         </Link>
 
-        {/* Introduction */}
-        <Card className="mb-8 border-gold/30 bg-white/90 shadow-lg">
+        <Card className="mb-8 border-rose-200 bg-white/90 shadow-sm">
           <CardHeader>
-            <CardTitle className="text-navy">
+            <CardTitle className="text-slate-800">
               About Performance Tasks
             </CardTitle>
           </CardHeader>
@@ -110,76 +108,45 @@ export default function PerformanceTasksPage() {
           </CardContent>
         </Card>
 
-        {/* What to Expect */}
-        <Card className="mb-8 border-gold/30 bg-gold-light/30">
+        <Card className="mb-8 border-rose-200 bg-rose-50/50">
           <CardHeader>
-            <CardTitle className="text-navy">What to Expect</CardTitle>
+            <CardTitle className="text-slate-800">What to Expect</CardTitle>
           </CardHeader>
           <CardContent>
             <ul className="space-y-2 text-foreground">
               <li className="flex items-start gap-2">
-                <span className="font-bold text-gold">1.</span>
-                <span>
-                  <strong className="text-navy">
-                    Language Arts Performance Task:
-                  </strong>{" "}
-                  Read passages and complete reading, writing, and research
-                  activities.
-                </span>
+                <span className="font-bold text-rose-700">1.</span>
+                <span><strong className="text-slate-800">Language Arts Performance Task:</strong>{" "}Read passages and complete reading, writing, and research activities.</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="font-bold text-gold">2.</span>
-                <span>
-                  <strong className="text-navy">
-                    Mathematics Performance Task:
-                  </strong>{" "}
-                  Solve multi-step problems using real-life situations.
-                </span>
+                <span className="font-bold text-rose-700">2.</span>
+                <span><strong className="text-slate-800">Mathematics Performance Task:</strong>{" "}Solve multi-step problems using real-life situations.</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="font-bold text-gold">3.</span>
-                <span>
-                  <strong className="text-navy">Timed Tasks:</strong> Practice
-                  working within time limits to build confidence.
-                </span>
+                <span className="font-bold text-rose-700">3.</span>
+                <span><strong className="text-slate-800">Timed Tasks:</strong> Practice working within time limits to build confidence.</span>
               </li>
             </ul>
           </CardContent>
         </Card>
 
-        {/* Topics */}
-        <h3 className="mb-6 text-xl font-semibold text-navy">
-          Skills to Practice
-        </h3>
+        <h3 className="mb-6 text-xl font-semibold text-slate-800">Skills to Practice</h3>
 
         <div className="mb-10 grid gap-6 md:grid-cols-2">
           {topics.map((topic) => {
             const Icon = topic.icon
             return (
-              <Card
-                key={topic.title}
-                className="border-gold/20 transition-shadow hover:shadow-md"
-              >
+              <Card key={topic.title} className="border-rose-200 transition-shadow hover:shadow-md">
                 <CardHeader className="pb-3">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gold-light text-navy">
-                      <Icon className="h-6 w-6" />
-                    </div>
-                    <CardTitle className="text-lg text-navy">
-                      {topic.title}
-                    </CardTitle>
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-rose-100 text-rose-700"><Icon className="h-6 w-6" /></div>
+                    <CardTitle className="text-lg text-slate-800">{topic.title}</CardTitle>
                   </div>
                 </CardHeader>
-
                 <CardContent>
-                  <CardDescription className="text-muted-foreground">
-                    {topic.description}
-                  </CardDescription>
-
+                  <CardDescription className="text-muted-foreground">{topic.description}</CardDescription>
                   <Link href={topic.href}>
-                    <Button className="mt-4 bg-gold text-navy hover:bg-gold/80">
-                      Start Practice
-                    </Button>
+                    <Button className="mt-4 bg-slate-800 text-white hover:bg-slate-900">Start Practice</Button>
                   </Link>
                 </CardContent>
               </Card>
@@ -187,23 +154,14 @@ export default function PerformanceTasksPage() {
           })}
         </div>
 
-        {/* CTA */}
-        <Card className="border-gold/30 bg-gold-light/30">
+        <Card className="border-rose-200 bg-rose-50/50">
           <CardHeader>
-            <CardTitle className="text-navy">
-              Ready for a Mock Test?
-            </CardTitle>
+            <CardTitle className="text-slate-800">Ready for a Mock Test?</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="mb-4 text-foreground">
-              Test your knowledge with a full practice examination that covers
-              all Performance Tasks topics.
-            </p>
-
+            <p className="mb-4 text-foreground">Test your knowledge with Performance Task mock practice.</p>
             <Link href="/mock-tests/performance/language-arts">
-              <Button className="bg-gold text-navy hover:bg-gold/80">
-                Start Sample Task
-              </Button>
+              <Button className="bg-slate-800 text-white hover:bg-slate-900">Start Mock Test</Button>
             </Link>
           </CardContent>
         </Card>
