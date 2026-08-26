@@ -31,10 +31,61 @@ export default function MathematicsCategoryPage() {
           </div>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <SubjectLevelCard grade="grade5" subject="numeracy" level="easy" availableTests={catalog.easy} questions={40} minutes={60} description={["More direct number questions","Basic operations and simple word problems","Clear working steps"]} />
-            <SubjectLevelCard grade="grade5" subject="numeracy" level="moderate" availableTests={catalog.moderate} questions={40} minutes={60} description={["Closer to standard Grade 5 PEP level","Balanced number, geometry, and data items","Some two-step reasoning"]} />
-            <SubjectLevelCard grade="grade5" subject="numeracy" level="difficult" availableTests={catalog.difficult} questions={40} minutes={60} description={["More reasoning-based questions","Stronger distractors","Longer word problems and strategy use"]} />
-            <SubjectLevelCard grade="grade5" subject="numeracy" level="mixed" availableTests={catalog.mixed} questions={40} minutes={60} description={["Blend of easy, moderate, and difficult items","Best exam-style simulation","Strong preparation for formal assessment"]} />
+            <SubjectLevelCard
+              grade="grade5"
+              subject="numeracy"
+              level="easy"
+              availableTests={catalog.easy}
+              questions={40}
+              minutes={60}
+              description={[
+                "More direct number questions",
+                "Basic operations and simple word problems",
+                "Clear working steps",
+              ]}
+            />
+
+            <SubjectLevelCard
+              grade="grade5"
+              subject="numeracy"
+              level="moderate"
+              availableTests={catalog.moderate}
+              questions={40}
+              minutes={60}
+              description={[
+                "Closer to standard Grade 5 PEP level",
+                "Balanced number, geometry, and data items",
+                "Some two-step reasoning",
+              ]}
+            />
+
+            <SubjectLevelCard
+              grade="grade5"
+              subject="numeracy"
+              level="difficult"
+              availableTests={catalog.difficult}
+              questions={40}
+              minutes={60}
+              description={[
+                "More reasoning-based questions",
+                "Stronger distractors",
+                "Longer word problems and strategy use",
+              ]}
+            />
+
+            <SubjectLevelCard
+              grade="grade5"
+              subject="numeracy"
+              level="mixed"
+              availableTests={catalog.mixed}
+              questions={40}
+              minutes={60}
+              description={[
+                "Blend of easy, moderate, and difficult items",
+                "Best exam-style simulation",
+                "Strong preparation for formal assessment",
+              ]}
+            />
           </div>
         </div>
       </main>
