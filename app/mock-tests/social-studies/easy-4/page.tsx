@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/auth-context"
+import { prepareSocialStudiesAssessment, prepareSocialStudiesPreview } from "@/lib/social-studies-assessment-engine"
 
 const FREE_QUESTION_LIMIT = 5
 
@@ -362,7 +363,7 @@ const g5SsEasy4Questions: Question[] = [
       "The Governor General and Prime Minister",
     ],
     correctAnswer: 2,
-    explanation: `The Judiciary comprises the court system: the Privy Council (highest), Court of Appeal, Supreme Court, Resident Magistrate's Court, and other courts.`
+    explanation: `The Judiciary includes Jamaica's courts of law, including Parish Courts, the Supreme Court and the Court of Appeal, together with the country's final appellate arrangements.`
   },
   {
     id: 25,
@@ -376,7 +377,7 @@ const g5SsEasy4Questions: Question[] = [
       "Using a single currency immediately",
     ],
     correctAnswer: 1,
-    explanation: `CARICOM's main goals include economic integration, free movement of goods and people, and cooperation in education, health, and security.`
+    explanation: `CARICOM promotes economic integration and regional cooperation. Through the CSME, it facilitates trade and movement, including the free movement of eligible skilled nationals or categories under the applicable rules.`
   },
   {
     id: 26,
@@ -438,15 +439,15 @@ const g5SsEasy4Questions: Question[] = [
     id: 30,
     type: "civics",
     skill: "Electoral Process",
-    question: `Who is eligible to be elected as a Member of Parliament in Jamaica?`,
+    question: `Which candidate meets the basic constitutional requirements to be elected to Jamaica's House of Representatives?`,
     options: [
-      "Any Jamaican citizen, regardless of age",
-      "A Jamaican citizen aged 21 or over who meets constitutional requirements",
-      "Only university-educated citizens",
-      "Only citizens who have lived abroad",
+      "A 19-year-old Commonwealth citizen who has lived in Jamaica all their life",
+      "A 25-year-old Commonwealth citizen who has ordinarily resided in Jamaica for the immediately preceding 12 months and is not constitutionally disqualified",
+      "A 30-year-old person who is not a Commonwealth citizen but has visited Jamaica regularly",
+      "A 25-year-old Commonwealth citizen who has lived outside Jamaica throughout the immediately preceding 12 months",
     ],
     correctAnswer: 1,
-    explanation: `To be eligible for Parliament, a candidate must be a Jamaican citizen, at least 21 years old, registered to vote, and meet other constitutional criteria.`
+    explanation: `The constitutional baseline includes being a Commonwealth citizen, being at least 21 years old, and having ordinarily resided in Jamaica for the immediately preceding 12 months, subject to the Constitution's disqualifications.`
   },
   {
     id: 31,
@@ -604,13 +605,10 @@ export default function G5SsEasy4MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]                 = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]               = useState(60 * 60)
+  const [attemptQuestions, setAttemptQuestions] = useState<Question[]>([])
 
-  const availableQuestions = isPremium ? g5SsEasy4Questions : g5SsEasy4Questions.slice(0, FREE_QUESTION_LIMIT)
-  const totalQuestions = availableQuestions.length
-
-  useEffect(() => {
-    if (answers.length !== totalQuestions) setAnswers(new Array(totalQuestions).fill(null))
-  }, [totalQuestions, answers.length])
+  const availableQuestions = attemptQuestions
+  const totalQuestions = started ? availableQuestions.length : isPremium ? g5SsEasy4Questions.length : FREE_QUESTION_LIMIT
 
   const formatTime = useCallback((s: number) => {
     const m = Math.floor(s / 60)
@@ -624,6 +622,18 @@ export default function G5SsEasy4MockTest() {
   }, [started, showResults])
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
+
+  const startTest = () => {
+    const preparedQuestions = isPremium
+      ? prepareSocialStudiesAssessment(g5SsEasy4Questions)
+      : prepareSocialStudiesPreview(g5SsEasy4Questions, FREE_QUESTION_LIMIT)
+    setAttemptQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    setStarted(true)
+  }
 
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
@@ -671,7 +681,7 @@ export default function G5SsEasy4MockTest() {
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setAttemptQuestions([]); setAnswers([]); setTimeLeft(60 * 60)
   }
 
   const q = availableQuestions[currentQuestion]
@@ -721,7 +731,7 @@ export default function G5SsEasy4MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
           </CardContent>
         </Card>
       </main>
