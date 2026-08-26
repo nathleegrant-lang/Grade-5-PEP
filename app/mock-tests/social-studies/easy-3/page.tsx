@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/auth-context"
+import { prepareSocialStudiesAssessment, prepareSocialStudiesPreview } from "@/lib/social-studies-assessment-engine"
 
 const FREE_QUESTION_LIMIT = 5
 
@@ -242,7 +243,7 @@ const g5SsEasy3Questions: Question[] = [
     id: 16,
     type: "geography",
     skill: "Parishes",
-    question: `What is the name of the parish that contains Jamaica's largest city by population?`,
+    question: `Which parish borders Kingston and contains much of the Kingston Metropolitan Area?`,
     options: [
       "Kingston",
       "St. Andrew",
@@ -250,7 +251,7 @@ const g5SsEasy3Questions: Question[] = [
       "Clarendon",
     ],
     correctAnswer: 1,
-    explanation: `St. Andrew surrounds Kingston and, combined with it (the Kingston Corporate Area), forms Jamaica's most populous urban region.`
+    explanation: `St. Andrew borders Kingston and contains much of the wider Kingston Metropolitan Area.`
   },
   {
     id: 17,
@@ -312,15 +313,15 @@ const g5SsEasy3Questions: Question[] = [
     id: 21,
     type: "civics",
     skill: "Constitution",
-    question: `The PREAMBLE of Jamaica's Constitution states:`,
+    question: `Which part of Jamaica's Constitution protects fundamental rights and freedoms?`,
     options: [
-      "The tax laws of Jamaica",
-      "The fundamental rights and freedoms of Jamaican citizens",
-      "The trading rules of CARICOM",
-      "The boundaries of Jamaica's parishes",
+      "The national budget",
+      "The Charter of Fundamental Rights and Freedoms",
+      "The Standing Orders of Parliament",
+      "The national motto",
     ],
     correctAnswer: 1,
-    explanation: `The preamble outlines the fundamental rights of Jamaicans, including political freedoms, the rule of law, and social equality.`
+    explanation: `The Charter of Fundamental Rights and Freedoms is the part of Jamaica's Constitution that protects fundamental rights and freedoms.`
   },
   {
     id: 22,
@@ -348,7 +349,7 @@ const g5SsEasy3Questions: Question[] = [
       "63",
     ],
     correctAnswer: 1,
-    explanation: `The Jamaican Senate has 21 members: 13 appointed by the Prime Minister and 8 by the Leader of the Opposition.`
+    explanation: `The Jamaican Senate has 21 members. All are formally appointed by the Governor-General: 13 on the advice of the Prime Minister and 8 on the advice of the Leader of the Opposition.`
   },
   {
     id: 24,
@@ -418,7 +419,7 @@ const g5SsEasy3Questions: Question[] = [
       "Application",
     ],
     correctAnswer: 2,
-    explanation: `A person born in Jamaica to at least one Jamaican parent is a citizen by birth — this is the most direct form of citizenship.`
+    explanation: `A person born in Jamaica is generally a citizen by birth, subject to the exceptions set out in Jamaica's Constitution. Citizenship by birth is not simply defined by whether both parents are Jamaican.`
   },
   {
     id: 29,
@@ -480,15 +481,15 @@ const g5SsEasy3Questions: Question[] = [
     id: 33,
     type: "economics",
     skill: "Agriculture",
-    question: `Which of the following is Jamaica's main EXPORT crop?`,
+    question: `Which crop was historically one of Jamaica's most important export crops during the plantation era and for many years afterwards?`,
     options: [
       "Rice",
-      "Sugar",
+      "Sugar cane",
       "Corn",
       "Wheat",
     ],
     correctAnswer: 1,
-    explanation: `Sugar has been Jamaica's most significant export crop historically, though coffee, bananas, and other products are also exported.`
+    explanation: `Sugar cane was historically one of Jamaica's most important export crops, especially during the plantation era and for many years afterwards.`
   },
   {
     id: 34,
@@ -604,13 +605,10 @@ export default function G5SsEasy3MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]                 = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]               = useState(60 * 60)
+  const [attemptQuestions, setAttemptQuestions] = useState<Question[]>([])
 
-  const availableQuestions = isPremium ? g5SsEasy3Questions : g5SsEasy3Questions.slice(0, FREE_QUESTION_LIMIT)
-  const totalQuestions = availableQuestions.length
-
-  useEffect(() => {
-    if (answers.length !== totalQuestions) setAnswers(new Array(totalQuestions).fill(null))
-  }, [totalQuestions, answers.length])
+  const availableQuestions = attemptQuestions
+  const totalQuestions = started ? availableQuestions.length : isPremium ? g5SsEasy3Questions.length : FREE_QUESTION_LIMIT
 
   const formatTime = useCallback((s: number) => {
     const m = Math.floor(s / 60)
@@ -624,6 +622,18 @@ export default function G5SsEasy3MockTest() {
   }, [started, showResults])
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
+
+  const startTest = () => {
+    const preparedQuestions = isPremium
+      ? prepareSocialStudiesAssessment(g5SsEasy3Questions)
+      : prepareSocialStudiesPreview(g5SsEasy3Questions, FREE_QUESTION_LIMIT)
+    setAttemptQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    setStarted(true)
+  }
 
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
@@ -671,7 +681,7 @@ export default function G5SsEasy3MockTest() {
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setAttemptQuestions([]); setAnswers([]); setTimeLeft(60 * 60)
   }
 
   const q = availableQuestions[currentQuestion]
@@ -721,7 +731,7 @@ export default function G5SsEasy3MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
           </CardContent>
         </Card>
       </main>
