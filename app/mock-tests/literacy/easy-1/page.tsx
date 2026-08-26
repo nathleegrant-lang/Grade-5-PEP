@@ -81,13 +81,13 @@ What is the MAIN idea of Passage 1?`,
     skill: "Sequence",
     question: `Which happened LAST in Passage 1?`,
     options: [
-      "Class 5 arrived at school",
-      "Mr. Grant checked his nets",
-      "Students visited Old Harbour Bay",
+      "Students travelled to Old Harbour Bay",
+      "Mr. Grant checked the fishing nets",
+      "Class 5 gathered at school for the trip",
       "Students made posters about protecting sea life",
     ],
     correctAnswer: 3,
-    explanation: `After taking notes, students later created posters, which was the final event mentioned.`
+    explanation: `Making posters about protecting sea life happened after the class returned from its visit to Old Harbour Bay, so it was the last of these events in Passage 1.`
   },
   {
     id: 5,
