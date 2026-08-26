@@ -15,7 +15,7 @@ const examSections = [
     id: "language-arts",
     title: "Language Arts",
     icon: BookOpen,
-    color: "bg-blue-500",
+    color: "bg-sky-500",
     duration: "45 minutes",
     questions: 15,
     description: "Reading comprehension, vocabulary, grammar, and writing"
@@ -24,7 +24,7 @@ const examSections = [
     id: "mathematics",
     title: "Mathematics",
     icon: Calculator,
-    color: "bg-orange-500",
+    color: "bg-amber-500",
     duration: "60 minutes",
     questions: 20,
     description: "Number operations, measurement, geometry, and statistics"
@@ -56,7 +56,7 @@ export default function FullMockExamPage() {
     <div className="flex min-h-screen flex-col bg-white">
       <Header />
       <main className="flex-1">
-        <section className="bg-gradient-to-r from-purple-600 to-purple-800 text-white py-12">
+        <section className="bg-gradient-to-r from-blue-700 to-[#0b3555] text-white py-12">
           <div className="max-w-6xl mx-auto px-4">
             <Link href="/">
               <Button variant="ghost" className="text-white hover:bg-white/20 mb-4">
@@ -69,8 +69,9 @@ export default function FullMockExamPage() {
                 <Trophy className="w-8 h-8 text-white" />
               </div>
               <div>
+                <p className="mb-1 text-xs font-bold uppercase tracking-[0.2em] text-blue-100">PEP PRACTICE — GRADE 5</p>
                 <h1 className="text-3xl font-bold">Full PEP Mock Examination</h1>
-                <p className="text-purple-200">Complete practice exam covering all subjects</p>
+                <p className="text-blue-100">Complete practice exam covering all subjects</p>
               </div>
             </div>
           </div>
@@ -78,26 +79,26 @@ export default function FullMockExamPage() {
 
         <div className="max-w-6xl mx-auto px-4 py-8">
           {/* Exam Overview */}
-          <Card className="mb-8 border-2 border-purple-200">
-            <CardHeader className="bg-purple-50">
+          <Card className="mb-8 border-2 border-blue-200">
+            <CardHeader className="bg-blue-50">
               <CardTitle className="text-[#1e3a5f]">Examination Overview</CardTitle>
             </CardHeader>
             <CardContent className="p-6">
               <div className="grid md:grid-cols-4 gap-4 mb-6">
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <p className="text-3xl font-bold text-purple-600">4</p>
+                  <p className="text-3xl font-bold text-blue-700">4</p>
                   <p className="text-sm text-gray-600">Subjects</p>
                 </div>
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <p className="text-3xl font-bold text-purple-600">75</p>
+                  <p className="text-3xl font-bold text-blue-700">75</p>
                   <p className="text-sm text-gray-600">Questions</p>
                 </div>
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <p className="text-3xl font-bold text-purple-600">3.25</p>
+                  <p className="text-3xl font-bold text-blue-700">3.25</p>
                   <p className="text-sm text-gray-600">Hours Total</p>
                 </div>
                 <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <p className="text-3xl font-bold text-purple-600">60%</p>
+                  <p className="text-3xl font-bold text-blue-700">60%</p>
                   <p className="text-sm text-gray-600">Pass Mark</p>
                 </div>
               </div>
