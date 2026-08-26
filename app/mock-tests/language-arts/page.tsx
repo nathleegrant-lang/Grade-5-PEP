@@ -4,9 +4,9 @@ import SubjectLevelCard from "@/components/mock-tests/subject-level-card"
 import { getSubjectCatalog } from "@/lib/mock-catalog"
 
 export const metadata = {
-  title: "Grade 5 PEP Language Arts Mock Tests",
+  title: "PEP PRACTICE — Grade 5 Language Arts Mock Tests",
   description:
-    "Grade 5 PEP Language Arts mock tests with easy, moderate, difficult, and mixed practice levels.",
+    "PEP PRACTICE — Grade 5 Language Arts mock tests with easy, moderate, difficult, and mixed practice levels.",
 }
 
 export default function LanguageArtsCategoryPage() {
@@ -19,12 +19,14 @@ export default function LanguageArtsCategoryPage() {
       <main className="container mx-auto px-4 py-10">
         <div className="mx-auto max-w-5xl">
           <div className="mb-10 text-center">
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-blue-700">PEP PRACTICE — Grade 5</p>
+            <p className="mb-2 font-semibold text-sky-700">Language Arts</p>
             <h1 className="mb-3 text-4xl font-bold text-slate-800">
-              Language Arts Mock Tests
+              Mock Tests
             </h1>
             <p className="text-slate-600">
               Strengthen reading, vocabulary, grammar, and writing with
-              levelled Grade 5 PEP practice.
+              levelled Grade 5 practice.
             </p>
           </div>
 
