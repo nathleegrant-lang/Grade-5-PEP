@@ -38,6 +38,9 @@ function subjectAccent(subject: string): { border: string; badge: string; text: 
       return { border: "border-green-300", badge: "bg-green-100 text-green-700", text: "text-green-700" }
     case "Social Studies":
       return { border: "border-purple-300", badge: "bg-purple-100 text-purple-700", text: "text-purple-700" }
+    case "Performance Task":
+    case "Performance Tasks":
+      return { border: "border-rose-300", badge: "bg-rose-100 text-rose-700", text: "text-rose-700" }
     default:
       return { border: "border-slate-300", badge: "bg-slate-100 text-slate-700", text: "text-slate-700" }
   }
@@ -51,6 +54,13 @@ function CertificatePrintView({ cert }: { cert: CertificateRecord }) {
     <div
       className={`rounded-2xl border-4 ${accent.border} bg-white p-8 text-center space-y-5 shadow-md print:shadow-none`}
     >
+      <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-700">
+        PEP PRACTICE — GRADE 5
+      </p>
+      <p className="-mt-3 text-[11px] font-medium text-slate-400">
+        by Shazonique&apos;s Inspiration
+      </p>
+
       {/* Decorative header */}
       <div className="flex justify-center">
         <div className="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center">
@@ -75,7 +85,7 @@ function CertificatePrintView({ cert }: { cert: CertificateRecord }) {
       </p>
 
       <div className="space-y-1">
-        <p className="text-lg font-semibold text-slate-700">{normalizeSubject(cert.subject)}</p>
+        <p className={`text-lg font-semibold ${accent.text}`}>{normalizeSubject(cert.subject)}</p>
         <p className="text-slate-500 text-sm">{cert.test_name}</p>
       </div>
 
@@ -85,9 +95,9 @@ function CertificatePrintView({ cert }: { cert: CertificateRecord }) {
         ))}
       </div>
 
-      <div className="inline-block rounded-full bg-amber-50 border border-amber-200 px-6 py-2">
-        <p className="text-2xl font-bold text-amber-700">{cert.percentage}%</p>
-        <p className="text-xs text-amber-600">
+      <div className="inline-block rounded-full bg-slate-50 border border-slate-200 px-6 py-2">
+        <p className="text-2xl font-bold text-slate-800">{cert.percentage}%</p>
+        <p className="text-xs text-slate-600">
           {cert.score} / {cert.total_questions} correct
         </p>
       </div>
@@ -98,10 +108,6 @@ function CertificatePrintView({ cert }: { cert: CertificateRecord }) {
           month: "long",
           day: "numeric",
         })}
-      </p>
-
-      <p className="text-xs font-semibold tracking-widest text-slate-300 uppercase">
-        Grade 5 PEP Prep Platform
       </p>
     </div>
   )
@@ -219,6 +225,9 @@ export default function CertificatesPage() {
         {/* Page title */}
         <div className="mb-8 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
           <div>
+            <p className="mb-1 text-xs font-bold uppercase tracking-[0.2em] text-blue-700">
+              PEP PRACTICE — Grade 5
+            </p>
             <h1 className="text-2xl md:text-3xl font-bold text-slate-800 flex items-center gap-2">
               <Award className="h-7 w-7 text-amber-500" />
               Certificates
@@ -249,7 +258,7 @@ export default function CertificatesPage() {
               </p>
               <Link href="/mock-tests">
                 <Button className="bg-sky-600 hover:bg-sky-700 text-white mt-2">
-                  Try a Mock Test
+                  Start Mock Test
                 </Button>
               </Link>
             </CardContent>
