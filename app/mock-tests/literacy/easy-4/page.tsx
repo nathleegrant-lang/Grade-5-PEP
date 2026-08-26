@@ -640,6 +640,11 @@ What happened because of the donation drive?`,
 const extractPassage = (sourceQuestion: string) =>
   sourceQuestion.split("\n\n").slice(1, -1).join("\n\n")
 
+const extractQuestionStem = (sourceQuestion: string) => {
+  const parts = sourceQuestion.split("\n\n")
+  return parts[parts.length - 1]
+}
+
 const READING_PASSAGES = {
   1: extractPassage(g5LaEasy4Questions.find((question) => question.id === 1)!.question),
   2: extractPassage(g5LaEasy4Questions.find((question) => question.id === 11)!.question),
@@ -762,7 +767,10 @@ export default function G5LaEasy4MockTest() {
   const q = availableQuestions[currentQuestion]
   const passageNumber = getPassageNumber(q)
   const passageText = passageNumber ? READING_PASSAGES[passageNumber] : null
-  const showPassagePanel = Boolean(passageText && q && !PASSAGE_BEARING_QUESTION_IDS.has(q.id))
+  const showPassagePanel = Boolean(passageText && q)
+  const displayedQuestion = q && PASSAGE_BEARING_QUESTION_IDS.has(q.id)
+    ? extractQuestionStem(q.question)
+    : q?.question
   const answeredCount = answers.filter((a) => a !== null).length
 
   if (!q) {
@@ -966,7 +974,7 @@ export default function G5LaEasy4MockTest() {
                   <p className="whitespace-pre-line text-sm leading-relaxed text-slate-700 sm:text-base">{passageText}</p>
                 </div>
               )}
-              <p className="text-base font-medium text-slate-800 mb-6 leading-relaxed whitespace-pre-line">{q.question}</p>
+              <p className="text-base font-medium text-slate-800 mb-6 leading-relaxed whitespace-pre-line">{displayedQuestion}</p>
               <div className="space-y-3">
                 {q.options.map((opt, idx) => (
                   <button key={idx} onClick={() => handleAnswer(idx)}
