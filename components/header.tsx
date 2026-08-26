@@ -17,13 +17,45 @@ const navItems = [
   { href: "/", label: "Home", Icon: Home }, { href: "/language-arts", label: "Language Arts", Icon: BookOpen }, { href: "/mathematics", label: "Mathematics", Icon: Calculator }, { href: "/science", label: "Science", Icon: FlaskConical }, { href: "/social-studies", label: "Social Studies", Icon: Globe }, { href: "/performance-tasks", label: "Performance Tasks", Icon: ClipboardList }, { href: "/mock-tests", label: "Mock Tests", Icon: FileText }, { href: "/pricing", label: "Pricing", Icon: DollarSign }, { href: "/about", label: "About", Icon: Info },
 ]
 
+const assessmentRoute = /^\/mock-tests\/(literacy|numeracy|science|social-studies)\/(easy|moderate|difficult|mixed)-(\d+)$/
+const subjectNames: Record<string, string> = { literacy: "Language Arts", numeracy: "Mathematics", science: "Science", "social-studies": "Social Studies" }
+
 export function Header() {
   const pathname = usePathname()
   const { user, isAuthenticated, isPremium, isAdmin, logout } = useAuth()
   const [mobileOpen, setMobileOpen] = useState(false)
-  useEffect(() => { setMobileOpen(false) }, [pathname])
+  const [assessmentFocused, setAssessmentFocused] = useState(false)
+  const assessmentMatch = pathname.match(assessmentRoute)
+  const assessmentContext = assessmentMatch ? { subject: subjectNames[assessmentMatch[1]], difficulty: `${assessmentMatch[2].charAt(0).toUpperCase()}${assessmentMatch[2].slice(1)} ${assessmentMatch[3]}` } : null
+
+  useEffect(() => { setMobileOpen(false); setAssessmentFocused(false) }, [pathname])
   useEffect(() => { document.body.style.overflow = mobileOpen ? "hidden" : ""; return () => { document.body.style.overflow = "" } }, [mobileOpen])
+  useEffect(() => {
+    if (!assessmentContext) return
+    const handleAssessmentAction = (event: MouseEvent) => {
+      const control = (event.target as HTMLElement | null)?.closest("button, a")
+      const label = control?.textContent?.replace(/\s+/g, " ").trim() ?? ""
+      if (/^(Start Test|Start Mock Test|Start Free Preview)$/.test(label)) setAssessmentFocused(true)
+      if (/^(Try Again|Back to .*Tests)$/.test(label)) setAssessmentFocused(false)
+    }
+    document.addEventListener("click", handleAssessmentAction, true)
+    return () => document.removeEventListener("click", handleAssessmentAction, true)
+  }, [assessmentContext])
+  useEffect(() => {
+    document.body.classList.toggle("pep-assessment-active", Boolean(assessmentFocused && assessmentContext))
+    return () => document.body.classList.remove("pep-assessment-active")
+  }, [assessmentFocused, assessmentContext])
+
   const isActive = (href: string) => href === "/" ? pathname === "/" : pathname.startsWith(href)
+
+  if (assessmentFocused && assessmentContext) {
+    return <header className="border-b border-blue-900 bg-[#0b3555] text-white shadow-sm" aria-label="PEP PRACTICE Grade 5 assessment context">
+      <div className="container mx-auto flex min-h-11 items-center justify-between gap-3 px-4 py-2">
+        <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] sm:text-xs">PEP PRACTICE — GRADE 5</p>
+        <p className="truncate text-right text-xs font-semibold text-blue-100 sm:text-sm">{assessmentContext.subject} · {assessmentContext.difficulty}</p>
+      </div>
+    </header>
+  }
 
   return <>
     <header className="border-b border-slate-200 bg-white text-[#102f57]">
