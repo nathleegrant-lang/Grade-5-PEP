@@ -4,27 +4,29 @@ import SubjectLevelCard from "@/components/mock-tests/subject-level-card"
 import { getSubjectCatalog } from "@/lib/mock-catalog"
 
 export const metadata = {
-  title: "Grade 5 PEP Science Mock Tests",
+  title: "PEP PRACTICE — Grade 5 Science Mock Tests",
   description:
-    "Grade 5 PEP Science mock tests with easy, moderate, difficult, and mixed practice levels.",
+    "PEP PRACTICE — Grade 5 Science mock tests with easy, moderate, difficult, and mixed practice levels.",
 }
 
 export default function ScienceCategoryPage() {
   const catalog = getSubjectCatalog("science")
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
+    <div className="min-h-screen bg-gradient-to-b from-green-50/50 to-slate-50">
       <Header />
 
       <main className="container mx-auto px-4 py-10">
         <div className="mx-auto max-w-5xl">
           <div className="mb-10 text-center">
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-blue-700">PEP PRACTICE — Grade 5</p>
+            <p className="mb-2 font-semibold text-green-700">Science</p>
             <h1 className="mb-3 text-4xl font-bold text-slate-800">
-              Science Mock Tests
+              Mock Tests
             </h1>
             <p className="text-slate-600">
               Strengthen scientific knowledge, observation, reasoning, and
-              application with levelled Grade 5 PEP practice.
+              application with levelled Grade 5 practice.
             </p>
           </div>
 
