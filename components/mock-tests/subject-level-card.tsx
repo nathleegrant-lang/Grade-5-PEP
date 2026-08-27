@@ -59,6 +59,13 @@ const subjectStyles: Record<SubjectKey, {
   },
 }
 
+const difficultyPillStyles: Record<DifficultyKey, string> = {
+  easy: "border-emerald-700 bg-emerald-500 text-white",
+  moderate: "border-blue-800 bg-blue-700 text-white",
+  difficult: "border-amber-600 bg-amber-400 text-slate-950",
+  mixed: "border-rose-700 bg-rose-500 text-white",
+}
+
 export default function SubjectLevelCard({
   subject,
   level,
@@ -75,7 +82,7 @@ export default function SubjectLevelCard({
   return (
     <div className={`overflow-hidden rounded-xl border-2 bg-white shadow-lg ${styles.card}`}>
       <div className={`border-b px-4 py-3 ${styles.band}`}>
-        <span className="inline-flex rounded-full border-2 border-white/90 bg-white px-3 py-1 text-sm font-bold text-slate-800 shadow-md">
+        <span className={`inline-flex rounded-full border-2 px-3 py-1 text-sm font-extrabold shadow-md ${difficultyPillStyles[level]}`}>
           {levelTitle}
         </span>
       </div>
