@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/auth-context"
+import { prepareSocialStudiesAssessment, prepareSocialStudiesPreview } from "@/lib/social-studies-assessment-engine"
 
 const FREE_QUESTION_LIMIT = 5
 
@@ -88,15 +89,15 @@ const g5SsEasy9Questions: Question[] = [
     id: 5,
     type: "history",
     skill: "Cultural Heritage",
-    question: `Jamaica's COAT OF ARMS features which animal?`,
+    question: `Which animal appears on Jamaica's Coat of Arms?`,
     options: [
-      "A hummingbird",
-      "Two crocodiles supporting a shield",
-      "A lion and a unicorn",
-      "A Doctor Bird",
+      "Doctor Bird",
+      "Jamaican crocodile",
+      "Lion",
+      "Mongoose",
     ],
     correctAnswer: 1,
-    explanation: `Jamaica's Coat of Arms features two Taino figures — one male and one female — flanking a shield with a crocodile, topped by a Jamaican Crocodile on a helmet.`
+    explanation: `A Jamaican crocodile appears on the crest of Jamaica's Coat of Arms. The two human figures flanking the shield are a Taíno man and woman; they are not crocodiles.`
   },
   {
     id: 6,
@@ -158,15 +159,15 @@ const g5SsEasy9Questions: Question[] = [
     id: 10,
     type: "history",
     skill: "Colonial History",
-    question: `In what way did the Roman Catholic Church support colonialism in the Caribbean?`,
+    question: `Which is an example of lasting British influence on Jamaica after Britain took control of the island in 1655?`,
     options: [
-      "The Church actively fought against slavery from the start",
-      "The Church blessed colonial conquest and sometimes used enslaved labour in missions",
-      "The Church had no presence in the Caribbean",
-      "The Church funded the independence movements",
+      "Spanish became Jamaica's official language.",
+      "English became the main official language and British-style political institutions developed.",
+      "Jamaica became part of South America.",
+      "Taíno became the language of Parliament.",
     ],
     correctAnswer: 1,
-    explanation: `The Roman Catholic Church initially blessed and supported Spanish colonial expansion in the Caribbean, though some clergy (like Bartolomé de las Casas) later protested the treatment of indigenous peoples.`
+    explanation: `British rule had a lasting influence on Jamaica's language, law, government, and institutions. English became the country's official language and Jamaica developed a parliamentary system influenced by Britain.`
   },
   {
     id: 11,
@@ -186,7 +187,7 @@ const g5SsEasy9Questions: Question[] = [
     id: 12,
     type: "geography",
     skill: "Parishes",
-    question: `Which parish is known for sugar production and has the town of May Pen as its capital?`,
+    question: `Which parish was historically an important centre of Jamaica's sugar industry and includes the town of May Pen?`,
     options: [
       "Manchester",
       "Clarendon",
@@ -194,7 +195,7 @@ const g5SsEasy9Questions: Question[] = [
       "St. Elizabeth",
     ],
     correctAnswer: 1,
-    explanation: `Clarendon is a major sugar-producing parish in central Jamaica, with May Pen as its capital and the Monymusk Sugar Factory as a key employer.`
+    explanation: `Clarendon, whose capital is May Pen, has a long history of sugar-cane cultivation and sugar production. The item refers to that historical importance rather than claiming sugar remains the parish's defining employer today.`
   },
   {
     id: 13,
@@ -241,16 +242,16 @@ const g5SsEasy9Questions: Question[] = [
   {
     id: 16,
     type: "geography",
-    skill: "Parishes",
-    question: `Which county contains Jamaica's 'Garden Parish' — known for its rich agriculture?`,
+    skill: "Counties",
+    question: `Which county contains St. Elizabeth, a parish widely known as Jamaica's breadbasket?`,
     options: [
       "Surrey",
       "Cornwall",
       "Middlesex",
-      "Trelawny",
+      "Kingston",
     ],
     correctAnswer: 1,
-    explanation: `St. Elizabeth, known as the 'Garden Parish' for its rich agricultural output, is located in Cornwall County in western Jamaica.`
+    explanation: `St. Elizabeth is in Cornwall County in western Jamaica and is widely known as Jamaica's breadbasket because of its important agricultural production.`
   },
   {
     id: 17,
@@ -312,15 +313,15 @@ const g5SsEasy9Questions: Question[] = [
     id: 21,
     type: "civics",
     skill: "Constitution",
-    question: `The CONSTITUTION can ONLY be changed by:`,
+    question: `Why are some parts of Jamaica's Constitution harder to change than ordinary laws?`,
     options: [
-      "The Prime Minister alone",
-      "A simple majority vote in Parliament",
-      "A two-thirds majority in both houses of Parliament, and sometimes by referendum",
-      "The Governor General's approval alone",
+      "The Prime Minister alone must approve every change.",
+      "Entrenched provisions require special constitutional procedures and larger parliamentary majorities; a referendum is required only for changes where the Constitution says so.",
+      "Every constitutional change requires exactly the same referendum.",
+      "The Constitution cannot ever be changed.",
     ],
-    correctAnswer: 2,
-    explanation: `Changing Jamaica's Constitution requires a two-thirds majority in both the Senate and House of Representatives — and some changes require a referendum — making it difficult to alter the supreme law casually.`
+    correctAnswer: 1,
+    explanation: `Some constitutional provisions are entrenched, so changing them requires special procedures and specified parliamentary majorities. A referendum is required only for constitutional changes for which the Constitution requires one.`
   },
   {
     id: 22,
@@ -604,13 +605,10 @@ export default function G5SsEasy9MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]                 = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]               = useState(60 * 60)
+  const [attemptQuestions, setAttemptQuestions] = useState<Question[]>([])
 
-  const availableQuestions = isPremium ? g5SsEasy9Questions : g5SsEasy9Questions.slice(0, FREE_QUESTION_LIMIT)
-  const totalQuestions = availableQuestions.length
-
-  useEffect(() => {
-    if (answers.length !== totalQuestions) setAnswers(new Array(totalQuestions).fill(null))
-  }, [totalQuestions, answers.length])
+  const availableQuestions = attemptQuestions
+  const totalQuestions = started ? availableQuestions.length : isPremium ? g5SsEasy9Questions.length : FREE_QUESTION_LIMIT
 
   const formatTime = useCallback((s: number) => {
     const m = Math.floor(s / 60)
@@ -624,6 +622,18 @@ export default function G5SsEasy9MockTest() {
   }, [started, showResults])
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
+
+  const startTest = () => {
+    const preparedQuestions = isPremium
+      ? prepareSocialStudiesAssessment(g5SsEasy9Questions)
+      : prepareSocialStudiesPreview(g5SsEasy9Questions, FREE_QUESTION_LIMIT)
+    setAttemptQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    setStarted(true)
+  }
 
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
@@ -671,7 +681,7 @@ export default function G5SsEasy9MockTest() {
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setAttemptQuestions([]); setAnswers([]); setTimeLeft(60 * 60)
   }
 
   const q = availableQuestions[currentQuestion]
@@ -721,7 +731,7 @@ export default function G5SsEasy9MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
           </CardContent>
         </Card>
       </main>
