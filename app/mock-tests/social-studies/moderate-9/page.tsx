@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/auth-context"
+import { prepareSocialStudiesAssessment, prepareSocialStudiesPreview } from "@/lib/social-studies-assessment-engine"
 
 const FREE_QUESTION_LIMIT = 5
 
@@ -31,562 +32,562 @@ const g5SsMod9Questions: Question[] = [
   {
     id: 1,
     type: "history",
-    skill: "Cause & Effect",
-    question: `Why did LARGE NUMBERS of Jamaicans migrate to Britain in the 1950s and 1960s?`,
+    skill: "Oral History",
+    question: `An elder describes life in a Jamaican village seventy years ago. What is one strength of this oral history?`,
     options: [
-      "Britain forced Jamaicans to migrate",
-      "Jamaicans were fleeing political persecution",
-      "Britain actively recruited Caribbean workers to fill post-war labour shortages — Jamaicans went seeking economic opportunity and better living conditions",
-      "Jamaicans were expelled from their own country",
+      "It gives a personal account of experiences and memories from the past.",
+      "It gives a complete record of how every resident experienced village life.",
+      "It is more reliable than written records because the speaker remembers the events.",
+      "It removes the need to compare memories with photographs, records or other accounts.",
     ],
-    correctAnswer: 2,
-    explanation: `The 1948 British Nationality Act gave Commonwealth citizens the right to live in Britain. With Britain rebuilding after WWII and Jamaica offering limited opportunities, tens of thousands made the 'Windrush' journey.`
+    correctAnswer: 0,
+    explanation: `Oral history can preserve first-hand memories, but it should still be compared with other evidence.`
   },
   {
     id: 2,
     type: "history",
-    skill: "Analysis",
-    question: `What does the PHRASE 'freedom is not free' mean in the context of Jamaica's independence struggle?`,
+    skill: "Chronology",
+    question: `Which timeline correctly places the Baptist War, legal abolition, the end of Apprenticeship and the Morant Bay Rebellion?`,
     options: [
-      "Freedom is expensive to buy",
-      "Freedom was purchased from Britain",
-      "Freedom was won through the sacrifices and sustained activism of leaders like Manley, Bustamante, and workers who organised, marched, and demanded rights over decades",
-      "Freedom was given freely by Britain",
+      "Baptist War → Morant Bay Rebellion → legal abolition → end of Apprenticeship",
+      "Baptist War → legal abolition → end of Apprenticeship → Morant Bay Rebellion",
+      "Legal abolition → Baptist War → Morant Bay Rebellion → end of Apprenticeship",
+      "Morant Bay Rebellion → Baptist War → end of Apprenticeship → legal abolition",
     ],
-    correctAnswer: 2,
-    explanation: `Independence was not granted out of generosity — it was the result of decades of organised political activism, strikes, civil disobedience, and persistent pressure from Jamaican leaders and ordinary people.`
+    correctAnswer: 1,
+    explanation: `The Baptist War was in 1831–32, legal abolition in 1834, Apprenticeship ended in 1838, and Morant Bay occurred in 1865.`
   },
   {
     id: 3,
     type: "history",
-    skill: "Comparing",
-    question: `How was Norman Manley's vision for Jamaica SIMILAR to and DIFFERENT from Marcus Garvey's?`,
+    skill: "Emancipation",
+    question: `Why was Apprenticeship controversial after slavery was legally abolished?`,
     options: [
-      "They were completely identical",
-      "Manley wanted colonialism; Garvey wanted independence",
-      "Both wanted dignity and justice for Black people, but Manley focused on building an independent Jamaican nation-state while Garvey focused on Pan-African unity and return to Africa",
-      "Neither cared about ordinary Jamaicans",
+      "Apprenticeship ended plantation work but required every freed person to join the colonial government.",
+      "Apprenticeship gave workers full freedom but prevented them from moving between parishes.",
+      "Formerly enslaved people were still compelled to work under a system that delayed full freedom until 1838.",
+      "Formerly enslaved people received immediate political equality but were required to attend school.",
     ],
     correctAnswer: 2,
-    explanation: `Both started from the same desire — dignity and self-determination for Black people. But Manley's nationalism was rooted in Jamaica, while Garvey's vision was transnational and ultimately Africa-centred.`
+    explanation: `Apprenticeship continued compulsory labour after legal abolition and ended in 1838.`
   },
   {
     id: 4,
     type: "history",
-    skill: "Impact",
-    question: `How did the 1938 LABOUR UNREST across Jamaica contribute to political change?`,
+    skill: "Historical Evidence",
+    question: `A newspaper from 1938 reports strikes and marches by workers. What does this evidence help show?`,
     options: [
-      "It caused Britain to increase control",
-      "It had no political impact",
-      "The strikes and labour unrest demonstrated the power of organised workers and led directly to political reforms — including the introduction of Universal Adult Suffrage in 1944",
-      "It ended Bustamante's career",
+      "Workers had already achieved all the changes they were demanding.",
+      "Every employer and political leader supported the workers’ demands.",
+      "The protests were mainly celebrations of Jamaican Independence.",
+      "Workers were organising publicly around labour and social grievances.",
     ],
-    correctAnswer: 2,
-    explanation: `The 1938 uprisings — led by Bustamante and others — showed that ordinary workers could force political change. Britain responded with the Moyne Commission and eventual democratic reforms.`
+    correctAnswer: 3,
+    explanation: `Reports of organised action provide evidence of worker mobilisation during the 1938 unrest.`
   },
   {
     id: 5,
     type: "history",
-    skill: "Historical Significance",
-    question: `Why is George William Gordon recognised as a National Hero despite not leading a direct rebellion?`,
+    skill: "Political Development",
+    question: `What did Universal Adult Suffrage change in Jamaica in 1944?`,
     options: [
-      "He did lead a rebellion",
-      "He was the richest Jamaican of his time",
-      "He used his position as a legislator to advocate powerfully for the poor and was martyred by the colonial authorities — his execution without fair trial made him a symbol of colonial injustice",
-      "He was a friend of Paul Bogle's",
+      "It greatly widened the number of qualified adults who could vote.",
+      "It ended colonial status and established Jamaica as a sovereign state.",
+      "It ended the labour system that followed legal abolition in 1834.",
+      "It established a regional organisation for Caribbean cooperation.",
     ],
-    correctAnswer: 1,
-    explanation: `Gordon's heroism lay in using political power to advocate for the powerless — and in his unjust execution. The colonial government's haste to make an example of him exposed the brutality of the system he opposed.`
+    correctAnswer: 0,
+    explanation: `Universal Adult Suffrage widened voting rights and increased political participation.`
   },
   {
     id: 6,
     type: "history",
-    skill: "Cultural Analysis",
-    question: `How does the MAROON COMMUNITY of Moore Town preserve Jamaica's African heritage TODAY?`,
+    skill: "Independence",
+    question: `What did Jamaica’s Independence in 1962 mean?`,
     options: [
-      "Maroons no longer exist",
-      "Maroon communities have completely assimilated",
-      "Moore Town Maroons maintain their own governance (the Colonel and council), traditional ceremonies (Kromanti ceremonies), music (Abeng), and distinct identity — a living link to African resistance",
-      "Maroons speak only English today",
+      "Jamaican adults received voting rights for the first time.",
+      "Jamaica became a sovereign state rather than remaining a British colony.",
+      "Jamaica ended every constitutional connection inherited from Britain on the same day.",
+      "Jamaica stopped participating in international organisations and agreements.",
     ],
-    correctAnswer: 2,
-    explanation: `Maroon communities are living repositories of African cultural survival — their governance, music, ceremonies, and identity represent continuous resistance to cultural erasure across centuries.`
+    correctAnswer: 1,
+    explanation: `Independence ended colonial status and established Jamaica as a sovereign state.`
   },
   {
     id: 7,
     type: "history",
-    skill: "Cause & Effect",
-    question: `What was the LONG-TERM EFFECT of the plantation economy's dependence on sugar on modern Jamaica?`,
+    skill: "Political Leadership",
+    question: `What did Norman Manley and Alexander Bustamante both contribute to?`,
     options: [
-      "It made Jamaica very wealthy for all Jamaicans",
-      "It had no long-term effects",
-      "Jamaica was left with a distorted economy dependent on a few export crops, significant inequality in land ownership, and limited industrialisation — legacies that still challenge development",
-      "It created a diversified, resilient economy",
+      "Twentieth-century political development and movement toward self-government",
+      "The military defence of Maroon communities during the eighteenth century",
+      "The Spanish settlement of Jamaica and the establishment of colonial towns",
+      "The organisation of the Baptist War and pressure for legal abolition",
     ],
     correctAnswer: 2,
-    explanation: `The plantation legacy — monoculture, concentrated land ownership, absent industrialisation — created structural weaknesses in Jamaica's economy that persist to this day.`
+    explanation: `Both leaders played major roles in modern Jamaican political development despite leading different political parties.`
   },
   {
     id: 8,
     type: "history",
-    skill: "Historical Comparison",
-    question: `How was PAUL BOGLE's rebellion DIFFERENT from GEORGE WILLIAM GORDON's political activism?`,
+    skill: "Cultural Heritage",
+    question: `Why is preserving Maroon music, stories and ceremonies important?`,
     options: [
-      "They were identical in approach",
-      "Bogle used political channels while Gordon used physical force",
-      "Bogle led direct armed action (the Morant Bay march and uprising), while Gordon used legislative and public advocacy — different methods both aimed at justice for the poor",
-      "Gordon was more violent than Bogle",
+      "They show that Maroon culture has remained completely unchanged for centuries.",
+      "They provide evidence that all Jamaican traditions developed from one source.",
+      "They are important mainly because tourists need entertainment at heritage sites.",
+      "They are living parts of Jamaica’s cultural heritage and historical memory.",
     ],
-    correctAnswer: 2,
-    explanation: `The contrast between Bogle (physical uprising) and Gordon (political advocacy) shows how the same cause — justice for poor Jamaicans — was pursued through different means by different people.`
+    correctAnswer: 3,
+    explanation: `Living traditions connect communities with history and cultural identity.`
   },
   {
     id: 9,
     type: "history",
-    skill: "Legacy",
-    question: `Why do Jamaicans celebrate their NATIONAL HEROES rather than colonial figures?`,
+    skill: "Artefacts",
+    question: `Why should a museum record where an archaeological artefact was found?`,
     options: [
-      "Because colonial figures are unknown",
-      "Because Jamaicans are required to by law",
-      "Celebrating National Heroes reflects Jamaica's post-colonial identity — honouring those who fought FOR Jamaican people rather than those who exploited them",
-      "Colonial figures have no statues",
+      "Its location provides context that can help explain how the artefact relates to the site.",
+      "Its location determines whether the artefact is more valuable than written evidence.",
+      "Its location proves that every object found nearby had the same purpose.",
+      "Its location tells historians exactly who made and used the artefact.",
     ],
-    correctAnswer: 2,
-    explanation: `National hero celebrations are an act of historical reclamation — choosing to honour resisters and builders of independence rather than those who profited from colonialism.`
+    correctAnswer: 0,
+    explanation: `Archaeological context helps historians interpret how an artefact relates to a place and other evidence.`
   },
   {
     id: 10,
     type: "history",
-    skill: "Analysis",
-    question: `What does it MEAN that Jamaica has ONLY ONE female National Hero?`,
+    skill: "Fact and Opinion",
+    question: `Which statement is an opinion rather than a verifiable historical fact?`,
     options: [
-      "That Jamaican women have not contributed to history",
-      "That only Nanny deserved the honour",
-      "It reflects both the genuine exceptional nature of Nanny's achievement AND historical patterns of overlooking women's contributions — a subject of ongoing discussion in Jamaica",
-      "That all seven National Heroes are famous internationally",
+      "The Morant Bay Rebellion occurred in 1865.",
+      "Jamaica became independent from Britain in 1962.",
+      "Sam Sharpe was Jamaica’s most inspiring National Hero.",
+      "Universal Adult Suffrage was introduced in 1944.",
     ],
-    correctAnswer: 2,
-    explanation: `The absence of women beyond Nanny raises important questions about whose contributions are recognised and who gets written into history — a living debate about how Jamaica remembers its past.`
+    correctAnswer: 1,
+    explanation: `Calling one event the “most inspiring” is a judgement; the dates in the other statements can be checked against historical records.`
   },
   {
     id: 11,
     type: "geography",
-    skill: "Spatial Relationships",
-    question: `A farmer in St. Thomas notices that rains fall heavily on the western slopes of the mountains but rarely on the eastern slopes. This is BEST explained by:`,
+    skill: "Map Legends",
+    question: `A map legend shows a green square for a park and a blue line for a river. What does a blue line on this map represent?`,
     options: [
-      "The eastern slopes are higher",
-      "The western slopes are closer to a river",
-      "The windward (western) slopes face moisture-bearing trade winds and receive heavy rain; the leeward (eastern) side is in a rain shadow",
-      "The eastern slopes are deforested",
+      "A parish boundary",
+      "A park",
+      "A river",
+      "A hospital",
     ],
     correctAnswer: 2,
-    explanation: `Local rain shadow effects exist within ranges — the windward side faces prevailing moist winds; the leeward side is sheltered and drier. Even within a parish, rainfall varies dramatically.`
+    explanation: `The legend defines the blue line as a river.`
   },
   {
     id: 12,
     type: "geography",
-    skill: "Cause & Effect",
-    question: `WHY does Blue Mountain Peak have a much cooler climate than Kingston?`,
+    skill: "Map Scale",
+    question: `A map uses a scale of 1 cm to 5 km. Two settlements are 7 cm apart. What is the real distance?`,
     options: [
-      "Blue Mountain is farther north",
-      "Kingston is at sea level and traps heat; Blue Mountain (at over 2,200 m) benefits from lower temperatures at higher elevation — approximately 6°C cooler for every 1,000 m gained",
-      "Kingston is in a valley with no wind",
-      "Blue Mountain faces the Atlantic ocean",
+      "70 km",
+      "12 km",
+      "30 km",
+      "35 km",
     ],
-    correctAnswer: 1,
-    explanation: `Temperature decreases with altitude — the lapse rate. Blue Mountain Peak at 2,256 m is dramatically cooler than sea-level Kingston, supporting coffee growing and a distinct ecosystem.`
+    correctAnswer: 3,
+    explanation: `Seven centimetres multiplied by 5 kilometres per centimetre gives 35 kilometres.`
   },
   {
     id: 13,
     type: "geography",
-    skill: "Environmental Decision",
-    question: `A community votes to build a dam on a local river. What is a POTENTIAL NEGATIVE CONSEQUENCE?`,
+    skill: "River Systems",
+    question: `A factory releases waste upstream from a town. Why can the town be affected?`,
     options: [
-      "Cheaper electricity for all",
-      "Better road access",
-      "Flooding of upstream communities and farmland, disruption of fish migration, and loss of river habitat downstream",
-      "Improved water quality",
+      "River flow can carry pollution downstream toward the town.",
+      "Pollution remains near the release point because river water does not transport waste.",
+      "Downstream treatment prevents upstream activities from affecting water quality.",
+      "Factory waste changes rainfall but does not move through the river system.",
     ],
-    correctAnswer: 2,
-    explanation: `Dams create reservoirs that flood land upstream, disrupt aquatic ecosystems, and change water flow downstream — community and ecological costs that must be weighed against benefits.`
+    correctAnswer: 0,
+    explanation: `Material entering a river upstream can be carried by the current toward downstream users.`
   },
   {
     id: 14,
     type: "geography",
-    skill: "Spatial Analysis",
-    question: `WHY are Jamaica's NORTHERN PARISHES (like St. Ann and Portland) more suitable for TOURISM than southern parishes like Clarendon?`,
+    skill: "Soil Conservation",
+    question: `Which farming practice BEST helps reduce soil erosion on a steep slope?`,
     options: [
-      "Southern parishes have better beaches",
-      "Northern parishes are less populated",
-      "The north coast has sandy beaches, clear water warmed by the Caribbean Sea, and scenic mountains — natural assets that attract tourists. Clarendon has fewer beach and scenic assets",
-      "Southern parishes are too far from the airport",
+      "Leaving soil bare between harvest and the next planting",
+      "Planting ground cover and farming along contours",
+      "Removing ground cover while keeping the same contour pattern",
+      "Ploughing directly downhill so water leaves the field faster",
     ],
-    correctAnswer: 2,
-    explanation: `Physical geography drives tourism location: the north coast's beaches, turquoise water, and mountain backdrop are the classic Caribbean tourism product. The south coast is drier and has fewer beach attractions.`
+    correctAnswer: 1,
+    explanation: `Ground cover protects soil, while contour farming slows runoff moving down a slope.`
   },
   {
     id: 15,
     type: "geography",
-    skill: "Environmental Impact",
-    question: `A student observes that rivers near cities run brown after heavy rain. What MOST LIKELY causes this?`,
+    skill: "Climate and Agriculture",
+    question: `A farmer expects a drier-than-normal season. Which response is MOST sensible?`,
     options: [
-      "Brown water is natural in cities",
-      "Rainfall makes rivers cleaner",
-      "Soil erosion and runoff carry sediment, pollutants, and sewage from urban areas into rivers — a major source of river pollution in Jamaica",
-      "Brown colour comes from minerals in the water",
+      "Remove mulch so soil moisture evaporates more quickly after rainfall.",
+      "Choose crops by market price without considering how much water they require.",
+      "Use water-saving irrigation and choose crops suited to drier conditions.",
+      "Apply more water before measuring available supplies or crop requirements.",
     ],
     correctAnswer: 2,
-    explanation: `Urban runoff is a major pollution source — rain washes construction sediment, oil, waste, and sewage from urban surfaces directly into rivers, reducing water quality and harming aquatic life.`
+    explanation: `Efficient irrigation and suitable crops help a farmer adapt production to drier conditions.`
   },
   {
     id: 16,
     type: "geography",
-    skill: "Environment",
-    question: `What is the RELATIONSHIP between watersheds and water supply?`,
+    skill: "Coastal Hazards",
+    question: `Which location is MOST exposed to storm surge?`,
     options: [
-      "Watersheds and water supply are unrelated",
-      "Polluting watersheds improves water quality",
-      "Watersheds are the land areas that collect rainfall into rivers — deforesting or polluting a watershed directly reduces and degrades the water supply of communities downstream",
-      "Watersheds only affect agriculture",
+      "A high inland ridge overlooking several valleys",
+      "A mountain settlement far from the coastline",
+      "A hilltop located above a sheltered harbour",
+      "A low-lying community beside the sea",
     ],
-    correctAnswer: 2,
-    explanation: `Protecting watersheds is protecting water supply — they are inseparable. Jamaica's Forest Act protects watershed forests precisely because clean, reliable water depends on healthy, forested catchment areas.`
+    correctAnswer: 3,
+    explanation: `Storm surge is a coastal rise in sea level, making low-lying coastal communities especially exposed.`
   },
   {
     id: 17,
     type: "geography",
-    skill: "Land Use",
-    question: `The COCKPIT COUNTRY in Jamaica is largely UNDEVELOPED. WHY is this both a challenge and an opportunity?`,
+    skill: "Population Density",
+    question: `Town A has 20,000 people in 10 km². Town B has 20,000 people in 40 km². Which town is more densely populated?`,
     options: [
-      "Undeveloped land is always worthless",
-      "Development is always better",
-      "Its rugged limestone terrain makes development costly (challenge), but its biodiversity, water-generating forests, and Maroon heritage make it invaluable for conservation and heritage tourism (opportunity)",
-      "It has no significance",
+      "Town A",
+      "Town B",
+      "Both towns have the same density",
+      "The towns cannot be compared using area and population",
     ],
-    correctAnswer: 2,
-    explanation: `The Cockpit Country presents a classic conservation dilemma — difficult to develop but ecologically and culturally priceless. Its protection is internationally recognised as essential.`
+    correctAnswer: 0,
+    explanation: `Town A has the same population concentrated in a smaller area.`
   },
   {
     id: 18,
     type: "geography",
-    skill: "Climate Analysis",
-    question: `A farming community experiences a severe drought. Which crops are they MOST LIKELY to be able to continue growing?`,
+    skill: "Transport and Settlement",
+    question: `A new road connects a rural area to a major town. Which change may follow?`,
     options: [
-      "Water-intensive crops like rice and watercress",
-      "Crops that require frequent irrigation",
-      "Drought-tolerant crops like cassava, sorghum, and certain root vegetables",
-      "Crops grown only in wet regions",
+      "The road may require the parish boundary to follow its route.",
+      "Improved access may encourage business and settlement near the route.",
+      "Improved access may reduce movement because travel becomes more convenient.",
+      "The road may change the area’s rainfall and temperature patterns.",
     ],
-    correctAnswer: 2,
-    explanation: `Drought conditions call for drought-tolerant crops — those with deep roots or physiological adaptations to low water. Cassava is famously drought-resistant and is a Jamaican food staple.`
+    correctAnswer: 1,
+    explanation: `Better transport access can attract settlement and businesses by improving links to markets and services.`
   },
   {
     id: 19,
     type: "geography",
-    skill: "Environmental Sustainability",
-    question: `WHY should Jamaica invest in RENEWABLE ENERGY?`,
+    skill: "Caribbean Geography",
+    question: `Which statement correctly describes Jamaica’s regional location?`,
     options: [
-      "Renewable energy is always free",
-      "Renewable energy produces more pollution",
-      "Jamaica imports nearly all its oil at high cost — renewable energy (solar, wind) would reduce import costs, lower electricity prices, create jobs, and reduce carbon emissions",
-      "Renewable energy cannot work in the Caribbean",
+      "Jamaica is in the Pacific Ocean east of the Caribbean region.",
+      "Jamaica is on the South American mainland beside the Caribbean Sea.",
+      "Jamaica is in the Caribbean and forms part of the Greater Antilles.",
+      "Jamaica is in the Caribbean and forms part only of the Lesser Antilles.",
     ],
     correctAnswer: 2,
-    explanation: `Energy imports consume a significant share of Jamaica's foreign exchange. Renewables would reduce this drain, lower consumer prices, and support Jamaica's commitment to sustainable development.`
+    explanation: `Jamaica is a Caribbean island and one of the islands of the Greater Antilles.`
   },
   {
     id: 20,
     type: "geography",
-    skill: "Environmental Impact",
-    question: `What is the RELATIONSHIP between deforestation and flooding in Jamaica?`,
+    skill: "Environmental Evidence",
+    question: `A community plants mangroves along an eroding shoreline. Which evidence would BEST show whether the project is helping?`,
     options: [
-      "Deforestation reduces flooding",
-      "There is no relationship",
-      "Forests absorb and slow rainfall; when forests are removed, rainwater runs off quickly, overwhelming river channels and causing flooding in communities below",
-      "Only coastal areas flood",
+      "Attendance totals from the ceremony that launched the planting project",
+      "Counts of signs installed near the mangrove planting locations",
+      "Minutes from meetings held before the first mangroves were planted",
+      "Measurements of shoreline change and mangrove survival over time",
     ],
-    correctAnswer: 2,
-    explanation: `Trees intercept rainfall, and root systems absorb and slowly release water. Without them, heavy rain rushes directly into rivers — causing flash floods that damage communities and agriculture.`
+    correctAnswer: 3,
+    explanation: `Repeated measurements of survival and shoreline change directly test whether the project is meeting its purpose.`
   },
   {
     id: 21,
     type: "civics",
-    skill: "Applying Knowledge",
-    question: `A constituency has elected its MP. What is that MP's PRIMARY duty?`,
+    skill: "Parliament",
+    question: `What is one main function of Jamaica’s Parliament?`,
     options: [
-      "To work only for their political party",
-      "To serve the Prime Minister's interests",
-      "To represent the interests of ALL constituents — not just those who voted for them — in Parliament",
-      "To attend only party meetings",
+      "To debate and make national laws",
+      "To decide individual court cases using witness testimony",
+      "To manage each public market and local minor road",
+      "To administer regional secondary-school examinations",
     ],
-    correctAnswer: 2,
-    explanation: `An MP represents all residents of their constituency — including those who voted against them. Once elected, they are accountable to all constituents, not just party supporters.`
+    correctAnswer: 0,
+    explanation: `Parliament debates proposed legislation and makes national laws through the constitutional law-making process.`
   },
   {
     id: 22,
     type: "civics",
-    skill: "Rights Analysis",
-    question: `WHY is the RIGHT TO A FAIR TRIAL particularly important for minorities and marginalised groups?`,
+    skill: "Courts",
+    question: `A citizen believes a constitutional right has been breached. Which institution can determine such a legal claim?`,
     options: [
-      "It only applies to wealthy citizens",
-      "Minorities do not need special protection",
-      "Without fair trial guarantees, historically marginalised groups face greater risk of unjust treatment — procedural protections are essential safeguards against systemic bias",
-      "Fair trials are only important for serious crimes",
+      "The CARICOM Secretariat",
+      "A court with the appropriate jurisdiction",
+      "The constituency office of a Member of Parliament",
+      "A Municipal Corporation meeting",
     ],
-    correctAnswer: 2,
-    explanation: `The right to a fair trial is especially vital for those with less social and economic power — history shows that without such guarantees, systemic injustice falls hardest on the most vulnerable.`
+    correctAnswer: 1,
+    explanation: `Courts interpret and apply the law and can determine legal claims about constitutional rights.`
   },
   {
     id: 23,
     type: "civics",
-    skill: "Government Function",
-    question: `WHY does the Jamaican government COLLECT TAXES?`,
+    skill: "Local Government",
+    question: `A local public market needs repairs. Which body is most directly associated with this local-government service?`,
     options: [
-      "Because all governments do so arbitrarily",
-      "To punish successful businesses",
-      "To fund the public services — education, healthcare, security, roads, and social welfare — that citizens need and use collectively",
-      "To give politicians personal income",
+      "The Municipal Corporation/local authority, which manages many local facilities and services",
+      "The Caribbean Examinations Council, which administers regional examinations and qualifications",
+      "The Bank of Jamaica, which performs central-banking and monetary functions",
+      "The CARICOM Secretariat, which supports regional Community programmes",
     ],
     correctAnswer: 2,
-    explanation: `Taxation funds the collective services that individuals and communities cannot provide for themselves — it is the practical mechanism for sharing the costs of shared benefits.`
+    explanation: `Municipal Corporations are Jamaica’s local authorities and manage many local facilities and services.`
   },
   {
     id: 24,
     type: "civics",
-    skill: "Civic Participation",
-    question: `A community group successfully campaigns to fix their flooded road. What does this demonstrate?`,
+    skill: "Voting",
+    question: `Why should voters consider reliable information about candidates and issues?`,
     options: [
-      "That government always ignores communities",
-      "That only government action matters",
-      "That organised citizen action can hold government accountable and drive positive change — civic participation works",
-      "That communities should replace government",
+      "To select the candidate whose name appears most often in advertisements",
+      "To vote according to a party colour without examining any proposal",
+      "To accept one campaign message as a complete record of public performance",
+      "To make informed choices instead of relying mainly on rumours",
     ],
-    correctAnswer: 2,
-    explanation: `This demonstrates the power of organised civic engagement — citizens who organise, document problems, and advocate collectively are more effective than individuals acting alone.`
+    correctAnswer: 3,
+    explanation: `Reliable information helps voters assess candidates and issues before making an informed choice.`
   },
   {
     id: 25,
     type: "civics",
-    skill: "Constitutional Significance",
-    question: `WHY is the Jamaican Constitution described as the SUPREME LAW?`,
+    skill: "Public Consultation",
+    question: `Why might a public agency invite comments on a proposed community project?`,
     options: [
-      "Because it was written first",
-      "Because the Governor General says so",
-      "Because ALL other laws must conform to it — any law that contradicts the Constitution can be struck down by the courts",
-      "Because it is the longest document",
+      "To learn about local needs and evidence before making a final decision",
+      "To allow comments to replace every legal approval the project requires",
+      "To hear only from residents who already support the proposal",
+      "To promise that every suggestion will be included in the final project",
     ],
-    correctAnswer: 2,
-    explanation: `Supremacy means the constitution trumps all other laws — Parliament cannot pass a law that violates constitutional rights, and courts can strike down such laws.`
+    correctAnswer: 0,
+    explanation: `Consultation can provide useful local evidence while the responsible authority retains its lawful decision-making role.`
   },
   {
     id: 26,
     type: "civics",
     skill: "Rule of Law",
-    question: `WHY is JUDICIAL INDEPENDENCE vital in Jamaica's democratic system?`,
+    question: `Which statement BEST describes the rule of law?`,
     options: [
-      "Judges should do what the government says",
-      "Judicial independence is not important",
-      "Independent judges can make decisions based on law and evidence alone — without political pressure — protecting citizens' rights even from government overreach",
-      "Judges should be elected by voters",
+      "A law applies only after every person affected has agreed with it.",
+      "Officials and citizens are subject to law, and government power is exercised within law.",
+      "Officials may set aside a law whenever following it delays a public decision.",
+      "Citizens must follow laws, but government officials are exempt while performing public duties.",
     ],
-    correctAnswer: 2,
-    explanation: `If judges could be pressured by politicians, those in power could manipulate court outcomes — independent courts protect all citizens, especially those challenging powerful interests.`
+    correctAnswer: 1,
+    explanation: `The rule of law requires both citizens and public officials to act within the law.`
   },
   {
     id: 27,
     type: "civics",
-    skill: "Rights Application",
-    question: `A school refuses to admit a student because of her religion. Which right has been violated?`,
+    skill: "Freedom of Expression",
+    question: `Which action shows responsible use of freedom of expression?`,
     options: [
-      "The right to free speech",
-      "The right to peaceful assembly",
-      "The right to freedom of religion and non-discrimination in access to education",
-      "The right to work",
+      "Threatening people who disagree with a speaker at a public meeting",
+      "Blocking opposing speakers so that one opinion is the only one heard",
+      "Expressing a lawful opinion while respecting the rights and safety of others",
+      "Publishing a claim known to be false in order to shame a neighbour",
     ],
     correctAnswer: 2,
-    explanation: `Refusing education access based on religion violates both freedom of religion (the right to practise one's faith without disadvantage) and the right to education without discrimination.`
+    explanation: `Freedom of expression is exercised within the law and with respect for other people’s rights and safety.`
   },
   {
     id: 28,
     type: "civics",
-    skill: "Government Transparency",
-    question: `WHY is FREEDOM OF INFORMATION important in a democracy?`,
+    skill: "Accountability",
+    question: `Why should a public agency explain how project funds were used?`,
     options: [
-      "Citizens don't need government information",
-      "It makes government more secretive",
-      "Allowing citizens to access government records enables them to hold officials accountable, identify corruption, and make informed decisions — transparency is essential to accountability",
-      "Only journalists need government information",
+      "To make the tax system simpler for every household",
+      "To prove that the project achieved every intended result",
+      "To replace financial records and independent audits",
+      "To account for its management of public resources",
     ],
-    correctAnswer: 2,
-    explanation: `Freedom of information empowers citizens — when government operates in the open, it is harder to hide waste, corruption, or abuse. Informed citizens are the foundation of accountability.`
+    correctAnswer: 3,
+    explanation: `Public agencies should account for decisions and spending involving public resources.`
   },
   {
     id: 29,
     type: "civics",
-    skill: "CARICOM",
-    question: `CARICOM member states cooperate on HEALTH because:`,
+    skill: "Regional Cooperation",
+    question: `Caribbean countries share hurricane forecasts and emergency supplies. What is the main benefit?`,
     options: [
-      "Health has nothing to do with CARICOM",
-      "Individual countries can manage all health issues alone",
-      "Small island states face shared health threats (like pandemics, non-communicable diseases) that are more effectively addressed collectively — pooling resources and expertise",
-      "CARICOM requires all members to have the same health system",
+      "They combine information and resources to address a risk shared across the region.",
+      "They ensure every country must use one identical emergency plan.",
+      "They remove the need for national disaster agencies and weather services.",
+      "They prevent hurricanes from crossing national boundaries.",
     ],
-    correctAnswer: 2,
-    explanation: `Collective action is more effective for many health challenges — coordinating pandemic responses, sharing medical expertise, and jointly negotiating drug prices are all more effective regionally.`
+    correctAnswer: 0,
+    explanation: `Regional cooperation can strengthen preparedness by pooling information, expertise and emergency resources.`
   },
   {
     id: 30,
     type: "civics",
-    skill: "Electoral Process",
-    question: `WHY is the SECRET BALLOT important in democratic elections?`,
+    skill: "Information Literacy",
+    question: `A message claims a new law has passed but gives no source. What should a responsible citizen do before sharing it?`,
     options: [
-      "It slows down the voting process",
-      "Voters should declare their choices publicly",
-      "It protects voters from pressure, intimidation, or retaliation — ensuring their vote truly reflects their free choice without fear",
-      "Secret ballots are less accurate",
+      "Judge the claim by how often it appears on social media.",
+      "Verify the claim using an official or otherwise credible source.",
+      "Ask one friend and treat the friend’s response as confirmation.",
+      "Share the message first and correct it later if someone objects.",
     ],
-    correctAnswer: 2,
-    explanation: `Secret ballots prevent employers, landlords, or political operatives from pressuring or punishing voters based on their choice — they are fundamental to genuinely free elections.`
+    correctAnswer: 1,
+    explanation: `Checking an official or credible source reduces the risk of spreading false information.`
   },
   {
     id: 31,
     type: "economics",
-    skill: "Production Decisions",
-    question: `A manufacturing company in Jamaica decides to AUTOMATE part of its production line. What is a LIKELY NEGATIVE consequence?`,
+    skill: "Budgeting",
+    question: `After paying essential expenses, a household has J$15,000 remaining. Which plan BEST shows deliberate budgeting?`,
     options: [
-      "The company becomes less productive",
-      "The company loses all its customers",
-      "Some workers may lose their jobs as machines replace human labour — the short-term cost for workers, even if long-term productivity gains benefit the company",
-      "Automation always improves wages for all workers",
+      "Borrow more money so the household can avoid choosing between priorities.",
+      "Leave the amount unrecorded and decide only after it has been spent.",
+      "Divide the money between emergency saving and an affordable optional purchase.",
+      "Spend all of it on the first optional item advertised that week.",
     ],
     correctAnswer: 2,
-    explanation: `Automation creates a productivity paradox — it can reduce costs and increase output for the company, but displace the workers whose tasks are now performed by machines.`
+    explanation: `A budget deliberately assigns available money to priorities, including saving and affordable wants.`
   },
   {
     id: 32,
     type: "economics",
-    skill: "Market Analysis",
-    question: `During the August mango season, mango prices FALL significantly in Jamaican markets. WHY?`,
+    skill: "Supply and Demand",
+    question: `A storm destroys much of the banana crop while demand remains similar. What may happen to banana prices?`,
     options: [
-      "Jamaicans suddenly dislike mangoes in August",
-      "The government lowers mango prices by law",
-      "Seasonal abundance — supply increases dramatically during harvest season — drives prices down as more mangoes compete for buyers",
-      "Mango importation increases in August",
+      "Prices may fall because crop damage increases the quantity supplied.",
+      "Prices may stay fixed because supply cannot affect market prices.",
+      "Prices may disappear because damaged crops end all demand for bananas.",
+      "Prices may rise because fewer bananas are available for buyers.",
     ],
-    correctAnswer: 2,
-    explanation: `Basic supply and demand: when the mango harvest floods the market, supply outstrips demand, forcing prices down. After the season, supply drops and prices recover.`
+    correctAnswer: 3,
+    explanation: `When supply falls while demand remains similar, competition for the smaller quantity may raise prices.`
   },
   {
     id: 33,
     type: "economics",
-    skill: "Tourism Economics",
-    question: `A hotel in Jamaica earns $1 million in revenue. Why might only a fraction of this stay in the Jamaican economy?`,
+    skill: "Tourism Linkages",
+    question: `A hotel hires local musicians and buys crafts from nearby producers. What is one likely benefit?`,
     options: [
-      "Because Jamaica taxes hotels heavily",
-      "Because tourists bring all their own food",
-      "Many hotels are foreign-owned and import food, furniture, and supplies — profits and spending 'leak' out of the economy to foreign owners and suppliers",
-      "All tourism revenue stays in Jamaica",
+      "Tourism spending supports local workers and businesses beyond the hotel.",
+      "The hotel replaces the musicians’ and craft producers’ independent businesses.",
+      "The purchases become imports because tourists may come from other countries.",
+      "Local producers lose income when a tourism business buys their goods and services.",
     ],
-    correctAnswer: 2,
-    explanation: `Economic leakage is a major issue in Caribbean tourism — foreign ownership means profits leave; imported food and goods reduce local economic benefit. Building linkages to local suppliers is key.`
+    correctAnswer: 0,
+    explanation: `Local hiring and purchasing create linkages that spread tourism income through the community.`
   },
   {
     id: 34,
     type: "economics",
-    skill: "Fiscal Policy",
-    question: `The Jamaican government REDUCES income tax. What is the MOST LIKELY SHORT-TERM effect?`,
+    skill: "Imports",
+    question: `A Jamaican factory buys a machine manufactured in Germany. For Jamaica, the machine is:`,
     options: [
-      "Citizens immediately have less money",
-      "Government revenue rises automatically",
-      "Citizens have more disposable income — potentially stimulating consumer spending and economic growth",
-      "Unemployment rises immediately",
+      "a public subsidy",
+      "an import",
+      "an export",
+      "a remittance",
     ],
-    correctAnswer: 2,
-    explanation: `A tax cut leaves more money in citizens' pockets — if they spend it on local goods and services, this can stimulate economic activity. However, it may also reduce government revenue.`
+    correctAnswer: 1,
+    explanation: `A good brought into Jamaica after being produced abroad is an import.`
   },
   {
     id: 35,
     type: "economics",
-    skill: "Agricultural Economics",
-    question: `WHY do some Jamaican farmers prefer to grow YAMS for the local market rather than BANANAS for export?`,
+    skill: "Exports",
+    question: `A Jamaican company sells coffee to customers overseas. For Jamaica, the coffee is:`,
     options: [
-      "Yams taste better than bananas",
-      "Local markets are more profitable for large quantities",
-      "Yams avoid the price volatility and strict quality standards of export markets — local market selling may be more predictable and require less compliance investment",
-      "Bananas are harder to grow",
+      "a household transfer",
+      "a government service",
+      "an export",
+      "an import",
     ],
     correctAnswer: 2,
-    explanation: `Export markets (especially for bananas) are subject to strict EU or US grading standards and volatile world prices. Local market crops can be sold across a wider range of qualities and offer more price stability.`
+    explanation: `Coffee produced in Jamaica and sold to buyers abroad is part of Jamaica’s exports.`
   },
   {
     id: 36,
     type: "economics",
-    skill: "Community Economics",
-    question: `A COOPERATIVE BANK charges its members 12% interest on loans while a commercial bank charges 24%. WHY might a small business owner choose the co-op?`,
+    skill: "Credit Unions",
+    question: `A credit-union member receives an approved loan. What responsibility normally follows?`,
     options: [
-      "Commercial banks are safer",
-      "Co-ops always have more money to lend",
-      "The cooperative's lower interest rate means the business owner pays less for the same loan — reducing costs and making the business more financially viable",
-      "Co-ops are only for farmers",
+      "Treat the loan as a gift that does not need to be repaid.",
+      "Set the repayment amount without reference to the loan agreement.",
+      "Transfer the repayment responsibility to other credit-union members.",
+      "Repay the loan according to the agreed terms.",
     ],
-    correctAnswer: 2,
-    explanation: `Lower interest rates are a direct financial advantage — the co-op's member-ownership model means profits go back to members as lower rates rather than to external shareholders.`
+    correctAnswer: 3,
+    explanation: `A borrower is responsible for repaying an approved loan according to its agreed terms.`
   },
   {
     id: 37,
     type: "economics",
-    skill: "International Trade",
-    question: `Jamaica benefits from preferential trade agreements with the USA and EU. WHY would losing these agreements hurt Jamaican exporters?`,
+    skill: "Taxes and Services",
+    question: `A government is preparing its annual plan for roads, schools and public safety. Why is tax revenue relevant to the plan?`,
     options: [
-      "Because Jamaica doesn't export to the USA or EU",
-      "Preferential access has no value",
-      "Jamaican products would face higher tariffs in those markets, making them more expensive and less competitive compared to products from countries with better trade access",
-      "Trade agreements only help large countries",
+      "To help fund shared public services and infrastructure",
+      "To ensure businesses and households receive the same income",
+      "To replace wages earned by workers in private employment",
+      "To charge each taxpayer only for services that person directly uses",
     ],
-    correctAnswer: 2,
-    explanation: `Preferential access allows Jamaican products (like coffee and sugar) to enter major markets at lower or zero tariffs — losing this advantage would make Jamaican exports pricier and less competitive internationally.`
+    correctAnswer: 0,
+    explanation: `Tax revenue helps fund shared services and infrastructure such as roads, schools and public safety.`
   },
   {
     id: 38,
     type: "economics",
-    skill: "Environmental Economics",
-    question: `A sugar factory pollutes a river used by fishing communities downstream. Who BEARS the ECONOMIC COST of this pollution?`,
+    skill: "Community Costs",
+    question: `A business pollutes nearby homes, causing residents to pay for cleaning and health care. What does this show?`,
     options: [
-      "The factory alone pays",
-      "Nobody bears a cost",
-      "The fishing communities — who lose income from reduced fish catches — and the public, who may face health costs and water treatment expenses",
-      "The government pays all costs automatically",
+      "Cleaning and health expenses are part of the business’s sales revenue.",
+      "Residents can bear costs created by an economic activity.",
+      "The business bears every cost because it owns the production equipment.",
+      "Pollution costs disappear when the business provides employment.",
     ],
-    correctAnswer: 2,
-    explanation: `Environmental economics calls these 'negative externalities' — costs borne by third parties who had no part in creating the pollution. The factory gains from avoiding waste treatment; communities lose.`
+    correctAnswer: 1,
+    explanation: `Pollution can impose external costs on people who were not part of the business transaction.`
   },
   {
     id: 39,
     type: "economics",
-    skill: "Economic Planning",
-    question: `A student studying economics learns that Jamaica has a SMALL, OPEN ECONOMY. What does this mean?`,
+    skill: "Market Research",
+    question: `Before investing heavily in a new product, what should a small business investigate?`,
     options: [
-      "Jamaica's economy is closed to trade",
-      "Jamaica only trades within CARICOM",
-      "Jamaica's economy is highly dependent on international trade — external factors like global oil prices, interest rates, and demand for tourism heavily influence Jamaica's economic performance",
-      "Jamaica is too poor to trade internationally",
+      "How much can be borrowed before estimating sales or expenses",
+      "Whether one customer likes the product enough to represent the whole market",
+      "Likely demand, competing prices and expected costs",
+      "The owner’s preferred colour without asking possible customers",
     ],
     correctAnswer: 2,
-    explanation: `A small, open economy is significantly influenced by external factors. Jamaica imports most of its fuel, food, and manufactured goods — making it vulnerable to global price changes.`
+    explanation: `Market research helps a business estimate demand, prices and costs before committing substantial resources.`
   },
   {
     id: 40,
     type: "economics",
-    skill: "Financial Decision",
-    question: `A Jamaican family earns $100,000 per month and spends $95,000. They are:`,
+    skill: "Business Reserves",
+    question: `Why might a cooperative retain part of its annual surplus?`,
     options: [
-      "In serious debt",
-      "Breaking even",
-      "Saving $5,000 per month — living within their means and building financial security",
-      "Spending irresponsibly",
+      "To hide its financial results from cooperative members",
+      "To avoid recording how the remaining surplus is used",
+      "To guarantee that future income will exceed every future expense",
+      "To build a reserve for future plans or unexpected costs",
     ],
-    correctAnswer: 2,
-    explanation: `Income ($100,000) minus expenditure ($95,000) = $5,000 saved. This family is living within its means and building savings — an example of positive financial management.`
+    correctAnswer: 3,
+    explanation: `A reserve can help a cooperative prepare for future investment or unexpected costs.`
   }
 ]
 
@@ -604,13 +605,10 @@ export default function G5SsMod9MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]                 = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]               = useState(60 * 60)
+  const [attemptQuestions, setAttemptQuestions] = useState<Question[]>([])
 
-  const availableQuestions = isPremium ? g5SsMod9Questions : g5SsMod9Questions.slice(0, FREE_QUESTION_LIMIT)
-  const totalQuestions = availableQuestions.length
-
-  useEffect(() => {
-    if (answers.length !== totalQuestions) setAnswers(new Array(totalQuestions).fill(null))
-  }, [totalQuestions, answers.length])
+  const availableQuestions = attemptQuestions
+  const totalQuestions = started ? availableQuestions.length : isPremium ? g5SsMod9Questions.length : FREE_QUESTION_LIMIT
 
   const formatTime = useCallback((s: number) => {
     const m = Math.floor(s / 60)
@@ -624,6 +622,18 @@ export default function G5SsMod9MockTest() {
   }, [started, showResults])
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
+
+  const startTest = () => {
+    const preparedQuestions = isPremium
+      ? prepareSocialStudiesAssessment(g5SsMod9Questions)
+      : prepareSocialStudiesPreview(g5SsMod9Questions, FREE_QUESTION_LIMIT)
+    setAttemptQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    setStarted(true)
+  }
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
 
@@ -670,7 +680,7 @@ export default function G5SsMod9MockTest() {
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setAttemptQuestions([]); setAnswers([]); setTimeLeft(60 * 60)
   }
 
   const q = availableQuestions[currentQuestion]
@@ -720,7 +730,7 @@ export default function G5SsMod9MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
           </CardContent>
         </Card>
       </main>
