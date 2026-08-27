@@ -217,10 +217,10 @@ const g5SsMod4Questions: Question[] = [
     skill: "Coastal Environment",
     question: `Why should a community avoid removing all the mangroves along an exposed coastline?`,
     options: [
-      "Mangroves can reduce wave energy and provide habitat for marine life.",
-      "Mangroves prevent all flooding in every storm.",
-      "Mangroves produce Jamaica's drinking water.",
-      "Mangroves make coral reefs unnecessary.",
+      "Mangroves can reduce wave energy and provide important habitat for young marine animals.",
+      "Mangroves are useful mainly because their roots create new sandy beaches for recreation.",
+      "Mangroves protect coasts by preventing salt water from ever moving inland during storms.",
+      "Mangroves grow naturally near the sea, so damaged areas usually recover without protection.",
     ],
     correctAnswer: 0,
     explanation: `Mangroves help protect shorelines and also provide valuable habitat, especially for young fish and other organisms.`
@@ -231,10 +231,10 @@ const g5SsMod4Questions: Question[] = [
     skill: "Population Distribution",
     question: `A parish map shows many people living near the coast and far fewer in the mountainous interior. What does the map show?`,
     options: [
-      "Population is evenly distributed.",
+      "Population is spread almost evenly between the coast and the mountainous interior.",
       "Population is concentrated more heavily in coastal areas.",
-      "No one lives in the mountains.",
-      "Every coastal resident works in fishing.",
+      "Population is concentrated mainly in the mountainous interior.",
+      "The map shows that settlement is scattered evenly throughout the parish.",
     ],
     correctAnswer: 1,
     explanation: `The map indicates a spatial pattern: a larger share of the population is clustered near the coast.`
@@ -260,9 +260,9 @@ const g5SsMod4Questions: Question[] = [
     question: `Students want to know whether littering near a stream is decreasing. Which evidence would be MOST useful?`,
     options: [
       "The number and type of litter items counted at the same locations over several weeks",
-      "The favourite colours of the students doing the survey",
-      "The age of the oldest building nearby",
-      "The number of pages in their Social Studies book",
+      "The number of students who report that the stream appears cleaner each week",
+      "Photographs taken from different locations each time the class visits the stream",
+      "The amount of rainfall recorded in the parish during the same period",
     ],
     correctAnswer: 0,
     explanation: `Repeated counts from the same locations allow the students to compare changes in litter over time.`
@@ -315,10 +315,10 @@ const g5SsMod4Questions: Question[] = [
     skill: "Parliament",
     question: `Why does Parliament debate proposed laws before they are passed?`,
     options: [
-      "To allow representatives to examine, question, and suggest changes to proposals",
-      "To ensure every proposal becomes law immediately",
-      "To replace the courts",
-      "To allow only government ministers to vote in elections",
+      "To allow representatives to examine, question, and suggest changes to proposed laws",
+      "To allow courts to decide whether each proposal should become law before Parliament votes",
+      "To allow citizens to vote directly on every proposed law before it reaches Parliament",
+      "To allow ministers to describe proposals without questions from other representatives",
     ],
     correctAnswer: 0,
     explanation: `Debate lets legislators examine proposals, raise concerns, and consider changes before a final decision.`
@@ -441,10 +441,10 @@ const g5SsMod4Questions: Question[] = [
     skill: "Public Participation",
     question: `A Municipal Corporation invites residents to comment on plans for a new market. Why is this useful?`,
     options: [
-      "Residents can provide information about community needs before decisions are finalised.",
-      "Residents automatically become government employees.",
-      "The consultation replaces all elections.",
-      "Every suggestion must legally be accepted.",
+      "Residents can provide information about local needs and concerns before the plan is finalised.",
+      "Residents can replace elected officials and make the final decision on the market themselves.",
+      "Residents can decide how all Municipal Corporation funds must be spent during the year.",
+      "Residents can require the Corporation to accept every suggestion made at the consultation.",
     ],
     correctAnswer: 0,
     explanation: `Public consultation can help decision-makers understand local needs and concerns before completing a plan.`
@@ -455,10 +455,10 @@ const g5SsMod4Questions: Question[] = [
     skill: "Opportunity Cost",
     question: `A school club has enough money for either new sports equipment or a shade tent, but not both. Choosing the shade tent means:`,
     options: [
-      "the sports equipment is the opportunity given up",
-      "the club receives both items",
-      "the money has no value",
-      "no decision was made",
+      "The sports equipment is the opportunity given up when the club chooses the shade tent.",
+      "The money paid for the shade tent is the opportunity cost of choosing it.",
+      "The benefits of both the tent and sports equipment together are the opportunity cost.",
+      "The cash remaining after purchasing the shade tent is the opportunity cost.",
     ],
     correctAnswer: 0,
     explanation: `When resources are limited, choosing one option means giving up another possible use of those resources.`
@@ -469,10 +469,10 @@ const g5SsMod4Questions: Question[] = [
     skill: "Local Production",
     question: `A restaurant buys eggs from a nearby farmer. Which local economic effect is MOST direct?`,
     options: [
-      "The farmer earns income from supplying the restaurant.",
-      "Jamaica stops importing all food.",
-      "Every egg producer charges the same price.",
-      "The restaurant becomes a farm.",
+      "The farmer earns income by supplying a nearby business with eggs.",
+      "The restaurant reduces demand for locally produced food by purchasing nearby eggs.",
+      "The farmer becomes an employee of the restaurant after completing the sale.",
+      "The purchase becomes an import because the eggs are transported to another business.",
     ],
     correctAnswer: 0,
     explanation: `The purchase creates income for a local producer and links one local business to another.`
@@ -497,10 +497,10 @@ const g5SsMod4Questions: Question[] = [
     skill: "Employment",
     question: `A new agro-processing factory opens near several farming communities. Which effect is MOST likely?`,
     options: [
-      "It may create jobs and a market for some locally grown crops.",
-      "Farming immediately ends in the area.",
-      "All workers must move overseas.",
-      "The factory removes the need for transport.",
+      "It may create jobs and provide a new market for some crops grown by nearby farmers.",
+      "It may reduce local farm sales because agro-processing factories do not use nearby crops.",
+      "It can create jobs only when all of the raw materials used by the factory are imported.",
+      "It will cause farmers to stop producing because the factory will compete with their farms.",
     ],
     correctAnswer: 0,
     explanation: `Processing businesses can employ workers and purchase agricultural products from nearby farmers.`
@@ -525,10 +525,10 @@ const g5SsMod4Questions: Question[] = [
     skill: "Public Services",
     question: `Why might a community support using some tax revenue to repair a damaged public road?`,
     options: [
-      "The road is shared infrastructure used by residents, businesses, and public services.",
-      "Tax money may only be spent on private houses.",
-      "Road repair benefits no economic activity.",
-      "Public roads do not require maintenance.",
+      "The road is shared infrastructure used by residents, businesses, schools, and emergency services.",
+      "The road is used by private vehicles, so public funds should not normally be spent on it.",
+      "Road repairs help transport but have little connection to businesses or emergency services.",
+      "A public road should be repaired only if every resident agrees that it is the top priority.",
     ],
     correctAnswer: 0,
     explanation: `Public roads support travel, business, emergency services, and access to schools and workplaces, so maintenance can benefit the wider community.`
@@ -553,10 +553,10 @@ const g5SsMod4Questions: Question[] = [
     skill: "Saving",
     question: `Why might a household keep an emergency savings fund?`,
     options: [
-      "To help meet unexpected expenses without immediately depending on new debt",
-      "To guarantee that no emergency ever occurs",
-      "To avoid planning regular expenses",
-      "To make all income tax-free",
+      "To help meet an unexpected expense without immediately depending on new borrowing",
+      "To earn enough interest to guarantee the household can pay for every future emergency",
+      "To avoid including unexpected expenses when the household prepares a budget",
+      "To replace insurance and other forms of planning for financial risks",
     ],
     correctAnswer: 0,
     explanation: `Emergency savings can provide money for unexpected needs and reduce the need to borrow immediately.`
@@ -568,9 +568,9 @@ const g5SsMod4Questions: Question[] = [
     question: `A popular beach attracts visitors but litter is increasing. Which response BEST balances economic and environmental needs?`,
     options: [
       "Improve waste collection and enforce anti-litter rules while keeping the beach responsibly open.",
-      "Allow unlimited dumping because visitors spend money.",
-      "Close every tourism business permanently.",
-      "Remove all bins so maintenance costs fall.",
+      "Reduce waste collection and sharply restrict visitors so the beach can recover naturally.",
+      "Keep the beach open but allow each tourism business to decide whether litter rules apply.",
+      "Close tourism businesses during busy periods even if improved waste management could solve the problem.",
     ],
     correctAnswer: 0,
     explanation: `Managing waste protects the resource that residents, visitors, and businesses depend on without unnecessarily ending economic activity.`
