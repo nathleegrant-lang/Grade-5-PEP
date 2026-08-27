@@ -30,11 +30,11 @@ const subjectStyles: Record<SubjectKey, {
     link: "border-blue-600 bg-blue-600 text-white hover:bg-blue-800",
   },
   numeracy: {
-    card: "border-amber-500 shadow-amber-200",
-    band: "border-amber-600 bg-gradient-to-r from-amber-500 via-yellow-400 to-orange-400",
-    stat: "border-amber-300 bg-amber-100",
+    card: "border-amber-400 shadow-amber-100",
+    band: "border-amber-500 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-300",
+    stat: "border-amber-300 bg-amber-50",
     statNumber: "text-amber-800",
-    link: "border-amber-600 bg-amber-500 text-slate-950 hover:bg-amber-700 hover:text-white",
+    link: "border-amber-500 bg-amber-400 text-slate-950 hover:bg-amber-600 hover:text-white",
   },
   science: {
     card: "border-emerald-500 shadow-emerald-200",
@@ -66,14 +66,7 @@ const difficultyPillStyles: Record<DifficultyKey, string> = {
   mixed: "border-rose-700 bg-rose-500 text-white",
 }
 
-export default function SubjectLevelCard({
-  subject,
-  level,
-  availableTests,
-  questions,
-  minutes,
-  description,
-}: SubjectLevelCardProps) {
+export default function SubjectLevelCard({ subject, level, availableTests, questions, minutes, description }: SubjectLevelCardProps) {
   const slots = Array.from({ length: MAX_TEST_SLOTS }, (_, index) => index + 1)
   const available = new Set(availableTests)
   const levelTitle = level.charAt(0).toUpperCase() + level.slice(1)
@@ -82,60 +75,21 @@ export default function SubjectLevelCard({
   return (
     <div className={`overflow-hidden rounded-xl border-2 bg-white shadow-lg ${styles.card}`}>
       <div className={`border-b px-4 py-3 ${styles.band}`}>
-        <span className={`inline-flex rounded-full border-2 px-3 py-1 text-sm font-extrabold shadow-md ${difficultyPillStyles[level]}`}>
-          {levelTitle}
-        </span>
+        <span className={`inline-flex rounded-full border-2 px-3 py-1 text-sm font-extrabold shadow-md ${difficultyPillStyles[level]}`}>{levelTitle}</span>
       </div>
-
       <div className="p-4 space-y-5">
-        <ul className="space-y-1 text-sm text-slate-700 min-h-[72px]">
-          {description.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-
+        <ul className="space-y-1 text-sm text-slate-700 min-h-[72px]">{description.map((item) => <li key={item}>{item}</li>)}</ul>
         <div className="grid grid-cols-2 gap-3">
-          <div className={`rounded-lg border-2 p-4 text-center ${styles.stat}`}>
-            <p className={`text-2xl font-extrabold ${styles.statNumber}`}>{questions}</p>
-            <p className="text-xs font-medium text-slate-700">Questions</p>
-          </div>
-
-          <div className={`rounded-lg border-2 p-4 text-center ${styles.stat}`}>
-            <p className={`text-2xl font-extrabold ${styles.statNumber}`}>{minutes}</p>
-            <p className="text-xs font-medium text-slate-700">Minutes</p>
-          </div>
+          <div className={`rounded-lg border-2 p-4 text-center ${styles.stat}`}><p className={`text-2xl font-extrabold ${styles.statNumber}`}>{questions}</p><p className="text-xs font-medium text-slate-700">Questions</p></div>
+          <div className={`rounded-lg border-2 p-4 text-center ${styles.stat}`}><p className={`text-2xl font-extrabold ${styles.statNumber}`}>{minutes}</p><p className="text-xs font-medium text-slate-700">Minutes</p></div>
         </div>
-
         <div>
           <p className="mb-2 text-sm font-bold text-slate-700">Available Tests</p>
           <div className="flex flex-wrap gap-2">
             {slots.map((testNumber) => {
               const isAvailable = available.has(testNumber)
-
-              if (!isAvailable) {
-                return (
-                  <button
-                    key={testNumber}
-                    type="button"
-                    disabled
-                    className="flex h-7 w-7 items-center justify-center rounded-md border border-slate-200 bg-slate-100 text-xs font-semibold text-slate-400 cursor-not-allowed"
-                    title="Coming soon"
-                  >
-                    {testNumber}
-                  </button>
-                )
-              }
-
-              return (
-                <Link
-                  key={testNumber}
-                  href={getTestHref(subject, level, testNumber)}
-                  className={`flex h-7 w-7 items-center justify-center rounded-md border text-xs font-extrabold shadow-sm transition-colors ${styles.link}`}
-                  title={`Open ${levelTitle} Test ${testNumber}`}
-                >
-                  {testNumber}
-                </Link>
-              )
+              if (!isAvailable) return <button key={testNumber} type="button" disabled className="flex h-7 w-7 items-center justify-center rounded-md border border-slate-200 bg-slate-100 text-xs font-semibold text-slate-400 cursor-not-allowed" title="Coming soon">{testNumber}</button>
+              return <Link key={testNumber} href={getTestHref(subject, level, testNumber)} className={`flex h-7 w-7 items-center justify-center rounded-md border text-xs font-extrabold shadow-sm transition-colors ${styles.link}`} title={`Open ${levelTitle} Test ${testNumber}`}>{testNumber}</Link>
             })}
           </div>
         </div>
