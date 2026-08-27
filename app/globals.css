@@ -105,7 +105,11 @@
 }
 
 body.pep-assessment-active .min-h-screen.bg-gradient-to-b {
-  background: linear-gradient(180deg, #bfdbfe 0%, #dbeafe 42%, #e0f2fe 100%) !important;
+  background: linear-gradient(135deg, #047857 0%, #10b981 52%, #2dd4bf 100%) !important;
+}
+
+body.pep-assessment-active footer {
+  display: none;
 }
 
 /* Color bar styles */
