@@ -5,13 +5,11 @@ import { getSubjectCatalog } from "@/lib/mock-catalog"
 
 export const metadata = {
   title: "PEP PRACTICE — Grade 5 Mathematics Mock Tests",
-  description:
-    "PEP PRACTICE — Grade 5 Mathematics mock tests with easy, moderate, difficult, and mixed practice levels.",
+  description: "PEP PRACTICE — Grade 5 Mathematics mock tests with easy, moderate, difficult, and mixed practice levels.",
 }
 
 export default function MathematicsCategoryPage() {
   const catalog = getSubjectCatalog("numeracy")
-
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -19,7 +17,7 @@ export default function MathematicsCategoryPage() {
         <div className="mx-auto max-w-5xl">
           <div className="mb-10 text-center text-white">
             <p className="mb-2 text-xs font-extrabold uppercase tracking-[0.2em] text-emerald-50">PEP PRACTICE — Grade 5</p>
-            <p className="mb-2 font-bold text-amber-200">Mathematics</p>
+            <p className="mb-2 text-lg font-extrabold text-amber-200 sm:text-xl">Mathematics</p>
             <h1 className="mb-3 text-4xl font-extrabold text-white sm:text-5xl">Mock Tests</h1>
             <p className="mx-auto max-w-2xl text-emerald-50">Build confidence in number work, measurement, geometry, and data handling with levelled Grade 5 practice.</p>
           </div>
