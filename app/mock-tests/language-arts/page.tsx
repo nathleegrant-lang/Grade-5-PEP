@@ -13,18 +13,18 @@ export default function LanguageArtsCategoryPage() {
   const catalog = getSubjectCatalog("literacy")
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
+    <div className="min-h-screen bg-white">
       <Header />
 
-      <main className="container mx-auto px-4 py-10">
+      <main className="bg-gradient-to-br from-[#123b8f] via-[#1267d6] to-[#05b9d7] px-4 py-10 sm:py-12">
         <div className="mx-auto max-w-5xl">
-          <div className="mb-10 text-center">
-            <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-blue-700">PEP PRACTICE — Grade 5</p>
-            <p className="mb-2 font-semibold text-sky-700">Language Arts</p>
-            <h1 className="mb-3 text-4xl font-bold text-slate-800">
+          <div className="mb-10 text-center text-white">
+            <p className="mb-2 text-xs font-extrabold uppercase tracking-[0.2em] text-cyan-100">PEP PRACTICE — Grade 5</p>
+            <p className="mb-2 font-bold text-cyan-100">Language Arts</p>
+            <h1 className="mb-3 text-4xl font-extrabold text-white sm:text-5xl">
               Mock Tests
             </h1>
-            <p className="text-slate-600">
+            <p className="mx-auto max-w-2xl text-blue-50">
               Strengthen reading, vocabulary, grammar, and writing with
               levelled Grade 5 practice.
             </p>
