@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/auth-context"
+import { prepareSocialStudiesAssessment, prepareSocialStudiesPreview } from "@/lib/social-studies-assessment-engine"
 
 const FREE_QUESTION_LIMIT = 5
 
@@ -60,15 +61,15 @@ const g5SsEasy8Questions: Question[] = [
     id: 3,
     type: "history",
     skill: "Cultural Heritage",
-    question: `Jamaica's national tree is the:`,
+    question: `Which pair correctly matches Jamaica's national tree and national flower?`,
     options: [
-      "Bamboo",
-      "Royal Palm",
-      "Lignum Vitae",
-      "Blue Mahoe",
+      "National tree — Lignum Vitae; national flower — Blue Mahoe",
+      "National tree — Blue Mahoe; national flower — Lignum Vitae",
+      "National tree — Bamboo; national flower — Hibiscus",
+      "National tree — Royal Palm; national flower — Bougainvillea",
     ],
-    correctAnswer: 2,
-    explanation: `The Lignum Vitae is Jamaica's national tree. The Blue Mahoe is a beautiful hardwood tree often confused with the national tree.`
+    correctAnswer: 1,
+    explanation: `The Blue Mahoe is Jamaica's national tree, while the Lignum Vitae is Jamaica's national flower.`
   },
   {
     id: 4,
@@ -157,30 +158,30 @@ const g5SsEasy8Questions: Question[] = [
   {
     id: 10,
     type: "history",
-    skill: "National Heroes",
-    question: `Which year marks the start of the PEP (Primary Exit Profile) assessment era in Jamaica?`,
+    skill: "Jamaican History",
+    question: `Which uprising led by Sam Sharpe took place in Jamaica in 1831?`,
     options: [
-      "2000",
-      "2012",
-      "2018",
-      "2015",
+      "The Morant Bay Rebellion",
+      "The Baptist War, also called the Christmas Rebellion",
+      "The First Maroon War",
+      "The Labour Rebellion of 1938",
     ],
-    correctAnswer: 2,
-    explanation: `The Primary Exit Profile (PEP) assessment was introduced in 2018, replacing the GSAT (Grade Six Achievement Test) for students leaving primary school.`
+    correctAnswer: 1,
+    explanation: `Sam Sharpe helped organise the 1831 uprising commonly called the Baptist War or Christmas Rebellion, an important event in Jamaica's history before emancipation.`
   },
   {
     id: 11,
     type: "geography",
     skill: "Physical Features",
-    question: `What is the significance of the BLUE MOUNTAINS for Jamaica's water supply?`,
+    question: `Why are mountain forests and watersheds in the Blue Mountains important to Jamaica's water supply?`,
     options: [
-      "They block rainfall from reaching Kingston",
-      "They are the source of most of Jamaica's major rivers, providing fresh water for communities",
-      "They prevent hurricanes from reaching the island",
-      "They contain large bauxite deposits",
+      "They stop all hurricanes from reaching Jamaica.",
+      "They receive rainfall and feed many important rivers, streams, and water supplies.",
+      "They contain most of Jamaica's bauxite.",
+      "They prevent water from flowing downhill.",
     ],
     correctAnswer: 1,
-    explanation: `The Blue Mountains are Jamaica's main water tower — they receive heavy rainfall that feeds the rivers and aquifers providing fresh water to communities across the island.`
+    explanation: `The Blue Mountains receive substantial rainfall. Their forests and watersheds help collect and release water that feeds many rivers, streams, and supplies used by communities.`
   },
   {
     id: 12,
@@ -326,15 +327,15 @@ const g5SsEasy8Questions: Question[] = [
     id: 22,
     type: "civics",
     skill: "Government",
-    question: `The MINISTRY OF EDUCATION is responsible for:`,
+    question: `Which level of government has national responsibility for education policy and Jamaica's public education system?`,
     options: [
-      "Law enforcement",
-      "Healthcare delivery",
-      "Policy, management, and quality of Jamaica's education system",
-      "Tourism promotion",
+      "A neighbourhood watch group",
+      "The national government through the ministry responsible for education",
+      "CARICOM",
+      "A private tourism company",
     ],
-    correctAnswer: 2,
-    explanation: `The Ministry of Education, Youth, and Information develops and implements Jamaica's education policy, manages the public school system, and sets curriculum standards.`
+    correctAnswer: 1,
+    explanation: `Education policy and oversight of Jamaica's public education system are national-government responsibilities carried out through the government ministry responsible for education.`
   },
   {
     id: 23,
@@ -438,15 +439,15 @@ const g5SsEasy8Questions: Question[] = [
     id: 30,
     type: "civics",
     skill: "Rights",
-    question: `The RIGHT TO EDUCATION in Jamaica means:`,
+    question: `Which education entitlement is specifically protected by Jamaica's Charter of Fundamental Rights and Freedoms?`,
     options: [
-      "Education is optional for all",
-      "Every child has a legal right to receive primary and secondary education free of charge",
-      "Only public school students have this right",
-      "Parents must pay for all education",
+      "Free university education for every person",
+      "Tuition at publicly funded pre-primary and primary schools without charge",
+      "Free private secondary-school tuition for every child",
+      "Free overseas study for every Jamaican student",
     ],
     correctAnswer: 1,
-    explanation: `Jamaica's Education Act and constitution guarantee every child the right to free primary education, and education is compulsory until age 16.`
+    explanation: `Jamaica's Charter of Fundamental Rights and Freedoms protects the right of every child who is a citizen to publicly funded tuition at the pre-primary and primary levels.`
   },
   {
     id: 31,
@@ -465,16 +466,16 @@ const g5SsEasy8Questions: Question[] = [
   {
     id: 32,
     type: "economics",
-    skill: "Agriculture",
-    question: `What is the HEART ACADEMY OF JAMAICA?`,
+    skill: "Training and Employment",
+    question: `Which national organisation provides technical and vocational education and training for Jamaicans?`,
     options: [
-      "A sports training facility",
-      "A tertiary institution providing technical and vocational training, including agricultural skills",
-      "A research institute for farming",
-      "A government ministry",
+      "Jamaica Tourist Board",
+      "HEART/NSTA Trust",
+      "Jamaica Constabulary Force",
+      "National Water Commission",
     ],
     correctAnswer: 1,
-    explanation: `The HEART/NSTA Trust (formerly HEART Academy) provides technical and vocational training in Jamaica — including agricultural, hospitality, construction, and other skills essential for the economy.`
+    explanation: `HEART/NSTA Trust provides technical and vocational education and training that helps Jamaicans develop skills for employment and entrepreneurship.`
   },
   {
     id: 33,
@@ -604,13 +605,10 @@ export default function G5SsEasy8MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]                 = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]               = useState(60 * 60)
+  const [attemptQuestions, setAttemptQuestions] = useState<Question[]>([])
 
-  const availableQuestions = isPremium ? g5SsEasy8Questions : g5SsEasy8Questions.slice(0, FREE_QUESTION_LIMIT)
-  const totalQuestions = availableQuestions.length
-
-  useEffect(() => {
-    if (answers.length !== totalQuestions) setAnswers(new Array(totalQuestions).fill(null))
-  }, [totalQuestions, answers.length])
+  const availableQuestions = attemptQuestions
+  const totalQuestions = started ? availableQuestions.length : isPremium ? g5SsEasy8Questions.length : FREE_QUESTION_LIMIT
 
   const formatTime = useCallback((s: number) => {
     const m = Math.floor(s / 60)
@@ -624,6 +622,18 @@ export default function G5SsEasy8MockTest() {
   }, [started, showResults])
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
+
+  const startTest = () => {
+    const preparedQuestions = isPremium
+      ? prepareSocialStudiesAssessment(g5SsEasy8Questions)
+      : prepareSocialStudiesPreview(g5SsEasy8Questions, FREE_QUESTION_LIMIT)
+    setAttemptQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    setStarted(true)
+  }
 
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
@@ -671,7 +681,7 @@ export default function G5SsEasy8MockTest() {
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setAttemptQuestions([]); setAnswers([]); setTimeLeft(60 * 60)
   }
 
   const q = availableQuestions[currentQuestion]
@@ -721,7 +731,7 @@ export default function G5SsEasy8MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
           </CardContent>
         </Card>
       </main>
