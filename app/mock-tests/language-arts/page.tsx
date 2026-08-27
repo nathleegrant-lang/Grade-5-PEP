@@ -16,15 +16,15 @@ export default function LanguageArtsCategoryPage() {
     <div className="min-h-screen bg-white">
       <Header />
 
-      <main className="bg-gradient-to-br from-[#0B3F56] via-[#087F78] to-[#08B8A8] px-4 py-10 sm:py-12">
+      <main className="bg-gradient-to-br from-[#047857] via-[#10B981] to-[#2DD4BF] px-4 py-10 sm:py-12">
         <div className="mx-auto max-w-5xl">
           <div className="mb-10 text-center text-white">
-            <p className="mb-2 text-xs font-extrabold uppercase tracking-[0.2em] text-emerald-100">PEP PRACTICE — Grade 5</p>
-            <p className="mb-2 font-bold text-emerald-100">Language Arts</p>
+            <p className="mb-2 text-xs font-extrabold uppercase tracking-[0.2em] text-emerald-50">PEP PRACTICE — Grade 5</p>
+            <p className="mb-2 font-bold text-emerald-50">Language Arts</p>
             <h1 className="mb-3 text-4xl font-extrabold text-white sm:text-5xl">
               Mock Tests
             </h1>
-            <p className="mx-auto max-w-2xl text-teal-50">
+            <p className="mx-auto max-w-2xl text-emerald-50">
               Strengthen reading, vocabulary, grammar, and writing with
               levelled Grade 5 practice.
             </p>
