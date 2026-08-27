@@ -469,10 +469,10 @@ const g5SsMod3Questions: Question[] = [
     skill: "Supply and Demand",
     question: `After a very good mango harvest, many farmers bring mangoes to market at the same time. If demand stays about the same, what is MOST likely to happen?`,
     options: [
-      "Mangoes become impossible to find.",
-      "Sellers may lower prices because the supply is larger.",
-      "Every farmer must stop selling mangoes.",
-      "Demand automatically becomes zero.",
+      "Prices may rise because farmers spent more money harvesting the larger crop.",
+      "Sellers may lower prices because the larger supply gives buyers more mangoes to choose from.",
+      "Prices may stay the same because harvest size does not affect the amount available for sale.",
+      "Sellers may raise prices because having more mangoes makes each mango harder to obtain.",
     ],
     correctAnswer: 1,
     explanation: `When supply increases while demand stays similar, sellers may lower prices to attract buyers and sell the larger quantity available.`
@@ -497,10 +497,10 @@ const g5SsMod3Questions: Question[] = [
     skill: "Taxes and Public Services",
     question: `Why do governments collect taxes from individuals and businesses?`,
     options: [
-      "Only to increase the price of imported goods",
-      "To help fund services such as roads, schools, health care, and public safety",
-      "To make every household earn the same income",
-      "To replace all private businesses with government offices",
+      "To discourage people from using too many government services",
+      "To help fund shared services such as roads, schools, health care, and public safety",
+      "To make businesses and households earn approximately the same income",
+      "To pay only for services used directly by the people who paid each tax",
     ],
     correctAnswer: 1,
     explanation: `Tax revenue helps governments pay for public services and infrastructure used by communities.`
@@ -526,9 +526,9 @@ const g5SsMod3Questions: Question[] = [
     question: `Why might members of a community choose to save through a credit union?`,
     options: [
       "Credit unions allow members to save and may provide loans and other financial services.",
-      "Credit unions guarantee that every investment will double.",
-      "Credit unions replace the need for household budgets.",
-      "Credit unions issue Jamaica's currency.",
+      "Credit unions accept members' savings but are not allowed to provide loans.",
+      "Credit unions are government agencies that issue Jamaica's notes and coins.",
+      "Credit unions guarantee that every member earns a profit on money saved.",
     ],
     correctAnswer: 0,
     explanation: `Credit unions are member-based financial institutions that accept savings and may provide loans and other services to members.`
@@ -553,10 +553,10 @@ const g5SsMod3Questions: Question[] = [
     skill: "Community Costs",
     question: `A factory dumps waste into a river used by nearby residents and fishers. Which is the BEST example of a wider community cost?`,
     options: [
-      "The factory changes the colour of its sign.",
-      "Residents may face polluted water and fishers may lose part of their catch.",
-      "Workers receive their wages on Friday.",
-      "The factory buys new office chairs.",
+      "The factory may have to spend more money to improve its waste-treatment system.",
+      "Residents may face polluted water while fishers may lose income because fish stocks are harmed.",
+      "The factory may temporarily produce fewer goods while equipment is being repaired.",
+      "Workers may need additional training before they can operate cleaner production equipment.",
     ],
     correctAnswer: 1,
     explanation: `Pollution can impose costs on people who did not cause it, such as poorer water quality and reduced fishing income.`
