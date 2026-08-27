@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/auth-context"
+import { prepareSocialStudiesAssessment, prepareSocialStudiesPreview } from "@/lib/social-studies-assessment-engine"
 
 const FREE_QUESTION_LIMIT = 5
 
@@ -334,7 +335,7 @@ const g5SsEasy10Questions: Question[] = [
       "A type of military takeover",
     ],
     correctAnswer: 1,
-    explanation: `Devolution transfers powers from the central government to local bodies — in Jamaica, giving Parish Councils more authority over local matters is an example.`
+    explanation: `Devolution transfers some responsibilities or powers from central government to local bodies. In Jamaica, Municipal Corporations/local authorities carry out many local-government functions.`
   },
   {
     id: 23,
@@ -368,15 +369,15 @@ const g5SsEasy10Questions: Question[] = [
     id: 25,
     type: "civics",
     skill: "CARICOM",
-    question: `The CARICOM SINGLE MARKET (CSM) allows:`,
+    question: `The CARICOM Single Market supports:`,
     options: [
-      "Only goods to move freely between member states",
-      "Citizens, goods, services, and capital to move freely across CARICOM member states",
-      "Only students to travel freely",
-      "Trade only with non-CARICOM countries",
+      "Only the movement of goods",
+      "Regional movement of goods, services and capital, together with movement of eligible skilled CARICOM nationals and other approved categories under agreed rules",
+      "Only students travelling between countries",
+      "Trade only with countries outside CARICOM",
     ],
     correctAnswer: 1,
-    explanation: `The CARICOM Single Market allows free movement of goods, services, capital, and skilled workers — creating a larger regional economic space for Caribbean countries.`
+    explanation: `The CARICOM Single Market promotes regional economic integration. It supports trade in goods and services, movement of capital, and movement of eligible skilled CARICOM nationals and other approved categories under CARICOM rules; it does not give every person an unrestricted right to work anywhere.`
   },
   {
     id: 26,
@@ -424,15 +425,15 @@ const g5SsEasy10Questions: Question[] = [
     id: 29,
     type: "civics",
     skill: "Rule of Law",
-    question: `What is NATURAL JUSTICE?`,
+    question: `A student is accused of breaking a school rule. Which action BEST shows the principle of a fair hearing?`,
     options: [
-      "The law of nature",
-      "The basic principles that everyone is entitled to — a fair hearing before a decision is made and that no one should be a judge in their own case",
-      "A type of environmental law",
-      "Rules about natural resources",
+      "Punish the student immediately without hearing what happened.",
+      "Allow the student to hear the accusation and explain their side before an impartial decision is made.",
+      "Let the person who made the accusation decide the punishment alone.",
+      "Refuse to tell the student what rule was allegedly broken.",
     ],
     correctAnswer: 1,
-    explanation: `Natural justice comprises two basic principles: the right to a fair hearing (audi alteram partem) and the rule against bias (nemo judex in causa sua) — fundamental to any fair legal system.`
+    explanation: `A fair hearing means a person should know the case against them and have a reasonable opportunity to respond before an impartial decision is made.`
   },
   {
     id: 30,
@@ -508,15 +509,15 @@ const g5SsEasy10Questions: Question[] = [
     id: 35,
     type: "economics",
     skill: "Tourism",
-    question: `What is a TOURISM MASTER PLAN?`,
+    question: `Which is an economic benefit tourism can bring to Jamaica?`,
     options: [
-      "A guide for tourist attractions only",
-      "A comprehensive strategic plan guiding the long-term development of Jamaica's tourism industry — balancing economic goals with sustainability",
-      "A map for tourists",
-      "A hotel development plan",
+      "It guarantees that prices will never rise.",
+      "It can create jobs and income in hotels, transport, attractions, restaurants, and other businesses.",
+      "It removes the need for all other industries.",
+      "It means every tourism dollar stays in Jamaica.",
     ],
     correctAnswer: 1,
-    explanation: `A Tourism Master Plan is a strategic blueprint for developing the tourism industry — setting targets, identifying infrastructure needs, and ensuring sustainable, equitable development.`
+    explanation: `Tourism can create employment and income in many parts of the economy, including accommodation, transport, food, attractions, entertainment, and local businesses.`
   },
   {
     id: 36,
@@ -564,15 +565,15 @@ const g5SsEasy10Questions: Question[] = [
     id: 39,
     type: "economics",
     skill: "Natural Resources",
-    question: `What is ENVIRONMENTAL VALUATION?`,
+    question: `Why is protecting mangroves a good conservation decision for coastal communities?`,
     options: [
-      "Placing a monetary value on the services provided by natural ecosystems to help decision-makers understand the economic cost of environmental degradation",
-      "A type of land registration",
-      "An environmental inspection programme",
-      "A type of tourism pricing",
+      "Mangroves prevent every hurricane from reaching land.",
+      "Mangroves can reduce wave impacts and erosion while providing important habitat for young fish and other wildlife.",
+      "Mangroves make all other coastal protection unnecessary.",
+      "Mangroves are useful only because tourists can photograph them.",
     ],
-    correctAnswer: 0,
-    explanation: `Environmental valuation assigns economic values to ecosystem services (clean water, carbon storage, biodiversity) — helping policymakers make decisions that account for environmental costs and benefits.`
+    correctAnswer: 1,
+    explanation: `Mangroves provide several valuable services: their roots help reduce wave energy and erosion, and they provide nursery habitat for fish and other wildlife. Protecting them supports both communities and ecosystems.`
   },
   {
     id: 40,
@@ -604,13 +605,10 @@ export default function G5SsEasy10MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]                 = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]               = useState(60 * 60)
+  const [attemptQuestions, setAttemptQuestions] = useState<Question[]>([])
 
-  const availableQuestions = isPremium ? g5SsEasy10Questions : g5SsEasy10Questions.slice(0, FREE_QUESTION_LIMIT)
-  const totalQuestions = availableQuestions.length
-
-  useEffect(() => {
-    if (answers.length !== totalQuestions) setAnswers(new Array(totalQuestions).fill(null))
-  }, [totalQuestions, answers.length])
+  const availableQuestions = attemptQuestions
+  const totalQuestions = started ? availableQuestions.length : isPremium ? g5SsEasy10Questions.length : FREE_QUESTION_LIMIT
 
   const formatTime = useCallback((s: number) => {
     const m = Math.floor(s / 60)
@@ -624,6 +622,18 @@ export default function G5SsEasy10MockTest() {
   }, [started, showResults])
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
+
+  const startTest = () => {
+    const preparedQuestions = isPremium
+      ? prepareSocialStudiesAssessment(g5SsEasy10Questions)
+      : prepareSocialStudiesPreview(g5SsEasy10Questions, FREE_QUESTION_LIMIT)
+    setAttemptQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    setStarted(true)
+  }
 
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
@@ -671,7 +681,7 @@ export default function G5SsEasy10MockTest() {
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setAttemptQuestions([]); setAnswers([]); setTimeLeft(60 * 60)
   }
 
   const q = availableQuestions[currentQuestion]
@@ -721,7 +731,7 @@ export default function G5SsEasy10MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
           </CardContent>
         </Card>
       </main>
