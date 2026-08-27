@@ -203,10 +203,10 @@ const g5SsMod5Questions: Question[] = [
     skill: "Settlement",
     question: `Why might a town grow near a major road junction?`,
     options: [
-      "The location can make movement of people and goods easier.",
-      "Road junctions stop all flooding.",
-      "Every resident must own a vehicle.",
-      "Crops grow only beside major roads.",
+      "The location can make movement of people and goods easier, encouraging homes and businesses to develop nearby.",
+      "The junction usually reduces traffic on nearby roads, making the area less attractive to businesses.",
+      "The junction guarantees that public services will be built before new residents arrive.",
+      "The junction makes nearby farmland more productive because more vehicles pass through the area.",
     ],
     correctAnswer: 0,
     explanation: `Transport links often encourage settlement and business because people and goods can move more easily.`
@@ -260,9 +260,9 @@ const g5SsMod5Questions: Question[] = [
     question: `A farmer changes from a water-demanding crop to a more drought-tolerant crop after several dry seasons. What is the farmer doing?`,
     options: [
       "Adapting production to environmental conditions",
-      "Increasing rainfall",
-      "Changing the parish boundary",
-      "Turning farming into tourism",
+      "Increasing farm output by using more water each year",
+      "Changing from agriculture to a different economic sector",
+      "Moving production to another parish without changing the crop",
     ],
     correctAnswer: 0,
     explanation: `The farmer is adjusting agricultural choices to suit changing water conditions.`
@@ -288,9 +288,9 @@ const g5SsMod5Questions: Question[] = [
     question: `A census shows that a town's population has grown rapidly. Which additional information would BEST help planners decide whether another school is needed?`,
     options: [
       "The number and ages of children living in the area",
-      "The favourite sports of adults",
-      "The colour of existing buildings",
-      "The parish flower",
+      "The total number of adults travelling through the town each day",
+      "The number of houses constructed in the town during the previous year",
+      "The average distance residents travel to the nearest hospital",
     ],
     correctAnswer: 0,
     explanation: `School planning depends strongly on how many school-age children live in the area.`
@@ -301,10 +301,10 @@ const g5SsMod5Questions: Question[] = [
     skill: "Environment and Tourism",
     question: `A nature attraction is becoming damaged because too many visitors leave marked trails. Which action is MOST appropriate?`,
     options: [
-      "Use clear trails, visitor limits where necessary, and conservation rules",
-      "Remove all conservation signs",
-      "Encourage visitors to enter fragile areas",
-      "Allow unlimited access without monitoring",
+      "Use clearly marked trails, visitor limits where necessary, and conservation rules.",
+      "Close the attraction temporarily and remove visitor facilities so people cannot enter.",
+      "Allow visitors to choose their own routes but add more warning signs in damaged areas.",
+      "Build additional attractions inside fragile areas so visitors spread out more widely.",
     ],
     correctAnswer: 0,
     explanation: `Managed access can protect the environment while allowing responsible tourism to continue.`
@@ -329,10 +329,10 @@ const g5SsMod5Questions: Question[] = [
     skill: "Parliament",
     question: `Why are both the House of Representatives and Senate involved in making many national laws?`,
     options: [
-      "Bills pass through parliamentary stages in both Houses before becoming law, subject to constitutional requirements.",
-      "Every Senator is elected by the same voters as MPs.",
-      "Courts draft all bills first.",
-      "Municipal Corporations approve every national law.",
+      "Bills normally pass through parliamentary stages in both Houses before becoming law, subject to constitutional requirements.",
+      "Both Houses represent voters in exactly the same way, so each House repeats the other's vote.",
+      "The Senate considers only financial matters, while the House handles all other proposed laws.",
+      "Both Houses must approve bills because courts are unable to review laws once they are passed.",
     ],
     correctAnswer: 0,
     explanation: `Jamaica has a bicameral Parliament, so legislation normally passes through both Houses as part of the law-making process.`
@@ -344,9 +344,9 @@ const g5SsMod5Questions: Question[] = [
     question: `Residents want repairs to a local market and improved garbage collection. Which body should they most directly approach about these local services?`,
     options: [
       "Municipal Corporation/local authority",
-      "CXC",
-      "Bank of Jamaica",
-      "CARICOM Secretariat",
+      "The ministry responsible for local government, because it directly repairs every market and collects garbage in each community",
+      "The Member of Parliament, because MPs manage local markets and garbage collection through Parliament",
+      "The National Solid Waste Management Authority alone, because both market repairs and garbage collection fall entirely under it",
     ],
     correctAnswer: 0,
     explanation: `Municipal Corporations/local authorities have responsibility for many local facilities and services.`
@@ -371,10 +371,10 @@ const g5SsMod5Questions: Question[] = [
     skill: "Citizenship",
     question: `Why is paying attention to official hurricane warnings a civic responsibility as well as a personal safety choice?`,
     options: [
-      "Following reliable instructions can protect individuals and reduce risks for emergency services and communities.",
-      "Citizens may ignore every emergency order.",
-      "Only tourists need official information.",
-      "Weather warnings replace all household planning.",
+      "Following reliable warnings can protect households and can also reduce avoidable risks for emergency workers and communities.",
+      "Following official warnings transfers all safety responsibility from households to emergency agencies.",
+      "Following warnings is mainly necessary after an evacuation order has already been issued.",
+      "Official warnings are mainly intended to protect public buildings rather than individual households.",
     ],
     correctAnswer: 0,
     explanation: `Responsible behaviour during emergencies can protect both individuals and the wider community.`
@@ -385,10 +385,10 @@ const g5SsMod5Questions: Question[] = [
     skill: "Representation",
     question: `A Member of Parliament receives complaints from constituents about a national policy. What is one appropriate action?`,
     options: [
-      "Raise their concerns through parliamentary or government channels.",
-      "Personally rewrite the Constitution.",
-      "Order a court to decide in their favour.",
-      "Cancel all local elections.",
+      "Raise constituents' concerns through parliamentary or appropriate government channels.",
+      "Direct a court to overturn the policy whenever constituents disagree with it.",
+      "Promise that every complaint will be solved without using parliamentary or government processes.",
+      "Order a Municipal Corporation to change any national policy affecting the constituency.",
     ],
     correctAnswer: 0,
     explanation: `Representatives can communicate constituent concerns and raise issues through democratic institutions.`
@@ -400,9 +400,9 @@ const g5SsMod5Questions: Question[] = [
     question: `Two people accused of the same offence are treated differently only because one is wealthy. Which principle is MOST directly being violated?`,
     options: [
       "Equality before the law",
-      "Regional integration",
-      "Free trade",
-      "Local taxation",
+      "Presumption of innocence",
+      "Freedom of expression",
+      "Separation of powers",
     ],
     correctAnswer: 0,
     explanation: `Equality before the law requires that legal rules be applied fairly rather than according to wealth or status.`
@@ -413,10 +413,10 @@ const g5SsMod5Questions: Question[] = [
     skill: "Democratic Participation",
     question: `Which action gives citizens a lawful way to influence public decisions between elections?`,
     options: [
-      "Attend consultations, submit petitions, or contact representatives.",
-      "Damage public property.",
-      "Prevent other citizens from speaking.",
-      "Spread false information anonymously.",
+      "Attend consultations, submit petitions, or contact elected representatives about the issue.",
+      "Join a political party and assume its leaders must accept every suggestion members make.",
+      "Avoid elections but require public officials to follow private instructions from individual citizens.",
+      "Use public meetings to prevent people with opposing views from speaking.",
     ],
     correctAnswer: 0,
     explanation: `Democratic participation includes peaceful and lawful ways of expressing views and influencing decision-makers.`
@@ -427,10 +427,10 @@ const g5SsMod5Questions: Question[] = [
     skill: "Regional Cooperation",
     question: `Why might CARICOM countries cooperate on disaster preparedness?`,
     options: [
-      "Many Caribbean hazards cross borders or affect several countries, so shared information and resources can improve response.",
-      "CARICOM can prevent hurricanes from forming.",
-      "Cooperation removes all national governments.",
-      "Disaster planning is only an economic activity.",
+      "Several countries face similar hazards, so sharing information, expertise, and emergency resources can strengthen preparedness.",
+      "Regional planning means individual countries no longer need their own disaster-preparedness arrangements.",
+      "Cooperation works best when every country uses exactly the same emergency plan regardless of local conditions.",
+      "Regional cooperation reduces the need for national weather services and emergency-management agencies.",
     ],
     correctAnswer: 0,
     explanation: `Regional cooperation can improve forecasting, preparedness, emergency support, and recovery when several countries face similar hazards.`
@@ -441,10 +441,10 @@ const g5SsMod5Questions: Question[] = [
     skill: "Accountability",
     question: `A government project costs far more than planned. Why should records of the spending be reviewed?`,
     options: [
-      "Public money should be accounted for and used for its authorised purpose.",
-      "Public projects never need financial records.",
-      "Overspending automatically proves a crime.",
-      "Only private businesses need budgets.",
+      "Public money should be accounted for so officials can show how it was used and why costs changed.",
+      "Overspending should be accepted automatically if the project was eventually completed.",
+      "Financial records matter only when citizens already have evidence that a crime occurred.",
+      "A project manager's explanation is enough even when no records of the additional spending are available.",
     ],
     correctAnswer: 0,
     explanation: `Reviewing expenditure supports accountability and helps determine how public resources were used.`
@@ -483,10 +483,10 @@ const g5SsMod5Questions: Question[] = [
     skill: "Saving",
     question: `Why is saving a small amount regularly often more effective than waiting to save one large amount someday?`,
     options: [
-      "Regular saving builds the fund gradually and makes saving part of a plan.",
-      "Small savings can never be spent.",
-      "Regular saving guarantees high interest.",
-      "Saving removes the need for income.",
+      "Regular saving builds the fund gradually and makes saving part of a planned routine.",
+      "Regular saving is useful mainly because small deposits always earn more interest than larger ones.",
+      "Waiting for one large amount is usually better because it avoids making a monthly saving plan.",
+      "Regular saving is useful only when a person has no other expenses to meet.",
     ],
     correctAnswer: 0,
     explanation: `Consistent saving helps a person make progress toward a goal over time.`
@@ -497,10 +497,10 @@ const g5SsMod5Questions: Question[] = [
     skill: "Imports and Exports",
     question: `A Jamaican hotel imports furniture but buys food from local farmers. Which statement is correct?`,
     options: [
-      "The hotel participates in both international trade and local economic linkages.",
-      "The hotel has no connection to Jamaican producers.",
-      "Imported furniture is an export from Jamaica.",
-      "Local food purchases are imports.",
+      "The hotel participates in international trade and also creates local economic linkages.",
+      "The hotel participates only in international trade because tourism itself is an export service.",
+      "The hotel participates only in the local economy because the imported furniture is used in Jamaica.",
+      "The food purchased locally becomes an import because the hotel serves international visitors.",
     ],
     correctAnswer: 0,
     explanation: `Buying furniture from abroad is importing, while buying from nearby farmers supports local producers.`
@@ -539,10 +539,10 @@ const g5SsMod5Questions: Question[] = [
     skill: "Budgeting",
     question: `A community group receives J$200,000 for a project. Why should it keep records of every purchase?`,
     options: [
-      "To compare spending with the budget and account for the money used",
-      "To make the project cost more",
-      "To hide spending from members",
-      "To avoid planning future expenses",
+      "To compare actual spending with the budget and account clearly for how the project's money was used",
+      "To prove that every planned expense was paid at exactly the amount originally estimated",
+      "To show that the group should spend the full grant before the project ends",
+      "To avoid changing the budget even when an unexpected but necessary cost appears",
     ],
     correctAnswer: 0,
     explanation: `Good records allow the group to track spending, stay within its plan, and account for funds.`
@@ -553,10 +553,10 @@ const g5SsMod5Questions: Question[] = [
     skill: "Economic and Environmental Decisions",
     question: `A business proposal could create jobs but destroy a wetland used as a fish nursery. What should decision-makers do?`,
     options: [
-      "Consider both economic benefits and environmental costs before deciding.",
-      "Consider only the number of jobs.",
-      "Assume wetlands have no economic value.",
-      "Approve the project without evidence.",
+      "Consider both the possible economic benefits and the environmental and livelihood costs before deciding.",
+      "Approve the proposal whenever the number of new jobs is greater than the number of fishers affected.",
+      "Reject the proposal immediately because any environmental effect makes development unacceptable.",
+      "Consider only the wetland because possible economic benefits should never influence a community decision.",
     ],
     correctAnswer: 0,
     explanation: `Responsible decisions consider benefits and costs, including effects on ecosystems and livelihoods.`
@@ -567,10 +567,10 @@ const g5SsMod5Questions: Question[] = [
     skill: "Community Economics",
     question: `A damaged bridge prevents farmers from reaching the market easily. Why can repairing it support the local economy?`,
     options: [
-      "It can improve movement of people and goods between producers and markets.",
-      "It guarantees higher prices for every crop.",
-      "It removes the need for farms.",
-      "It prevents all future road damage.",
+      "It can improve the movement of people and goods between producers and markets.",
+      "It can automatically increase the price farmers receive for every crop sold.",
+      "It can reduce production costs even when transport time and vehicle expenses do not change.",
+      "It can guarantee that every farmer will sell all produce taken to market.",
     ],
     correctAnswer: 0,
     explanation: `Transport infrastructure can lower barriers to moving goods and reaching customers.`
@@ -581,10 +581,10 @@ const g5SsMod5Questions: Question[] = [
     skill: "Household Planning",
     question: `A household's electricity bill rises sharply. What is the BEST first budgeting response?`,
     options: [
-      "Review usage and other expenses, then identify realistic ways to reduce costs.",
-      "Ignore the bill and spend as before.",
-      "Borrow money every month without examining the cause.",
-      "Stop keeping a budget.",
+      "Review electricity use and other expenses, then identify realistic ways to reduce costs.",
+      "Reduce every spending category by the same amount without checking which expenses are essential.",
+      "Use savings to pay the higher bill each month without investigating why electricity use increased.",
+      "Borrow enough to cover several future bills before comparing usage or reviewing the household budget.",
     ],
     correctAnswer: 0,
     explanation: `Reviewing actual spending and usage helps the household understand the problem and make informed adjustments.`
