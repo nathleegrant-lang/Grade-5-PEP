@@ -124,7 +124,7 @@ const g5SsMod9Questions: Question[] = [
       "The Spanish settlement of Jamaica and the establishment of colonial towns",
       "The organisation of the Baptist War and pressure for legal abolition",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `Both leaders played major roles in modern Jamaican political development despite leading different political parties.`
   },
   {
@@ -166,7 +166,7 @@ const g5SsMod9Questions: Question[] = [
       "Sam Sharpe was Jamaica’s most inspiring National Hero.",
       "Universal Adult Suffrage was introduced in 1944.",
     ],
-    correctAnswer: 1,
+    correctAnswer: 2,
     explanation: `Calling one event the “most inspiring” is a judgement; the dates in the other statements can be checked against historical records.`
   },
   {
@@ -348,7 +348,7 @@ const g5SsMod9Questions: Question[] = [
       "The Bank of Jamaica, which performs central-banking and monetary functions",
       "The CARICOM Secretariat, which supports regional Community programmes",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `Municipal Corporations are Jamaica’s local authorities and manage many local facilities and services.`
   },
   {
