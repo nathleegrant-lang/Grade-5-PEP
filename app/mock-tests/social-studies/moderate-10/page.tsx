@@ -348,7 +348,7 @@ const g5SsMod10Questions: Question[] = [
       "The Bank of Jamaica, responsible for central-banking and monetary functions",
       "The CARICOM Secretariat, responsible for supporting Caribbean Community programmes",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `Municipal Corporations are Jamaica’s local authorities and are responsible for many local facilities and services.`
   },
   {
