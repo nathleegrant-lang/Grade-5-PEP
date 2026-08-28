@@ -68,7 +68,7 @@ const g5SsMod7Questions: Question[] = [
       "It created elected local authorities to manage services in Jamaican communities.",
       "It ended plantation agriculture by requiring estates to release all cultivated land.",
     ],
-    correctAnswer: 2,
+    correctAnswer: 1,
     explanation: `The scale of the Baptist War and its harsh suppression strengthened abolitionist pressure in Britain.`
   },
   {
@@ -82,7 +82,7 @@ const g5SsMod7Questions: Question[] = [
       "It records environmental conditions that caused hurricanes to affect St Thomas.",
       "It describes the tourism policies used to create employment after Independence.",
     ],
-    correctAnswer: 3,
+    correctAnswer: 0,
     explanation: `The petition provides evidence of grievances involving land, justice and treatment around the time of Morant Bay.`
   },
   {
@@ -110,7 +110,7 @@ const g5SsMod7Questions: Question[] = [
       "The unrest showed that Jamaica had already achieved Independence before 1938.",
       "The protests showed that political participation had little connection with worker concerns.",
     ],
-    correctAnswer: 1,
+    correctAnswer: 0,
     explanation: `The 1938 unrest showed that organised workers could press employers and government for reform.`
   },
   {
@@ -124,7 +124,7 @@ const g5SsMod7Questions: Question[] = [
       "Both milestones occurred in 1962 as part of the same constitutional event.",
       "Voting rights widened when CARICOM was established, while Independence came later.",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `Universal Adult Suffrage widened voting rights in 1944, while Independence ended colonial status in 1962.`
   },
   {
@@ -138,7 +138,7 @@ const g5SsMod7Questions: Question[] = [
       "Evidence that the person accumulated greater personal wealth than contemporaries",
       "Frequent mention of the person in advertisements and popular entertainment",
     ],
-    correctAnswer: 3,
+    correctAnswer: 0,
     explanation: `National Hero recognition should rest on well-supported contributions to freedom, justice or nation-building.`
   },
   {
@@ -236,7 +236,7 @@ const g5SsMod7Questions: Question[] = [
       "Anchoring can protect fish because damaged coral releases more food into the water.",
       "Anchoring affects beaches but has little connection with coral habitat or fisheries.",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `Anchors can break or damage coral structures that provide habitat for marine life.`
   },
   {
@@ -250,7 +250,7 @@ const g5SsMod7Questions: Question[] = [
       "Farmers may stop production because buses connect the settlement with a town.",
       "The parish boundary may move because the route crosses several communities.",
     ],
-    correctAnswer: 3,
+    correctAnswer: 0,
     explanation: `A regular bus service can improve direct access to schools, employment, markets and services.`
   },
   {
@@ -278,7 +278,7 @@ const g5SsMod7Questions: Question[] = [
       "A strong building in a floodplain where rising water may block all access roads",
       "A remote hilltop outside flood danger but without a safe route for residents",
     ],
-    correctAnswer: 1,
+    correctAnswer: 0,
     explanation: `A shelter should be structurally sound, accessible and outside known flood and storm-surge danger.`
   },
   {
@@ -334,7 +334,7 @@ const g5SsMod7Questions: Question[] = [
       "Ask the CARICOM Secretariat to arrange repairs to the community infrastructure.",
       "Remove the remaining lights so that every street is affected in the same way.",
     ],
-    correctAnswer: 1,
+    correctAnswer: 0,
     explanation: `Streetlight problems should be reported through the responsible local authority or service channel.`
   },
   {
@@ -390,7 +390,7 @@ const g5SsMod7Questions: Question[] = [
       "To avoid preparing a budget because receipts provide all necessary planning",
       "To guarantee that each public project will cost the same amount",
     ],
-    correctAnswer: 1,
+    correctAnswer: 0,
     explanation: `Spending records help public agencies account for how public money was used.`
   },
   {
@@ -404,7 +404,7 @@ const g5SsMod7Questions: Question[] = [
       "Allow supporters of one site to speak while excluding residents who disagree.",
       "Begin work at both sites before comparing safety, access and community evidence.",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `Consultation allows different views and evidence to be considered through a lawful democratic process.`
   },
   {
@@ -418,7 +418,7 @@ const g5SsMod7Questions: Question[] = [
       "Participating countries close national schools and transfer teaching to CARICOM.",
       "Regional recognition turns the examining body into a university for all students.",
     ],
-    correctAnswer: 3,
+    correctAnswer: 0,
     explanation: `Regional recognition makes qualifications easier to understand and use across participating countries.`
   },
   {
