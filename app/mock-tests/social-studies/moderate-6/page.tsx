@@ -68,7 +68,7 @@ const g5SsMod6Questions: Question[] = [
       "It widened voting rights for qualified Jamaican adults.",
       "It created a regional organisation for Caribbean cooperation.",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `Apprenticeship followed legal abolition in 1834 and ended in 1838, when full freedom came.`
   },
   {
@@ -96,7 +96,7 @@ const g5SsMod6Questions: Question[] = [
       "It established the political parties that later contested national elections.",
       "It transferred responsibility for Jamaica from Britain to CARICOM.",
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation: `The rebellion highlighted deep grievances over poverty, justice and political power and was followed by major changes in colonial rule.`
   },
   {
@@ -124,7 +124,7 @@ const g5SsMod6Questions: Question[] = [
       "Both served as colonial governors appointed to administer Jamaica.",
       "Both campaigned against extending voting rights to Jamaican adults.",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `Both men played major roles in Jamaica's twentieth-century political development despite leading different political movements.`
   },
   {
@@ -138,7 +138,7 @@ const g5SsMod6Questions: Question[] = [
       "Combine the accounts as if every detail in both must be equally reliable.",
       "Select the account with the strongest language because it shows greater confidence.",
     ],
-    correctAnswer: 3,
+    correctAnswer: 1,
     explanation: `Comparing origin, purpose and evidence helps a student judge why accounts may differ.`
   },
   {
@@ -166,7 +166,7 @@ const g5SsMod6Questions: Question[] = [
       "Limited opportunity at home and advertised employment abroad both influenced the decision.",
       "The move was mainly cultural because economic conditions did not affect migration.",
     ],
-    correctAnswer: 1,
+    correctAnswer: 2,
     explanation: `Limited opportunity can push a person away while employment elsewhere can pull the person toward another country.`
   },
   {
@@ -236,7 +236,7 @@ const g5SsMod6Questions: Question[] = [
       "Mangroves provide the same habitat as coral reefs, making reef protection less important.",
       "Mangroves support adult fish mainly by preventing them from moving into open water.",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `Mangroves provide important nursery habitat and can therefore support nearby fisheries.`
   },
   {
@@ -250,7 +250,7 @@ const g5SsMod6Questions: Question[] = [
       "Delay evacuation planning until officials know which homes have begun to flood.",
       "Direct residents along the shortest roads even when those roads cross low-lying areas.",
     ],
-    correctAnswer: 3,
+    correctAnswer: 1,
     explanation: `Planning safe evacuation routes before a storm helps people move away from storm-surge danger.`
   },
   {
@@ -264,7 +264,7 @@ const g5SsMod6Questions: Question[] = [
       "The distance from the site to shops that sell household furniture",
       "The number of recreational facilities planned for the development",
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation: `Flood history and site conditions help planners judge risk to people and property.`
   },
   {
@@ -278,7 +278,7 @@ const g5SsMod6Questions: Question[] = [
       "Hurricanes develop mainly over islands and then move between neighbouring land areas.",
       "National boundaries direct storms along routes that pass through several countries.",
     ],
-    correctAnswer: 1,
+    correctAnswer: 0,
     explanation: `Storm systems move across the wider Caribbean region and are not stopped by political borders.`
   },
   {
@@ -292,7 +292,7 @@ const g5SsMod6Questions: Question[] = [
       "Historic monuments and exhibits about earlier settlement",
       "Boundary markers showing the legal limits of the parish",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `Population growth can increase demand for public services and infrastructure.`
   },
   {
@@ -306,7 +306,7 @@ const g5SsMod6Questions: Question[] = [
       "Compare photographs taken at different beaches after each clean-up event.",
       "Compare the number of activities offered to volunteers during the programme.",
     ],
-    correctAnswer: 3,
+    correctAnswer: 0,
     explanation: `Repeated comparable litter counts provide evidence of whether litter levels are changing.`
   },
   {
@@ -334,7 +334,7 @@ const g5SsMod6Questions: Question[] = [
       "The CARICOM Secretariat, which supports the work of the Caribbean Community",
       "A foreign embassy, which represents another country and assists its citizens",
     ],
-    correctAnswer: 1,
+    correctAnswer: 0,
     explanation: `Municipal Corporations/local authorities manage many local facilities and services.`
   },
   {
@@ -404,7 +404,7 @@ const g5SsMod6Questions: Question[] = [
       "Clear the drain by damaging nearby public property without contacting the authority.",
       "Prevent neighbours from joining the clean-up because one group reported the problem.",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `Active citizenship includes lawful participation in solving community problems.`
   },
   {
@@ -446,7 +446,7 @@ const g5SsMod6Questions: Question[] = [
       "Residents can require every suggestion at the consultation to be adopted.",
       "Residents can use attendance at the meeting to become councillors for the project.",
     ],
-    correctAnswer: 1,
+    correctAnswer: 0,
     explanation: `Consultation can give decision-makers evidence about the needs of people who use the facility.`
   },
   {
@@ -474,7 +474,7 @@ const g5SsMod6Questions: Question[] = [
       "Prices may remain fixed because a supply change cannot influence market prices.",
       "Prices may become irrelevant because demand ends when part of a crop is damaged.",
     ],
-    correctAnswer: 3,
+    correctAnswer: 0,
     explanation: `A lower supply with similar demand can place upward pressure on prices.`
   },
   {
@@ -502,7 +502,7 @@ const g5SsMod6Questions: Question[] = [
       "Making household incomes equal by replacing wages with public payments",
       "Paying exclusively for services used by the individual who paid each tax",
     ],
-    correctAnswer: 1,
+    correctAnswer: 0,
     explanation: `Taxes help finance public services and infrastructure.`
   },
   {
@@ -516,7 +516,7 @@ const g5SsMod6Questions: Question[] = [
       "It removes the need for members to budget because savings are protected from expenses.",
       "It guarantees members a fixed level of wealth after they make regular deposits.",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `Credit unions are member-based financial institutions offering savings and other services.`
   },
   {
@@ -572,7 +572,7 @@ const g5SsMod6Questions: Question[] = [
       "It provides money for optional purchases before essential bills are considered.",
       "It removes the need to budget for predictable expenses during the year.",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `Emergency savings provide a financial cushion when unexpected costs arise.`
   },
   {
@@ -586,7 +586,7 @@ const g5SsMod6Questions: Question[] = [
       "Prepare a large quantity because customer requests guarantee continuing demand.",
       "Stop recording sales and judge success from the amount prepared each day.",
     ],
-    correctAnswer: 3,
+    correctAnswer: 0,
     explanation: `Testing the idea on a small scale provides evidence before the vendor commits more resources.`
   }
 ]
