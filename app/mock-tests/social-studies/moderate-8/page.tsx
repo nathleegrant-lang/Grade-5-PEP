@@ -334,7 +334,7 @@ const g5SsMod8Questions: Question[] = [
       "The Bank of Jamaica, responsible for the country’s central banking and monetary functions",
       "The CARICOM Secretariat, which supports the work of the Caribbean Community",
     ],
-    correctAnswer: 1,
+    correctAnswer: 0,
     explanation: `Municipal Corporations/local authorities are responsible for many local facilities and services.`
   },
   {
@@ -348,7 +348,7 @@ const g5SsMod8Questions: Question[] = [
       "Damage a public office to compel officials to discuss the proposal.",
       "Threaten election workers until they agree to reconsider the decision.",
     ],
-    correctAnswer: 2,
+    correctAnswer: 0,
     explanation: `Peaceful participation is a lawful way for citizens to express views and influence public decisions.`
   },
   {
@@ -446,7 +446,7 @@ const g5SsMod8Questions: Question[] = [
       "Evidence, public needs, legal duties and the views of constituents",
       "The personal benefit that the representative expects to receive",
     ],
-    correctAnswer: 1,
+    correctAnswer: 2,
     explanation: `Responsible representation requires consideration of evidence, public needs, lawful duties and constituent concerns.`
   },
   {
@@ -558,7 +558,7 @@ const g5SsMod8Questions: Question[] = [
       "Reduced fish catches and poorer water for people using the river",
       "The factory’s sales income from goods produced before the pollution",
     ],
-    correctAnswer: 1,
+    correctAnswer: 2,
     explanation: `Pollution can create economic and environmental costs for people who did not cause it.`
   },
   {
