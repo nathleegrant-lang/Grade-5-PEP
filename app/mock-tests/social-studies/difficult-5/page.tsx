@@ -564,7 +564,7 @@ const g5SsDiff5Questions: Question[] = [
   {
     "id": 39,
     "type": "economics",
-    "skill": "Environmental External Cost",
+    "skill": "Community Costs",
     "question": "A business earns profit but sends waste into a river used downstream. Why is private profit not the full economic result?",
     "options": [
       "Downstream health, fishing and cleaning losses are costs imposed on others.",
@@ -573,7 +573,7 @@ const g5SsDiff5Questions: Question[] = [
       "The selling price is the clearest measure of the business's community effect."
     ],
     "correctAnswer": 0,
-    "explanation": "The business's accounts may omit external costs borne by other people and activities."
+    "explanation": "The business's private profit does not include costs such as poorer health, reduced fishing income or cleaning expenses that other people downstream may have to bear."
   },
   {
     "id": 40,
