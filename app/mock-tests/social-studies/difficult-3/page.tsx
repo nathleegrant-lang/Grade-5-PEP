@@ -150,10 +150,10 @@ const g5SsDiff3Questions: Question[] = [
       "Use the online comment first because it gives the clearest summary.",
       "Treat the diary as fully neutral because it is old.",
       "Exclude the textbook because it was not written during 1865.",
-      "Use both sources and verify them against further evidence."
+      "Use the diary and textbook, assess the undated online comment cautiously, and verify useful claims against further evidence."
     ],
     "correctAnswer": 3,
-    "explanation": "Different sources offer different strengths and limits; careful history compares origin, purpose and corroborating evidence."
+    "explanation": "The diary and textbook have different strengths and limitations, while an undated online comment has weak source information. A careful investigation evaluates each source and checks important claims against further evidence."
   },
   {
     "id": 10,
@@ -355,15 +355,15 @@ const g5SsDiff3Questions: Question[] = [
     "id": 24,
     "type": "civics",
     "skill": "Rights Scenario Matrix",
-    "question": "Four protest plans are scored for legality, safety, evidence and respect for others. Plan C scores high in all four. What is the best decision?",
+    "question": "Four protest plans are rated for legality, safety, evidence and respect for others. Plan A scores high in legality, safety and respect but low in evidence. Plan B scores high in evidence and respect but low in safety. Plan C scores high in all four. Plan D scores high in safety and evidence but low in legality. Which plan best balances the full set of criteria?",
     "options": [
-      "Choose the loudest plan even if unsafe.",
-      "Choose the plan with no evidence because it is faster.",
-      "Choose Plan C, the responsible option.",
-      "Reject all peaceful protest as unlawful."
+      "Plan A, because legality and safety matter more than evidence.",
+      "Plan B, because strong evidence can compensate for poor safety.",
+      "Plan C, because it satisfies all four criteria.",
+      "Plan D, because strong evidence can compensate for low legality."
     ],
     "correctAnswer": 2,
-    "explanation": "Responsible participation protects expression while observing law, safety, evidence and others' rights."
+    "explanation": "Plan C is the only plan that performs strongly on legality, safety, evidence and respect for others, so it best satisfies the complete set of responsible-participation criteria."
   },
   {
     "id": 25,
@@ -385,9 +385,9 @@ const g5SsDiff3Questions: Question[] = [
     "skill": "Budget Records",
     "question": "A project budget lists J$8 million approved, J$10 million spent and no explanation for the difference. Which information should be requested first?",
     "options": [
-      "The favourite colour of the contractor",
-      "A list of unrelated private purchases by residents",
-      "A promise that all future projects will cost less",
+      "A contractor's summary stating that the completed project appears successful",
+      "The original approved budget without records showing what was actually spent",
+      "A report describing the project's outputs and how many residents now use them",
       "Itemised records and authorised reasons for the J$2 million variance"
     ],
     "correctAnswer": 3,
