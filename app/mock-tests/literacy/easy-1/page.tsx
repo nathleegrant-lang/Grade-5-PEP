@@ -743,8 +743,8 @@ export default function G5LaEasy1MockTest() {
                   <Lock className="mt-1 h-5 w-5 flex-shrink-0 text-amber-600" />
                   <div>
                     <p className="font-semibold text-amber-800">Free Preview Mode</p>
-                    <p className="text-sm text-amber-700">Try {FREE_QUESTION_LIMIT} questions free. Upgrade to unlock all 40.</p>
-                    <Link href="/pricing" className="mt-3 inline-block"><Button className="bg-amber-500 hover:bg-amber-600"><Crown className="mr-2 h-4 w-4" />Upgrade to Premium</Button></Link>
+                    <p className="text-sm text-amber-700">Try {FREE_QUESTION_LIMIT} questions free. Upgrade Access to unlock all 40.</p>
+                    <Link href="/pricing" className="mt-3 inline-block"><Button className="bg-amber-500 hover:bg-amber-600"><Crown className="mr-2 h-4 w-4" />Upgrade Access</Button></Link>
                   </div>
                 </div>
               </div>
@@ -799,8 +799,8 @@ export default function G5LaEasy1MockTest() {
               {!isPremium && (
                 <div className="rounded-lg border border-amber-200 bg-amber-50 p-4">
                   <p className="font-semibold text-amber-800">You completed the free preview.</p>
-                  <p className="text-sm text-amber-700">Upgrade to unlock all 40 questions.</p>
-                  <Link href="/pricing" className="mt-3 inline-block"><Button className="bg-amber-500 hover:bg-amber-600"><Crown className="mr-2 h-4 w-4" />Upgrade</Button></Link>
+                  <p className="text-sm text-amber-700">Upgrade Access to unlock all 40 questions.</p>
+                  <Link href="/pricing" className="mt-3 inline-block"><Button className="bg-amber-500 hover:bg-amber-600"><Crown className="mr-2 h-4 w-4" />Upgrade Access</Button></Link>
                 </div>
               )}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -882,7 +882,7 @@ export default function G5LaEasy1MockTest() {
           {!isPremium && (
             <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
               <p className="font-semibold text-amber-800">Free Preview: {FREE_QUESTION_LIMIT} of 40 questions</p>
-              <p className="text-sm text-amber-700">Upgrade to Premium to access the full test.</p>
+              <p className="text-sm text-amber-700">Upgrade Access to access the full test.</p>
             </div>
           )}
           <Card className="mb-6 border-blue-100">
