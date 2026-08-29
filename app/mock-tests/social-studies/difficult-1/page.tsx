@@ -173,15 +173,15 @@ const g5SsDiff1Questions: Question[] = [
     "id": 11,
     "type": "geography",
     "skill": "Map Evidence",
-    "question": "A map scale says 1 cm represents 5 km. Two shelters are 4 cm apart, but one route crosses a flooded bridge. Which plan uses both distance and hazard evidence?",
+    "question": "A map scale says 1 cm represents 5 km. Route A to the shelter measures 4 cm and crosses a flooded bridge. Route B measures 5 cm and avoids flooded areas. Which plan uses both distance and hazard evidence?",
     "options": [
-      "Choose the 20 km route because distance matters more than flood risk.",
-      "Use map scale first and assess the bridge after reaching it.",
-      "Use the longer route that avoids the flooded bridge.",
-      "Wait beside the bridge until floodwater rises."
+      "Choose Route A because 20 km is shorter even though the bridge is flooded.",
+      "Choose Route B only because 25 km is longer, since longer routes are always safer.",
+      "Choose Route B because it is 25 km but avoids the flooded bridge.",
+      "Choose Route A because the bridge condition can be checked after reaching it."
     ],
     "correctAnswer": 2,
-    "explanation": "Scale gives distance, but safe route decisions must also use hazard information; the shortest route is not best if it is blocked."
+    "explanation": "Route A is 20 km and Route B is 25 km. Although Route B is 5 km longer, it avoids the known flooded bridge, so it uses both the distance calculation and the hazard evidence."
   },
   {
     "id": 12,
@@ -274,12 +274,12 @@ const g5SsDiff1Questions: Question[] = [
     "question": "A reef area supports fishing and tourism but shows coral damage from anchors. Which response best addresses cause and livelihood?",
     "options": [
       "Use moorings, protected zones and regulated access.",
-      "Close the reef to fishing and tourism across the parish.",
-      "Add more anchors so boats spread out.",
-      "Move damaged coral onto the beach."
+      "Ban anchoring but allow unlimited visitor access throughout every reef zone.",
+      "Allow anchoring mainly in the busiest reef areas so fishing can continue elsewhere.",
+      "Close the entire reef to fishing and tourism without first identifying the most vulnerable areas."
     ],
     "correctAnswer": 0,
-    "explanation": "Moorings reduce anchor damage, while zoning can protect vulnerable reef areas without ending all local livelihoods."
+    "explanation": "Moorings directly reduce anchor damage, while protected zones and regulated access can protect vulnerable coral without unnecessarily ending fishing and tourism throughout the area."
   },
   {
     "id": 19,
