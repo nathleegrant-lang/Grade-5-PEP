@@ -23,15 +23,12 @@
   --border: #e2e8f0;
   --input: #e2e8f0;
   --ring: #0d4a5f;
-  
-  /* Theme colors matching Grade 4 */
   --teal-dark: #0a3d4e;
   --teal: #0d4a5f;
   --teal-light: #1a6b85;
   --gold: #f59e0b;
   --gold-light: #fbbf24;
   --navy: #1e3a5f;
-  
   --chart-1: #0d4a5f;
   --chart-2: #f59e0b;
   --chart-3: #0d9488;
@@ -96,40 +93,28 @@
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+  * { @apply border-border outline-ring/50; }
+  body { @apply bg-background text-foreground; }
 }
 
-body.pep-assessment-active .min-h-screen.bg-gradient-to-b {
+/* Grade 5 assessment journey: vibrant product environment, clean white work surfaces. */
+body.pep-assessment-route .min-h-screen.bg-gradient-to-b {
   background: linear-gradient(135deg, #047857 0%, #10b981 52%, #2dd4bf 100%) !important;
 }
 
-body.pep-assessment-active footer {
-  display: none;
+body.pep-assessment-route:not(.pep-assessment-active) .min-h-screen.bg-gradient-to-b > main,
+body.pep-assessment-route:not(.pep-assessment-active) .min-h-screen.bg-gradient-to-b > div:not(header):not(nav):not(footer) {
+  background-color: transparent;
 }
+
+body.pep-assessment-active .min-h-screen.bg-gradient-to-b {
+  background: linear-gradient(135deg, #065f46 0%, #10b981 48%, #2dd4bf 100%) !important;
+}
+
+body.pep-assessment-active footer { display: none; }
 
 /* Color bar styles */
-.color-bar {
-  display: flex;
-  height: 8px;
-  width: 100%;
-}
-
-.color-bar-navy {
-  flex: 1;
-  background-color: #1e3a5f;
-}
-
-.color-bar-teal {
-  flex: 1;
-  background-color: #0d9488;
-}
-
-.color-bar-gold {
-  flex: 1;
-  background-color: #f59e0b;
-}
+.color-bar { display: flex; height: 8px; width: 100%; }
+.color-bar-navy { flex: 1; background-color: #1e3a5f; }
+.color-bar-teal { flex: 1; background-color: #0d9488; }
+.color-bar-gold { flex: 1; background-color: #f59e0b; }
