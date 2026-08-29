@@ -385,10 +385,10 @@ const g5SsDiff2Questions: Question[] = [
     "skill": "Participation Over Time",
     "question": "Which sequence shows responsible participation from identifying a problem to checking results?",
     "options": [
-      "Spread a rumour → damage property → hide records → demand praise",
-      "Choose a solution → refuse evidence → exclude residents → end review",
+      "Gather evidence → choose a solution alone → submit it → stop once officials reply",
+      "Consult affected people → submit a proposal → collect evidence after the decision → monitor publicity",
       "Gather evidence → consult affected people → submit a lawful proposal → monitor the response",
-      "Monitor results → invent a problem → avoid consultation → erase the proposal"
+      "Identify a problem → submit a proposal immediately → consult only supporters → monitor attendance"
     ],
     "correctAnswer": 2,
     "explanation": "Responsible action begins with evidence and consultation, proceeds lawfully and includes follow-up."
@@ -483,13 +483,13 @@ const g5SsDiff2Questions: Question[] = [
     "skill": "Production Sequence",
     "question": "Which sequence correctly follows a small cassava business from input to sale?",
     "options": [
-      "Sell to customers → grow cassava instantly → calculate yesterday's costs → import demand",
+      "Buy cassava and packaging → advertise the product before processing → transport the inputs → sell unfinished goods",
       "Buy cassava and packaging → process the product → transport it → sell to customers",
-      "Transport an empty package → collect taxes → create rainfall → set wages",
-      "Advertise a sold-out item → ignore inputs → stop production → increase supply"
+      "Buy packaging → take customer orders → transport the raw cassava → process the product after delivery",
+      "Buy cassava → process it → store it without packaging → arrange transport only after customers are waiting"
     ],
     "correctAnswer": 1,
-    "explanation": "Inputs are obtained and transformed before the product is transported and sold."
+    "explanation": "A normal production sequence obtains the necessary inputs, processes the product, prepares it for distribution, transports it and then completes the sale to customers."
   },
   {
     "id": 34,
