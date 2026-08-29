@@ -42,8 +42,18 @@ body.pep-assessment-route:not(.pep-assessment-active) .min-h-screen.bg-gradient-
 /* Stronger Language Arts overview palette without modifying certified assessment content. */
 body.pep-assessment-route:not(.pep-assessment-active) main .border-blue-200.shadow-lg { border-color: #2563eb !important; box-shadow: 0 14px 32px rgba(3, 105, 161, .22) !important; }
 body.pep-assessment-route:not(.pep-assessment-active) main .border-blue-200.shadow-lg > .bg-blue-50 {
+  position: relative;
+  padding-top: 7.5rem !important;
   background: linear-gradient(90deg, #2563eb 0%, #0ea5e9 52%, #22d3ee 100%) !important;
   color: #ffffff !important;
+}
+body.pep-assessment-route:not(.pep-assessment-active) main .border-blue-200.shadow-lg > .bg-blue-50::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 6.1rem;
+  background: #ffffff url('/images/pep-practice-grade5-primary.jpg') center / auto 4.8rem no-repeat;
+  border-bottom: 1px solid #bfdbfe;
 }
 body.pep-assessment-route:not(.pep-assessment-active) main .border-blue-200.shadow-lg > .bg-blue-50 .text-blue-600,
 body.pep-assessment-route:not(.pep-assessment-active) main .border-blue-200.shadow-lg > .bg-blue-50 .text-blue-800,
@@ -52,6 +62,16 @@ body.pep-assessment-route:not(.pep-assessment-active) main .border-blue-200.bg-w
 body.pep-assessment-route:not(.pep-assessment-active) main .bg-sky-50 { background-color: #cffafe !important; border: 1px solid #22d3ee; }
 body.pep-assessment-route:not(.pep-assessment-active) main .bg-sky-50 .text-sky-800 { color: #075985 !important; }
 body.pep-assessment-route:not(.pep-assessment-active) main .bg-gray-50 { background-color: #dbeafe !important; border: 1px solid #60a5fa; }
+
+/* Keep the overview back action visible against the vibrant Grade 5 environment. */
+body.pep-assessment-route:not(.pep-assessment-active) main > a:first-child > button {
+  background: rgba(255, 255, 255, .94) !important;
+  color: #0b3555 !important;
+  border: 1px solid rgba(255, 255, 255, .85) !important;
+  box-shadow: 0 4px 14px rgba(6, 95, 70, .18);
+  font-weight: 700;
+}
+body.pep-assessment-route:not(.pep-assessment-active) main > a:first-child > button:hover { background: #ffffff !important; }
 
 body.pep-assessment-active .min-h-screen.bg-gradient-to-b { background: linear-gradient(135deg, #065f46 0%, #10b981 48%, #2dd4bf 100%) !important; }
 body.pep-assessment-active footer { display: none; }
