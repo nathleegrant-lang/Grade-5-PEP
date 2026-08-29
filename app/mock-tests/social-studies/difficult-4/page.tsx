@@ -77,7 +77,7 @@ const g5SsDiff4Questions: Question[] = [
     "skill": "Competing Emancipation Claims",
     "question": "Which statement best resolves the disagreement “freedom came in 1834” versus “freedom came in 1838”?",
     "options": [
-      "Both dates describe stages within Apprenticeship.",
+      "Full freedom came in 1834, while Apprenticeship began for the first time in 1838.",
       "Apprenticeship delayed full freedom until 1838.",
       "1834 ended Apprenticeship and 1838 began slavery.",
       "The dates describe laws passed by separate colonial assemblies."
@@ -299,15 +299,15 @@ const g5SsDiff4Questions: Question[] = [
     "id": 20,
     "type": "geography",
     "skill": "Community Hazard Choice",
-    "question": "A community can fund warning sirens or one additional shelter. Which information is needed before choosing?",
+    "question": "A community can fund warning sirens or one additional shelter. Which information would BEST show which safety gap is greater?",
     "options": [
-      "The colour residents prefer for the equipment",
-      "Shelter capacity, exposed population and warning coverage",
-      "Which proposal has the shortest title",
-      "Whether tourists use the community beach"
+      "The cost and installation time for each project",
+      "Shelter capacity, the number of exposed residents and how many people current warnings reach",
+      "How many residents say they prefer warning sirens or a shelter",
+      "The age of the existing shelter and the number of past storms residents remember"
     ],
     "correctAnswer": 1,
-    "explanation": "The decision should address the largest documented safety gap using exposure, capacity and coverage evidence."
+    "explanation": "Shelter capacity, population exposure and warning coverage directly show whether the larger unmet need is safe shelter space or the ability to warn people in time."
   },
   {
     "id": 21,
@@ -331,11 +331,11 @@ const g5SsDiff4Questions: Question[] = [
     "options": [
       "The office directs Parliament and reviews decisions made by the courts.",
       "The office manages all parish drains and markets.",
-      "Constitutional functions within elected government",
+      "The Governor-General performs formal constitutional duties within Jamaica's system of elected government.",
       "The office is a private business with no public duties."
     ],
     "correctAnswer": 2,
-    "explanation": "The Governor-General has formal constitutional duties, not unlimited personal policy-making power."
+    "explanation": "The Governor-General performs constitutionally defined duties within Jamaica's system of government; the office does not have unlimited personal authority to create government policy."
   },
   {
     "id": 23,
@@ -470,12 +470,12 @@ const g5SsDiff4Questions: Question[] = [
     "question": "A concert price falls and ticket sales rise. Which conclusion is most careful?",
     "options": [
       "The price change suggests that buyers had more income to spend.",
-      "Lower price may raise demand; check other changes too.",
+      "The lower price may have led buyers to purchase more tickets, but other changes should also be checked.",
       "Demand is usually too stable to respond quickly to a price change.",
       "More sales prove the concert's costs fell."
     ],
     "correctAnswer": 1,
-    "explanation": "The pattern fits a price response, but responsible analysis checks other influences before claiming sole cause."
+    "explanation": "More ticket sales after a price cut are consistent with buyers purchasing more at the lower price, but other influences should still be checked before claiming that price was the only cause."
   },
   {
     "id": 33,
