@@ -147,13 +147,13 @@ const g5SsDiff3Questions: Question[] = [
     "skill": "Source-Set Decision",
     "question": "A student has a diary written during 1865, a textbook published later and an undated online comment. Which plan best supports a Morant Bay investigation?",
     "options": [
-      "Use the online comment first because it gives the clearest summary.",
-      "Treat the diary as fully neutral because it is old.",
-      "Exclude the textbook because it was not written during 1865.",
-      "Use the diary and textbook, assess the undated online comment cautiously, and verify useful claims against further evidence."
+      "Use the diary as the main source and use the textbook only to confirm its claims.",
+      "Use the textbook as the main account and ignore the diary because personal accounts may be biased.",
+      "Use the diary and textbook equally, and accept the online comment if it agrees with both.",
+      "Compare the diary and textbook, treat the undated comment cautiously, and check important claims against other evidence."
     ],
     "correctAnswer": 3,
-    "explanation": "The diary and textbook have different strengths and limitations, while an undated online comment has weak source information. A careful investigation evaluates each source and checks important claims against further evidence."
+    "explanation": "The diary and textbook provide different kinds of evidence and should be compared critically. Because the online comment is undated, it should be treated cautiously, and important claims should be checked against additional reliable evidence."
   },
   {
     "id": 10,
