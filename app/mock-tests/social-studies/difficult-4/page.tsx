@@ -329,13 +329,13 @@ const g5SsDiff4Questions: Question[] = [
     "skill": "Constitutional Roles",
     "question": "A speaker claims the Governor-General personally creates government policy without constitutional limits. Which response is sound?",
     "options": [
-      "The office directs Parliament and reviews decisions made by the courts.",
-      "The office manages all parish drains and markets.",
+      "The Governor-General normally sets government policy independently whenever Parliament is divided.",
+      "The Governor-General may replace elected-government advice whenever another policy seems preferable.",
       "The Governor-General performs formal constitutional duties within Jamaica's system of elected government.",
-      "The office is a private business with no public duties."
+      "The Governor-General directs policy only in areas that Parliament has not debated."
     ],
     "correctAnswer": 2,
-    "explanation": "The Governor-General performs constitutionally defined duties within Jamaica's system of government; the office does not have unlimited personal authority to create government policy."
+    "explanation": "The Governor-General performs constitutionally defined formal duties within Jamaica's system of elected and parliamentary government; the office does not have unlimited personal authority to create or replace government policy."
   },
   {
     "id": 23,
@@ -469,13 +469,13 @@ const g5SsDiff4Questions: Question[] = [
     "skill": "Demand Explanation",
     "question": "A concert price falls and ticket sales rise. Which conclusion is most careful?",
     "options": [
-      "The price change suggests that buyers had more income to spend.",
-      "The lower price may have led buyers to purchase more tickets, but other changes should also be checked.",
-      "Demand is usually too stable to respond quickly to a price change.",
-      "More sales prove the concert's costs fell."
+      "The price cut may have attracted more buyers, so price was probably the only cause of the increase.",
+      "The lower price may have encouraged more ticket purchases, but other changes should also be checked.",
+      "The rise in ticket sales shows that factors unrelated to price must have caused the increase.",
+      "The lower price proves that buyers had more income available to spend on entertainment."
     ],
     "correctAnswer": 1,
-    "explanation": "More ticket sales after a price cut are consistent with buyers purchasing more at the lower price, but other influences should still be checked before claiming that price was the only cause."
+    "explanation": "More ticket sales after a price cut are consistent with buyers purchasing more at the lower price, but the pattern does not prove that price was the only cause. Other relevant changes should also be checked."
   },
   {
     "id": 33,
