@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/auth-context"
+import { prepareSocialStudiesAssessment, prepareSocialStudiesPreview } from "@/lib/social-studies-assessment-engine"
 
 const FREE_QUESTION_LIMIT = 5
 
@@ -29,564 +30,564 @@ interface Question {
 
 const g5SsDiff8Questions: Question[] = [
   {
-    id: 1,
-    type: "history",
-    skill: "Source Analysis",
-    question: `Read this source: 'The Negro is inherently inferior and cannot govern himself — British rule is a civilising gift.' (Colonial official, 1900). What does this source reveal about colonial thinking?`,
-    options: [
-      "This shows accurate historical thinking",
-      "This source is neutral and factual",
-      "This source reveals the racist ideology that justified colonial rule — portraying colonised peoples as inferior to legitimise their subjugation and deny their right to self-determination",
-      "This source was written by a Jamaican National Hero",
+    "id": 1,
+    "type": "history",
+    "skill": "Timeline Evidence",
+    "question": "A chart gives 1834: Apprenticeship begins, 1838: full freedom, 1944: Universal Adult Suffrage, 1962: Independence. Which interval was shortest?",
+    "options": [
+      "1838 to 1944, because the largest year numbers create the shortest interval.",
+      "1944 to 1962, because Independence followed suffrage without another listed event.",
+      "1834 to 1838, because the interval between Apprenticeship and full freedom was four years.",
+      "1834 to 1962, because it contains all four developments on the timeline."
     ],
-    correctAnswer: 2,
-    explanation: `Primary sources from colonists reveal colonial ideology — the belief in racial hierarchy that justified empire. Analysing this rhetoric critically exposes the self-serving nature of 'civilising mission' justifications for exploitation.`
+    "correctAnswer": 2,
+    "explanation": "The interval from 1834 to 1838 was four years, shorter than the other intervals."
   },
   {
-    id: 2,
-    type: "history",
-    skill: "Synthesis — Heritage",
-    question: `How does the fact that Jamaica's national symbols (flag, motto, dish, bird, tree, fruit) draw from MULTIPLE cultural traditions reflect Jamaica's history?`,
-    options: [
-      "It shows Jamaica has no single identity",
-      "It is a coincidence",
-      "Each symbol traces a thread of Jamaica's layered cultural history — African, Taino, European, East Indian — the symbols together are a visual map of colonialism, resistance, and cultural fusion",
-      "National symbols are chosen randomly",
+    "id": 2,
+    "type": "history",
+    "skill": "Source Interpretation",
+    "question": "A plantation record lists work completed, while a worker’s account describes punishment and resistance. Why compare both?",
+    "options": [
+      "Use the plantation record as the complete account because records of work cannot reflect an owner’s purpose.",
+      "Compare the record’s work data with the worker’s experience, while considering why each source was created.",
+      "Use the worker’s account alone because personal experience automatically explains the entire plantation system.",
+      "Treat the sources as equally complete and combine their claims without checking agreements or conflicts."
     ],
-    correctAnswer: 2,
-    explanation: `The ackee (West Africa), the Lignum Vitae (indigenous Caribbean), 'Out of Many, One People' (multicultural history) — Jamaica's symbols consciously celebrate the diverse origins forged through centuries of contact, conflict, and creativity.`
+    "correctAnswer": 1,
+    "explanation": "The records were created for different purposes and viewpoints; comparison gives a fuller, more critical picture."
   },
   {
-    id: 3,
-    type: "history",
-    skill: "Evaluating Legacy",
-    question: `A student argues 'colonialism left Jamaica with no benefits at all.' A more historically nuanced view would be:`,
-    options: [
-      "Colonialism was entirely beneficial",
-      "This is completely correct",
-      "Colonialism left Jamaica with deep structural damage (inequality, land concentration, extraction) while also involuntarily creating the diverse society and some of the infrastructure that modern Jamaica inherited — both the damage and the legacy are real",
-      "Colonialism had no effects on Jamaica",
+    "id": 3,
+    "type": "history",
+    "skill": "Cause and Evidence",
+    "question": "After the Baptist War, British debates about slavery intensified. Which conclusion uses the evidence most carefully?",
+    "options": [
+      "The Baptist War ended slavery immediately, so later debates merely recorded a change already completed.",
+      "British debates caused the Baptist War, because political discussion always occurs before resistance.",
+      "The rebellion was unrelated to abolition because freedom did not arrive on the same day.",
+      "The rebellion added pressure for abolition, but its influence should be considered alongside other campaigns and forces."
     ],
-    correctAnswer: 2,
-    explanation: `Nuanced history acknowledges that colonialism was exploitative and unjust, while also recognising that modern Jamaica — its language, some institutions, and multicultural society — emerged from that colonial encounter. Acknowledging complexity is not excusing exploitation.`
+    "correctAnswer": 3,
+    "explanation": "The Baptist War strengthened pressure for abolition, but abolition resulted from several connected forces and did not occur immediately."
   },
   {
-    id: 4,
-    type: "history",
-    skill: "Contrafactual Reasoning",
-    question: `If Jamaica had NOT gained independence in 1962, which consequence would MOST LIKELY have followed?`,
-    options: [
-      "Nothing would have changed",
-      "Jamaica would be richer",
-      "Jamaicans would have been denied the full exercise of self-determination — unable to set their own education, economic, and social policies according to their own priorities and values",
-      "Jamaica would have become a US territory",
+    "id": 4,
+    "type": "history",
+    "skill": "Map and History",
+    "question": "A map marks Spanish Town inland and Port Royal on the coast. Which historical activity would Port Royal’s location most directly support?",
+    "options": [
+      "Mountain farming, because an inland position can be inferred whenever a place appears near a harbour.",
+      "Shipping, defence, and overseas trade, because Port Royal’s coastal harbour position supported maritime activity.",
+      "Mining, because coastal forts were generally built where valuable ores were extracted.",
+      "Land-border trade, because Port Royal connected Jamaica by road to neighbouring countries."
     ],
-    correctAnswer: 2,
-    explanation: `Without independence, Jamaica's economy, education, and social policy would have continued to serve British imperial interests rather than Jamaican needs. The power to set national priorities is the essential benefit of sovereignty.`
+    "correctAnswer": 1,
+    "explanation": "Port Royal’s coastal location near Kingston Harbour supported shipping, defence, and maritime trade."
   },
   {
-    id: 5,
-    type: "history",
-    skill: "Connecting Past and Present",
-    question: `How does the LEGACY OF THE PLANTATION ECONOMY continue to affect Jamaica TODAY?`,
-    options: [
-      "The plantation economy has no modern legacy",
-      "Jamaica recovered completely from the plantation era",
-      "Concentrated land ownership, wealth inequality, dependence on agricultural exports, and the social hierarchies from the plantation era continue to shape Jamaica's development challenges",
-      "Jamaica's plantation era made it one of the world's wealthiest nations",
+    "id": 5,
+    "type": "history",
+    "skill": "Comparing Evidence",
+    "question": "Two population tables for the same year disagree slightly. What should a historian do first?",
+    "options": [
+      "Use the larger total because a higher figure is more likely to include everyone who was counted.",
+      "Average the totals immediately because disagreement proves both tables are equally reliable.",
+      "Check each table’s date, definitions, coverage, and method before deciding how the figures can be compared.",
+      "Reject both totals because numerical sources cannot provide reliable evidence about past populations."
     ],
-    correctAnswer: 2,
-    explanation: `Historical legacies are not just past events — land ownership patterns from the plantation era, the absence of an industrial base, and social inequalities originating in slavery continue to shape Jamaica's economic and social realities.`
+    "correctAnswer": 2,
+    "explanation": "Differences may come from methods or dates, so source information should be checked before the figures are used."
   },
   {
-    id: 6,
-    type: "history",
-    skill: "Historical Empathy",
-    question: `An enslaved person in 1820s Jamaica secretly teaches others to read, risking severe punishment. What does this action reveal about enslaved people?`,
-    options: [
-      "Enslaved people were passive victims with no agency",
-      "Reading was forbidden but not important",
-      "Despite systematic oppression, enslaved people exercised agency — pursuing knowledge as an act of resistance and self-determination, demonstrating remarkable courage and the human will to assert dignity",
-      "This action had no significance",
+    "id": 6,
+    "type": "history",
+    "skill": "Chronology and Change",
+    "question": "Which event most directly created a wider electorate before Jamaica achieved Independence?",
+    "options": [
+      "Universal Adult Suffrage in 1944, because it widened voting rights before Independence.",
+      "The Morant Bay Rebellion in 1865, because it immediately gave every adult the vote.",
+      "The English capture in 1655, because British rule began with universal elections.",
+      "The Baptist War in 1831–32, because it created Jamaica’s independent Parliament."
     ],
-    correctAnswer: 2,
-    explanation: `Historical empathy requires understanding enslaved people not as passive victims but as agents — people who found ways to resist, maintain humanity, and exercise agency even under the most brutal constraints.`
+    "correctAnswer": 0,
+    "explanation": "Universal Adult Suffrage expanded voting rights in 1944, before Independence in 1962."
   },
   {
-    id: 7,
-    type: "history",
-    skill: "Evaluating Interpretations",
-    question: `Two historians debate the Morant Bay Rebellion. Historian A calls it 'a criminal riot.' Historian B calls it 'a justified uprising.' Which statement BEST evaluates these interpretations?`,
-    options: [
-      "Historian A is correct because the law was broken",
-      "Historian B is correct because people were poor",
-      "Both interpretations reflect different values and perspectives — the event can be read as a crime against order OR as justified resistance against injustice, depending on whose interests and values the historian prioritises",
-      "Neither historian is correct",
+    "id": 7,
+    "type": "history",
+    "skill": "Evaluating Memorials",
+    "question": "A monument praises a leader but gives no dates or sources. What additional evidence would best help evaluate its account?",
+    "options": [
+      "The monument’s size and building material, because a larger memorial provides more reliable historical evidence.",
+      "A count of present-day visitors, because popularity confirms the accuracy of every claim displayed.",
+      "The wording on nearby monuments, because memorials created for similar purposes verify one another.",
+      "Contemporary records and later research that can confirm, contextualize, or challenge claims about the leader."
     ],
-    correctAnswer: 2,
-    explanation: `This is a classic example of contested historical interpretation. The same event — acts of violence against authority — can be criminal or heroic depending on whether you accept the legitimacy of the authority being challenged. Both interpretations use real evidence.`
+    "correctAnswer": 3,
+    "explanation": "Records and research can confirm, add context to, or challenge claims made by a commemorative monument."
   },
   {
-    id: 8,
-    type: "history",
-    skill: "Synthesis",
-    question: `Which of the following BEST explains why Jamaica's National Heroes come from different eras and used different methods?`,
-    options: [
-      "They are chosen randomly",
-      "Jamaica ran out of heroes in one era",
-      "Freedom and justice require ongoing effort across different historical moments — each hero responded to the specific form of oppression dominant in their time, from slavery to colonialism to independence",
-      "Heroes are chosen based on their military victories alone",
+    "id": 8,
+    "type": "history",
+    "skill": "Historical Decision",
+    "question": "A museum can display either one official speech or the speech beside letters from ordinary people. Which choice better supports historical reasoning?",
+    "options": [
+      "Display only the official speech because government sources describe ordinary people’s reactions without bias.",
+      "Display only the letters because personal accounts represent everyone who lived through the event.",
+      "Display both, explain their origins, and invite comparison between official aims and individual experiences.",
+      "Display neither because evidence from different viewpoints cannot be used in the same historical account."
     ],
-    correctAnswer: 2,
-    explanation: `From Nanny (resistance to slavery) through Bogle (colonial injustice) to Manley and Bustamante (independence) — each National Hero represents a different phase of the same long struggle for dignity and self-determination.`
+    "correctAnswer": 2,
+    "explanation": "Placing different sources together allows visitors to compare viewpoints and evidence."
   },
   {
-    id: 9,
-    type: "history",
-    skill: "Critical Evaluation",
-    question: `A student argues: 'The Maroon Peace Treaty of 1739 was a betrayal because Maroons agreed to return escaped slaves.' How should a historian BEST respond?`,
-    options: [
-      "The student is entirely wrong",
-      "The student is entirely right",
-      "The historian should acknowledge the moral complexity — the treaty secured Maroon freedom but at the cost of others' freedom, making it simultaneously a victory and a morally troubling compromise",
-      "Historical figures cannot be judged by modern standards",
+    "id": 9,
+    "type": "history",
+    "skill": "Data Interpretation",
+    "question": "A table shows protest attendance rising for three months, but it gives no reasons. Which claim is supported?",
+    "options": [
+      "One leader caused the increase, because attendance cannot rise without a single organizer.",
+      "Attendance increased across the three months, but the table alone does not establish the reasons or results.",
+      "The protest achieved its goals, because increasing participation always produces policy change.",
+      "Support became universal, because a rising total proves that every group joined the protest."
     ],
-    correctAnswer: 2,
-    explanation: `Historical empathy requires holding complexity: the Maroons secured survival and freedom for their community, but the clause requiring them to return escapees is genuinely troubling. Acknowledging both is more historically sophisticated than simple judgement.`
+    "correctAnswer": 1,
+    "explanation": "The figures support a trend in attendance, not conclusions about cause, results, or universal support."
   },
   {
-    id: 10,
-    type: "history",
-    skill: "Historical Significance — Ranking",
-    question: `Which development in Jamaican history was MOST significant for the long-term wellbeing of ordinary Jamaicans?`,
-    options: [
-      "The Spanish founding of Santiago de la Vega",
-      "The British conquest of Jamaica in 1655",
-      "Universal Adult Suffrage in 1944 — giving all adults a political voice and the power to elect governments accountable to them",
-      "Christopher Columbus's arrival in 1494",
+    "id": 10,
+    "type": "history",
+    "skill": "Fact and Opinion",
+    "question": "Which statement is an interpretation rather than a directly checkable date?",
+    "options": [
+      "“Universal Adult Suffrage began in 1944,” because any statement containing a date is an interpretation.",
+      "“Jamaica became independent in 1962,” because independence can only be discussed as an opinion.",
+      "“The Morant Bay Rebellion occurred in 1865,” because names of events cannot be checked in records.",
+      "“The 1938 labour unrest was a major turning point,” because judging significance interprets evidence about change."
     ],
-    correctAnswer: 2,
-    explanation: `Political representation is the foundation for all other rights — once ordinary Jamaicans could vote, they could elect governments committed to their welfare. All subsequent social progress was built on this democratic foundation.`
+    "correctAnswer": 3,
+    "explanation": "Calling an event a major turning point is an interpretation supported by evidence; the other statements give dates."
   },
   {
-    id: 11,
-    type: "geography",
-    skill: "Complex Spatial Reasoning",
-    question: `A new expressway is planned to connect Kingston to Montego Bay through the interior. List THREE likely consequences — both positive and negative.`,
-    options: [
-      "Only positive consequences are possible",
-      "Only negative consequences occur",
-      "Positive: faster travel time, more accessible interior communities, economic development along the route. Negative: environmental disruption to interior ecosystems, displacement of communities along the route, potential acceleration of deforestation as the interior becomes more accessible",
-      "Roads have no consequences",
+    "id": 11,
+    "type": "geography",
+    "skill": "Map Scale",
+    "question": "A map scale is 1 cm = 8 km. A route has two segments measuring 3 cm and 2.5 cm. What is the total real distance?",
+    "options": [
+      "20 km, because only the 2.5 cm segment should be converted using the scale.",
+      "40 km, because the two segments should be rounded to five centimetres before conversion.",
+      "44 km, because the segments total 5.5 cm and each centimetre represents 8 km.",
+      "88 km, because both the map distance and scale should be doubled before multiplying."
     ],
-    correctAnswer: 2,
-    explanation: `Infrastructure planning requires multi-dimensional consequence analysis. Major roads generate economic benefits (connectivity, development) AND environmental/social costs (ecosystem disruption, displacement, deforestation pressure). Both must be considered.`
+    "correctAnswer": 2,
+    "explanation": "The map distance is 5.5 cm; 5.5 × 8 = 44 km."
   },
   {
-    id: 12,
-    type: "geography",
-    skill: "Environmental Interdependence",
-    question: `How does the HEALTH of Jamaica's Blue Mountain forests affect communities in Kingston?`,
-    options: [
-      "There is no relationship between mountains and cities",
-      "Mountain forests only benefit mountain communities",
-      "Blue Mountain forests are the primary watershed for Kingston's water supply — forest degradation through deforestation reduces water quality and quantity, directly affecting millions of urban residents who depend on mountain rivers",
-      "Only bauxite mining affects Kingston's water",
+    "id": 12,
+    "type": "geography",
+    "skill": "Direction",
+    "question": "A river flows south from the hills, then turns east to the sea. A village lies north of the bend. In which direction is the bend from the village?",
+    "options": [
+      "North, because the bend lies below the village only when the map is turned upside down.",
+      "South, because a place north of the bend must look south to locate the bend.",
+      "East, because the river turns east after reaching the bend.",
+      "South-east, because the river’s later direction determines the bend’s position from the village."
     ],
-    correctAnswer: 2,
-    explanation: `This question tests understanding of watershed interdependence: urban water supply depends on rural/mountain forest health. Environmental problems in the mountains translate into water crises in the city — urban and rural environments are deeply connected.`
+    "correctAnswer": 1,
+    "explanation": "If the village is north of the bend, the bend is south of the village."
   },
   {
-    id: 13,
-    type: "geography",
-    skill: "Policy Evaluation",
-    question: `Jamaica's government designates large areas of the Blue Mountains as a National Park. Some farmers in the area object. Which analysis BEST addresses both perspectives?`,
-    options: [
-      "Farmers are always wrong",
-      "National Parks never help anyone",
-      "Farmers' livelihoods and land access are legitimate concerns — but the Park protects biodiversity, water supply, and heritage that benefit all Jamaicans. The best policy would include farmers in park management and provide alternative income, rather than treating conservation and community welfare as opposites",
-      "Conservation is always more important than farming",
+    "id": 13,
+    "type": "geography",
+    "skill": "Rainfall Data",
+    "question": "Monthly rainfall is A: 120 mm, B: 200 mm, C: 80 mm. How much more rain did B receive than A and C combined?",
+    "options": [
+      "40 mm, because Town B’s rainfall exceeds Town A by 80 mm and Town C should be halved.",
+      "80 mm, because Town C’s rainfall should be subtracted from Town B without including Town A.",
+      "200 mm, because Town A and Town C should be added but not compared with Town B.",
+      "0 mm, because Town A and Town C total 200 mm, exactly equal to Town B."
     ],
-    correctAnswer: 2,
-    explanation: `Effective conservation policy requires community co-management — farmers as stewards rather than obstacles. Excluding communities creates conflict and often undermines conservation. The most sophisticated analysis sees human welfare and environmental protection as mutually reinforcing, not opposed.`
+    "correctAnswer": 3,
+    "explanation": "A and C total 200 mm, equal to B, so B received 0 mm more."
   },
   {
-    id: 14,
-    type: "geography",
-    skill: "Map Skills — Complex",
-    question: `A map shows Jamaica's land use. The NORTH COAST shows resort hotels; the SOUTH shows agriculture and port facilities; the INTERIOR shows forests and mining. What does this pattern reveal about Jamaica's economy?`,
-    options: [
-      "Land use is random",
-      "All areas are used for the same purpose",
-      "The pattern reflects Jamaica's major economic sectors: tourism concentrated on the scenic north coast (beaches, clear water), agriculture and trade on the productive south plain and ports, and natural resource extraction in the interior — economic geography follows environmental assets",
-      "The south coast is more beautiful than the north",
+    "id": 14,
+    "type": "geography",
+    "skill": "Map Symbols",
+    "question": "A map shows a hospital symbol beside a main road but across a river from most homes. What additional map feature matters most for emergency access?",
+    "options": [
+      "Contour spacing, because steepness alone determines whether residents can cross the river to reach care.",
+      "Bridge or safe-crossing locations, because the river may block access despite the hospital being beside a main road.",
+      "Prevailing-wind arrows, because wind direction identifies the quickest road route across a river.",
+      "Parish-boundary labels, because emergency access changes when a hospital and homes are in different districts."
     ],
-    correctAnswer: 2,
-    explanation: `Economic geography maps onto environmental geography: tourism follows beach and scenery (north coast), agriculture follows fertile soils (south plain), mining follows mineral deposits (interior). Understanding this spatial logic is key to economic geography.`
+    "correctAnswer": 1,
+    "explanation": "A bridge or safe crossing determines whether residents can reach the hospital across the river."
   },
   {
-    id: 15,
-    type: "geography",
-    skill: "Climate Change Impact",
-    question: `Scientists predict that Jamaica's sea levels will rise 30 cm by 2050. Which communities face the GREATEST risk?`,
-    options: [
-      "Only communities far from the coast",
-      "All Jamaican communities equally",
-      "Low-lying coastal communities — including parts of Kingston, Portmore, and tourist areas on the north coast — face the greatest risk of flooding, saltwater intrusion into freshwater sources, and loss of beaches",
-      "Inland mountain communities",
+    "id": 15,
+    "type": "geography",
+    "skill": "Settlement Planning",
+    "question": "Site X is flat and near water but floods often. Site Y is higher and safer but lacks a road. What is the best planning conclusion?",
+    "options": [
+      "Choose Site A because proximity to work makes recurring flood risk less important than travel time.",
+      "Choose Site B because safer land means road access and service costs no longer require investigation.",
+      "Compare Site A’s flood-mitigation costs with Site B’s road-access costs and the long-term safety of each.",
+      "Reject both sites because a settlement cannot be planned where either transport or hazard improvements are needed."
     ],
-    correctAnswer: 2,
-    explanation: `Differential vulnerability is key: not all communities face equal climate risk. Low-lying coastal communities (Portmore, beach resorts, Kingston Harbour area) face flooding and saltwater intrusion. Mapping vulnerability by elevation and proximity to coast reveals who is most at risk.`
+    "correctAnswer": 2,
+    "explanation": "The decision requires comparing hazard risk with the cost and feasibility of providing access."
   },
   {
-    id: 16,
-    type: "geography",
-    skill: "Synthesis — Human Geography",
-    question: `Why do geographers say 'geography shapes history, and history shapes geography'?`,
-    options: [
-      "Geography and history are completely unrelated",
-      "Only history shapes geography",
-      "Physical geography (mountains, harbours, rivers) shaped where people settled, what they farmed, and what routes they took — creating history. Then human history (deforestation, cities, dams) reshaped the physical landscape — both forces constantly act on each other",
-      "Geography is more important than history",
+    "id": 16,
+    "type": "geography",
+    "skill": "Hazard Data",
+    "question": "Community records show most storm injuries occur after people enter floodwater. Which action is most directly supported?",
+    "options": [
+      "Increase rainfall measurements after storms, because knowing the total prevents residents from entering floodwater.",
+      "Move clinics nearer the flood zone, because shorter treatment time addresses the main cause of injuries.",
+      "Deepen every drain without studying routes, because drainage alone guarantees safe pedestrian movement.",
+      "Warn people against entering floodwater and provide accessible safe routes, crossings, or shelters."
     ],
-    correctAnswer: 2,
-    explanation: `The human-environment interaction works in both directions: the Blue Mountains shaped Maroon history (providing refuge), and Maroon settlement shaped those mountains (burning, farming, path creation). Kingston's harbour shaped its role as capital; being capital shaped how the harbour was developed.`
+    "correctAnswer": 3,
+    "explanation": "The injury pattern directly supports preventing entry into floodwater and improving safe movement."
   },
   {
-    id: 17,
-    type: "geography",
-    skill: "Multi-Factor Analysis",
-    question: `A student is asked to explain why Kingston is Jamaica's largest and most important city. Which answer is MOST complete?`,
-    options: [
-      "Because it was chosen randomly",
-      "Because it has the best weather",
-      "Kingston's natural harbour (one of the world's largest), flat coastal land, central location on the south coast, and its designation as capital all combined to concentrate commerce, government, and population — multiple geographical and historical factors reinforced each other",
-      "Because it is the smallest parish",
+    "id": 17,
+    "type": "geography",
+    "skill": "Coastal Protection",
+    "question": "A proposal combines mangrove restoration with buildings set farther from shore. Why can the combination be stronger than either action alone?",
+    "options": [
+      "Restore mangroves alone, because a natural buffer makes building location and evacuation planning unnecessary.",
+      "Restore mangroves and place buildings farther from the shore, combining a natural buffer with reduced exposure.",
+      "Move buildings inland alone, because coastal ecosystems do not affect waves, sediment, or habitat.",
+      "Build closer to the shore behind a narrow mangrove strip, because shorter evacuation routes reduce storm exposure."
     ],
-    correctAnswer: 2,
-    explanation: `Urban primacy results from multiple reinforcing advantages: natural harbour for trade, flat land for development, capital status attracting government functions. Understanding settlement requires multi-factor analysis, not a single cause.`
+    "correctAnswer": 1,
+    "explanation": "Setbacks reduce exposure and mangroves can lessen wave effects; neither guarantees complete safety."
   },
   {
-    id: 18,
-    type: "geography",
-    skill: "Environmental Trade-offs",
-    question: `A government must decide whether to build a bauxite mine or protect a forested watershed. What is the MOST complete analysis of this decision?`,
-    options: [
-      "Always mine bauxite — it generates revenue",
-      "Always protect the forest — mining is wrong",
-      "This requires weighing short-term economic gain (mining revenue, jobs) against long-term environmental costs (watershed destruction, biodiversity loss, community water supply). The decision depends on whether the economic benefit outweighs the ecological cost AND whether the community can develop alternative income",
-      "Mining always benefits communities",
+    "id": 18,
+    "type": "geography",
+    "skill": "Watershed Decision",
+    "question": "Farmers need hillside crops, but soil is washing into a river. Which plan best addresses both needs?",
+    "options": [
+      "Clear narrow channels straight downhill so runoff leaves farms quickly, even if it carries more soil to the river.",
+      "Stop all hillside farming, because no soil-protection method can support crops on sloping land.",
+      "Use contour planting and vegetated strips to slow runoff and retain soil while suitable fields remain productive.",
+      "Plant only at the foot of the slope, because erosion begins after runoff has already reached the river."
     ],
-    correctAnswer: 2,
-    explanation: `Environmental decision-making requires systematic cost-benefit analysis across economic, ecological, and social dimensions — considering who benefits, who bears costs, and over what timeframe.`
+    "correctAnswer": 2,
+    "explanation": "Contour planting and vegetated strips reduce runoff and soil loss while allowing farming to continue."
   },
   {
-    id: 19,
-    type: "geography",
-    skill: "Data Interpretation",
-    question: `A climate table shows that Morant Bay receives 1,800 mm of rain annually while Portmore receives only 800 mm. Both are in southeastern Jamaica. What geographic factor MOST explains this difference?`,
-    options: [
-      "Portmore is in a different country",
-      "Morant Bay has a larger population",
-      "Morant Bay is on the wetter, northeastern-facing slopes exposed to trade winds; Portmore is on the drier, leeward southern plain — a localised rain shadow effect within the same region",
-      "The two towns have different soils",
+    "id": 19,
+    "type": "geography",
+    "skill": "Population Data",
+    "question": "Two towns have 10,000 people. Town A covers 5 km²; Town B covers 20 km². Which has higher population density?",
+    "options": [
+      "Town B, because its larger area means the same population is concentrated more densely.",
+      "Both towns, because equal populations always produce equal density regardless of land area.",
+      "Density cannot be compared because the populations are equal and only one calculation is needed.",
+      "Town A, because 10,000 people across 5 km² is 2,000 per km², greater than Town B’s 500."
     ],
-    correctAnswer: 2,
-    explanation: `Micro-scale rain shadow effects operate even within small areas. Morant Bay faces the moisture-bearing trade winds; Portmore is shielded by terrain. This is the same rain shadow principle applied at local scale.`
+    "correctAnswer": 3,
+    "explanation": "Town A has 2,000 people per km², while Town B has 500 per km²."
   },
   {
-    id: 20,
-    type: "geography",
-    skill: "Sustainability Analysis",
-    question: `A fishing village catches 50% more fish than last year because they use new large-scale nets. Why might this be a problem in the LONG TERM?`,
-    options: [
-      "More fish is always better",
-      "Fishing cannot be over-done",
-      "Overfishing depletes fish populations faster than they can reproduce — next year's catch will likely fall sharply, threatening the long-term viability of the fishery and the community's livelihood",
-      "Large nets are too expensive",
+    "id": 20,
+    "type": "geography",
+    "skill": "Environmental Evidence",
+    "question": "Fish catches fall after muddy runoff repeatedly covers a reef. Which investigation best tests a connection?",
+    "options": [
+      "Compare boat colours and crew sizes before and after rain, because fishing effort alone reveals reef damage.",
+      "Compare runoff, reef condition, and fish catches across heavy-rain and drier periods while checking other influences.",
+      "Compare parish boundaries with fish names, because location labels establish why catches changed.",
+      "Compare only catch prices before and after rain, because prices directly measure sediment covering coral."
     ],
-    correctAnswer: 2,
-    explanation: `This is a classic tragedy of the commons / sustainability problem. Short-term gain from overfishing destroys the resource base that future catches depend on. Sustainable fishing limits catches to what the population can replenish.`
+    "correctAnswer": 1,
+    "explanation": "Linked observations of runoff, reef condition, and catches can test whether the changes occur together."
   },
   {
-    id: 21,
-    type: "civics",
-    skill: "Constitutional Rights — Application",
-    question: `A school bans Muslim students from wearing hijabs on school grounds, citing uniform policy. Which constitutional rights may be violated?`,
-    options: [
-      "Schools have absolute authority over uniform policy",
-      "The school is correct because rules apply to everyone",
-      "The right to freedom of religion and the right to non-discrimination — a blanket ban may infringe students' right to practise their faith without reasonable justification. Courts would likely require the school to demonstrate why accommodation is impossible",
-      "Religious clothing has no legal protection",
+    "id": 21,
+    "type": "civics",
+    "skill": "Using Public Data",
+    "question": "A council publishes costs for three road projects. What should residents examine before supporting one?",
+    "options": [
+      "Choose the project serving the most people, even if its safety benefit is small and its total cost is unknown.",
+      "Choose the least expensive project, because cost alone provides a fair measure of community priority.",
+      "Choose the road with the highest reported danger, without comparing whether another project could reduce more risk.",
+      "Compare need, safety improvement, full cost, users served, and feasible alternatives before supporting a project."
     ],
-    correctAnswer: 2,
-    explanation: `This applies constitutional rights to a real scenario. Freedom of religion protects the right to manifest faith through dress. The test is whether the restriction is 'reasonably justifiable' — courts would ask whether accommodation is possible and whether the restriction is proportionate.`
+    "correctAnswer": 3,
+    "explanation": "Relevant evidence includes need, benefit, cost, and reach, not presentation features."
   },
   {
-    id: 22,
-    type: "civics",
-    skill: "Democratic Theory",
-    question: `Why might a democracy with FREE and FAIR ELECTIONS still fail to protect the rights of minorities?`,
-    options: [
-      "Democracies always protect minorities",
-      "Minorities should not have special rights",
-      "A majority can vote to restrict minority rights — 'tyranny of the majority.' This is why constitutions entrench fundamental rights that cannot be removed by simple majority vote — protecting minorities from democratic oppression",
-      "Elections are the only measure of democracy",
+    "id": 22,
+    "type": "civics",
+    "skill": "Representation Data",
+    "question": "A survey includes 90 adults but only 10 young people for a youth-centre decision. What weakness should be considered?",
+    "options": [
+      "The survey is reliable because 100 responses are enough even when the group most affected is scarcely represented.",
+      "Young people’s views may be under-represented, so the sample should include more of the intended users.",
+      "Adult responses should be discarded because only young people may express a view about public spending.",
+      "The survey proves that adults oppose the centre, because they form the largest group of respondents."
     ],
-    correctAnswer: 2,
-    explanation: `This is a fundamental problem in democratic theory: majority rule without minority protections can become oppressive. Constitutional rights exist precisely to shield individuals and minorities from majority power — democracy requires both elections AND rights protection.`
+    "correctAnswer": 1,
+    "explanation": "Because the decision concerns a youth centre, the small youth sample may not represent those most affected."
   },
   {
-    id: 23,
-    type: "civics",
-    skill: "Government Accountability",
-    question: `The Auditor General's report reveals a government ministry wasted $50 million. What SEQUENCE of events should follow in a functioning democracy?`,
-    options: [
-      "Nothing — the government decides what to do",
-      "The Prime Minister apologises and the matter ends",
-      "The report is laid in Parliament; the Public Accounts Committee investigates; the minister and officials are questioned; where crimes are found, the Director of Public Prosecutions considers charges; corrective measures are implemented — multiple accountability mechanisms activate",
-      "The Auditor General fires the minister",
+    "id": 23,
+    "type": "civics",
+    "skill": "Lawful Participation",
+    "question": "Residents find that a proposed dump may affect a stream. Which action combines evidence and lawful participation?",
+    "options": [
+      "Post unverified claims about the dump so officials must respond before checking whether the stream is at risk.",
+      "Block access to the proposed site, because preventing work is the quickest form of lawful consultation.",
+      "Document the possible stream effects and present the evidence through consultation or to the responsible authority.",
+      "Wait until pollution occurs, because residents cannot raise an environmental concern before damage is confirmed."
     ],
-    correctAnswer: 2,
-    explanation: `Democratic accountability requires multiple mechanisms working together: the Auditor General reports, Parliament scrutinises, prosecution considers charges, and administration reforms. No single institution handles it alone — the system of checks provides accountability.`
+    "correctAnswer": 2,
+    "explanation": "Documented evidence presented through lawful channels supports informed participation without creating harm."
   },
   {
-    id: 24,
-    type: "civics",
-    skill: "Evaluating Civic Behaviour",
-    question: `A student says: 'I don't vote because one vote doesn't matter.' Evaluate this argument.`,
-    options: [
-      "The student is completely correct",
-      "Voting never changes anything",
-      "While a single vote rarely decides an election, collective non-participation by those who feel this way can determine outcomes. Civic participation has cumulative effects; abstaining is also a choice with consequences — it cedes political influence to those who do vote",
-      "Every single vote has always decided an election",
+    "id": 24,
+    "type": "civics",
+    "skill": "Parliament and Evidence",
+    "question": "A bill is debated after a committee receives public submissions. What benefit can the submissions provide?",
+    "options": [
+      "The submissions decide the bill automatically when most writers recommend the same outcome.",
+      "They supply evidence and viewpoints that legislators can evaluate alongside other information during debate.",
+      "They replace parliamentary debate because a committee has already heard members of the public.",
+      "They allow each writer to amend the bill directly without a vote by either chamber of Parliament."
     ],
-    correctAnswer: 2,
-    explanation: `The 'my vote doesn't matter' fallacy ignores collective action: everyone reasoning this way produces mass abstention that genuinely affects outcomes. Civic participation is inherently collective — individual choices aggregate into social outcomes.`
+    "correctAnswer": 1,
+    "explanation": "Submissions can inform legislators, but Parliament retains responsibility for debate and decisions."
   },
   {
-    id: 25,
-    type: "civics",
-    skill: "Constitutional Significance",
-    question: `A critic argues 'the Governor General is pointless — they just perform ceremonies.' Why is this argument incomplete?`,
-    options: [
-      "The Governor General has no real function",
-      "The critic is completely correct",
-      "The Governor General performs vital constitutional functions: formally appointing the Prime Minister, granting assent to laws, and serving as a constitutional safeguard if a government acts unconstitutionally — the ceremonial role obscures real constitutional significance",
-      "The Governor General runs the country",
+    "id": 25,
+    "type": "civics",
+    "skill": "Court Reasoning",
+    "question": "Two witnesses give different accounts. What should a court do?",
+    "options": [
+      "Choose the account offered by the witness with the strongest community reputation.",
+      "Give both accounts equal weight even if physical evidence supports only one of them.",
+      "Ask an elected official which witness should be believed before applying the relevant law.",
+      "Test each account against other evidence, consider reliability, and apply the law independently."
     ],
-    correctAnswer: 2,
-    explanation: `Constitutional roles often appear ceremonial but retain real significance in exceptional circumstances. The Governor General's power to withhold assent or act in constitutional crises provides a backstop against executive overreach — rarely exercised but constitutionally essential.`
+    "correctAnswer": 3,
+    "explanation": "Fair decision-making requires evaluating evidence and applying law independently."
   },
   {
-    id: 26,
-    type: "civics",
-    skill: "Rule of Law — Application",
-    question: `A wealthy businessman is caught committing a serious crime. He offers to donate $10 million to a hospital if charges are dropped. What principle is violated if the authorities accept?`,
-    options: [
-      "The rule of law — no one may buy their way out of legal accountability regardless of wealth or social status",
-      "Freedom of contract",
-      "The right to privacy",
-      "The principle of free market economics",
+    "id": 26,
+    "type": "civics",
+    "skill": "Rights Evidence",
+    "question": "A school limits a meeting because an unsafe crowd blocks exits. Which question best tests whether the limit is reasonable?",
+    "options": [
+      "Whether most students support the meeting’s topic, because popular expression receives stronger protection than unpopular expression.",
+      "Whether the rule ended the meeting permanently, because a temporary safety restriction can never be reasonable.",
+      "Whether blocked exits created a real risk, the rule was applied fairly, and safer opportunities to meet remained available.",
+      "Whether school leaders agreed with the speakers, because safety rules may properly depend on the viewpoint expressed."
     ],
-    correctAnswer: 0,
-    explanation: `The rule of law's most fundamental meaning: equality before the law regardless of wealth, power, or status. Allowing the wealthy to buy freedom from accountability destroys the legal equality on which democratic society rests.`
+    "correctAnswer": 2,
+    "explanation": "A reasonable limit should address a real safety concern, be fairly applied, and avoid restricting more expression than necessary."
   },
   {
-    id: 27,
-    type: "civics",
-    skill: "Constitutional Analysis",
-    question: `A government passes a law that takes away citizens' right to free speech. Which institution has the power to strike down this law?`,
-    options: [
-      "The Prime Minister can reverse it",
-      "The Governor General reverses all bad laws",
-      "The Supreme Court — which can rule the law unconstitutional if it violates the Charter of Fundamental Rights and Freedoms",
-      "Parliament can re-vote on it",
+    "id": 27,
+    "type": "civics",
+    "skill": "Accountability",
+    "question": "A local project costs more than planned. Which evidence would best support accountability?",
+    "options": [
+      "The final project photograph and opening-day attendance, because completion alone explains every additional cost.",
+      "The approved budget and changes, invoices, authorization records, and reasons for the cost overrun.",
+      "Statements from workers without financial records, because personal accounts replace the need to examine spending.",
+      "The original budget only, because later authorized changes should not be included when reviewing the final cost."
     ],
-    correctAnswer: 2,
-    explanation: `Judicial review is the Supreme Court's power to invalidate laws that violate the Constitution. This is the fundamental mechanism protecting rights even from elected governments — the Constitution limits what Parliament can do.`
+    "correctAnswer": 1,
+    "explanation": "Budget records, invoices, and documented reasons allow the spending to be examined."
   },
   {
-    id: 28,
-    type: "civics",
-    skill: "Evaluating Democratic Principles",
-    question: `A political party wins 60% of parliamentary seats with only 40% of the popular vote. This is possible under Jamaica's first-past-the-post electoral system. Which democratic PRINCIPLE does this tension highlight?`,
-    options: [
-      "There is no tension — 60% seats is fair",
-      "Only constituency results matter",
-      "The tension between proportional representation of popular votes and the winner-takes-all constituency system — first-past-the-post can produce parliaments that don't reflect the full distribution of voters' preferences",
-      "Only the losing party objects to this",
+    "id": 28,
+    "type": "civics",
+    "skill": "Constitutional Roles",
+    "question": "An infographic says the Governor-General “runs all ministries.” Which correction is most accurate?",
+    "options": [
+      "The Governor-General supervises ministries directly but normally allows ministers to make minor daily decisions.",
+      "The Governor-General and Prime Minister share equal personal power to direct every ministry programme.",
+      "The Senate directs ministries because senators are appointed rather than elected by constituencies.",
+      "Elected ministers direct government policy and ministries; the Governor-General performs formal constitutional duties."
     ],
-    correctAnswer: 2,
-    explanation: `First-past-the-post can produce seat/vote share mismatches — a party winning narrow victories in many constituencies can win far more seats than its national vote share suggests. This is a genuine democratic trade-off between geographic representation and proportional representation.`
+    "correctAnswer": 3,
+    "explanation": "Government policy and ministries are led by elected officials, while the Governor-General has formal constitutional functions."
   },
   {
-    id: 29,
-    type: "civics",
-    skill: "Rights Conflicts",
-    question: `A journalist publishes confidential government documents exposing corruption. The government seeks to prosecute her for breaking state secrecy laws. Which competing rights and values are in conflict?`,
-    options: [
-      "Only the government's rights matter",
-      "This is a simple case with an obvious answer",
-      "Freedom of the press and the public's right to know about government corruption vs the government's right to protect official information and maintain state security — a genuine tension between democratic accountability and institutional confidentiality",
-      "Journalists should never publish government documents",
+    "id": 29,
+    "type": "civics",
+    "skill": "Regional Decisions",
+    "question": "A worker asks whether CSME means anyone can take any job in any member state. What is the careful answer?",
+    "options": [
+      "Anyone may take any job after entering another member state, because regional movement removes qualification rules.",
+      "Only tourists benefit from regional movement, because employment remains excluded from CARICOM cooperation.",
+      "Opportunities operate through agreed categories and still require relevant qualifications and national procedures.",
+      "Every member state must use identical employment laws, because CSME replaces national administrative systems."
     ],
-    correctAnswer: 2,
-    explanation: `This is a real constitutional dilemma with legitimate arguments on both sides. Press freedom and public accountability argue for publication; state security and rule of law argue against. Courts must balance these competing values.`
+    "correctAnswer": 2,
+    "explanation": "Regional arrangements create opportunities but still involve agreed eligibility, qualifications, and procedures."
   },
   {
-    id: 30,
-    type: "civics",
-    skill: "Policy Reasoning",
-    question: `A government wants to reduce crime. It debates two approaches: (A) increase police powers, even if some civil liberties are limited, or (B) invest in education and community development. Which consideration is MOST important?`,
-    options: [
-      "Only approach A is correct",
-      "Only approach B is correct",
-      "The most effective approach probably combines both — addressing immediate security while also addressing root causes. However, approach A carries risks to civil liberties that must be carefully managed and monitored, while approach B's benefits take longer to materialise",
-      "Crime cannot be reduced",
+    "id": 30,
+    "type": "civics",
+    "skill": "Community Priorities",
+    "question": "Data show one district has no safe water point while another requests decorative lights. Which priority is better supported?",
+    "options": [
+      "Divide the money equally between water and lights, even if neither amount is sufficient to complete a useful project.",
+      "Prioritize safe water access because the evidence identifies an urgent basic need, while planning later improvements where possible.",
+      "Install decorative lights first because visible improvements demonstrate that every district receives equal treatment.",
+      "Delay both projects until the communities agree unanimously about which service should be treated as essential."
     ],
-    correctAnswer: 2,
-    explanation: `Criminal justice policy requires multi-dimensional thinking: security measures provide short-term safety; social investment addresses root causes. Critically, security measures that undermine civil liberties create their own injustices — the most nuanced answer recognises the need for balance and oversight.`
+    "correctAnswer": 1,
+    "explanation": "Safe water is an urgent basic need, so the evidence supports addressing it before a less essential improvement."
   },
   {
-    id: 31,
-    type: "economics",
-    skill: "Evaluating Economic Development",
-    question: `GDP growth of 3% in Jamaica is reported. Which question MOST helps determine whether this growth improved Jamaicans' lives?`,
-    options: [
-      "Was 3% the highest growth in the Caribbean?",
-      "How does 3% compare to last year?",
-      "How was the growth distributed — did it reach the poor and middle class, or mainly benefit wealthy businesses and foreign investors? What happened to employment, wages, and public services?",
-      "Did growth occur in the tourism sector?",
+    "id": 31,
+    "type": "economics",
+    "skill": "Budget Data",
+    "question": "A household earns $80,000, spends $56,000 on needs and $12,000 on wants. If it saves the rest, how much is saved?",
+    "options": [
+      "$24,000, because only essential spending should be subtracted before calculating savings.",
+      "$68,000, because needs and wants should be added to find the amount saved.",
+      "$12,000, because $80,000 minus $56,000 in needs and $12,000 in wants leaves $12,000.",
+      "$8,000, because the two spending amounts should first be subtracted from each other."
     ],
-    correctAnswer: 2,
-    explanation: `GDP growth is an aggregate measure — it says nothing about distribution. Inclusive growth that raises wages and funds public services differs fundamentally from growth that enriches a small elite while leaving most Jamaicans behind. Asking about distribution is the essential critical question.`
+    "correctAnswer": 2,
+    "explanation": "$80,000 − $56,000 − $12,000 = $12,000."
   },
   {
-    id: 32,
-    type: "economics",
-    skill: "Financial Literacy — Complex",
-    question: `A Jamaican student takes a $500,000 student loan at 8% annual interest. She can either repay it over 5 years or 10 years. What is the TRADE-OFF?`,
-    options: [
-      "Longer repayment is always better",
-      "Shorter repayment is always better",
-      "Shorter repayment (5 years) means higher monthly payments but LESS total interest paid; longer repayment (10 years) means lower monthly payments but MORE total interest paid over the full period — the trade-off is monthly cash flow vs total cost",
-      "Interest rate is the only factor that matters",
+    "id": 32,
+    "type": "economics",
+    "skill": "Percentage Reasoning",
+    "question": "A shop reduces a $4,000 item by 10%. What is the sale price?",
+    "options": [
+      "$3,960, because ten percent should be taken from the first two digits of the original price only.",
+      "$3,600, because ten percent is $400 and the discount is subtracted from $4,000.",
+      "$4,400, because a discount is added to the marked price before the item is sold.",
+      "$400, because the amount of the discount is the same as the final sale price."
     ],
-    correctAnswer: 2,
-    explanation: `Loan repayment trade-offs: term length affects both monthly payments and total interest cost. Understanding this trade-off — monthly affordability vs total cost — is essential financial literacy for anyone considering student loans or mortgages.`
+    "correctAnswer": 1,
+    "explanation": "Ten percent of $4,000 is $400; subtracting gives $3,600."
   },
   {
-    id: 33,
-    type: "economics",
-    skill: "Entrepreneurship — Analysis",
-    question: `A Jamaican entrepreneur wants to start a business. She is choosing between: (A) a franchise of an existing foreign brand, or (B) creating a new Jamaican brand. What are the KEY TRADE-OFFS?`,
-    options: [
-      "Franchises are always better",
-      "New brands are always better",
-      "Franchise: lower risk (proven model, brand recognition), but fees reduce profit and rules limit creativity. New brand: higher risk (unknown), but full creative control, all profits stay local, and success creates a Jamaican asset. The right choice depends on her risk tolerance, capital, and long-term goals",
-      "There are no trade-offs",
+    "id": 33,
+    "type": "economics",
+    "skill": "Comparing Plans",
+    "question": "Plan A costs $2,000 monthly plus $500 usage. Plan B costs $2,800 with no usage fee. Which is cheaper for that month?",
+    "options": [
+      "Plan B is cheaper by $200 because its total should be compared only with Plan A’s monthly charge.",
+      "Both plans cost $2,800 because Plan A’s usage fee replaces rather than adds to its monthly charge.",
+      "Plan B is cheaper by $300 because $2,000 plus $500 is greater than $2,800.",
+      "Plan A is cheaper by $300 because its $2,500 total is below Plan B’s $2,800 charge."
     ],
-    correctAnswer: 2,
-    explanation: `This is an entrepreneurship decision analysis: franchises reduce risk but share value; new brands are riskier but create independent wealth and Jamaican cultural capital. Understanding these trade-offs — not just choosing one option — is the goal.`
+    "correctAnswer": 3,
+    "explanation": "Plan A totals $2,500, which is $300 less than Plan B."
   },
   {
-    id: 34,
-    type: "economics",
-    skill: "Development Economics",
-    question: `Why do economists argue that INVESTING IN EARLY CHILDHOOD EDUCATION has better economic returns than many other investments?`,
-    options: [
-      "Early education is cheap to provide",
-      "Children are less important than adults",
-      "Research consistently shows that investment in early childhood (0-5 years) generates the highest returns in human capital — a more skilled, healthier, more productive workforce — with dollar-for-dollar returns estimated at 7-12 times the investment through lifetime earnings and reduced social costs",
-      "Education only benefits individuals, not the economy",
+    "id": 34,
+    "type": "economics",
+    "skill": "Market Data",
+    "question": "At $300, 40 baskets sell; at $250, 60 sell. Which conclusion is supported?",
+    "options": [
+      "The lower price caused all of the increase, because no other condition can affect sales when a price changes.",
+      "More baskets sold at the lower price, but other changes should be checked before treating price as the only cause.",
+      "Demand was lower at $250, because a greater number of sales means fewer buyers still wanted baskets.",
+      "Supply was unchanged on both days, because the table reports prices and sales rather than production."
     ],
-    correctAnswer: 2,
-    explanation: `The economics of early childhood investment: James Heckman's research shows early childhood is when human capital is most efficiently built. Prevention is cheaper than remediation — investing early reduces later costs in remedial education, healthcare, and the justice system.`
+    "correctAnswer": 1,
+    "explanation": "The sales pattern is consistent with greater quantity demanded at a lower price, but other changing factors should be checked."
   },
   {
-    id: 35,
-    type: "economics",
-    skill: "Market Failure",
-    question: `Why might PRIVATE BUSINESSES fail to provide clean water to all rural Jamaicans, even if it were profitable?`,
-    options: [
-      "Private businesses can always provide water",
-      "Governments should never provide water",
-      "Private businesses pursue profit — rural communities with low incomes may not generate sufficient profit to justify investment in remote areas. Water is also a public good (essential for life) with significant externalities. Market failure in essential services justifies government provision or regulation",
-      "Water should only be provided by businesses",
+    "id": 35,
+    "type": "economics",
+    "skill": "Trade Decision",
+    "question": "A bakery can use imported fruit at $900 per box or local fruit at $850 with similar quality. What should it compare beyond price?",
+    "options": [
+      "Choose the imported fruit because the higher price proves it has better quality and more reliable delivery.",
+      "Choose the local fruit because its lower price makes quality, quantity, and delivery conditions irrelevant.",
+      "Choose whichever supplier is nearer, because transport distance alone determines the bakery’s full cost.",
+      "Compare quality, usable quantity, reliability, transport, and effects on local producers in addition to price."
     ],
-    correctAnswer: 2,
-    explanation: `Market failure analysis: private markets may not provide essential services to poor or remote communities because profitability is insufficient. Water's public good character (essential for life, cannot be substituted) and the negative externalities of its absence (disease, economic loss) justify government intervention.`
+    "correctAnswer": 3,
+    "explanation": "A sound purchasing decision compares total costs, reliability, quality, and wider effects."
   },
   {
-    id: 36,
-    type: "economics",
-    skill: "Policy Consequences",
-    question: `Jamaica reduces its import tariffs on foreign agricultural products as part of a trade agreement. What are the LIKELY consequences for Jamaican farmers?`,
-    options: [
-      "All farmers benefit immediately",
-      "Tariff reduction always helps developing countries",
-      "Local farmers face cheaper foreign competition — many may not survive unless they can reduce costs or find niche markets. Consumers benefit from lower food prices, but farm employment and food security may suffer — the trade-off between consumer benefit and producer protection is a genuine policy dilemma",
-      "Trade agreements have no consequences for farmers",
+    "id": 36,
+    "type": "economics",
+    "skill": "Tax Data",
+    "question": "A tax raises $5 million. A clinic upgrade costs $3 million and road repairs cost $2 million. What does the calculation show?",
+    "options": [
+      "The clinic alone would use all $5 million because health services must be funded before road repairs.",
+      "The two projects would require $10 million because each stated cost should be counted twice.",
+      "The listed $3 million and $2 million projects total $5 million, so the revenue could cover both if no other costs apply.",
+      "The revenue cannot support both because tax money may fund only one kind of public service at a time."
     ],
-    correctAnswer: 2,
-    explanation: `Trade liberalisation creates winners (consumers, export industries) and losers (import-competing local producers). Jamaican farmers facing cheap imports from subsidised US or European agriculture is a real challenge — managing this transition requires adjustment support, not just trade liberalisation alone.`
+    "correctAnswer": 2,
+    "explanation": "The projects total $5 million, equal to the stated revenue, though actual planning may include other costs."
   },
   {
-    id: 37,
-    type: "economics",
-    skill: "Policy Evaluation",
-    question: `The Jamaican government offers tax breaks to foreign hotel chains to invest in tourism. A critic argues this 'gives away Jamaica's natural resources for little benefit.' Which analysis is MOST complete?`,
-    options: [
-      "Tax breaks are always good policy",
-      "Critics are always wrong about tax policy",
-      "Tax breaks attract investment and create jobs (benefit), but tax revenue forgone cannot fund schools and hospitals (cost). The key question is whether tourism jobs, training, and infrastructure created outweigh the tax revenue lost — policy should include requirements for local employment and supply chain linkages",
-      "Foreign investment is always harmful",
+    "id": 37,
+    "type": "economics",
+    "skill": "Tourism Data",
+    "question": "Visitor spending rises, but beach-cleaning costs rise faster. Which response uses both facts?",
+    "options": [
+      "Continue current tourism practices because higher visitor spending will eventually pay for beach cleaning without planning.",
+      "Preserve useful tourism activity while using fair charges, budgets, and stronger waste systems to manage rising costs.",
+      "End tourism immediately because environmental and employment benefits cannot be considered in the same decision.",
+      "Reduce beach cleaning so its cost remains below visitor spending, even if waste accumulates near the shore."
     ],
-    correctAnswer: 2,
-    explanation: `This is a classic cost-benefit policy analysis. Tax incentives have real benefits (investment, jobs) and real costs (forgone revenue, profit repatriation). The most sophisticated analysis asks whether the deal is structured to maximise local benefit — not just whether foreign investment is good or bad in principle.`
+    "correctAnswer": 1,
+    "explanation": "The response should preserve benefits while addressing the growing environmental cost."
   },
   {
-    id: 38,
-    type: "economics",
-    skill: "Economic Reasoning — Trade-off",
-    question: `Jamaica's government must allocate a limited budget. It can fund: (A) a new highway to a tourist resort, or (B) repairs to primary schools in rural areas. Which allocation framework BEST guides this decision?`,
-    options: [
-      "Always choose tourism infrastructure",
-      "Always choose education",
-      "The decision requires cost-benefit analysis: the highway may generate more tourism revenue but benefits the private sector; school repairs directly benefit thousands of children and have long-term economic returns through human capital development. Equity, long-term development, and community need should weigh alongside immediate economic return",
-      "Flip a coin — both are equally important",
+    "id": 38,
+    "type": "economics",
+    "skill": "Savings Data",
+    "question": "A saver deposits $20,000. One account earns $800 with $100 fees; another earns $650 with no fees. Which has the higher net gain?",
+    "options": [
+      "The second account, because receiving no fees means the full $650 is greater than the first account’s $800.",
+      "The first account by $150, because fees should be subtracted from the second account rather than the first.",
+      "Both accounts, because interest and fees must be ignored when comparing the original $20,000 deposit.",
+      "The first account by $50, because it nets $700 after fees while the second account nets $650."
     ],
-    correctAnswer: 2,
-    explanation: `Public investment decisions require analysis across multiple dimensions: immediate economic return, long-term development value, equity (who benefits), and community need. Education investment has proven long-term economic returns through human capital — not just immediate GDP impact.`
+    "correctAnswer": 3,
+    "explanation": "The first nets $700 and the second $650, so the first is higher by $50."
   },
   {
-    id: 39,
-    type: "economics",
-    skill: "Sustainability Analysis",
-    question: `A bauxite company argues its mining creates 1,000 jobs and $50 million in tax revenue for Jamaica. An environmental group argues mining destroys watersheds permanently. Which FRAMEWORK best resolves this debate?`,
-    options: [
-      "Jobs always matter more than environment",
-      "Environment always matters more than jobs",
-      "True cost-benefit analysis must include: the economic value of the watershed's ecosystem services (water supply, flood protection) over its lifetime vs. the jobs and revenue over the mine's lifetime. If watershed value exceeds mining value, protection is economically rational, not just environmentally romantic",
-      "Only the government can decide",
+    "id": 39,
+    "type": "economics",
+    "skill": "Cooperative Data",
+    "question": "Five farmers each pay $4,000 for transport. Shared transport costs $15,000. How much do they save together?",
+    "options": [
+      "$1,000, because the $5,000 difference should be divided among the five farmers before reporting group savings.",
+      "$5,000, because separate transport totals $20,000 and shared transport costs $15,000.",
+      "$15,000, because the shared transport price is the amount saved from separate arrangements.",
+      "$20,000, because adding five individual payments gives the saving rather than the original cost."
     ],
-    correctAnswer: 2,
-    explanation: `Environmental economics frames this as a genuine economic comparison: ecosystem services (clean water for millions, flood protection, fisheries) have economic value that can be estimated. When this exceeds mining benefits, environmental protection is economically rational. This dissolves the false economy-vs-environment binary.`
+    "correctAnswer": 1,
+    "explanation": "Separate transport totals $20,000; shared transport saves $5,000."
   },
   {
-    id: 40,
-    type: "economics",
-    skill: "International Economics",
-    question: `Jamaica's tourism industry earns US$3 billion annually but much of this 'leaks' out of the economy. Explain what leakage means and how it REDUCES the benefit to Jamaicans.`,
-    options: [
-      "Leakage means tourists steal from Jamaica",
-      "All tourism revenue stays in Jamaica",
-      "Leakage occurs when tourism revenue leaves Jamaica through: profits remitted by foreign hotel owners, imported food and supplies used by resorts, foreign staff employed by hotels, and savings by foreign investors. Every dollar that leaks out is a dollar that doesn't circulate in Jamaica's economy",
-      "Leakage only affects the government",
+    "id": 40,
+    "type": "economics",
+    "skill": "Opportunity Cost",
+    "question": "A council spends its only $2 million on a market roof instead of a playground. What is the opportunity cost?",
+    "options": [
+      "The $2 million spent on the market roof, because opportunity cost is always the price of the chosen project.",
+      "All future playground spending, because choosing the roof prevents the council from ever building a playground.",
+      "The benefits of the playground—the next-best alternative surrendered when the funds were used for the roof.",
+      "The number of vendors using the market, because users determine what the council gave up."
     ],
-    correctAnswer: 2,
-    explanation: `Tourism leakage is a key concept in development economics: gross tourism revenue substantially overstates net benefit. Building local supply chains, Jamaican ownership of hotels, and employing local staff all reduce leakage and increase the share of tourism revenue that stays in and circulates through the local economy.`
+    "correctAnswer": 2,
+    "explanation": "Opportunity cost is the value of the next-best alternative forgone—in this case, the playground benefits."
   }
 ]
 
@@ -604,13 +605,10 @@ export default function G5SsDiff8MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]                 = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]               = useState(60 * 60)
+  const [attemptQuestions, setAttemptQuestions] = useState<Question[]>([])
 
-  const availableQuestions = isPremium ? g5SsDiff8Questions : g5SsDiff8Questions.slice(0, FREE_QUESTION_LIMIT)
-  const totalQuestions = availableQuestions.length
-
-  useEffect(() => {
-    if (answers.length !== totalQuestions) setAnswers(new Array(totalQuestions).fill(null))
-  }, [totalQuestions, answers.length])
+  const availableQuestions = attemptQuestions
+  const totalQuestions = started ? availableQuestions.length : isPremium ? g5SsDiff8Questions.length : FREE_QUESTION_LIMIT
 
   const formatTime = useCallback((s: number) => {
     const m = Math.floor(s / 60)
@@ -624,6 +622,18 @@ export default function G5SsDiff8MockTest() {
   }, [started, showResults])
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
+
+  const startTest = () => {
+    const preparedQuestions = isPremium
+      ? prepareSocialStudiesAssessment(g5SsDiff8Questions)
+      : prepareSocialStudiesPreview(g5SsDiff8Questions, FREE_QUESTION_LIMIT)
+    setAttemptQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    setStarted(true)
+  }
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
 
@@ -670,7 +680,7 @@ export default function G5SsDiff8MockTest() {
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setAttemptQuestions([]); setAnswers([]); setTimeLeft(60 * 60)
   }
 
   const q = availableQuestions[currentQuestion]
@@ -720,7 +730,7 @@ export default function G5SsDiff8MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
           </CardContent>
         </Card>
       </main>
