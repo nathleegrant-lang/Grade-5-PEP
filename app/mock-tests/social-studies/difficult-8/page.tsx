@@ -231,9 +231,9 @@ const g5SsDiff8Questions: Question[] = [
     "skill": "Settlement Planning",
     "question": "Site X is flat and near water but floods often. Site Y is higher and safer but lacks a road. What is the best planning conclusion?",
     "options": [
-      "Choose Site A because proximity to work makes recurring flood risk less important than travel time.",
-      "Choose Site B because safer land means road access and service costs no longer require investigation.",
-      "Compare Site A’s flood-mitigation costs with Site B’s road-access costs and the long-term safety of each.",
+      "Choose Site X because proximity to work makes recurring flood risk less important than travel time.",
+      "Choose Site Y because safer land means road access and service costs no longer require investigation.",
+      "Compare Site X’s flood-mitigation costs with Site Y’s road-access costs and the long-term safety of each.",
       "Reject both sites because a settlement cannot be planned where either transport or hazard improvements are needed."
     ],
     "correctAnswer": 2,
