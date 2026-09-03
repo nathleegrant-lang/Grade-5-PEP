@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/auth-context"
+import { prepareSocialStudiesAssessment, prepareSocialStudiesPreview } from "@/lib/social-studies-assessment-engine"
 
 const FREE_QUESTION_LIMIT = 5
 
@@ -29,564 +30,564 @@ interface Question {
 
 const g5SsMix2Questions: Question[] = [
   {
-    id: 1,
-    type: "history",
-    skill: "Recall",
-    question: `Which National Hero founded the Universal Negro Improvement Association (UNIA)?`,
-    options: [
+    "id": 1,
+    "type": "history",
+    "skill": "Recall",
+    "question": "Which National Hero founded the Universal Negro Improvement Association (UNIA)?",
+    "options": [
       "Norman Manley",
       "Paul Bogle",
       "Sam Sharpe",
-      "Marcus Garvey",
+      "Marcus Garvey"
     ],
-    correctAnswer: 3,
-    explanation: `Marcus Mosiah Garvey founded the UNIA in 1914, championing Black pride, Pan-Africanism, and self-reliance for Black people globally.`
+    "correctAnswer": 3,
+    "explanation": "Marcus Mosiah Garvey founded the UNIA in 1914, championing Black pride, Pan-Africanism, and self-reliance for Black people globally."
   },
   {
-    id: 2,
-    type: "history",
-    skill: "Recall",
-    question: `Who was the ONLY FEMALE National Hero of Jamaica?`,
-    options: [
+    "id": 2,
+    "type": "history",
+    "skill": "Recall",
+    "question": "Who was the ONLY FEMALE National Hero of Jamaica?",
+    "options": [
       "Mary Seacole",
       "Nanny of the Maroons",
       "Louise Bennett",
-      "Millicent Fawcett",
+      "Millicent Fawcett"
     ],
-    correctAnswer: 1,
-    explanation: `Queen Nanny led the Windward Maroons in guerrilla resistance against the British in the early 18th century and is Jamaica's only female National Hero.`
+    "correctAnswer": 1,
+    "explanation": "Queen Nanny led the Windward Maroons in guerrilla resistance against the British in the early 18th century and is Jamaica's only female National Hero."
   },
   {
-    id: 3,
-    type: "history",
-    skill: "Recall",
-    question: `The Taino people called Jamaica 'Xaymaca.' What does this name mean?`,
-    options: [
+    "id": 3,
+    "type": "history",
+    "skill": "Recall",
+    "question": "The Taino people called Jamaica 'Xaymaca.' What does this name mean?",
+    "options": [
       "Island of Sunshine",
       "Land of Wood and Water",
       "Place of Many Fruits",
-      "Home of the Strong",
+      "Home of the Strong"
     ],
-    correctAnswer: 1,
-    explanation: `Xaymaca means 'Land of Wood and Water,' describing Jamaica's lush forests and abundant rivers — a Taino description of their island home.`
+    "correctAnswer": 1,
+    "explanation": "Xaymaca means 'Land of Wood and Water,' describing Jamaica's lush forests and abundant rivers — a Taino description of their island home."
   },
   {
-    id: 4,
-    type: "history",
-    skill: "Analysis",
-    question: `HOW did the Triangular Trade connect Europe, Africa, and the Americas?`,
-    options: [
+    "id": 4,
+    "type": "history",
+    "skill": "Analysis",
+    "question": "HOW did the Triangular Trade connect Europe, Africa, and the Americas?",
+    "options": [
       "Europe sent enslaved people to Africa; Africa sent goods to the Americas",
       "It was a shipping route with no fixed direction",
       "Europe sent manufactured goods to Africa; Africa supplied enslaved people to the Americas; the Americas sent raw materials (sugar, tobacco) back to Europe",
-      "The Americas traded directly with Europe only",
+      "The Americas traded directly with Europe only"
     ],
-    correctAnswer: 2,
-    explanation: `The Triangular Trade was a three-cornered system: goods from Europe traded for enslaved people in Africa; enslaved Africans sent to the Americas; raw materials produced by their unpaid labour sent back to Europe.`
+    "correctAnswer": 2,
+    "explanation": "The Triangular Trade was a three-cornered system: goods from Europe traded for enslaved people in Africa; enslaved Africans sent to the Americas; raw materials produced by their unpaid labour sent back to Europe."
   },
   {
-    id: 5,
-    type: "history",
-    skill: "Cause & Effect",
-    question: `WHY did thousands of Jamaicans migrate to Britain in the 1950s and 1960s?`,
-    options: [
+    "id": 5,
+    "type": "history",
+    "skill": "Cause & Effect",
+    "question": "WHY did thousands of Jamaicans migrate to Britain in the 1950s and 1960s?",
+    "options": [
       "Britain expelled Jamaicans from Jamaica",
       "Jamaicans were fleeing natural disasters",
       "Britain actively recruited Caribbean workers to fill post-war labour shortages — Jamaicans went seeking economic opportunity and better living standards",
-      "Jamaicans were required to migrate by law",
+      "Jamaicans were required to migrate by law"
     ],
-    correctAnswer: 2,
-    explanation: `The 1948 British Nationality Act gave Commonwealth citizens the right to live in Britain. With Jamaica offering limited post-war opportunities and Britain recruiting workers, the Windrush generation made the journey.`
+    "correctAnswer": 2,
+    "explanation": "The 1948 British Nationality Act gave Commonwealth citizens the right to live in Britain. With Jamaica offering limited post-war opportunities and Britain recruiting workers, the Windrush generation made the journey."
   },
   {
-    id: 6,
-    type: "history",
-    skill: "Cultural Analysis",
-    question: `How does the JONKANOO festival demonstrate cultural resilience?`,
-    options: [
+    "id": 6,
+    "type": "history",
+    "skill": "Cultural Analysis",
+    "question": "How does the JONKANOO festival demonstrate cultural resilience?",
+    "options": [
       "Jonkanoo was created by the British",
       "It has no African roots",
       "Jonkanoo preserved West African masquerade traditions under slavery — enslaved people maintained cultural identity through this festival even when denied almost everything else",
-      "Jonkanoo was created after emancipation",
+      "Jonkanoo was created after emancipation"
     ],
-    correctAnswer: 2,
-    explanation: `Cultural resilience: enslaved Africans found ways to maintain community and cultural expression. Jonkanoo preserved African spiritual and artistic traditions under the eyes of enslavers, surviving into the modern era.`
+    "correctAnswer": 2,
+    "explanation": "Cultural resilience: enslaved Africans found ways to maintain community and cultural expression. Jonkanoo preserved African spiritual and artistic traditions under the eyes of enslavers, surviving into the modern era."
   },
   {
-    id: 7,
-    type: "history",
-    skill: "Significance",
-    question: `Why is 1944 — the year of Universal Adult Suffrage — a landmark in Jamaican history?`,
-    options: [
+    "id": 7,
+    "type": "history",
+    "skill": "Significance",
+    "question": "Why is 1944 — the year of Universal Adult Suffrage — a landmark in Jamaican history?",
+    "options": [
       "Jamaica gained independence in 1944",
       "1944 was when slavery ended",
       "For the first time, ALL adults could vote regardless of property, literacy, or gender — ordinary Jamaicans gained real political power for the first time",
-      "1944 is not particularly significant",
+      "1944 is not particularly significant"
     ],
-    correctAnswer: 2,
-    explanation: `Before 1944, voting was limited by property and literacy requirements that excluded most Jamaicans. Universal suffrage democratised politics and gave ordinary people the power to elect governments accountable to them.`
+    "correctAnswer": 2,
+    "explanation": "Before 1944, voting was limited by property and literacy requirements that excluded most Jamaicans. Universal suffrage democratised politics and gave ordinary people the power to elect governments accountable to them."
   },
   {
-    id: 8,
-    type: "history",
-    skill: "Evaluating Sources",
-    question: `A planter's diary from 1825 says his enslaved workers are 'happy and content.' Why should a historian be deeply sceptical?`,
-    options: [
+    "id": 8,
+    "type": "history",
+    "skill": "Evaluating Sources",
+    "question": "A planter's diary from 1825 says his enslaved workers are 'happy and content.' Why should a historian be deeply sceptical?",
+    "options": [
       "Planters were always honest",
       "Diaries are the most reliable sources",
       "The planter had every incentive to believe or claim his workers were content — enslaved people could not safely express dissatisfaction. This diary reflects the planter's self-image, not the enslaved people's reality",
-      "Planters knew their workers best",
+      "Planters knew their workers best"
     ],
-    correctAnswer: 2,
-    explanation: `Source evaluation: the power relationship made honest expression impossible for enslaved people. The planter's account tells us about his self-perception or public image, not the lived experience of the enslaved.`
+    "correctAnswer": 2,
+    "explanation": "Source evaluation: the power relationship made honest expression impossible for enslaved people. The planter's account tells us about his self-perception or public image, not the lived experience of the enslaved."
   },
   {
-    id: 9,
-    type: "history",
-    skill: "Synthesis",
-    question: `What connects the MAROON WAR, the BAPTIST WAR, and the MORANT BAY REBELLION?`,
-    options: [
+    "id": 9,
+    "type": "history",
+    "skill": "Synthesis",
+    "question": "What connects the MAROON WAR, the BAPTIST WAR, and the MORANT BAY REBELLION?",
+    "options": [
       "They were all defeated with no consequences",
       "They were all in the same year",
       "All three were organised acts of resistance against oppression — demonstrating that Jamaicans consistently refused to accept injustice passively across different eras and circumstances",
-      "They were all led by the same leader",
+      "They were all led by the same leader"
     ],
-    correctAnswer: 2,
-    explanation: `A thread of resistance runs through Jamaican history: different eras, different methods, different leaders — but the same refusal to accept oppression. This continuity of resistance is central to Jamaican identity.`
+    "correctAnswer": 2,
+    "explanation": "A thread of resistance runs through Jamaican history: different eras, different methods, different leaders — but the same refusal to accept oppression. This continuity of resistance is central to Jamaican identity."
   },
   {
-    id: 10,
-    type: "history",
-    skill: "Legacy",
-    question: `How does Jamaica's PLANTATION LEGACY continue to shape the country TODAY?`,
-    options: [
+    "id": 10,
+    "type": "history",
+    "skill": "Legacy",
+    "question": "How does Jamaica's PLANTATION LEGACY continue to shape the country TODAY?",
+    "options": [
       "The plantation era ended completely in 1838",
       "Jamaica has fully overcome its colonial past",
       "Concentrated land ownership, wealth inequality, dependence on agricultural and tourism exports, and limited industrial development all trace directly to the plantation economy — legacies that still challenge Jamaica's development",
-      "The plantation era made Jamaica one of the world's wealthiest nations",
+      "The plantation era made Jamaica one of the world's wealthiest nations"
     ],
-    correctAnswer: 2,
-    explanation: `Historical legacies are not just past events — land ownership patterns, export dependence, and social inequalities rooted in slavery continue to shape Jamaica's economic and social landscape.`
+    "correctAnswer": 2,
+    "explanation": "Historical legacies are not just past events — land ownership patterns, export dependence, and social inequalities rooted in slavery continue to shape Jamaica's economic and social landscape."
   },
   {
-    id: 11,
-    type: "geography",
-    skill: "Recall",
-    question: `Which county is located in WESTERN Jamaica?`,
-    options: [
+    "id": 11,
+    "type": "geography",
+    "skill": "Recall",
+    "question": "Which county is located in WESTERN Jamaica?",
+    "options": [
       "Surrey",
       "Middlesex",
       "Cornwall",
-      "Portland",
+      "Portland"
     ],
-    correctAnswer: 2,
-    explanation: `Cornwall is the westernmost county, containing parishes including Westmoreland, St. James (Montego Bay), Hanover, and Trelawny.`
+    "correctAnswer": 2,
+    "explanation": "Cornwall is the westernmost county, containing parishes including Westmoreland, St. James (Montego Bay), Hanover, and Trelawny."
   },
   {
-    id: 12,
-    type: "geography",
-    skill: "Recall",
-    question: `What is the CAPITAL CITY of Jamaica?`,
-    options: [
+    "id": 12,
+    "type": "geography",
+    "skill": "Recall",
+    "question": "What is the CAPITAL CITY of Jamaica?",
+    "options": [
       "Montego Bay",
       "Spanish Town",
       "Portmore",
-      "Kingston",
+      "Kingston"
     ],
-    correctAnswer: 3,
-    explanation: `Kingston is Jamaica's capital and largest city, located on the southeastern coast.`
+    "correctAnswer": 3,
+    "explanation": "Kingston is Jamaica's capital and largest city, located on the southeastern coast."
   },
   {
-    id: 13,
-    type: "geography",
-    skill: "Map Skills",
-    question: `On a topographic map, CLOSELY SPACED contour lines indicate:`,
-    options: [
+    "id": 13,
+    "type": "geography",
+    "skill": "Map Skills",
+    "question": "On a topographic map, CLOSELY SPACED contour lines indicate:",
+    "options": [
       "Very flat terrain",
       "A river valley",
       "Very steep terrain where elevation changes rapidly over a short distance",
-      "An urban area",
+      "An urban area"
     ],
-    correctAnswer: 2,
-    explanation: `The spacing of contour lines indicates slope steepness. Close together = steep; far apart = gentle slope.`
+    "correctAnswer": 2,
+    "explanation": "The spacing of contour lines indicates slope steepness. Close together = steep; far apart = gentle slope."
   },
   {
-    id: 14,
-    type: "geography",
-    skill: "Cause & Effect",
-    question: `A town's main river is polluted by a factory located upstream. What is the MOST IMMEDIATE impact on the town?`,
-    options: [
+    "id": 14,
+    "type": "geography",
+    "skill": "Cause & Effect",
+    "question": "A town's main river is polluted by a factory located upstream. What is the MOST IMMEDIATE impact on the town?",
+    "options": [
       "The river becomes cleaner downstream",
       "No impact — rivers clean themselves",
       "The town's water supply is threatened — contaminated water can cause health problems for residents and kill fish that fishing families depend on",
-      "Only the factory is affected",
+      "Only the factory is affected"
     ],
-    correctAnswer: 2,
-    explanation: `Upstream pollution flows downstream. Communities below a polluting source face contaminated water for drinking, bathing, irrigation, and fishing — immediate and serious consequences.`
+    "correctAnswer": 2,
+    "explanation": "Upstream pollution flows downstream. Communities below a polluting source face contaminated water for drinking, bathing, irrigation, and fishing — immediate and serious consequences."
   },
   {
-    id: 15,
-    type: "geography",
-    skill: "Environmental Analysis",
-    question: `WHY is the COCKPIT COUNTRY in central Jamaica important to protect?`,
-    options: [
+    "id": 15,
+    "type": "geography",
+    "skill": "Environmental Analysis",
+    "question": "WHY is the COCKPIT COUNTRY in central Jamaica important to protect?",
+    "options": [
       "It has no significance",
       "It is the flattest area of Jamaica",
       "It is a unique limestone (karst) landscape with extraordinary biodiversity, underground rivers, Maroon heritage, and watersheds that supply water to surrounding communities",
-      "It is where most Jamaicans live",
+      "It is where most Jamaicans live"
     ],
-    correctAnswer: 2,
-    explanation: `The Cockpit Country is ecologically, culturally, and hydrologically vital — its unique geology supports endemic species, its forests generate water, and its valleys sheltered the Maroons. It is internationally recognised as a priority for protection.`
+    "correctAnswer": 2,
+    "explanation": "The Cockpit Country is ecologically, culturally, and hydrologically vital — its unique geology supports endemic species, its forests generate water, and its valleys sheltered the Maroons. It is internationally recognised as a priority for protection."
   },
   {
-    id: 16,
-    type: "geography",
-    skill: "Spatial Reasoning",
-    question: `WHY do MOST of Jamaica's tourist resorts cluster along the NORTH COAST?`,
-    options: [
+    "id": 16,
+    "type": "geography",
+    "skill": "Spatial Reasoning",
+    "question": "WHY do MOST of Jamaica's tourist resorts cluster along the NORTH COAST?",
+    "options": [
       "North coast is closer to the USA",
       "North coast has a cooler climate",
       "The north coast has sandy beaches, clear turquoise water, and scenic mountain backdrops — natural assets that make it the classic Caribbean tourism product",
-      "North coast has better roads",
+      "North coast has better roads"
     ],
-    correctAnswer: 2,
-    explanation: `Tourism geography follows physical geography: beaches, clear water, and scenic landscapes drive resort location. The north coast's natural assets make it Jamaica's prime tourism zone.`
+    "correctAnswer": 2,
+    "explanation": "Tourism geography follows physical geography: beaches, clear water, and scenic landscapes drive resort location. The north coast's natural assets make it Jamaica's prime tourism zone."
   },
   {
-    id: 17,
-    type: "geography",
-    skill: "Caribbean",
-    question: `Which country is Jamaica's NEAREST neighbour?`,
-    options: [
+    "id": 17,
+    "type": "geography",
+    "skill": "Caribbean",
+    "question": "Which country is Jamaica's NEAREST neighbour?",
+    "options": [
       "Haiti",
       "Puerto Rico",
       "Trinidad",
-      "Cuba",
+      "Cuba"
     ],
-    correctAnswer: 3,
-    explanation: `Cuba lies approximately 145 km north of Jamaica — its nearest Caribbean neighbour.`
+    "correctAnswer": 3,
+    "explanation": "Cuba lies approximately 145 km north of Jamaica — its nearest Caribbean neighbour."
   },
   {
-    id: 18,
-    type: "geography",
-    skill: "Environmental Impact",
-    question: `Rising sea levels threaten Jamaica's coastlines. Which communities face the GREATEST risk?`,
-    options: [
+    "id": 18,
+    "type": "geography",
+    "skill": "Environmental Impact",
+    "question": "Rising sea levels threaten Jamaica's coastlines. Which communities face the GREATEST risk?",
+    "options": [
       "Mountain communities",
       "All communities equally",
       "Low-lying coastal communities — like parts of Portmore and Kingston — face the greatest risk of flooding, saltwater intrusion, and loss of beaches",
-      "Only tourist resorts are threatened",
+      "Only tourist resorts are threatened"
     ],
-    correctAnswer: 2,
-    explanation: `Differential vulnerability: sea level rise hits hardest where land is lowest. Portmore, parts of Kingston, and beach resort areas face the most serious threats from flooding and saltwater intrusion.`
+    "correctAnswer": 2,
+    "explanation": "Differential vulnerability: sea level rise hits hardest where land is lowest. Portmore, parts of Kingston, and beach resort areas face the most serious threats from flooding and saltwater intrusion."
   },
   {
-    id: 19,
-    type: "geography",
-    skill: "Policy Analysis",
-    question: `A government considers building a major dam on Jamaica's Black River. What factors should it MOST carefully consider?`,
-    options: [
+    "id": 19,
+    "type": "geography",
+    "skill": "Policy Analysis",
+    "question": "A government considers building a major dam on Jamaica's Black River. What factors should it MOST carefully consider?",
+    "options": [
       "Only the cost of construction",
       "Only the amount of electricity generated",
       "The economic benefits (hydropower, water supply, flood control) weighed against the costs: flooding of upstream communities and farmland, disruption of the river ecosystem, and effects on the Black River Morass wetland downstream",
-      "Only the views of the construction company",
+      "Only the views of the construction company"
     ],
-    correctAnswer: 2,
-    explanation: `Dam decision-making requires holistic cost-benefit analysis: power generation and water supply benefits must be weighed against community displacement, ecological disruption, and downstream environmental effects.`
+    "correctAnswer": 2,
+    "explanation": "Dam decision-making requires holistic cost-benefit analysis: power generation and water supply benefits must be weighed against community displacement, ecological disruption, and downstream environmental effects."
   },
   {
-    id: 20,
-    type: "geography",
-    skill: "Synthesis",
-    question: `A geographer says 'geography shapes history, and history shapes geography.' Give the BEST example of this from Jamaica.`,
-    options: [
+    "id": 20,
+    "type": "geography",
+    "skill": "Synthesis",
+    "question": "A geographer says 'geography shapes history, and history shapes geography.' Give the BEST example of this from Jamaica.",
+    "options": [
       "Geography and history are separate",
       "Only history matters in Jamaica",
       "The Blue Mountains provided refuge for Maroon communities (geography shaped history); the Maroons' farming, paths, and land use changed the mountain landscape over centuries (history reshaped geography) — both forces act on each other",
-      "Geography never changes",
+      "Geography never changes"
     ],
-    correctAnswer: 2,
-    explanation: `Human-environment interaction is bidirectional. The Blue Mountains determined Maroon survival strategies (geography shaped history), and Maroon occupation over centuries changed vegetation, paths, and land use (history shaped geography).`
+    "correctAnswer": 2,
+    "explanation": "Human-environment interaction is bidirectional. The Blue Mountains determined Maroon survival strategies (geography shaped history), and Maroon occupation over centuries changed vegetation, paths, and land use (history shaped geography)."
   },
   {
-    id: 21,
-    type: "civics",
-    skill: "Recall",
-    question: `Jamaica's Parliament consists of which TWO houses?`,
-    options: [
+    "id": 21,
+    "type": "civics",
+    "skill": "Recall",
+    "question": "Jamaica's Parliament consists of which TWO houses?",
+    "options": [
       "The Cabinet and Senate",
       "The House of Representatives and Senate",
       "The Senate and Judiciary",
-      "The House of Representatives and Cabinet",
+      "The House of Representatives and Cabinet"
     ],
-    correctAnswer: 1,
-    explanation: `Jamaica's Parliament has two chambers: the elected House of Representatives and the appointed Senate.`
+    "correctAnswer": 1,
+    "explanation": "Jamaica's Parliament has two chambers: the elected House of Representatives and the appointed Senate."
   },
   {
-    id: 22,
-    type: "civics",
-    skill: "Recall",
-    question: `What document is the SUPREME LAW of Jamaica?`,
-    options: [
+    "id": 22,
+    "type": "civics",
+    "skill": "Recall",
+    "question": "What document is the SUPREME LAW of Jamaica?",
+    "options": [
       "The Manifesto of the ruling party",
       "The Electoral Act",
       "Jamaica's Constitution",
-      "The Order of National Hero Act",
+      "The Order of National Hero Act"
     ],
-    correctAnswer: 2,
-    explanation: `The Constitution is Jamaica's supreme law — all other laws must conform to it, and it cannot be easily changed.`
+    "correctAnswer": 2,
+    "explanation": "The Constitution is Jamaica's supreme law — all other laws must conform to it, and it cannot be easily changed."
   },
   {
-    id: 23,
-    type: "civics",
-    skill: "Application",
-    question: `Members of the Senate are appointed rather than elected. Who appoints them?`,
-    options: [
+    "id": 23,
+    "type": "civics",
+    "skill": "Application",
+    "question": "Members of the Senate are appointed rather than elected. Who appoints them?",
+    "options": [
       "The Governor General alone",
       "Jamaican citizens in a special vote",
-      "13 by the Prime Minister and 8 by the Leader of the Opposition — all 21 are appointed",
-      "The Chief Justice",
+      "The Governor-General formally appoints all 21: 13 on the advice of the Prime Minister and 8 on the advice of the Leader of the Opposition",
+      "The Chief Justice"
     ],
-    correctAnswer: 2,
-    explanation: `The 21 senators are all appointed: 13 by the Prime Minister and 8 by the Leader of the Opposition, on the advice of the Governor General.`
+    "correctAnswer": 2,
+    "explanation": "All 21 Senators are formally appointed by the Governor-General: 13 on the advice of the Prime Minister and 8 on the advice of the Leader of the Opposition."
   },
   {
-    id: 24,
-    type: "civics",
-    skill: "Rights Application",
-    question: `A school refuses to teach a student because her family follows a different religion. Which right is violated?`,
-    options: [
+    "id": 24,
+    "type": "civics",
+    "skill": "Rights Application",
+    "question": "A school refuses to teach a student because her family follows a different religion. Which right is violated?",
+    "options": [
       "The right to work",
       "The right to freedom of movement",
       "The right to education combined with freedom of religion — access to education cannot be withheld on religious grounds",
-      "The right to property",
+      "The right to property"
     ],
-    correctAnswer: 2,
-    explanation: `Both freedom of religion and the right to education are protected rights. Discriminating in education access based on religion violates both.`
+    "correctAnswer": 2,
+    "explanation": "Both freedom of religion and the right to education are protected rights. Discriminating in education access based on religion violates both."
   },
   {
-    id: 25,
-    type: "civics",
-    skill: "Government Analysis",
-    question: `WHY does Jamaica's Auditor General prepare annual reports?`,
-    options: [
+    "id": 25,
+    "type": "civics",
+    "skill": "Government Analysis",
+    "question": "WHY does Jamaica's Auditor General prepare annual reports?",
+    "options": [
       "To embarrass the government",
       "For historical records only",
       "To independently assess whether government agencies use public funds legally, efficiently, and for intended purposes — a key accountability mechanism",
-      "To set the government's budget",
+      "To set the government's budget"
     ],
-    correctAnswer: 2,
-    explanation: `The Auditor General provides independent financial oversight of government spending, identifying waste, irregularities, or misuse of public funds and reporting to Parliament.`
+    "correctAnswer": 2,
+    "explanation": "The Auditor General provides independent financial oversight of government spending, identifying waste, irregularities, or misuse of public funds and reporting to Parliament."
   },
   {
-    id: 26,
-    type: "civics",
-    skill: "CARICOM Analysis",
-    question: `The CARICOM Single Market allows Jamaicans to work in other member states. Which condition applies to this right?`,
-    options: [
+    "id": 26,
+    "type": "civics",
+    "skill": "CARICOM Analysis",
+    "question": "The CARICOM Single Market allows Jamaicans to work in other member states. Which condition applies to this right?",
+    "options": [
       "All Jamaicans can work anywhere in CARICOM",
       "Only Jamaican citizens under 30 can migrate",
       "This right primarily applies to University graduates and workers in designated skilled occupations — not all workers have automatic freedom of movement",
-      "Only Jamaicans with university degrees from abroad",
+      "Only Jamaicans with university degrees from abroad"
     ],
-    correctAnswer: 2,
-    explanation: `CARICOM's free movement of persons initially covers specific skilled categories — university graduates, media workers, sports persons, artists, musicians, and others. It does not yet cover all workers equally.`
+    "correctAnswer": 2,
+    "explanation": "CARICOM's free movement of persons initially covers specific skilled categories — university graduates, media workers, sports persons, artists, musicians, and others. It does not yet cover all workers equally."
   },
   {
-    id: 27,
-    type: "civics",
-    skill: "Rights Analysis",
-    question: `A student argues: 'My rights end where your rights begin.' What does this mean?`,
-    options: [
+    "id": 27,
+    "type": "civics",
+    "skill": "Rights Analysis",
+    "question": "A student argues: 'My rights end where your rights begin.' What does this mean?",
+    "options": [
       "Rights are limitless",
       "Only one person can have rights at a time",
       "Rights are not absolute — exercising your rights must not infringe the equally valid rights of others. Rights exist within a framework of mutual respect and legal limits",
-      "Governments set all limits on rights",
+      "Governments set all limits on rights"
     ],
-    correctAnswer: 2,
-    explanation: `Rights are relational — freedom of speech doesn't entitle you to defame; freedom of movement doesn't entitle you to trespass. The concept of rights includes corresponding limits that protect others' rights.`
+    "correctAnswer": 2,
+    "explanation": "Rights are relational — freedom of speech doesn't entitle you to defame; freedom of movement doesn't entitle you to trespass. The concept of rights includes corresponding limits that protect others' rights."
   },
   {
-    id: 28,
-    type: "civics",
-    skill: "Constitutional Analysis",
-    question: `A government uses an 'emergency' to suspend elections for two years. What principle does this violate?`,
-    options: [
+    "id": 28,
+    "type": "civics",
+    "skill": "Constitutional Analysis",
+    "question": "A government uses an 'emergency' to suspend elections for two years. What principle does this violate?",
+    "options": [
       "It violates the right to work",
       "It is a reasonable emergency measure",
       "It violates the constitutional requirement for regular elections and the democratic principle that governments derive their authority from the consent of the governed",
-      "Only the UN can object to this",
+      "Only the UN can object to this"
     ],
-    correctAnswer: 2,
-    explanation: `Suspending elections undermines the foundation of democracy — governments govern by consent, expressed through regular elections. No emergency justifies indefinite denial of the public's right to choose their government.`
+    "correctAnswer": 2,
+    "explanation": "Suspending elections undermines the foundation of democracy — governments govern by consent, expressed through regular elections. No emergency justifies indefinite denial of the public's right to choose their government."
   },
   {
-    id: 29,
-    type: "civics",
-    skill: "Civic Reasoning",
-    question: `Why might CIVIC EDUCATION in schools be important for Jamaica's democracy?`,
-    options: [
+    "id": 29,
+    "type": "civics",
+    "skill": "Civic Reasoning",
+    "question": "Why might CIVIC EDUCATION in schools be important for Jamaica's democracy?",
+    "options": [
       "It is a waste of school time",
       "Children are not citizens",
       "Informed citizens who understand their rights, duties, and how government works are better equipped to participate, hold government accountable, and defend democratic institutions — democracy requires an engaged citizenry",
-      "Only adults need to know about democracy",
+      "Only adults need to know about democracy"
     ],
-    correctAnswer: 2,
-    explanation: `Democratic health depends on informed participation. Civic education builds the knowledge and skills for active citizenship — understanding rights, how to vote, and how to engage with institutions — which sustains democracy across generations.`
+    "correctAnswer": 2,
+    "explanation": "Democratic health depends on informed participation. Civic education builds the knowledge and skills for active citizenship — understanding rights, how to vote, and how to engage with institutions — which sustains democracy across generations."
   },
   {
-    id: 30,
-    type: "civics",
-    skill: "Rule of Law",
-    question: `WHY is it important that EVERYONE — including the Prime Minister — must obey the law?`,
-    options: [
+    "id": 30,
+    "type": "civics",
+    "skill": "Rule of Law",
+    "question": "WHY is it important that EVERYONE — including the Prime Minister — must obey the law?",
+    "options": [
       "Leaders should be above the law for efficiency",
       "Only ordinary citizens need to follow laws",
       "The rule of law applies equally to all — if leaders are above the law, citizens lose protection against state abuse and the entire concept of equal justice becomes meaningless",
-      "Only the Constitution applies to the Prime Minister",
+      "Only the Constitution applies to the Prime Minister"
     ],
-    correctAnswer: 2,
-    explanation: `The rule of law's power lies in its universality — when leaders are exempt, law becomes a tool of the powerful rather than a protection for all. Equal accountability, including of leaders, is essential to democratic legitimacy.`
+    "correctAnswer": 2,
+    "explanation": "The rule of law's power lies in its universality — when leaders are exempt, law becomes a tool of the powerful rather than a protection for all. Equal accountability, including of leaders, is essential to democratic legitimacy."
   },
   {
-    id: 31,
-    type: "economics",
-    skill: "Recall",
-    question: `Which sector of the economy involves MAKING goods from raw materials?`,
-    options: [
+    "id": 31,
+    "type": "economics",
+    "skill": "Recall",
+    "question": "Which sector of the economy involves MAKING goods from raw materials?",
+    "options": [
       "Primary",
       "Tertiary",
       "Secondary (manufacturing)",
-      "Quaternary",
+      "Quaternary"
     ],
-    correctAnswer: 2,
-    explanation: `Secondary activities transform raw materials into manufactured products — refining bauxite into alumina, milling sugar, or producing rum are examples.`
+    "correctAnswer": 2,
+    "explanation": "Secondary activities transform raw materials into manufactured products — refining bauxite into alumina, milling sugar, or producing rum are examples."
   },
   {
-    id: 32,
-    type: "economics",
-    skill: "Recall",
-    question: `What is SUBSISTENCE FARMING?`,
-    options: [
+    "id": 32,
+    "type": "economics",
+    "skill": "Recall",
+    "question": "What is SUBSISTENCE FARMING?",
+    "options": [
       "Farming for large-scale export",
       "Farming using modern machinery only",
       "Growing just enough food for the farmer's own family with little or no surplus to sell",
-      "Farming with chemical fertilisers",
+      "Farming with chemical fertilisers"
     ],
-    correctAnswer: 2,
-    explanation: `Subsistence farming produces food primarily for personal/family consumption — contrasted with commercial farming where the goal is selling for profit.`
+    "correctAnswer": 2,
+    "explanation": "Subsistence farming produces food primarily for personal/family consumption — contrasted with commercial farming where the goal is selling for profit."
   },
   {
-    id: 33,
-    type: "economics",
-    skill: "Application",
-    question: `A student wins $50,000. She deposits it in a credit union at 6% annual interest. How much interest will she earn after ONE YEAR?`,
-    options: [
+    "id": 33,
+    "type": "economics",
+    "skill": "Application",
+    "question": "A student wins $50,000. She deposits it in a credit union at 6% annual interest. How much interest will she earn after ONE YEAR?",
+    "options": [
       "$3,000",
       "$6,000",
       "$300",
-      "$30,000",
+      "$30,000"
     ],
-    correctAnswer: 0,
-    explanation: `6% of $50,000 = $3,000 interest earned after one year.`
+    "correctAnswer": 0,
+    "explanation": "6% of $50,000 = $3,000 interest earned after one year."
   },
   {
-    id: 34,
-    type: "economics",
-    skill: "Supply & Demand",
-    question: `During the October school holiday, hotel prices in Montego Bay RISE significantly. The BEST explanation is:`,
-    options: [
+    "id": 34,
+    "type": "economics",
+    "skill": "Supply & Demand",
+    "question": "During the October school holiday, hotel prices in Montego Bay RISE significantly. The BEST explanation is:",
+    "options": [
       "Hotels are greedier in October",
       "The government raises prices in holidays",
       "Demand increases during the holiday as more tourists want to visit — higher demand with the same supply of rooms pushes prices up",
-      "Hotels close some rooms in October",
+      "Hotels close some rooms in October"
     ],
-    correctAnswer: 2,
-    explanation: `Basic demand and supply: when demand rises (holiday season) and supply stays fixed (same number of hotel rooms), prices rise. This is the market's mechanism for allocating scarce resources.`
+    "correctAnswer": 2,
+    "explanation": "Basic demand and supply: when demand rises (holiday season) and supply stays fixed (same number of hotel rooms), prices rise. This is the market's mechanism for allocating scarce resources."
   },
   {
-    id: 35,
-    type: "economics",
-    skill: "Economic Reasoning",
-    question: `A Jamaican entrepreneur starts a local food brand using only Jamaican ingredients. What is the ECONOMIC BENEFIT beyond her own profit?`,
-    options: [
+    "id": 35,
+    "type": "economics",
+    "skill": "Economic Reasoning",
+    "question": "A Jamaican entrepreneur starts a local food brand using only Jamaican ingredients. What is the ECONOMIC BENEFIT beyond her own profit?",
+    "options": [
       "No additional benefit",
       "Only she benefits",
       "She creates local farm employment, keeps supply-chain spending within Jamaica, reduces import costs for ingredients, and builds a Jamaican brand asset — money circulates locally rather than leaking out",
-      "Only the government benefits from local businesses",
+      "Only the government benefits from local businesses"
     ],
-    correctAnswer: 2,
-    explanation: `Local businesses create economic multiplier effects: they purchase locally (supporting farmers), employ locally (creating wages), and build local economic capacity — money circulates rather than leaking to foreign suppliers.`
+    "correctAnswer": 2,
+    "explanation": "Local businesses create economic multiplier effects: they purchase locally (supporting farmers), employ locally (creating wages), and build local economic capacity — money circulates rather than leaking to foreign suppliers."
   },
   {
-    id: 36,
-    type: "economics",
-    skill: "Interdependence",
-    question: `Jamaica imports nearly all its petroleum. What RISK does this create?`,
-    options: [
+    "id": 36,
+    "type": "economics",
+    "skill": "Interdependence",
+    "question": "Jamaica imports nearly all its petroleum. What RISK does this create?",
+    "options": [
       "No risk — imports are always reliable",
       "Jamaica has plenty of oil",
       "Jamaica is highly vulnerable to global oil price shocks — when oil prices rise internationally, electricity, transport, and manufacturing costs all increase, affecting the entire economy",
-      "Only the government is affected",
+      "Only the government is affected"
     ],
-    correctAnswer: 2,
-    explanation: `Energy import dependence creates structural economic vulnerability. Every sector that uses energy (all of them) is exposed to global price volatility — a major reason Jamaica invests in renewables.`
+    "correctAnswer": 2,
+    "explanation": "Energy import dependence creates structural economic vulnerability. Every sector that uses energy (all of them) is exposed to global price volatility — a major reason Jamaica invests in renewables."
   },
   {
-    id: 37,
-    type: "economics",
-    skill: "Community Development",
-    question: `A credit union lends money to community members at lower rates than commercial banks. Why can it afford to do this?`,
-    options: [
+    "id": 37,
+    "type": "economics",
+    "skill": "Community Development",
+    "question": "A credit union lends money to community members at lower rates than commercial banks. Why can it afford to do this?",
+    "options": [
       "It borrows at lower rates from government",
       "Credit unions operate at a loss",
       "As a member-owned cooperative, profits return to members as lower interest rates or dividends rather than going to external shareholders — the cooperative structure creates member benefit",
-      "Credit unions use cheaper staff",
+      "Credit unions use cheaper staff"
     ],
-    correctAnswer: 2,
-    explanation: `Cooperative economics: member-ownership means profits stay within the member community. Without external shareholders demanding returns, credit unions can offer better terms to borrowing members.`
+    "correctAnswer": 2,
+    "explanation": "Cooperative economics: member-ownership means profits stay within the member community. Without external shareholders demanding returns, credit unions can offer better terms to borrowing members."
   },
   {
-    id: 38,
-    type: "economics",
-    skill: "Policy Evaluation",
-    question: `Jamaica reduces tariffs on imported chicken as part of a trade deal. Who BENEFITS and who may be HARMED?`,
-    options: [
+    "id": 38,
+    "type": "economics",
+    "skill": "Policy Evaluation",
+    "question": "Jamaica reduces tariffs on imported chicken as part of a trade deal. Who BENEFITS and who may be HARMED?",
+    "options": [
       "Everyone benefits equally",
       "Only the government benefits",
       "Consumers benefit from cheaper chicken; local poultry farmers face cheaper competition and may lose market share — the trade-off between consumer benefit and producer protection is real",
-      "Only foreign companies benefit",
+      "Only foreign companies benefit"
     ],
-    correctAnswer: 2,
-    explanation: `Trade liberalisation creates winners and losers. Lower tariffs on imported chicken benefit consumers (lower prices) but harm local producers who cannot compete with cheaper (often subsidised) imports.`
+    "correctAnswer": 2,
+    "explanation": "Trade liberalisation creates winners and losers. Lower tariffs on imported chicken benefit consumers (lower prices) but harm local producers who cannot compete with cheaper (often subsidised) imports."
   },
   {
-    id: 39,
-    type: "economics",
-    skill: "Fiscal Reasoning",
-    question: `Jamaica has high national debt. When significant tax revenue goes to debt interest payments, which citizens are MOST AFFECTED?`,
-    options: [
+    "id": 39,
+    "type": "economics",
+    "skill": "Fiscal Reasoning",
+    "question": "Jamaica has high national debt. When significant tax revenue goes to debt interest payments, which citizens are MOST AFFECTED?",
+    "options": [
       "Only wealthy citizens",
       "All citizens equally",
       "Citizens who depend most on public services — healthcare, education, roads — bear the greatest cost when debt interest crowds out government spending",
-      "Only the government is affected",
+      "Only the government is affected"
     ],
-    correctAnswer: 2,
-    explanation: `Debt service crowds out public spending. The citizens most affected are those most dependent on government services — typically lower-income Jamaicans who cannot privately purchase the education, healthcare, and infrastructure the government would otherwise provide.`
+    "correctAnswer": 2,
+    "explanation": "Debt service crowds out public spending. The citizens most affected are those most dependent on government services — typically lower-income Jamaicans who cannot privately purchase the education, healthcare, and infrastructure the government would otherwise provide."
   },
   {
-    id: 40,
-    type: "economics",
-    skill: "Sustainable Development",
-    question: `Which BEST describes SUSTAINABLE DEVELOPMENT?`,
-    options: [
+    "id": 40,
+    "type": "economics",
+    "skill": "Sustainable Development",
+    "question": "Which BEST describes SUSTAINABLE DEVELOPMENT?",
+    "options": [
       "Development that maximises economic growth regardless of cost",
       "Development that only protects the environment",
       "Development that meets present economic, social, and environmental needs without compromising the ability of future generations to meet theirs",
-      "Development funded by foreign aid only",
+      "Development funded by foreign aid only"
     ],
-    correctAnswer: 2,
-    explanation: `Sustainable development balances three pillars simultaneously: economic growth, social equity, and environmental protection. Compromising any one undermines the others — all three must advance together.`
+    "correctAnswer": 2,
+    "explanation": "Sustainable development balances three pillars simultaneously: economic growth, social equity, and environmental protection. Compromising any one undermines the others — all three must advance together."
   }
 ]
 
@@ -604,13 +605,10 @@ export default function G5SsMix2MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]                 = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]               = useState(60 * 60)
+  const [attemptQuestions, setAttemptQuestions] = useState<Question[]>([])
 
-  const availableQuestions = isPremium ? g5SsMix2Questions : g5SsMix2Questions.slice(0, FREE_QUESTION_LIMIT)
-  const totalQuestions = availableQuestions.length
-
-  useEffect(() => {
-    if (answers.length !== totalQuestions) setAnswers(new Array(totalQuestions).fill(null))
-  }, [totalQuestions, answers.length])
+  const availableQuestions = attemptQuestions
+  const totalQuestions = started ? availableQuestions.length : isPremium ? g5SsMix2Questions.length : FREE_QUESTION_LIMIT
 
   const formatTime = useCallback((s: number) => {
     const m = Math.floor(s / 60)
@@ -624,6 +622,18 @@ export default function G5SsMix2MockTest() {
   }, [started, showResults])
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
+
+  const startTest = () => {
+    const preparedQuestions = isPremium
+      ? prepareSocialStudiesAssessment(g5SsMix2Questions)
+      : prepareSocialStudiesPreview(g5SsMix2Questions, FREE_QUESTION_LIMIT)
+    setAttemptQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    setStarted(true)
+  }
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
 
@@ -670,7 +680,7 @@ export default function G5SsMix2MockTest() {
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setAttemptQuestions([]); setAnswers([]); setTimeLeft(60 * 60)
   }
 
   const q = availableQuestions[currentQuestion]
@@ -720,7 +730,7 @@ export default function G5SsMix2MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
           </CardContent>
         </Card>
       </main>
