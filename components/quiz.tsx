@@ -61,6 +61,7 @@ export function Quiz({ questions, title }: QuizProps) {
     return (
       <Card className="border-2 border-[#0d9488]">
         <CardContent className="p-8 text-center">
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-blue-700">PEP PRACTICE — Grade 5</p>
           <div className={`w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-6 ${
             percentage >= 70 ? "bg-green-100" : percentage >= 50 ? "bg-yellow-100" : "bg-red-100"
           }`}>
@@ -71,7 +72,7 @@ export function Quiz({ questions, title }: QuizProps) {
             </span>
           </div>
           <h3 className="text-2xl font-bold text-[#1e3a5f] mb-2">
-            {percentage >= 70 ? "Great Job!" : percentage >= 50 ? "Good Effort!" : "Keep Practicing!"}
+            {percentage >= 70 ? "Great Job!" : percentage >= 50 ? "Good Effort!" : "Keep Practising!"}
           </h3>
           <p className="text-gray-600 mb-6">
             You scored {score} out of {questions.length} questions correctly.
@@ -91,6 +92,7 @@ export function Quiz({ questions, title }: QuizProps) {
   return (
     <Card className="border-2 border-gray-200">
       <CardContent className="p-6">
+        <div className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-blue-700">PEP PRACTICE Grade 5 · {title}</div>
         <div className="flex justify-between items-center mb-6">
           <span className="text-sm font-medium text-gray-500">
             Question {currentQuestion + 1} of {questions.length}

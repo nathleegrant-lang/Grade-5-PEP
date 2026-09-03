@@ -15,117 +15,81 @@ interface SubjectLevelCardProps {
   description: string[]
 }
 
-const levelStyles: Record<
-  DifficultyKey,
-  {
-    headerBg: string
-    statBg: string
-    activeBg: string
-    activeHover: string
-    activeText: string
-  }
-> = {
-  easy: {
-    headerBg: "bg-emerald-50 border-emerald-100",
-    statBg: "bg-slate-50",
-    activeBg: "bg-emerald-500",
-    activeHover: "hover:bg-emerald-600",
-    activeText: "text-white",
+const subjectStyles: Record<SubjectKey, {
+  card: string
+  band: string
+  stat: string
+  statNumber: string
+  link: string
+}> = {
+  literacy: {
+    card: "border-blue-500 shadow-blue-200",
+    band: "border-blue-600 bg-gradient-to-r from-blue-600 via-sky-500 to-cyan-400",
+    stat: "border-blue-300 bg-blue-100",
+    statNumber: "text-blue-800",
+    link: "border-blue-600 bg-blue-600 text-white hover:bg-blue-800",
   },
-  moderate: {
-    headerBg: "bg-blue-50 border-blue-100",
-    statBg: "bg-slate-50",
-    activeBg: "bg-blue-500",
-    activeHover: "hover:bg-blue-600",
-    activeText: "text-white",
+  numeracy: {
+    card: "border-amber-400 shadow-amber-100",
+    band: "border-amber-500 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-300",
+    stat: "border-amber-300 bg-amber-50",
+    statNumber: "text-amber-800",
+    link: "border-amber-500 bg-amber-400 text-slate-950 hover:bg-amber-600 hover:text-white",
   },
-  difficult: {
-    headerBg: "bg-amber-50 border-amber-100",
-    statBg: "bg-slate-50",
-    activeBg: "bg-orange-500",
-    activeHover: "hover:bg-orange-600",
-    activeText: "text-white",
+  science: {
+    card: "border-emerald-500 shadow-emerald-200",
+    band: "border-emerald-600 bg-gradient-to-r from-emerald-600 via-green-500 to-lime-400",
+    stat: "border-emerald-300 bg-emerald-100",
+    statNumber: "text-emerald-800",
+    link: "border-emerald-700 bg-emerald-600 text-white hover:bg-emerald-800",
   },
-  mixed: {
-    headerBg: "bg-slate-100 border-slate-200",
-    statBg: "bg-slate-50",
-    activeBg: "bg-slate-600",
-    activeHover: "hover:bg-slate-700",
-    activeText: "text-white",
+  "social-studies": {
+    card: "border-violet-500 shadow-violet-200",
+    band: "border-violet-700 bg-gradient-to-r from-indigo-600 via-violet-600 to-fuchsia-500",
+    stat: "border-violet-300 bg-violet-100",
+    statNumber: "text-violet-800",
+    link: "border-violet-700 bg-violet-600 text-white hover:bg-violet-800",
+  },
+  performance: {
+    card: "border-rose-500 shadow-rose-200",
+    band: "border-rose-700 bg-gradient-to-r from-rose-600 via-pink-500 to-fuchsia-400",
+    stat: "border-rose-300 bg-rose-100",
+    statNumber: "text-rose-800",
+    link: "border-rose-700 bg-rose-600 text-white hover:bg-rose-800",
   },
 }
 
-export default function SubjectLevelCard({
-  subject,
-  level,
-  availableTests,
-  questions,
-  minutes,
-  description,
-}: SubjectLevelCardProps) {
-  const styles = levelStyles[level]
+const difficultyPillStyles: Record<DifficultyKey, string> = {
+  easy: "border-emerald-700 bg-emerald-500 text-white",
+  moderate: "border-blue-800 bg-blue-700 text-white",
+  difficult: "border-amber-600 bg-amber-400 text-slate-950",
+  mixed: "border-rose-700 bg-rose-500 text-white",
+}
+
+export default function SubjectLevelCard({ subject, level, availableTests, questions, minutes, description }: SubjectLevelCardProps) {
   const slots = Array.from({ length: MAX_TEST_SLOTS }, (_, index) => index + 1)
   const available = new Set(availableTests)
-
-  const levelTitle =
-    level.charAt(0).toUpperCase() + level.slice(1)
+  const levelTitle = level.charAt(0).toUpperCase() + level.slice(1)
+  const styles = subjectStyles[subject]
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden">
-      <div className={`border-b px-4 py-3 ${styles.headerBg}`}>
-        <h2 className="text-lg font-semibold text-slate-800">{levelTitle}</h2>
+    <div className={`overflow-hidden rounded-xl border-2 bg-white shadow-lg ${styles.card}`}>
+      <div className={`border-b px-4 py-3 ${styles.band}`}>
+        <span className={`inline-flex rounded-full border-2 px-3 py-1 text-sm font-extrabold shadow-md ${difficultyPillStyles[level]}`}>{levelTitle}</span>
       </div>
-
       <div className="p-4 space-y-5">
-        <ul className="space-y-1 text-sm text-slate-600 min-h-[72px]">
-          {description.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-
+        <ul className="space-y-1 text-sm text-slate-700 min-h-[72px]">{description.map((item) => <li key={item}>{item}</li>)}</ul>
         <div className="grid grid-cols-2 gap-3">
-          <div className={`rounded-lg border border-slate-200 p-4 text-center ${styles.statBg}`}>
-            <p className="text-2xl font-bold text-slate-800">{questions}</p>
-            <p className="text-xs text-slate-500">Questions</p>
-          </div>
-
-          <div className={`rounded-lg border border-slate-200 p-4 text-center ${styles.statBg}`}>
-            <p className="text-2xl font-bold text-slate-800">{minutes}</p>
-            <p className="text-xs text-slate-500">Minutes</p>
-          </div>
+          <div className={`rounded-lg border-2 p-4 text-center ${styles.stat}`}><p className={`text-2xl font-extrabold ${styles.statNumber}`}>{questions}</p><p className="text-xs font-medium text-slate-700">Questions</p></div>
+          <div className={`rounded-lg border-2 p-4 text-center ${styles.stat}`}><p className={`text-2xl font-extrabold ${styles.statNumber}`}>{minutes}</p><p className="text-xs font-medium text-slate-700">Minutes</p></div>
         </div>
-
         <div>
-          <p className="mb-2 text-sm font-medium text-slate-700">Available Tests</p>
-
+          <p className="mb-2 text-sm font-bold text-slate-700">Available Tests</p>
           <div className="flex flex-wrap gap-2">
             {slots.map((testNumber) => {
               const isAvailable = available.has(testNumber)
-
-              if (!isAvailable) {
-                return (
-                  <button
-                    key={testNumber}
-                    type="button"
-                    disabled
-                    className="flex h-7 w-7 items-center justify-center rounded-md bg-slate-200 text-xs font-semibold text-slate-500 cursor-not-allowed"
-                    title="Coming soon"
-                  >
-                    {testNumber}
-                  </button>
-                )
-              }
-
-              return (
-                <Link
-                  key={testNumber}
-                  href={getTestHref(subject, level, testNumber)}
-                  className={`flex h-7 w-7 items-center justify-center rounded-md text-xs font-semibold transition-colors ${styles.activeBg} ${styles.activeHover} ${styles.activeText}`}
-                  title={`Open ${levelTitle} Test ${testNumber}`}
-                >
-                  {testNumber}
-                </Link>
-              )
+              if (!isAvailable) return <button key={testNumber} type="button" disabled className="flex h-7 w-7 items-center justify-center rounded-md border border-slate-200 bg-slate-100 text-xs font-semibold text-slate-400 cursor-not-allowed" title="Coming soon">{testNumber}</button>
+              return <Link key={testNumber} href={getTestHref(subject, level, testNumber)} className={`flex h-7 w-7 items-center justify-center rounded-md border text-xs font-extrabold shadow-sm transition-colors ${styles.link}`} title={`Open ${levelTitle} Test ${testNumber}`}>{testNumber}</Link>
             })}
           </div>
         </div>

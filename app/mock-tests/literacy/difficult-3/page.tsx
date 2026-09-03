@@ -848,14 +848,14 @@ export default function G5LaDifficult3MockTest() {
             </CardHeader>
             <CardContent className="space-y-4 p-6">
               <p className="text-slate-700">
-                You completed the free preview for this test. Upgrade to Premium
+                You completed the free preview for this test. Upgrade Access
                 to unlock all 40 questions.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link href="/pricing">
                   <Button className="bg-amber-500 hover:bg-amber-600">
                     <Crown className="mr-2 h-4 w-4" />
-                    Upgrade to Premium
+                    Upgrade Access
                   </Button>
                 </Link>
                 <Link href="/mock-tests/language-arts">
@@ -917,13 +917,13 @@ export default function G5LaDifficult3MockTest() {
                         Free Preview Mode
                       </p>
                       <p className="text-sm text-amber-700">
-                        Try {FREE_QUESTION_LIMIT} questions free. Upgrade to
+                        Try {FREE_QUESTION_LIMIT} questions free. Upgrade Access to
                         unlock all 40.
                       </p>
                       <Link href="/pricing" className="mt-3 inline-block">
                         <Button className="bg-amber-500 hover:bg-amber-600">
                           <Crown className="mr-2 h-4 w-4" />
-                          Upgrade to Premium
+                          Upgrade Access
                         </Button>
                       </Link>
                     </div>
@@ -1034,12 +1034,12 @@ export default function G5LaDifficult3MockTest() {
                     You completed the free preview.
                   </p>
                   <p className="text-sm text-amber-700">
-                    Upgrade to unlock all 40 questions.
+                    Upgrade Access to unlock all 40 questions.
                   </p>
                   <Link href="/pricing" className="mt-3 inline-block">
                     <Button className="bg-amber-500 hover:bg-amber-600">
                       <Crown className="mr-2 h-4 w-4" />
-                      Upgrade
+                      Upgrade Access
                     </Button>
                   </Link>
                 </div>
@@ -1214,7 +1214,7 @@ export default function G5LaDifficult3MockTest() {
                 Free Preview: {FREE_QUESTION_LIMIT} of 40 questions
               </p>
               <p className="text-sm text-amber-700">
-                Upgrade to Premium to access the full test.
+                Upgrade Access to access the full test.
               </p>
             </div>
           )}

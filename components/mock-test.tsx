@@ -134,6 +134,7 @@ export function MockTest({ title, subject, description, timeLimit, questions, pa
     return (
       <Card className="max-w-2xl mx-auto">
         <CardHeader className="text-center bg-[#0d9488] text-white rounded-t-lg">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-teal-100">PEP PRACTICE — Grade 5</p>
           <CardTitle className="text-2xl">{title}</CardTitle>
           <p className="text-teal-100">{subject} Mock Test</p>
         </CardHeader>
@@ -156,7 +157,7 @@ export function MockTest({ title, subject, description, timeLimit, questions, pa
                 <Link href="/pricing">
                   <Button size="sm" className="bg-[#f59e0b] hover:bg-[#d97706] text-white">
                     <Crown className="w-4 h-4 mr-1" />
-                    Upgrade
+                    Upgrade Access
                   </Button>
                 </Link>
               </div>
@@ -193,7 +194,7 @@ export function MockTest({ title, subject, description, timeLimit, questions, pa
             onClick={() => setTestStarted(true)} 
             className="w-full bg-[#0d9488] hover:bg-[#0a7c72] text-white py-6 text-lg"
           >
-            {isPremium ? "Start Full Test" : "Start Free Preview"}
+            {isPremium ? "Start Mock Test" : "Start Free Preview"}
           </Button>
         </CardContent>
       </Card>
@@ -209,9 +210,10 @@ export function MockTest({ title, subject, description, timeLimit, questions, pa
           passed ? "bg-green-600" : "bg-red-500",
           "text-white"
         )}>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/80">PEP PRACTICE Grade 5 · {subject} · {title}</p>
           <Trophy className="w-16 h-16 mx-auto mb-2" />
           <CardTitle className="text-2xl">
-            {passed ? "Congratulations!" : "Keep Practicing!"}
+            {passed ? "Congratulations!" : "Keep Practising!"}
           </CardTitle>
           <p>{passed ? "You passed the test!" : "You can do better next time!"}</p>
         </CardHeader>
@@ -247,7 +249,7 @@ export function MockTest({ title, subject, description, timeLimit, questions, pa
               variant="outline"
               className="flex-1"
             >
-              Review Answers
+              Review Results
             </Button>
             <Button 
               onClick={handleRestart}
@@ -368,6 +370,7 @@ export function MockTest({ title, subject, description, timeLimit, questions, pa
   return (
     <Card className="max-w-3xl mx-auto">
       <CardHeader className="bg-[#0d9488] text-white">
+        <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-teal-100">PEP PRACTICE Grade 5 · {subject} · {title}</p>
         <div className="flex justify-between items-center">
           <div>
             <CardTitle className="text-lg">Question {currentQuestion + 1} of {availableQuestions.length}</CardTitle>
