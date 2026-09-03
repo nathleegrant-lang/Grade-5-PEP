@@ -187,15 +187,15 @@ const g5SsDiff10Questions: Question[] = [
     "id": 12,
     "type": "geography",
     "skill": "Direction and Hazard",
-    "question": "A storm moves west. Community B lies west of Community A. What should A avoid concluding?",
+    "question": "A storm moves west, and Community B lies west of Community A. Which conclusion is most careful?",
     "options": [
-      "Community B will certainly have greater damage because its western location is sufficient to predict the storm’s full impact.",
-      "That B must suffer more damage; direction matters, but storm changes, exposure, buildings, and preparation also affect impact.",
-      "Community A can stop preparing because the westward movement places it completely outside every possible hazard.",
+      "Community B will certainly have greater damage because its western location alone determines the storm’s full impact.",
+      "Community B may face changing storm conditions if the westward movement continues, but actual damage also depends on exposure, buildings, preparation, and changes in the storm.",
+      "Community A can stop preparing because westward movement places it completely outside every possible hazard.",
       "Both communities must experience equal damage because they are affected by the same named storm."
     ],
     "correctAnswer": 1,
-    "explanation": "Direction alone does not determine damage; storm changes and local vulnerability also matter."
+    "explanation": "The storm’s direction is relevant, but direction alone cannot predict which community will suffer greater damage. Storm changes, local exposure, building strength, land conditions, and preparation also affect impact."
   },
   {
     "id": 13,
