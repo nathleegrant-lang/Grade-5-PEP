@@ -75,7 +75,7 @@ const g5SsDiff6Questions: Question[] = [
     "id": 4,
     "type": "history",
     "skill": "Cause and Evidence",
-    "question": "Planning notes and messages made before the Baptist War describe coordinated action and demands for freedom. Which claim do these sources weaken most directly?",
+    "question": "Planning notes and messages made before the Baptist War describe coordinated action and demands for freedom. Which additional evidence would most directly strengthen the conclusion that the uprising was planned rather than accidental?",
     "options": [
       "A plantation photograph made long after the uprising, because buildings establish whether resistance was planned.",
       "A list of parishes used after Independence, because later boundaries explain the uprising’s organization.",
@@ -83,7 +83,7 @@ const g5SsDiff6Questions: Question[] = [
       "Meeting testimony, communications, or records showing organized resistance and demands before the uprising."
     ],
     "correctAnswer": 3,
-    "explanation": "Evidence of organisation and demands for freedom shows that the uprising had aims and causes, rather than being merely a sudden disturbance."
+    "explanation": "Further pre-uprising evidence of meetings, communication, organization, or demands would directly strengthen the conclusion that the resistance was planned rather than accidental."
   },
   {
     "id": 5,
