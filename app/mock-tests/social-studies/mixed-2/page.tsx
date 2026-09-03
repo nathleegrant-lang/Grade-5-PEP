@@ -343,13 +343,13 @@ const g5SsMix2Questions: Question[] = [
     "skill": "Application",
     "question": "Members of the Senate are appointed rather than elected. Who appoints them?",
     "options": [
-      "The Governor General alone",
-      "Jamaican citizens in a special vote",
-      "The Governor-General formally appoints all 21: 13 on the advice of the Prime Minister and 8 on the advice of the Leader of the Opposition",
-      "The Chief Justice"
+      "The Governor-General appoints all 21 Senators entirely at personal discretion.",
+      "Voters elect all 21 Senators directly in a separate national Senate election.",
+      "The Governor-General appoints all 21: 13 on the Prime Minister's advice and 8 on the Opposition Leader's advice.",
+      "The Prime Minister appoints 13 Senators and the Chief Justice appoints the remaining 8."
     ],
     "correctAnswer": 2,
-    "explanation": "All 21 Senators are formally appointed by the Governor-General: 13 on the advice of the Prime Minister and 8 on the advice of the Leader of the Opposition."
+    "explanation": "All 21 Senators are formally appointed by the Governor-General: 13 on the advice of the Prime Minister and eight on the advice of the Leader of the Opposition."
   },
   {
     "id": 24,
