@@ -385,13 +385,13 @@ const g5SsMix4Questions: Question[] = [
     "skill": "Lawful Participation",
     "question": "Residents oppose a proposed quarry. Which action is the strongest lawful response?",
     "options": [
-      "Damage quarry equipment before consultation so officials notice the opposition.",
-      "Threaten neighbours who support the quarry to reduce support for the proposal.",
-      "Block emergency vehicles until authorities promise to reject the project.",
-      "Gather evidence, attend consultations and submit objections through the lawful process."
+      "Sign a petition opposing the quarry but submit it without evidence about likely community effects.",
+      "Attend the consultation and state opposition, but avoid examining reports or alternative proposals.",
+      "Ask elected representatives to reject the quarry immediately before the public review process is completed.",
+      "Gather evidence, attend consultations and submit objections through the lawful decision-making process."
     ],
     "correctAnswer": 3,
-    "explanation": "Evidence, consultation and lawful objections allow residents to influence decisions without violating others' rights."
+    "explanation": "The strongest civic response combines evidence with participation in the lawful process. It allows residents to challenge the proposal while giving decision-makers information that can be examined."
   },
   {
     "id": 27,
