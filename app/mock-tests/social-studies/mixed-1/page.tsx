@@ -147,13 +147,13 @@ const g5SsMix1Questions: Question[] = [
     "skill": "Evaluating Sources",
     "question": "A colonial newspaper from 1865 describes Paul Bogle as a 'dangerous agitator.' Why should a student treat this with caution?",
     "options": [
-      "Newspapers always tell the truth",
-      "Colonial newspapers were always accurate",
-      "This description reflects the perspective of those whose authority Bogle was challenging — colonial sources are likely to be biased against those who resisted the system",
-      "Paul Bogle was actually dangerous"
+      "The description should be accepted because newspapers printed during an event are automatically neutral sources.",
+      "The description is reliable because colonial newspapers had direct access to officials involved in the events.",
+      "The description reflects the viewpoint of people whose authority Bogle challenged, so it should be compared with other evidence.",
+      "The description proves Bogle's actions were dangerous because contemporary writers understood the rebellion best."
     ],
     "correctAnswer": 2,
-    "explanation": "Primary sources must be evaluated for bias. A colonial newspaper represented colonial interests — it would naturally portray those who challenged colonial authority negatively."
+    "explanation": "A colonial newspaper may reflect the interests and viewpoint of colonial authorities. Students should compare its description of Bogle with other contemporary evidence rather than treating its language as neutral fact."
   },
   {
     "id": 10,
@@ -441,13 +441,13 @@ const g5SsMix1Questions: Question[] = [
     "skill": "Civic Responsibility",
     "question": "A student wants to make her community safer. Which action BEST demonstrates active citizenship?",
     "options": [
-      "Waiting for the government to solve all problems",
-      "Complaining privately to friends",
-      "Organising a community meeting, identifying safety issues, partnering with the Municipal Corporation/local authority, and leading a neighbourhood watch initiative",
-      "Only voting in elections"
+      "Report the safety concern to officials and wait for them to decide what action is needed.",
+      "Discuss the problem with neighbours but leave all planning and follow-up to someone else.",
+      "Organise residents, document the safety issue, work with the Municipal Corporation/local authority, and help carry out a lawful community response.",
+      "Vote at the next election but take no other action on the immediate safety concern."
     ],
     "correctAnswer": 2,
-    "explanation": "Active citizenship goes beyond voting — it involves identifying problems, organising collective responses, engaging with institutions, and taking initiative to improve community conditions."
+    "explanation": "Active citizenship combines identifying a community problem, organising with others, using appropriate public institutions and taking lawful practical action."
   },
   {
     "id": 31,
@@ -497,13 +497,13 @@ const g5SsMix1Questions: Question[] = [
     "skill": "Cause & Effect",
     "question": "When the price of mango RISES significantly in August, farmers will MOST LIKELY:",
     "options": [
-      "Grow fewer mangoes next season",
-      "Immediately stop growing mangoes",
-      "Plant more mango trees — higher prices signal greater profitability and incentivise increased production",
-      "Buy more mangoes from other farmers"
+      "Reduce future mango production because the higher price makes producing mangoes less attractive.",
+      "Keep production unchanged because market prices provide no useful information to producers.",
+      "Consider increasing future mango production if the higher expected return justifies the extra land, labour and cost.",
+      "Buy mangoes from other farmers instead of considering whether producing more would be profitable."
     ],
     "correctAnswer": 2,
-    "explanation": "Higher prices signal profit opportunity. Rational farmers respond by increasing production of the more profitable crop — basic supply and demand."
+    "explanation": "A higher price can signal stronger potential returns and encourage farmers to increase future supply, but production decisions still depend on costs, resources and growing time."
   },
   {
     "id": 35,
