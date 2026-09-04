@@ -1,0 +1,48 @@
+/* Distinguish learning choices from the Mock PEP Test action. */
+:is(.grade5-mathematics-hub,.grade5-science-hub,.grade5-social-studies-hub)
+main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 {
+  position:relative;
+  margin-top:1.25rem;
+  border-top:1px solid #e2e8f0;
+  background:linear-gradient(180deg,#f1f5f9 0%,#f8fbff 42%,#fff 100%);
+  padding-top:3.4rem;
+}
+:is(.grade5-mathematics-hub,.grade5-science-hub,.grade5-social-studies-hub)
+main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12::before {
+  content:"LEARN & PRACTICE";
+  position:absolute; top:1.25rem; left:50%; transform:translateX(-50%);
+  font-size:.68rem; font-weight:900; letter-spacing:.18em; white-space:nowrap;
+}
+.grade5-mathematics-hub main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12::before { color:#d97706; }
+.grade5-science-hub main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12::before { color:#15803d; }
+.grade5-social-studies-hub main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12::before { color:#7c3aed; }
+
+/* Performance Tasks: actionable skills first; explanatory material follows. */
+.grade5-performance-hub > div:has(> main.container.mx-auto.px-4.py-10) > main {
+  display:flex;
+  flex-direction:column;
+}
+.grade5-performance-hub > div:has(> main.container.mx-auto.px-4.py-10) > main > a { order:1; }
+.grade5-performance-hub > div:has(> main.container.mx-auto.px-4.py-10) > main > h3 { order:2; margin-top:.5rem; margin-bottom:.35rem; text-align:center; }
+.grade5-performance-hub > div:has(> main.container.mx-auto.px-4.py-10) > main > h3::before {
+  content:"LEARN & PRACTICE";
+  display:block;
+  margin-bottom:.45rem;
+  color:#e11d48;
+  font-size:.68rem;
+  font-weight:900;
+  letter-spacing:.18em;
+}
+.grade5-performance-hub > div:has(> main.container.mx-auto.px-4.py-10) > main > .grid { order:3; }
+.grade5-performance-hub > div:has(> main.container.mx-auto.px-4.py-10) > main > .grid + div { order:6; }
+.grade5-performance-hub > div:has(> main.container.mx-auto.px-4.py-10) > main > div:nth-of-type(1) { order:4; }
+.grade5-performance-hub > div:has(> main.container.mx-auto.px-4.py-10) > main > div:nth-of-type(2) { order:5; }
+
+@media (max-width:639px) {
+  :is(.grade5-mathematics-hub,.grade5-science-hub,.grade5-social-studies-hub)
+  main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 {
+    margin-top:.75rem;
+    padding-top:3.25rem;
+  }
+  .grade5-performance-hub > div:has(> main.container.mx-auto.px-4.py-10) > main > a { margin-bottom:.75rem; }
+}
