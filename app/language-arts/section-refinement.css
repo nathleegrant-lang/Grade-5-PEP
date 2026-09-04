@@ -2,8 +2,8 @@
 .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 {
   position: relative;
   margin-top: 1.25rem;
-  border-top: 1px solid #dbeafe;
-  background: linear-gradient(180deg,#eff6ff 0%,#f8fbff 42%,#ffffff 100%);
+  border-top: 1px solid #bfdbfe;
+  background: linear-gradient(180deg,#dbeafe 0%,#eaf4ff 38%,#f5f9ff 100%);
   padding-top: 3.4rem;
 }
 .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12::before {
@@ -18,9 +18,7 @@
   letter-spacing: .18em;
   white-space: nowrap;
 }
-.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 > h2 {
-  margin-bottom: .3rem;
-}
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 > h2 { margin-bottom: .3rem; }
 @media (max-width:639px) {
   .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 {
     margin-top: .75rem;
