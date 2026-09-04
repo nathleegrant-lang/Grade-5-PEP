@@ -1,10 +1,11 @@
-/* Final mobile hierarchy refinement: make topic learning a distinct section. */
+/* Shared Grade 5 Learn & Practice environment: deep teal with white learning cards. */
 .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 {
   position: relative;
   margin-top: 1.25rem;
-  border-top: 1px solid #bfdbfe;
-  background: linear-gradient(180deg,#dbeafe 0%,#eaf4ff 38%,#f5f9ff 100%);
+  border-top: 0;
+  background: #168f87;
   padding-top: 3.4rem;
+  padding-bottom: 2.5rem;
 }
 .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12::before {
   content: "LEARN & PRACTICE";
@@ -12,13 +13,19 @@
   top: 1.25rem;
   left: 50%;
   transform: translateX(-50%);
-  color: #0284c7;
+  color: #fde047;
   font-size: .68rem;
   font-weight: 900;
   letter-spacing: .18em;
   white-space: nowrap;
 }
-.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 > h2 { margin-bottom: .3rem; }
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 > h2 {
+  margin-bottom: .3rem;
+  color: #fff !important;
+}
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 > p {
+  color: rgba(255,255,255,.9) !important;
+}
 @media (max-width:639px) {
   .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 {
     margin-top: .75rem;
