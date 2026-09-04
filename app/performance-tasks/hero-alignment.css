@@ -1,0 +1,57 @@
+/* Presentation-only alignment for the principal Performance Tasks landing hero. */
+.grade5-performance-hub > div:has(> main.container.mx-auto.px-4.py-10) > section:first-of-type .container {
+  max-width: 64rem;
+  text-align: center;
+}
+
+.grade5-performance-hub > div:has(> main.container.mx-auto.px-4.py-10) > section:first-of-type p:first-child {
+  margin-bottom: .65rem;
+  font-size: 0 !important;
+  text-align: center;
+}
+
+.grade5-performance-hub > div:has(> main.container.mx-auto.px-4.py-10) > section:first-of-type p:first-child::after {
+  content: "PEP PRACTICE — GRADE 5  •  PERFORMANCE TASKS";
+  color: #fef08a;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .18em;
+  line-height: 1.4;
+}
+
+.grade5-performance-hub > div:has(> main.container.mx-auto.px-4.py-10) > section:first-of-type .flex.items-center.gap-4 {
+  display: block;
+  text-align: center;
+}
+
+.grade5-performance-hub > div:has(> main.container.mx-auto.px-4.py-10) > section:first-of-type .flex.items-center.gap-4 > .rounded-full {
+  display: none;
+}
+
+.grade5-performance-hub > div:has(> main.container.mx-auto.px-4.py-10) > section:first-of-type h2 {
+  margin-bottom: .65rem;
+  color: white !important;
+  font-size: clamp(2rem, 9vw, 3.8rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: -.035em;
+  line-height: 1.03;
+}
+
+.grade5-performance-hub > div:has(> main.container.mx-auto.px-4.py-10) > section:first-of-type h2 + p {
+  margin-inline: auto;
+  max-width: 42rem;
+  color: rgba(255,255,255,.94) !important;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+@media (max-width: 639px) {
+  .grade5-performance-hub > div:has(> main.container.mx-auto.px-4.py-10) > section:first-of-type p:first-child::after {
+    font-size: .64rem;
+    letter-spacing: .12em;
+  }
+
+  .grade5-performance-hub > div:has(> main.container.mx-auto.px-4.py-10) > section:first-of-type h2 {
+    font-size: 2.15rem !important;
+  }
+}
