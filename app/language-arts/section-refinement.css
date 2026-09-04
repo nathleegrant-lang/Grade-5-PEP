@@ -1,0 +1,30 @@
+/* Final mobile hierarchy refinement: make topic learning a distinct section. */
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 {
+  position: relative;
+  margin-top: 1.25rem;
+  border-top: 1px solid #dbeafe;
+  background: linear-gradient(180deg,#eff6ff 0%,#f8fbff 42%,#ffffff 100%);
+  padding-top: 3.4rem;
+}
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12::before {
+  content: "LEARN & PRACTICE";
+  position: absolute;
+  top: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #0284c7;
+  font-size: .68rem;
+  font-weight: 900;
+  letter-spacing: .18em;
+  white-space: nowrap;
+}
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 > h2 {
+  margin-bottom: .3rem;
+}
+@media (max-width:639px) {
+  .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 {
+    margin-top: .75rem;
+    padding-top: 3.25rem;
+    padding-bottom: 2rem;
+  }
+}
