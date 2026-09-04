@@ -47,25 +47,28 @@
   line-height: 1.55;
 }
 
-/* Mock test becomes a crisp Language Arts action card rather than a second environmental block. */
+/* Mock-test-style action card: white work surface, cyan top edge, circular icon, full blue CTA on mobile. */
 .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.pt-8 {
   padding-top: 1rem;
 }
 
 .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.pt-8 > a > div {
-  border: 1px solid #bae6fd;
+  border: 1px solid #dbeafe;
   border-top: 4px solid #38bdf8;
-  border-radius: 1rem;
+  border-radius: 1.25rem;
   background: white !important;
   color: #0f2747 !important;
-  box-shadow: 0 10px 28px rgba(15, 39, 71, 0.09);
+  box-shadow: 0 12px 30px rgba(15, 39, 71, 0.10);
 }
 
 .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.pt-8 > a > div:hover {
-  box-shadow: 0 14px 34px rgba(15, 39, 71, 0.13);
+  box-shadow: 0 16px 36px rgba(15, 39, 71, 0.14);
 }
 
 .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.pt-8 .bg-white\/20 {
+  width: 4rem !important;
+  height: 4rem !important;
+  border-radius: 9999px !important;
   background: #e0f2fe !important;
 }
 
@@ -82,11 +85,13 @@
 }
 
 .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.pt-8 button {
-  background: #0284c7 !important;
+  border-radius: 0.75rem;
+  background: #2563eb !important;
   color: white !important;
+  font-weight: 700;
 }
 
-/* Topic cards keep Language Arts blue/cyan as the local accent inside the Grade 5 frame. */
+/* Topic cards now echo the Mock Tests cards while retaining Language Arts blue/cyan identity. */
 .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 {
   margin-top: 1rem;
   max-width: none;
@@ -117,41 +122,55 @@
   position: relative;
   overflow: hidden;
   border: 1px solid #dbeafe;
-  border-radius: 1rem;
+  border-top: 4px solid #38bdf8;
+  border-radius: 1.25rem;
   background: white;
-  box-shadow: 0 8px 24px rgba(15, 39, 71, 0.07);
+  box-shadow: 0 12px 30px rgba(15, 39, 71, 0.09);
   transform: none !important;
-}
-
-.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid > div::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 4px;
-  background: linear-gradient(90deg, #2563eb, #06b6d4);
 }
 
 .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid > div:hover {
   border-color: #7dd3fc;
-  box-shadow: 0 12px 30px rgba(15, 39, 71, 0.11);
+  box-shadow: 0 16px 36px rgba(15, 39, 71, 0.13);
 }
 
 .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid .w-14.h-14.rounded-xl {
-  background: linear-gradient(135deg, #2563eb, #06b6d4) !important;
+  width: 4rem !important;
+  height: 4rem !important;
+  margin-inline: auto;
+  border-radius: 9999px !important;
+  background: #e0f2fe !important;
+}
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid .w-14.h-14.rounded-xl svg {
+  color: #0284c7 !important;
+}
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid .p-6 {
+  text-align: center;
 }
 
 .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid h3 {
-  color: #0f2747;
+  color: #1d4ed8;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid p {
+  line-height: 1.55;
 }
 
 .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid button {
-  border-color: #0284c7 !important;
-  color: #0369a1 !important;
-  background: white !important;
+  width: 100%;
+  border-color: #2563eb !important;
+  border-radius: 0.75rem;
+  background: #2563eb !important;
+  color: white !important;
+  font-weight: 700;
 }
 
 .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid button:hover {
-  background: #0284c7 !important;
+  background: #1d4ed8 !important;
   color: white !important;
 }
 
@@ -229,7 +248,7 @@
   }
 
   .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.pt-8 .flex.items-center.gap-4 {
-    align-items: flex-start;
+    align-items: center;
   }
 
   .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.pt-8 button {
@@ -246,6 +265,6 @@
   }
 
   .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid .p-6 {
-    padding: 1.15rem;
+    padding: 1.25rem;
   }
 }
