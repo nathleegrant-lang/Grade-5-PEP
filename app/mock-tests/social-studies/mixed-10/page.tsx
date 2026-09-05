@@ -152,7 +152,7 @@ const g5SsMix10Questions: Question[] = [
       "A map of polling locations that gives no dates or eligibility rules",
       "A speech about Independence in 1962 without evidence about voting rights"
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 0,
     "explanation": "Comparing eligibility rules and registration totals would connect the removal of former property and income qualifications with the expanded electorate."
   },
   {
