@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/auth-context"
+import { prepareSocialStudiesAssessment, prepareSocialStudiesPreview } from "@/lib/social-studies-assessment-engine"
 
 const FREE_QUESTION_LIMIT = 5
 
@@ -87,16 +88,16 @@ const g5SsEasy7Questions: Question[] = [
   {
     id: 5,
     type: "history",
-    skill: "National Heroes",
-    question: `Sam Sharpe is depicted on which Jamaican banknote?`,
+    skill: "Cultural Heritage",
+    question: `Which two National Heroes appear together on Jamaica's current $500 polymer banknote?`,
     options: [
-      "$50",
-      "$100",
-      "$500",
-      "$1,000",
+      "Marcus Garvey and George William Gordon",
+      "Nanny of the Maroons and Sam Sharpe",
+      "Norman Manley and Sir Alexander Bustamante",
+      "Paul Bogle and Marcus Garvey",
     ],
     correctAnswer: 1,
-    explanation: `Sam Sharpe appears on the Jamaican $100 banknote.`
+    explanation: `Nanny of the Maroons and Sam Sharpe appear together on Jamaica's current $500 polymer banknote.`
   },
   {
     id: 6,
@@ -185,16 +186,16 @@ const g5SsEasy7Questions: Question[] = [
   {
     id: 12,
     type: "geography",
-    skill: "Parishes",
-    question: `Which parish is MOST associated with the production of Blue Mountain Coffee?`,
+    skill: "Agriculture and Regions",
+    question: `Which Jamaican mountain region is famous for producing Blue Mountain Coffee?`,
     options: [
-      "Westmoreland",
-      "Portland and St. Thomas",
-      "St. Andrew and St. Thomas",
-      "Clarendon",
+      "Cockpit Country",
+      "Blue Mountains",
+      "Pedro Plains",
+      "Dry Harbour Mountains",
     ],
-    correctAnswer: 2,
-    explanation: `Blue Mountain Coffee is grown at high elevations in Portland, St. Thomas, St. Andrew, and St. Mary parishes — the Blue Mountain range spans all four.`
+    correctAnswer: 1,
+    explanation: `Blue Mountain Coffee is grown in the recognised Blue Mountain region at high elevations in parts of several eastern Jamaican parishes.`
   },
   {
     id: 13,
@@ -438,29 +439,29 @@ const g5SsEasy7Questions: Question[] = [
     id: 30,
     type: "civics",
     skill: "Rights",
-    question: `THE RIGHT TO WORK means:`,
+    question: `Which of the following is a right protected by Jamaica's Charter of Fundamental Rights and Freedoms?`,
     options: [
-      "Everyone is guaranteed a job",
-      "Citizens have the right to seek employment and not be discriminated against in the workplace",
-      "Only educated citizens can work",
-      "The government must employ all citizens",
+      "The right to ignore laws you disagree with",
+      "Freedom of expression",
+      "The right to receive any job you choose",
+      "The right to take another person's property",
     ],
     correctAnswer: 1,
-    explanation: `The right to work means the freedom to seek employment and protection against unlawful discrimination in hiring and employment — the government does not guarantee jobs for all.`
+    explanation: `Freedom of expression is one of the rights protected by Jamaica's Charter of Fundamental Rights and Freedoms. Rights operate within the law and do not give a person permission to violate the rights of others.`
   },
   {
     id: 31,
     type: "economics",
     skill: "Economic Activities",
-    question: `Give an example of a QUATERNARY economic activity.`,
+    question: `Which activity is a SECONDARY economic activity?`,
     options: [
-      "Farming sugarcane",
-      "Manufacturing rum",
-      "Research and development in a university or tech company",
-      "Running a grocery store",
+      "Growing sugar cane",
+      "Turning sugar cane into rum at a factory",
+      "Teaching pupils at a school",
+      "Catching fish at sea",
     ],
-    correctAnswer: 2,
-    explanation: `Quaternary activities involve knowledge-based services: research, development, information technology, and education — the most advanced sector of modern economies.`
+    correctAnswer: 1,
+    explanation: `Secondary economic activities turn raw materials into products. Making rum from sugar cane is manufacturing, so it is a secondary activity.`
   },
   {
     id: 32,
@@ -522,15 +523,15 @@ const g5SsEasy7Questions: Question[] = [
     id: 36,
     type: "economics",
     skill: "Money",
-    question: `What does 'FOREIGN EXCHANGE RESERVES' mean?`,
+    question: `Why is it helpful for a family to save some of the money it receives?`,
     options: [
-      "Unused foreign currency burned by the government",
-      "Currency held by Jamaica's central bank to stabilise the exchange rate and pay for imports",
-      "Money kept in personal bank accounts",
-      "The profit from tourism",
+      "Saving guarantees that the family will become rich.",
+      "Savings can help the family prepare for future needs or unexpected expenses.",
+      "Saving means the family never needs a budget.",
+      "Money that is saved can no longer be used in the future.",
     ],
     correctAnswer: 1,
-    explanation: `Foreign exchange reserves are holdings of foreign currency (mainly US dollars) maintained by Jamaica's central bank to protect the Jamaican dollar, finance imports, and meet international obligations.`
+    explanation: `Saving sets aside some money for future needs or emergencies. It is one part of responsible budgeting and does not guarantee wealth.`
   },
   {
     id: 37,
@@ -549,30 +550,30 @@ const g5SsEasy7Questions: Question[] = [
   {
     id: 38,
     type: "economics",
-    skill: "Interdependence",
-    question: `What does 'GLOBALISATION' mean in economics?`,
+    skill: "Trade",
+    question: `Which example shows Jamaica IMPORTING a good?`,
     options: [
-      "Each country producing only what it needs",
-      "The growing integration of national economies through trade, investment, and technology, making the world more interconnected",
-      "Countries becoming independent of each other",
-      "A type of international law",
+      "A Jamaican farmer sells coffee to a buyer overseas.",
+      "A Jamaican business buys petroleum from another country.",
+      "A craft worker sells locally made baskets to tourists in Jamaica.",
+      "A Jamaican company sends rum to customers abroad.",
     ],
     correctAnswer: 1,
-    explanation: `Globalisation is the increasing integration of the world's economies — goods, capital, technology, and people move across borders more freely than ever before.`
+    explanation: `An import is a good or service bought from another country. Buying petroleum from abroad is an example of Jamaica importing a good.`
   },
   {
     id: 39,
     type: "economics",
     skill: "Natural Resources",
-    question: `What is a NATURAL RESOURCE AUDIT?`,
+    question: `Which action BEST helps conserve a renewable natural resource?`,
     options: [
-      "Counting the number of trees in a park",
-      "A systematic assessment of the quantity, quality, and condition of a country's natural resources",
-      "A type of environmental tax",
-      "A map of mineral deposits",
+      "Cutting all the trees from a hillside at once",
+      "Replanting trees after some have been harvested",
+      "Using more petroleum each year",
+      "Removing mangroves to create more bare coastline",
     ],
     correctAnswer: 1,
-    explanation: `A natural resource audit evaluates the state of a country's natural assets — helping planners decide how to use them sustainably and where to focus conservation efforts.`
+    explanation: `Trees are renewable when forests are managed responsibly. Replanting after harvesting helps the resource recover and remain available in the future.`
   },
   {
     id: 40,
@@ -604,13 +605,10 @@ export default function G5SsEasy7MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]                 = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]               = useState(60 * 60)
+  const [attemptQuestions, setAttemptQuestions] = useState<Question[]>([])
 
-  const availableQuestions = isPremium ? g5SsEasy7Questions : g5SsEasy7Questions.slice(0, FREE_QUESTION_LIMIT)
-  const totalQuestions = availableQuestions.length
-
-  useEffect(() => {
-    if (answers.length !== totalQuestions) setAnswers(new Array(totalQuestions).fill(null))
-  }, [totalQuestions, answers.length])
+  const availableQuestions = attemptQuestions
+  const totalQuestions = started ? availableQuestions.length : isPremium ? g5SsEasy7Questions.length : FREE_QUESTION_LIMIT
 
   const formatTime = useCallback((s: number) => {
     const m = Math.floor(s / 60)
@@ -624,6 +622,18 @@ export default function G5SsEasy7MockTest() {
   }, [started, showResults])
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
+
+  const startTest = () => {
+    const preparedQuestions = isPremium
+      ? prepareSocialStudiesAssessment(g5SsEasy7Questions)
+      : prepareSocialStudiesPreview(g5SsEasy7Questions, FREE_QUESTION_LIMIT)
+    setAttemptQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    setStarted(true)
+  }
 
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
@@ -671,7 +681,7 @@ export default function G5SsEasy7MockTest() {
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setAttemptQuestions([]); setAnswers([]); setTimeLeft(60 * 60)
   }
 
   const q = availableQuestions[currentQuestion]
@@ -721,7 +731,7 @@ export default function G5SsEasy7MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
           </CardContent>
         </Card>
       </main>
