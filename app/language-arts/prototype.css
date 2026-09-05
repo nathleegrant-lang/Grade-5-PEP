@@ -1,0 +1,271 @@
+.grade5-language-arts-prototype {
+  overflow-x: clip;
+}
+
+/* Scope the prototype to the principal Language Arts landing state only.
+   Topic/quiz states and nested assessment routes retain their existing presentation. */
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > section:first-child {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(110deg, #2563eb 0%, #06b6d4 52%, #34d399 100%);
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > section:first-child > div {
+  position: relative;
+  z-index: 2;
+  max-width: 64rem;
+}
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > section:first-child > div::before {
+  content: "PEP PRACTICE — GRADE 5  •  LANGUAGE ARTS";
+  display: block;
+  margin-bottom: 0.65rem;
+  color: #fef08a;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  line-height: 1.4;
+}
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > section:first-child h1 {
+  margin-bottom: 0.65rem;
+  color: white;
+  font-size: clamp(2rem, 9vw, 3.8rem);
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  line-height: 1.03;
+}
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > section:first-child p {
+  margin-inline: auto;
+  max-width: 42rem;
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.pt-8 {
+  padding-top: 1rem;
+}
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.pt-8 > a > div {
+  border: 1px solid #dbeafe;
+  border-top: 4px solid #38bdf8;
+  border-radius: 1.25rem;
+  background: white !important;
+  color: #0f2747 !important;
+  box-shadow: 0 12px 30px rgba(15, 39, 71, 0.10);
+}
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.pt-8 .bg-white\/20 {
+  width: 4rem !important;
+  height: 4rem !important;
+  border-radius: 9999px !important;
+  background: #e0f2fe !important;
+}
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.pt-8 .bg-white\/20 svg {
+  color: #0284c7 !important;
+}
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.pt-8 h3 {
+  color: #0f2747 !important;
+}
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.pt-8 p {
+  color: #64748b !important;
+}
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.pt-8 button {
+  border-radius: 0.75rem;
+  background: #2563eb !important;
+  color: white !important;
+  font-weight: 700;
+}
+
+/* Shared Mock Tests card architecture. */
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 {
+  margin-top: 1rem;
+  max-width: none;
+  background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+  padding-top: 2rem;
+  padding-bottom: 2.5rem;
+}
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 > h2,
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 > p,
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 > div {
+  width: min(100% - 2rem, 72rem);
+  margin-inline: auto;
+}
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 > h2 {
+  color: #0f2747;
+  font-size: 1.65rem;
+  font-weight: 850;
+}
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 > p {
+  margin-bottom: 1.25rem;
+  color: #64748b;
+}
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid > div {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  border-radius: 1.25rem;
+  background: white;
+  box-shadow: 0 12px 30px rgba(15, 39, 71, 0.09);
+  transform: none !important;
+}
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid .w-14.h-14.rounded-xl {
+  width: 4rem !important;
+  height: 4rem !important;
+  margin-inline: auto;
+  border-radius: 9999px !important;
+}
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid .p-6 {
+  text-align: center;
+}
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid p {
+  line-height: 1.55;
+}
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid button {
+  width: 100%;
+  border-radius: 0.75rem;
+  color: white !important;
+  font-weight: 700;
+}
+
+/* Restore the four established topic identities inside the Language Arts environment. */
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid > div:nth-child(1) { border-top: 4px solid #2563eb; }
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid > div:nth-child(1) .w-14.h-14.rounded-xl { background: #dbeafe !important; }
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid > div:nth-child(1) svg,
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid > div:nth-child(1) h3 { color: #1d4ed8 !important; }
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid > div:nth-child(1) button { border-color: #2563eb !important; background: #2563eb !important; }
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid > div:nth-child(2) { border-top: 4px solid #14b8a6; }
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid > div:nth-child(2) .w-14.h-14.rounded-xl { background: #ccfbf1 !important; }
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid > div:nth-child(2) svg,
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid > div:nth-child(2) h3 { color: #0f766e !important; }
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid > div:nth-child(2) button { border-color: #0d9488 !important; background: #0d9488 !important; }
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid > div:nth-child(3) { border-top: 4px solid #f59e0b; }
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid > div:nth-child(3) .w-14.h-14.rounded-xl { background: #fef3c7 !important; }
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid > div:nth-child(3) svg,
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid > div:nth-child(3) h3 { color: #d97706 !important; }
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid > div:nth-child(3) button { border-color: #f59e0b !important; background: #f59e0b !important; }
+
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid > div:nth-child(4) { border-top: 4px solid #f43f5e; }
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid > div:nth-child(4) .w-14.h-14.rounded-xl { background: #ffe4e6 !important; }
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid > div:nth-child(4) svg,
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid > div:nth-child(4) h3 { color: #e11d48 !important; }
+.grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid > div:nth-child(4) button { border-color: #f43f5e !important; background: #f43f5e !important; }
+
+/* Desktop-only decorative richness. */
+@media (min-width: 640px) {
+  .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > section:first-child {
+    padding-top: 2.75rem;
+    padding-bottom: 2.75rem;
+    background-image:
+      radial-gradient(circle at 8% 26%, rgba(255,255,255,0.18) 0 2px, transparent 3px),
+      radial-gradient(circle at 11% 34%, rgba(255,255,255,0.18) 0 2px, transparent 3px),
+      radial-gradient(circle at 14% 26%, rgba(255,255,255,0.18) 0 2px, transparent 3px),
+      linear-gradient(110deg, #2563eb 0%, #06b6d4 52%, #34d399 100%);
+  }
+
+  .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > section:first-child::before {
+    content: "★";
+    position: absolute;
+    top: 1.25rem;
+    right: 8%;
+    z-index: 1;
+    color: #fde047;
+    font-size: 2rem;
+    line-height: 1;
+    transform: rotate(10deg);
+  }
+
+  .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > section:first-child::after {
+    content: "+";
+    position: absolute;
+    right: 18%;
+    bottom: 0.5rem;
+    z-index: 1;
+    color: rgba(255,255,255,0.3);
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1;
+  }
+}
+
+@media (min-width: 900px) {
+  .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > section:first-child {
+    padding-top: 3.25rem;
+    padding-bottom: 3.25rem;
+  }
+
+  .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > section:first-child > div::after {
+    content: "";
+    position: absolute;
+    left: -6rem;
+    top: 50%;
+    width: 9rem;
+    height: 9rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 9999px;
+    transform: translateY(-50%);
+  }
+}
+
+/* 390px-first restraint and stacking. */
+@media (max-width: 639px) {
+  .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > section:first-child > div::before {
+    font-size: 0.64rem;
+    letter-spacing: 0.12em;
+  }
+
+  .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > section:first-child h1 {
+    font-size: 2.15rem;
+  }
+
+  .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.pt-8 > a > div > div {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.pt-8 .flex.items-center.gap-4 {
+    align-items: center;
+  }
+
+  .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.pt-8 button {
+    width: 100%;
+  }
+
+  .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 {
+    margin-top: 0.5rem;
+    padding-top: 1.5rem;
+  }
+
+  .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid {
+    gap: 1rem;
+  }
+
+  .grade5-language-arts-prototype main:has(> div.max-w-6xl.mx-auto.px-4.pt-8) > div.max-w-6xl.mx-auto.px-4.py-12 .grid .p-6 {
+    padding: 1.25rem;
+  }
+}
