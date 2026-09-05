@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/auth-context"
+import { prepareSocialStudiesAssessment, prepareSocialStudiesPreview } from "@/lib/social-studies-assessment-engine"
 
 const FREE_QUESTION_LIMIT = 5
 
@@ -59,16 +60,16 @@ const g5SsMod2Questions: Question[] = [
   {
     id: 3,
     type: "history",
-    skill: "Comparing Events",
-    question: `How was the 1831 Christmas Rebellion DIFFERENT from earlier slave uprisances?`,
+    skill: "Historical Significance",
+    question: `Why was the Baptist War of 1831–32 especially significant in the movement toward emancipation?`,
     options: [
-      "It was smaller than earlier rebellions",
-      "It was only about better working conditions",
-      "It was specifically organised to demand freedom (not just better conditions) and was the largest and most coordinated rebellion in Jamaican history",
-      "It succeeded in ending slavery immediately",
+      "It was the first time enslaved Jamaicans had ever resisted slavery.",
+      "Its large scale, organisation, and harsh suppression increased pressure in Britain for slavery to end.",
+      "It immediately made Jamaica independent from Britain.",
+      "It replaced plantation agriculture with free farming throughout Jamaica.",
     ],
-    correctAnswer: 2,
-    explanation: `Earlier uprisances often demanded better conditions; Sam Sharpe's rebellion explicitly claimed freedom — a qualitative shift that made it more ideologically radical.`
+    correctAnswer: 1,
+    explanation: `The Baptist War involved large numbers of enslaved people and was followed by severe punishment. News of the uprising and its suppression strengthened abolitionist pressure in Britain and helped accelerate the movement toward ending slavery.`
   },
   {
     id: 4,
@@ -437,16 +438,16 @@ const g5SsMod2Questions: Question[] = [
   {
     id: 30,
     type: "civics",
-    skill: "CARICOM Benefits",
-    question: `How does CARICOM's CARIBBEAN EXAMINATIONS COUNCIL (CXC/CSEC) benefit Jamaican students?`,
+    skill: "Regional Cooperation",
+    question: `How does the Caribbean Examinations Council (CXC) benefit Jamaican and other Caribbean students?`,
     options: [
-      "It only benefits Barbadian students",
-      "CXC has nothing to do with CARICOM",
-      "CXC provides regionally recognised qualifications that Jamaican graduates can use across CARICOM member states — a single exam system serving multiple countries",
-      "CXC is a Jamaican government organisation",
+      "It operates the national parliaments of CARICOM countries.",
+      "It provides regional examinations and qualifications recognised across the Caribbean and beyond.",
+      "It decides which Caribbean citizens may travel between islands.",
+      "It manages all universities and secondary schools in CARICOM.",
     ],
-    correctAnswer: 2,
-    explanation: `CXC's CSEC qualifications are recognised across the Caribbean — a Jamaican student's passes are accepted in Trinidad, Barbados, or Guyana, facilitating regional mobility.`
+    correctAnswer: 1,
+    explanation: `The Caribbean Examinations Council develops and administers regional examinations and qualifications, including CSEC and CAPE, used by students in Jamaica and other Caribbean countries. CXC is a regional examining body, not a department of CARICOM.`
   },
   {
     id: 31,
@@ -604,13 +605,10 @@ export default function G5SsMod2MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]                 = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]               = useState(60 * 60)
+  const [attemptQuestions, setAttemptQuestions] = useState<Question[]>([])
 
-  const availableQuestions = isPremium ? g5SsMod2Questions : g5SsMod2Questions.slice(0, FREE_QUESTION_LIMIT)
-  const totalQuestions = availableQuestions.length
-
-  useEffect(() => {
-    if (answers.length !== totalQuestions) setAnswers(new Array(totalQuestions).fill(null))
-  }, [totalQuestions, answers.length])
+  const availableQuestions = attemptQuestions
+  const totalQuestions = started ? availableQuestions.length : isPremium ? g5SsMod2Questions.length : FREE_QUESTION_LIMIT
 
   const formatTime = useCallback((s: number) => {
     const m = Math.floor(s / 60)
@@ -624,6 +622,18 @@ export default function G5SsMod2MockTest() {
   }, [started, showResults])
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
+
+  const startTest = () => {
+    const preparedQuestions = isPremium
+      ? prepareSocialStudiesAssessment(g5SsMod2Questions)
+      : prepareSocialStudiesPreview(g5SsMod2Questions, FREE_QUESTION_LIMIT)
+    setAttemptQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    setStarted(true)
+  }
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
 
@@ -670,7 +680,7 @@ export default function G5SsMod2MockTest() {
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setAttemptQuestions([]); setAnswers([]); setTimeLeft(60 * 60)
   }
 
   const q = availableQuestions[currentQuestion]
@@ -720,7 +730,7 @@ export default function G5SsMod2MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
           </CardContent>
         </Card>
       </main>

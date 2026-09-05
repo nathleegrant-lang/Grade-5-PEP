@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/auth-context"
+import { prepareSocialStudiesAssessment, prepareSocialStudiesPreview } from "@/lib/social-studies-assessment-engine"
 
 const FREE_QUESTION_LIMIT = 5
 
@@ -171,16 +172,16 @@ const g5SsMod3Questions: Question[] = [
   {
     id: 11,
     type: "geography",
-    skill: "Spatial Relationships",
-    question: `A farmer in St. Thomas notices that rains fall heavily on the western slopes of the mountains but rarely on the eastern slopes. This is BEST explained by:`,
+    skill: "Rainfall and Relief",
+    question: `Moist trade winds rise on one side of a mountain and descend on the other. Which side is likely to receive more rainfall?`,
     options: [
-      "The eastern slopes are higher",
-      "The western slopes are closer to a river",
-      "The windward (western) slopes face moisture-bearing trade winds and receive heavy rain; the leeward (eastern) side is in a rain shadow",
-      "The eastern slopes are deforested",
+      "The leeward side",
+      "The windward side",
+      "Both sides always receive exactly the same rainfall",
+      "The side farthest from every coastline",
     ],
-    correctAnswer: 2,
-    explanation: `Local rain shadow effects exist within ranges — the windward side faces prevailing moist winds; the leeward side is sheltered and drier. Even within a parish, rainfall varies dramatically.`
+    correctAnswer: 1,
+    explanation: `The windward side receives more rainfall because moist air is forced upward, cools, and condenses. Air descending on the leeward side is usually drier.`
   },
   {
     id: 12,
@@ -452,141 +453,141 @@ const g5SsMod3Questions: Question[] = [
     id: 31,
     type: "economics",
     skill: "Production Decisions",
-    question: `A manufacturing company in Jamaica decides to AUTOMATE part of its production line. What is a LIKELY NEGATIVE consequence?`,
+    question: `A small bakery has enough money to buy either a larger oven or new display shelves. Orders are often delayed because the oven is too small. Which choice would BEST help the bakery increase production?`,
     options: [
-      "The company becomes less productive",
-      "The company loses all its customers",
-      "Some workers may lose their jobs as machines replace human labour — the short-term cost for workers, even if long-term productivity gains benefit the company",
-      "Automation always improves wages for all workers",
+      "Buy the larger oven",
+      "Buy decorative shelves",
+      "Shorten the shop's opening hours",
+      "Print more menus",
     ],
-    correctAnswer: 2,
-    explanation: `Automation creates a productivity paradox — it can reduce costs and increase output for the company, but displace the workers whose tasks are now performed by machines.`
+    correctAnswer: 0,
+    explanation: `A larger oven directly addresses the production bottleneck by allowing more goods to be baked at one time.`
   },
   {
     id: 32,
     type: "economics",
-    skill: "Market Analysis",
-    question: `During the August mango season, mango prices FALL significantly in Jamaican markets. WHY?`,
+    skill: "Supply and Demand",
+    question: `After a very good mango harvest, many farmers bring mangoes to market at the same time. If demand stays about the same, what is MOST likely to happen?`,
     options: [
-      "Jamaicans suddenly dislike mangoes in August",
-      "The government lowers mango prices by law",
-      "Seasonal abundance — supply increases dramatically during harvest season — drives prices down as more mangoes compete for buyers",
-      "Mango importation increases in August",
+      "Prices may rise because farmers spent more money harvesting the larger crop.",
+      "Sellers may lower prices because the larger supply gives buyers more mangoes to choose from.",
+      "Prices may stay the same because harvest size does not affect the amount available for sale.",
+      "Sellers may raise prices because having more mangoes makes each mango harder to obtain.",
     ],
-    correctAnswer: 2,
-    explanation: `Basic supply and demand: when the mango harvest floods the market, supply outstrips demand, forcing prices down. After the season, supply drops and prices recover.`
+    correctAnswer: 1,
+    explanation: `When supply increases while demand stays similar, sellers may lower prices to attract buyers and sell the larger quantity available.`
   },
   {
     id: 33,
     type: "economics",
-    skill: "Tourism Economics",
-    question: `A hotel in Jamaica earns $1 million in revenue. Why might only a fraction of this stay in the Jamaican economy?`,
+    skill: "Tourism and Community",
+    question: `A hotel decides to buy vegetables from farmers in nearby communities instead of importing all its produce. What is one likely local benefit?`,
     options: [
-      "Because Jamaica taxes hotels heavily",
-      "Because tourists bring all their own food",
-      "Many hotels are foreign-owned and import food, furniture, and supplies — profits and spending 'leak' out of the economy to foreign owners and suppliers",
-      "All tourism revenue stays in Jamaica",
+      "Local farmers may earn more income from supplying the hotel.",
+      "The hotel will no longer need any workers.",
+      "Jamaica will stop importing every type of food.",
+      "Farming will become part of the tourism ministry.",
     ],
-    correctAnswer: 2,
-    explanation: `Economic leakage is a major issue in Caribbean tourism — foreign ownership means profits leave; imported food and goods reduce local economic benefit. Building linkages to local suppliers is key.`
+    correctAnswer: 0,
+    explanation: `Buying locally can connect tourism spending to nearby farms and businesses, allowing more tourism income to circulate in local communities.`
   },
   {
     id: 34,
     type: "economics",
-    skill: "Fiscal Policy",
-    question: `The Jamaican government REDUCES income tax. What is the MOST LIKELY SHORT-TERM effect?`,
+    skill: "Taxes and Public Services",
+    question: `Why do governments collect taxes from individuals and businesses?`,
     options: [
-      "Citizens immediately have less money",
-      "Government revenue rises automatically",
-      "Citizens have more disposable income — potentially stimulating consumer spending and economic growth",
-      "Unemployment rises immediately",
+      "To discourage people from using too many government services",
+      "To help fund shared services such as roads, schools, health care, and public safety",
+      "To make businesses and households earn approximately the same income",
+      "To pay only for services used directly by the people who paid each tax",
     ],
-    correctAnswer: 2,
-    explanation: `A tax cut leaves more money in citizens' pockets — if they spend it on local goods and services, this can stimulate economic activity. However, it may also reduce government revenue.`
+    correctAnswer: 1,
+    explanation: `Tax revenue helps governments pay for public services and infrastructure used by communities.`
   },
   {
     id: 35,
     type: "economics",
-    skill: "Agricultural Economics",
-    question: `WHY do some Jamaican farmers prefer to grow YAMS for the local market rather than BANANAS for export?`,
+    skill: "Agricultural Decisions",
+    question: `A farmer learns that the coming months may be unusually dry. Which decision BEST reduces the risk of wasting water?`,
     options: [
-      "Yams taste better than bananas",
-      "Local markets are more profitable for large quantities",
-      "Yams avoid the price volatility and strict quality standards of export markets — local market selling may be more predictable and require less compliance investment",
-      "Bananas are harder to grow",
+      "Water crops at midday when evaporation is greatest.",
+      "Use mulching and carefully timed irrigation.",
+      "Remove all shade and ground cover.",
+      "Flood every field every morning.",
     ],
-    correctAnswer: 2,
-    explanation: `Export markets (especially for bananas) are subject to strict EU or US grading standards and volatile world prices. Local market crops can be sold across a wider range of qualities and offer more price stability.`
+    correctAnswer: 1,
+    explanation: `Mulch helps soil retain moisture, and careful irrigation directs water to crops when it is needed instead of wasting it.`
   },
   {
     id: 36,
     type: "economics",
-    skill: "Community Economics",
-    question: `A COOPERATIVE BANK charges its members 12% interest on loans while a commercial bank charges 24%. WHY might a small business owner choose the co-op?`,
+    skill: "Financial Institutions",
+    question: `Why might members of a community choose to save through a credit union?`,
     options: [
-      "Commercial banks are safer",
-      "Co-ops always have more money to lend",
-      "The cooperative's lower interest rate means the business owner pays less for the same loan — reducing costs and making the business more financially viable",
-      "Co-ops are only for farmers",
+      "Credit unions allow members to save and may provide loans and other financial services.",
+      "Credit unions accept members' savings but are not allowed to provide loans.",
+      "Credit unions are government agencies that issue Jamaica's notes and coins.",
+      "Credit unions guarantee that every member earns a profit on money saved.",
     ],
-    correctAnswer: 2,
-    explanation: `Lower interest rates are a direct financial advantage — the co-op's member-ownership model means profits go back to members as lower rates rather than to external shareholders.`
+    correctAnswer: 0,
+    explanation: `Credit unions are member-based financial institutions that accept savings and may provide loans and other services to members.`
   },
   {
     id: 37,
     type: "economics",
-    skill: "International Trade",
-    question: `Jamaica benefits from preferential trade agreements with the USA and EU. WHY would losing these agreements hurt Jamaican exporters?`,
+    skill: "Trade",
+    question: `A Jamaican company sells bottled sauces to supermarkets in Trinidad and Tobago. For Jamaica, this transaction is an example of:`,
     options: [
-      "Because Jamaica doesn't export to the USA or EU",
-      "Preferential access has no value",
-      "Jamaican products would face higher tariffs in those markets, making them more expensive and less competitive compared to products from countries with better trade access",
-      "Trade agreements only help large countries",
+      "importing",
+      "exporting",
+      "borrowing",
+      "taxation",
     ],
-    correctAnswer: 2,
-    explanation: `Preferential access allows Jamaican products (like coffee and sugar) to enter major markets at lower or zero tariffs — losing this advantage would make Jamaican exports pricier and less competitive internationally.`
+    correctAnswer: 1,
+    explanation: `The sauces are produced in Jamaica and sold to buyers in another country, so they are Jamaican exports.`
   },
   {
     id: 38,
     type: "economics",
-    skill: "Environmental Economics",
-    question: `A sugar factory pollutes a river used by fishing communities downstream. Who BEARS the ECONOMIC COST of this pollution?`,
+    skill: "Community Costs",
+    question: `A factory dumps waste into a river used by nearby residents and fishers. Which is the BEST example of a wider community cost?`,
     options: [
-      "The factory alone pays",
-      "Nobody bears a cost",
-      "The fishing communities — who lose income from reduced fish catches — and the public, who may face health costs and water treatment expenses",
-      "The government pays all costs automatically",
+      "The factory may have to spend more money to improve its waste-treatment system.",
+      "Residents may face polluted water while fishers may lose income because fish stocks are harmed.",
+      "The factory may temporarily produce fewer goods while equipment is being repaired.",
+      "Workers may need additional training before they can operate cleaner production equipment.",
     ],
-    correctAnswer: 2,
-    explanation: `Environmental economics calls these 'negative externalities' — costs borne by third parties who had no part in creating the pollution. The factory gains from avoiding waste treatment; communities lose.`
+    correctAnswer: 1,
+    explanation: `Pollution can impose costs on people who did not cause it, such as poorer water quality and reduced fishing income.`
   },
   {
     id: 39,
     type: "economics",
-    skill: "Economic Planning",
-    question: `A student studying economics learns that Jamaica has a SMALL, OPEN ECONOMY. What does this mean?`,
+    skill: "Budgeting",
+    question: `A family earns J$90,000 for the month. After planning essential expenses of J$78,000, what is the MOST sensible use of part of the remaining money?`,
     options: [
-      "Jamaica's economy is closed to trade",
-      "Jamaica only trades within CARICOM",
-      "Jamaica's economy is highly dependent on international trade — external factors like global oil prices, interest rates, and demand for tourism heavily influence Jamaica's economic performance",
-      "Jamaica is too poor to trade internationally",
+      "Spend all of it immediately because it is not in the expense list.",
+      "Set aside some for savings or unexpected expenses.",
+      "Borrow more money before deciding what is needed.",
+      "Ignore the budget and begin again next month.",
     ],
-    correctAnswer: 2,
-    explanation: `A small, open economy is significantly influenced by external factors. Jamaica imports most of its fuel, food, and manufactured goods — making it vulnerable to global price changes.`
+    correctAnswer: 1,
+    explanation: `A budget helps a family meet essential expenses and plan for savings and unexpected needs with money that remains.`
   },
   {
     id: 40,
     type: "economics",
-    skill: "Financial Decision",
-    question: `A Jamaican family earns $100,000 per month and spends $95,000. They are:`,
+    skill: "Saving and Planning",
+    question: `Keisha wants to buy a school tablet in six months. Which plan BEST shows purposeful saving?`,
     options: [
-      "In serious debt",
-      "Breaking even",
-      "Saving $5,000 per month — living within their means and building financial security",
-      "Spending irresponsibly",
+      "Save a fixed amount from her allowance regularly and track her progress.",
+      "Spend her allowance first and save only if something happens to remain.",
+      "Borrow the full cost immediately without comparing options.",
+      "Stop recording how much money she has.",
     ],
-    correctAnswer: 2,
-    explanation: `Income ($100,000) minus expenditure ($95,000) = $5,000 saved. This family is living within its means and building savings — an example of positive financial management.`
+    correctAnswer: 0,
+    explanation: `Regularly setting aside a planned amount and tracking progress makes it more likely that Keisha will reach her savings goal.`
   }
 ]
 
@@ -604,13 +605,10 @@ export default function G5SsMod3MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]                 = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]               = useState(60 * 60)
+  const [attemptQuestions, setAttemptQuestions] = useState<Question[]>([])
 
-  const availableQuestions = isPremium ? g5SsMod3Questions : g5SsMod3Questions.slice(0, FREE_QUESTION_LIMIT)
-  const totalQuestions = availableQuestions.length
-
-  useEffect(() => {
-    if (answers.length !== totalQuestions) setAnswers(new Array(totalQuestions).fill(null))
-  }, [totalQuestions, answers.length])
+  const availableQuestions = attemptQuestions
+  const totalQuestions = started ? availableQuestions.length : isPremium ? g5SsMod3Questions.length : FREE_QUESTION_LIMIT
 
   const formatTime = useCallback((s: number) => {
     const m = Math.floor(s / 60)
@@ -624,6 +622,18 @@ export default function G5SsMod3MockTest() {
   }, [started, showResults])
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
+
+  const startTest = () => {
+    const preparedQuestions = isPremium
+      ? prepareSocialStudiesAssessment(g5SsMod3Questions)
+      : prepareSocialStudiesPreview(g5SsMod3Questions, FREE_QUESTION_LIMIT)
+    setAttemptQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    setStarted(true)
+  }
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
 
@@ -670,7 +680,7 @@ export default function G5SsMod3MockTest() {
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setAttemptQuestions([]); setAnswers([]); setTimeLeft(60 * 60)
   }
 
   const q = availableQuestions[currentQuestion]
@@ -720,7 +730,7 @@ export default function G5SsMod3MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
           </CardContent>
         </Card>
       </main>
