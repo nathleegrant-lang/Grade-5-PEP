@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/auth-context"
+import { prepareSocialStudiesAssessment, prepareSocialStudiesPreview } from "@/lib/social-studies-assessment-engine"
 
 const FREE_QUESTION_LIMIT = 5
 
@@ -73,16 +74,16 @@ const g5SsEasy5Questions: Question[] = [
   {
     id: 4,
     type: "history",
-    skill: "National Heroes",
-    question: `Which National Hero wrote the poem 'If We Must Die'?`,
+    skill: "Jamaican Writers",
+    question: `Which Jamaican writer wrote the poem "If We Must Die"?`,
     options: [
       "Marcus Garvey",
       "Norman Manley",
-      "Claude McKay (not a National Hero, but influential)",
-      "Sam Sharpe",
+      "Claude McKay",
+      "Louise Bennett",
     ],
-    correctAnswer: 0,
-    explanation: `Marcus Garvey was known for powerful speeches and writings. Note: 'If We Must Die' was written by Claude McKay (1919), not a National Hero, but a great Jamaican poet. Marcus Garvey's slogan 'One God, One Aim, One Destiny' is famous. This question requires careful rechecking.`
+    correctAnswer: 2,
+    explanation: `Claude McKay, the Jamaican-born poet and writer, wrote "If We Must Die" in 1919. He is an important Jamaican literary figure but is not one of Jamaica's National Heroes.`
   },
   {
     id: 5,
@@ -242,15 +243,15 @@ const g5SsEasy5Questions: Question[] = [
     id: 16,
     type: "geography",
     skill: "Physical Features",
-    question: `Jamaica's BLACK RIVER is significant because it is:`,
+    question: `Which Jamaican river is especially well known for having a long navigable section?`,
     options: [
-      "The fastest-flowing river",
-      "The deepest river",
-      "The only navigable river in Jamaica",
-      "The shortest river",
+      "Black River",
+      "Rio Minho",
+      "Rio Cobre",
+      "Great River",
     ],
-    correctAnswer: 2,
-    explanation: `The Black River in St. Elizabeth is Jamaica's most navigable river and flows through the Black River Morass (wetland), an important ecosystem.`
+    correctAnswer: 0,
+    explanation: `Black River in St. Elizabeth is especially well known for its long navigable section and for flowing through the Black River wetland area.`
   },
   {
     id: 17,
@@ -270,15 +271,15 @@ const g5SsEasy5Questions: Question[] = [
     id: 18,
     type: "geography",
     skill: "Maps",
-    question: `On a map, what does RED usually represent?`,
+    question: `A map legend shows red lines as roads. What does a red line represent?`,
     options: [
-      "Water bodies such as rivers and seas",
-      "Roads or main highways",
-      "Forested areas",
+      "A road",
+      "A river",
+      "A forested area",
       "Farmland",
     ],
-    correctAnswer: 1,
-    explanation: `On most maps, red lines indicate roads or highways. However, map colours vary by type — always check the legend.`
+    correctAnswer: 0,
+    explanation: `The map legend states that red lines represent roads, so a red line on this map represents a road.`
   },
   {
     id: 19,
@@ -604,13 +605,10 @@ export default function G5SsEasy5MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]                 = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]               = useState(60 * 60)
+  const [attemptQuestions, setAttemptQuestions] = useState<Question[]>([])
 
-  const availableQuestions = isPremium ? g5SsEasy5Questions : g5SsEasy5Questions.slice(0, FREE_QUESTION_LIMIT)
-  const totalQuestions = availableQuestions.length
-
-  useEffect(() => {
-    if (answers.length !== totalQuestions) setAnswers(new Array(totalQuestions).fill(null))
-  }, [totalQuestions, answers.length])
+  const availableQuestions = attemptQuestions
+  const totalQuestions = started ? availableQuestions.length : isPremium ? g5SsEasy5Questions.length : FREE_QUESTION_LIMIT
 
   const formatTime = useCallback((s: number) => {
     const m = Math.floor(s / 60)
@@ -624,6 +622,18 @@ export default function G5SsEasy5MockTest() {
   }, [started, showResults])
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
+
+  const startTest = () => {
+    const preparedQuestions = isPremium
+      ? prepareSocialStudiesAssessment(g5SsEasy5Questions)
+      : prepareSocialStudiesPreview(g5SsEasy5Questions, FREE_QUESTION_LIMIT)
+    setAttemptQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    setStarted(true)
+  }
 
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
@@ -671,7 +681,7 @@ export default function G5SsEasy5MockTest() {
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setAttemptQuestions([]); setAnswers([]); setTimeLeft(60 * 60)
   }
 
   const q = availableQuestions[currentQuestion]
@@ -721,7 +731,7 @@ export default function G5SsEasy5MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
           </CardContent>
         </Card>
       </main>
