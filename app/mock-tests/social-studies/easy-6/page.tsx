@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/auth-context"
+import { prepareSocialStudiesAssessment, prepareSocialStudiesPreview } from "@/lib/social-studies-assessment-engine"
 
 const FREE_QUESTION_LIMIT = 5
 
@@ -129,16 +130,16 @@ const g5SsEasy6Questions: Question[] = [
   {
     id: 8,
     type: "history",
-    skill: "Independence",
-    question: `Jamaica's first constitution was introduced in:`,
+    skill: "Electoral History",
+    question: `What important voting change was introduced in Jamaica in 1944?`,
     options: [
-      "1962 (Independence)",
-      "1944 (Universal Adult Suffrage)",
-      "1838 (Emancipation)",
-      "1865 (after Morant Bay)",
+      "Only landowners were allowed to vote.",
+      "Universal Adult Suffrage gave all qualified adults the right to vote.",
+      "Jamaica became independent from Britain.",
+      "CARICOM was established.",
     ],
     correctAnswer: 1,
-    explanation: `The 1944 Constitution introduced Universal Adult Suffrage to Jamaica — allowing all adults to vote — a key step on the road to full independence.`
+    explanation: `Universal Adult Suffrage was introduced in Jamaica in 1944, greatly widening the right to vote and allowing qualified adults to take part in elections regardless of property ownership.`
   },
   {
     id: 9,
@@ -385,12 +386,12 @@ const g5SsEasy6Questions: Question[] = [
     question: `What is the CSME — Caribbean Single Market and Economy?`,
     options: [
       "A Caribbean sports competition",
-      "A CARICOM initiative creating a single economic space allowing free movement of goods, services, capital, and people",
+      "A CARICOM arrangement that supports regional trade, services, capital, and the movement of eligible skilled CARICOM nationals under agreed rules",
       "A banking system only",
       "A Caribbean environmental programme",
     ],
     correctAnswer: 1,
-    explanation: `The CSME allows CARICOM member states to operate as a single market — citizens can move and work freely, and goods and services flow without trade barriers.`
+    explanation: `The CSME promotes regional economic integration. It supports the movement of goods, services and capital and provides for the movement of eligible skilled CARICOM nationals and other approved categories under agreed rules; it does not give every person an unrestricted right to work anywhere in CARICOM.`
   },
   {
     id: 27,
@@ -466,15 +467,15 @@ const g5SsEasy6Questions: Question[] = [
     id: 32,
     type: "economics",
     skill: "Agriculture",
-    question: `What does the AGRICULTURAL DEVELOPMENT CORPORATION (ADC) do in Jamaica?`,
+    question: `Which Jamaican organisation provides farmers with agricultural extension services, training, and technical advice?`,
     options: [
-      "Manufactures agricultural equipment",
-      "Provides land, infrastructure, and support for agricultural development across Jamaica",
-      "Imports food for Jamaica",
-      "Trains police officers",
+      "Jamaica Constabulary Force (JCF)",
+      "Rural Agricultural Development Authority (RADA)",
+      "National Water Commission (NWC)",
+      "Jamaica Tourist Board (JTB)",
     ],
     correctAnswer: 1,
-    explanation: `The ADC develops, manages, and promotes agricultural land and infrastructure — helping to modernise and support Jamaican agriculture.`
+    explanation: `The Rural Agricultural Development Authority (RADA) supports farmers through agricultural extension services, technical advice, training, and programmes that help improve farm production.`
   },
   {
     id: 33,
@@ -571,7 +572,7 @@ const g5SsEasy6Questions: Question[] = [
       "Non-renewable resources are more valuable",
       "Renewable resources are only found in rivers",
     ],
-    correctAnswer: 0,
+    correctAnswer: 1,
     explanation: `Renewable resources (like forests, water, wind, solar) replenish naturally. Non-renewable resources (like oil, bauxite, coal) take millions of years to form and cannot be practically replaced once used.`
   },
   {
@@ -604,13 +605,10 @@ export default function G5SsEasy6MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]                 = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]               = useState(60 * 60)
+  const [attemptQuestions, setAttemptQuestions] = useState<Question[]>([])
 
-  const availableQuestions = isPremium ? g5SsEasy6Questions : g5SsEasy6Questions.slice(0, FREE_QUESTION_LIMIT)
-  const totalQuestions = availableQuestions.length
-
-  useEffect(() => {
-    if (answers.length !== totalQuestions) setAnswers(new Array(totalQuestions).fill(null))
-  }, [totalQuestions, answers.length])
+  const availableQuestions = attemptQuestions
+  const totalQuestions = started ? availableQuestions.length : isPremium ? g5SsEasy6Questions.length : FREE_QUESTION_LIMIT
 
   const formatTime = useCallback((s: number) => {
     const m = Math.floor(s / 60)
@@ -624,6 +622,18 @@ export default function G5SsEasy6MockTest() {
   }, [started, showResults])
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
+
+  const startTest = () => {
+    const preparedQuestions = isPremium
+      ? prepareSocialStudiesAssessment(g5SsEasy6Questions)
+      : prepareSocialStudiesPreview(g5SsEasy6Questions, FREE_QUESTION_LIMIT)
+    setAttemptQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    setStarted(true)
+  }
 
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
@@ -671,7 +681,7 @@ export default function G5SsEasy6MockTest() {
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setAttemptQuestions([]); setAnswers([]); setTimeLeft(60 * 60)
   }
 
   const q = availableQuestions[currentQuestion]
@@ -721,7 +731,7 @@ export default function G5SsEasy6MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
           </CardContent>
         </Card>
       </main>
