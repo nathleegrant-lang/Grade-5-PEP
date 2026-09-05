@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/auth-context"
+import { prepareSocialStudiesAssessment, prepareSocialStudiesPreview } from "@/lib/social-studies-assessment-engine"
 
 const FREE_QUESTION_LIMIT = 5
 
@@ -144,7 +145,7 @@ const g5SsEasy2Questions: Question[] = [
     id: 9,
     type: "history",
     skill: "Colonial History",
-    question: `What system of free labour replaced slavery after emancipation in 1834?`,
+    question: `Which transitional system followed the legal abolition of slavery in 1834 before full freedom in 1838?`,
     options: [
       "Indentureship",
       "Apprenticeship",
@@ -152,21 +153,21 @@ const g5SsEasy2Questions: Question[] = [
       "Bonded labour",
     ],
     correctAnswer: 1,
-    explanation: `The Apprenticeship system (1834–1838) required formerly enslaved people to continue working for their former enslavers for a transition period before full freedom.`
+    explanation: `After slavery was legally abolished in 1834, formerly enslaved people were still compelled to work under the Apprenticeship system. Apprenticeship ended in 1838, when full freedom came.`
   },
   {
     id: 10,
     type: "history",
     skill: "Cultural Heritage",
-    question: `Which of Jamaica's National Heroes is featured on the $1,000 banknote?`,
+    question: `Which two National Heroes appear together on Jamaica's current $1,000 polymer banknote?`,
     options: [
-      "Paul Bogle",
-      "Norman Manley",
-      "Marcus Garvey",
-      "Nanny of the Maroons",
+      "Nanny of the Maroons and Sam Sharpe",
+      "Sir Alexander Bustamante and Norman Manley",
+      "Marcus Garvey and George William Gordon",
+      "Paul Bogle and Nanny of the Maroons",
     ],
-    correctAnswer: 3,
-    explanation: `Nanny of the Maroons appears on the Jamaican $1,000 banknote.`
+    correctAnswer: 1,
+    explanation: `Sir Alexander Bustamante and Norman Manley appear together on Jamaica's current $1,000 polymer banknote.`
   },
   {
     id: 11,
@@ -242,15 +243,15 @@ const g5SsEasy2Questions: Question[] = [
     id: 16,
     type: "geography",
     skill: "Natural Disasters",
-    question: `Which type of natural disaster is MOST common in Jamaica and can cause widespread damage?`,
+    question: `Which tropical weather system can produce destructive winds, storm surge, and heavy rainfall during the Atlantic hurricane season?`,
     options: [
-      "Tornadoes",
-      "Earthquakes",
-      "Hurricanes",
-      "Tsunamis",
+      "Tornado",
+      "Earthquake",
+      "Hurricane",
+      "Tsunami",
     ],
     correctAnswer: 2,
-    explanation: `Hurricanes are the most frequent natural disaster threat to Jamaica, occurring during the Atlantic hurricane season (June–November).`
+    explanation: `A hurricane is a powerful tropical weather system that can bring destructive winds, storm surge, and very heavy rainfall during the Atlantic hurricane season.`
   },
   {
     id: 17,
@@ -343,12 +344,12 @@ const g5SsEasy2Questions: Question[] = [
     question: `Members of the Senate are:`,
     options: [
       "Elected in general elections",
-      "Appointed — 13 by the Prime Minister and 8 by the Leader of the Opposition",
+      "Appointed by the Governor-General: 13 on the advice of the Prime Minister and 8 on the advice of the Leader of the Opposition",
       "Chosen by the public in a special vote",
       "Automatically appointed based on education",
     ],
     correctAnswer: 1,
-    explanation: `The 21 senators are all appointed: 13 by the Prime Minister and 8 by the Leader of the Opposition, on the advice of the Governor General.`
+    explanation: `All 21 Senators are formally appointed by the Governor-General: 13 on the advice of the Prime Minister and 8 on the advice of the Leader of the Opposition.`
   },
   {
     id: 24,
@@ -404,13 +405,13 @@ const g5SsEasy2Questions: Question[] = [
       "1980",
     ],
     correctAnswer: 2,
-    explanation: `CARICOM was established on August 1, 1973, when the Treaty of Chaguaramas was signed in Trinidad and Tobago.`
+    explanation: `CARICOM was established in 1973. The Treaty of Chaguaramas was signed on July 4, 1973.`
   },
   {
     id: 28,
     type: "civics",
     skill: "Community",
-    question: `A Parish Council is an example of:`,
+    question: `A Municipal Corporation is an example of:`,
     options: [
       "National government",
       "Regional government",
@@ -418,7 +419,7 @@ const g5SsEasy2Questions: Question[] = [
       "Federal government",
     ],
     correctAnswer: 2,
-    explanation: `Parish Councils are local government bodies in Jamaica, responsible for managing roads, markets, public spaces, and local services.`
+    explanation: `Municipal Corporations are local government authorities responsible for many roads, markets, public spaces, and other local services in Jamaica.`
   },
   {
     id: 29,
@@ -604,13 +605,10 @@ export default function G5SsEasy2MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]                 = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]               = useState(60 * 60)
+  const [attemptQuestions, setAttemptQuestions] = useState<Question[]>([])
 
-  const availableQuestions = isPremium ? g5SsEasy2Questions : g5SsEasy2Questions.slice(0, FREE_QUESTION_LIMIT)
-  const totalQuestions = availableQuestions.length
-
-  useEffect(() => {
-    if (answers.length !== totalQuestions) setAnswers(new Array(totalQuestions).fill(null))
-  }, [totalQuestions, answers.length])
+  const availableQuestions = attemptQuestions
+  const totalQuestions = started ? availableQuestions.length : isPremium ? g5SsEasy2Questions.length : FREE_QUESTION_LIMIT
 
   const formatTime = useCallback((s: number) => {
     const m = Math.floor(s / 60)
@@ -624,6 +622,18 @@ export default function G5SsEasy2MockTest() {
   }, [started, showResults])
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
+
+  const startTest = () => {
+    const preparedQuestions = isPremium
+      ? prepareSocialStudiesAssessment(g5SsEasy2Questions)
+      : prepareSocialStudiesPreview(g5SsEasy2Questions, FREE_QUESTION_LIMIT)
+    setAttemptQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    setStarted(true)
+  }
 
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
@@ -671,7 +681,7 @@ export default function G5SsEasy2MockTest() {
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setAttemptQuestions([]); setAnswers([]); setTimeLeft(60 * 60)
   }
 
   const q = availableQuestions[currentQuestion]
@@ -721,7 +731,7 @@ export default function G5SsEasy2MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
           </CardContent>
         </Card>
       </main>
