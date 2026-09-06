@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { useAuth } from "@/contexts/auth-context"
 import { getSupabaseBrowserClient } from "@/lib/supabase/client"
-import { calculateExpiry, getPlanLabel } from "@/lib/subscriptions"
+import { getPlanLabel } from "@/lib/subscriptions"
 import type { PaymentRecord, PlanCode, PaymentStatus } from "@/lib/types"
 import { ShieldCheck, CheckCircle2, XCircle } from "lucide-react"
 
@@ -27,6 +27,7 @@ type PaymentRow = {
   submitted_at: string
   verified_at: string | null
   rejection_reason: string | null
+  receipt_number: string | null
   parent_email: string | null
   parent_name: string | null
 }
@@ -46,13 +47,10 @@ function mapPaymentRow(row: PaymentRow): PaymentRecord {
     submittedAt: row.submitted_at,
     verifiedAt: row.verified_at,
     rejectionReason: row.rejection_reason,
+    receiptNumber: row.receipt_number,
     parentEmail: row.parent_email,
     parentName: row.parent_name,
   }
-}
-
-function getMaxStudents(planCode: PlanCode) {
-  return planCode === "premium_family_monthly" ? 4 : 1
 }
 
 export default function AdminPaymentsPage() {
@@ -66,6 +64,31 @@ export default function AdminPaymentsPage() {
   const [message, setMessage] = useState("")
   const [error, setError] = useState("")
   const [rejectNotes, setRejectNotes] = useState<Record<string, string>>({})
+  const [cash, setCash] = useState({
+    parentId: "",
+    planCode: "standard_yearly" as PlanCode,
+    actualAmountJmd: "30000",
+    currency: "JMD",
+    paidAt: new Date().toISOString().slice(0, 10),
+    offlineReference: "",
+    note: "",
+    studentIds: "",
+  })
+
+  const callAdminAction = async (body: object) => {
+    const { data } = await supabase.auth.getSession()
+    const response = await fetch("/api/admin/payments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${data.session?.access_token || ""}`,
+      },
+      body: JSON.stringify(body),
+    })
+    const payload = await response.json()
+    if (!response.ok) throw new Error(payload.error || "Payment operation failed.")
+    return payload.result
+  }
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
@@ -105,46 +128,11 @@ export default function AdminPaymentsPage() {
     setError("")
 
     try {
-      const now = new Date()
-      const expiresAt = calculateExpiry(payment.planCode)
-
-      await supabase
-        .from("payments")
-        .update({
-          status: "verified",
-          verified_at: now.toISOString(),
-          rejection_reason: null,
-        })
-        .eq("id", payment.id)
-
-      const { data: existingSubscription } = await supabase
-        .from("subscriptions")
-        .select("id")
-        .eq("parent_id", payment.parentId)
-        .eq("grade", "grade5")
-        .order("created_at", { ascending: false })
-        .limit(1)
-        .maybeSingle()
-
-      const subscriptionPayload = {
-        parent_id: payment.parentId,
-        grade: "grade5" as const,
-        plan_code: payment.planCode,
-        status: "active" as const,
-        starts_at: now.toISOString(),
-        expires_at: expiresAt?.toISOString() || null,
-        max_students: getMaxStudents(payment.planCode),
-        payment_id: payment.id,
-      }
-
-      if (existingSubscription?.id) {
-        await supabase.from("subscriptions").update(subscriptionPayload).eq("id", existingSubscription.id)
-      } else {
-        await supabase.from("subscriptions").insert(subscriptionPayload)
-      }
-
-      setMessage("Payment approved and access activated.")
+      const result = await callAdminAction({ action: "activate", paymentId: payment.id })
+      setMessage(`Payment approved. Receipt ${result.receiptNumber}.`)
       await loadPayments()
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not approve payment.")
     } finally {
       setWorkingId(null)
     }
@@ -162,17 +150,38 @@ export default function AdminPaymentsPage() {
     setMessage("")
     setError("")
 
-    await supabase
-      .from("payments")
-      .update({
-        status: "rejected",
-        rejection_reason: reason,
-      })
-      .eq("id", payment.id)
+    try {
+      await callAdminAction({ action: "reject", paymentId: payment.id, reason })
+      setMessage("Payment rejected.")
+      await loadPayments()
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not reject payment.")
+    } finally {
+      setWorkingId(null)
+    }
+  }
 
-    setMessage("Payment rejected.")
-    await loadPayments()
-    setWorkingId(null)
+  const handleRecordCash = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setWorkingId("cash")
+    setMessage("")
+    setError("")
+    try {
+      const result = await callAdminAction({
+        action: "record_cash",
+        ...cash,
+        actualAmountJmd: Number(cash.actualAmountJmd),
+        paidAt: new Date(`${cash.paidAt}T12:00:00Z`).toISOString(),
+        studentIds: cash.studentIds.split(",").map((id) => id.trim()).filter(Boolean),
+      })
+      setMessage(`Offline Cash payment recorded and activated. Receipt ${result.receiptNumber}.`)
+      setCash((value) => ({ ...value, parentId: "", offlineReference: "", note: "", studentIds: "" }))
+      await loadPayments()
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not record Cash payment.")
+    } finally {
+      setWorkingId(null)
+    }
   }
 
   if (isLoading || loadingPayments) {
@@ -202,6 +211,32 @@ export default function AdminPaymentsPage() {
 
         {message && <div className="text-green-600">{message}</div>}
         {error && <div className="text-red-600">{error}</div>}
+
+        <Card className="border-amber-300">
+          <CardHeader>
+            <CardTitle>Record Offline Payment</CardTitle>
+            <CardDescription>Exceptional administrator-only Cash recording. The reference is the permanent idempotency key.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleRecordCash} className="grid gap-3 md:grid-cols-2">
+              <input className="rounded-md border p-2" required placeholder="Parent UUID" value={cash.parentId} onChange={(e) => setCash({ ...cash, parentId: e.target.value })} />
+              <select className="rounded-md border p-2" value={cash.planCode} onChange={(e) => setCash({ ...cash, planCode: e.target.value as PlanCode, actualAmountJmd: e.target.value.includes("family") ? (e.target.value.includes("yearly") ? "100000" : "10000") : (e.target.value.includes("yearly") ? "30000" : e.target.value.includes("monthly") ? "3000" : "1000") })}>
+                <option value="standard_weekly">Standard Weekly</option>
+                <option value="standard_monthly">Standard Monthly</option>
+                <option value="standard_yearly">Standard Yearly</option>
+                <option value="premium_family_monthly">Premium Family Monthly</option>
+                <option value="premium_family_yearly">Premium Family Yearly</option>
+              </select>
+              <input className="rounded-md border p-2" required type="number" min="0" step="0.01" placeholder="Actual amount (JMD)" value={cash.actualAmountJmd} onChange={(e) => setCash({ ...cash, actualAmountJmd: e.target.value })} />
+              <input className="rounded-md border p-2" required value={cash.currency} onChange={(e) => setCash({ ...cash, currency: e.target.value.toUpperCase() })} aria-label="Currency" />
+              <input className="rounded-md border p-2" required type="date" value={cash.paidAt} onChange={(e) => setCash({ ...cash, paidAt: e.target.value })} />
+              <input className="rounded-md border p-2" required placeholder="Unique Cash reference" value={cash.offlineReference} onChange={(e) => setCash({ ...cash, offlineReference: e.target.value })} />
+              <input className="rounded-md border p-2 md:col-span-2" placeholder="Applicable student UUIDs, comma-separated" value={cash.studentIds} onChange={(e) => setCash({ ...cash, studentIds: e.target.value })} />
+              <textarea className="rounded-md border p-2 md:col-span-2" placeholder="Audit note (optional)" value={cash.note} onChange={(e) => setCash({ ...cash, note: e.target.value })} />
+              <Button type="submit" disabled={workingId === "cash"} className="md:col-span-2">{workingId === "cash" ? "Recording..." : "Record and Activate Cash Payment"}</Button>
+            </form>
+          </CardContent>
+        </Card>
 
         <Card className="border-sky-200">
           <CardHeader>
@@ -265,6 +300,12 @@ export default function AdminPaymentsPage() {
                 {payment.rejectionReason && (
                   <div className="rounded-lg bg-red-50 border border-red-200 p-3 text-red-700 text-sm">
                     Rejection Reason: {payment.rejectionReason}
+                  </div>
+                )}
+                {payment.receiptNumber && (
+                  <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-sm">
+                    <span className="font-medium text-emerald-900">Receipt:</span>{" "}
+                    <span className="font-mono text-emerald-800">{payment.receiptNumber}</span>
                   </div>
                 )}
 

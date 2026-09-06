@@ -231,7 +231,7 @@ export default function PricingPage() {
                       className={`w-full ${
                         tier.popular
                           ? "bg-amber-500 hover:bg-amber-600 text-white"
-                          : tier.id === "premium_family_monthly"
+                          : tier.id === "premium_family_monthly" || tier.id === "premium_family_yearly"
                           ? "bg-sky-600 hover:bg-sky-700 text-white"
                           : "bg-slate-200 hover:bg-slate-300 text-slate-700"
                       }`}

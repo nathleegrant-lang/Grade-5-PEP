@@ -170,8 +170,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           .eq("parent_id", authUser.id)
           .eq("grade", "grade5")
           .in("status", ["active", "pending"])
-          .order("created_at", { ascending: false })
-          .limit(1),
+          .order("starts_at", { ascending: false }),
         supabase
           .from("students")
           .select("id, full_name, grade_level, subscription_id, created_at")
@@ -269,9 +268,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
       }
 
-      const subscription = mapSubscription(
-        (subscriptionRows?.[0] as SupabaseSubscriptionRow | undefined) ?? null,
-      )
+      const now = new Date()
+      const effectiveSubscription = (subscriptionRows ?? []).find((candidate) => {
+        const row = candidate as SupabaseSubscriptionRow
+        return (
+          row.status === "active" &&
+          (!row.starts_at || new Date(row.starts_at) <= now) &&
+          Boolean(row.expires_at && new Date(row.expires_at) > now)
+        )
+      }) as SupabaseSubscriptionRow | undefined
+      const subscription = mapSubscription(effectiveSubscription ?? null)
       const latestVerifiedPayment = mapPayment((paymentRows?.[0] as SupabasePaymentRow | undefined) ?? null)
       const active = isSubscriptionActive(subscription) || isPaymentAccessActive(latestVerifiedPayment)
 
@@ -472,6 +478,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     if (planCode === "standard_monthly" || planCode === "premium_family_monthly") {
       date.setMonth(date.getMonth() + 1)
+      return date
+    }
+
+    if (planCode === "standard_yearly" || planCode === "premium_family_yearly") {
+      date.setMonth(date.getMonth() + 12)
       return date
     }
 
