@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs"
 import test from "node:test"
 
 const migration = readFileSync("supabase/migrations/20260906000000_grade5_yearly_and_offline_cash.sql", "utf8")
+const backfillMigration = readFileSync("supabase/migrations/20260906224451_legacy_grade5_entitlement_backfill.sql", "utf8")
 const adminPage = readFileSync("app/admin/payments/page.tsx", "utf8")
 const pricingPage = readFileSync("app/pricing/page.tsx", "utf8")
 const checkoutPage = readFileSync("app/checkout/page.tsx", "utf8")
@@ -37,6 +38,96 @@ function activate(state, reference, planCode, now) {
   state.terms.push(result)
   state.receipts.set(reference, result)
   return result
+}
+
+const legacyEvidence = Object.freeze({
+  paymentId: "d1e603ad-4b9c-4f4f-b213-1941bf228a1a",
+  historicalSubscriptionId: "91d75058-6640-4b29-99f0-4e7b4df4c2ee",
+  historicalPaymentId: "8422f298-e5a5-48e6-b710-e16a54d5c211",
+  startsAt: "2026-09-06T03:19:38.035Z",
+  expiresAt: "2026-09-13T03:19:38.035Z",
+})
+
+function legacyFixture() {
+  return {
+    payment: {
+      id: legacyEvidence.paymentId,
+      parentId: "synthetic-parent",
+      grade: "grade5",
+      planCode: "standard_weekly",
+      amountJmd: 1000,
+      method: "bank_transfer",
+      status: "verified",
+      verifiedAt: legacyEvidence.startsAt,
+      referenceSha256: "79390986bbba18cf5c5377fce37cc1fa15f6c631e16a0d8ead4b70a4ae545efd",
+    },
+    subscriptions: [{
+      id: legacyEvidence.historicalSubscriptionId,
+      parentId: "synthetic-parent",
+      grade: "grade5",
+      planCode: "standard_weekly",
+      status: "active",
+      startsAt: "2026-04-29T03:09:37.248Z",
+      expiresAt: "2026-05-06T03:09:37.248Z",
+      maxStudents: 1,
+      paymentId: legacyEvidence.historicalPaymentId,
+    }],
+    audit: [],
+  }
+}
+
+function runSyntheticLegacyBackfill(state) {
+  const payment = state.payment
+  const paymentFactsMatch =
+    payment.id === legacyEvidence.paymentId &&
+    payment.grade === "grade5" &&
+    payment.planCode === "standard_weekly" &&
+    payment.amountJmd === 1000 &&
+    payment.method === "bank_transfer" &&
+    payment.status === "verified" &&
+    payment.verifiedAt === legacyEvidence.startsAt &&
+    payment.referenceSha256 === "79390986bbba18cf5c5377fce37cc1fa15f6c631e16a0d8ead4b70a4ae545efd"
+  if (!paymentFactsMatch) throw new Error("payment facts changed")
+
+  const linked = state.subscriptions.find((row) => row.paymentId === payment.id)
+  if (linked) {
+    const exact = linked.parentId === payment.parentId &&
+      linked.planCode === "standard_weekly" &&
+      linked.startsAt === legacyEvidence.startsAt &&
+      linked.expiresAt === legacyEvidence.expiresAt &&
+      linked.maxStudents === 1
+    if (!exact) throw new Error("conflicting linked subscription")
+    return linked
+  }
+
+  if (state.subscriptions.some((row) =>
+    row.id !== legacyEvidence.historicalSubscriptionId &&
+    row.status === "active" && row.expiresAt > legacyEvidence.startsAt)) {
+    throw new Error("another effective subscription")
+  }
+
+  const historical = state.subscriptions.find((row) => row.id === legacyEvidence.historicalSubscriptionId)
+  if (!historical || historical.status !== "active" ||
+      historical.expiresAt !== "2026-05-06T03:09:37.248Z" ||
+      historical.paymentId !== legacyEvidence.historicalPaymentId) {
+    throw new Error("historical state changed")
+  }
+
+  historical.status = "expired"
+  const subscription = {
+    id: "synthetic-backfilled-subscription",
+    parentId: payment.parentId,
+    grade: "grade5",
+    planCode: "standard_weekly",
+    status: "active",
+    startsAt: legacyEvidence.startsAt,
+    expiresAt: legacyEvidence.expiresAt,
+    maxStudents: 1,
+    paymentId: payment.id,
+  }
+  state.subscriptions.push(subscription)
+  state.audit.push({ actionType: "legacy_payment_subscription_backfilled", entitlementExtended: false })
+  return subscription
 }
 
 test("yearly plans are authoritative 12-calendar-month products", () => {
@@ -107,4 +198,99 @@ test("Cash is absent from public Pricing and Checkout", () => {
   assert.doesNotMatch(pricingPage, /cash/i)
   assert.doesNotMatch(checkoutPage, /cash/i)
   assert.match(adminPage, /Record Offline Payment/)
+})
+
+test("all payment activation audit writes use the production audit schema", () => {
+  assert.match(migration, /admin_user_id, action_type, target_table, target_id, details/g)
+  assert.match(backfillMigration, /admin_user_id, action_type, target_table, target_id, details/)
+  assert.doesNotMatch(migration, /\(administrator_id, action, entity_type, entity_id, details\)/)
+  assert.match(migration, /'payment_activated', 'payment'/)
+  assert.match(migration, /'offline_cash_recorded', 'payment'/)
+  assert.match(backfillMigration, /'legacy_payment_subscription_backfilled'/)
+})
+
+test("legacy backfill is bound to the accepted payment evidence", () => {
+  assert.match(backfillMigration, /d1e603ad-4b9c-4f4f-b213-1941bf228a1a/)
+  assert.match(backfillMigration, /79390986bbba18cf5c5377fce37cc1fa15f6c631e16a0d8ead4b70a4ae545efd/)
+  assert.match(backfillMigration, /91d75058-6640-4b29-99f0-4e7b4df4c2ee/)
+  assert.match(backfillMigration, /8422f298-e5a5-48e6-b710-e16a54d5c211/)
+  assert.match(backfillMigration, /'standard_weekly'/)
+  assert.match(backfillMigration, /1000\.00::numeric/)
+  assert.match(backfillMigration, /'bank_transfer'/)
+  assert.match(backfillMigration, /'verified'/)
+  assert.match(backfillMigration, /2026-09-06 03:19:38\.035\+00/)
+  assert.match(backfillMigration, /2026-09-13 03:19:38\.035\+00/)
+})
+
+test("legacy backfill preserves the exact entitlement and never adds time", () => {
+  assert.match(backfillMigration, /preserved_start, preserved_expiry, 1, target_payment_id/)
+  assert.match(backfillMigration, /'entitlementExtended', false/g)
+  assert.doesNotMatch(backfillMigration, /make_interval|interval\s+'7 days'|greatest\s*\(/i)
+  assert.doesNotMatch(backfillMigration, /clock_timestamp\(\).*interval|now\(\).*interval/is)
+})
+
+test("legacy backfill has transactional replay and conflict safeguards", () => {
+  assert.match(backfillMigration, /^begin;/)
+  assert.match(backfillMigration, /for update/g)
+  assert.match(backfillMigration, /pg_advisory_xact_lock/)
+  assert.match(backfillMigration, /subscriptions_payment_id_unique/)
+  assert.match(backfillMigration, /on public\.subscriptions \(payment_id\)\s+where payment_id is not null/s)
+  assert.match(backfillMigration, /'idempotent', true/)
+  assert.match(backfillMigration, /Conflicting subscription already linked/)
+  assert.match(backfillMigration, /Another effective Grade 5 subscription already exists/)
+  assert.match(backfillMigration, /Legacy payment facts no longer match/)
+  assert.match(backfillMigration, /Legacy payment activation state no longer matches/)
+  assert.match(backfillMigration, /Historical subscription no longer matches/)
+  assert.match(backfillMigration, /set status = 'expired'/)
+  assert.match(backfillMigration, /activated_at = preserved_start/)
+  assert.match(backfillMigration, /commit;\s*$/)
+})
+
+test("legacy backfill privileged function is not executable by public clients", () => {
+  assert.match(backfillMigration, /security definer/)
+  assert.match(backfillMigration, /revoke all on function app_private\.backfill_legacy_grade5_entitlement\(uuid, uuid\)\s+from public, anon, authenticated/s)
+  assert.match(backfillMigration, /grant execute on function app_private\.backfill_legacy_grade5_entitlement\(uuid, uuid\)\s+to service_role/s)
+  assert.match(backfillMigration, /role = 'admin'/)
+})
+
+test("synthetic legacy backfill preserves entitlement and replay is idempotent", () => {
+  const state = legacyFixture()
+  const first = runSyntheticLegacyBackfill(state)
+  const replay = runSyntheticLegacyBackfill(state)
+  assert.equal(first, replay)
+  assert.equal(first.startsAt, legacyEvidence.startsAt)
+  assert.equal(first.expiresAt, legacyEvidence.expiresAt)
+  assert.equal(first.maxStudents, 1)
+  assert.equal(state.subscriptions.length, 2)
+  assert.equal(state.subscriptions[0].status, "expired")
+  assert.equal(state.audit.length, 1)
+  assert.equal(state.audit[0].entitlementExtended, false)
+})
+
+test("synthetic legacy backfill refuses changed payment facts", () => {
+  const state = legacyFixture()
+  state.payment.amountJmd = 2000
+  assert.throws(() => runSyntheticLegacyBackfill(state), /payment facts changed/)
+  assert.equal(state.subscriptions.length, 1)
+  assert.equal(state.subscriptions[0].status, "active")
+})
+
+test("synthetic legacy backfill refuses a newly effective subscription", () => {
+  const state = legacyFixture()
+  state.subscriptions.push({
+    id: "unexpected-effective-subscription",
+    parentId: state.payment.parentId,
+    status: "active",
+    expiresAt: "2026-10-01T00:00:00.000Z",
+    paymentId: "another-payment",
+  })
+  assert.throws(() => runSyntheticLegacyBackfill(state), /another effective subscription/)
+  assert.equal(state.subscriptions[0].status, "active")
+})
+
+test("synthetic legacy backfill refuses changed historical state", () => {
+  const state = legacyFixture()
+  state.subscriptions[0].expiresAt = "2026-05-07T03:09:37.248Z"
+  assert.throws(() => runSyntheticLegacyBackfill(state), /historical state changed/)
+  assert.equal(state.subscriptions.length, 1)
 })

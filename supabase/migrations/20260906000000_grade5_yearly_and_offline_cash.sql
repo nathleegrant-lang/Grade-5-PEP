@@ -47,11 +47,11 @@ create unique index if not exists payments_receipt_number_unique
   where receipt_number is not null;
 
 create table if not exists public.admin_audit_log (
-  id bigint generated always as identity primary key,
-  administrator_id uuid not null references auth.users(id),
-  action text not null,
-  entity_type text not null,
-  entity_id uuid,
+  id uuid primary key default gen_random_uuid(),
+  admin_user_id uuid not null references auth.users(id) on delete cascade,
+  action_type text not null,
+  target_table text,
+  target_id uuid,
   details jsonb not null default '{}'::jsonb,
   created_at timestamptz not null default now()
 );
@@ -172,7 +172,7 @@ begin
     rejection_reason = null
   where id = payment_row.id;
 
-  insert into public.admin_audit_log (administrator_id, action, entity_type, entity_id, details)
+  insert into public.admin_audit_log (admin_user_id, action_type, target_table, target_id, details)
   values (p_administrator_id, 'payment_activated', 'payment', payment_row.id,
     jsonb_build_object('subscriptionId', subscription_id, 'planCode', payment_row.plan_code,
       'startsAt', base_at, 'expiresAt', expiry_at, 'receiptNumber', receipt));
@@ -228,7 +228,7 @@ begin
      p_note, 'pending', upper(p_currency), p_paid_at, plan_price, p_actual_amount_jmd, p_administrator_id, p_student_ids)
   returning id into payment_id;
 
-  insert into public.admin_audit_log (administrator_id, action, entity_type, entity_id, details)
+  insert into public.admin_audit_log (admin_user_id, action_type, target_table, target_id, details)
   values (p_administrator_id, 'offline_cash_recorded', 'payment', payment_id,
     jsonb_build_object('reference', btrim(p_offline_reference), 'paidAt', p_paid_at,
       'currency', upper(p_currency), 'actualAmountJmd', p_actual_amount_jmd, 'studentIds', p_student_ids));
