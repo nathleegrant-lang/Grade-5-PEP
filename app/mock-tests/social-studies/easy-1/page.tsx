@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/auth-context"
+import { prepareSocialStudiesAssessment, prepareSocialStudiesPreview } from "@/lib/social-studies-assessment-engine"
 
 const FREE_QUESTION_LIMIT = 5
 
@@ -82,7 +83,7 @@ const g5SsEasy1Questions: Question[] = [
       "1966",
     ],
     correctAnswer: 2,
-    explanation: `Jamaica gained independence on August 6, 1962. Independence Day is celebrated annually on the first Monday in August.`
+    explanation: `Jamaica became independent on August 6, 1962, and Independence Day is commemorated on August 6 each year.`
   },
   {
     id: 5,
@@ -96,7 +97,7 @@ const g5SsEasy1Questions: Question[] = [
       "Spain",
     ],
     correctAnswer: 3,
-    explanation: `Spain colonised Jamaica in 1494 after Christopher Columbus arrived. The Spanish called it 'Santiago de la Vega.'`
+    explanation: `Christopher Columbus reached Jamaica for Spain in 1494. Permanent Spanish settlement began later, in 1509. Santiago de la Vega was the Spanish settlement that later became Spanish Town, not a Spanish name for the whole island.`
   },
   {
     id: 6,
@@ -130,7 +131,7 @@ const g5SsEasy1Questions: Question[] = [
     id: 8,
     type: "history",
     skill: "First Peoples",
-    question: `What was the name of the first people to live in Jamaica?`,
+    question: `Which Indigenous people were living in Jamaica when Europeans arrived at the end of the 1400s?`,
     options: [
       "Arawaks",
       "Aztecs",
@@ -138,7 +139,7 @@ const g5SsEasy1Questions: Question[] = [
       "Caribs",
     ],
     correctAnswer: 0,
-    explanation: `The Taino, also known as Arawaks, were the indigenous people of Jamaica, arriving about 2,500 years ago from South America.`
+    explanation: `The Taíno, also referred to as Arawaks in many older sources, were the Indigenous people living in Jamaica when Europeans arrived at the end of the 1400s.`
   },
   {
     id: 9,
@@ -214,7 +215,7 @@ const g5SsEasy1Questions: Question[] = [
     id: 14,
     type: "geography",
     skill: "Physical Features",
-    question: `What are the two main seas that border Jamaica?`,
+    question: `Which two major bodies of water are associated with Jamaica?`,
     options: [
       "Pacific Ocean and Atlantic Ocean",
       "Caribbean Sea and Atlantic Ocean",
@@ -222,7 +223,7 @@ const g5SsEasy1Questions: Question[] = [
       "Gulf of Mexico and Caribbean Sea",
     ],
     correctAnswer: 1,
-    explanation: `Jamaica is bordered by the Caribbean Sea to the south and the North Atlantic Ocean to the north.`
+    explanation: `Jamaica lies in the Caribbean Sea, with the North Atlantic Ocean to the north of the Caribbean region.`
   },
   {
     id: 15,
@@ -326,7 +327,7 @@ const g5SsEasy1Questions: Question[] = [
     id: 22,
     type: "civics",
     skill: "Government",
-    question: `Who is the HEAD OF STATE of Jamaica?`,
+    question: `Who represents Jamaica's monarch in Jamaica and carries out most constitutional Head-of-State functions?`,
     options: [
       "The Prime Minister",
       "The President",
@@ -334,7 +335,7 @@ const g5SsEasy1Questions: Question[] = [
       "The Chief Justice",
     ],
     correctAnswer: 2,
-    explanation: `The Governor General is Jamaica's head of state, representing the British monarch and performing ceremonial duties.`
+    explanation: `King Charles III is Jamaica's monarch. The Governor-General represents the monarch in Jamaica and carries out most constitutional Head-of-State functions.`
   },
   {
     id: 23,
@@ -382,15 +383,15 @@ const g5SsEasy1Questions: Question[] = [
     id: 26,
     type: "civics",
     skill: "Government",
-    question: `Which level of government is responsible for managing parishes?`,
+    question: `Which level of government is responsible for managing many local services in Jamaica's parishes?`,
     options: [
       "National government",
       "Regional government",
-      "Local government (Parish Councils)",
+      "Local government (Municipal Corporations/local authorities)",
       "CARICOM",
     ],
     correctAnswer: 2,
-    explanation: `Parish Councils are the local government bodies responsible for managing services and development within each of Jamaica's 14 parishes.`
+    explanation: `Municipal Corporations are local authorities responsible for many services and development matters within Jamaica's parishes.`
   },
   {
     id: 27,
@@ -424,15 +425,15 @@ const g5SsEasy1Questions: Question[] = [
     id: 29,
     type: "civics",
     skill: "CARICOM",
-    question: `What does CARICOM stand for?`,
+    question: `What does CARICOM refer to today?`,
     options: [
-      "Caribbean Community",
-      "Caribbean Common Market",
-      "Caribbean Community and Common Market",
-      "Caribbean Association and Common Market",
+      "The Caribbean Community",
+      "The Caribbean Common Market",
+      "The Caribbean Community and Common Market",
+      "The Caribbean Association and Common Market",
     ],
-    correctAnswer: 2,
-    explanation: `CARICOM stands for Caribbean Community and Common Market, an organisation of Caribbean nations promoting economic integration and cooperation.`
+    correctAnswer: 0,
+    explanation: `CARICOM is the Caribbean Community. The original treaty established the Caribbean Community and Common Market, while the modern Caribbean Community also includes arrangements such as the CSME.`
   },
   {
     id: 30,
@@ -604,13 +605,10 @@ export default function G5SsEasy1MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]                 = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]               = useState(60 * 60)
+  const [attemptQuestions, setAttemptQuestions] = useState<Question[]>([])
 
-  const availableQuestions = isPremium ? g5SsEasy1Questions : g5SsEasy1Questions.slice(0, FREE_QUESTION_LIMIT)
-  const totalQuestions = availableQuestions.length
-
-  useEffect(() => {
-    if (answers.length !== totalQuestions) setAnswers(new Array(totalQuestions).fill(null))
-  }, [totalQuestions, answers.length])
+  const availableQuestions = attemptQuestions
+  const totalQuestions = started ? availableQuestions.length : isPremium ? g5SsEasy1Questions.length : FREE_QUESTION_LIMIT
 
   const formatTime = useCallback((s: number) => {
     const m = Math.floor(s / 60)
@@ -624,6 +622,18 @@ export default function G5SsEasy1MockTest() {
   }, [started, showResults])
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
+
+  const startTest = () => {
+    const preparedQuestions = isPremium
+      ? prepareSocialStudiesAssessment(g5SsEasy1Questions)
+      : prepareSocialStudiesPreview(g5SsEasy1Questions, FREE_QUESTION_LIMIT)
+    setAttemptQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    setStarted(true)
+  }
 
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
@@ -671,7 +681,7 @@ export default function G5SsEasy1MockTest() {
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setAttemptQuestions([]); setAnswers([]); setTimeLeft(60 * 60)
   }
 
   const q = availableQuestions[currentQuestion]
@@ -721,7 +731,7 @@ export default function G5SsEasy1MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
           </CardContent>
         </Card>
       </main>

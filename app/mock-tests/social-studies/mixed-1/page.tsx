@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/auth-context"
+import { prepareSocialStudiesAssessment, prepareSocialStudiesPreview } from "@/lib/social-studies-assessment-engine"
 
 const FREE_QUESTION_LIMIT = 5
 
@@ -29,564 +30,564 @@ interface Question {
 
 const g5SsMix1Questions: Question[] = [
   {
-    id: 1,
-    type: "history",
-    skill: "Recall",
-    question: `Which of Jamaica's seven National Heroes was a trade union leader AND the country's first Prime Minister?`,
-    options: [
+    "id": 1,
+    "type": "history",
+    "skill": "Recall",
+    "question": "Which of Jamaica's seven National Heroes was a trade union leader AND the country's first Prime Minister?",
+    "options": [
       "Norman Manley",
       "Paul Bogle",
       "Alexander Bustamante",
-      "Marcus Garvey",
+      "Marcus Garvey"
     ],
-    correctAnswer: 2,
-    explanation: `Sir Alexander Bustamante founded the BITU trade union, the JLP political party, and served as Jamaica's first Prime Minister after independence in 1962.`
+    "correctAnswer": 2,
+    "explanation": "Sir Alexander Bustamante founded the BITU trade union, the JLP political party, and served as Jamaica's first Prime Minister after independence in 1962."
   },
   {
-    id: 2,
-    type: "history",
-    skill: "Recall",
-    question: `What year did Jamaica gain independence?`,
-    options: [
+    "id": 2,
+    "type": "history",
+    "skill": "Recall",
+    "question": "What year did Jamaica gain independence?",
+    "options": [
       "1938",
       "1944",
       "1962",
-      "1974",
+      "1974"
     ],
-    correctAnswer: 2,
-    explanation: `Jamaica gained independence from Britain on August 6, 1962.`
+    "correctAnswer": 2,
+    "explanation": "Jamaica gained independence from Britain on August 6, 1962."
   },
   {
-    id: 3,
-    type: "history",
-    skill: "Cause & Effect",
-    question: `WHY did Paul Bogle march to Morant Bay courthouse in 1865?`,
-    options: [
+    "id": 3,
+    "type": "history",
+    "skill": "Cause & Effect",
+    "question": "WHY did Paul Bogle march to Morant Bay courthouse in 1865?",
+    "options": [
       "To celebrate a harvest festival",
       "To meet the British governor",
       "To protest poverty, unjust courts, and colonial indifference to the suffering of poor Jamaicans",
-      "To pay taxes",
+      "To pay taxes"
     ],
-    correctAnswer: 2,
-    explanation: `The Morant Bay Rebellion grew from the desperate conditions of rural Jamaicans — unfair courts, poverty, and a colonial government that ignored their grievances.`
+    "correctAnswer": 2,
+    "explanation": "The Morant Bay Rebellion grew from the desperate conditions of rural Jamaicans — unfair courts, poverty, and a colonial government that ignored their grievances."
   },
   {
-    id: 4,
-    type: "history",
-    skill: "Analysis",
-    question: `What does the Jamaican national motto 'Out of Many, One People' reflect?`,
-    options: [
+    "id": 4,
+    "type": "history",
+    "skill": "Analysis",
+    "question": "What does the Jamaican national motto 'Out of Many, One People' reflect?",
+    "options": [
       "Jamaica has only one ethnic group",
       "Jamaica has many languages",
       "Jamaica's history of diverse peoples — African, European, East Indian, Chinese, and Taino — united as one nation",
-      "Jamaica has many political parties",
+      "Jamaica has many political parties"
     ],
-    correctAnswer: 2,
-    explanation: `The motto celebrates Jamaica's multicultural heritage, uniting people of diverse origins under a single national identity.`
+    "correctAnswer": 2,
+    "explanation": "The motto celebrates Jamaica's multicultural heritage, uniting people of diverse origins under a single national identity."
   },
   {
-    id: 5,
-    type: "history",
-    skill: "Cause & Effect",
-    question: `How did the Baptist War of 1831 lead to emancipation?`,
-    options: [
+    "id": 5,
+    "type": "history",
+    "skill": "Cause & Effect",
+    "question": "How did the Baptist War of 1831 lead to emancipation?",
+    "options": [
       "It caused Britain to increase slavery",
       "It had no effect",
       "The scale and violence of the rebellion shocked the British Parliament and strengthened the abolitionist cause, leading to emancipation within three years",
-      "It ended slavery immediately on Christmas Day",
+      "It ended slavery immediately on Christmas Day"
     ],
-    correctAnswer: 2,
-    explanation: `The Christmas Rebellion of 1831, the largest slave uprising in Jamaican history, accelerated the British Parliament's move to pass the Slavery Abolition Act in 1833.`
+    "correctAnswer": 2,
+    "explanation": "The Christmas Rebellion of 1831, the largest slave uprising in Jamaican history, accelerated the British Parliament's move to pass the Slavery Abolition Act in 1833."
   },
   {
-    id: 6,
-    type: "history",
-    skill: "Significance",
-    question: `Why is August 1, 1838 considered MORE significant than August 1, 1834?`,
-    options: [
+    "id": 6,
+    "type": "history",
+    "skill": "Significance",
+    "question": "Why is August 1, 1838 considered MORE significant than August 1, 1834?",
+    "options": [
       "There is no difference",
       "1834 was more important",
       "In 1834, slavery technically ended but an Apprenticeship system forced the formerly enslaved to continue working unpaid. August 1, 1838 ended Apprenticeship — giving genuine freedom",
-      "The date is symbolic only",
+      "The date is symbolic only"
     ],
-    correctAnswer: 2,
-    explanation: `The Apprenticeship system was slavery by another name. Full, unqualified freedom only came on August 1, 1838, making it the true date of emancipation.`
+    "correctAnswer": 2,
+    "explanation": "The Apprenticeship system was slavery by another name. Full, unqualified freedom only came on August 1, 1838, making it the true date of emancipation."
   },
   {
-    id: 7,
-    type: "history",
-    skill: "Cultural Analysis",
-    question: `How does reggae music connect to Jamaica's long history of resistance?`,
-    options: [
+    "id": 7,
+    "type": "history",
+    "skill": "Cultural Analysis",
+    "question": "How does reggae music connect to Jamaica's long history of resistance?",
+    "options": [
       "Reggae has no social message",
       "Reggae began in Britain",
       "Reggae evolved from Jamaica's tradition of using music as protest and spiritual expression — from work songs under slavery through ska and rocksteady to Bob Marley's global message of justice",
-      "Reggae is only about love songs",
+      "Reggae is only about love songs"
     ],
-    correctAnswer: 2,
-    explanation: `Jamaican music has always carried social commentary — from enslaved people's work songs to the conscious lyrics of reggae. It is a continuous tradition of using art as resistance.`
+    "correctAnswer": 2,
+    "explanation": "Jamaican music has always carried social commentary — from enslaved people's work songs to the conscious lyrics of reggae. It is a continuous tradition of using art as resistance."
   },
   {
-    id: 8,
-    type: "history",
-    skill: "Recall",
-    question: `What does 'Xaymaca' — the Taino name for Jamaica — mean?`,
-    options: [
+    "id": 8,
+    "type": "history",
+    "skill": "Recall",
+    "question": "What does 'Xaymaca' — the Taino name for Jamaica — mean?",
+    "options": [
       "Land of Many Rivers",
       "Land of Wood and Water",
       "Island of the Sun",
-      "Land of Beautiful People",
+      "Land of Beautiful People"
     ],
-    correctAnswer: 1,
-    explanation: `The Taino called the island 'Xaymaca,' meaning 'Land of Wood and Water,' reflecting its lush forests and many rivers.`
+    "correctAnswer": 1,
+    "explanation": "The Taino called the island 'Xaymaca,' meaning 'Land of Wood and Water,' reflecting its lush forests and many rivers."
   },
   {
-    id: 9,
-    type: "history",
-    skill: "Evaluating Sources",
-    question: `A colonial newspaper from 1865 describes Paul Bogle as a 'dangerous agitator.' Why should a student treat this with caution?`,
-    options: [
-      "Newspapers always tell the truth",
-      "Colonial newspapers were always accurate",
-      "This description reflects the perspective of those whose authority Bogle was challenging — colonial sources are likely to be biased against those who resisted the system",
-      "Paul Bogle was actually dangerous",
+    "id": 9,
+    "type": "history",
+    "skill": "Evaluating Sources",
+    "question": "A colonial newspaper from 1865 describes Paul Bogle as a 'dangerous agitator.' Why should a student treat this with caution?",
+    "options": [
+      "The description should be accepted because newspapers printed during an event are automatically neutral sources.",
+      "The description is reliable because colonial newspapers had direct access to officials involved in the events.",
+      "The description reflects the viewpoint of people whose authority Bogle challenged, so it should be compared with other evidence.",
+      "The description proves Bogle's actions were dangerous because contemporary writers understood the rebellion best."
     ],
-    correctAnswer: 1,
-    explanation: `Primary sources must be evaluated for bias. A colonial newspaper represented colonial interests — it would naturally portray those who challenged colonial authority negatively.`
+    "correctAnswer": 2,
+    "explanation": "A colonial newspaper may reflect the interests and viewpoint of colonial authorities. Students should compare its description of Bogle with other contemporary evidence rather than treating its language as neutral fact."
   },
   {
-    id: 10,
-    type: "history",
-    skill: "Synthesis",
-    question: `What do ALL SEVEN Jamaican National Heroes share in common?`,
-    options: [
+    "id": 10,
+    "type": "history",
+    "skill": "Synthesis",
+    "question": "What do ALL SEVEN Jamaican National Heroes share in common?",
+    "options": [
       "They were all from Kingston",
       "They all lived in the 20th century",
       "They all made extraordinary sacrifices to advance the rights, dignity, and freedom of Jamaican people",
-      "They all led armed rebellions",
+      "They all led armed rebellions"
     ],
-    correctAnswer: 2,
-    explanation: `Despite different backgrounds, eras, and methods, all seven National Heroes made exceptional sacrifices in pursuit of justice and self-determination for the Jamaican people.`
+    "correctAnswer": 2,
+    "explanation": "Despite different backgrounds, eras, and methods, all seven National Heroes made exceptional sacrifices in pursuit of justice and self-determination for the Jamaican people."
   },
   {
-    id: 11,
-    type: "geography",
-    skill: "Recall",
-    question: `What is the name of Jamaica's highest mountain?`,
-    options: [
+    "id": 11,
+    "type": "geography",
+    "skill": "Recall",
+    "question": "What is the name of Jamaica's highest mountain?",
+    "options": [
       "John Crow Peak",
       "Blue Mountain Peak",
       "Santa Cruz Peak",
-      "Dry Harbour Peak",
+      "Dry Harbour Peak"
     ],
-    correctAnswer: 1,
-    explanation: `Blue Mountain Peak, at approximately 2,256 metres above sea level, is Jamaica's highest point.`
+    "correctAnswer": 1,
+    "explanation": "Blue Mountain Peak, at approximately 2,256 metres above sea level, is Jamaica's highest point."
   },
   {
-    id: 12,
-    type: "geography",
-    skill: "Recall",
-    question: `How many parishes does Jamaica have?`,
-    options: [
+    "id": 12,
+    "type": "geography",
+    "skill": "Recall",
+    "question": "How many parishes does Jamaica have?",
+    "options": [
       "10",
       "12",
       "14",
-      "16",
+      "16"
     ],
-    correctAnswer: 2,
-    explanation: `Jamaica is divided into 14 parishes across three counties: Cornwall, Middlesex, and Surrey.`
+    "correctAnswer": 2,
+    "explanation": "Jamaica is divided into 14 parishes across three counties: Cornwall, Middlesex, and Surrey."
   },
   {
-    id: 13,
-    type: "geography",
-    skill: "Map Skills",
-    question: `A map has a scale of 1:100,000. Two towns are 5 cm apart on the map. The actual distance between them is:`,
-    options: [
+    "id": 13,
+    "type": "geography",
+    "skill": "Map Skills",
+    "question": "A map has a scale of 1:100,000. Two towns are 5 cm apart on the map. The actual distance between them is:",
+    "options": [
       "5 km",
       "500 m",
       "10 km",
-      "50 km",
+      "50 km"
     ],
-    correctAnswer: 0,
-    explanation: `1:100,000 means 1 cm = 100,000 cm = 1 km. So 5 cm = 5 km.`
+    "correctAnswer": 0,
+    "explanation": "1:100,000 means 1 cm = 100,000 cm = 1 km. So 5 cm = 5 km."
   },
   {
-    id: 14,
-    type: "geography",
-    skill: "Cause & Effect",
-    question: `Why does the NORTH COAST of Jamaica receive more rainfall than the south coast?`,
-    options: [
+    "id": 14,
+    "type": "geography",
+    "skill": "Cause & Effect",
+    "question": "Why does the NORTH COAST of Jamaica receive more rainfall than the south coast?",
+    "options": [
       "The north coast is higher in elevation",
       "The north coast is farther from Kingston",
       "Moisture-bearing northeast trade winds rise over the mountains and release rain on the windward north side — the south is in a rain shadow",
-      "The north coast has more rivers",
+      "The north coast has more rivers"
     ],
-    correctAnswer: 2,
-    explanation: `The Blue Mountains intercept trade winds. As moist air rises and cools, it rains on the north (windward) side. The south (leeward) side is drier — a classic rain shadow.`
+    "correctAnswer": 2,
+    "explanation": "The Blue Mountains intercept trade winds. As moist air rises and cools, it rains on the north (windward) side. The south (leeward) side is drier — a classic rain shadow."
   },
   {
-    id: 15,
-    type: "geography",
-    skill: "Environmental Reasoning",
-    question: `A community deforests a hillside to grow crops. What is the MOST LIKELY immediate consequence?`,
-    options: [
+    "id": 15,
+    "type": "geography",
+    "skill": "Environmental Reasoning",
+    "question": "A community deforests a hillside to grow crops. What is the MOST LIKELY immediate consequence?",
+    "options": [
       "Better crop yields for decades",
       "More rainfall in the area",
       "Soil erosion — rain washes exposed topsoil downhill, reducing soil quality and increasing flooding downstream",
-      "The land becomes more fertile",
+      "The land becomes more fertile"
     ],
-    correctAnswer: 2,
-    explanation: `Forests protect soil. Without tree roots and canopy, rainfall washes topsoil away — a rapid and damaging consequence of hillside deforestation.`
+    "correctAnswer": 2,
+    "explanation": "Forests protect soil. Without tree roots and canopy, rainfall washes topsoil away — a rapid and damaging consequence of hillside deforestation."
   },
   {
-    id: 16,
-    type: "geography",
-    skill: "Spatial Analysis",
-    question: `Why are most of Jamaica's large towns and cities located on the coast or in valleys?`,
-    options: [
+    "id": 16,
+    "type": "geography",
+    "skill": "Spatial Analysis",
+    "question": "Why are most of Jamaica's large towns and cities located on the coast or in valleys?",
+    "options": [
       "The interior is too cold",
       "The government chose these locations",
       "Coastal and valley areas offer flat land, access to water, and historically provided harbour access for trade — natural advantages that favoured settlement",
-      "Mountains are more interesting to live in",
+      "Mountains are more interesting to live in"
     ],
-    correctAnswer: 2,
-    explanation: `Settlement follows geographic logic: flat land for building, rivers for water, and harbours for trade. Jamaica's urban centres reflect centuries of geographic decision-making.`
+    "correctAnswer": 2,
+    "explanation": "Settlement follows geographic logic: flat land for building, rivers for water, and harbours for trade. Jamaica's urban centres reflect centuries of geographic decision-making."
   },
   {
-    id: 17,
-    type: "geography",
-    skill: "Caribbean",
-    question: `Which of the following is NOT part of the Greater Antilles?`,
-    options: [
+    "id": 17,
+    "type": "geography",
+    "skill": "Caribbean",
+    "question": "Which of the following is NOT part of the Greater Antilles?",
+    "options": [
       "Cuba",
       "Barbados",
       "Jamaica",
-      "Puerto Rico",
+      "Puerto Rico"
     ],
-    correctAnswer: 1,
-    explanation: `Barbados is part of the Lesser Antilles. The Greater Antilles consists of the four large islands: Cuba, Hispaniola, Jamaica, and Puerto Rico.`
+    "correctAnswer": 1,
+    "explanation": "Barbados is part of the Lesser Antilles. The Greater Antilles consists of the four large islands: Cuba, Hispaniola, Jamaica, and Puerto Rico."
   },
   {
-    id: 18,
-    type: "geography",
-    skill: "Environmental Analysis",
-    question: `How does DEFORESTATION of Jamaica's watersheds threaten Kingston's water supply?`,
-    options: [
+    "id": 18,
+    "type": "geography",
+    "skill": "Environmental Analysis",
+    "question": "How does DEFORESTATION of Jamaica's watersheds threaten Kingston's water supply?",
+    "options": [
       "Deforestation has no effect on cities",
       "Kingston gets water from desalination only",
       "Blue Mountain forests generate and filter the rivers that supply Kingston — removing forests reduces water quality and quantity, directly threatening the city's water supply",
-      "Only mining affects water supply",
+      "Only mining affects water supply"
     ],
-    correctAnswer: 2,
-    explanation: `Watershed interdependence: urban water depends on rural forest health. Deforesting the mountains that generate Kingston's rivers is deforesting Kingston's water supply.`
+    "correctAnswer": 2,
+    "explanation": "Watershed interdependence: urban water depends on rural forest health. Deforesting the mountains that generate Kingston's rivers is deforesting Kingston's water supply."
   },
   {
-    id: 19,
-    type: "geography",
-    skill: "Sustainability",
-    question: `A fishing community uses large-scale nets to catch 60% more fish than last year. Why is this a concern for the LONG TERM?`,
-    options: [
+    "id": 19,
+    "type": "geography",
+    "skill": "Sustainability",
+    "question": "A fishing community uses large-scale nets to catch 60% more fish than last year. Why is this a concern for the LONG TERM?",
+    "options": [
       "More fish is always better",
       "Fish populations are unlimited",
       "Overfishing depletes populations faster than they can reproduce — this year's bonus becomes next year's collapse. Sustainable fishing limits catches to what the population can naturally replenish",
-      "The government should give the community larger nets",
+      "The government should give the community larger nets"
     ],
-    correctAnswer: 2,
-    explanation: `Overfishing is a classic sustainability problem. Short-term gain through over-extraction destroys the resource base. Sustainable yields are those that can be maintained indefinitely.`
+    "correctAnswer": 2,
+    "explanation": "Overfishing is a classic sustainability problem. Short-term gain through over-extraction destroys the resource base. Sustainable yields are those that can be maintained indefinitely."
   },
   {
-    id: 20,
-    type: "geography",
-    skill: "Policy Analysis",
-    question: `Jamaica designates a forest area as a National Park. Local farmers must move. What is the MOST complete evaluation of this policy?`,
-    options: [
+    "id": 20,
+    "type": "geography",
+    "skill": "Policy Analysis",
+    "question": "Jamaica designates a forest area as a National Park. Local farmers must move. What is the MOST complete evaluation of this policy?",
+    "options": [
       "Farmers are always wrong",
       "National Parks never help anyone",
       "The policy protects vital biodiversity and water resources (long-term public benefit) but causes real hardship for the displaced farmers. Best practice includes community consultation, co-management, and alternative livelihood support — conservation and human welfare need not be opposed",
-      "Environmental protection always outweighs community needs",
+      "Environmental protection always outweighs community needs"
     ],
-    correctAnswer: 2,
-    explanation: `Effective conservation policy integrates community welfare with environmental goals — displacing communities without alternatives creates both injustice and often undermines conservation.`
+    "correctAnswer": 2,
+    "explanation": "Effective conservation policy integrates community welfare with environmental goals — displacing communities without alternatives creates both injustice and often undermines conservation."
   },
   {
-    id: 21,
-    type: "civics",
-    skill: "Recall",
-    question: `Who is the HEAD OF GOVERNMENT in Jamaica?`,
-    options: [
+    "id": 21,
+    "type": "civics",
+    "skill": "Recall",
+    "question": "Who is the HEAD OF GOVERNMENT in Jamaica?",
+    "options": [
       "The Governor General",
       "The President",
       "The Prime Minister",
-      "The Chief Justice",
+      "The Chief Justice"
     ],
-    correctAnswer: 2,
-    explanation: `The Prime Minister leads the government, heads the Cabinet, and is accountable to Parliament.`
+    "correctAnswer": 2,
+    "explanation": "The Prime Minister leads the government, heads the Cabinet, and is accountable to Parliament."
   },
   {
-    id: 22,
-    type: "civics",
-    skill: "Recall",
-    question: `At what age can Jamaican citizens vote?`,
-    options: [
+    "id": 22,
+    "type": "civics",
+    "skill": "Recall",
+    "question": "At what age can Jamaican citizens vote?",
+    "options": [
       "16",
       "18",
       "21",
-      "25",
+      "25"
     ],
-    correctAnswer: 1,
-    explanation: `Jamaican citizens can vote from age 18, provided they are registered on the electoral roll.`
+    "correctAnswer": 1,
+    "explanation": "Jamaican citizens can vote from age 18, provided they are registered on the electoral roll."
   },
   {
-    id: 23,
-    type: "civics",
-    skill: "Application",
-    question: `A street in your community floods every time it rains. Which level of government should you contact?`,
-    options: [
+    "id": 23,
+    "type": "civics",
+    "skill": "Application",
+    "question": "A street in your community floods every time it rains. Which level of government should you contact?",
+    "options": [
       "The Governor General",
       "The Prime Minister",
-      "Your Parish Council — responsible for local drainage and roads",
-      "The Supreme Court",
+      "Your Municipal Corporation/local authority — responsible for local drainage and roads",
+      "The Supreme Court"
     ],
-    correctAnswer: 2,
-    explanation: `Parish Councils manage local infrastructure including roads, drains, and markets. Local problems go to local government.`
+    "correctAnswer": 2,
+    "explanation": "Municipal Corporations are Jamaica's local authorities and are responsible for many local services, including local roads and drainage."
   },
   {
-    id: 24,
-    type: "civics",
-    skill: "Applying Rights",
-    question: `A citizen is arrested and held in police custody for 5 days without charge. Which right has been violated?`,
-    options: [
+    "id": 24,
+    "type": "civics",
+    "skill": "Applying Rights",
+    "question": "A citizen is arrested and held in police custody for 5 days without charge. Which right has been violated?",
+    "options": [
       "The right to work",
       "The right to vote",
       "The right to liberty — citizens cannot be detained indefinitely without being charged and brought before a court",
-      "The right to education",
+      "The right to education"
     ],
-    correctAnswer: 2,
-    explanation: `The right to personal liberty protects against arbitrary detention. Citizens must be charged and brought before a court within a reasonable time — habeas corpus is the legal protection.`
+    "correctAnswer": 2,
+    "explanation": "The right to personal liberty protects against arbitrary detention. Citizens must be charged and brought before a court within a reasonable time — habeas corpus is the legal protection."
   },
   {
-    id: 25,
-    type: "civics",
-    skill: "Government Function",
-    question: `Why is the SEPARATION OF POWERS among the Legislature, Executive, and Judiciary important?`,
-    options: [
+    "id": 25,
+    "type": "civics",
+    "skill": "Government Function",
+    "question": "Why is the SEPARATION OF POWERS among the Legislature, Executive, and Judiciary important?",
+    "options": [
       "It makes government faster",
       "It creates more jobs",
       "It prevents any single branch from becoming too powerful — each checks and balances the others, protecting citizens from abuse of authority",
-      "It is a tradition with no practical purpose",
+      "It is a tradition with no practical purpose"
     ],
-    correctAnswer: 2,
-    explanation: `Separation of powers is democracy's internal safeguard. The Legislature makes laws, the Executive implements them, the Judiciary interprets them — no branch can dominate the others.`
+    "correctAnswer": 2,
+    "explanation": "Separation of powers is democracy's internal safeguard. The Legislature makes laws, the Executive implements them, the Judiciary interprets them — no branch can dominate the others."
   },
   {
-    id: 26,
-    type: "civics",
-    skill: "CARICOM",
-    question: `How does CARICOM membership BENEFIT Jamaican skilled graduates?`,
-    options: [
+    "id": 26,
+    "type": "civics",
+    "skill": "CARICOM",
+    "question": "How does CARICOM membership BENEFIT Jamaican skilled graduates?",
+    "options": [
       "They get free university education",
       "No benefit — CARICOM is only for trade",
       "Under the CARICOM Single Market, graduates in designated occupations can work in other member states without work permits — accessing a larger regional job market",
-      "They automatically get foreign citizenship",
+      "They automatically get foreign citizenship"
     ],
-    correctAnswer: 2,
-    explanation: `The CSME allows free movement of skilled persons — a Jamaican engineer, nurse, or teacher can work in Barbados, Trinidad, or Guyana without complex immigration procedures.`
+    "correctAnswer": 2,
+    "explanation": "The CSME allows free movement of skilled persons — a Jamaican engineer, nurse, or teacher can work in Barbados, Trinidad, or Guyana without complex immigration procedures."
   },
   {
-    id: 27,
-    type: "civics",
-    skill: "Rights Analysis",
-    question: `A newspaper publishes false information that damages a citizen's reputation. Which rights are in conflict?`,
-    options: [
+    "id": 27,
+    "type": "civics",
+    "skill": "Rights Analysis",
+    "question": "A newspaper publishes false information that damages a citizen's reputation. Which rights are in conflict?",
+    "options": [
       "Right to vote vs right to work",
       "Right to education vs right to health",
       "Freedom of the press vs the individual's right not to be harmed by deliberate falsehoods",
-      "Right to property vs right to liberty",
+      "Right to property vs right to liberty"
     ],
-    correctAnswer: 2,
-    explanation: `Freedom of expression is not unlimited. Publishing deliberate falsehoods that harm others is defamation — the individual's right to reputation places a legal limit on press freedom.`
+    "correctAnswer": 2,
+    "explanation": "Freedom of expression is not unlimited. Publishing deliberate falsehoods that harm others is defamation — the individual's right to reputation places a legal limit on press freedom."
   },
   {
-    id: 28,
-    type: "civics",
-    skill: "Constitutional Analysis",
-    question: `A government passes a law removing citizens' right to vote in elections. What should happen?`,
-    options: [
+    "id": 28,
+    "type": "civics",
+    "skill": "Constitutional Analysis",
+    "question": "A government passes a law removing citizens' right to vote in elections. What should happen?",
+    "options": [
       "Citizens must accept it",
       "The Governor General signs it immediately",
       "The Supreme Court can strike it down as unconstitutional — fundamental rights cannot be removed by Parliament without breaching the Constitution",
-      "Nothing — Parliament is supreme",
+      "Nothing — Parliament is supreme"
     ],
-    correctAnswer: 2,
-    explanation: `Constitutional supremacy: the right to vote is a fundamental right protected by the Constitution. The Supreme Court's power of judicial review allows it to invalidate laws that violate constitutional rights — even acts of Parliament.`
+    "correctAnswer": 2,
+    "explanation": "Constitutional supremacy: the right to vote is a fundamental right protected by the Constitution. The Supreme Court's power of judicial review allows it to invalidate laws that violate constitutional rights — even acts of Parliament."
   },
   {
-    id: 29,
-    type: "civics",
-    skill: "Evaluating Democracy",
-    question: `A country holds elections every five years, but opposition parties are regularly harassed and there is no independent judiciary. Is this a genuine democracy?`,
-    options: [
+    "id": 29,
+    "type": "civics",
+    "skill": "Evaluating Democracy",
+    "question": "A country holds elections every five years, but opposition parties are regularly harassed and there is no independent judiciary. Is this a genuine democracy?",
+    "options": [
       "Yes — elections are what matter",
       "Elections are irrelevant",
       "No — genuine democracy requires free elections AND an independent judiciary, free press, opposition rights, and constitutional protections of fundamental rights",
-      "Only Western countries have genuine democracy",
+      "Only Western countries have genuine democracy"
     ],
-    correctAnswer: 2,
-    explanation: `Democracy is an ecosystem, not just elections. Without judicial independence, press freedom, and opposition rights, elections may be held regularly while power remains unaccountable.`
+    "correctAnswer": 2,
+    "explanation": "Democracy is an ecosystem, not just elections. Without judicial independence, press freedom, and opposition rights, elections may be held regularly while power remains unaccountable."
   },
   {
-    id: 30,
-    type: "civics",
-    skill: "Civic Responsibility",
-    question: `A student wants to make her community safer. Which action BEST demonstrates active citizenship?`,
-    options: [
-      "Waiting for the government to solve all problems",
-      "Complaining privately to friends",
-      "Organising a community meeting, identifying safety issues, partnering with the Parish Council, and leading a neighbourhood watch initiative",
-      "Only voting in elections",
+    "id": 30,
+    "type": "civics",
+    "skill": "Civic Responsibility",
+    "question": "A student wants to make her community safer. Which action BEST demonstrates active citizenship?",
+    "options": [
+      "Report the safety concern to officials and wait for them to decide what action is needed.",
+      "Discuss the problem with neighbours but leave all planning and follow-up to someone else.",
+      "Organise residents, document the safety issue, work with the Municipal Corporation/local authority, and help carry out a lawful community response.",
+      "Vote at the next election but take no other action on the immediate safety concern."
     ],
-    correctAnswer: 2,
-    explanation: `Active citizenship goes beyond voting — it involves identifying problems, organising collective responses, engaging with institutions, and taking initiative to improve community conditions.`
+    "correctAnswer": 2,
+    "explanation": "Active citizenship combines identifying a community problem, organising with others, using appropriate public institutions and taking lawful practical action."
   },
   {
-    id: 31,
-    type: "economics",
-    skill: "Recall",
-    question: `What does GDP measure?`,
-    options: [
+    "id": 31,
+    "type": "economics",
+    "skill": "Recall",
+    "question": "What does GDP measure?",
+    "options": [
       "The total population of a country",
       "The total value of imports",
       "The total value of all goods and services produced in a country in a year",
-      "The national debt",
+      "The national debt"
     ],
-    correctAnswer: 2,
-    explanation: `GDP (Gross Domestic Product) is the standard measure of a country's economic output — the monetary value of all production within its borders in a year.`
+    "correctAnswer": 2,
+    "explanation": "GDP (Gross Domestic Product) is the standard measure of a country's economic output — the monetary value of all production within its borders in a year."
   },
   {
-    id: 32,
-    type: "economics",
-    skill: "Recall",
-    question: `When a country EXPORTS goods, it:`,
-    options: [
+    "id": 32,
+    "type": "economics",
+    "skill": "Recall",
+    "question": "When a country EXPORTS goods, it:",
+    "options": [
       "Buys goods from other countries",
       "Borrows money from other nations",
       "Sells goods to other countries",
-      "Receives foreign aid",
+      "Receives foreign aid"
     ],
-    correctAnswer: 2,
-    explanation: `Exporting means selling goods produced domestically to buyers in other countries — the opposite of importing.`
+    "correctAnswer": 2,
+    "explanation": "Exporting means selling goods produced domestically to buyers in other countries — the opposite of importing."
   },
   {
-    id: 33,
-    type: "economics",
-    skill: "Application",
-    question: `A Jamaican farmer can plant sugar cane OR vegetables on the same land. The income he gives up by choosing vegetables is called:`,
-    options: [
+    "id": 33,
+    "type": "economics",
+    "skill": "Application",
+    "question": "A Jamaican farmer can plant sugar cane OR vegetables on the same land. The income he gives up by choosing vegetables is called:",
+    "options": [
       "His profit",
       "His savings",
       "His opportunity cost",
-      "His tax obligation",
+      "His tax obligation"
     ],
-    correctAnswer: 2,
-    explanation: `Opportunity cost is the value of the next-best alternative forgone. By choosing vegetables, the farmer gives up the income he could have earned from sugar cane.`
+    "correctAnswer": 2,
+    "explanation": "Opportunity cost is the value of the next-best alternative forgone. By choosing vegetables, the farmer gives up the income he could have earned from sugar cane."
   },
   {
-    id: 34,
-    type: "economics",
-    skill: "Cause & Effect",
-    question: `When the price of mango RISES significantly in August, farmers will MOST LIKELY:`,
-    options: [
-      "Grow fewer mangoes next season",
-      "Immediately stop growing mangoes",
-      "Plant more mango trees — higher prices signal greater profitability and incentivise increased production",
-      "Buy more mangoes from other farmers",
+    "id": 34,
+    "type": "economics",
+    "skill": "Cause & Effect",
+    "question": "When the price of mango RISES significantly in August, farmers will MOST LIKELY:",
+    "options": [
+      "Reduce future mango production because the higher price makes producing mangoes less attractive.",
+      "Keep production unchanged because market prices provide no useful information to producers.",
+      "Consider increasing future mango production if the higher expected return justifies the extra land, labour and cost.",
+      "Buy mangoes from other farmers instead of considering whether producing more would be profitable."
     ],
-    correctAnswer: 1,
-    explanation: `Higher prices signal profit opportunity. Rational farmers respond by increasing production of the more profitable crop — basic supply and demand.`
+    "correctAnswer": 2,
+    "explanation": "A higher price can signal stronger potential returns and encourage farmers to increase future supply, but production decisions still depend on costs, resources and growing time."
   },
   {
-    id: 35,
-    type: "economics",
-    skill: "Tourism Analysis",
-    question: `A hotel in Jamaica earns $2 million but much of this money leaves the country. What is this economic concept called?`,
-    options: [
+    "id": 35,
+    "type": "economics",
+    "skill": "Tourism Analysis",
+    "question": "A hotel in Jamaica earns $2 million but much of this money leaves the country. What is this economic concept called?",
+    "options": [
       "Trade surplus",
       "Inflation",
       "Economic leakage — when tourism revenue leaves through foreign ownership, imported goods, and repatriated profits",
-      "Remittances",
+      "Remittances"
     ],
-    correctAnswer: 2,
-    explanation: `Tourism leakage is a critical concept: gross revenue overstates net benefit. Foreign-owned hotels, imported food, and foreign staff mean a large proportion of tourism earnings never circulates in the Jamaican economy.`
+    "correctAnswer": 2,
+    "explanation": "Tourism leakage is a critical concept: gross revenue overstates net benefit. Foreign-owned hotels, imported food, and foreign staff mean a large proportion of tourism earnings never circulates in the Jamaican economy."
   },
   {
-    id: 36,
-    type: "economics",
-    skill: "Community Services",
-    question: `Which organisation in Jamaica is responsible for managing the country's monetary policy and regulating banks?`,
-    options: [
+    "id": 36,
+    "type": "economics",
+    "skill": "Community Services",
+    "question": "Which organisation in Jamaica is responsible for managing the country's monetary policy and regulating banks?",
+    "options": [
       "The Ministry of Finance",
       "The NWC",
       "The Bank of Jamaica",
-      "The JCF",
+      "The JCF"
     ],
-    correctAnswer: 2,
-    explanation: `The Bank of Jamaica (BOJ) is the central bank — it sets monetary policy, issues currency, manages foreign reserves, and supervises the financial sector.`
+    "correctAnswer": 2,
+    "explanation": "The Bank of Jamaica (BOJ) is the central bank — it sets monetary policy, issues currency, manages foreign reserves, and supervises the financial sector."
   },
   {
-    id: 37,
-    type: "economics",
-    skill: "Trade Analysis",
-    question: `Jamaica has a persistent TRADE DEFICIT. What does this mean?`,
-    options: [
+    "id": 37,
+    "type": "economics",
+    "skill": "Trade Analysis",
+    "question": "Jamaica has a persistent TRADE DEFICIT. What does this mean?",
+    "options": [
       "Jamaica exports more than it imports",
       "Jamaica's economy is growing strongly",
       "Jamaica imports more goods and services than it exports — spending more foreign exchange than it earns from sales abroad",
-      "Jamaica has no international trade",
+      "Jamaica has no international trade"
     ],
-    correctAnswer: 2,
-    explanation: `A trade deficit occurs when import spending exceeds export earnings. Jamaica must use foreign reserves or borrow to finance the gap — creating downward pressure on the currency.`
+    "correctAnswer": 2,
+    "explanation": "A trade deficit occurs when import spending exceeds export earnings. Jamaica must use foreign reserves or borrow to finance the gap — creating downward pressure on the currency."
   },
   {
-    id: 38,
-    type: "economics",
-    skill: "Development Reasoning",
-    question: `The government must choose: build a resort road OR repair rural primary schools. Which framework BEST guides this decision?`,
-    options: [
+    "id": 38,
+    "type": "economics",
+    "skill": "Development Reasoning",
+    "question": "The government must choose: build a resort road OR repair rural primary schools. Which framework BEST guides this decision?",
+    "options": [
       "Always choose tourism first",
       "Always choose education first",
       "Systematic cost-benefit analysis: the school repairs benefit thousands of children with long-term human capital returns; the road serves private investors. Equity, long-term returns, and community need should weigh alongside immediate economic return",
-      "Flip a coin",
+      "Flip a coin"
     ],
-    correctAnswer: 2,
-    explanation: `Public investment decisions require multi-dimensional analysis: immediate economic return, long-term development value, equity (who benefits), and community need. Education investment has proven long-term economic returns that can exceed infrastructure investment.`
+    "correctAnswer": 2,
+    "explanation": "Public investment decisions require multi-dimensional analysis: immediate economic return, long-term development value, equity (who benefits), and community need. Education investment has proven long-term economic returns that can exceed infrastructure investment."
   },
   {
-    id: 39,
-    type: "economics",
-    skill: "Sustainability",
-    question: `A bauxite mine generates $80 million annually and 500 jobs. It also permanently destroys the watershed supplying water to 50,000 people. How should this be evaluated?`,
-    options: [
+    "id": 39,
+    "type": "economics",
+    "skill": "Sustainability",
+    "question": "A bauxite mine generates $80 million annually and 500 jobs. It also permanently destroys the watershed supplying water to 50,000 people. How should this be evaluated?",
+    "options": [
       "Mining revenue always justifies environmental costs",
       "Environmental concerns should never limit mining",
       "The economic value of the mine must be weighed against the economic value of the watershed — clean water for 50,000 people has enormous economic value in health, agriculture, and social wellbeing. If watershed value exceeds mining value, protection is economically rational",
-      "Only the government should decide",
+      "Only the government should decide"
     ],
-    correctAnswer: 2,
-    explanation: `Environmental economics: watershed services (clean water, flood protection, health) have calculable economic value. When this exceeds mining benefits over time, protection is both economically and ethically rational.`
+    "correctAnswer": 2,
+    "explanation": "Environmental economics: watershed services (clean water, flood protection, health) have calculable economic value. When this exceeds mining benefits over time, protection is both economically and ethically rational."
   },
   {
-    id: 40,
-    type: "economics",
-    skill: "Financial Literacy",
-    question: `A student borrows $100,000 at 10% annual interest. How much total interest will she owe after TWO years (simple interest)?`,
-    options: [
+    "id": 40,
+    "type": "economics",
+    "skill": "Financial Literacy",
+    "question": "A student borrows $100,000 at 10% annual interest. How much total interest will she owe after TWO years (simple interest)?",
+    "options": [
       "$10,000",
       "$20,000",
       "$21,000",
-      "$100,000",
+      "$100,000"
     ],
-    correctAnswer: 1,
-    explanation: `Simple interest: $100,000 × 10% = $10,000 per year. Over two years = $20,000 total interest. (Compound interest would be $21,000 — this question uses simple interest.)`
+    "correctAnswer": 1,
+    "explanation": "Simple interest: $100,000 × 10% = $10,000 per year. Over two years = $20,000 total interest. (Compound interest would be $21,000 — this question uses simple interest.)"
   }
 ]
 
@@ -604,13 +605,10 @@ export default function G5SsMix1MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]                 = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]               = useState(60 * 60)
+  const [attemptQuestions, setAttemptQuestions] = useState<Question[]>([])
 
-  const availableQuestions = isPremium ? g5SsMix1Questions : g5SsMix1Questions.slice(0, FREE_QUESTION_LIMIT)
-  const totalQuestions = availableQuestions.length
-
-  useEffect(() => {
-    if (answers.length !== totalQuestions) setAnswers(new Array(totalQuestions).fill(null))
-  }, [totalQuestions, answers.length])
+  const availableQuestions = attemptQuestions
+  const totalQuestions = started ? availableQuestions.length : isPremium ? g5SsMix1Questions.length : FREE_QUESTION_LIMIT
 
   const formatTime = useCallback((s: number) => {
     const m = Math.floor(s / 60)
@@ -624,6 +622,18 @@ export default function G5SsMix1MockTest() {
   }, [started, showResults])
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
+
+  const startTest = () => {
+    const preparedQuestions = isPremium
+      ? prepareSocialStudiesAssessment(g5SsMix1Questions)
+      : prepareSocialStudiesPreview(g5SsMix1Questions, FREE_QUESTION_LIMIT)
+    setAttemptQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    setStarted(true)
+  }
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
 
@@ -670,7 +680,7 @@ export default function G5SsMix1MockTest() {
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setAttemptQuestions([]); setAnswers([]); setTimeLeft(60 * 60)
   }
 
   const q = availableQuestions[currentQuestion]
@@ -720,7 +730,7 @@ export default function G5SsMix1MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
           </CardContent>
         </Card>
       </main>

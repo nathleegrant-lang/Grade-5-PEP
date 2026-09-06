@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/auth-context"
+import { prepareSocialStudiesAssessment, prepareSocialStudiesPreview } from "@/lib/social-studies-assessment-engine"
 
 const FREE_QUESTION_LIMIT = 5
 
@@ -166,7 +167,7 @@ const g5SsMod1Questions: Question[] = [
       "The federation was dissolved by Britain",
     ],
     correctAnswer: 1,
-    explanation: `Jamaicans voted 54% to 54% to leave in a 1961 referendum. Critics of federation feared a unequal burden — paying for poorer islands — while independence offered full self-determination.`
+    explanation: `In the 1961 referendum, approximately 54% voted for Jamaica to leave the West Indies Federation and about 46% voted to remain. The result supported Jamaica's withdrawal from the Federation.`
   },
   {
     id: 11,
@@ -316,11 +317,11 @@ const g5SsMod1Questions: Question[] = [
     options: [
       "The Governor General",
       "The Prime Minister's office",
-      "The Parish Council — which is responsible for local road maintenance",
+      "The Municipal Corporation/local authority — which is responsible for many local services, including local road maintenance",
       "The Senate",
     ],
     correctAnswer: 2,
-    explanation: `Parish Councils manage local infrastructure including roads, drains, and public spaces. Local problems go to local government.`
+    explanation: `Municipal Corporations are Jamaica's local authorities and are responsible for many local services, including maintenance of local roads.`
   },
   {
     id: 22,
@@ -437,16 +438,16 @@ const g5SsMod1Questions: Question[] = [
   {
     id: 30,
     type: "civics",
-    skill: "Constitutional Analysis",
-    question: `WHY does Jamaica's Constitution require a TWO-THIRDS MAJORITY to change it?`,
+    skill: "Constitution",
+    question: `Why are some provisions of Jamaica's Constitution harder to change than ordinary laws?`,
     options: [
-      "To make Parliament meetings longer",
-      "Because two-thirds is a random requirement",
-      "To prevent hasty or politically motivated changes to the supreme law — requiring broad consensus ensures only widely supported changes are made",
-      "Because the Governor General demanded it",
+      "Because every constitutional provision requires exactly a two-thirds majority and a referendum",
+      "Because entrenched provisions require special constitutional procedures and specified parliamentary majorities, with a referendum required only where the Constitution says so",
+      "Because only the Prime Minister may change the Constitution",
+      "Because Jamaica's Constitution can never be amended",
     ],
-    correctAnswer: 2,
-    explanation: `A supermajority requirement ensures constitutional changes reflect genuine national consensus — not just a slim political majority's preferences. It protects fundamental rights from easy erosion.`
+    correctAnswer: 1,
+    explanation: `Some provisions of Jamaica's Constitution are entrenched, so changing them requires special procedures and specified parliamentary majorities. A referendum is required only for provisions where the Constitution specifically requires one.`
   },
   {
     id: 31,
@@ -529,7 +530,7 @@ const g5SsMod1Questions: Question[] = [
       "Only the Ministry of Education",
       "Only private corporations",
     ],
-    correctAnswer: 2,
+    correctAnswer: 1,
     explanation: `Community-scale renewable energy projects in Jamaica are typically financed through combinations of government grants, international NGOs, development banks, and local fundraising — rarely through a single source.`
   },
   {
@@ -604,13 +605,10 @@ export default function G5SsMod1MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]                 = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]               = useState(60 * 60)
+  const [attemptQuestions, setAttemptQuestions] = useState<Question[]>([])
 
-  const availableQuestions = isPremium ? g5SsMod1Questions : g5SsMod1Questions.slice(0, FREE_QUESTION_LIMIT)
-  const totalQuestions = availableQuestions.length
-
-  useEffect(() => {
-    if (answers.length !== totalQuestions) setAnswers(new Array(totalQuestions).fill(null))
-  }, [totalQuestions, answers.length])
+  const availableQuestions = attemptQuestions
+  const totalQuestions = started ? availableQuestions.length : isPremium ? g5SsMod1Questions.length : FREE_QUESTION_LIMIT
 
   const formatTime = useCallback((s: number) => {
     const m = Math.floor(s / 60)
@@ -624,6 +622,18 @@ export default function G5SsMod1MockTest() {
   }, [started, showResults])
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
+
+  const startTest = () => {
+    const preparedQuestions = isPremium
+      ? prepareSocialStudiesAssessment(g5SsMod1Questions)
+      : prepareSocialStudiesPreview(g5SsMod1Questions, FREE_QUESTION_LIMIT)
+    setAttemptQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    setStarted(true)
+  }
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
 
@@ -670,7 +680,7 @@ export default function G5SsMod1MockTest() {
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setAttemptQuestions([]); setAnswers([]); setTimeLeft(60 * 60)
   }
 
   const q = availableQuestions[currentQuestion]
@@ -720,7 +730,7 @@ export default function G5SsMod1MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
           </CardContent>
         </Card>
       </main>

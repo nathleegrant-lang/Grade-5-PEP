@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/contexts/auth-context"
+import { prepareSocialStudiesAssessment, prepareSocialStudiesPreview } from "@/lib/social-studies-assessment-engine"
 
 const FREE_QUESTION_LIMIT = 5
 
@@ -95,7 +96,7 @@ const g5SsMod4Questions: Question[] = [
       "He used his position as a legislator to advocate powerfully for the poor and was martyred by the colonial authorities — his execution without fair trial made him a symbol of colonial injustice",
       "He was a friend of Paul Bogle's",
     ],
-    correctAnswer: 1,
+    correctAnswer: 2,
     explanation: `Gordon's heroism lay in using political power to advocate for the powerless — and in his unjust execution. The colonial government's haste to make an example of him exposed the brutality of the system he opposed.`
   },
   {
@@ -172,421 +173,421 @@ const g5SsMod4Questions: Question[] = [
     id: 11,
     type: "geography",
     skill: "Map Skills",
-    question: `A student measures 4 cm on a map with a scale of 1:25,000. The actual distance is:`,
+    question: `A map scale shows that 1 cm represents 5 km. Two towns are 4 cm apart on the map. About how far apart are they in reality?`,
     options: [
-      "4 km",
-      "1 km",
-      "10 km",
+      "9 km",
+      "20 km",
       "25 km",
+      "40 km",
     ],
     correctAnswer: 1,
-    explanation: `1:25,000 means 1 cm = 25,000 cm = 0.25 km. 4 cm × 0.25 km = 1 km.`
+    explanation: `Four centimetres multiplied by 5 kilometres per centimetre gives a real distance of about 20 kilometres.`
   },
   {
     id: 12,
     type: "geography",
-    skill: "Cause & Effect",
-    question: `WHY does Blue Mountain Peak have a much cooler climate than Kingston?`,
+    skill: "Settlement",
+    question: `Why are many settlements found near major roads?`,
     options: [
-      "Blue Mountain is farther north",
-      "Kingston is at sea level and traps heat; Blue Mountain (at over 2,200 m) benefits from lower temperatures at higher elevation — approximately 6°C cooler for every 1,000 m gained",
-      "Kingston is in a valley with no wind",
-      "Blue Mountain faces the Atlantic ocean",
+      "Roads can make travel, trade, and access to services easier.",
+      "Roads prevent every type of natural hazard.",
+      "People living near roads never need other transport.",
+      "Major roads always have the coolest climate.",
     ],
-    correctAnswer: 1,
-    explanation: `Temperature decreases with altitude — the lapse rate. Blue Mountain Peak at 2,256 m is dramatically cooler than sea-level Kingston, supporting coffee growing and a distinct ecosystem.`
+    correctAnswer: 0,
+    explanation: `Access to transport can help residents reach jobs, markets, schools, health services, and other communities.`
   },
   {
     id: 13,
     type: "geography",
-    skill: "Environmental Reasoning",
-    question: `A town's river is polluted by a factory upstream. What is the MOST IMMEDIATE impact on the town?`,
+    skill: "Watersheds",
+    question: `A community removes much of the forest from steep slopes above its river. Which problem is MOST likely after heavy rain?`,
     options: [
-      "Improved water quality",
-      "No impact — rivers clean themselves quickly",
-      "The town's water supply and aquatic life are threatened — residents may face health risks and fish populations decline",
-      "The factory gains more customers",
+      "Less soil is washed into the river.",
+      "More runoff and soil erosion may occur.",
+      "The river immediately becomes salt water.",
+      "Rainfall stops falling on the slope.",
     ],
-    correctAnswer: 2,
-    explanation: `Upstream pollution flows downstream — communities below a polluting factory face contaminated water for drinking, bathing, and irrigation, plus the loss of fish from the river.`
+    correctAnswer: 1,
+    explanation: `Vegetation slows runoff and holds soil. Removing it from steep slopes can increase erosion and sediment entering rivers.`
   },
   {
     id: 14,
     type: "geography",
-    skill: "Spatial Analysis",
-    question: `WHY are Jamaica's NORTHERN PARISHES (like St. Ann and Portland) more suitable for TOURISM than southern parishes like Clarendon?`,
+    skill: "Coastal Environment",
+    question: `Why should a community avoid removing all the mangroves along an exposed coastline?`,
     options: [
-      "Southern parishes have better beaches",
-      "Northern parishes are less populated",
-      "The north coast has sandy beaches, clear water warmed by the Caribbean Sea, and scenic mountains — natural assets that attract tourists. Clarendon has fewer beach and scenic assets",
-      "Southern parishes are too far from the airport",
+      "Mangroves can reduce wave energy and provide important habitat for young marine animals.",
+      "Mangroves are useful mainly because their roots create new sandy beaches for recreation.",
+      "Mangroves protect coasts by preventing salt water from ever moving inland during storms.",
+      "Mangroves grow naturally near the sea, so damaged areas usually recover without protection.",
     ],
-    correctAnswer: 2,
-    explanation: `Physical geography drives tourism location: the north coast's beaches, turquoise water, and mountain backdrop are the classic Caribbean tourism product. The south coast is drier and has fewer beach attractions.`
+    correctAnswer: 0,
+    explanation: `Mangroves help protect shorelines and also provide valuable habitat, especially for young fish and other organisms.`
   },
   {
     id: 15,
     type: "geography",
-    skill: "Land Use Decision",
-    question: `A community debates whether to develop a mangrove area as a resort or protect it. WHY should they consider protecting the mangroves?`,
+    skill: "Population Distribution",
+    question: `A parish map shows many people living near the coast and far fewer in the mountainous interior. What does the map show?`,
     options: [
-      "Mangroves are ugly and useless",
-      "Resorts are always better",
-      "Mangroves provide coastal protection from storms, habitat for juvenile fish (supporting fisheries), water filtration, and carbon storage — their ecosystem services may outweigh short-term resort revenue",
-      "Mangroves prevent tourism",
+      "Population is spread almost evenly between the coast and the mountainous interior.",
+      "Population is concentrated more heavily in coastal areas.",
+      "Population is concentrated mainly in the mountainous interior.",
+      "The map shows that settlement is scattered evenly throughout the parish.",
     ],
-    correctAnswer: 2,
-    explanation: `Mangrove valuation is a classic cost-benefit dilemma. Their ecosystem services — storm surge protection alone can save millions in infrastructure — often exceed the one-time benefit of development.`
+    correctAnswer: 1,
+    explanation: `The map indicates a spatial pattern: a larger share of the population is clustered near the coast.`
   },
   {
     id: 16,
     type: "geography",
-    skill: "Environment",
-    question: `What is the RELATIONSHIP between watersheds and water supply?`,
+    skill: "Climate",
+    question: `Two farming communities grow the same crop, but one receives much less rainfall. Which factor should that community consider MOST carefully?`,
     options: [
-      "Watersheds and water supply are unrelated",
-      "Polluting watersheds improves water quality",
-      "Watersheds are the land areas that collect rainfall into rivers — deforesting or polluting a watershed directly reduces and degrades the water supply of communities downstream",
-      "Watersheds only affect agriculture",
+      "Water supply and irrigation needs",
+      "The colour of nearby houses",
+      "The parish motto",
+      "The number of road signs",
     ],
-    correctAnswer: 2,
-    explanation: `Protecting watersheds is protecting water supply — they are inseparable. Jamaica's Forest Act protects watershed forests precisely because clean, reliable water depends on healthy, forested catchment areas.`
+    correctAnswer: 0,
+    explanation: `Lower rainfall can limit crop growth, so farmers need to plan how water will be supplied and conserved.`
   },
   {
     id: 17,
     type: "geography",
-    skill: "Map Skills",
-    question: `On a map, what information does the LEGEND (key) provide that a compass rose does NOT?`,
+    skill: "Environmental Evidence",
+    question: `Students want to know whether littering near a stream is decreasing. Which evidence would be MOST useful?`,
     options: [
-      "Direction",
-      "Scale",
-      "The meaning of symbols and colours used on the map",
-      "The map's publication date",
+      "The number and type of litter items counted at the same locations over several weeks",
+      "The number of students who report that the stream appears cleaner each week",
+      "Photographs taken from different locations each time the class visits the stream",
+      "The amount of rainfall recorded in the parish during the same period",
     ],
-    correctAnswer: 2,
-    explanation: `The compass rose shows direction; the legend explains what every symbol, colour, and line means. Both are essential, but they provide completely different types of information.`
+    correctAnswer: 0,
+    explanation: `Repeated counts from the same locations allow the students to compare changes in litter over time.`
   },
   {
     id: 18,
     type: "geography",
-    skill: "Climate Analysis",
-    question: `A farming community experiences a severe drought. Which crops are they MOST LIKELY to be able to continue growing?`,
+    skill: "Human Geography",
+    question: `A town grows quickly but roads and drainage are not improved. Which problem could result?`,
     options: [
-      "Water-intensive crops like rice and watercress",
-      "Crops that require frequent irrigation",
-      "Drought-tolerant crops like cassava, sorghum, and certain root vegetables",
-      "Crops grown only in wet regions",
+      "Greater traffic congestion and flooding",
+      "Fewer people using roads",
+      "Automatic improvement in every public service",
+      "Lower rainfall throughout the parish",
     ],
-    correctAnswer: 2,
-    explanation: `Drought conditions call for drought-tolerant crops — those with deep roots or physiological adaptations to low water. Cassava is famously drought-resistant and is a Jamaican food staple.`
+    correctAnswer: 0,
+    explanation: `Rapid growth can place pressure on transport and drainage infrastructure if services do not expand with the population.`
   },
   {
     id: 19,
     type: "geography",
-    skill: "Caribbean Geography",
-    question: `Jamaica, Cuba, Haiti, and Puerto Rico are all part of the GREATER ANTILLES. What do they have in common that distinguishes them from the LESSER ANTILLES?`,
+    skill: "Land Use",
+    question: `A flat area beside a river floods almost every year. Which use requires the MOST careful planning?`,
     options: [
-      "They are all British colonies",
-      "They all speak Spanish",
-      "They are significantly larger islands than those of the Lesser Antilles",
-      "They are all closer to South America",
+      "Building a new housing development",
+      "Marking a nature trail",
+      "Planting flood-tolerant vegetation",
+      "Monitoring river levels",
     ],
-    correctAnswer: 2,
-    explanation: `The Greater Antilles are distinguished by their size — these four large islands contain the majority of the Caribbean's land area and population.`
+    correctAnswer: 0,
+    explanation: `Permanent housing in a frequently flooded area can place people and property at risk, so flood hazard must be considered before building.`
   },
   {
     id: 20,
     type: "geography",
-    skill: "Environmental Impact",
-    question: `What is the RELATIONSHIP between deforestation and flooding in Jamaica?`,
+    skill: "Natural Hazards",
+    question: `A hurricane watch is issued for Jamaica. Which community action is BEST before conditions worsen?`,
     options: [
-      "Deforestation reduces flooding",
-      "There is no relationship",
-      "Forests absorb and slow rainfall; when forests are removed, rainwater runs off quickly, overwhelming river channels and causing flooding in communities below",
-      "Only coastal areas flood",
+      "Check emergency supplies and follow official weather information.",
+      "Wait until flooding begins before making any preparation.",
+      "Ignore evacuation advice unless neighbours leave first.",
+      "Remove storm shutters to improve ventilation.",
     ],
-    correctAnswer: 2,
-    explanation: `Trees intercept rainfall, and root systems absorb and slowly release water. Without them, heavy rain rushes directly into rivers — causing flash floods that damage communities and agriculture.`
+    correctAnswer: 0,
+    explanation: `Preparing supplies and following official information helps households respond early and safely to changing hurricane conditions.`
   },
   {
     id: 21,
     type: "civics",
-    skill: "Applying Civic Knowledge",
-    question: `A citizen believes her human rights have been violated by the government. Which institution can she approach?`,
+    skill: "Parliament",
+    question: `Why does Parliament debate proposed laws before they are passed?`,
     options: [
-      "Her parish councillor",
-      "The Parliament",
-      "The Supreme Court — which can hear cases involving breaches of constitutional rights",
-      "The Cabinet",
+      "To allow representatives to examine, question, and suggest changes to proposed laws",
+      "To allow courts to decide whether each proposal should become law before Parliament votes",
+      "To allow citizens to vote directly on every proposed law before it reaches Parliament",
+      "To allow ministers to describe proposals without questions from other representatives",
     ],
-    correctAnswer: 2,
-    explanation: `The Supreme Court has original jurisdiction to hear cases about violations of constitutional rights — citizens can petition directly when fundamental rights are at stake.`
+    correctAnswer: 0,
+    explanation: `Debate lets legislators examine proposals, raise concerns, and consider changes before a final decision.`
   },
   {
     id: 22,
     type: "civics",
-    skill: "Evaluating Rights",
-    question: `Freedom of speech DOES NOT protect which of the following?`,
+    skill: "Local Government",
+    question: `Residents report an overflowing local market drain. Which public body would normally be most directly involved in addressing this local-service issue?`,
     options: [
-      "Criticising government policy",
-      "Peaceful protest against unfair laws",
-      "Deliberately inciting violence against a group of people",
-      "Reporting on government corruption",
+      "The Municipal Corporation/local authority",
+      "CARICOM",
+      "The Senate of another country",
+      "The Caribbean Examinations Council",
     ],
-    correctAnswer: 2,
-    explanation: `Freedom of speech protects robust political debate and criticism, but not speech that directly incites violence, hatred, or harm to others — the law sets limits to protect others' safety and dignity.`
+    correctAnswer: 0,
+    explanation: `Municipal Corporations/local authorities handle many local services and facilities within their areas.`
   },
   {
     id: 23,
     type: "civics",
-    skill: "Government Function",
-    question: `Why does Jamaica need BOTH a House of Representatives AND a Senate?`,
+    skill: "Rights and Responsibilities",
+    question: `A citizen has the right to express an opinion at a peaceful meeting. Which responsibility should accompany that right?`,
     options: [
-      "It creates extra jobs",
-      "The Senate is unnecessary",
-      "The House (elected) represents the people; the Senate (appointed) acts as a revising chamber — providing a second check on legislation before it becomes law",
-      "The Constitution randomly requires two houses",
+      "Respect the law and the rights and safety of others.",
+      "Prevent everyone with a different opinion from speaking.",
+      "Damage property if the meeting becomes frustrating.",
+      "Ignore lawful safety instructions.",
     ],
-    correctAnswer: 2,
-    explanation: `Bicameral parliament provides an extra layer of scrutiny — bills pass through both chambers, and the Senate can send legislation back for revision, reducing the chance of rushed or poorly considered laws.`
+    correctAnswer: 0,
+    explanation: `Rights are exercised within the law and alongside responsibilities to respect other people's rights and public safety.`
   },
   {
     id: 24,
     type: "civics",
-    skill: "CARICOM",
-    question: `A hurricane devastates a small CARICOM member state. How would CARICOM membership help?`,
+    skill: "Rule of Law",
+    question: `Why is it important that public officials must obey the law?`,
     options: [
-      "CARICOM provides direct financial aid to all members",
-      "CARICOM has no disaster response role",
-      "CARICOM has mechanisms for regional disaster response and can coordinate assistance from member states — pooling resources that small states couldn't access alone",
-      "CARICOM only deals with trade",
+      "It supports the principle that the law applies to everyone.",
+      "It allows officials to change laws whenever they wish.",
+      "It means courts are no longer needed.",
+      "It guarantees every government decision is popular.",
     ],
-    correctAnswer: 2,
-    explanation: `CARICOM's disaster management framework (CDEMA) coordinates regional disaster response — small island states benefit from collective resources and expertise they couldn't maintain individually.`
+    correctAnswer: 0,
+    explanation: `The rule of law means that citizens and public officials are all subject to the law.`
   },
   {
     id: 25,
     type: "civics",
-    skill: "Rights vs Responsibilities",
-    question: `A neighbour plays very loud music late at night. Which rights are in conflict?`,
+    skill: "Elections",
+    question: `Why is a secret ballot important in an election?`,
     options: [
-      "The right to education vs the right to rest",
-      "The neighbour's freedom of expression vs other residents' right to peaceful enjoyment of their property and adequate rest",
-      "The right to vote vs the duty to pay taxes",
-      "Freedom of religion vs freedom of movement",
+      "It helps voters make choices without others knowing how they voted.",
+      "It prevents election officials from counting votes.",
+      "It allows one voter to vote for several people.",
+      "It removes the need for registered candidates.",
     ],
-    correctAnswer: 1,
-    explanation: `Rights frequently conflict — freedom of expression (playing music) vs the right to peaceful enjoyment and adequate rest. Law and community norms mediate between competing valid claims.`
+    correctAnswer: 0,
+    explanation: `A secret ballot protects voter privacy and reduces pressure or intimidation over a person's choice.`
   },
   {
     id: 26,
     type: "civics",
-    skill: "Electoral Analysis",
-    question: `WHY is voter registration important in a democracy?`,
+    skill: "Government Accountability",
+    question: `A community asks a government agency to explain how money for a project was spent. Which democratic principle are residents promoting?`,
     options: [
-      "Only registered voters pay taxes",
-      "It is an optional civic activity",
-      "Voter registration ensures only eligible citizens participate in elections — maintaining the integrity of the democratic process",
-      "Registration automatically makes you a Member of Parliament",
+      "Accountability",
+      "Hereditary rule",
+      "Censorship",
+      "Colonialism",
     ],
-    correctAnswer: 2,
-    explanation: `Voter registration is the gateway to democratic participation — ensuring votes are cast only by eligible citizens and that election results genuinely reflect the preferences of the electorate.`
+    correctAnswer: 0,
+    explanation: `Accountability means public bodies and officials should be able to explain and take responsibility for their decisions and use of public resources.`
   },
   {
     id: 27,
     type: "civics",
-    skill: "Constitutional Rights",
-    question: `The RIGHT TO SILENCE means a person arrested cannot be COMPELLED to:`,
+    skill: "Citizenship",
+    question: `Which action BEST shows active citizenship?`,
     options: [
-      "Speak to their lawyer",
-      "Appear in court",
-      "Testify against themselves — they can remain silent without it being treated as evidence of guilt",
-      "Pay their legal fees",
+      "Joining a lawful community clean-up and reporting a blocked drain",
+      "Ignoring every community problem because government alone must act",
+      "Damaging a public facility to attract attention",
+      "Spreading an unverified rumour about a neighbour",
     ],
-    correctAnswer: 2,
-    explanation: `The right to silence (sometimes called the right against self-incrimination) protects suspects from being forced to provide evidence against themselves — a cornerstone of fair criminal procedure.`
+    correctAnswer: 0,
+    explanation: `Active citizenship includes lawful participation and constructive action to improve one's community.`
   },
   {
     id: 28,
     type: "civics",
-    skill: "Government Accountability",
-    question: `The OFFICE OF THE PUBLIC DEFENDER in Jamaica receives complaints about:`,
+    skill: "Regional Cooperation",
+    question: `Several Caribbean countries share hurricane information and emergency supplies after a major storm. What does this BEST demonstrate?`,
     options: [
-      "Tax payment disputes",
-      "Parliamentary procedures",
-      "Actions by government agencies and officials that may be unfair, discriminatory, or an abuse of authority",
-      "Commercial disputes between businesses",
+      "Regional cooperation",
+      "Colonial rule",
+      "Private ownership",
+      "Individual taxation",
     ],
-    correctAnswer: 2,
-    explanation: `The Public Defender (similar to an ombudsman) investigates complaints about government conduct — providing citizens with an independent avenue to challenge unfair administrative action.`
+    correctAnswer: 0,
+    explanation: `Countries cooperating across borders to respond to a shared problem is an example of regional cooperation.`
   },
   {
     id: 29,
     type: "civics",
-    skill: "Democracy",
-    question: `What makes an election DEMOCRATIC?`,
+    skill: "Separation of Powers",
+    question: `Why should courts be able to decide cases without being told what verdict to give by political leaders?`,
     options: [
-      "Any election is democratic by definition",
-      "One party always winning",
-      "Free and fair elections with universal suffrage, secret ballots, multiple candidates, and results that are accepted and respected",
-      "Only rich countries have democratic elections",
+      "Judicial independence supports fair application of the law.",
+      "Courts should make all laws instead of Parliament.",
+      "Judges should run political parties.",
+      "Courts should decide who may vote in every election.",
     ],
-    correctAnswer: 2,
-    explanation: `Democratic elections require: free choice, universal eligibility to vote, secret ballots, competing candidates, transparent counting, and peaceful transfer of power — all are necessary.`
+    correctAnswer: 0,
+    explanation: `Judicial independence helps courts make decisions according to law and evidence rather than political instructions.`
   },
   {
     id: 30,
     type: "civics",
-    skill: "CARICOM Benefits",
-    question: `How does CARICOM's CARIBBEAN EXAMINATIONS COUNCIL (CXC/CSEC) benefit Jamaican students?`,
+    skill: "Public Participation",
+    question: `A Municipal Corporation invites residents to comment on plans for a new market. Why is this useful?`,
     options: [
-      "It only benefits Barbadian students",
-      "CXC has nothing to do with CARICOM",
-      "CXC provides regionally recognised qualifications that Jamaican graduates can use across CARICOM member states — a single exam system serving multiple countries",
-      "CXC is a Jamaican government organisation",
+      "Residents can provide information about local needs and concerns before the plan is finalised.",
+      "Residents can replace elected officials and make the final decision on the market themselves.",
+      "Residents can decide how all Municipal Corporation funds must be spent during the year.",
+      "Residents can require the Corporation to accept every suggestion made at the consultation.",
     ],
-    correctAnswer: 2,
-    explanation: `CXC's CSEC qualifications are recognised across the Caribbean — a Jamaican student's passes are accepted in Trinidad, Barbados, or Guyana, facilitating regional mobility.`
+    correctAnswer: 0,
+    explanation: `Public consultation can help decision-makers understand local needs and concerns before completing a plan.`
   },
   {
     id: 31,
     type: "economics",
-    skill: "Production Decisions",
-    question: `A manufacturing company in Jamaica decides to AUTOMATE part of its production line. What is a LIKELY NEGATIVE consequence?`,
+    skill: "Opportunity Cost",
+    question: `A school club has enough money for either new sports equipment or a shade tent, but not both. Choosing the shade tent means:`,
     options: [
-      "The company becomes less productive",
-      "The company loses all its customers",
-      "Some workers may lose their jobs as machines replace human labour — the short-term cost for workers, even if long-term productivity gains benefit the company",
-      "Automation always improves wages for all workers",
+      "The sports equipment is the opportunity given up when the club chooses the shade tent.",
+      "The money paid for the shade tent is the opportunity cost of choosing it.",
+      "The benefits of both the tent and sports equipment together are the opportunity cost.",
+      "The cash remaining after purchasing the shade tent is the opportunity cost.",
     ],
-    correctAnswer: 2,
-    explanation: `Automation creates a productivity paradox — it can reduce costs and increase output for the company, but displace the workers whose tasks are now performed by machines.`
+    correctAnswer: 0,
+    explanation: `When resources are limited, choosing one option means giving up another possible use of those resources.`
   },
   {
     id: 32,
     type: "economics",
-    skill: "Market Analysis",
-    question: `During the August mango season, mango prices FALL significantly in Jamaican markets. WHY?`,
+    skill: "Local Production",
+    question: `A restaurant buys eggs from a nearby farmer. Which local economic effect is MOST direct?`,
     options: [
-      "Jamaicans suddenly dislike mangoes in August",
-      "The government lowers mango prices by law",
-      "Seasonal abundance — supply increases dramatically during harvest season — drives prices down as more mangoes compete for buyers",
-      "Mango importation increases in August",
+      "The farmer earns income by supplying a nearby business with eggs.",
+      "The restaurant reduces demand for locally produced food by purchasing nearby eggs.",
+      "The farmer becomes an employee of the restaurant after completing the sale.",
+      "The purchase becomes an import because the eggs are transported to another business.",
     ],
-    correctAnswer: 2,
-    explanation: `Basic supply and demand: when the mango harvest floods the market, supply outstrips demand, forcing prices down. After the season, supply drops and prices recover.`
+    correctAnswer: 0,
+    explanation: `The purchase creates income for a local producer and links one local business to another.`
   },
   {
     id: 33,
     type: "economics",
-    skill: "Tourism Economics",
-    question: `A hotel in Jamaica earns $1 million in revenue. Why might only a fraction of this stay in the Jamaican economy?`,
+    skill: "Consumer Decisions",
+    question: `Two shops sell the same school bag. One costs J$4,500 and the other J$3,900 with the same warranty. What should a careful consumer do?`,
     options: [
-      "Because Jamaica taxes hotels heavily",
-      "Because tourists bring all their own food",
-      "Many hotels are foreign-owned and import food, furniture, and supplies — profits and spending 'leak' out of the economy to foreign owners and suppliers",
-      "All tourism revenue stays in Jamaica",
+      "Compare price, quality, and warranty before buying.",
+      "Always choose the most expensive item.",
+      "Ignore whether the bag is suitable.",
+      "Buy both because comparison is unnecessary.",
     ],
-    correctAnswer: 2,
-    explanation: `Economic leakage is a major issue in Caribbean tourism — foreign ownership means profits leave; imported food and goods reduce local economic benefit. Building linkages to local suppliers is key.`
+    correctAnswer: 0,
+    explanation: `Consumers make better decisions when they compare important features and cost instead of relying on price alone.`
   },
   {
     id: 34,
     type: "economics",
-    skill: "Fiscal Policy",
-    question: `The Jamaican government REDUCES income tax. What is the MOST LIKELY SHORT-TERM effect?`,
+    skill: "Employment",
+    question: `A new agro-processing factory opens near several farming communities. Which effect is MOST likely?`,
     options: [
-      "Citizens immediately have less money",
-      "Government revenue rises automatically",
-      "Citizens have more disposable income — potentially stimulating consumer spending and economic growth",
-      "Unemployment rises immediately",
+      "It may create jobs and provide a new market for some crops grown by nearby farmers.",
+      "It may reduce local farm sales because agro-processing factories do not use nearby crops.",
+      "It can create jobs only when all of the raw materials used by the factory are imported.",
+      "It will cause farmers to stop producing because the factory will compete with their farms.",
     ],
-    correctAnswer: 2,
-    explanation: `A tax cut leaves more money in citizens' pockets — if they spend it on local goods and services, this can stimulate economic activity. However, it may also reduce government revenue.`
+    correctAnswer: 0,
+    explanation: `Processing businesses can employ workers and purchase agricultural products from nearby farmers.`
   },
   {
     id: 35,
     type: "economics",
-    skill: "Agricultural Economics",
-    question: `WHY do some Jamaican farmers prefer to grow YAMS for the local market rather than BANANAS for export?`,
+    skill: "Budgeting",
+    question: `A youth club has J$30,000 for a community event. Which action BEST demonstrates budgeting?`,
     options: [
-      "Yams taste better than bananas",
-      "Local markets are more profitable for large quantities",
-      "Yams avoid the price volatility and strict quality standards of export markets — local market selling may be more predictable and require less compliance investment",
-      "Bananas are harder to grow",
+      "Estimate costs for the venue, supplies, and activities before spending.",
+      "Spend the full amount on the first item offered.",
+      "Avoid recording any purchases.",
+      "Borrow additional money before calculating the event's cost.",
     ],
-    correctAnswer: 2,
-    explanation: `Export markets (especially for bananas) are subject to strict EU or US grading standards and volatile world prices. Local market crops can be sold across a wider range of qualities and offer more price stability.`
+    correctAnswer: 0,
+    explanation: `A budget plans how limited money will be allocated among expected expenses.`
   },
   {
     id: 36,
     type: "economics",
-    skill: "Community Economics",
-    question: `A COOPERATIVE BANK charges its members 12% interest on loans while a commercial bank charges 24%. WHY might a small business owner choose the co-op?`,
+    skill: "Public Services",
+    question: `Why might a community support using some tax revenue to repair a damaged public road?`,
     options: [
-      "Commercial banks are safer",
-      "Co-ops always have more money to lend",
-      "The cooperative's lower interest rate means the business owner pays less for the same loan — reducing costs and making the business more financially viable",
-      "Co-ops are only for farmers",
+      "The road is shared infrastructure used by residents, businesses, schools, and emergency services.",
+      "The road is used by private vehicles, so public funds should not normally be spent on it.",
+      "Road repairs help transport but have little connection to businesses or emergency services.",
+      "A public road should be repaired only if every resident agrees that it is the top priority.",
     ],
-    correctAnswer: 2,
-    explanation: `Lower interest rates are a direct financial advantage — the co-op's member-ownership model means profits go back to members as lower rates rather than to external shareholders.`
+    correctAnswer: 0,
+    explanation: `Public roads support travel, business, emergency services, and access to schools and workplaces, so maintenance can benefit the wider community.`
   },
   {
     id: 37,
     type: "economics",
-    skill: "International Trade",
-    question: `Jamaica benefits from preferential trade agreements with the USA and EU. WHY would losing these agreements hurt Jamaican exporters?`,
+    skill: "Trade",
+    question: `Jamaica imports machinery that local firms use to produce goods. Which statement BEST describes this trade?`,
     options: [
-      "Because Jamaica doesn't export to the USA or EU",
-      "Preferential access has no value",
-      "Jamaican products would face higher tariffs in those markets, making them more expensive and less competitive compared to products from countries with better trade access",
-      "Trade agreements only help large countries",
+      "Imports can include useful equipment that supports local production.",
+      "Every import reduces production in Jamaica.",
+      "Imported machinery can never be used by Jamaican workers.",
+      "Trade occurs only when finished food is sold overseas.",
     ],
-    correctAnswer: 2,
-    explanation: `Preferential access allows Jamaican products (like coffee and sugar) to enter major markets at lower or zero tariffs — losing this advantage would make Jamaican exports pricier and less competitive internationally.`
+    correctAnswer: 0,
+    explanation: `Countries import many kinds of goods, including machinery and equipment that local businesses can use to produce other goods and services.`
   },
   {
     id: 38,
     type: "economics",
-    skill: "Environmental Economics",
-    question: `A sugar factory pollutes a river used by fishing communities downstream. Who BEARS the ECONOMIC COST of this pollution?`,
+    skill: "Saving",
+    question: `Why might a household keep an emergency savings fund?`,
     options: [
-      "The factory alone pays",
-      "Nobody bears a cost",
-      "The fishing communities — who lose income from reduced fish catches — and the public, who may face health costs and water treatment expenses",
-      "The government pays all costs automatically",
+      "To help meet an unexpected expense without immediately depending on new borrowing",
+      "To earn enough interest to guarantee the household can pay for every future emergency",
+      "To avoid including unexpected expenses when the household prepares a budget",
+      "To replace insurance and other forms of planning for financial risks",
     ],
-    correctAnswer: 2,
-    explanation: `Environmental economics calls these 'negative externalities' — costs borne by third parties who had no part in creating the pollution. The factory gains from avoiding waste treatment; communities lose.`
+    correctAnswer: 0,
+    explanation: `Emergency savings can provide money for unexpected needs and reduce the need to borrow immediately.`
   },
   {
     id: 39,
     type: "economics",
-    skill: "Economic Planning",
-    question: `A student studying economics learns that Jamaica has a SMALL, OPEN ECONOMY. What does this mean?`,
+    skill: "Community Resources",
+    question: `A popular beach attracts visitors but litter is increasing. Which response BEST balances economic and environmental needs?`,
     options: [
-      "Jamaica's economy is closed to trade",
-      "Jamaica only trades within CARICOM",
-      "Jamaica's economy is highly dependent on international trade — external factors like global oil prices, interest rates, and demand for tourism heavily influence Jamaica's economic performance",
-      "Jamaica is too poor to trade internationally",
+      "Improve waste collection and enforce anti-litter rules while keeping the beach responsibly open.",
+      "Reduce waste collection and sharply restrict visitors so the beach can recover naturally.",
+      "Keep the beach open but allow each tourism business to decide whether litter rules apply.",
+      "Close tourism businesses during busy periods even if improved waste management could solve the problem.",
     ],
-    correctAnswer: 2,
-    explanation: `A small, open economy is significantly influenced by external factors. Jamaica imports most of its fuel, food, and manufactured goods — making it vulnerable to global price changes.`
+    correctAnswer: 0,
+    explanation: `Managing waste protects the resource that residents, visitors, and businesses depend on without unnecessarily ending economic activity.`
   },
   {
     id: 40,
     type: "economics",
-    skill: "Financial Decision",
-    question: `A Jamaican family earns $100,000 per month and spends $95,000. They are:`,
+    skill: "Economic Decision-Making",
+    question: `A cooperative earns a surplus after paying its costs. Members want both future security and better equipment. Which plan is MOST balanced?`,
     options: [
-      "In serious debt",
-      "Breaking even",
-      "Saving $5,000 per month — living within their means and building financial security",
-      "Spending irresponsibly",
+      "Save part of the surplus and use part for agreed improvements.",
+      "Spend the entire surplus immediately on decorations.",
+      "Distribute every dollar and keep no reserve.",
+      "Borrow more money before deciding what equipment is needed.",
     ],
-    correctAnswer: 2,
-    explanation: `Income ($100,000) minus expenditure ($95,000) = $5,000 saved. This family is living within its means and building savings — an example of positive financial management.`
+    correctAnswer: 0,
+    explanation: `Dividing the surplus between reserves and useful investment balances future security with current improvement.`
   }
 ]
 
@@ -604,13 +605,10 @@ export default function G5SsMod4MockTest() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers]                 = useState<(number | null)[]>([])
   const [timeLeft, setTimeLeft]               = useState(60 * 60)
+  const [attemptQuestions, setAttemptQuestions] = useState<Question[]>([])
 
-  const availableQuestions = isPremium ? g5SsMod4Questions : g5SsMod4Questions.slice(0, FREE_QUESTION_LIMIT)
-  const totalQuestions = availableQuestions.length
-
-  useEffect(() => {
-    if (answers.length !== totalQuestions) setAnswers(new Array(totalQuestions).fill(null))
-  }, [totalQuestions, answers.length])
+  const availableQuestions = attemptQuestions
+  const totalQuestions = started ? availableQuestions.length : isPremium ? g5SsMod4Questions.length : FREE_QUESTION_LIMIT
 
   const formatTime = useCallback((s: number) => {
     const m = Math.floor(s / 60)
@@ -624,6 +622,18 @@ export default function G5SsMod4MockTest() {
   }, [started, showResults])
 
   const handleAnswer = (idx: number) => { const a = [...answers]; a[currentQuestion] = idx; setAnswers(a) }
+
+  const startTest = () => {
+    const preparedQuestions = isPremium
+      ? prepareSocialStudiesAssessment(g5SsMod4Questions)
+      : prepareSocialStudiesPreview(g5SsMod4Questions, FREE_QUESTION_LIMIT)
+    setAttemptQuestions(preparedQuestions)
+    setAnswers(new Array(preparedQuestions.length).fill(null))
+    setCurrentQuestion(0)
+    setTimeLeft(60 * 60)
+    setShowResults(false)
+    setStarted(true)
+  }
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
   const scorePct  = () => Math.round((calcScore() / totalQuestions) * 100)
 
@@ -670,7 +680,7 @@ export default function G5SsMod4MockTest() {
 
   const resetTest = () => {
     setStarted(false); setShowResults(false); setCurrentQuestion(0)
-    setAnswers(new Array(totalQuestions).fill(null)); setTimeLeft(60 * 60)
+    setAttemptQuestions([]); setAnswers([]); setTimeLeft(60 * 60)
   }
 
   const q = availableQuestions[currentQuestion]
@@ -720,7 +730,7 @@ export default function G5SsMod4MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-green-700">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
+            <Button onClick={startTest} className="w-full bg-green-700 py-6 text-lg hover:bg-green-800">Start Test</Button>
           </CardContent>
         </Card>
       </main>
