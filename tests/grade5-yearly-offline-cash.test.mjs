@@ -1,5 +1,6 @@
 import assert from "node:assert/strict"
-import { readFileSync } from "node:fs"
+import { createHash } from "node:crypto"
+import { readdirSync, readFileSync } from "node:fs"
 import test from "node:test"
 
 const migration = readFileSync("supabase/migrations/20260906000000_grade5_yearly_and_offline_cash.sql", "utf8")
@@ -7,6 +8,12 @@ const backfillMigration = readFileSync("supabase/migrations/20260906224451_legac
 const adminPage = readFileSync("app/admin/payments/page.tsx", "utf8")
 const pricingPage = readFileSync("app/pricing/page.tsx", "utf8")
 const checkoutPage = readFileSync("app/checkout/page.tsx", "utf8")
+const authContext = readFileSync("contexts/auth-context.tsx", "utf8")
+const subscriptionsLibrary = readFileSync("lib/subscriptions.ts", "utf8")
+const activationPath = "supabase/controlled-releases/phase-6/activate_grade5_yearly_plans.sql"
+const activationMigration = readFileSync(activationPath, "utf8")
+const activationReadme = readFileSync("supabase/controlled-releases/phase-6/README.md", "utf8")
+const certifiedBackfillSha256 = "cd8ca6691b818ae138ba34e8c7e0efa02f7371d39179de4088e7fcd346d9e441"
 
 const plans = {
   standard_monthly: { months: 1, days: 0, maxStudents: 1 },
@@ -38,6 +45,22 @@ function activate(state, reference, planCode, now) {
   state.terms.push(result)
   state.receipts.set(reference, result)
   return result
+}
+
+function resolveEntitlement(subscription, now = new Date("2027-01-15T12:00:00Z")) {
+  const active = Boolean(
+    subscription &&
+    subscription.status === "active" &&
+    (!subscription.startsAt || new Date(subscription.startsAt) <= now) &&
+    subscription.expiresAt &&
+    new Date(subscription.expiresAt) > now,
+  )
+
+  return {
+    planCode: active ? subscription.planCode : "free",
+    expiresAt: active ? subscription.expiresAt : undefined,
+    maxStudents: active ? subscription.maxStudents : 1,
+  }
 }
 
 const legacyEvidence = Object.freeze({
@@ -136,6 +159,92 @@ test("yearly plans are authoritative 12-calendar-month products", () => {
   assert.doesNotMatch(migration, /365\s*days/i)
 })
 
+test("yearly products are installed dormant in both configuration and public pricing", () => {
+  assert.match(migration, /'standard_yearly', 30000, 12, 0, 1, false/)
+  assert.match(migration, /'premium_family_yearly', 100000, 12, 0, 4, false/)
+  assert.match(migration, /'standard_yearly',[\s\S]+1, 'Yearly Value', false, false\)/)
+  assert.match(migration, /'premium_family_yearly',[\s\S]+4, null, false, false\)/)
+  assert.doesNotMatch(migration, /'standard_yearly', 30000, 12, 0, 1, true/)
+  assert.doesNotMatch(migration, /'premium_family_yearly', 100000, 12, 0, 4, true/)
+})
+
+test("public pricing and checkout fail closed when paid plan lookup fails", () => {
+  assert.match(pricingPage, /\.eq\("is_active", true\)/)
+  assert.match(pricingPage, /PRICING_TIERS\.filter\(\(tier\) => tier\.id === "free"\)/)
+  assert.doesNotMatch(pricingPage, /useState<PricingTier\[]>\(PRICING_TIERS\)/)
+  assert.match(checkoutPage, /\.eq\("is_active", true\)/)
+  assert.match(checkoutPage, /planId === "free"/)
+  assert.doesNotMatch(checkoutPage, /find\(\(tier\) => tier\.id === planId\)/)
+})
+
+test("subscriptions are the sole paid-entitlement authority", () => {
+  assert.match(authContext, /const active = isSubscriptionActive\(subscription\)/)
+  assert.match(authContext, /maxStudents: subscription\?\.maxStudents \?\? 1/)
+  assert.doesNotMatch(authContext, /isPaymentAccessActive|latestVerifiedPayment|calculatePaymentExpiry/)
+  assert.doesNotMatch(authContext, /\.from\("payments"\)/)
+  assert.doesNotMatch(subscriptionsLibrary, /isPaymentAccessActive|calculateExpiryFromStart|setMonth\(/)
+
+  const individual = resolveEntitlement({
+    status: "active",
+    planCode: "standard_yearly",
+    startsAt: "2027-01-01T00:00:00Z",
+    expiresAt: "2028-01-01T00:00:00Z",
+    maxStudents: 1,
+  })
+  const family = resolveEntitlement({
+    status: "active",
+    planCode: "premium_family_yearly",
+    startsAt: "2027-01-01T00:00:00Z",
+    expiresAt: "2028-01-01T00:00:00Z",
+    maxStudents: 4,
+  })
+  assert.deepEqual(individual, {
+    planCode: "standard_yearly",
+    expiresAt: "2028-01-01T00:00:00Z",
+    maxStudents: 1,
+  })
+  assert.equal(family.maxStudents, 4)
+})
+
+test("verified payment alone, expired subscription, and future subscription remain Free", () => {
+  assert.deepEqual(resolveEntitlement(null), {
+    planCode: "free",
+    expiresAt: undefined,
+    maxStudents: 1,
+  })
+  assert.equal(resolveEntitlement({
+    status: "expired",
+    planCode: "standard_yearly",
+    startsAt: "2026-01-01T00:00:00Z",
+    expiresAt: "2027-01-01T00:00:00Z",
+    maxStudents: 1,
+  }).planCode, "free")
+  assert.equal(resolveEntitlement({
+    status: "active",
+    planCode: "premium_family_yearly",
+    startsAt: "2027-02-01T00:00:00Z",
+    expiresAt: "2028-02-01T00:00:00Z",
+    maxStudents: 4,
+  }).planCode, "free")
+})
+
+test("Phase 6 activation is assertion-gated and outside automatic Phase 2 migrations", () => {
+  const automaticMigrations = readdirSync("supabase/migrations")
+  assert.equal(automaticMigrations.some((name) => /activate_grade5_yearly_plans/.test(name)), false)
+  assert.match(activationReadme, /intentionally outside `supabase\/migrations`/)
+  assert.match(activationMigration, /price_jmd = 30000/)
+  assert.match(activationMigration, /duration_months = 12/)
+  assert.match(activationMigration, /duration_days = 0/)
+  assert.match(activationMigration, /max_students = 1/)
+  assert.match(activationMigration, /price_jmd = 100000/)
+  assert.match(activationMigration, /max_students = 4/)
+  assert.match(activationMigration, /configuration_count <> 2/)
+  assert.match(activationMigration, /pricing_count <> 2/)
+  assert.match(activationMigration, /set is_public = true/)
+  assert.match(activationMigration, /set is_active = true/)
+  assert.doesNotMatch(activationMigration, /insert into|delete from|update public\.(?!grade5_plan_configuration|pricing_plans)/i)
+})
+
 test("calendar arithmetic handles leap day and month end", () => {
   assert.equal(addCalendarMonths(new Date("2028-02-29T12:00:00Z"), 12).toISOString(), "2029-02-28T12:00:00.000Z")
   assert.equal(addCalendarMonths(new Date("2027-01-31T12:00:00Z"), 1).toISOString(), "2027-02-28T12:00:00.000Z")
@@ -210,6 +319,7 @@ test("all payment activation audit writes use the production audit schema", () =
 })
 
 test("legacy backfill is bound to the accepted payment evidence", () => {
+  assert.equal(createHash("sha256").update(backfillMigration).digest("hex"), certifiedBackfillSha256)
   assert.match(backfillMigration, /d1e603ad-4b9c-4f4f-b213-1941bf228a1a/)
   assert.match(backfillMigration, /79390986bbba18cf5c5377fce37cc1fa15f6c631e16a0d8ead4b70a4ae545efd/)
   assert.match(backfillMigration, /91d75058-6640-4b29-99f0-4e7b4df4c2ee/)

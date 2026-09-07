@@ -129,14 +129,18 @@ function CheckoutContent() {
           return
         }
 
-        const fallbackPlan =
-          PRICING_TIERS.find((tier) => tier.id === planId) ?? null
-        setPlan(fallbackPlan)
+        const freePlan =
+          planId === "free"
+            ? PRICING_TIERS.find((tier) => tier.id === "free") ?? null
+            : null
+        setPlan(freePlan)
       } catch (err) {
         console.error("Unexpected checkout plan load error:", err)
-        const fallbackPlan =
-          PRICING_TIERS.find((tier) => tier.id === planId) ?? null
-        setPlan(fallbackPlan)
+        const freePlan =
+          planId === "free"
+            ? PRICING_TIERS.find((tier) => tier.id === "free") ?? null
+            : null
+        setPlan(freePlan)
       } finally {
         setLoadingPlan(false)
       }

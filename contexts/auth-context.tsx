@@ -11,7 +11,7 @@ import type {
   PlanCode,
   AuthState,
 } from "@/lib/types"
-import { isPaymentAccessActive, isSubscriptionActive } from "@/lib/subscriptions"
+import { isSubscriptionActive } from "@/lib/subscriptions"
 
 interface AuthContextType extends AuthState {
   login: (email: string, password: string) => Promise<boolean>
@@ -46,22 +46,6 @@ interface SupabaseStudentRow {
   created_at: string
 }
 
-
-interface SupabasePaymentRow {
-  id: string
-  parent_id: string
-  grade: "grade4" | "grade5"
-  plan_code: PlanCode
-  amount_jmd: number
-  method: string
-  reference_code: string | null
-  proof_url: string | null
-  note: string | null
-  status: "pending" | "verified" | "rejected" | "expired"
-  submitted_at: string
-  verified_at: string | null
-  rejection_reason: string | null
-}
 
 interface SupabaseSubscriptionRow {
   id: string
@@ -107,26 +91,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       paymentId: row.payment_id,
     }
   }
-
-
-  const mapPayment = (row: SupabasePaymentRow | null) => {
-    if (!row) return null
-    return {
-      id: row.id,
-      parentId: row.parent_id,
-      grade: row.grade,
-      planCode: row.plan_code,
-      amountJmd: Number(row.amount_jmd),
-      method: row.method,
-      referenceCode: row.reference_code,
-      proofUrl: row.proof_url,
-      note: row.note,
-      status: row.status,
-      submittedAt: row.submitted_at,
-      verifiedAt: row.verified_at,
-      rejectionReason: row.rejection_reason,
-    }
-  }
   const persistPendingChild = (email: string, childName: string) => {
     if (typeof window === "undefined") return
     localStorage.setItem(`${PENDING_CHILD_PREFIX}${email.toLowerCase()}`, childName)
@@ -157,7 +121,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         { data: profile, error: profileError },
         { data: subscriptionRows, error: subscriptionError },
         { data: studentRows, error: studentError },
-        { data: paymentRows, error: paymentError },
       ] = await Promise.all([
         supabase
           .from("profiles")
@@ -176,15 +139,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           .select("id, full_name, grade_level, subscription_id, created_at")
           .eq("parent_id", authUser.id)
           .order("created_at", { ascending: true }),
-        supabase
-          .from("payments")
-          .select("id, parent_id, grade, plan_code, amount_jmd, method, reference_code, proof_url, note, status, submitted_at, verified_at, rejection_reason")
-          .eq("parent_id", authUser.id)
-          .eq("grade", "grade5")
-          .eq("status", "verified")
-          .order("verified_at", { ascending: false, nullsFirst: false })
-          .order("submitted_at", { ascending: false })
-          .limit(1),
       ])
 
       if (profileError) {
@@ -195,9 +149,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
       if (studentError) {
         console.error("Could not load students:", studentError)
-      }
-      if (paymentError) {
-        console.error("Could not load payments:", paymentError)
       }
 
       let resolvedStudents = (studentRows ?? []).map((row) => mapStudent(row as SupabaseStudentRow))
@@ -278,20 +229,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         )
       }) as SupabaseSubscriptionRow | undefined
       const subscription = mapSubscription(effectiveSubscription ?? null)
-      const latestVerifiedPayment = mapPayment((paymentRows?.[0] as SupabasePaymentRow | undefined) ?? null)
-      const active = isSubscriptionActive(subscription) || isPaymentAccessActive(latestVerifiedPayment)
-
-      const effectivePlanCode = active
-        ? (subscription?.planCode ?? latestVerifiedPayment?.planCode ?? "free")
-        : "free"
-      const effectiveExpiry = active
-        ? (subscription?.expiresAt
-          ? new Date(subscription.expiresAt)
-          : latestVerifiedPayment?.verifiedAt
-            ? calculatePaymentExpiry(latestVerifiedPayment.planCode, latestVerifiedPayment.verifiedAt)
-            : latestVerifiedPayment?.submittedAt
-              ? calculatePaymentExpiry(latestVerifiedPayment.planCode, latestVerifiedPayment.submittedAt)
-              : undefined)
+      const active = isSubscriptionActive(subscription)
+      const effectivePlanCode = active ? subscription?.planCode ?? "free" : "free"
+      const effectiveExpiry = active && subscription?.expiresAt
+        ? new Date(subscription.expiresAt)
         : undefined
 
       setStudents(resolvedStudents)
@@ -465,30 +406,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setIsLoading(false)
     }
   }
-
-
-  const calculatePaymentExpiry = (planCode: PlanCode, startAt: string) => {
-    const date = new Date(startAt)
-    if (Number.isNaN(date.getTime())) return undefined
-
-    if (planCode === "standard_weekly") {
-      date.setDate(date.getDate() + 7)
-      return date
-    }
-
-    if (planCode === "standard_monthly" || planCode === "premium_family_monthly") {
-      date.setMonth(date.getMonth() + 1)
-      return date
-    }
-
-    if (planCode === "standard_yearly" || planCode === "premium_family_yearly") {
-      date.setMonth(date.getMonth() + 12)
-      return date
-    }
-
-    return undefined
-  }
-
   const addStudent = async (childName: string) => {
     if (!user) return { success: false, error: "Please sign in first." }
     if (!childName.trim()) return { success: false, error: "Enter a student name." }

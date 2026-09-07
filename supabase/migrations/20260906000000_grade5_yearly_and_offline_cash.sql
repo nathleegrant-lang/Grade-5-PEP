@@ -18,9 +18,9 @@ values
   ('free', 0, 0, 0, 1, true),
   ('standard_weekly', 1000, 0, 7, 1, true),
   ('standard_monthly', 3000, 1, 0, 1, true),
-  ('standard_yearly', 30000, 12, 0, 1, true),
+  ('standard_yearly', 30000, 12, 0, 1, false),
   ('premium_family_monthly', 10000, 1, 0, 4, true),
-  ('premium_family_yearly', 100000, 12, 0, 4, true)
+  ('premium_family_yearly', 100000, 12, 0, 4, false)
 on conflict (code) do update set
   price_jmd = excluded.price_jmd,
   duration_months = excluded.duration_months,
@@ -251,11 +251,11 @@ values
   ('standard_yearly', 'grade5', 'Standard Yearly', 30000, 'per 12 months',
    'Full Grade 5 access for one student for 12 calendar months.',
    '["Full Grade 5 access","12 calendar months, prepaid","No automatic renewal","One student included"]'::jsonb,
-   1, 'Yearly Value', false, true),
+   1, 'Yearly Value', false, false),
   ('premium_family_yearly', 'grade5', 'Premium Family Yearly', 100000, 'per 12 months',
    'Full Grade 5 access for up to 4 students for 12 calendar months.',
    '["Full Grade 5 access for up to 4 students","12 calendar months, prepaid","No automatic renewal","All premium resources included"]'::jsonb,
-   4, null, false, true)
+   4, null, false, false)
 on conflict do nothing;
 
 update public.pricing_plans target set
@@ -272,11 +272,11 @@ from (values
   ('standard_yearly', 'grade5', 'Standard Yearly', 30000::numeric, 'per 12 months',
    'Full Grade 5 access for one student for 12 calendar months.',
    '["Full Grade 5 access","12 calendar months, prepaid","No automatic renewal","One student included"]'::jsonb,
-   1, 'Yearly Value', false, true),
+   1, 'Yearly Value', false, false),
   ('premium_family_yearly', 'grade5', 'Premium Family Yearly', 100000::numeric, 'per 12 months',
    'Full Grade 5 access for up to 4 students for 12 calendar months.',
    '["Full Grade 5 access for up to 4 students","12 calendar months, prepaid","No automatic renewal","All premium resources included"]'::jsonb,
-   4, null, false, true)
+   4, null, false, false)
 ) as source(code, grade, name, price_jmd, period, description, features, max_students, badge_text, popular, is_active)
 where target.code = source.code and target.grade = source.grade;
 
