@@ -97,8 +97,7 @@ function CheckoutContent() {
 
   const hasPendingPayment = Boolean(pendingPayment)
   const hasActiveSubscription = Boolean(activeSubscription)
-  const formLocked =
-    submitting || checkingStatus || hasPendingPayment || hasActiveSubscription
+  const formLocked = submitting || checkingStatus || hasPendingPayment
 
   const planId = searchParams.get("plan") as PlanCode | null
 
@@ -130,14 +129,18 @@ function CheckoutContent() {
           return
         }
 
-        const fallbackPlan =
-          PRICING_TIERS.find((tier) => tier.id === planId) ?? null
-        setPlan(fallbackPlan)
+        const freePlan =
+          planId === "free"
+            ? PRICING_TIERS.find((tier) => tier.id === "free") ?? null
+            : null
+        setPlan(freePlan)
       } catch (err) {
         console.error("Unexpected checkout plan load error:", err)
-        const fallbackPlan =
-          PRICING_TIERS.find((tier) => tier.id === planId) ?? null
-        setPlan(fallbackPlan)
+        const freePlan =
+          planId === "free"
+            ? PRICING_TIERS.find((tier) => tier.id === "free") ?? null
+            : null
+        setPlan(freePlan)
       } finally {
         setLoadingPlan(false)
       }
@@ -233,14 +236,6 @@ function CheckoutContent() {
     if (latestState.pendingPayment) {
       setError(
         "Your payment submission has already been received and is awaiting verification.",
-      )
-      setSubmitting(false)
-      return
-    }
-
-    if (latestState.activeSubscription) {
-      setError(
-        "Your Grade 5 access is already active. No new payment submission is needed right now.",
       )
       setSubmitting(false)
       return
@@ -370,11 +365,11 @@ function CheckoutContent() {
                 </div>
               )}
 
-              {hasActiveSubscription ? (
+              {hasActiveSubscription && (
                 <div className="space-y-4">
                   <div className="rounded-xl border-2 border-emerald-600 bg-emerald-100 p-5 shadow-md">
                     <p className="text-lg font-extrabold text-emerald-900 mb-2">
-                      ✅ Access Already Active
+                      Access currently active
                     </p>
                     <p className="text-sm text-emerald-900">
                       Your Grade 5 access is already active.
@@ -389,14 +384,9 @@ function CheckoutContent() {
                     </p>
                   </div>
 
-                  <Link href="/dashboard">
-                    <Button className="w-full bg-slate-800 hover:bg-slate-900 text-white">
-                      Go to Dashboard
-                    </Button>
-                  </Link>
                 </div>
-              ) : (
-                <>
+              )}
+              <>
                   <div className="grid md:grid-cols-3 gap-4">
                     <div className="rounded-xl border border-sky-100 bg-white p-5">
                       <div className="flex items-center gap-2 mb-3">
@@ -500,8 +490,7 @@ function CheckoutContent() {
                       </Button>
                     </div>
                   </form>
-                </>
-              )}
+              </>
             </CardContent>
           </Card>
         </div>

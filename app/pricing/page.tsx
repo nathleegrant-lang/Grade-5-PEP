@@ -73,7 +73,9 @@ export default function PricingPage() {
   const supabase = useMemo(() => getSupabaseBrowserClient(), [])
 
   const [selectedPlan, setSelectedPlan] = useState<PlanCode | null>(null)
-  const [tiers, setTiers] = useState<PricingTier[]>(PRICING_TIERS)
+  const [tiers, setTiers] = useState<PricingTier[]>(() =>
+    PRICING_TIERS.filter((tier) => tier.id === "free"),
+  )
   const [isLoadingPlans, setIsLoadingPlans] = useState(true)
 
   useEffect(() => {
@@ -90,14 +92,22 @@ export default function PricingPage() {
 
         if (error) {
           console.error("Could not load pricing plans:", error)
+          setTiers(PRICING_TIERS.filter((tier) => tier.id === "free"))
           return
         }
 
-        if (data && data.length > 0) {
-          setTiers((data as PricingPlanRow[]).map(mapPlanRowToTier))
-        }
+        const activePlans = (data as PricingPlanRow[] | null) ?? []
+        const freePlan = PRICING_TIERS.find((tier) => tier.id === "free")
+        setTiers(
+          activePlans.length > 0
+            ? activePlans.map(mapPlanRowToTier)
+            : freePlan
+              ? [freePlan]
+              : [],
+        )
       } catch (err) {
         console.error("Unexpected pricing load error:", err)
+        setTiers(PRICING_TIERS.filter((tier) => tier.id === "free"))
       } finally {
         setIsLoadingPlans(false)
       }
@@ -231,7 +241,7 @@ export default function PricingPage() {
                       className={`w-full ${
                         tier.popular
                           ? "bg-amber-500 hover:bg-amber-600 text-white"
-                          : tier.id === "premium_family_monthly"
+                          : tier.id === "premium_family_monthly" || tier.id === "premium_family_yearly"
                           ? "bg-sky-600 hover:bg-sky-700 text-white"
                           : "bg-slate-200 hover:bg-slate-300 text-slate-700"
                       }`}

@@ -16,7 +16,7 @@ import { PlusCircle, Save, Trash2, RefreshCw, ShieldCheck } from "lucide-react"
 
 type PricingPlanRow = {
   id: string
-  code: "free" | "standard_weekly" | "standard_monthly" | "premium_family_monthly"
+  code: "free" | "standard_weekly" | "standard_monthly" | "standard_yearly" | "premium_family_monthly" | "premium_family_yearly"
   grade: "grade4" | "grade5"
   name: string
   price_jmd: number
@@ -32,7 +32,7 @@ type PricingPlanRow = {
 }
 
 type FormState = {
-  code: "free" | "standard_weekly" | "standard_monthly" | "premium_family_monthly"
+  code: "free" | "standard_weekly" | "standard_monthly" | "standard_yearly" | "premium_family_monthly" | "premium_family_yearly"
   grade: "grade4" | "grade5"
   name: string
   price_jmd: string
@@ -321,7 +321,9 @@ export default function AdminPricingPage() {
                         <option value="free">free</option>
                         <option value="standard_weekly">standard_weekly</option>
                         <option value="standard_monthly">standard_monthly</option>
+                        <option value="standard_yearly">standard_yearly</option>
                         <option value="premium_family_monthly">premium_family_monthly</option>
+                        <option value="premium_family_yearly">premium_family_yearly</option>
                       </select>
                     </div>
 

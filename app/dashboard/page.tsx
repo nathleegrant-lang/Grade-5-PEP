@@ -111,7 +111,7 @@ export default function DashboardPage() {
       const { data } = await supabase
         .from("payments")
         .select(
-          "id, parent_id, grade, plan_code, amount_jmd, method, reference_code, proof_url, note, status, submitted_at, verified_at, rejection_reason",
+          "id, parent_id, grade, plan_code, amount_jmd, method, reference_code, proof_url, note, status, submitted_at, verified_at, rejection_reason, receipt_number",
         )
         .eq("parent_id", user.id)
         .eq("grade", "grade5")
@@ -136,6 +136,7 @@ export default function DashboardPage() {
         submittedAt: row.submitted_at,
         verifiedAt: row.verified_at,
         rejectionReason: row.rejection_reason,
+        receiptNumber: row.receipt_number,
       })
     }
 
@@ -675,6 +676,12 @@ export default function DashboardPage() {
                       <div>
                         <span className="text-slate-500 block mb-1">Reference</span>
                         <span className="text-slate-700">{latestPayment.referenceCode}</span>
+                      </div>
+                    )}
+                    {latestPayment.receiptNumber && (
+                      <div>
+                        <span className="text-slate-500 block mb-1">Receipt</span>
+                        <span className="font-mono text-slate-700">{latestPayment.receiptNumber}</span>
                       </div>
                     )}
                   </>

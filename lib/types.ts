@@ -1,6 +1,6 @@
 export type AppRole = "admin" | "parent"
 export type GradeProduct = "grade4" | "grade5"
-export type PlanCode = "free" | "standard_weekly" | "standard_monthly" | "premium_family_monthly"
+export type PlanCode = "free" | "standard_weekly" | "standard_monthly" | "standard_yearly" | "premium_family_monthly" | "premium_family_yearly"
 export type PaymentStatus = "pending" | "verified" | "rejected" | "expired"
 export type SubscriptionStatus = "pending" | "active" | "expired" | "cancelled" | "suspended"
 
@@ -38,6 +38,12 @@ export interface PaymentRecord {
   submittedAt: string
   verifiedAt?: string | null
   rejectionReason?: string | null
+  currency?: string
+  paidAt?: string | null
+  verifiedBy?: string | null
+  expectedAmountJmd?: number | null
+  actualAmountJmd?: number | null
+  receiptNumber?: string | null
   parentEmail?: string | null
   parentName?: string | null
 }
@@ -123,10 +129,20 @@ export const PRICING_TIERS: PricingTier[] = [
     badgeText: "Best Value",
     features: [
       "Everything in Standard Weekly",
-      "30-day access after approval",
+      "One calendar month of access after approval",
       "Detailed progress review",
       "One student included",
     ],
+  },
+  {
+    id: "standard_yearly",
+    name: "Standard Yearly",
+    priceJMD: 30000,
+    period: "per 12 months",
+    description: "Full Grade 5 access for one student for 12 calendar months.",
+    maxStudents: 1,
+    badgeText: "Yearly Value",
+    features: ["Full Grade 5 access", "12 calendar months, prepaid", "No automatic renewal", "One student included"],
   },
   {
     id: "premium_family_monthly",
@@ -141,6 +157,15 @@ export const PRICING_TIERS: PricingTier[] = [
       "All premium resources included",
       "Great for siblings in one household",
     ],
+  },
+  {
+    id: "premium_family_yearly",
+    name: "Premium Family Yearly",
+    priceJMD: 100000,
+    period: "per 12 months",
+    description: "Full Grade 5 access for up to 4 students for 12 calendar months.",
+    maxStudents: 4,
+    features: ["Full Grade 5 access for up to 4 students", "12 calendar months, prepaid", "No automatic renewal", "All premium resources included"],
   },
 ]
 
