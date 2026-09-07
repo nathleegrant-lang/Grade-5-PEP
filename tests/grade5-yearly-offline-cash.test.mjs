@@ -1,6 +1,6 @@
 import assert from "node:assert/strict"
 import { createHash } from "node:crypto"
-import { readdirSync, readFileSync } from "node:fs"
+import { existsSync, readdirSync, readFileSync } from "node:fs"
 import test from "node:test"
 
 const migration = readFileSync("supabase/migrations/20260906000000_grade5_yearly_and_offline_cash.sql", "utf8")
@@ -10,7 +10,8 @@ const pricingPage = readFileSync("app/pricing/page.tsx", "utf8")
 const checkoutPage = readFileSync("app/checkout/page.tsx", "utf8")
 const authContext = readFileSync("contexts/auth-context.tsx", "utf8")
 const subscriptionsLibrary = readFileSync("lib/subscriptions.ts", "utf8")
-const activationPath = "supabase/controlled-releases/phase-6/activate_grade5_yearly_plans.sql"
+const typesLibrary = readFileSync("lib/types.ts", "utf8")
+const activationPath = "supabase/migrations/20260907043932_activate_grade5_yearly_plans.sql"
 const activationMigration = readFileSync(activationPath, "utf8")
 const activationReadme = readFileSync("supabase/controlled-releases/phase-6/README.md", "utf8")
 const certifiedBackfillSha256 = "cd8ca6691b818ae138ba34e8c7e0efa02f7371d39179de4088e7fcd346d9e441"
@@ -60,6 +61,52 @@ function resolveEntitlement(subscription, now = new Date("2027-01-15T12:00:00Z")
     planCode: active ? subscription.planCode : "free",
     expiresAt: active ? subscription.expiresAt : undefined,
     maxStudents: active ? subscription.maxStudents : 1,
+  }
+}
+
+function yearlyActivationFixture() {
+  return {
+    configuration: [
+      { code: "standard_weekly", priceJmd: 1000, months: 0, days: 7, maxStudents: 1, isPublic: true },
+      { code: "standard_monthly", priceJmd: 3000, months: 1, days: 0, maxStudents: 1, isPublic: true },
+      { code: "premium_family_monthly", priceJmd: 10000, months: 1, days: 0, maxStudents: 4, isPublic: true },
+      { code: "standard_yearly", priceJmd: 30000, months: 12, days: 0, maxStudents: 1, isPublic: false },
+      { code: "premium_family_yearly", priceJmd: 100000, months: 12, days: 0, maxStudents: 4, isPublic: false },
+    ],
+    pricing: [
+      { grade: "grade5", code: "standard_weekly", priceJmd: 1000, maxStudents: 1, isActive: true },
+      { grade: "grade5", code: "standard_monthly", priceJmd: 3000, maxStudents: 1, isActive: true },
+      { grade: "grade5", code: "premium_family_monthly", priceJmd: 10000, maxStudents: 4, isActive: true },
+      { grade: "grade5", code: "standard_yearly", priceJmd: 30000, maxStudents: 1, isActive: false },
+      { grade: "grade5", code: "premium_family_yearly", priceJmd: 100000, maxStudents: 4, isActive: false },
+    ],
+  }
+}
+
+function runSyntheticYearlyActivation(state) {
+  const expected = {
+    standard_yearly: { priceJmd: 30000, months: 12, days: 0, maxStudents: 1 },
+    premium_family_yearly: { priceJmd: 100000, months: 12, days: 0, maxStudents: 4 },
+  }
+  for (const [code, plan] of Object.entries(expected)) {
+    const configuration = state.configuration.filter((row) => row.code === code)
+    const pricing = state.pricing.filter((row) => row.grade === "grade5" && row.code === code)
+    if (configuration.length !== 1 || pricing.length !== 1) throw new Error("missing or duplicate Yearly plan")
+    const configured = configuration[0]
+    const priced = pricing[0]
+    if (configured.priceJmd !== plan.priceJmd || configured.months !== plan.months ||
+        configured.days !== plan.days || configured.maxStudents !== plan.maxStudents || configured.isPublic !== false) {
+      throw new Error("configuration does not match dormant state")
+    }
+    if (priced.priceJmd !== plan.priceJmd || priced.maxStudents !== plan.maxStudents || priced.isActive !== false) {
+      throw new Error("pricing does not match dormant state")
+    }
+  }
+  for (const row of state.configuration) {
+    if (row.code in expected) row.isPublic = true
+  }
+  for (const row of state.pricing) {
+    if (row.grade === "grade5" && row.code in expected) row.isActive = true
   }
 }
 
@@ -228,10 +275,14 @@ test("verified payment alone, expired subscription, and future subscription rema
   }).planCode, "free")
 })
 
-test("Phase 6 activation is assertion-gated and outside automatic Phase 2 migrations", () => {
+test("Phase 6 activation is promoted once into normal migration authority", () => {
   const automaticMigrations = readdirSync("supabase/migrations")
-  assert.equal(automaticMigrations.some((name) => /activate_grade5_yearly_plans/.test(name)), false)
-  assert.match(activationReadme, /intentionally outside `supabase\/migrations`/)
+  assert.deepEqual(automaticMigrations.filter((name) => /activate_grade5_yearly_plans/.test(name)), [
+    "20260907043932_activate_grade5_yearly_plans.sql",
+  ])
+  assert.equal(existsSync("supabase/controlled-releases/phase-6/activate_grade5_yearly_plans.sql"), false)
+  assert.match(activationReadme, /former standalone SQL has been retired/)
+  assert.match(activationReadme, /separate Master production-deployment authorization/)
   assert.match(activationMigration, /price_jmd = 30000/)
   assert.match(activationMigration, /duration_months = 12/)
   assert.match(activationMigration, /duration_days = 0/)
@@ -243,6 +294,50 @@ test("Phase 6 activation is assertion-gated and outside automatic Phase 2 migrat
   assert.match(activationMigration, /set is_public = true/)
   assert.match(activationMigration, /set is_active = true/)
   assert.doesNotMatch(activationMigration, /insert into|delete from|update public\.(?!grade5_plan_configuration|pricing_plans)/i)
+})
+
+test("Phase 6 refuses incorrect price, duration, capacity, or dormant state", () => {
+  const mutations = [
+    (state) => { state.configuration.find((row) => row.code === "standard_yearly").priceJmd = 29999 },
+    (state) => { state.configuration.find((row) => row.code === "premium_family_yearly").priceJmd = 99999 },
+    (state) => { state.configuration.find((row) => row.code === "standard_yearly").months = 11 },
+    (state) => { state.configuration.find((row) => row.code === "premium_family_yearly").days = 365 },
+    (state) => { state.configuration.find((row) => row.code === "standard_yearly").maxStudents = 2 },
+    (state) => { state.configuration.find((row) => row.code === "premium_family_yearly").maxStudents = 3 },
+    (state) => { state.configuration.find((row) => row.code === "standard_yearly").isPublic = true },
+    (state) => { state.pricing.find((row) => row.code === "premium_family_yearly").isActive = true },
+  ]
+  for (const mutate of mutations) {
+    const state = yearlyActivationFixture()
+    mutate(state)
+    assert.throws(() => runSyntheticYearlyActivation(state), /does not match dormant state/)
+  }
+})
+
+test("Phase 6 activates exactly two Yearly rows without changing existing paid plans", () => {
+  const state = yearlyActivationFixture()
+  const beforeConfiguration = structuredClone(state.configuration)
+  const beforePricing = structuredClone(state.pricing)
+  runSyntheticYearlyActivation(state)
+
+  const changedConfiguration = state.configuration.filter((row, index) =>
+    JSON.stringify(row) !== JSON.stringify(beforeConfiguration[index]))
+  const changedPricing = state.pricing.filter((row, index) =>
+    JSON.stringify(row) !== JSON.stringify(beforePricing[index]))
+  assert.deepEqual(changedConfiguration.map((row) => row.code).sort(), ["premium_family_yearly", "standard_yearly"])
+  assert.deepEqual(changedPricing.map((row) => row.code).sort(), ["premium_family_yearly", "standard_yearly"])
+  assert.ok(changedConfiguration.every((row) => row.isPublic))
+  assert.ok(changedPricing.every((row) => row.isActive))
+})
+
+test("the application already recognizes both Yearly plans after database activation", () => {
+  assert.match(typesLibrary, /standard_yearly/)
+  assert.match(typesLibrary, /premium_family_yearly/)
+  assert.match(subscriptionsLibrary, /case "standard_yearly"/)
+  assert.match(subscriptionsLibrary, /case "premium_family_yearly"/)
+  assert.match(pricingPage, /tier\.id === "premium_family_monthly" \|\| tier\.id === "premium_family_yearly"/)
+  assert.match(checkoutPage, /\.from\("pricing_plans"\)/)
+  assert.match(checkoutPage, /\.eq\("is_active", true\)/)
 })
 
 test("calendar arithmetic handles leap day and month end", () => {
