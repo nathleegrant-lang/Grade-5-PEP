@@ -17,6 +17,97 @@ type AdminPaymentAction =
       studentIds?: string[]
     }
 
+type ParentLookupRow = {
+  id: string
+  full_name: string | null
+  email: string | null
+}
+
+type StudentLookupRow = {
+  id: string
+  full_name: string | null
+}
+
+export async function GET(request: NextRequest) {
+  const authorized = await authorizeAdminRequest(request.headers.get("authorization"))
+  if (!authorized) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
+
+  try {
+    const { searchParams } = new URL(request.url)
+    const mode = searchParams.get("mode")
+
+    if (mode === "parents") {
+      const query = searchParams.get("q")?.trim() || ""
+      if (query.length < 2) {
+        return NextResponse.json({ error: "Enter at least 2 characters to search." }, { status: 400 })
+      }
+
+      const pattern = `%${query}%`
+      const [nameResult, emailResult] = await Promise.all([
+        authorized.db
+          .from("profiles")
+          .select("id, full_name, email")
+          .eq("role", "parent")
+          .ilike("full_name", pattern)
+          .limit(25),
+        authorized.db
+          .from("profiles")
+          .select("id, full_name, email")
+          .eq("role", "parent")
+          .ilike("email", pattern)
+          .limit(25),
+      ])
+
+      if (nameResult.error) throw nameResult.error
+      if (emailResult.error) throw emailResult.error
+
+      const unique = new Map<string, ParentLookupRow>()
+      for (const row of [...(nameResult.data || []), ...(emailResult.data || [])] as ParentLookupRow[]) {
+        unique.set(row.id, row)
+      }
+
+      const customers = Array.from(unique.values())
+        .map((row) => ({
+          id: row.id,
+          name: row.full_name?.trim() || "Unnamed parent",
+          email: row.email?.trim() || "No email",
+        }))
+        .sort((a, b) => `${a.name} ${a.email}`.localeCompare(`${b.name} ${b.email}`))
+        .slice(0, 25)
+
+      return NextResponse.json({ customers })
+    }
+
+    if (mode === "students") {
+      const parentId = searchParams.get("parentId")?.trim() || ""
+      if (!parentId) {
+        return NextResponse.json({ error: "Parent is required." }, { status: 400 })
+      }
+
+      const { data, error } = await authorized.db
+        .from("students")
+        .select("id, full_name")
+        .eq("parent_id", parentId)
+        .eq("grade_level", 5)
+        .order("full_name", { ascending: true })
+
+      if (error) throw error
+
+      const students = ((data || []) as StudentLookupRow[]).map((row) => ({
+        id: row.id,
+        name: row.full_name?.trim() || "Unnamed student",
+      }))
+
+      return NextResponse.json({ students })
+    }
+
+    return NextResponse.json({ error: "Unsupported lookup mode." }, { status: 400 })
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Lookup failed."
+    return NextResponse.json({ error: message }, { status: 400 })
+  }
+}
+
 export async function POST(request: NextRequest) {
   const authorized = await authorizeAdminRequest(request.headers.get("authorization"))
   if (!authorized) return NextResponse.json({ error: "Forbidden" }, { status: 403 })
