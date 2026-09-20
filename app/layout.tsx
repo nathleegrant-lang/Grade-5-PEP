@@ -12,19 +12,23 @@ const nunito = Nunito({
 })
 
 export const metadata: Metadata = {
-  title: "Grade 5 PEP - Jamaica Primary Exit Profile Preparation",
+  title: "Grade 6 PEP Ready - Jamaica Primary Exit Profile Preparation",
   description:
-    "Interactive learning platform for Grade 5 students preparing for the Jamaica Primary Exit Profile (PEP) examination. Practice Mathematics, Language Arts, Science, and Social Studies.",
+    "Complete interactive preparation for Grade 6 students sitting Jamaica's Primary Exit Profile examinations, including Mathematics, Language Arts, Science, Social Studies, performance tasks, mock examinations, and ability-test practice.",
   keywords: [
     "PEP",
-    "Grade 5",
+    "Grade 6",
     "Jamaica",
     "Primary Exit Profile",
+    "Ability Test",
+    "Mental Ability",
     "Mathematics",
     "Language Arts",
     "Science",
     "Social Studies",
-    "Education",
+    "Performance Tasks",
+    "Mock Examinations",
+    "Secondary School Placement",
   ],
 }
 
