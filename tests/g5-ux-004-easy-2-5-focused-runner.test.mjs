@@ -26,13 +26,63 @@ test("Easy 2-5 use the production focused runner with page-owned navigation", as
 
     assert.match(source, /import \{ FocusedActiveRunner \} from "@\/components\/assessment\/focused-active-runner"/)
     assert.match(source, /<FocusedActiveRunner/)
-    assert.match(source, /question=\{q\}/)
+    if (assessmentNumber === 3) {
+      assert.match(source, /question=\{q\}/)
+      assert.doesNotMatch(source, /stimulus=/)
+    } else {
+      assert.match(source, /question=\{\{ \.\.\.q, question: displayedQuestion \?\? q\.question \}\}/)
+      assert.match(source, /stimulus=\{passageText && passageNumber/)
+    }
     assert.match(source, /questions=\{availableQuestions\}/)
     assert.match(source, /onNavigate=\{\(questionIndex\) => setCurrentQuestion/)
     assert.match(source, /onSubmit=\{handleSubmit\}/)
-    assert.doesNotMatch(source, /stimulus=/)
     assert.equal(source.match(/<Header\s*\/>/g)?.length, 3)
     assert.equal(source.match(/<Footer\s*\/>/g)?.length, 3)
+  }
+})
+
+test("Easy 2, 4 and 5 resolve stable passage groups from the full certified source bank", async () => {
+  const expectations = new Map([
+    [2, { sourceIds: [1, 11], boundaries: [10, 15], checks: [[2, 1], [10, 1], [11, 2], [12, 2], [15, 2], [16, null]] }],
+    [4, { sourceIds: [1, 11], boundaries: [10, 15], checks: [[2, 1], [10, 1], [11, 2], [12, 2], [15, 2], [16, null]] }],
+    [5, { sourceIds: [1, 9], boundaries: [8, 15], checks: [[2, 1], [8, 1], [9, 2], [11, 2], [15, 2], [16, null]] }],
+  ])
+
+  for (const [assessmentNumber, expectation] of expectations) {
+    const source = await read(`app/mock-tests/literacy/easy-${assessmentNumber}/page.tsx`)
+    const sourceIds = [...source.matchAll(/g5LaEasy\dQuestions\.find\(\(question\) => question\.id === (\d+)\)/g)]
+      .map((match) => Number(match[1]))
+    const boundaries = [...source.matchAll(/if \(question\.id <= (\d+)\) return [12]/g)]
+      .map((match) => Number(match[1]))
+
+    assert.deepEqual(sourceIds, expectation.sourceIds)
+    assert.deepEqual(boundaries, expectation.boundaries)
+    assert.match(source, /if \(question\?\.type !== "reading"\) return null/)
+
+    const resolvePassage = (questionId, type = "reading") => {
+      if (type !== "reading") return null
+      if (questionId <= boundaries[0]) return 1
+      if (questionId <= boundaries[1]) return 2
+      return null
+    }
+
+    for (const [questionId, expectedPassage] of expectation.checks) {
+      assert.equal(resolvePassage(questionId), expectedPassage)
+    }
+    assert.equal(resolvePassage(2, "grammar"), null)
+  }
+})
+
+test("passage access is independent of the prepared five-question attempt", async () => {
+  for (const assessmentNumber of [2, 4, 5]) {
+    const source = await read(`app/mock-tests/literacy/easy-${assessmentNumber}/page.tsx`)
+    const passageMapStart = source.indexOf("const READING_PASSAGES")
+    const passageMapEnd = source.indexOf("const PASSAGE_BEARING_QUESTION_IDS", passageMapStart)
+    const passageMap = source.slice(passageMapStart, passageMapEnd)
+
+    assert.match(passageMap, new RegExp(`g5LaEasy${assessmentNumber}Questions\\.find`))
+    assert.doesNotMatch(passageMap, /availableQuestions|randomizedQuestions|preparePreview/)
+    assert.match(source, /const passageNumber = getPassageNumber\(q\)/)
   }
 })
 

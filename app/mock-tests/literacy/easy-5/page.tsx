@@ -638,6 +638,28 @@ Which statement is an opinion about the road safety lesson?`,
   }
 ]
 
+const extractPassage = (sourceQuestion: string) =>
+  sourceQuestion.split("\n\n").slice(1, -1).join("\n\n")
+
+const extractQuestionStem = (sourceQuestion: string) => {
+  const parts = sourceQuestion.split("\n\n")
+  return parts[parts.length - 1]
+}
+
+const READING_PASSAGES = {
+  1: extractPassage(g5LaEasy5Questions.find((question) => question.id === 1)!.question),
+  2: extractPassage(g5LaEasy5Questions.find((question) => question.id === 9)!.question),
+}
+
+const PASSAGE_BEARING_QUESTION_IDS = new Set([1, 9])
+
+const getPassageNumber = (question?: Question): 1 | 2 | null => {
+  if (question?.type !== "reading") return null
+  if (question.id <= 8) return 1
+  if (question.id <= 15) return 2
+  return null
+}
+
 const SECTION_CONFIG = [
   { type: "reading" as const,    label: "Reading Comprehension",  note: "main idea, inference, author's purpose, tone, text structure" },
   { type: "vocabulary" as const, label: "Vocabulary & Word Study", note: "context clues, synonyms, antonyms, figurative language, word meaning" },
@@ -746,6 +768,11 @@ export default function G5LaEasy5MockTest() {
   }
 
   const q = availableQuestions[currentQuestion]
+  const passageNumber = getPassageNumber(q)
+  const passageText = passageNumber ? READING_PASSAGES[passageNumber] : null
+  const displayedQuestion = q && PASSAGE_BEARING_QUESTION_IDS.has(q.id)
+    ? extractQuestionStem(q.question)
+    : q?.question
 
   if (!q) {
     return (
@@ -894,7 +921,7 @@ export default function G5LaEasy5MockTest() {
 
   return <FocusedActiveRunner
     assessmentName="Language Arts Easy 5"
-    question={q}
+    question={{ ...q, question: displayedQuestion ?? q.question }}
     questions={availableQuestions}
     currentQuestion={currentQuestion}
     answers={answers}
@@ -908,6 +935,7 @@ export default function G5LaEasy5MockTest() {
     onNext={() => setCurrentQuestion((previous) => Math.min(previous + 1, totalQuestions - 1))}
     onSubmit={handleSubmit}
     onNavigate={(questionIndex) => setCurrentQuestion(Math.min(Math.max(questionIndex, 0), totalQuestions - 1))}
+    stimulus={passageText && passageNumber ? { title: `Passage ${passageNumber}`, content: passageText } : undefined}
     previewNotice={!isPremium ? `Free Preview: ${FREE_QUESTION_LIMIT} of 40 questions. Upgrade Access to access the full test.` : undefined}
   />
 }
