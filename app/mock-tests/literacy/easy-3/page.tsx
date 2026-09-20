@@ -9,8 +9,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { FocusedActiveRunner } from "@/components/assessment/focused-active-runner"
 import {
-  Clock, ChevronLeft, ChevronRight, Flag, CheckCircle, XCircle,
+  CheckCircle, XCircle,
   BookOpen, RotateCcw, Home, Lock, Crown, ArrowLeft, Printer
 } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -770,7 +771,6 @@ export default function G5LaEasy3MockTest() {
   }
 
   const q = availableQuestions[currentQuestion]
-  const answeredCount = answers.filter((a) => a !== null).length
 
   if (!q) {
     return (
@@ -927,88 +927,22 @@ export default function G5LaEasy3MockTest() {
     )
   }
 
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
-      <Header />
-      <header className="bg-blue-800 text-white sticky top-0 z-10">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Link href="/mock-tests/language-arts" className="p-2 hover:bg-white/10 rounded-lg transition-colors"><ArrowLeft className="h-5 w-5" /></Link>
-            <BookOpen className="h-8 w-8" />
-            <div><h1 className="text-lg font-bold">Language Arts Easy 3</h1><p className="text-blue-100 text-xs">Question {currentQuestion + 1} of {totalQuestions}</p></div>
-          </div>
-          <div className={cn("flex items-center gap-2 px-4 py-2 rounded-lg font-mono text-lg", timeLeft <= 300 ? "bg-red-500" : "bg-green-600")}>
-            <Clock className="h-5 w-5" />{formatTime(timeLeft)}
-          </div>
-        </div>
-      </header>
-      <div className="bg-white border-b shadow-sm sticky top-[72px] z-10">
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center justify-between text-sm text-gray-600 mb-2">
-            <span>Progress: {answeredCount}/{totalQuestions} answered</span>
-            <span>{Math.round((answeredCount / totalQuestions) * 100)}% complete</span>
-          </div>
-          <Progress value={(answeredCount / totalQuestions) * 100} className="h-2" />
-        </div>
-      </div>
-      <main className="container mx-auto px-4 py-6">
-        <div className="max-w-4xl mx-auto">
-          {!isPremium && (
-            <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
-              <p className="font-semibold text-amber-800">Free Preview: {FREE_QUESTION_LIMIT} of 40 questions</p>
-              <p className="text-sm text-amber-700">Upgrade Access to access the full test.</p>
-            </div>
-          )}
-          <Card className="mb-6 border-blue-100">
-            <CardHeader className={cn("rounded-t-lg", secColor(q.type))}>
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold uppercase tracking-wide">{q.skill}</span>
-                <span className="text-xs uppercase tracking-wide opacity-70">{secLabel(q.type)}</span>
-              </div>
-            </CardHeader>
-            <CardContent className="p-6">
-              <p className="text-base font-medium text-slate-800 mb-6 leading-relaxed whitespace-pre-line">{q.question}</p>
-              <div className="space-y-3">
-                {q.options.map((opt, idx) => (
-                  <button key={idx} onClick={() => handleAnswer(idx)}
-                    className={cn("w-full p-4 text-left rounded-lg border-2 transition-all",
-                      answers[currentQuestion] === idx ? "border-blue-600 bg-blue-50" : "border-gray-200 hover:border-blue-300 hover:bg-blue-50/50")}>
-                    <span className="font-medium text-blue-700 mr-3">{String.fromCharCode(65 + idx)}.</span>{opt}
-                  </button>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-          <div className="flex items-center justify-between mb-6">
-            <Button variant="outline" onClick={() => setCurrentQuestion((p) => Math.max(p - 1, 0))} disabled={currentQuestion === 0}><ChevronLeft className="h-4 w-4 mr-2" />Previous</Button>
-            {currentQuestion === totalQuestions - 1
-              ? <Button onClick={handleSubmit} className="bg-blue-600 hover:bg-blue-700"><Flag className="h-4 w-4 mr-2" />Submit Test</Button>
-              : <Button onClick={() => setCurrentQuestion((p) => Math.min(p + 1, totalQuestions - 1))} className="bg-blue-600 hover:bg-blue-700">Next<ChevronRight className="h-4 w-4 ml-2" /></Button>}
-          </div>
-          <Card className="border-blue-100">
-            <CardHeader className="py-3"><CardTitle className="text-sm text-blue-700">Question Navigator</CardTitle></CardHeader>
-            <CardContent className="pb-4">
-              <div className="grid grid-cols-10 gap-2">
-                {availableQuestions.map((_, idx) => (
-                  <button key={idx} onClick={() => setCurrentQuestion(Math.min(Math.max(idx, 0), totalQuestions - 1))}
-                    className={cn("w-8 h-8 rounded text-sm font-medium transition-colors",
-                      currentQuestion === idx ? "bg-blue-600 text-white"
-                      : answers[idx] !== null ? "bg-blue-100 text-blue-700"
-                      : "bg-gray-100 text-gray-600 hover:bg-gray-200")}>
-                    {idx + 1}
-                  </button>
-                ))}
-              </div>
-              <div className="flex items-center gap-4 mt-4 text-xs text-gray-500">
-                <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-blue-600" /><span>Current</span></div>
-                <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-blue-100" /><span>Answered</span></div>
-                <div className="flex items-center gap-1"><div className="w-3 h-3 rounded bg-gray-100" /><span>Unanswered</span></div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </main>
-      <Footer />
-    </div>
-  )
+  return <FocusedActiveRunner
+    assessmentName="Language Arts Easy 3"
+    question={q}
+    questions={availableQuestions}
+    currentQuestion={currentQuestion}
+    answers={answers}
+    timeLeft={timeLeft}
+    formatTime={formatTime}
+    sectionLabel={secLabel(q.type)}
+    skill={q.skill}
+    sectionClassName={secColor(q.type)}
+    onAnswer={handleAnswer}
+    onPrevious={() => setCurrentQuestion((previous) => Math.max(previous - 1, 0))}
+    onNext={() => setCurrentQuestion((previous) => Math.min(previous + 1, totalQuestions - 1))}
+    onSubmit={handleSubmit}
+    onNavigate={(questionIndex) => setCurrentQuestion(Math.min(Math.max(questionIndex, 0), totalQuestions - 1))}
+    previewNotice={!isPremium ? `Free Preview: ${FREE_QUESTION_LIMIT} of 40 questions. Upgrade Access to access the full test.` : undefined}
+  />
 }
