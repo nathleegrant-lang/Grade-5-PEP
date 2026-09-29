@@ -128,6 +128,9 @@ export async function POST(request: NextRequest) {
       if (!body.parentId || !body.idempotencyKey || !body.paidAt) {
         return NextResponse.json({ error: "Parent, operation identity, and paid date are required." }, { status: 400 })
       }
+      if (!body.studentIds?.length) {
+        return NextResponse.json({ error: "Select at least one Grade 5 student beneficiary." }, { status: 400 })
+      }
       if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(body.idempotencyKey)) {
         return NextResponse.json({ error: "Invalid Cash operation identity." }, { status: 400 })
       }
