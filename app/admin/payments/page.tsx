@@ -30,6 +30,12 @@ type PaymentRow = {
   receipt_number: string | null
   parent_email: string | null
   parent_name: string | null
+  cash_business_date: string | null
+  authoritative_business_date: string | null
+  authoritative_reference: string | null
+  identity_source: "new_date_contract" | "legacy" | "corrected"
+  historical_reference: string | null
+  correction_created_at: string | null
 }
 
 type CustomerOption = {
@@ -51,7 +57,7 @@ function mapPaymentRow(row: PaymentRow): PaymentRecord {
     planCode: row.plan_code,
     amountJmd: Number(row.amount_jmd),
     method: row.method,
-    referenceCode: row.reference_code,
+    referenceCode: row.authoritative_reference || row.reference_code,
     proofUrl: row.proof_url,
     note: row.note,
     status: row.status,
@@ -61,6 +67,12 @@ function mapPaymentRow(row: PaymentRow): PaymentRecord {
     receiptNumber: row.receipt_number,
     parentEmail: row.parent_email,
     parentName: row.parent_name,
+    cashBusinessDate: row.cash_business_date,
+    authoritativeBusinessDate: row.authoritative_business_date,
+    authoritativeReference: row.authoritative_reference,
+    identitySource: row.identity_source,
+    historicalReference: row.historical_reference,
+    correctionCreatedAt: row.correction_created_at,
   }
 }
 
@@ -101,7 +113,7 @@ export default function AdminPaymentsPage() {
     planCode: "standard_yearly" as PlanCode,
     actualAmountJmd: "30000",
     currency: "JMD",
-    paidAt: new Date().toISOString().slice(0, 10),
+    paymentDate: "",
     note: "",
   })
 
@@ -135,17 +147,20 @@ export default function AdminPaymentsPage() {
 
   const loadPayments = async () => {
     setLoadingPayments(true)
-
-    const { data } = await supabase
-      .from("payments")
-      .select("*")
-      .eq("grade", "grade5")
-      .order("submitted_at", { ascending: false })
-
-    const normalized = ((data || []) as PaymentRow[]).map(mapPaymentRow)
-    setPayments(normalized)
-
-    setLoadingPayments(false)
+    try {
+      const { data } = await supabase.auth.getSession()
+      const response = await fetch("/api/admin/payments?mode=payments", {
+        headers: { Authorization: `Bearer ${data.session?.access_token || ""}` },
+      })
+      const payload = await response.json()
+      if (!response.ok) throw new Error(payload.error || "Payment lookup failed.")
+      setPayments(((payload.payments || []) as PaymentRow[]).map(mapPaymentRow))
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Payment lookup failed.")
+      setPayments([])
+    } finally {
+      setLoadingPayments(false)
+    }
   }
 
   useEffect(() => {
@@ -330,12 +345,12 @@ export default function AdminPaymentsPage() {
         idempotencyKey: cashOperationKey.current,
         parentId: selectedParent.id,
         actualAmountJmd: Number(cash.actualAmountJmd),
-        paidAt: new Date(`${cash.paidAt}T12:00:00Z`).toISOString(),
+        paymentDate: cash.paymentDate,
         studentIds: selectedStudentIds,
       })
       setMessage(`Offline Cash payment recorded and activated. Reference ${result.paymentReference}. Receipt ${result.receiptNumber}.`)
       cashOperationKey.current = null
-      setCash((value) => ({ ...value, parentId: "", note: "" }))
+      setCash((value) => ({ ...value, parentId: "", paymentDate: "", note: "" }))
       setSelectedParent(null)
       setCustomerQuery("")
       setCustomerResults([])
@@ -491,9 +506,20 @@ export default function AdminPaymentsPage() {
               </div>
 
               <input className="rounded-md border p-2" required value={cash.currency} onChange={(e) => setCash({ ...cash, currency: e.target.value.toUpperCase() })} aria-label="Currency" />
-              <input className="rounded-md border p-2" required type="date" value={cash.paidAt} onChange={(e) => setCash({ ...cash, paidAt: e.target.value })} />
+              <div className="space-y-1">
+                <label htmlFor="cash-payment-date" className="text-sm font-medium text-slate-700">Payment date</label>
+                <input
+                  id="cash-payment-date"
+                  className="w-full rounded-md border p-2"
+                  required
+                  type="date"
+                  value={cash.paymentDate}
+                  onChange={(e) => setCash({ ...cash, paymentDate: e.target.value })}
+                />
+                <p className="text-xs text-slate-500">Enter the date the Cash was physically received.</p>
+              </div>
               <textarea className="rounded-md border p-2 md:col-span-2" placeholder="Audit note (optional)" value={cash.note} onChange={(e) => setCash({ ...cash, note: e.target.value })} />
-              <Button type="submit" disabled={workingId === "cash" || !selectedParent} className="md:col-span-2">{workingId === "cash" ? "Recording..." : "Record and Activate Cash Payment"}</Button>
+              <Button type="submit" disabled={workingId === "cash" || !selectedParent || !cash.paymentDate} className="md:col-span-2">{workingId === "cash" ? "Recording..." : "Record and Activate Cash Payment"}</Button>
             </form>
           </CardContent>
         </Card>
@@ -535,7 +561,7 @@ export default function AdminPaymentsPage() {
                   </Badge>
                 </div>
 
-                <div className="grid md:grid-cols-4 text-sm">
+                <div className="grid md:grid-cols-5 text-sm">
                   <div>
                     <p className="text-slate-500">Plan</p>
                     <p>{getPlanLabel(payment.planCode)}</p>
@@ -554,6 +580,11 @@ export default function AdminPaymentsPage() {
                   <div>
                     <p className="text-slate-500">Reference</p>
                     <p>{payment.referenceCode}</p>
+                  </div>
+
+                  <div>
+                    <p className="text-slate-500">Cash business date</p>
+                    <p>{payment.authoritativeBusinessDate || "Not recorded"}</p>
                   </div>
                 </div>
 

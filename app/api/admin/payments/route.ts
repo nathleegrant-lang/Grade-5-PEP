@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { authorizeAdminRequest } from "@/lib/admin-request"
+import { isValidCashBusinessDate } from "@/lib/cash-business-date"
 import type { PlanCode } from "@/lib/types"
 
 type AdminPaymentAction =
@@ -11,7 +12,7 @@ type AdminPaymentAction =
       planCode: PlanCode
       actualAmountJmd: number
       currency: string
-      paidAt: string
+      paymentDate: string
       idempotencyKey: string
       note?: string
       studentIds?: string[]
@@ -35,6 +36,16 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
     const mode = searchParams.get("mode")
+
+    if (mode === "payments") {
+      const { data, error } = await authorized.db
+        .from("grade5_payment_accounting_identity")
+        .select("*")
+        .eq("grade", "grade5")
+        .order("submitted_at", { ascending: false })
+      if (error) throw error
+      return NextResponse.json({ payments: data || [] })
+    }
 
     if (mode === "parents") {
       const query = searchParams.get("q")?.trim() || ""
@@ -125,8 +136,11 @@ export async function POST(request: NextRequest) {
     }
 
     if (body.action === "record_cash") {
-      if (!body.parentId || !body.idempotencyKey || !body.paidAt) {
-        return NextResponse.json({ error: "Parent, operation identity, and paid date are required." }, { status: 400 })
+      if (!body.parentId || !body.idempotencyKey || body.paymentDate === undefined) {
+        return NextResponse.json({ error: "Parent, operation identity, and payment date are required." }, { status: 400 })
+      }
+      if (!isValidCashBusinessDate(body.paymentDate)) {
+        return NextResponse.json({ error: "Payment date must be a valid calendar date in YYYY-MM-DD format." }, { status: 400 })
       }
       if (!body.studentIds?.length) {
         return NextResponse.json({ error: "Select at least one Grade 5 student beneficiary." }, { status: 400 })
@@ -139,7 +153,7 @@ export async function POST(request: NextRequest) {
         p_plan_code: body.planCode,
         p_actual_amount_jmd: body.actualAmountJmd,
         p_currency: body.currency || "JMD",
-        p_paid_at: body.paidAt,
+        p_cash_business_date: body.paymentDate,
         p_idempotency_key: body.idempotencyKey,
         p_administrator_id: authorized.adminId,
         p_note: body.note || null,

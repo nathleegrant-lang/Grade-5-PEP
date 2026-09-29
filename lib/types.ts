@@ -40,6 +40,12 @@ export interface PaymentRecord {
   rejectionReason?: string | null
   currency?: string
   paidAt?: string | null
+  cashBusinessDate?: string | null
+  authoritativeBusinessDate?: string | null
+  authoritativeReference?: string | null
+  identitySource?: "new_date_contract" | "legacy" | "corrected"
+  historicalReference?: string | null
+  correctionCreatedAt?: string | null
   verifiedBy?: string | null
   expectedAmountJmd?: number | null
   actualAmountJmd?: number | null

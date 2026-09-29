@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs"
 import test from "node:test"
 
 const migration = readFileSync("supabase/migrations/20260929052000_g5_admin_001_automatic_cash_reference.sql", "utf8")
+const cashV2Migration = readFileSync("supabase/migrations/20260929141400_g5_customer_ops_001_corr_003_cash_rpc_v2.sql", "utf8")
 const route = readFileSync("app/api/admin/payments/route.ts", "utf8")
 const page = readFileSync("app/admin/payments/page.tsx", "utf8")
 const studentMigration = readFileSync("supabase/migrations/20260929033000_g5_student_001_authoritative_add_student.sql", "utf8")
@@ -24,7 +25,7 @@ class SyntheticCashStore {
     try {
       const existing = this.rows.find((row) => row.operationKey === input.operationKey)
       if (existing) {
-        const comparable = ["parentId", "planCode", "amount", "currency", "paidAt", "note"]
+        const comparable = ["parentId", "planCode", "amount", "currency", "paymentDate", "note"]
         if (comparable.some((key) => (existing[key] ?? "") !== (input[key] ?? "")) ||
             JSON.stringify(existing.studentIds ?? []) !== JSON.stringify(input.studentIds ?? [])) {
           throw new Error("Cash operation payload conflict")
@@ -44,7 +45,7 @@ class SyntheticCashStore {
       // Sequence gaps are allowed, but no payment row survives a failed transaction.
       const seq = ++this.sequence
       if (input.failBeforeInsert) throw new Error("synthetic failure")
-      const date = input.paidAt.slice(0, 10).replaceAll("-", "")
+      const date = input.paymentDate.replaceAll("-", "")
       const reference = `CASH-${date}-${String(seq).padStart(6, "0")}`
       const row = Object.freeze({
         ...input,
@@ -78,7 +79,7 @@ function valid(overrides = {}) {
     amount: 3000,
     planPrice: 3000,
     currency: "JMD",
-    paidAt: "2026-09-29T12:00:00.000Z",
+    paymentDate: "2026-09-29",
     note: "",
     studentIds: ["student-a"],
     validStudentIds: ["student-a"],
@@ -92,7 +93,7 @@ test("permanent reference is database-generated and cannot be supplied by Admin 
   assert.doesNotMatch(route, /offlineReference|p_offline_reference/)
   assert.match(page, /crypto\.randomUUID\(\)/)
   assert.match(route, /p_idempotency_key: body\.idempotencyKey/)
-  assert.match(migration, /payment_reference :=[\s\S]+'CASH-'[\s\S]+to_char\(p_paid_at at time zone 'UTC', 'YYYYMMDD'\)[\s\S]+lpad\(reference_seq::text, 6, '0'\)/)
+  assert.match(cashV2Migration, /payment_reference :=[\s\S]+'CASH-'[\s\S]+to_char\(p_cash_business_date, 'YYYYMMDD'\)[\s\S]+lpad\(reference_seq::text, 6, '0'\)/)
 })
 
 test("database sequence plus unique indexes are authoritative for permanent and operation identity", () => {
@@ -193,6 +194,10 @@ test("Admin displays generated reference and Audit note remains separate and opt
   assert.match(page, /Audit note \(optional\)/)
   assert.match(route, /p_note: body\.note \|\| null/)
   assert.match(migration, /offline_idempotency_key, note, status/)
+  assert.match(page, /paymentDate: ""/)
+  assert.match(page, /Enter the date the Cash was physically received\./)
+  assert.doesNotMatch(page, /new Date\(`\$\{cash\.(paidAt|paymentDate)\}/)
+  assert.match(route, /p_cash_business_date: body\.paymentDate/)
 })
 
 test("G5-STUDENT-001 remains present and is not rewritten by the Admin migration", () => {
