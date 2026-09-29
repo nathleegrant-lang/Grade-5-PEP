@@ -11,6 +11,10 @@ const leastCorrection = readFileSync(
   "supabase/migrations/20260929115000_g5_student_002_fix_least.sql",
   "utf8",
 )
+const specialExpressionCorrection = readFileSync(
+  "supabase/migrations/20260929121500_g5_student_002_corr_001_fix_coalesce.sql",
+  "utf8",
+)
 const authContext = readFileSync("contexts/auth-context.tsx", "utf8")
 const resultWriter = readFileSync("lib/student-test-results.ts", "utf8")
 const dashboard = readFileSync("app/dashboard/page.tsx", "utf8")
@@ -112,8 +116,10 @@ test("capacity is configuration-backed, effective-subscription-aware, and transa
   assert.match(migration, /pg_catalog\.pg_advisory_xact_lock/)
   assert.match(migration, /v_caller_id::text \|\| ':grade5:students'/)
   assert.match(migration, /join public\.grade5_plan_configuration c on c\.code = s\.plan_code/)
-  assert.match(leastCorrection, /select s\.id, least\(s\.max_students, c\.max_students\)/)
-  assert.doesNotMatch(leastCorrection, /pg_catalog\.least\(/)
+  assert.match(specialExpressionCorrection, /select s\.id, least\(s\.max_students, c\.max_students\)/)
+  assert.doesNotMatch(specialExpressionCorrection, /pg_catalog\.least\(/)
+  assert.match(specialExpressionCorrection, /v_allowance := coalesce\(v_allowance, 1\)/)
+  assert.doesNotMatch(specialExpressionCorrection, /pg_catalog\.coalesce\(/)
   assert.match(migration, /s\.status = 'active'/)
   assert.match(migration, /s\.starts_at is null or s\.starts_at <= pg_catalog\.clock_timestamp\(\)/)
   assert.match(migration, /s\.expires_at > pg_catalog\.clock_timestamp\(\)/)
@@ -138,6 +144,39 @@ test("G5-STUDENT-002 changes only the invalid least qualification in the RPC con
       "least(s.max_students, c.max_students)",
     ),
   )
+})
+
+test("CORR-001 changes only the invalid coalesce qualification in the RPC contract", () => {
+  const functionContract = (sql) => sql.match(
+    /create or replace function public\.add_grade5_student\([\s\S]+?grant execute on function public\.add_grade5_student\(text, uuid\)[\s\S]+?to authenticated;/,
+  )?.[0]
+  const failedContract = functionContract(leastCorrection)
+  const correctedContract = functionContract(specialExpressionCorrection)
+
+  assert.ok(failedContract)
+  assert.ok(correctedContract)
+  assert.equal(
+    correctedContract,
+    failedContract.replace(
+      "pg_catalog.coalesce(v_allowance, 1)",
+      "coalesce(v_allowance, 1)",
+    ),
+  )
+})
+
+test("corrected RPC schema-qualifies only legitimate pg_catalog callables", () => {
+  const rpc = specialExpressionCorrection.match(
+    /create or replace function public\.add_grade5_student\([\s\S]+?\$\$;/,
+  )?.[0]
+  assert.ok(rpc)
+
+  const qualifiedCallables = [...rpc.matchAll(/pg_catalog\.([a-z_][a-z0-9_]*)\s*\(/g)]
+    .map((match) => match[1])
+  assert.deepEqual(
+    [...new Set(qualifiedCallables)].sort(),
+    ["btrim", "clock_timestamp", "count", "hashtextextended", "pg_advisory_xact_lock"].sort(),
+  )
+  assert.doesNotMatch(rpc, /pg_catalog\.(?:coalesce|greatest|least)\s*\(/i)
 })
 
 test("successful persistence fixes Grade 5, Parent, subscription, and returns one row", () => {
