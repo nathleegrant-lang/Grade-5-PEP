@@ -36,7 +36,10 @@ class SyntheticStudentStore {
       const existing = this.students.find(
         (student) => student.parentId === callerId && student.operationKey === operationKey,
       )
-      if (existing) return existing
+      if (existing) {
+        if (existing.name !== name.trim()) throw new Error("Student operation payload conflict")
+        return existing
+      }
 
       const count = this.students.filter(
         (student) => student.parentId === callerId && student.gradeLevel === 5,
@@ -125,6 +128,8 @@ test("operation keys, not names, are the immutable retry identity", () => {
   assert.match(migration, /add column if not exists creation_idempotency_key uuid/)
   assert.match(migration, /create unique index if not exists uq_students_parent_creation_operation[\s\S]+\(parent_id, creation_idempotency_key\)/)
   assert.match(migration, /s\.creation_idempotency_key = p_idempotency_key/)
+  assert.match(migration, /v_existing\.full_name is distinct from v_student_name/)
+  assert.match(migration, /Student operation payload conflict[\s\S]+errcode = '22000'/)
   assert.match(migration, /if p_idempotency_key is null then[\s\S]+Student operation identity required/)
   assert.doesNotMatch(migration, /lower\(pg_catalog\.btrim\(s\.full_name\)\) = pg_catalog\.lower\(v_student_name\)/)
   assert.match(migration, /if found then[\s\S]+return v_existing/)
@@ -212,14 +217,51 @@ test("synthetic concurrent attempts cannot exceed authoritative capacity", async
   assert.equal(store.students.length, 1)
 })
 
-test("same operation key retries exactly while a new key permits a namesake", async () => {
+test("exact and canonically equivalent replays return the established student", async () => {
   const store = new SyntheticStudentStore({ allowance: 2 })
-  const first = await store.add({ callerId: "parent-a", name: "One", operationKey: "operation-1" })
-  const retry = await store.add({ callerId: "parent-a", name: "Changed on retry", operationKey: "operation-1" })
+  const first = await store.add({ callerId: "parent-a", name: " John Brown ", operationKey: "operation-1" })
+  const retry = await store.add({ callerId: "parent-a", name: "John Brown", operationKey: "operation-1" })
   assert.equal(retry, first)
-  const namesake = await store.add({ callerId: "parent-a", name: "One", operationKey: "operation-2" })
+  const exactRetry = await store.add({ callerId: "parent-a", name: "John Brown", operationKey: "operation-1" })
+  assert.equal(exactRetry, first)
+  assert.equal(store.students.length, 1)
+})
+
+test("conflicting replay is rejected without changing the established operation", async () => {
+  const store = new SyntheticStudentStore({ allowance: 2 })
+  const first = await store.add({ callerId: "parent-a", name: "John Brown", operationKey: "operation-1" })
+  await assert.rejects(
+    store.add({ callerId: "parent-a", name: "Jane Brown", operationKey: "operation-1" }),
+    /Student operation payload conflict/,
+  )
+  assert.equal(first.name, "John Brown")
+  assert.equal(first.operationKey, "operation-1")
+  assert.equal(store.students.length, 1)
+  assert.equal(store.students.some((student) => student.name === "Jane Brown"), false)
+})
+
+test("a new operation key permits a same-name student when capacity permits", async () => {
+  const store = new SyntheticStudentStore({ allowance: 2 })
+  const first = await store.add({ callerId: "parent-a", name: "John Brown", operationKey: "operation-1" })
+  const namesake = await store.add({ callerId: "parent-a", name: "John Brown", operationKey: "operation-2" })
   assert.notEqual(namesake.id, first.id)
   assert.equal(store.students.length, 2)
+})
+
+test("valid replay succeeds and conflicting replay conflicts at full capacity", async () => {
+  const store = new SyntheticStudentStore({ allowance: 1 })
+  const first = await store.add({ callerId: "parent-a", name: "John Brown", operationKey: "operation-1" })
+  const replay = await store.add({ callerId: "parent-a", name: "John Brown", operationKey: "operation-1" })
+  assert.equal(replay, first)
+  await assert.rejects(
+    store.add({ callerId: "parent-a", name: "Jane Brown", operationKey: "operation-1" }),
+    /Student operation payload conflict/,
+  )
+  await assert.rejects(
+    store.add({ callerId: "parent-a", name: "John Brown", operationKey: "operation-2" }),
+    /Student capacity reached/,
+  )
+  assert.equal(store.students.length, 1)
 })
 
 test("concurrent same-key calls create one student and cross-Parent keys never replay another Parent", async () => {
@@ -232,6 +274,19 @@ test("concurrent same-key calls create one student and cross-Parent keys never r
   const otherParent = await store.add({ callerId: "parent-b", name: "One", operationKey: "shared-operation" })
   assert.notEqual(otherParent.id, first.id)
   assert.equal(otherParent.parentId, "parent-b")
+})
+
+test("concurrent conflicting same-key payloads establish one operation and reject the other", async () => {
+  const store = new SyntheticStudentStore({ allowance: 2 })
+  const results = await Promise.allSettled([
+    store.add({ callerId: "parent-a", name: "John Brown", operationKey: "shared-operation" }),
+    store.add({ callerId: "parent-a", name: "Jane Brown", operationKey: "shared-operation" }),
+  ])
+  assert.equal(results.filter((result) => result.status === "fulfilled").length, 1)
+  const rejected = results.find((result) => result.status === "rejected")
+  assert.match(rejected.reason.message, /Student operation payload conflict/)
+  assert.equal(store.students.length, 1)
+  assert.equal(store.students[0].operationKey, "shared-operation")
 })
 
 test("a failed operation reserves neither a student nor its operation key", async () => {

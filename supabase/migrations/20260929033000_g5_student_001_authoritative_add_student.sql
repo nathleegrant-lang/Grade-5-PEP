@@ -135,6 +135,9 @@ begin
      and s.creation_idempotency_key = p_idempotency_key;
 
   if found then
+    if v_existing.full_name is distinct from v_student_name then
+      raise exception 'Student operation payload conflict' using errcode = '22000';
+    end if;
     return v_existing;
   end if;
 
