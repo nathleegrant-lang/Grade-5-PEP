@@ -12,7 +12,7 @@ type AdminPaymentAction =
       actualAmountJmd: number
       currency: string
       paidAt: string
-      offlineReference: string
+      idempotencyKey: string
       note?: string
       studentIds?: string[]
     }
@@ -125,8 +125,11 @@ export async function POST(request: NextRequest) {
     }
 
     if (body.action === "record_cash") {
-      if (!body.parentId || !body.offlineReference || !body.paidAt) {
-        return NextResponse.json({ error: "Parent, reference, and paid date are required." }, { status: 400 })
+      if (!body.parentId || !body.idempotencyKey || !body.paidAt) {
+        return NextResponse.json({ error: "Parent, operation identity, and paid date are required." }, { status: 400 })
+      }
+      if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(body.idempotencyKey)) {
+        return NextResponse.json({ error: "Invalid Cash operation identity." }, { status: 400 })
       }
       const { data, error } = await authorized.db.rpc("admin_record_grade5_cash_payment", {
         p_parent_id: body.parentId,
@@ -134,7 +137,7 @@ export async function POST(request: NextRequest) {
         p_actual_amount_jmd: body.actualAmountJmd,
         p_currency: body.currency || "JMD",
         p_paid_at: body.paidAt,
-        p_offline_reference: body.offlineReference,
+        p_idempotency_key: body.idempotencyKey,
         p_administrator_id: authorized.adminId,
         p_note: body.note || null,
         p_student_ids: body.studentIds || null,
