@@ -33,6 +33,7 @@ class SyntheticCashStore {
       }
 
       if (!input.authorized) throw new Error("Forbidden")
+      if ((input.studentIds ?? []).length === 0) throw new Error("At least one Grade 5 student beneficiary is required")
       if (input.currency !== "JMD") throw new Error("Offline Cash currency must be JMD")
       if (input.amount !== input.planPrice) throw new Error("Actual amount does not match authoritative plan price")
       if ((input.studentIds ?? []).some((id) => !input.validStudentIds.includes(id))) {
@@ -198,4 +199,98 @@ test("G5-STUDENT-001 remains present and is not rewritten by the Admin migration
   assert.match(studentMigration, /Student operation payload conflict/)
   assert.match(studentMigration, /creation_idempotency_key/)
   assert.doesNotMatch(migration, /alter table public\.students|create or replace function public\.add_grade5_student/)
+})
+
+
+test("CORR-001 rejects NULL and empty beneficiary sets before persistence", async () => {
+  for (const studentIds of [null, []]) {
+    const store = new SyntheticCashStore()
+    await assert.rejects(
+      store.record(valid({ studentIds })),
+      /At least one Grade 5 student beneficiary is required/,
+    )
+    assert.equal(store.rows.length, 0)
+    assert.equal(store.subscriptions.length, 0)
+    assert.equal(store.audit.length, 0)
+    assert.equal(store.sequence, 0)
+  }
+})
+
+test("CORR-001 database boundary canonicalizes NULL and rejects zero beneficiaries before reference allocation", () => {
+  const correction = readFileSync(
+    "supabase/migrations/20260929060000_g5_admin_001_corr_001_require_beneficiary.sql",
+    "utf8",
+  )
+  assert.match(correction, /beneficiary_ids uuid\[\] := coalesce\(p_student_ids, '\{\}'::uuid\[\]\)/)
+  assert.match(correction, /if cardinality\(beneficiary_ids\) = 0 then[\s\S]+At least one Grade 5 student beneficiary is required[\s\S]+errcode = '22000'/)
+  const rejectAt = correction.indexOf("if cardinality(beneficiary_ids) = 0")
+  const allocateAt = correction.indexOf("nextval('public.grade5_cash_reference_seq'")
+  const insertAt = correction.indexOf("insert into public.payments")
+  const activateAt = correction.indexOf("app_private.activate_grade5_payment")
+  assert.ok(rejectAt >= 0 && rejectAt < allocateAt)
+  assert.ok(rejectAt < insertAt)
+  assert.ok(rejectAt < activateAt)
+})
+
+test("CORR-001 valid single and family beneficiaries retain success and capacity semantics", async () => {
+  const single = new SyntheticCashStore()
+  const one = await single.record(valid())
+  assert.match(one.paymentReference, /^CASH-20260929-\d{6,}$/)
+  assert.equal(single.rows.length, 1)
+  assert.equal(single.subscriptions.length, 1)
+
+  const family = new SyntheticCashStore()
+  const many = await family.record(valid({
+    operationKey: "33333333-3333-4333-8333-333333333333",
+    planCode: "premium_family_monthly",
+    amount: 10000,
+    planPrice: 10000,
+    studentIds: ["student-a", "student-b", "student-c", "student-d"],
+    validStudentIds: ["student-a", "student-b", "student-c", "student-d"],
+    capacity: 4,
+  }))
+  assert.match(many.paymentReference, /^CASH-20260929-\d{6,}$/)
+  assert.equal(family.rows[0].studentIds.length, 4)
+  assert.equal(family.subscriptions.length, 1)
+})
+
+test("CORR-001 wrong Parent, non-Grade-5 equivalent, and over-capacity selections remain rejected", async () => {
+  const cases = [
+    [valid({ studentIds: ["other-parent-student"] }), /does not belong to parent/],
+    [valid({ studentIds: ["non-grade5-student"] }), /does not belong to parent/],
+    [valid({ studentIds: ["student-a", "student-b"], validStudentIds: ["student-a", "student-b"] }), /exceeds plan entitlement/],
+  ]
+  for (const [input, expected] of cases) {
+    const store = new SyntheticCashStore()
+    await assert.rejects(store.record(input), expected)
+    assert.equal(store.rows.length, 0)
+    assert.equal(store.subscriptions.length, 0)
+  }
+})
+
+test("CORR-001 valid beneficiary replay remains idempotent and changed beneficiary set conflicts", async () => {
+  const store = new SyntheticCashStore()
+  const first = await store.record(valid())
+  const replay = await store.record(valid())
+  assert.equal(replay.paymentReference, first.paymentReference)
+  await assert.rejects(
+    store.record(valid({ studentIds: ["student-b"], validStudentIds: ["student-b"] })),
+    /Cash operation payload conflict/,
+  )
+  assert.equal(store.rows.length, 1)
+  assert.equal(store.subscriptions.length, 1)
+})
+
+test("CORR-001 preserves reference generation, receipt separation, service-role boundary, and student isolation", () => {
+  const correction = readFileSync(
+    "supabase/migrations/20260929060000_g5_admin_001_corr_001_require_beneficiary.sql",
+    "utf8",
+  )
+  assert.match(correction, /'CASH-' \|\| to_char\(p_paid_at at time zone 'UTC', 'YYYYMMDD'\)/)
+  assert.match(correction, /nextval\('public\.grade5_cash_reference_seq'::regclass\)/)
+  assert.match(correction, /grant execute on function public\.admin_record_grade5_cash_payment[\s\S]+to service_role/)
+  assert.match(correction, /revoke all on function public\.admin_record_grade5_cash_payment[\s\S]+from public, anon, authenticated/)
+  assert.doesNotMatch(correction, /receipt_number\s*:=\s*payment_reference|receipt_number[^\n]+payment_reference/)
+  assert.doesNotMatch(correction, /alter table public\.students|create or replace function public\.add_grade5_student/)
+  assert.match(route, /if \(!body\.studentIds\?\.length\)/)
 })
