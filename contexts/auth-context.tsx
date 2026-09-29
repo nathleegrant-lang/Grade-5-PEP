@@ -106,6 +106,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem(`${PENDING_CHILD_PREFIX}${email.toLowerCase()}`)
   }
 
+  const createGrade5Student = async (fullName: string) =>
+    supabase
+      .rpc("add_grade5_student", { p_full_name: fullName })
+      .single<SupabaseStudentRow>()
+
   const loadUser = async (session: Session | null) => {
     try {
       if (!session?.user) {
@@ -177,40 +182,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
 
         if (names.size > 0) {
-          const { data: insertedStudents, error: insertBackfillError } = await supabase
-            .from("students")
-            .insert(
-              Array.from(names).map((name) => ({
-                parent_id: authUser.id,
-                full_name: name,
-                grade_level: 5,
-              })),
-            )
-            .select("id, full_name, grade_level, subscription_id, created_at")
-
-          if (insertBackfillError) {
-            console.error("Could not backfill students from existing records:", insertBackfillError)
+          const recoveredStudents: StudentRecord[] = []
+          for (const name of names) {
+            const { data: recoveredStudent, error: recoveryError } = await createGrade5Student(name)
+            if (recoveryError) {
+              console.error("Could not recover student from existing records.")
+              break
+            }
+            if (recoveredStudent) recoveredStudents.push(mapStudent(recoveredStudent))
           }
 
-          if (insertedStudents?.length) {
-            resolvedStudents = insertedStudents.map((row) => mapStudent(row as SupabaseStudentRow))
+          if (recoveredStudents.length) {
+            resolvedStudents = recoveredStudents
           }
         }
       }
 
       if (resolvedStudents.length === 0 && pendingChild) {
-        const { data: insertedStudent, error: insertStudentError } = await supabase
-          .from("students")
-          .insert({
-            parent_id: authUser.id,
-            full_name: pendingChild,
-            grade_level: 5,
-          })
-          .select("id, full_name, grade_level, subscription_id, created_at")
-          .single<SupabaseStudentRow>()
+        const { data: insertedStudent, error: insertStudentError } = await createGrade5Student(pendingChild)
 
         if (insertStudentError) {
-          console.error("Could not create pending child record:", insertStudentError)
+          console.error("Could not create pending child record.")
         }
 
         if (insertedStudent) {
@@ -418,15 +410,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     }
 
-    const { error } = await supabase.from("students").insert({
-      parent_id: user.id,
-      subscription_id: activeSubscription?.id ?? null,
-      full_name: childName.trim(),
-      grade_level: 5,
-    })
+    const { error } = await createGrade5Student(childName.trim())
 
     if (error) {
-      return { success: false, error: error.message }
+      if (error.message.includes("Student capacity reached")) {
+        return {
+          success: false,
+          error: `This plan allows up to ${allowed} student${allowed === 1 ? "" : "s"}.`,
+        }
+      }
+      if (error.message.includes("Parent account required") || error.message.includes("Authentication required")) {
+        return { success: false, error: "Please sign in with a Parent account." }
+      }
+      if (error.message.includes("Student name required")) {
+        return { success: false, error: "Enter a student name." }
+      }
+      return { success: false, error: "Unable to add the student right now. Please try again." }
     }
 
     await refreshUser()
