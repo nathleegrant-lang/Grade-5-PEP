@@ -7,6 +7,10 @@ const migration = readFileSync(
   "supabase/migrations/20260929033000_g5_student_001_authoritative_add_student.sql",
   "utf8",
 )
+const leastCorrection = readFileSync(
+  "supabase/migrations/20260929115000_g5_student_002_fix_least.sql",
+  "utf8",
+)
 const authContext = readFileSync("contexts/auth-context.tsx", "utf8")
 const resultWriter = readFileSync("lib/student-test-results.ts", "utf8")
 const dashboard = readFileSync("app/dashboard/page.tsx", "utf8")
@@ -108,13 +112,32 @@ test("capacity is configuration-backed, effective-subscription-aware, and transa
   assert.match(migration, /pg_catalog\.pg_advisory_xact_lock/)
   assert.match(migration, /v_caller_id::text \|\| ':grade5:students'/)
   assert.match(migration, /join public\.grade5_plan_configuration c on c\.code = s\.plan_code/)
-  assert.match(migration, /pg_catalog\.least\(s\.max_students, c\.max_students\)/)
+  assert.match(leastCorrection, /select s\.id, least\(s\.max_students, c\.max_students\)/)
+  assert.doesNotMatch(leastCorrection, /pg_catalog\.least\(/)
   assert.match(migration, /s\.status = 'active'/)
   assert.match(migration, /s\.starts_at is null or s\.starts_at <= pg_catalog\.clock_timestamp\(\)/)
   assert.match(migration, /s\.expires_at > pg_catalog\.clock_timestamp\(\)/)
   assert.match(migration, /c\.code = 'free'/)
   assert.match(migration, /v_allowance := pg_catalog\.coalesce\(v_allowance, 1\)/)
   assert.match(migration, /v_student_count >= v_allowance/)
+})
+
+test("G5-STUDENT-002 changes only the invalid least qualification in the RPC contract", () => {
+  const functionContract = (sql) => sql.match(
+    /create or replace function public\.add_grade5_student\([\s\S]+?grant execute on function public\.add_grade5_student\(text, uuid\)[\s\S]+?to authenticated;/,
+  )?.[0]
+  const productionContract = functionContract(migration)
+  const correctedContract = functionContract(leastCorrection)
+
+  assert.ok(productionContract)
+  assert.ok(correctedContract)
+  assert.equal(
+    correctedContract,
+    productionContract.replace(
+      "pg_catalog.least(s.max_students, c.max_students)",
+      "least(s.max_students, c.max_students)",
+    ),
+  )
 })
 
 test("successful persistence fixes Grade 5, Parent, subscription, and returns one row", () => {
