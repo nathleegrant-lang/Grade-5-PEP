@@ -1,7 +1,12 @@
 begin;
 
 alter table public.students
-  add column if not exists creation_source text;
+  add column if not exists creation_source text,
+  add column if not exists creation_idempotency_key uuid;
+
+create unique index if not exists uq_students_parent_creation_operation
+  on public.students (parent_id, creation_idempotency_key)
+  where creation_idempotency_key is not null;
 
 create unique index if not exists uq_students_grade5_signup_parent
   on public.students (parent_id)
@@ -57,9 +62,35 @@ before insert on public.students
 for each row
 execute function public.enforce_grade5_signup_student_source();
 
+create or replace function public.protect_student_creation_identity()
+returns trigger
+language plpgsql
+set search_path = ''
+as $$
+begin
+  if new.creation_idempotency_key is distinct from old.creation_idempotency_key then
+    raise exception 'Student creation identity is immutable' using errcode = '42501';
+  end if;
+  return new;
+end;
+$$;
+
+revoke all on function public.protect_student_creation_identity()
+  from public, anon, authenticated;
+
+drop trigger if exists protect_student_creation_identity on public.students;
+create trigger protect_student_creation_identity
+before update on public.students
+for each row
+execute function public.protect_student_creation_identity();
+
 -- This is the sole authenticated persistence boundary for new Grade 5
 -- students. It serializes each Parent's inserts before counting capacity.
-create or replace function public.add_grade5_student(p_full_name text)
+drop function if exists public.add_grade5_student(text);
+create or replace function public.add_grade5_student(
+  p_full_name text,
+  p_idempotency_key uuid
+)
 returns public.students
 language plpgsql
 security definer
@@ -87,27 +118,28 @@ begin
     raise exception 'Parent account required' using errcode = '42501';
   end if;
 
-  if v_student_name is null or v_student_name = '' then
-    raise exception 'Student name required' using errcode = '22023';
+  if p_idempotency_key is null then
+    raise exception 'Student operation identity required' using errcode = '22023';
   end if;
 
   perform pg_catalog.pg_advisory_xact_lock(
     pg_catalog.hashtextextended(v_caller_id::text || ':grade5:students', 0)
   );
 
-  -- A retry after a lost/controlled response returns the established row
-  -- instead of creating an unintended duplicate.
+  -- Only the caller-scoped operation key identifies a retry. Names are not
+  -- identities: a fresh operation key may intentionally create a namesake.
   select s.*
     into v_existing
     from public.students s
    where s.parent_id = v_caller_id
-     and s.grade_level = 5
-     and pg_catalog.lower(pg_catalog.btrim(s.full_name)) = pg_catalog.lower(v_student_name)
-   order by s.created_at, s.id
-   limit 1;
+     and s.creation_idempotency_key = p_idempotency_key;
 
   if found then
     return v_existing;
+  end if;
+
+  if v_student_name is null or v_student_name = '' then
+    raise exception 'Student name required' using errcode = '22023';
   end if;
 
   select s.id, pg_catalog.least(s.max_students, c.max_students)
@@ -141,19 +173,19 @@ begin
   end if;
 
   insert into public.students
-    (parent_id, subscription_id, full_name, grade_level)
+    (parent_id, subscription_id, full_name, grade_level, creation_idempotency_key)
   values
-    (v_caller_id, v_subscription_id, v_student_name, 5)
+    (v_caller_id, v_subscription_id, v_student_name, 5, p_idempotency_key)
   returning * into v_created;
 
   return v_created;
 end;
 $$;
 
-alter function public.add_grade5_student(text) owner to postgres;
-revoke all on function public.add_grade5_student(text)
+alter function public.add_grade5_student(text, uuid) owner to postgres;
+revoke all on function public.add_grade5_student(text, uuid)
   from public, anon, authenticated;
-grant execute on function public.add_grade5_student(text)
+grant execute on function public.add_grade5_student(text, uuid)
   to authenticated;
 
 -- Keep RLS and its ownership policies intact, but close the direct browser

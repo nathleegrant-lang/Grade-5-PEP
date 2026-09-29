@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react"
+import { createContext, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react"
 import type { AuthChangeEvent, Session } from "@supabase/supabase-js"
 import { getSupabaseBrowserClient } from "@/lib/supabase/client"
 import type {
@@ -62,12 +62,22 @@ interface SupabaseSubscriptionRow {
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 const PENDING_CHILD_PREFIX = "grade5_pending_child_"
 
+async function stableStudentOperationKey(source: string) {
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(source))
+  const bytes = new Uint8Array(digest.slice(0, 16))
+  bytes[6] = (bytes[6] & 0x0f) | 0x50
+  bytes[8] = (bytes[8] & 0x3f) | 0x80
+  const hex = Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("")
+  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const supabase = useMemo(() => getSupabaseBrowserClient(), [])
   const [user, setUser] = useState<User | null>(null)
   const [students, setStudents] = useState<StudentRecord[]>([])
   const [activeSubscription, setActiveSubscription] = useState<SubscriptionRecord | null>(null)
   const [isLoading, setIsLoading] = useState(true)
+  const pendingAddOperation = useRef<{ name: string; key: string } | null>(null)
 
   const mapStudent = (row: SupabaseStudentRow): StudentRecord => ({
     id: row.id,
@@ -106,9 +116,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem(`${PENDING_CHILD_PREFIX}${email.toLowerCase()}`)
   }
 
-  const createGrade5Student = async (fullName: string) =>
+  const createGrade5Student = async (fullName: string, idempotencyKey: string) =>
     supabase
-      .rpc("add_grade5_student", { p_full_name: fullName })
+      .rpc("add_grade5_student", {
+        p_full_name: fullName,
+        p_idempotency_key: idempotencyKey,
+      })
       .single<SupabaseStudentRow>()
 
   const loadUser = async (session: Session | null) => {
@@ -165,26 +178,41 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const [{ data: resultNameRows }, { data: certificateNameRows }] = await Promise.all([
           supabase
             .from("student_test_results")
-            .select("student_name")
+            .select("id, student_name")
             .eq("parent_id", authUser.id)
             .not("student_name", "is", null),
           supabase
             .from("certificates")
-            .select("student_name")
+            .select("id, student_name")
             .eq("parent_id", authUser.id)
             .not("student_name", "is", null),
         ])
 
-        const names = new Set<string>()
-        for (const row of [...(resultNameRows ?? []), ...(certificateNameRows ?? [])] as Array<{ student_name?: string | null }>) {
+        const sources = [
+          ...(resultNameRows ?? []).map((row) => ({ ...row, source: "result" })),
+          ...(certificateNameRows ?? []).map((row) => ({ ...row, source: "certificate" })),
+        ].sort((a, b) => `${a.source}:${a.id}`.localeCompare(`${b.source}:${b.id}`)) as Array<{
+          id: string
+          student_name?: string | null
+          source: string
+        }>
+        const names = new Map<string, { name: string; operationSource: string }>()
+        for (const row of sources) {
           const trimmed = row.student_name?.trim()
-          if (trimmed) names.add(trimmed)
+          const normalized = trimmed?.toLocaleLowerCase()
+          if (trimmed && normalized && !names.has(normalized)) {
+            names.set(normalized, {
+              name: trimmed,
+              operationSource: `grade5-student-recovery:${row.source}:${row.id}`,
+            })
+          }
         }
 
         if (names.size > 0) {
           const recoveredStudents: StudentRecord[] = []
-          for (const name of names) {
-            const { data: recoveredStudent, error: recoveryError } = await createGrade5Student(name)
+          for (const { name, operationSource } of names.values()) {
+            const operationKey = await stableStudentOperationKey(operationSource)
+            const { data: recoveredStudent, error: recoveryError } = await createGrade5Student(name, operationKey)
             if (recoveryError) {
               console.error("Could not recover student from existing records.")
               break
@@ -199,7 +227,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
 
       if (resolvedStudents.length === 0 && pendingChild) {
-        const { data: insertedStudent, error: insertStudentError } = await createGrade5Student(pendingChild)
+        const operationKey = await stableStudentOperationKey(`grade5-pending-registration:${authUser.id}`)
+        const { data: insertedStudent, error: insertStudentError } = await createGrade5Student(pendingChild, operationKey)
 
         if (insertStudentError) {
           console.error("Could not create pending child record.")
@@ -410,7 +439,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     }
 
-    const { error } = await createGrade5Student(childName.trim())
+    const trimmedName = childName.trim()
+    if (!pendingAddOperation.current || pendingAddOperation.current.name !== trimmedName) {
+      pendingAddOperation.current = { name: trimmedName, key: crypto.randomUUID() }
+    }
+
+    const { error } = await createGrade5Student(trimmedName, pendingAddOperation.current.key)
 
     if (error) {
       if (error.message.includes("Student capacity reached")) {
@@ -428,6 +462,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return { success: false, error: "Unable to add the student right now. Please try again." }
     }
 
+    pendingAddOperation.current = null
     await refreshUser()
     return { success: true }
   }

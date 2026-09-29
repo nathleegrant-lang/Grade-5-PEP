@@ -1,5 +1,6 @@
 import assert from "node:assert/strict"
-import { readFileSync } from "node:fs"
+import { readdirSync, readFileSync, statSync } from "node:fs"
+import { join } from "node:path"
 import test from "node:test"
 
 const migration = readFileSync(
@@ -7,6 +8,7 @@ const migration = readFileSync(
   "utf8",
 )
 const authContext = readFileSync("contexts/auth-context.tsx", "utf8")
+const resultWriter = readFileSync("lib/student-test-results.ts", "utf8")
 const dashboard = readFileSync("app/dashboard/page.tsx", "utf8")
 const paymentMigration = readFileSync(
   "supabase/migrations/20260906000000_grade5_yearly_and_offline_cash.sql",
@@ -21,7 +23,7 @@ class SyntheticStudentStore {
     this.lock = Promise.resolve()
   }
 
-  async add({ authenticated = true, role = "parent", callerId, requestedParentId = callerId, name }) {
+  async add({ authenticated = true, role = "parent", callerId, requestedParentId = callerId, name, operationKey }) {
     const previous = this.lock
     let release
     this.lock = new Promise((resolve) => { release = resolve })
@@ -31,9 +33,8 @@ class SyntheticStudentStore {
       if (role !== "parent") throw new Error("Parent account required")
       if (requestedParentId !== callerId) throw new Error("Student ownership verification failed")
 
-      const normalized = name.trim().toLowerCase()
       const existing = this.students.find(
-        (student) => student.parentId === callerId && student.name.toLowerCase() === normalized,
+        (student) => student.parentId === callerId && student.operationKey === operationKey,
       )
       if (existing) return existing
 
@@ -48,6 +49,7 @@ class SyntheticStudentStore {
         name: name.trim(),
         gradeLevel: 5,
         subscriptionId: this.subscriptionId,
+        operationKey,
       })
       this.students.push(student)
       return student
@@ -55,6 +57,14 @@ class SyntheticStudentStore {
       release()
     }
   }
+}
+
+function executableSources(root) {
+  return readdirSync(root).flatMap((entry) => {
+    const path = join(root, entry)
+    if (statSync(path).isDirectory()) return executableSources(path)
+    return /\.(?:c|m)?(?:j|t)sx?$/.test(entry) ? [path] : []
+  })
 }
 
 test("forward migration repairs only the narrow trigger auth lookup boundary", () => {
@@ -72,14 +82,15 @@ test("forward migration repairs only the narrow trigger auth lookup boundary", (
 })
 
 test("authoritative RPC authenticates the Parent and makes parent spoofing impossible", () => {
-  assert.match(migration, /create or replace function public\.add_grade5_student\(p_full_name text\)/)
+  assert.match(migration, /create or replace function public\.add_grade5_student\([\s\S]+p_full_name text,[\s\S]+p_idempotency_key uuid/)
   assert.match(migration, /v_caller_id uuid := \(select auth\.uid\(\)\)/)
   assert.match(migration, /if v_caller_id is null/)
   assert.match(migration, /from public\.profiles p[\s\S]+p\.id = v_caller_id[\s\S]+p\.role = 'parent'/)
   assert.doesNotMatch(migration, /p_parent_id/)
   assert.match(migration, /Student ownership verification failed/)
-  assert.match(migration, /grant execute on function public\.add_grade5_student\(text\)[\s\S]+to authenticated/)
-  assert.match(migration, /revoke all on function public\.add_grade5_student\(text\)[\s\S]+from public, anon, authenticated/)
+  assert.match(migration, /drop function if exists public\.add_grade5_student\(text\)/)
+  assert.match(migration, /grant execute on function public\.add_grade5_student\(text, uuid\)[\s\S]+to authenticated/)
+  assert.match(migration, /revoke all on function public\.add_grade5_student\(text, uuid\)[\s\S]+from public, anon, authenticated/)
 })
 
 test("RLS and ownership policies remain while direct browser INSERT is closed", () => {
@@ -104,31 +115,49 @@ test("capacity is configuration-backed, effective-subscription-aware, and transa
 })
 
 test("successful persistence fixes Grade 5, Parent, subscription, and returns one row", () => {
-  assert.match(migration, /insert into public\.students[\s\S]+\(parent_id, subscription_id, full_name, grade_level\)/)
-  assert.match(migration, /\(v_caller_id, v_subscription_id, v_student_name, 5\)/)
+  assert.match(migration, /insert into public\.students[\s\S]+\(parent_id, subscription_id, full_name, grade_level, creation_idempotency_key\)/)
+  assert.match(migration, /\(v_caller_id, v_subscription_id, v_student_name, 5, p_idempotency_key\)/)
   assert.match(migration, /returning \* into v_created/)
   assert.match(migration, /return v_created/)
 })
 
-test("same-name retry is idempotent and ordinary additional children are not marked signup-origin", () => {
-  assert.match(migration, /A retry after a lost\/controlled response returns the established row/)
-  assert.match(migration, /pg_catalog\.lower\(pg_catalog\.btrim\(s\.full_name\)\) = pg_catalog\.lower\(v_student_name\)/)
+test("operation keys, not names, are the immutable retry identity", () => {
+  assert.match(migration, /add column if not exists creation_idempotency_key uuid/)
+  assert.match(migration, /create unique index if not exists uq_students_parent_creation_operation[\s\S]+\(parent_id, creation_idempotency_key\)/)
+  assert.match(migration, /s\.creation_idempotency_key = p_idempotency_key/)
+  assert.match(migration, /if p_idempotency_key is null then[\s\S]+Student operation identity required/)
+  assert.doesNotMatch(migration, /lower\(pg_catalog\.btrim\(s\.full_name\)\) = pg_catalog\.lower\(v_student_name\)/)
   assert.match(migration, /if found then[\s\S]+return v_existing/)
+  assert.match(migration, /create trigger protect_student_creation_identity[\s\S]+before update on public\.students/)
   assert.match(migration, /v_signup_child is not null[\s\S]+lower\(v_signup_child\)[\s\S]+creation_source = 'grade5_signup'/)
 })
 
 test("application and all existing recovery paths use the authoritative RPC", () => {
-  assert.match(authContext, /\.rpc\("add_grade5_student", \{ p_full_name: fullName \}\)/)
+  assert.match(authContext, /\.rpc\("add_grade5_student", \{[\s\S]+p_full_name: fullName,[\s\S]+p_idempotency_key: idempotencyKey/)
   assert.doesNotMatch(authContext, /\.from\("students"\)\s*\.insert/)
-  assert.match(authContext, /for \(const name of names\)[\s\S]+createGrade5Student\(name\)/)
+  assert.match(authContext, /grade5-student-recovery:\$\{row\.source\}:\$\{row\.id\}/)
   assert.match(authContext, /\.from\("student_test_results"\)/)
   assert.match(authContext, /\.from\("certificates"\)/)
-  assert.match(authContext, /createGrade5Student\(pendingChild\)/)
-  assert.match(authContext, /createGrade5Student\(childName\.trim\(\)\)/)
+  assert.match(authContext, /grade5-pending-registration:\$\{authUser\.id\}/)
+  assert.match(authContext, /pendingAddOperation\.current = \{ name: trimmedName, key: crypto\.randomUUID\(\) \}/)
+  assert.match(authContext, /createGrade5Student\(trimmedName, pendingAddOperation\.current\.key\)/)
+  assert.match(authContext, /pendingAddOperation\.current = null/)
+  assert.match(resultWriter, /\.rpc\("add_grade5_student"/)
+  assert.match(resultWriter, /grade5_student_result_recovery_/)
+  assert.match(resultWriter, /sessionStorage\.getItem\(storageKey\)/)
+  assert.match(resultWriter, /recoveryOperation\.complete\(\)/)
   assert.match(authContext, /This plan allows up to/)
   assert.match(authContext, /Unable to add the student right now\. Please try again\./)
   assert.match(dashboard, /const result = await addStudent\(newStudentName\)/)
   assert.match(dashboard, /Student added successfully\./)
+})
+
+test("no executable browser or app path directly inserts a student", () => {
+  const directInsert = /\.from\(["']students["']\)\s*\.\s*(?:insert|upsert)\s*\(/s
+  const offenders = ["app", "components", "contexts", "lib"]
+    .flatMap(executableSources)
+    .filter((path) => directInsert.test(readFileSync(path, "utf8")))
+  assert.deepEqual(offenders, [])
 })
 
 test("no browser service credential or general auth lookup is introduced", () => {
@@ -140,12 +169,12 @@ test("no browser service credential or general auth lookup is introduced", () =>
 
 test("synthetic free allowance permits 0-of-1 once and refuses 1-of-1", async () => {
   const store = new SyntheticStudentStore()
-  const created = await store.add({ callerId: "parent-a", name: "Student One" })
+  const created = await store.add({ callerId: "parent-a", name: "Student One", operationKey: "operation-1" })
   assert.equal(created.gradeLevel, 5)
   assert.equal(created.parentId, "parent-a")
   assert.equal(store.students.length, 1)
   await assert.rejects(
-    store.add({ callerId: "parent-a", name: "Student Two" }),
+    store.add({ callerId: "parent-a", name: "Student Two", operationKey: "operation-2" }),
     /Student capacity reached/,
   )
   assert.equal(store.students.length, 1)
@@ -153,20 +182,20 @@ test("synthetic free allowance permits 0-of-1 once and refuses 1-of-1", async ()
 
 test("synthetic paid allowance preserves subscription linkage", async () => {
   const store = new SyntheticStudentStore({ allowance: 4, subscriptionId: "subscription-family" })
-  for (const name of ["One", "Two", "Three", "Four"]) {
-    const student = await store.add({ callerId: "parent-a", name })
+  for (const [index, name] of ["One", "Two", "Three", "Four"].entries()) {
+    const student = await store.add({ callerId: "parent-a", name, operationKey: `operation-${index}` })
     assert.equal(student.subscriptionId, "subscription-family")
   }
-  await assert.rejects(store.add({ callerId: "parent-a", name: "Five" }), /Student capacity reached/)
+  await assert.rejects(store.add({ callerId: "parent-a", name: "Five", operationKey: "operation-5" }), /Student capacity reached/)
   assert.equal(store.students.length, 4)
 })
 
 test("synthetic unauthenticated, non-Parent, and cross-Parent calls persist nothing", async () => {
   const store = new SyntheticStudentStore()
-  await assert.rejects(store.add({ authenticated: false, callerId: "parent-a", name: "One" }), /Authentication required/)
-  await assert.rejects(store.add({ role: "admin", callerId: "admin-a", name: "One" }), /Parent account required/)
+  await assert.rejects(store.add({ authenticated: false, callerId: "parent-a", name: "One", operationKey: "operation-1" }), /Authentication required/)
+  await assert.rejects(store.add({ role: "admin", callerId: "admin-a", name: "One", operationKey: "operation-1" }), /Parent account required/)
   await assert.rejects(
-    store.add({ callerId: "parent-a", requestedParentId: "parent-b", name: "One" }),
+    store.add({ callerId: "parent-a", requestedParentId: "parent-b", name: "One", operationKey: "operation-1" }),
     /ownership verification failed/,
   )
   assert.equal(store.students.length, 0)
@@ -175,19 +204,50 @@ test("synthetic unauthenticated, non-Parent, and cross-Parent calls persist noth
 test("synthetic concurrent attempts cannot exceed authoritative capacity", async () => {
   const store = new SyntheticStudentStore()
   const results = await Promise.allSettled([
-    store.add({ callerId: "parent-a", name: "One" }),
-    store.add({ callerId: "parent-a", name: "Two" }),
+    store.add({ callerId: "parent-a", name: "One", operationKey: "operation-1" }),
+    store.add({ callerId: "parent-a", name: "Two", operationKey: "operation-2" }),
   ])
   assert.equal(results.filter((result) => result.status === "fulfilled").length, 1)
   assert.equal(results.filter((result) => result.status === "rejected").length, 1)
   assert.equal(store.students.length, 1)
 })
 
-test("synthetic retry returns the established row without a duplicate", async () => {
-  const store = new SyntheticStudentStore()
-  const first = await store.add({ callerId: "parent-a", name: "One" })
-  const retry = await store.add({ callerId: "parent-a", name: " One " })
+test("same operation key retries exactly while a new key permits a namesake", async () => {
+  const store = new SyntheticStudentStore({ allowance: 2 })
+  const first = await store.add({ callerId: "parent-a", name: "One", operationKey: "operation-1" })
+  const retry = await store.add({ callerId: "parent-a", name: "Changed on retry", operationKey: "operation-1" })
   assert.equal(retry, first)
+  const namesake = await store.add({ callerId: "parent-a", name: "One", operationKey: "operation-2" })
+  assert.notEqual(namesake.id, first.id)
+  assert.equal(store.students.length, 2)
+})
+
+test("concurrent same-key calls create one student and cross-Parent keys never replay another Parent", async () => {
+  const store = new SyntheticStudentStore({ allowance: 2 })
+  const [first, retry] = await Promise.all([
+    store.add({ callerId: "parent-a", name: "One", operationKey: "shared-operation" }),
+    store.add({ callerId: "parent-a", name: "One", operationKey: "shared-operation" }),
+  ])
+  assert.equal(first, retry)
+  const otherParent = await store.add({ callerId: "parent-b", name: "One", operationKey: "shared-operation" })
+  assert.notEqual(otherParent.id, first.id)
+  assert.equal(otherParent.parentId, "parent-b")
+})
+
+test("a failed operation reserves neither a student nor its operation key", async () => {
+  const store = new SyntheticStudentStore({ allowance: 0 })
+  await assert.rejects(
+    store.add({ callerId: "parent-a", name: "One", operationKey: "retry-after-failure" }),
+    /Student capacity reached/,
+  )
+  assert.equal(store.students.length, 0)
+  store.allowance = 1
+  const created = await store.add({
+    callerId: "parent-a",
+    name: "One",
+    operationKey: "retry-after-failure",
+  })
+  assert.equal(created.operationKey, "retry-after-failure")
   assert.equal(store.students.length, 1)
 })
 

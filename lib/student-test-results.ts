@@ -14,6 +14,24 @@ export interface SaveStudentTestResultInput {
   completedAt: string
 }
 
+const recoveryOperationKeys = new Map<string, string>()
+
+function studentRecoveryOperation(input: SaveStudentTestResultInput, studentName: string) {
+  const operation = [input.parentId, input.subject, input.testName, studentName].join(":")
+  const storageKey = `grade5_student_result_recovery_${operation}`
+  const stored = typeof window === "undefined" ? null : sessionStorage.getItem(storageKey)
+  const idempotencyKey = stored ?? recoveryOperationKeys.get(operation) ?? crypto.randomUUID()
+  recoveryOperationKeys.set(operation, idempotencyKey)
+  if (typeof window !== "undefined") sessionStorage.setItem(storageKey, idempotencyKey)
+  return {
+    idempotencyKey,
+    complete: () => {
+      recoveryOperationKeys.delete(operation)
+      if (typeof window !== "undefined") sessionStorage.removeItem(storageKey)
+    },
+  }
+}
+
 export async function saveStudentTestResult(input: SaveStudentTestResultInput) {
   const supabase = getSupabaseBrowserClient()
 
@@ -31,16 +49,19 @@ export async function saveStudentTestResult(input: SaveStudentTestResultInput) {
     if (existingStudent?.id) {
       resolvedStudentId = existingStudent.id
     } else {
-      const { data: createdStudent } = await supabase
-        .from("students")
-        .insert({
-          parent_id: input.parentId,
-          full_name: resolvedStudentName,
-          grade_level: 5,
+      const recoveryOperation = studentRecoveryOperation(input, resolvedStudentName)
+      const { data: createdStudent, error: createStudentError } = await supabase
+        .rpc("add_grade5_student", {
+          p_full_name: resolvedStudentName,
+          p_idempotency_key: recoveryOperation.idempotencyKey,
         })
-        .select("id")
-        .single()
+        .single<{ id: string }>()
 
+      if (createStudentError) {
+        throw createStudentError
+      }
+
+      recoveryOperation.complete()
       resolvedStudentId = createdStudent?.id ?? null
     }
   }
