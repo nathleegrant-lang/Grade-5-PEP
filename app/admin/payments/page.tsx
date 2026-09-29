@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -102,9 +102,10 @@ export default function AdminPaymentsPage() {
     actualAmountJmd: "30000",
     currency: "JMD",
     paidAt: new Date().toISOString().slice(0, 10),
-    offlineReference: "",
     note: "",
   })
+
+  const cashOperationKey = useRef<string | null>(null)
 
   const callAdminAction = async (body: object) => {
     const { data } = await supabase.auth.getSession()
@@ -322,16 +323,19 @@ export default function AdminPaymentsPage() {
     setMessage("")
     setError("")
     try {
+      cashOperationKey.current ??= crypto.randomUUID()
       const result = await callAdminAction({
         action: "record_cash",
         ...cash,
+        idempotencyKey: cashOperationKey.current,
         parentId: selectedParent.id,
         actualAmountJmd: Number(cash.actualAmountJmd),
         paidAt: new Date(`${cash.paidAt}T12:00:00Z`).toISOString(),
         studentIds: selectedStudentIds,
       })
-      setMessage(`Offline Cash payment recorded and activated. Receipt ${result.receiptNumber}.`)
-      setCash((value) => ({ ...value, parentId: "", offlineReference: "", note: "" }))
+      setMessage(`Offline Cash payment recorded and activated. Reference ${result.paymentReference}. Receipt ${result.receiptNumber}.`)
+      cashOperationKey.current = null
+      setCash((value) => ({ ...value, parentId: "", note: "" }))
       setSelectedParent(null)
       setCustomerQuery("")
       setCustomerResults([])
@@ -379,7 +383,7 @@ export default function AdminPaymentsPage() {
         <Card className="border-amber-300">
           <CardHeader>
             <CardTitle>Record Offline Payment</CardTitle>
-            <CardDescription>Exceptional administrator-only Cash recording. The reference is the permanent idempotency key.</CardDescription>
+            <CardDescription>Exceptional administrator-only Cash recording. The permanent payment reference is generated automatically after successful recording.</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleRecordCash} className="grid gap-3 md:grid-cols-2">
@@ -488,7 +492,6 @@ export default function AdminPaymentsPage() {
 
               <input className="rounded-md border p-2" required value={cash.currency} onChange={(e) => setCash({ ...cash, currency: e.target.value.toUpperCase() })} aria-label="Currency" />
               <input className="rounded-md border p-2" required type="date" value={cash.paidAt} onChange={(e) => setCash({ ...cash, paidAt: e.target.value })} />
-              <input className="rounded-md border p-2 md:col-span-2" required placeholder="Unique Cash reference" value={cash.offlineReference} onChange={(e) => setCash({ ...cash, offlineReference: e.target.value })} />
               <textarea className="rounded-md border p-2 md:col-span-2" placeholder="Audit note (optional)" value={cash.note} onChange={(e) => setCash({ ...cash, note: e.target.value })} />
               <Button type="submit" disabled={workingId === "cash" || !selectedParent} className="md:col-span-2">{workingId === "cash" ? "Recording..." : "Record and Activate Cash Payment"}</Button>
             </form>
