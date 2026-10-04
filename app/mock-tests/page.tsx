@@ -16,7 +16,7 @@ import { Footer } from "@/components/footer"
 const subjects = [
   {
     title: "Language Arts",
-    description: "Reading, vocabulary, grammar, and writing practice for Grade 5.",
+    description: "Broader Grade 5 tests covering reading, vocabulary, grammar, and writing.",
     href: "/mock-tests/language-arts",
     icon: BookOpen,
     accent: "sky",
@@ -28,7 +28,7 @@ const subjects = [
   },
   {
     title: "Mathematics",
-    description: "Number operations, measurement, geometry, and data practice.",
+    description: "Broader Grade 5 tests covering number operations, measurement, geometry, and data.",
     href: "/mock-tests/mathematics",
     icon: Calculator,
     accent: "amber",
@@ -40,7 +40,7 @@ const subjects = [
   },
   {
     title: "Science",
-    description: "Living things, energy, matter, earth systems, and investigation skills.",
+    description: "Broader Grade 5 tests covering living things, energy, matter, earth systems, and investigation skills.",
     href: "/mock-tests/science",
     icon: FlaskConical,
     accent: "green",
@@ -52,7 +52,7 @@ const subjects = [
   },
   {
     title: "Social Studies",
-    description: "Jamaica, geography, history, citizenship, and community life.",
+    description: "Broader Grade 5 tests covering Jamaica, geography, history, citizenship, and community life.",
     href: "/mock-tests/social-studies",
     icon: Globe,
     accent: "purple",
@@ -116,7 +116,13 @@ export default function MockTestsPage() {
                 Mock Tests
               </h1>
               <p className="mx-auto mt-3 max-w-2xl text-base font-medium text-white/95 sm:text-lg">
-                Choose a subject or performance task area to begin practice.
+                Choose a subject or performance task area to check your Grade 5 performance and readiness.
+              </p>
+              <p className="mt-3 text-sm text-white/90">
+                Want to learn or review first?{" "}
+                <Link href="/#subject-practice" className="font-bold underline underline-offset-4 hover:text-yellow-200">
+                  Choose a Practice subject on Home.
+                </Link>
               </p>
             </div>
 

@@ -21,7 +21,9 @@ export default function Home() {
         <section className="mx-auto max-w-6xl px-4 pb-10"><HowToUse /></section>
 
         <div className="mx-auto max-w-6xl space-y-10 px-4 pb-10">
-          <SubjectCards />
+          <div id="subject-practice" className="scroll-mt-24">
+            <SubjectCards />
+          </div>
           <section>
             <div className="mb-7 text-center"><h2 className="mb-2 text-2xl font-bold text-[#1e3a5f]">More Grade 5 Practice Resources</h2><p className="text-gray-600">Writing practice, printable resources and full mock examination preparation when your learner is ready for more.</p></div>
             <div className="grid gap-6 md:grid-cols-3">
@@ -32,7 +34,35 @@ export default function Home() {
           </section>
         </div>
 
-        <section className="bg-[#172d63] text-white"><div className="mx-auto flex max-w-6xl flex-col gap-5 px-4 py-8 sm:flex-row sm:items-center sm:justify-between"><div><p className="text-xs font-bold uppercase tracking-[0.16em] text-cyan-200">PEP PRACTICE — Grade 5</p><h2 className="mt-2 text-2xl font-bold">Ready for the next practice session?</h2><p className="mt-1 text-sm text-blue-100">Practice • Review • Confidence</p></div><Link href="/mock-tests"><Button className="bg-amber-400 px-7 text-[#102f57] hover:bg-amber-500">Start Practice</Button></Link></div></section>
+        <section className="bg-[#172d63] text-white">
+          <div className="mx-auto grid max-w-6xl gap-6 px-4 py-8 md:grid-cols-2">
+            <div className="rounded-2xl border border-cyan-300/30 bg-white/10 p-6">
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-cyan-200">Learn and improve</p>
+              <h2 className="mt-2 text-2xl font-bold">Practice</h2>
+              <p className="mt-2 text-sm leading-6 text-blue-100">
+                Learn or review a subject, answer shorter practice questions, and use explanations and feedback to improve.
+              </p>
+              <Link href="#subject-practice">
+                <Button className="mt-5 bg-amber-400 px-7 text-[#102f57] hover:bg-amber-500">
+                  Choose a Practice Subject
+                </Button>
+              </Link>
+            </div>
+
+            <div className="rounded-2xl border border-purple-300/30 bg-white/10 p-6">
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-purple-200">Check readiness</p>
+              <h2 className="mt-2 text-2xl font-bold">Mock Tests</h2>
+              <p className="mt-2 text-sm leading-6 text-blue-100">
+                Take broader Grade 5 assessments to check performance and readiness across subject content.
+              </p>
+              <Link href="/mock-tests">
+                <Button className="mt-5 bg-white px-7 text-[#172d63] hover:bg-blue-50">
+                  Explore Mock Tests
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
         <ColorBar />
       </main>
       <Footer />
