@@ -21,7 +21,7 @@ export function HeroSection() {
           <div className="mt-6 flex flex-wrap gap-3">
             <Link href="/mock-tests">
               <Button className="bg-[#ffc107] px-7 font-semibold text-[#102f57] hover:bg-[#ffd04a]">
-                Start Practice
+                Mock Tests
               </Button>
             </Link>
             <Link href="/pricing">

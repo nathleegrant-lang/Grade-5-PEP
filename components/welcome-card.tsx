@@ -14,7 +14,7 @@ export function WelcomeCard() {
           <p className="text-xs font-bold uppercase tracking-[0.16em] text-blue-700">For Students</p>
           <h3 className="mt-2 text-2xl font-bold text-[#1e3a5f]">Practise with growing independence</h3>
           <p className="mt-3 leading-relaxed text-gray-600">Review what you are learning at school, challenge yourself across Grade 5 subjects, learn from your results and build confidence for the PEP journey.</p>
-          <Link href="/mock-tests" className="mt-5 inline-block"><Button className="bg-blue-700 text-white hover:bg-blue-800">Start Practice</Button></Link>
+          <Link href="/mock-tests" className="mt-5 inline-block"><Button className="bg-blue-700 text-white hover:bg-blue-800">Mock Tests</Button></Link>
         </CardContent>
       </Card>
 

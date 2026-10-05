@@ -3,8 +3,13 @@ import { execFileSync } from "node:child_process"
 import { readFile } from "node:fs/promises"
 import test from "node:test"
 
-const baseline = "8de56ba8f47ff76fa103c6086a1959a53fd8e949"
+const baseline = "07023f19a9c4e701c6d88eb7b555e56cc6a85ec6"
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8")
+const sharedMockTestLinks = [
+  "components/footer.tsx",
+  "components/hero-section.tsx",
+  "components/welcome-card.tsx",
+]
 
 test("O1-01 homepage explicitly distinguishes Practice from Mock Tests", async () => {
   const home = await read("app/page.tsx")
@@ -38,6 +43,23 @@ test("O1-04 the old generic Start Practice to Mock Tests contract is removed", a
   const home = await read("app/page.tsx")
 
   assert.doesNotMatch(home, /<Link href="\/mock-tests">[\s\S]{0,180}Start Practice/)
+})
+
+test("O1-CORR-001 shared learner navigation identifies every /mock-tests action as Mock Tests", async () => {
+  for (const path of sharedMockTestLinks) {
+    const source = await read(path)
+    assert.doesNotMatch(source, /<Link\b(?=[^>]*\bhref="\/mock-tests")[^>]*>(?:(?!<\/Link>)[\s\S])*?\bStart\s+Practice\b(?:(?!<\/Link>)[\s\S])*?<\/Link>/)
+    assert.match(source, /<Link\b(?=[^>]*\bhref="\/mock-tests")[^>]*>(?:(?!<\/Link>)[\s\S])*?\bMock\s+Tests\b(?:(?!<\/Link>)[\s\S])*?<\/Link>/)
+  }
+})
+
+test("O1-CORR-001 no equivalent static generic Practice to /mock-tests contract remains", async () => {
+  const sourcePaths = execFileSync("git", ["ls-files", "app", "components"], { encoding: "utf8" })
+    .trim().split("\n").filter((path) => /\.(?:jsx|tsx)$/.test(path))
+  const conflictingContract = /<Link\b(?=[^>]*\bhref="\/mock-tests")[^>]*>(?:(?!<\/Link>)[\s\S])*?\b(?:Start\s+Practice|Practice)\b(?:(?!<\/Link>)[\s\S])*?<\/Link>/
+  const conflicts = []
+  for (const path of sourcePaths) if (conflictingContract.test(await read(path))) conflicts.push(path)
+  assert.deepEqual(conflicts, [])
 })
 
 test("O1-05 Mock Tests identifies assessment readiness and points learners back to Practice", async () => {
@@ -75,8 +97,9 @@ test("O1-10 candidate stays inside the authorized static orientation boundary", 
     .filter(Boolean)
 
   assert.deepEqual(changed, [
-    "app/mock-tests/page.tsx",
-    "app/page.tsx",
+    "components/footer.tsx",
+    "components/hero-section.tsx",
+    "components/welcome-card.tsx",
     "tests/g5-learner-ux-001-o1-orientation.test.mjs",
   ])
 })
