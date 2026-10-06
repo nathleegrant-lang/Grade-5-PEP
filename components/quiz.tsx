@@ -16,9 +16,11 @@ export interface Question {
 interface QuizProps {
   questions: Question[]
   title: string
+  onReviewTopic: () => void
+  onChooseAnotherTopic: () => void
 }
 
-export function Quiz({ questions, title }: QuizProps) {
+export function Quiz({ questions, title, onReviewTopic, onChooseAnotherTopic }: QuizProps) {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null)
   const [showResult, setShowResult] = useState(false)
@@ -77,10 +79,18 @@ export function Quiz({ questions, title }: QuizProps) {
           <p className="text-gray-600 mb-6">
             You scored {score} out of {questions.length} questions correctly.
           </p>
-          <Button onClick={handleRestart} className="bg-[#0d9488] hover:bg-[#0d4a5f]">
-            <RotateCcw className="w-4 h-4 mr-2" />
-            Try Again
-          </Button>
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3">
+            <Button onClick={handleRestart} className="bg-[#0d9488] hover:bg-[#0d4a5f]">
+              <RotateCcw className="w-4 h-4 mr-2" />
+              Try Again
+            </Button>
+            <Button onClick={onReviewTopic} variant="outline">
+              Review Topic
+            </Button>
+            <Button onClick={onChooseAnotherTopic} variant="outline">
+              Choose Another Topic
+            </Button>
+          </div>
         </CardContent>
       </Card>
     )

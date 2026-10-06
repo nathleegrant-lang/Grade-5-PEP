@@ -353,7 +353,12 @@ export default function MathematicsPage() {
                 </div>
               </div>
             ) : (
-              <Quiz questions={selectedTopic.questions} title={selectedTopic.title} />
+              <Quiz
+                questions={selectedTopic.questions}
+                title={selectedTopic.title}
+                onReviewTopic={() => setShowQuiz(false)}
+                onChooseAnotherTopic={() => { setSelectedTopic(null); setShowQuiz(false) }}
+              />
             )}
           </div>
 
