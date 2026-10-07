@@ -407,6 +407,7 @@ export default function SciencePage() {
         </div>
 
         <div className="max-w-6xl mx-auto px-4 py-12">
+          <p className="mb-4 text-center"><Link href="/learn" className="font-semibold text-blue-700 underline">Browse Term Topics</Link></p>
           <h2 className="text-2xl font-bold text-[#1e3a5f] mb-2 text-center">Choose a Topic</h2>
           <p className="text-gray-600 mb-8 text-center">Select a topic to learn and practice</p>
           

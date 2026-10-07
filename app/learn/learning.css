@@ -1,0 +1,11 @@
+.learn-control {
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  background: white;
+  padding: 0.65rem 1rem;
+  font-weight: 600;
+}
+.learn-control:hover { background: #eff6ff; }
+.learn-control:focus-visible { outline: 3px solid #1d4ed8; outline-offset: 3px; }
+.learn-control[aria-pressed="true"] { border-color: #1d4ed8; background: #eff6ff; }
+.learn-control:disabled { opacity: 0.5; cursor: not-allowed; }
