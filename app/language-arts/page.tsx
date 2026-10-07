@@ -457,7 +457,11 @@ export default function LanguageArtsPage() {
         </div>
 
         <div className="max-w-6xl mx-auto px-4 py-12">
-          <p className="mb-4 text-center"><Link href="/learn" className="font-semibold text-blue-700 underline">Browse Term Topics</Link></p>
+          <section aria-label="Explore Language Arts by Term & Topic" className="mb-8 rounded-2xl border-2 border-blue-200 bg-blue-50 p-6 sm:p-8">
+            <h2 className="mb-2 text-2xl font-bold text-[#1e3a5f]">Explore Language Arts by Term &amp; Topic</h2>
+            <p className="mb-5 text-slate-700">Choose a term to see topics and available learning activities. The existing lessons below remain separate.</p>
+            <Link href="/learn?subject=language-arts" className="inline-flex min-h-12 items-center justify-center rounded-lg bg-[#1e3a5f] px-6 py-3 text-base font-bold text-white shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-blue-600">Learn by Term &amp; Topic</Link>
+          </section>
           <h2 className="text-2xl font-bold text-[#1e3a5f] mb-2 text-center">Choose a Topic</h2>
           <p className="text-gray-600 mb-8 text-center">Select a topic to learn and practice</p>
           
