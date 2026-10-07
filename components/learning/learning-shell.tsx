@@ -12,6 +12,7 @@ import { PracticeRunner } from "./practice-runner"
 interface LearningShellProps {
   grade: GradeManifest
   provider: PracticeProvider
+  initialSubjectId?: string
   learner?: LearnerContextRef
   progressSink?: ProgressEventSink
   renderGuidedActivity?: (slotId: string, onCompleted: () => void) => ReactNode
@@ -38,8 +39,8 @@ function ActivityView({ activity, renderGuidedActivity, onCompleted }: {
   </article>
 }
 /** Curriculum and approved providers are inputs. There is no identity lookup, storage or bank fallback. */
-export function LearningShell({ grade, provider, learner, progressSink = noOpProgressEventSink, renderGuidedActivity }: LearningShellProps) {
-  const [navigation, setNavigation] = useState(initialNavigation)
+export function LearningShell({ grade, provider, initialSubjectId, learner, progressSink = noOpProgressEventSink, renderGuidedActivity }: LearningShellProps) {
+  const [navigation, setNavigation] = useState(() => initialSubjectId ? navigate(grade, initialNavigation, { type: "subject", id: initialSubjectId }) : initialNavigation)
   const [practice, setPractice] = useState<PracticeResolution | null>(null)
   const subject = grade.subjects.find(s => s.id === navigation.subjectId)
   const term = subject?.terms.find(t => t.id === navigation.termId)
