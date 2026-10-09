@@ -1,0 +1,61 @@
+name: G5 DBSEC-004 isolated PostgreSQL 17.6
+on:
+  workflow_dispatch:
+    inputs:
+      harness_sha:
+        description: Exact reviewed harness commit (40 hex characters)
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  isolated:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:17.6
+        env:
+          POSTGRES_USER: harness_runner
+          POSTGRES_PASSWORD: synthetic-disposable-only
+          POSTGRES_DB: g5_dbsec_ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U harness_runner -d g5_dbsec_ci"
+          --health-interval 5s --health-timeout 5s --health-retries 12
+    env:
+      PGHOST: 127.0.0.1
+      PGPORT: 5432
+      PGUSER: harness_runner
+      PGPASSWORD: synthetic-disposable-only
+      PGDATABASE: g5_dbsec_ci
+      EXPECTED_HARNESS_SHA: ${{ inputs.harness_sha }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Verify exact harness ref
+        run: |
+          test "$EXPECTED_HARNESS_SHA" = "$(git rev-parse HEAD)"
+          mkdir -p evidence
+          git rev-parse HEAD HEAD^{tree} > evidence/harness-git-identity.txt
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+      - name: Reconstruct, compare and run isolated matrix
+        run: python3 tests/dbsec-004/run.py
+      - name: Preserve service log
+        if: always()
+        env:
+          PG_CONTAINER: ${{ job.services.postgres.id }}
+        run: docker logs "$PG_CONTAINER" > evidence/postgres-service.log 2>&1
+      - name: Upload all evidence, including failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: g5-dbsec-004-${{ github.sha }}-${{ github.run_id }}
+          path: evidence/
+          if-no-files-found: error
+          retention-days: 30

@@ -1,0 +1,3230 @@
+{
+  "assignment_id": "G5-O2-DBSEC-004-REC-001",
+  "source_project": "lhsefavnwjzxfpojsipn",
+  "capture_mode": "SELECT catalog metadata only; no application/auth/customer table rows; no role password fields",
+  "scope": "Seven requested relations plus FK and cash-registry dependencies; catalog security definitions",
+  "catalog": {
+    "roles": [
+      {
+        "name": "pg_database_owner",
+        "login": false,
+        "inherit": true,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": false,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "pg_read_all_data",
+        "login": false,
+        "inherit": true,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": false,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "pg_write_all_data",
+        "login": false,
+        "inherit": true,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": false,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "pg_monitor",
+        "login": false,
+        "inherit": true,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": false,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "pg_read_all_settings",
+        "login": false,
+        "inherit": true,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": false,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "pg_read_all_stats",
+        "login": false,
+        "inherit": true,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": false,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "pg_stat_scan_tables",
+        "login": false,
+        "inherit": true,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": false,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "pg_read_server_files",
+        "login": false,
+        "inherit": true,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": false,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "pg_write_server_files",
+        "login": false,
+        "inherit": true,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": false,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "pg_execute_server_program",
+        "login": false,
+        "inherit": true,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": false,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "pg_signal_backend",
+        "login": false,
+        "inherit": true,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": false,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "pg_checkpoint",
+        "login": false,
+        "inherit": true,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": false,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "pg_maintain",
+        "login": false,
+        "inherit": true,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": false,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "pg_use_reserved_connections",
+        "login": false,
+        "inherit": true,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": false,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "pg_create_subscription",
+        "login": false,
+        "inherit": true,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": false,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "dashboard_user",
+        "login": false,
+        "inherit": true,
+        "create_db": true,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": true,
+        "replication": true,
+        "connection_limit": -1
+      },
+      {
+        "name": "authenticated",
+        "login": false,
+        "inherit": true,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": false,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "anon",
+        "login": false,
+        "inherit": true,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": false,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "service_role",
+        "login": false,
+        "inherit": true,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": true,
+        "create_role": false,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "supabase_privileged_role",
+        "login": false,
+        "inherit": true,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": false,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "supabase_admin",
+        "login": true,
+        "inherit": true,
+        "create_db": true,
+        "superuser": true,
+        "bypass_rls": true,
+        "create_role": true,
+        "replication": true,
+        "connection_limit": -1
+      },
+      {
+        "name": "authenticator",
+        "login": true,
+        "inherit": false,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": false,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "supabase_auth_admin",
+        "login": true,
+        "inherit": false,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": true,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "supabase_storage_admin",
+        "login": true,
+        "inherit": false,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": true,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "supabase_replication_admin",
+        "login": true,
+        "inherit": true,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": false,
+        "replication": true,
+        "connection_limit": -1
+      },
+      {
+        "name": "supabase_read_only_user",
+        "login": true,
+        "inherit": true,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": true,
+        "create_role": false,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "supabase_etl_admin",
+        "login": true,
+        "inherit": true,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": true,
+        "create_role": false,
+        "replication": true,
+        "connection_limit": -1
+      },
+      {
+        "name": "pgbouncer",
+        "login": true,
+        "inherit": true,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": false,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "supabase_realtime_admin",
+        "login": false,
+        "inherit": false,
+        "create_db": false,
+        "superuser": false,
+        "bypass_rls": false,
+        "create_role": false,
+        "replication": false,
+        "connection_limit": -1
+      },
+      {
+        "name": "postgres",
+        "login": true,
+        "inherit": true,
+        "create_db": true,
+        "superuser": false,
+        "bypass_rls": true,
+        "create_role": true,
+        "replication": true,
+        "connection_limit": -1
+      }
+    ],
+    "tables": [
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "anon=arwdDxtm/postgres",
+          "authenticated=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres"
+        ],
+        "oid": "18062",
+        "rls": true,
+        "kind": "r",
+        "name": "certificates",
+        "owner": "postgres",
+        "schema": "public",
+        "columns": [
+          {
+            "acl": null,
+            "name": "id",
+            "type": "uuid",
+            "number": 1,
+            "default": "gen_random_uuid()",
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "parent_id",
+            "type": "uuid",
+            "number": 2,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "student_id",
+            "type": "uuid",
+            "number": 3,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "test_result_id",
+            "type": "uuid",
+            "number": 4,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "grade",
+            "type": "text",
+            "number": 5,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "student_name",
+            "type": "text",
+            "number": 6,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "subject",
+            "type": "text",
+            "number": 7,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "test_name",
+            "type": "text",
+            "number": 8,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "score",
+            "type": "integer",
+            "number": 9,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "total_questions",
+            "type": "integer",
+            "number": 10,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "percentage",
+            "type": "numeric(5,2)",
+            "number": 11,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "certificate_title",
+            "type": "text",
+            "number": 12,
+            "default": "'Certificate of Achievement'::text",
+            "identity": "",
+            "not_null": true,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "issued_at",
+            "type": "timestamp with time zone",
+            "number": 13,
+            "default": "now()",
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "number": 14,
+            "default": "now()",
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          }
+        ],
+        "force_rls": false
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "anon=rwdDxtm/postgres",
+          "authenticated=rwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres"
+        ],
+        "oid": "17701",
+        "rls": true,
+        "kind": "r",
+        "name": "students",
+        "owner": "postgres",
+        "schema": "public",
+        "columns": [
+          {
+            "acl": null,
+            "name": "id",
+            "type": "uuid",
+            "number": 1,
+            "default": "gen_random_uuid()",
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "parent_id",
+            "type": "uuid",
+            "number": 2,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "full_name",
+            "type": "text",
+            "number": 3,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "grade_level",
+            "type": "integer",
+            "number": 4,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "subscription_id",
+            "type": "uuid",
+            "number": 5,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "number": 6,
+            "default": "now()",
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "creation_source",
+            "type": "text",
+            "number": 7,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "creation_idempotency_key",
+            "type": "uuid",
+            "number": 8,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          }
+        ],
+        "force_rls": false
+      },
+      {
+        "acl": [
+          "supabase_auth_admin=arwdDxtm/supabase_auth_admin",
+          "dashboard_user=arwdDxtm/supabase_auth_admin",
+          "postgres=ar*wdDxtm/supabase_auth_admin"
+        ],
+        "oid": "16499",
+        "rls": true,
+        "kind": "r",
+        "name": "users",
+        "owner": "supabase_auth_admin",
+        "schema": "auth",
+        "columns": [
+          {
+            "acl": null,
+            "name": "instance_id",
+            "type": "uuid",
+            "number": 1,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "id",
+            "type": "uuid",
+            "number": 2,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "aud",
+            "type": "character varying(255)",
+            "number": 3,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "role",
+            "type": "character varying(255)",
+            "number": 4,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "email",
+            "type": "character varying(255)",
+            "number": 5,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "encrypted_password",
+            "type": "character varying(255)",
+            "number": 6,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "email_confirmed_at",
+            "type": "timestamp with time zone",
+            "number": 7,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "invited_at",
+            "type": "timestamp with time zone",
+            "number": 8,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "confirmation_token",
+            "type": "character varying(255)",
+            "number": 9,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "confirmation_sent_at",
+            "type": "timestamp with time zone",
+            "number": 10,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "recovery_token",
+            "type": "character varying(255)",
+            "number": 11,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "recovery_sent_at",
+            "type": "timestamp with time zone",
+            "number": 12,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "email_change_token_new",
+            "type": "character varying(255)",
+            "number": 13,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "email_change",
+            "type": "character varying(255)",
+            "number": 14,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "email_change_sent_at",
+            "type": "timestamp with time zone",
+            "number": 15,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "last_sign_in_at",
+            "type": "timestamp with time zone",
+            "number": 16,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "raw_app_meta_data",
+            "type": "jsonb",
+            "number": 17,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "raw_user_meta_data",
+            "type": "jsonb",
+            "number": 18,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "is_super_admin",
+            "type": "boolean",
+            "number": 19,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "number": 20,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "updated_at",
+            "type": "timestamp with time zone",
+            "number": 21,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "phone",
+            "type": "text",
+            "number": 22,
+            "default": "NULL::character varying",
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "phone_confirmed_at",
+            "type": "timestamp with time zone",
+            "number": 23,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "phone_change",
+            "type": "text",
+            "number": 24,
+            "default": "''::character varying",
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "phone_change_token",
+            "type": "character varying(255)",
+            "number": 25,
+            "default": "''::character varying",
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "phone_change_sent_at",
+            "type": "timestamp with time zone",
+            "number": 26,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "confirmed_at",
+            "type": "timestamp with time zone",
+            "number": 27,
+            "default": "LEAST(email_confirmed_at, phone_confirmed_at)",
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": "s"
+          },
+          {
+            "acl": null,
+            "name": "email_change_token_current",
+            "type": "character varying(255)",
+            "number": 28,
+            "default": "''::character varying",
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "email_change_confirm_status",
+            "type": "smallint",
+            "number": 29,
+            "default": "0",
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "banned_until",
+            "type": "timestamp with time zone",
+            "number": 30,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "reauthentication_token",
+            "type": "character varying(255)",
+            "number": 31,
+            "default": "''::character varying",
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "reauthentication_sent_at",
+            "type": "timestamp with time zone",
+            "number": 32,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "is_sso_user",
+            "type": "boolean",
+            "number": 33,
+            "default": "false",
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "deleted_at",
+            "type": "timestamp with time zone",
+            "number": 34,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "is_anonymous",
+            "type": "boolean",
+            "number": 35,
+            "default": "false",
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          }
+        ],
+        "force_rls": false
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "anon=arwdDxtm/postgres",
+          "authenticated=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres"
+        ],
+        "oid": "17642",
+        "rls": true,
+        "kind": "r",
+        "name": "profiles",
+        "owner": "postgres",
+        "schema": "public",
+        "columns": [
+          {
+            "acl": null,
+            "name": "id",
+            "type": "uuid",
+            "number": 1,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "full_name",
+            "type": "text",
+            "number": 2,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "email",
+            "type": "text",
+            "number": 3,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "phone",
+            "type": "text",
+            "number": 4,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "role",
+            "type": "text",
+            "number": 5,
+            "default": "'parent'::text",
+            "identity": "",
+            "not_null": true,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "number": 6,
+            "default": "now()",
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          }
+        ],
+        "force_rls": false
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "anon=arwdDxtm/postgres",
+          "authenticated=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres"
+        ],
+        "oid": "18027",
+        "rls": true,
+        "kind": "r",
+        "name": "student_test_results",
+        "owner": "postgres",
+        "schema": "public",
+        "columns": [
+          {
+            "acl": null,
+            "name": "id",
+            "type": "uuid",
+            "number": 1,
+            "default": "gen_random_uuid()",
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "parent_id",
+            "type": "uuid",
+            "number": 2,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "student_id",
+            "type": "uuid",
+            "number": 3,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "grade",
+            "type": "text",
+            "number": 4,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "subject",
+            "type": "text",
+            "number": 5,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "test_name",
+            "type": "text",
+            "number": 6,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "difficulty",
+            "type": "text",
+            "number": 7,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "score",
+            "type": "integer",
+            "number": 8,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "total_questions",
+            "type": "integer",
+            "number": 9,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "percentage",
+            "type": "numeric(5,2)",
+            "number": 10,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "completed_at",
+            "type": "timestamp with time zone",
+            "number": 11,
+            "default": "now()",
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "number": 12,
+            "default": "now()",
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          }
+        ],
+        "force_rls": false
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "anon=arwdDxtm/postgres",
+          "authenticated=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres"
+        ],
+        "oid": "18937",
+        "rls": true,
+        "kind": "r",
+        "name": "grade5_plan_configuration",
+        "owner": "postgres",
+        "schema": "public",
+        "columns": [
+          {
+            "acl": null,
+            "name": "code",
+            "type": "text",
+            "number": 1,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "price_jmd",
+            "type": "numeric(12,2)",
+            "number": 2,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "duration_months",
+            "type": "integer",
+            "number": 3,
+            "default": "0",
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "duration_days",
+            "type": "integer",
+            "number": 4,
+            "default": "0",
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "max_students",
+            "type": "integer",
+            "number": 5,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "is_public",
+            "type": "boolean",
+            "number": 6,
+            "default": "true",
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          }
+        ],
+        "force_rls": false
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "anon=arwdDxtm/postgres",
+          "authenticated=arwdDxtm/postgres",
+          "service_role=arwdDxtm/postgres"
+        ],
+        "oid": "17676",
+        "rls": true,
+        "kind": "r",
+        "name": "subscriptions",
+        "owner": "postgres",
+        "schema": "public",
+        "columns": [
+          {
+            "acl": null,
+            "name": "id",
+            "type": "uuid",
+            "number": 1,
+            "default": "gen_random_uuid()",
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "parent_id",
+            "type": "uuid",
+            "number": 2,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "grade",
+            "type": "text",
+            "number": 3,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "plan_code",
+            "type": "text",
+            "number": 4,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "status",
+            "type": "text",
+            "number": 5,
+            "default": "'pending'::text",
+            "identity": "",
+            "not_null": true,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "starts_at",
+            "type": "timestamp with time zone",
+            "number": 6,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "expires_at",
+            "type": "timestamp with time zone",
+            "number": 7,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "max_students",
+            "type": "integer",
+            "number": 8,
+            "default": "1",
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "payment_id",
+            "type": "uuid",
+            "number": 9,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "number": 10,
+            "default": "now()",
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          }
+        ],
+        "force_rls": false
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres",
+          "anon=arDxtm/postgres",
+          "authenticated=arDxtm/postgres",
+          "service_role=arwdDxtm/postgres"
+        ],
+        "oid": "17657",
+        "rls": true,
+        "kind": "r",
+        "name": "payments",
+        "owner": "postgres",
+        "schema": "public",
+        "columns": [
+          {
+            "acl": null,
+            "name": "id",
+            "type": "uuid",
+            "number": 1,
+            "default": "gen_random_uuid()",
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "parent_id",
+            "type": "uuid",
+            "number": 2,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "grade",
+            "type": "text",
+            "number": 3,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "plan_code",
+            "type": "text",
+            "number": 4,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "amount_jmd",
+            "type": "numeric(10,2)",
+            "number": 5,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "method",
+            "type": "text",
+            "number": 6,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "reference_code",
+            "type": "text",
+            "number": 7,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "proof_url",
+            "type": "text",
+            "number": 8,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "note",
+            "type": "text",
+            "number": 9,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "status",
+            "type": "text",
+            "number": 10,
+            "default": "'pending'::text",
+            "identity": "",
+            "not_null": true,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "submitted_at",
+            "type": "timestamp with time zone",
+            "number": 11,
+            "default": "now()",
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "verified_at",
+            "type": "timestamp with time zone",
+            "number": 12,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "rejection_reason",
+            "type": "text",
+            "number": 13,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "number": 14,
+            "default": "now()",
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "parent_name",
+            "type": "text",
+            "number": 15,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "parent_email",
+            "type": "text",
+            "number": 16,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "currency",
+            "type": "text",
+            "number": 17,
+            "default": "'JMD'::text",
+            "identity": "",
+            "not_null": true,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "paid_at",
+            "type": "timestamp with time zone",
+            "number": 18,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "verified_by",
+            "type": "uuid",
+            "number": 19,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "expected_amount_jmd",
+            "type": "numeric(12,2)",
+            "number": 20,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "actual_amount_jmd",
+            "type": "numeric(12,2)",
+            "number": 21,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "offline_reference",
+            "type": "text",
+            "number": 22,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "receipt_number",
+            "type": "text",
+            "number": 23,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "activated_at",
+            "type": "timestamp with time zone",
+            "number": 24,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "student_ids",
+            "type": "uuid[]",
+            "number": 25,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "offline_idempotency_key",
+            "type": "uuid",
+            "number": 26,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "cash_business_date",
+            "type": "date",
+            "number": 27,
+            "default": null,
+            "identity": "",
+            "not_null": false,
+            "collation": null,
+            "generated": ""
+          }
+        ],
+        "force_rls": false
+      },
+      {
+        "acl": [
+          "postgres=arwdDxtm/postgres"
+        ],
+        "oid": "19190",
+        "rls": true,
+        "kind": "r",
+        "name": "grade5_cash_reference_registry",
+        "owner": "postgres",
+        "schema": "public",
+        "columns": [
+          {
+            "acl": null,
+            "name": "reference_key",
+            "type": "text",
+            "number": 1,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "reference_value",
+            "type": "text",
+            "number": 2,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "source_type",
+            "type": "text",
+            "number": 3,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": "\"default\"",
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "source_id",
+            "type": "uuid",
+            "number": 4,
+            "default": null,
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          },
+          {
+            "acl": null,
+            "name": "created_at",
+            "type": "timestamp with time zone",
+            "number": 5,
+            "default": "clock_timestamp()",
+            "identity": "",
+            "not_null": true,
+            "collation": null,
+            "generated": ""
+          }
+        ],
+        "force_rls": false
+      }
+    ],
+    "indexes": [
+      {
+        "oid": "16504",
+        "ready": true,
+        "table": "auth.users",
+        "valid": true,
+        "unique": true,
+        "primary": true,
+        "definition": "CREATE UNIQUE INDEX users_pkey ON auth.users USING btree (id)"
+      },
+      {
+        "oid": "16509",
+        "ready": true,
+        "table": "auth.users",
+        "valid": true,
+        "unique": false,
+        "primary": false,
+        "definition": "CREATE INDEX users_instance_id_idx ON auth.users USING btree (instance_id)"
+      },
+      {
+        "oid": "16705",
+        "ready": true,
+        "table": "auth.users",
+        "valid": true,
+        "unique": false,
+        "primary": false,
+        "definition": "CREATE INDEX users_instance_id_email_idx ON auth.users USING btree (instance_id, lower((email)::text))"
+      },
+      {
+        "oid": "16707",
+        "ready": true,
+        "table": "auth.users",
+        "valid": true,
+        "unique": true,
+        "primary": false,
+        "definition": "CREATE UNIQUE INDEX confirmation_token_idx ON auth.users USING btree (confirmation_token) WHERE ((confirmation_token)::text !~ '^[0-9 ]*$'::text)"
+      },
+      {
+        "oid": "16708",
+        "ready": true,
+        "table": "auth.users",
+        "valid": true,
+        "unique": true,
+        "primary": false,
+        "definition": "CREATE UNIQUE INDEX recovery_token_idx ON auth.users USING btree (recovery_token) WHERE ((recovery_token)::text !~ '^[0-9 ]*$'::text)"
+      },
+      {
+        "oid": "16709",
+        "ready": true,
+        "table": "auth.users",
+        "valid": true,
+        "unique": true,
+        "primary": false,
+        "definition": "CREATE UNIQUE INDEX email_change_token_current_idx ON auth.users USING btree (email_change_token_current) WHERE ((email_change_token_current)::text !~ '^[0-9 ]*$'::text)"
+      },
+      {
+        "oid": "16710",
+        "ready": true,
+        "table": "auth.users",
+        "valid": true,
+        "unique": true,
+        "primary": false,
+        "definition": "CREATE UNIQUE INDEX email_change_token_new_idx ON auth.users USING btree (email_change_token_new) WHERE ((email_change_token_new)::text !~ '^[0-9 ]*$'::text)"
+      },
+      {
+        "oid": "16711",
+        "ready": true,
+        "table": "auth.users",
+        "valid": true,
+        "unique": true,
+        "primary": false,
+        "definition": "CREATE UNIQUE INDEX reauthentication_token_idx ON auth.users USING btree (reauthentication_token) WHERE ((reauthentication_token)::text !~ '^[0-9 ]*$'::text)"
+      },
+      {
+        "oid": "16868",
+        "ready": true,
+        "table": "auth.users",
+        "valid": true,
+        "unique": true,
+        "primary": false,
+        "definition": "CREATE UNIQUE INDEX users_email_partial_key ON auth.users USING btree (email) WHERE (is_sso_user = false)"
+      },
+      {
+        "oid": "16880",
+        "ready": true,
+        "table": "auth.users",
+        "valid": true,
+        "unique": true,
+        "primary": false,
+        "definition": "CREATE UNIQUE INDEX users_phone_key ON auth.users USING btree (phone)"
+      },
+      {
+        "oid": "16923",
+        "ready": true,
+        "table": "auth.users",
+        "valid": true,
+        "unique": false,
+        "primary": false,
+        "definition": "CREATE INDEX users_is_anonymous_idx ON auth.users USING btree (is_anonymous)"
+      },
+      {
+        "oid": "17164",
+        "ready": true,
+        "table": "auth.users",
+        "valid": true,
+        "unique": false,
+        "primary": false,
+        "definition": "CREATE INDEX idx_users_email ON auth.users USING btree (email)"
+      },
+      {
+        "oid": "17165",
+        "ready": true,
+        "table": "auth.users",
+        "valid": true,
+        "unique": false,
+        "primary": false,
+        "definition": "CREATE INDEX idx_users_created_at_desc ON auth.users USING btree (created_at DESC)"
+      },
+      {
+        "oid": "17166",
+        "ready": true,
+        "table": "auth.users",
+        "valid": true,
+        "unique": false,
+        "primary": false,
+        "definition": "CREATE INDEX idx_users_last_sign_in_at_desc ON auth.users USING btree (last_sign_in_at DESC)"
+      },
+      {
+        "oid": "17169",
+        "ready": true,
+        "table": "auth.users",
+        "valid": true,
+        "unique": false,
+        "primary": false,
+        "definition": "CREATE INDEX idx_users_name ON auth.users USING btree (((raw_user_meta_data ->> 'name'::text))) WHERE ((raw_user_meta_data ->> 'name'::text) IS NOT NULL)"
+      },
+      {
+        "oid": "17650",
+        "ready": true,
+        "table": "profiles",
+        "valid": true,
+        "unique": true,
+        "primary": true,
+        "definition": "CREATE UNIQUE INDEX profiles_pkey ON public.profiles USING btree (id)"
+      },
+      {
+        "oid": "17669",
+        "ready": true,
+        "table": "payments",
+        "valid": true,
+        "unique": true,
+        "primary": true,
+        "definition": "CREATE UNIQUE INDEX payments_pkey ON public.payments USING btree (id)"
+      },
+      {
+        "oid": "17689",
+        "ready": true,
+        "table": "subscriptions",
+        "valid": true,
+        "unique": true,
+        "primary": true,
+        "definition": "CREATE UNIQUE INDEX subscriptions_pkey ON public.subscriptions USING btree (id)"
+      },
+      {
+        "oid": "17708",
+        "ready": true,
+        "table": "students",
+        "valid": true,
+        "unique": true,
+        "primary": true,
+        "definition": "CREATE UNIQUE INDEX students_pkey ON public.students USING btree (id)"
+      },
+      {
+        "oid": "17720",
+        "ready": true,
+        "table": "profiles",
+        "valid": true,
+        "unique": false,
+        "primary": false,
+        "definition": "CREATE INDEX idx_profiles_email ON public.profiles USING btree (email)"
+      },
+      {
+        "oid": "17721",
+        "ready": true,
+        "table": "students",
+        "valid": true,
+        "unique": false,
+        "primary": false,
+        "definition": "CREATE INDEX idx_students_parent_id ON public.students USING btree (parent_id)"
+      },
+      {
+        "oid": "17722",
+        "ready": true,
+        "table": "subscriptions",
+        "valid": true,
+        "unique": false,
+        "primary": false,
+        "definition": "CREATE INDEX idx_subscriptions_parent_id ON public.subscriptions USING btree (parent_id)"
+      },
+      {
+        "oid": "17723",
+        "ready": true,
+        "table": "payments",
+        "valid": true,
+        "unique": false,
+        "primary": false,
+        "definition": "CREATE INDEX idx_payments_parent_id ON public.payments USING btree (parent_id)"
+      },
+      {
+        "oid": "17724",
+        "ready": true,
+        "table": "payments",
+        "valid": true,
+        "unique": true,
+        "primary": false,
+        "definition": "CREATE UNIQUE INDEX one_pending_payment_per_parent_grade ON public.payments USING btree (parent_id, grade) WHERE (status = 'pending'::text)"
+      },
+      {
+        "oid": "17725",
+        "ready": true,
+        "table": "subscriptions",
+        "valid": true,
+        "unique": true,
+        "primary": false,
+        "definition": "CREATE UNIQUE INDEX one_active_subscription_per_parent_grade ON public.subscriptions USING btree (parent_id, grade) WHERE (status = 'active'::text)"
+      },
+      {
+        "oid": "18035",
+        "ready": true,
+        "table": "student_test_results",
+        "valid": true,
+        "unique": true,
+        "primary": true,
+        "definition": "CREATE UNIQUE INDEX student_test_results_pkey ON public.student_test_results USING btree (id)"
+      },
+      {
+        "oid": "18071",
+        "ready": true,
+        "table": "certificates",
+        "valid": true,
+        "unique": true,
+        "primary": true,
+        "definition": "CREATE UNIQUE INDEX certificates_pkey ON public.certificates USING btree (id)"
+      },
+      {
+        "oid": "18811",
+        "ready": true,
+        "table": "students",
+        "valid": true,
+        "unique": true,
+        "primary": false,
+        "definition": "CREATE UNIQUE INDEX uq_students_grade5_signup_parent ON public.students USING btree (parent_id) WHERE (creation_source = 'grade5_signup'::text)"
+      },
+      {
+        "oid": "18950",
+        "ready": true,
+        "table": "grade5_plan_configuration",
+        "valid": true,
+        "unique": true,
+        "primary": true,
+        "definition": "CREATE UNIQUE INDEX grade5_plan_configuration_pkey ON public.grade5_plan_configuration USING btree (code)"
+      },
+      {
+        "oid": "18958",
+        "ready": true,
+        "table": "payments",
+        "valid": true,
+        "unique": true,
+        "primary": false,
+        "definition": "CREATE UNIQUE INDEX payments_offline_reference_unique ON public.payments USING btree (lower(offline_reference)) WHERE (offline_reference IS NOT NULL)"
+      },
+      {
+        "oid": "18959",
+        "ready": true,
+        "table": "payments",
+        "valid": true,
+        "unique": true,
+        "primary": false,
+        "definition": "CREATE UNIQUE INDEX payments_receipt_number_unique ON public.payments USING btree (receipt_number) WHERE (receipt_number IS NOT NULL)"
+      },
+      {
+        "oid": "18969",
+        "ready": true,
+        "table": "subscriptions",
+        "valid": true,
+        "unique": true,
+        "primary": false,
+        "definition": "CREATE UNIQUE INDEX subscriptions_payment_id_unique ON public.subscriptions USING btree (payment_id) WHERE (payment_id IS NOT NULL)"
+      },
+      {
+        "oid": "19161",
+        "ready": true,
+        "table": "students",
+        "valid": true,
+        "unique": true,
+        "primary": false,
+        "definition": "CREATE UNIQUE INDEX uq_students_parent_creation_operation ON public.students USING btree (parent_id, creation_idempotency_key) WHERE (creation_idempotency_key IS NOT NULL)"
+      },
+      {
+        "oid": "19168",
+        "ready": true,
+        "table": "payments",
+        "valid": true,
+        "unique": true,
+        "primary": false,
+        "definition": "CREATE UNIQUE INDEX payments_offline_idempotency_key_unique ON public.payments USING btree (offline_idempotency_key) WHERE (offline_idempotency_key IS NOT NULL)"
+      },
+      {
+        "oid": "19198",
+        "ready": true,
+        "table": "grade5_cash_reference_registry",
+        "valid": true,
+        "unique": true,
+        "primary": true,
+        "definition": "CREATE UNIQUE INDEX grade5_cash_reference_registry_pkey ON public.grade5_cash_reference_registry USING btree (reference_key)"
+      },
+      {
+        "oid": "19200",
+        "ready": true,
+        "table": "grade5_cash_reference_registry",
+        "valid": true,
+        "unique": true,
+        "primary": false,
+        "definition": "CREATE UNIQUE INDEX grade5_cash_reference_registry_source_type_source_id_key ON public.grade5_cash_reference_registry USING btree (source_type, source_id)"
+      }
+    ],
+    "schemas": [
+      {
+        "acl": [
+          "supabase_admin=UC/supabase_admin",
+          "anon=U/supabase_admin",
+          "authenticated=U/supabase_admin",
+          "service_role=U/supabase_admin",
+          "supabase_auth_admin=UC/supabase_admin",
+          "dashboard_user=UC/supabase_admin",
+          "postgres=U/supabase_admin"
+        ],
+        "name": "auth",
+        "owner": "supabase_admin"
+      },
+      {
+        "acl": [
+          "pg_database_owner=UC/pg_database_owner",
+          "=U/pg_database_owner",
+          "postgres=U/pg_database_owner",
+          "anon=U/pg_database_owner",
+          "authenticated=U/pg_database_owner",
+          "service_role=U/pg_database_owner"
+        ],
+        "name": "public",
+        "owner": "pg_database_owner"
+      },
+      {
+        "acl": [
+          "postgres=UC/postgres",
+          "service_role=U/postgres"
+        ],
+        "name": "app_private",
+        "owner": "postgres"
+      }
+    ],
+    "policies": [
+      {
+        "cmd": "SELECT",
+        "qual": "(( SELECT auth.uid() AS uid) = parent_id)",
+        "roles": [
+          "public"
+        ],
+        "tablename": "students",
+        "permissive": "PERMISSIVE",
+        "policyname": "students_select_own",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "INSERT",
+        "qual": null,
+        "roles": [
+          "public"
+        ],
+        "tablename": "students",
+        "permissive": "PERMISSIVE",
+        "policyname": "students_insert_own",
+        "schemaname": "public",
+        "with_check": "(( SELECT auth.uid() AS uid) = parent_id)"
+      },
+      {
+        "cmd": "UPDATE",
+        "qual": "(( SELECT auth.uid() AS uid) = parent_id)",
+        "roles": [
+          "public"
+        ],
+        "tablename": "students",
+        "permissive": "PERMISSIVE",
+        "policyname": "students_update_own",
+        "schemaname": "public",
+        "with_check": "(( SELECT auth.uid() AS uid) = parent_id)"
+      },
+      {
+        "cmd": "DELETE",
+        "qual": "(( SELECT auth.uid() AS uid) = parent_id)",
+        "roles": [
+          "public"
+        ],
+        "tablename": "students",
+        "permissive": "PERMISSIVE",
+        "policyname": "students_delete_own",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "(( SELECT auth.uid() AS uid) = parent_id)",
+        "roles": [
+          "public"
+        ],
+        "tablename": "subscriptions",
+        "permissive": "PERMISSIVE",
+        "policyname": "subscriptions_select_own",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "(( SELECT auth.uid() AS uid) = parent_id)",
+        "roles": [
+          "public"
+        ],
+        "tablename": "payments",
+        "permissive": "PERMISSIVE",
+        "policyname": "payments_select_own",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "INSERT",
+        "qual": null,
+        "roles": [
+          "public"
+        ],
+        "tablename": "subscriptions",
+        "permissive": "PERMISSIVE",
+        "policyname": "subscriptions_admin_insert",
+        "schemaname": "public",
+        "with_check": "(EXISTS ( SELECT 1\n   FROM profiles\n  WHERE ((profiles.id = auth.uid()) AND (profiles.role = 'admin'::text))))"
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "(EXISTS ( SELECT 1\n   FROM profiles\n  WHERE ((profiles.id = auth.uid()) AND (profiles.role = 'admin'::text))))",
+        "roles": [
+          "public"
+        ],
+        "tablename": "subscriptions",
+        "permissive": "PERMISSIVE",
+        "policyname": "subscriptions_admin_read",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "(( SELECT auth.uid() AS uid) = id)",
+        "roles": [
+          "public"
+        ],
+        "tablename": "profiles",
+        "permissive": "PERMISSIVE",
+        "policyname": "profiles_select_own",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "UPDATE",
+        "qual": "(( SELECT auth.uid() AS uid) = id)",
+        "roles": [
+          "public"
+        ],
+        "tablename": "profiles",
+        "permissive": "PERMISSIVE",
+        "policyname": "profiles_update_own",
+        "schemaname": "public",
+        "with_check": "(( SELECT auth.uid() AS uid) = id)"
+      },
+      {
+        "cmd": "UPDATE",
+        "qual": "(EXISTS ( SELECT 1\n   FROM profiles\n  WHERE ((profiles.id = auth.uid()) AND (profiles.role = 'admin'::text))))",
+        "roles": [
+          "public"
+        ],
+        "tablename": "payments",
+        "permissive": "PERMISSIVE",
+        "policyname": "payments_admin_update",
+        "schemaname": "public",
+        "with_check": "(EXISTS ( SELECT 1\n   FROM profiles\n  WHERE ((profiles.id = auth.uid()) AND (profiles.role = 'admin'::text))))"
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "(EXISTS ( SELECT 1\n   FROM profiles\n  WHERE ((profiles.id = auth.uid()) AND (profiles.role = 'admin'::text))))",
+        "roles": [
+          "public"
+        ],
+        "tablename": "payments",
+        "permissive": "PERMISSIVE",
+        "policyname": "payments_admin_read",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "is_admin_user()",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "payments",
+        "permissive": "PERMISSIVE",
+        "policyname": "Admins can view all payments",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "(auth.uid() = parent_id)",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "student_test_results",
+        "permissive": "PERMISSIVE",
+        "policyname": "Parents can view their own student test results",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "INSERT",
+        "qual": null,
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "student_test_results",
+        "permissive": "PERMISSIVE",
+        "policyname": "Parents can insert their own student test results",
+        "schemaname": "public",
+        "with_check": "(auth.uid() = parent_id)"
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "(EXISTS ( SELECT 1\n   FROM profiles\n  WHERE ((profiles.id = auth.uid()) AND (profiles.role = 'admin'::text))))",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "student_test_results",
+        "permissive": "PERMISSIVE",
+        "policyname": "Admins can view all student test results",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "(auth.uid() = parent_id)",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "certificates",
+        "permissive": "PERMISSIVE",
+        "policyname": "Parents can view their own certificates",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "INSERT",
+        "qual": null,
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "certificates",
+        "permissive": "PERMISSIVE",
+        "policyname": "Parents can create their own certificates",
+        "schemaname": "public",
+        "with_check": "(auth.uid() = parent_id)"
+      },
+      {
+        "cmd": "SELECT",
+        "qual": "(EXISTS ( SELECT 1\n   FROM profiles\n  WHERE ((profiles.id = auth.uid()) AND (profiles.role = 'admin'::text))))",
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "certificates",
+        "permissive": "PERMISSIVE",
+        "policyname": "Admins can view all certificates",
+        "schemaname": "public",
+        "with_check": null
+      },
+      {
+        "cmd": "INSERT",
+        "qual": null,
+        "roles": [
+          "authenticated"
+        ],
+        "tablename": "payments",
+        "permissive": "PERMISSIVE",
+        "policyname": "payments_insert_own",
+        "schemaname": "public",
+        "with_check": "((( SELECT auth.uid() AS uid) = parent_id) AND (method = 'bank_transfer'::text) AND (status = 'pending'::text) AND (verified_at IS NULL) AND (verified_by IS NULL) AND (activated_at IS NULL) AND (offline_reference IS NULL) AND (receipt_number IS NULL) AND (expected_amount_jmd IS NULL) AND (actual_amount_jmd IS NULL) AND (paid_at IS NULL) AND (cash_business_date IS NULL))"
+      }
+    ],
+    "triggers": [
+      {
+        "name": "on_auth_user_created",
+        "table": "auth.users",
+        "enabled": "O",
+        "function": "handle_new_user()",
+        "definition": "CREATE TRIGGER on_auth_user_created AFTER INSERT ON auth.users FOR EACH ROW EXECUTE FUNCTION handle_new_user()"
+      },
+      {
+        "name": "enforce_grade5_signup_student_source",
+        "table": "students",
+        "enabled": "O",
+        "function": "enforce_grade5_signup_student_source()",
+        "definition": "CREATE TRIGGER enforce_grade5_signup_student_source BEFORE INSERT ON students FOR EACH ROW EXECUTE FUNCTION enforce_grade5_signup_student_source()"
+      },
+      {
+        "name": "protect_student_creation_identity",
+        "table": "students",
+        "enabled": "O",
+        "function": "protect_student_creation_identity()",
+        "definition": "CREATE TRIGGER protect_student_creation_identity BEFORE UPDATE ON students FOR EACH ROW EXECUTE FUNCTION protect_student_creation_identity()"
+      },
+      {
+        "name": "protect_grade5_cash_payment_identity",
+        "table": "payments",
+        "enabled": "O",
+        "function": "app_private.protect_grade5_cash_payment_identity()",
+        "definition": "CREATE TRIGGER protect_grade5_cash_payment_identity BEFORE UPDATE ON payments FOR EACH ROW EXECUTE FUNCTION app_private.protect_grade5_cash_payment_identity()"
+      },
+      {
+        "name": "register_grade5_cash_payment_reference",
+        "table": "payments",
+        "enabled": "O",
+        "function": "app_private.register_grade5_cash_payment_reference()",
+        "definition": "CREATE TRIGGER register_grade5_cash_payment_reference AFTER INSERT OR UPDATE OF offline_reference ON payments FOR EACH ROW EXECUTE FUNCTION app_private.register_grade5_cash_payment_reference()"
+      }
+    ],
+    "functions": [
+      {
+        "acl": [
+          "=X/supabase_auth_admin",
+          "supabase_auth_admin=X/supabase_auth_admin",
+          "dashboard_user=X/supabase_auth_admin"
+        ],
+        "owner": "supabase_auth_admin",
+        "config": null,
+        "schema": "auth",
+        "language": "sql",
+        "signature": "auth.uid()",
+        "definition": "CREATE OR REPLACE FUNCTION auth.uid()\n RETURNS uuid\n LANGUAGE sql\n STABLE\nAS $function$\n  select \n  coalesce(\n    nullif(current_setting('request.jwt.claim.sub', true), ''),\n    (nullif(current_setting('request.jwt.claims', true), '')::jsonb ->> 'sub')\n  )::uuid\n$function$\n",
+        "security_definer": false
+      },
+      {
+        "acl": [
+          "=X/supabase_auth_admin",
+          "supabase_auth_admin=X/supabase_auth_admin",
+          "dashboard_user=X/supabase_auth_admin"
+        ],
+        "owner": "supabase_auth_admin",
+        "config": null,
+        "schema": "auth",
+        "language": "sql",
+        "signature": "auth.role()",
+        "definition": "CREATE OR REPLACE FUNCTION auth.role()\n RETURNS text\n LANGUAGE sql\n STABLE\nAS $function$\n  select \n  coalesce(\n    nullif(current_setting('request.jwt.claim.role', true), ''),\n    (nullif(current_setting('request.jwt.claims', true), '')::jsonb ->> 'role')\n  )::text\n$function$\n",
+        "security_definer": false
+      },
+      {
+        "acl": [
+          "=X/supabase_auth_admin",
+          "postgres=X/supabase_auth_admin",
+          "supabase_auth_admin=X/supabase_auth_admin",
+          "dashboard_user=X/supabase_auth_admin"
+        ],
+        "owner": "supabase_auth_admin",
+        "config": null,
+        "schema": "auth",
+        "language": "sql",
+        "signature": "auth.jwt()",
+        "definition": "CREATE OR REPLACE FUNCTION auth.jwt()\n RETURNS jsonb\n LANGUAGE sql\n STABLE\nAS $function$\n  select \n    coalesce(\n        nullif(current_setting('request.jwt.claim', true), ''),\n        nullif(current_setting('request.jwt.claims', true), '')\n    )::jsonb\n$function$\n",
+        "security_definer": false
+      },
+      {
+        "acl": [
+          "=X/postgres",
+          "postgres=X/postgres",
+          "anon=X/postgres",
+          "authenticated=X/postgres",
+          "service_role=X/postgres"
+        ],
+        "owner": "postgres",
+        "config": [
+          "search_path=public"
+        ],
+        "schema": "public",
+        "language": "plpgsql",
+        "signature": "handle_new_user()",
+        "definition": "CREATE OR REPLACE FUNCTION public.handle_new_user()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO 'public'\nAS $function$\r\nbegin\r\n  insert into public.profiles (id, full_name, email, phone, role)\r\n  values (\r\n    new.id,\r\n    new.raw_user_meta_data ->> 'full_name',\r\n    new.email,\r\n    new.raw_user_meta_data ->> 'phone',\r\n    coalesce(new.raw_user_meta_data ->> 'role', 'parent')\r\n  )\r\n  on conflict (id) do nothing;\r\n\r\n  return new;\r\nend;\r\n$function$\n",
+        "security_definer": true
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "anon=X/postgres",
+          "authenticated=X/postgres",
+          "service_role=X/postgres"
+        ],
+        "owner": "postgres",
+        "config": [
+          "search_path=public"
+        ],
+        "schema": "public",
+        "language": "plpgsql",
+        "signature": "ensure_grade5_signup_student(text)",
+        "definition": "CREATE OR REPLACE FUNCTION public.ensure_grade5_signup_student(p_full_name text)\n RETURNS students\n LANGUAGE plpgsql\n SET search_path TO 'public'\nAS $function$\ndeclare\n  v_parent_id uuid := auth.uid();\n  v_student public.students;\nbegin\n  if v_parent_id is null then\n    raise exception 'authentication required';\n  end if;\n\n  if nullif(btrim(p_full_name), '') is null then\n    raise exception 'student name required';\n  end if;\n\n  select * into v_student\n  from public.students\n  where parent_id = v_parent_id\n  order by created_at asc\n  limit 1;\n\n  if found then\n    return v_student;\n  end if;\n\n  insert into public.students (parent_id, full_name, grade_level, creation_source)\n  values (v_parent_id, btrim(p_full_name), 5, 'grade5_signup')\n  on conflict (parent_id) where creation_source = 'grade5_signup'\n  do update set full_name = public.students.full_name\n  returning * into v_student;\n\n  return v_student;\nend;\n$function$\n",
+        "security_definer": false
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "service_role=X/postgres"
+        ],
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "schema": "public",
+        "language": "plpgsql",
+        "signature": "enforce_grade5_signup_student_source()",
+        "definition": "CREATE OR REPLACE FUNCTION public.enforce_grade5_signup_student_source()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare\n  v_caller_id uuid := (select auth.uid());\n  v_signup_child text;\nbegin\n  if v_caller_id is null or new.parent_id is distinct from v_caller_id then\n    raise exception 'Student ownership verification failed' using errcode = '42501';\n  end if;\n\n  if new.grade_level = 5 and new.creation_source is null then\n    select nullif(pg_catalog.btrim(u.raw_user_meta_data ->> 'child_name'), '')\n      into v_signup_child\n      from auth.users u\n     where u.id = v_caller_id\n       and u.id = new.parent_id\n       and u.email_confirmed_at is not null;\n\n    if v_signup_child is not null\n       and pg_catalog.lower(pg_catalog.btrim(new.full_name)) = pg_catalog.lower(v_signup_child)\n       and not exists (\n         select 1\n           from public.students s\n          where s.parent_id = new.parent_id\n            and s.creation_source = 'grade5_signup'\n       ) then\n      new.creation_source := 'grade5_signup';\n    end if;\n  end if;\n\n  return new;\nend;\n$function$\n",
+        "security_definer": true
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "service_role=X/postgres"
+        ],
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "schema": "public",
+        "language": "plpgsql",
+        "signature": "protect_student_creation_identity()",
+        "definition": "CREATE OR REPLACE FUNCTION public.protect_student_creation_identity()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\nbegin\n  if new.creation_idempotency_key is distinct from old.creation_idempotency_key then\n    raise exception 'Student creation identity is immutable' using errcode = '42501';\n  end if;\n  return new;\nend;\n$function$\n",
+        "security_definer": false
+      },
+      {
+        "acl": [
+          "postgres=X/postgres",
+          "service_role=X/postgres",
+          "authenticated=X/postgres"
+        ],
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "schema": "public",
+        "language": "plpgsql",
+        "signature": "add_grade5_student(text,uuid)",
+        "definition": "CREATE OR REPLACE FUNCTION public.add_grade5_student(p_full_name text, p_idempotency_key uuid)\n RETURNS students\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare\n  v_caller_id uuid := (select auth.uid());\n  v_student_name text := pg_catalog.btrim(p_full_name);\n  v_subscription_id uuid;\n  v_allowance integer;\n  v_student_count integer;\n  v_existing public.students%rowtype;\n  v_created public.students%rowtype;\nbegin\n  if v_caller_id is null then\n    raise exception 'Authentication required' using errcode = '42501';\n  end if;\n\n  if not exists (\n    select 1\n      from public.profiles p\n     where p.id = v_caller_id\n       and p.role = 'parent'\n  ) then\n    raise exception 'Parent account required' using errcode = '42501';\n  end if;\n\n  if p_idempotency_key is null then\n    raise exception 'Student operation identity required' using errcode = '22023';\n  end if;\n\n  perform pg_catalog.pg_advisory_xact_lock(\n    pg_catalog.hashtextextended(v_caller_id::text || ':grade5:students', 0)\n  );\n\n  -- Only the caller-scoped operation key identifies a retry. Names are not\n  -- identities: a fresh operation key may intentionally create a namesake.\n  select s.*\n    into v_existing\n    from public.students s\n   where s.parent_id = v_caller_id\n     and s.creation_idempotency_key = p_idempotency_key;\n\n  if found then\n    if v_existing.full_name is distinct from v_student_name then\n      raise exception 'Student operation payload conflict' using errcode = '22000';\n    end if;\n    return v_existing;\n  end if;\n\n  if v_student_name is null or v_student_name = '' then\n    raise exception 'Student name required' using errcode = '22023';\n  end if;\n\n  select s.id, least(s.max_students, c.max_students)\n    into v_subscription_id, v_allowance\n    from public.subscriptions s\n    join public.grade5_plan_configuration c on c.code = s.plan_code\n   where s.parent_id = v_caller_id\n     and s.grade = 'grade5'\n     and s.status = 'active'\n     and (s.starts_at is null or s.starts_at <= pg_catalog.clock_timestamp())\n     and s.expires_at > pg_catalog.clock_timestamp()\n   order by s.starts_at desc nulls last, s.expires_at desc, s.id\n   limit 1;\n\n  if v_subscription_id is null then\n    select c.max_students\n      into v_allowance\n      from public.grade5_plan_configuration c\n     where c.code = 'free';\n    v_allowance := coalesce(v_allowance, 1);\n  end if;\n\n  select pg_catalog.count(*)::integer\n    into v_student_count\n    from public.students s\n   where s.parent_id = v_caller_id\n     and s.grade_level = 5;\n\n  if v_student_count >= v_allowance then\n    raise exception 'Student capacity reached' using errcode = 'P0001';\n  end if;\n\n  insert into public.students\n    (parent_id, subscription_id, full_name, grade_level, creation_idempotency_key)\n  values\n    (v_caller_id, v_subscription_id, v_student_name, 5, p_idempotency_key)\n  returning * into v_created;\n\n  return v_created;\nend;\n$function$\n",
+        "security_definer": true
+      },
+      {
+        "acl": [
+          "postgres=X/postgres"
+        ],
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "schema": "app_private",
+        "language": "plpgsql",
+        "signature": "app_private.protect_grade5_cash_payment_identity()",
+        "definition": "CREATE OR REPLACE FUNCTION app_private.protect_grade5_cash_payment_identity()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n  if old.method = 'cash' and (\n    new.offline_reference is distinct from old.offline_reference\n    or new.reference_code is distinct from old.reference_code\n    or new.offline_idempotency_key is distinct from old.offline_idempotency_key\n    or new.cash_business_date is distinct from old.cash_business_date\n  ) then\n    raise exception 'Cash payment identity is immutable' using errcode = '22000';\n  end if;\n  return new;\nend;\n$function$\n",
+        "security_definer": true
+      },
+      {
+        "acl": [
+          "postgres=X/postgres"
+        ],
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "schema": "app_private",
+        "language": "plpgsql",
+        "signature": "app_private.register_grade5_cash_payment_reference()",
+        "definition": "CREATE OR REPLACE FUNCTION app_private.register_grade5_cash_payment_reference()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n  if new.grade = 'grade5' and new.method = 'cash' and new.offline_reference is not null then\n    insert into public.grade5_cash_reference_registry\n      (reference_key, reference_value, source_type, source_id)\n    values (lower(new.offline_reference), new.offline_reference, 'payment', new.id)\n    on conflict (reference_key) do nothing;\n\n    if not exists (\n      select 1 from public.grade5_cash_reference_registry r\n      where r.reference_key = lower(new.offline_reference)\n        and r.source_type = 'payment'\n        and r.source_id = new.id\n    ) then\n      raise exception 'Cash reference collision' using errcode = '23505';\n    end if;\n  end if;\n  return new;\nend;\n$function$\n",
+        "security_definer": true
+      }
+    ],
+    "extensions": [
+      {
+        "name": "plpgsql",
+        "schema": "pg_catalog",
+        "version": "1.0"
+      },
+      {
+        "name": "pg_stat_statements",
+        "schema": "extensions",
+        "version": "1.11"
+      },
+      {
+        "name": "uuid-ossp",
+        "schema": "extensions",
+        "version": "1.1"
+      },
+      {
+        "name": "pgcrypto",
+        "schema": "extensions",
+        "version": "1.3"
+      },
+      {
+        "name": "supabase_vault",
+        "schema": "vault",
+        "version": "0.3.1"
+      }
+    ],
+    "captured_at": "2026-10-09T16:42:12.954733+00:00",
+    "constraints": [
+      {
+        "name": "users_pkey",
+        "type": "p",
+        "table": "auth.users",
+        "index_oid": "16504",
+        "validated": true,
+        "deferrable": false,
+        "definition": "PRIMARY KEY (id)",
+        "initially_deferred": false
+      },
+      {
+        "name": "users_email_change_confirm_status_check",
+        "type": "c",
+        "table": "auth.users",
+        "index_oid": "0",
+        "validated": true,
+        "deferrable": false,
+        "definition": "CHECK (email_change_confirm_status >= 0 AND email_change_confirm_status <= 2)",
+        "initially_deferred": false
+      },
+      {
+        "name": "users_phone_key",
+        "type": "u",
+        "table": "auth.users",
+        "index_oid": "16880",
+        "validated": true,
+        "deferrable": false,
+        "definition": "UNIQUE (phone)",
+        "initially_deferred": false
+      },
+      {
+        "name": "profiles_role_check",
+        "type": "c",
+        "table": "profiles",
+        "index_oid": "0",
+        "validated": true,
+        "deferrable": false,
+        "definition": "CHECK (role = ANY (ARRAY['admin'::text, 'parent'::text]))",
+        "initially_deferred": false
+      },
+      {
+        "name": "profiles_pkey",
+        "type": "p",
+        "table": "profiles",
+        "index_oid": "17650",
+        "validated": true,
+        "deferrable": false,
+        "definition": "PRIMARY KEY (id)",
+        "initially_deferred": false
+      },
+      {
+        "name": "profiles_id_fkey",
+        "type": "f",
+        "table": "profiles",
+        "index_oid": "16504",
+        "validated": true,
+        "deferrable": false,
+        "definition": "FOREIGN KEY (id) REFERENCES auth.users(id) ON DELETE CASCADE",
+        "initially_deferred": false
+      },
+      {
+        "name": "payments_grade_check",
+        "type": "c",
+        "table": "payments",
+        "index_oid": "0",
+        "validated": true,
+        "deferrable": false,
+        "definition": "CHECK (grade = ANY (ARRAY['grade4'::text, 'grade5'::text]))",
+        "initially_deferred": false
+      },
+      {
+        "name": "payments_status_check",
+        "type": "c",
+        "table": "payments",
+        "index_oid": "0",
+        "validated": true,
+        "deferrable": false,
+        "definition": "CHECK (status = ANY (ARRAY['pending'::text, 'verified'::text, 'rejected'::text, 'expired'::text]))",
+        "initially_deferred": false
+      },
+      {
+        "name": "payments_pkey",
+        "type": "p",
+        "table": "payments",
+        "index_oid": "17669",
+        "validated": true,
+        "deferrable": false,
+        "definition": "PRIMARY KEY (id)",
+        "initially_deferred": false
+      },
+      {
+        "name": "payments_parent_id_fkey",
+        "type": "f",
+        "table": "payments",
+        "index_oid": "16504",
+        "validated": true,
+        "deferrable": false,
+        "definition": "FOREIGN KEY (parent_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+        "initially_deferred": false
+      },
+      {
+        "name": "subscriptions_grade_check",
+        "type": "c",
+        "table": "subscriptions",
+        "index_oid": "0",
+        "validated": true,
+        "deferrable": false,
+        "definition": "CHECK (grade = ANY (ARRAY['grade4'::text, 'grade5'::text]))",
+        "initially_deferred": false
+      },
+      {
+        "name": "subscriptions_status_check",
+        "type": "c",
+        "table": "subscriptions",
+        "index_oid": "0",
+        "validated": true,
+        "deferrable": false,
+        "definition": "CHECK (status = ANY (ARRAY['pending'::text, 'active'::text, 'expired'::text, 'cancelled'::text, 'suspended'::text]))",
+        "initially_deferred": false
+      },
+      {
+        "name": "subscriptions_max_students_check",
+        "type": "c",
+        "table": "subscriptions",
+        "index_oid": "0",
+        "validated": true,
+        "deferrable": false,
+        "definition": "CHECK (max_students > 0)",
+        "initially_deferred": false
+      },
+      {
+        "name": "subscriptions_pkey",
+        "type": "p",
+        "table": "subscriptions",
+        "index_oid": "17689",
+        "validated": true,
+        "deferrable": false,
+        "definition": "PRIMARY KEY (id)",
+        "initially_deferred": false
+      },
+      {
+        "name": "subscriptions_parent_id_fkey",
+        "type": "f",
+        "table": "subscriptions",
+        "index_oid": "16504",
+        "validated": true,
+        "deferrable": false,
+        "definition": "FOREIGN KEY (parent_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+        "initially_deferred": false
+      },
+      {
+        "name": "subscriptions_payment_id_fkey",
+        "type": "f",
+        "table": "subscriptions",
+        "index_oid": "17669",
+        "validated": true,
+        "deferrable": false,
+        "definition": "FOREIGN KEY (payment_id) REFERENCES payments(id) ON DELETE SET NULL",
+        "initially_deferred": false
+      },
+      {
+        "name": "students_pkey",
+        "type": "p",
+        "table": "students",
+        "index_oid": "17708",
+        "validated": true,
+        "deferrable": false,
+        "definition": "PRIMARY KEY (id)",
+        "initially_deferred": false
+      },
+      {
+        "name": "students_parent_id_fkey",
+        "type": "f",
+        "table": "students",
+        "index_oid": "16504",
+        "validated": true,
+        "deferrable": false,
+        "definition": "FOREIGN KEY (parent_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+        "initially_deferred": false
+      },
+      {
+        "name": "students_subscription_id_fkey",
+        "type": "f",
+        "table": "students",
+        "index_oid": "17689",
+        "validated": true,
+        "deferrable": false,
+        "definition": "FOREIGN KEY (subscription_id) REFERENCES subscriptions(id) ON DELETE SET NULL",
+        "initially_deferred": false
+      },
+      {
+        "name": "student_test_results_pkey",
+        "type": "p",
+        "table": "student_test_results",
+        "index_oid": "18035",
+        "validated": true,
+        "deferrable": false,
+        "definition": "PRIMARY KEY (id)",
+        "initially_deferred": false
+      },
+      {
+        "name": "student_test_results_parent_id_fkey",
+        "type": "f",
+        "table": "student_test_results",
+        "index_oid": "16504",
+        "validated": true,
+        "deferrable": false,
+        "definition": "FOREIGN KEY (parent_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+        "initially_deferred": false
+      },
+      {
+        "name": "student_test_results_student_id_fkey",
+        "type": "f",
+        "table": "student_test_results",
+        "index_oid": "17708",
+        "validated": true,
+        "deferrable": false,
+        "definition": "FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE SET NULL",
+        "initially_deferred": false
+      },
+      {
+        "name": "certificates_pkey",
+        "type": "p",
+        "table": "certificates",
+        "index_oid": "18071",
+        "validated": true,
+        "deferrable": false,
+        "definition": "PRIMARY KEY (id)",
+        "initially_deferred": false
+      },
+      {
+        "name": "certificates_parent_id_fkey",
+        "type": "f",
+        "table": "certificates",
+        "index_oid": "16504",
+        "validated": true,
+        "deferrable": false,
+        "definition": "FOREIGN KEY (parent_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+        "initially_deferred": false
+      },
+      {
+        "name": "certificates_student_id_fkey",
+        "type": "f",
+        "table": "certificates",
+        "index_oid": "17708",
+        "validated": true,
+        "deferrable": false,
+        "definition": "FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE SET NULL",
+        "initially_deferred": false
+      },
+      {
+        "name": "certificates_test_result_id_fkey",
+        "type": "f",
+        "table": "certificates",
+        "index_oid": "18035",
+        "validated": true,
+        "deferrable": false,
+        "definition": "FOREIGN KEY (test_result_id) REFERENCES student_test_results(id) ON DELETE SET NULL",
+        "initially_deferred": false
+      },
+      {
+        "name": "grade5_plan_configuration_price_jmd_check",
+        "type": "c",
+        "table": "grade5_plan_configuration",
+        "index_oid": "0",
+        "validated": true,
+        "deferrable": false,
+        "definition": "CHECK (price_jmd >= 0::numeric)",
+        "initially_deferred": false
+      },
+      {
+        "name": "grade5_plan_configuration_duration_months_check",
+        "type": "c",
+        "table": "grade5_plan_configuration",
+        "index_oid": "0",
+        "validated": true,
+        "deferrable": false,
+        "definition": "CHECK (duration_months >= 0)",
+        "initially_deferred": false
+      },
+      {
+        "name": "grade5_plan_configuration_duration_days_check",
+        "type": "c",
+        "table": "grade5_plan_configuration",
+        "index_oid": "0",
+        "validated": true,
+        "deferrable": false,
+        "definition": "CHECK (duration_days >= 0)",
+        "initially_deferred": false
+      },
+      {
+        "name": "grade5_cash_reference_registry_check",
+        "type": "c",
+        "table": "grade5_cash_reference_registry",
+        "index_oid": "0",
+        "validated": true,
+        "deferrable": false,
+        "definition": "CHECK (reference_key = lower(reference_value))",
+        "initially_deferred": false
+      },
+      {
+        "name": "grade5_cash_reference_registry_pkey",
+        "type": "p",
+        "table": "grade5_cash_reference_registry",
+        "index_oid": "19198",
+        "validated": true,
+        "deferrable": false,
+        "definition": "PRIMARY KEY (reference_key)",
+        "initially_deferred": false
+      },
+      {
+        "name": "grade5_plan_configuration_max_students_check",
+        "type": "c",
+        "table": "grade5_plan_configuration",
+        "index_oid": "0",
+        "validated": true,
+        "deferrable": false,
+        "definition": "CHECK (max_students >= 1 AND max_students <= 4)",
+        "initially_deferred": false
+      },
+      {
+        "name": "grade5_plan_configuration_check",
+        "type": "c",
+        "table": "grade5_plan_configuration",
+        "index_oid": "0",
+        "validated": true,
+        "deferrable": false,
+        "definition": "CHECK ((duration_months = 0) <> (duration_days = 0) OR code = 'free'::text)",
+        "initially_deferred": false
+      },
+      {
+        "name": "grade5_plan_configuration_pkey",
+        "type": "p",
+        "table": "grade5_plan_configuration",
+        "index_oid": "18950",
+        "validated": true,
+        "deferrable": false,
+        "definition": "PRIMARY KEY (code)",
+        "initially_deferred": false
+      },
+      {
+        "name": "payments_verified_by_fkey",
+        "type": "f",
+        "table": "payments",
+        "index_oid": "16504",
+        "validated": true,
+        "deferrable": false,
+        "definition": "FOREIGN KEY (verified_by) REFERENCES auth.users(id)",
+        "initially_deferred": false
+      },
+      {
+        "name": "payments_plan_code_valid",
+        "type": "c",
+        "table": "payments",
+        "index_oid": "0",
+        "validated": true,
+        "deferrable": false,
+        "definition": "CHECK (plan_code = ANY (ARRAY['free'::text, 'standard_weekly'::text, 'standard_monthly'::text, 'standard_yearly'::text, 'premium_family_monthly'::text, 'premium_family_yearly'::text]))",
+        "initially_deferred": false
+      },
+      {
+        "name": "subscriptions_plan_code_valid",
+        "type": "c",
+        "table": "subscriptions",
+        "index_oid": "0",
+        "validated": true,
+        "deferrable": false,
+        "definition": "CHECK (plan_code = ANY (ARRAY['free'::text, 'standard_weekly'::text, 'standard_monthly'::text, 'standard_yearly'::text, 'premium_family_monthly'::text, 'premium_family_yearly'::text]))",
+        "initially_deferred": false
+      },
+      {
+        "name": "grade5_cash_reference_registry_source_type_source_id_key",
+        "type": "u",
+        "table": "grade5_cash_reference_registry",
+        "index_oid": "19200",
+        "validated": true,
+        "deferrable": false,
+        "definition": "UNIQUE (source_type, source_id)",
+        "initially_deferred": false
+      },
+      {
+        "name": "grade5_cash_reference_registry_source_type_check",
+        "type": "c",
+        "table": "grade5_cash_reference_registry",
+        "index_oid": "0",
+        "validated": true,
+        "deferrable": false,
+        "definition": "CHECK (source_type = ANY (ARRAY['payment'::text, 'correction'::text]))",
+        "initially_deferred": false
+      }
+    ],
+    "memberships": [
+      {
+        "set": true,
+        "role": "pg_monitor",
+        "admin": false,
+        "member": "supabase_read_only_user",
+        "grantor": "supabase_admin",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "pg_monitor",
+        "admin": true,
+        "member": "postgres",
+        "grantor": "supabase_admin",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "pg_monitor",
+        "admin": false,
+        "member": "supabase_etl_admin",
+        "grantor": "supabase_admin",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "pg_read_all_settings",
+        "admin": false,
+        "member": "pg_monitor",
+        "grantor": "supabase_admin",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "pg_read_all_stats",
+        "admin": false,
+        "member": "pg_monitor",
+        "grantor": "supabase_admin",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "pg_stat_scan_tables",
+        "admin": false,
+        "member": "pg_monitor",
+        "grantor": "supabase_admin",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "pg_signal_backend",
+        "admin": true,
+        "member": "postgres",
+        "grantor": "supabase_admin",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "pg_read_all_data",
+        "admin": false,
+        "member": "supabase_read_only_user",
+        "grantor": "supabase_admin",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "pg_read_all_data",
+        "admin": false,
+        "member": "supabase_etl_admin",
+        "grantor": "supabase_admin",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "pg_read_all_data",
+        "admin": true,
+        "member": "postgres",
+        "grantor": "supabase_admin",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "pg_create_subscription",
+        "admin": true,
+        "member": "postgres",
+        "grantor": "supabase_admin",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "anon",
+        "admin": false,
+        "member": "authenticator",
+        "grantor": "supabase_admin",
+        "inherit": false
+      },
+      {
+        "set": true,
+        "role": "anon",
+        "admin": true,
+        "member": "postgres",
+        "grantor": "supabase_admin",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "authenticated",
+        "admin": false,
+        "member": "authenticator",
+        "grantor": "supabase_admin",
+        "inherit": false
+      },
+      {
+        "set": true,
+        "role": "authenticated",
+        "admin": true,
+        "member": "postgres",
+        "grantor": "supabase_admin",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "service_role",
+        "admin": false,
+        "member": "authenticator",
+        "grantor": "supabase_admin",
+        "inherit": false
+      },
+      {
+        "set": true,
+        "role": "service_role",
+        "admin": true,
+        "member": "postgres",
+        "grantor": "supabase_admin",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "authenticator",
+        "admin": false,
+        "member": "supabase_storage_admin",
+        "grantor": "supabase_admin",
+        "inherit": false
+      },
+      {
+        "set": true,
+        "role": "authenticator",
+        "admin": true,
+        "member": "postgres",
+        "grantor": "supabase_admin",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "supabase_privileged_role",
+        "admin": false,
+        "member": "supabase_etl_admin",
+        "grantor": "supabase_admin",
+        "inherit": true
+      },
+      {
+        "set": true,
+        "role": "supabase_privileged_role",
+        "admin": false,
+        "member": "postgres",
+        "grantor": "supabase_admin",
+        "inherit": true
+      }
+    ],
+    "server_version": "17.6"
+  },
+  "capture_query": "with recursive targets(oid) as (\n select c.oid from pg_class c join pg_namespace n on n.oid=c.relnamespace where (n.nspname='public' and c.relname in ('profiles','students','student_test_results','certificates','subscriptions','grade5_plan_configuration','grade5_cash_reference_registry')) or (n.nspname='auth' and c.relname='users')\n union select con.confrelid from pg_constraint con join targets t on t.oid=con.conrelid where con.contype='f'\n), functions as (\n select p.oid from pg_proc p join pg_namespace n on n.oid=p.pronamespace where (n.nspname='public' and p.proname in ('add_grade5_student','ensure_grade5_signup_student','handle_new_user','enforce_grade5_signup_student_source','protect_student_creation_identity')) or (n.nspname='auth' and p.proname in ('uid','role','jwt'))\n union select tgfoid from pg_trigger where tgrelid in (select oid from targets) and not tgisinternal\n)\nselect jsonb_build_object(\n'server_version',current_setting('server_version'),\n'captured_at',clock_timestamp(),\n'tables',(select jsonb_agg(jsonb_build_object('oid',c.oid,'schema',n.nspname,'name',c.relname,'kind',c.relkind,'owner',pg_get_userbyid(c.relowner),'rls',c.relrowsecurity,'force_rls',c.relforcerowsecurity,'acl',c.relacl,'columns',(select jsonb_agg(jsonb_build_object('name',a.attname,'number',a.attnum,'type',format_type(a.atttypid,a.atttypmod),'not_null',a.attnotnull,'default',pg_get_expr(d.adbin,d.adrelid),'identity',a.attidentity,'generated',a.attgenerated,'acl',a.attacl,'collation',case when a.attcollation<>0 then a.attcollation::regcollation::text end) order by a.attnum) from pg_attribute a left join pg_attrdef d on d.adrelid=a.attrelid and d.adnum=a.attnum where a.attrelid=c.oid and a.attnum>0 and not a.attisdropped))) from pg_class c join pg_namespace n on n.oid=c.relnamespace where c.oid in(select oid from targets)),\n'constraints',(select jsonb_agg(jsonb_build_object('table',c.conrelid::regclass::text,'name',c.conname,'type',c.contype,'definition',pg_get_constraintdef(c.oid,true),'validated',c.convalidated,'deferrable',c.condeferrable,'initially_deferred',c.condeferred,'index_oid',c.conindid)) from pg_constraint c where c.conrelid in(select oid from targets)),\n'indexes',(select jsonb_agg(jsonb_build_object('table',i.indrelid::regclass::text,'oid',i.indexrelid,'definition',pg_get_indexdef(i.indexrelid),'valid',i.indisvalid,'ready',i.indisready,'primary',i.indisprimary,'unique',i.indisunique)) from pg_index i where i.indrelid in(select oid from targets)),\n'policies',(select jsonb_agg(to_jsonb(p)) from pg_policies p where (quote_ident(p.schemaname)||'.'||quote_ident(p.tablename))::regclass in(select oid from targets)),\n'triggers',(select jsonb_agg(jsonb_build_object('table',t.tgrelid::regclass::text,'name',t.tgname,'enabled',t.tgenabled,'definition',pg_get_triggerdef(t.oid,true),'function',t.tgfoid::regprocedure::text)) from pg_trigger t where t.tgrelid in(select oid from targets) and not t.tgisinternal),\n'functions',(select jsonb_agg(jsonb_build_object('signature',p.oid::regprocedure::text,'schema',n.nspname,'owner',pg_get_userbyid(p.proowner),'security_definer',p.prosecdef,'config',p.proconfig,'acl',p.proacl,'language',l.lanname,'definition',pg_get_functiondef(p.oid))) from pg_proc p join pg_namespace n on n.oid=p.pronamespace join pg_language l on l.oid=p.prolang where p.oid in(select oid from functions)),\n'roles',(select jsonb_agg(jsonb_build_object('name',rolname,'superuser',rolsuper,'inherit',rolinherit,'create_role',rolcreaterole,'create_db',rolcreatedb,'login',rolcanlogin,'replication',rolreplication,'bypass_rls',rolbypassrls,'connection_limit',rolconnlimit)) from pg_roles),\n'memberships',(select jsonb_agg(jsonb_build_object('role',r.rolname,'member',m.rolname,'grantor',g.rolname,'admin',a.admin_option,'inherit',a.inherit_option,'set',a.set_option)) from pg_auth_members a join pg_roles r on r.oid=a.roleid join pg_roles m on m.oid=a.member join pg_roles g on g.oid=a.grantor),\n'schemas',(select jsonb_agg(jsonb_build_object('name',nspname,'owner',pg_get_userbyid(nspowner),'acl',nspacl)) from pg_namespace where oid in(select relnamespace from pg_class where oid in(select oid from targets)) or nspname='app_private'),\n'extensions',(select jsonb_agg(jsonb_build_object('name',e.extname,'version',e.extversion,'schema',n.nspname)) from pg_extension e join pg_namespace n on n.oid=e.extnamespace)\n) as catalog;"
+}

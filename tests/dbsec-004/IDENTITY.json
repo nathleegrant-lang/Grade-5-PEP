@@ -1,0 +1,47 @@
+{
+  "assignment_id": "G5-O2-DBSEC-004-EXEC-001",
+  "verification": "static checks PASS; PostgreSQL execution NOT PERFORMED",
+  "workflow_dispatch": "BLOCKED: absent default-branch workflow registration and initial dispatch capability",
+  "files": [
+    {
+      "path": ".github/workflows/g5-dbsec-004-isolated.yml",
+      "sha256": "dcfbf159a16b5ba13129a8a09a71032e8b6daf7d273f6e74cf3b247ea92e84ac",
+      "bytes": 2048
+    },
+    {
+      "path": "tests/dbsec-004/README.md",
+      "sha256": "9fb78572d9099c3524e55a85a71f279d4c33af504cdeb21977d145546f04fb88",
+      "bytes": 5989
+    },
+    {
+      "path": "tests/dbsec-004/catalog.py",
+      "sha256": "f827972985e5b73e5346316d603c31bfe5302a6a901a3bb10e1e24fa5e2f9fc5",
+      "bytes": 5600
+    },
+    {
+      "path": "tests/dbsec-004/inputs/QA-SPEC.md",
+      "sha256": "19f870fb5a53adad182668d24c4b760fe02bbc95e6442a935fe4bc3bfa2f2c11",
+      "bytes": 5359
+    },
+    {
+      "path": "tests/dbsec-004/inputs/dbsec-003.sql",
+      "sha256": "885860118abf7e5bd3f3c2b97c0e9dc2e6d465f96f8d65f2545d6c90c923289d",
+      "bytes": 8617
+    },
+    {
+      "path": "tests/dbsec-004/inputs/schema-catalog.json",
+      "sha256": "393b0d8a2e92f77c2fa157c941178ba7100054f784a506982e0ae12871276f2a",
+      "bytes": 104868
+    },
+    {
+      "path": "tests/dbsec-004/inputs/signup-role-correction.sql",
+      "sha256": "2a11d1a231e25fe22a402a788323a963a354cee6bcb70b55270a0870f06d863d",
+      "bytes": 599
+    },
+    {
+      "path": "tests/dbsec-004/run.py",
+      "sha256": "28bca253286280d70a38f87fdd51159f2998c0d447acc3c9efdd8bb17b649120",
+      "bytes": 16321
+    }
+  ]
+}
