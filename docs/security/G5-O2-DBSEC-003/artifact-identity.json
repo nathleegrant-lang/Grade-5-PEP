@@ -1,0 +1,46 @@
+{
+  "assignment_id": "G5-O2-DBSEC-003",
+  "protected_sha": "7bce46177784efe094ec24641667b375e5f9084d",
+  "protected_tree": "940e8b37cf1ae71791f1c2bb183c4e26a3de3e55",
+  "candidate_type": "unexecuted isolated SQL review artifact",
+  "files": [
+    {
+      "path": "docs/security/G5-O2-DBSEC-003/QA-SPEC.md",
+      "bytes": 5359,
+      "sha256": "19f870fb5a53adad182668d24c4b760fe02bbc95e6442a935fe4bc3bfa2f2c11",
+      "git_blob_sha": "eb6475e011d7bd5890830d67f1bd24c6eecdfd09"
+    },
+    {
+      "path": "docs/security/G5-O2-DBSEC-003/REVIEW.md",
+      "bytes": 8931,
+      "sha256": "df57ab8ff7a6a7d4e07f46c3e3dac84a0b97256b3884950599ad85b2e1ee6813",
+      "git_blob_sha": "089f758ad8184d1f3f465317ce2cdcb1ce5b576e"
+    },
+    {
+      "path": "docs/security/G5-O2-DBSEC-003/caller-census.json",
+      "bytes": 3698,
+      "sha256": "54b230a74f367829f7271a10247810db0db4b67e21222e2194470441c77ceeda",
+      "git_blob_sha": "318f6d5c0f8a12edc1228b294b79023416c589d1"
+    },
+    {
+      "path": "docs/security/G5-O2-DBSEC-003/candidate.sql",
+      "bytes": 8617,
+      "sha256": "885860118abf7e5bd3f3c2b97c0e9dc2e6d465f96f8d65f2545d6c90c923289d",
+      "git_blob_sha": "dc7dd180d177d06094d73f61047f178ec5330357"
+    },
+    {
+      "path": "docs/security/G5-O2-DBSEC-003/database-metadata.json",
+      "bytes": 40018,
+      "sha256": "7b0c893feac8040163eaf7c21029f1dc941677954df2cb42cf0cc95842f9ef1a",
+      "git_blob_sha": "eb2781ec6f4fc008ef1f53b7225d01c0c11e5974"
+    },
+    {
+      "path": "docs/security/G5-O2-DBSEC-003/protected-tree-manifest.json",
+      "bytes": 126393,
+      "sha256": "b716171e883b15005ea270bfcdb32261b250679fe77fb7a3f5e337c02f32367d",
+      "git_blob_sha": "73d3ff9d47317becbc66b9b1a22030d0b2c54c4a"
+    }
+  ],
+  "independent_qa": "NOT AUTHORIZED / NOT EXECUTED",
+  "production": "HOLD"
+}

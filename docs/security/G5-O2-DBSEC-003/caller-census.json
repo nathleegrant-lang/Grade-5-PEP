@@ -1,0 +1,83 @@
+{
+  "assignment_id": "G5-O2-DBSEC-003",
+  "protected_sha": "7bce46177784efe094ec24641667b375e5f9084d",
+  "protected_tree": "940e8b37cf1ae71791f1c2bb183c4e26a3de3e55",
+  "tracked_files": 503,
+  "search": "case-insensitive exact legacy name across every frozen Git blob; RPC/dynamic wrapper review; every ancestor commit exact-name search",
+  "frozen_exact_references": [],
+  "frozen_executable_legacy_callers": 0,
+  "frozen_definitions_documentation_tests": 0,
+  "rpc_review": [
+    {
+      "path": "app/api/admin/payments/route.ts",
+      "line": 130,
+      "source": "const { data, error } = await authorized.db.rpc(\"admin_activate_grade5_payment\", {"
+    },
+    {
+      "path": "app/api/admin/payments/route.ts",
+      "line": 151,
+      "source": "const { data, error } = await authorized.db.rpc(\"admin_record_grade5_cash_payment\", {"
+    },
+    {
+      "path": "contexts/auth-context.tsx",
+      "line": 137,
+      "source": ".rpc(\"add_grade5_student\", {"
+    }
+  ],
+  "ancestor_commits_searched": 653,
+  "historical_references": [],
+  "current_replacement": {
+    "path": "contexts/auth-context.tsx",
+    "line": 137,
+    "function": "createGrade5Student",
+    "rpc": "add_grade5_student",
+    "arguments": {
+      "p_full_name": "fullName",
+      "p_idempotency_key": "idempotencyKey"
+    },
+    "caller_identity": "authenticated Supabase session; explicit operation UUID"
+  },
+  "limits": [
+    "External clients, historical deployed builds and dashboard SQL outside Git are not inventoried by source search. Live database legacy definition/grants separately captured.",
+    "Historical references are not executable callers in the frozen tree.",
+    "No source absence claim establishes zero production RPC traffic."
+  ],
+  "supplemental_historical_refs": [
+    {
+      "commit": "a029e8704042a930c4a6768db21d1a97efc26f35",
+      "path": "contexts/auth-context.tsx",
+      "line": 60,
+      "source": "        const { data: ensuredStudent, error: ensureStudentError } = await supabase.rpc(\"ensure_grade5_signup_student\", { p_full_name: signupChildName }).single<SupabaseStudentRow>()",
+      "classification": "historical executable caller"
+    },
+    {
+      "commit": "71c7326c6eb1833110ce524178e78801b493a5a6",
+      "path": "contexts/auth-context.tsx",
+      "line": 60,
+      "source": "        const { data: ensuredStudent, error: ensureStudentError } = await supabase.rpc(\"ensure_grade5_signup_student\", { p_full_name: signupChildName }).single<SupabaseStudentRow>()",
+      "classification": "historical executable caller"
+    },
+    {
+      "commit": "71c7326c6eb1833110ce524178e78801b493a5a6",
+      "path": "database/grade5_signup_student_event_invariant.sql",
+      "line": 10,
+      "source": "create or replace function public.ensure_grade5_signup_student(p_full_name text)",
+      "classification": "historical SQL definition/grant"
+    },
+    {
+      "commit": "71c7326c6eb1833110ce524178e78801b493a5a6",
+      "path": "database/grade5_signup_student_event_invariant.sql",
+      "line": 51,
+      "source": "revoke all on function public.ensure_grade5_signup_student(text) from public;",
+      "classification": "historical SQL definition/grant"
+    },
+    {
+      "commit": "71c7326c6eb1833110ce524178e78801b493a5a6",
+      "path": "database/grade5_signup_student_event_invariant.sql",
+      "line": 52,
+      "source": "grant execute on function public.ensure_grade5_signup_student(text) to authenticated;",
+      "classification": "historical SQL definition/grant"
+    }
+  ],
+  "history_note": "All 653 protected ancestors have zero exact references. Supplemental named historical objects from other local refs are not evidence of current protected callers."
+}
