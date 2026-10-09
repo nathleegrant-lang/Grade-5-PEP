@@ -32,6 +32,9 @@ interface AiResult {
 }
 
 
+import { useLearnerAttempt } from "@/hooks/use-learner-attempt"
+import { LearnerSelector } from "@/components/learner-selector"
+import { savePerformanceTaskResult } from "@/lib/student-test-results"
 import { useState } from "react"
 import Link from "next/link"
 import { Header } from "@/components/header"
@@ -102,6 +105,8 @@ const shortAnswers: ShortAnswer[] = [
 ]
 
 export default function PerformanceEasy3Page() {
+  const learnerAttempt = useLearnerAttempt()
+
   const [started, setStarted] = useState(false)
   const [answers, setAnswers] = useState<number[]>([])
   const [submitted, setSubmitted] = useState(false)
@@ -142,8 +147,7 @@ export default function PerformanceEasy3Page() {
         if (user) {
           const totalScore = total + (sa1?.score ?? 0) + (sa2?.score ?? 0) + (ew?.totalScore ?? 0)
           const percentage = Math.round((totalScore / 21) * 100)
-          await supabase.from("student_test_results").insert({
-            student_id: user.id,
+          await savePerformanceTaskResult({
             subject: "Language Arts",
             test_name: "Performance Task - Easy 3",
             score: percentage,
@@ -151,7 +155,9 @@ export default function PerformanceEasy3Page() {
             correct_answers: percentage,
             difficulty: "Easy",
             category: "performance-task",
-            completed_at: new Date().toISOString(),
+            studentId: learnerAttempt.studentId,
+            parentId: user.id,
+            completed_at: learnerAttempt.completedAt(),
           })
         }
       } catch (saveError) {
@@ -165,6 +171,7 @@ export default function PerformanceEasy3Page() {
     return (
       <div className="min-h-screen bg-gradient-to-b from-blue-50 to-slate-50">
         <Header />
+      <LearnerSelector />
         <main className="container mx-auto px-4 pb-10 pt-32 lg:pt-10">
           <Link href="/mock-tests/performance/language-arts">
             <Button variant="ghost" className="mb-6">
@@ -201,7 +208,7 @@ export default function PerformanceEasy3Page() {
                   <p className="font-bold text-blue-700 text-xl">1 Extended Writing</p>
                 </div>
               </div>
-              <Button onClick={() => setStarted(true)} className="w-full bg-blue-700 hover:bg-blue-800 py-6 text-lg">Start Task</Button>
+              <Button onClick={() => learnerAttempt.capture() && setStarted(true)} className="w-full bg-blue-700 hover:bg-blue-800 py-6 text-lg">Start Task</Button>
             </CardContent>
           </Card>
         </main>
@@ -213,6 +220,7 @@ export default function PerformanceEasy3Page() {
   if (aiLoading) return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-slate-50">
       <Header />
+      <LearnerSelector />
       <main className="container mx-auto px-4 pb-20 pt-32 text-center lg:pt-20">
         <div className="mx-auto max-w-sm">
           <div className="mb-6 flex justify-center">
@@ -230,6 +238,7 @@ export default function PerformanceEasy3Page() {
     return (
       <div className="min-h-screen bg-gradient-to-b from-blue-50 to-slate-50">
         <Header />
+      <LearnerSelector />
         <main className="container mx-auto px-4 pb-10 pt-32 lg:pt-10">
           <Card className="mx-auto max-w-4xl border-blue-300 shadow-lg">
             <CardHeader className="bg-blue-700 text-center rounded-t-lg">
@@ -350,6 +359,7 @@ export default function PerformanceEasy3Page() {
     return (
       <div className="min-h-screen bg-gradient-to-b from-blue-50 to-slate-50">
       <Header />
+      <LearnerSelector />
       <main className="container mx-auto px-4 pb-8 pt-32 lg:pt-8">
         <div className="mx-auto max-w-4xl space-y-6">
           <Card className="overflow-hidden rounded-2xl border border-blue-200 bg-white shadow-sm">

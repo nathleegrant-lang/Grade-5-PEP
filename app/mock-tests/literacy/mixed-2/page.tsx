@@ -1,5 +1,7 @@
 "use client"
 
+import { useLearnerAttempt } from "@/hooks/use-learner-attempt"
+import { LearnerSelector } from "@/components/learner-selector"
 import { useState, useEffect, useCallback, useRef } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
 import { prepareAssessment, preparePreview } from "@/lib/assessment-engine"
@@ -673,6 +675,8 @@ const SECTION_CONFIG = [
 ]
 
 export default function G5LaMix2MockTest() {
+  const learnerAttempt = useLearnerAttempt()
+
   const { isPremium, user } = useAuth()
   const [started, setStarted]                 = useState(false)
   const [showResults, setShowResults]         = useState(false)
@@ -718,9 +722,10 @@ export default function G5LaMix2MockTest() {
       testName: "Mixed 2",
       difficulty: "Mixed",
       score: calcScore(),
-      totalQuestions,
+      totalQuestions: totalQuestions,
       percentage: scorePct(),
-      completedAt: new Date().toISOString(),
+      studentId: learnerAttempt.studentId,
+      completedAt: learnerAttempt.completedAt(),
     }).catch(() => {
       hasSavedResult.current = false
     })
@@ -736,7 +741,7 @@ export default function G5LaMix2MockTest() {
     setTimeLeft(60 * 60)
     setShowResults(false)
     hasSavedResult.current = false
-    setStarted(true)
+    learnerAttempt.capture() && setStarted(true)
   }
 
   const handleSubmit = () => {
@@ -783,6 +788,7 @@ export default function G5LaMix2MockTest() {
   if (!started) return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
       <Header />
+      <LearnerSelector />
       <main className="container mx-auto px-4 py-10">
         <Link href="/mock-tests/language-arts"><Button variant="ghost" className="mb-6"><ArrowLeft className="mr-2 h-4 w-4" />Back to Language Arts Mock Tests</Button></Link>
         <Card className="mx-auto max-w-3xl border-blue-200 shadow-lg">
@@ -834,6 +840,7 @@ export default function G5LaMix2MockTest() {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
         <Header />
+      <LearnerSelector />
         <main className="container mx-auto px-4 py-10">
           <Card className="mx-auto max-w-4xl border-blue-200 shadow-lg">
             <CardHeader className="bg-blue-50 text-center">
@@ -905,6 +912,7 @@ export default function G5LaMix2MockTest() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
       <Header />
+      <LearnerSelector />
       <header className="bg-blue-800 text-white sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">

@@ -14,6 +14,8 @@ import type {
 import { isSubscriptionActive } from "@/lib/subscriptions"
 
 interface AuthContextType extends AuthState {
+  selectedStudentId: string | null
+  selectStudent: (studentId: string) => void
   login: (email: string, password: string) => Promise<boolean>
   register: (data: RegisterData) => Promise<RegisterResult>
   logout: () => Promise<void>
@@ -77,6 +79,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [students, setStudents] = useState<StudentRecord[]>([])
   const [activeSubscription, setActiveSubscription] = useState<SubscriptionRecord | null>(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [learnerChoice, setLearnerChoice] = useState<{parentId: string; studentId: string} | null>(null)
+  const selectedStudentId = learnerChoice && user && learnerChoice.parentId === user.id && students.some(s => s.id === learnerChoice.studentId) ? learnerChoice.studentId : null
+  const selectStudent = (studentId: string) => {
+    if (!user) return
+    const id = students.some(s => s.id === studentId) ? studentId : ""
+    setLearnerChoice({parentId: user.id, studentId: id})
+    try { sessionStorage.setItem("grade5_selected_student_" + user.id, id) } catch { /* Selection remains available without storage. */ }
+  }
+  useEffect(() => {
+    if (!user) { setLearnerChoice(null); return }
+    let id = ""
+    try { id = sessionStorage.getItem("grade5_selected_student_" + user.id) || "" } catch { /* No first-child fallback. */ }
+    setLearnerChoice({parentId: user.id, studentId: students.some(s => s.id === id) ? id : ""})
+  }, [user?.id, students])
   const pendingAddOperation = useRef<{ name: string; key: string } | null>(null)
 
   const mapStudent = (row: SupabaseStudentRow): StudentRecord => ({
@@ -174,58 +190,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const pendingChild = authUser.email ? readPendingChild(authUser.email) : null
 
 
-      if (resolvedStudents.length === 0) {
-        const [{ data: resultNameRows }, { data: certificateNameRows }] = await Promise.all([
-          supabase
-            .from("student_test_results")
-            .select("id, student_name")
-            .eq("parent_id", authUser.id)
-            .not("student_name", "is", null),
-          supabase
-            .from("certificates")
-            .select("id, student_name")
-            .eq("parent_id", authUser.id)
-            .not("student_name", "is", null),
-        ])
-
-        const sources = [
-          ...(resultNameRows ?? []).map((row) => ({ ...row, source: "result" })),
-          ...(certificateNameRows ?? []).map((row) => ({ ...row, source: "certificate" })),
-        ].sort((a, b) => `${a.source}:${a.id}`.localeCompare(`${b.source}:${b.id}`)) as Array<{
-          id: string
-          student_name?: string | null
-          source: string
-        }>
-        const names = new Map<string, { name: string; operationSource: string }>()
-        for (const row of sources) {
-          const trimmed = row.student_name?.trim()
-          const normalized = trimmed?.toLocaleLowerCase()
-          if (trimmed && normalized && !names.has(normalized)) {
-            names.set(normalized, {
-              name: trimmed,
-              operationSource: `grade5-student-recovery:${row.source}:${row.id}`,
-            })
-          }
-        }
-
-        if (names.size > 0) {
-          const recoveredStudents: StudentRecord[] = []
-          for (const { name, operationSource } of names.values()) {
-            const operationKey = await stableStudentOperationKey(operationSource)
-            const { data: recoveredStudent, error: recoveryError } = await createGrade5Student(name, operationKey)
-            if (recoveryError) {
-              console.error("Could not recover student from existing records.")
-              break
-            }
-            if (recoveredStudent) recoveredStudents.push(mapStudent(recoveredStudent))
-          }
-
-          if (recoveredStudents.length) {
-            resolvedStudents = recoveredStudents
-          }
-        }
-      }
-
       if (resolvedStudents.length === 0 && pendingChild) {
         const operationKey = await stableStudentOperationKey(`grade5-pending-registration:${authUser.id}`)
         const { data: insertedStudent, error: insertStudentError } = await createGrade5Student(pendingChild, operationKey)
@@ -261,7 +225,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser({
         id: authUser.id,
         parentName: profile?.full_name ?? authUser.user_metadata?.full_name ?? "Parent",
-        childName: resolvedStudents[0]?.fullName ?? "Student",
+        childName: "Student",
         email: profile?.email ?? authUser.email ?? "",
         role: profile?.role ?? "parent",
         subscriptionTier: effectivePlanCode,
@@ -478,6 +442,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       value={{
         user,
         students,
+        selectedStudentId,
+        selectStudent,
         activeSubscription,
         isLoading,
         isAuthenticated: !!user,

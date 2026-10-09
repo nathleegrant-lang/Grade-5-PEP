@@ -10,9 +10,9 @@ import { Input } from "@/components/ui/input"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { useAuth } from "@/contexts/auth-context"
-import { useProgress } from "@/contexts/progress-context"
+import { LearnerSelector } from "@/components/learner-selector"
 import { getSupabaseBrowserClient } from "@/lib/supabase/client"
-import { normalizeSubject } from "@/lib/student-results"
+import { fetchLearnerDashboard, normalizeSubject } from "@/lib/student-results"
 import type { PaymentRecord } from "@/lib/types"
 import {
   BookOpen,
@@ -85,16 +85,23 @@ export default function DashboardPage() {
     activeSubscription,
     addStudent,
     refreshUser,
+    selectedStudentId,
   } = useAuth()
 
-  const { getTopicProgress } = useProgress()
   const supabase = useMemo(() => getSupabaseBrowserClient(), [])
 
   const [latestPayment, setLatestPayment] = useState<PaymentRecord | null>(null)
-  const [latestTest, setLatestTest] = useState<StudentTestResult | null>(null)
-  const [testResults, setTestResults] = useState<StudentTestResult[]>([])
-  const [testStats, setTestStats] = useState({ total: 0, average: 0, best: 0 })
-  const [earnedCertificates, setEarnedCertificates] = useState<CertificateRecord[]>([])
+  const [loadedLatestTest, setLatestTest] = useState<StudentTestResult | null>(null)
+  const [loadedTestResults, setTestResults] = useState<StudentTestResult[]>([])
+  const [loadedTestStats, setTestStats] = useState({ total: 0, average: 0, best: 0 })
+  const [loadedCertificates, setEarnedCertificates] = useState<CertificateRecord[]>([])
+
+  const [resultStudentId, setResultStudentId] = useState<string | null>(null)
+  const currentResults = !!selectedStudentId && resultStudentId === selectedStudentId
+  const testResults = currentResults ? loadedTestResults : []
+  const latestTest = currentResults ? loadedLatestTest : null
+  const testStats = currentResults ? loadedTestStats : { total: 0, average: 0, best: 0 }
+  const earnedCertificates = currentResults ? loadedCertificates : []
 
   const [newStudentName, setNewStudentName] = useState("")
   const [studentMessage, setStudentMessage] = useState("")
@@ -144,33 +151,18 @@ export default function DashboardPage() {
   }, [supabase, user])
 
   useEffect(() => {
+    const controller = new AbortController()
+    setResultStudentId(null)
+    setTestResults([])
+    setEarnedCertificates([])
+    setLatestTest(null)
+    setTestStats({ total: 0, average: 0, best: 0 })
     const loadDashboardResults = async () => {
-      if (!user) return
-
+      if (!user || !selectedStudentId) return
       try {
-        const {
-          data: { session },
-        } = await supabase.auth.getSession()
-
-        const token = session?.access_token
-
-        if (!token) {
-          throw new Error("No session token found")
-        }
-
-        const response = await fetch("/api/dashboard/results", {
-          method: "GET",
-          cache: "no-store",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-
-        if (!response.ok) {
-          throw new Error(`Failed with ${response.status}`)
-        }
-
-        const data = await response.json()
+        const data = await fetchLearnerDashboard(supabase, selectedStudentId, controller.signal)
+        if (controller.signal.aborted) return
+        setResultStudentId(selectedStudentId)
         const results = (data.testResults || []) as StudentTestResult[]
         const certificates = (data.earnedCertificates || []) as CertificateRecord[]
 
@@ -195,6 +187,7 @@ export default function DashboardPage() {
           best: Math.round(best),
         })
       } catch (error) {
+        if (controller.signal.aborted) return
         console.error("Failed loading dashboard results:", error)
 
         setTestResults([])
@@ -205,7 +198,8 @@ export default function DashboardPage() {
     }
 
     void loadDashboardResults()
-  }, [supabase, user])
+    return () => controller.abort()
+  }, [supabase, user, selectedStudentId])
 
   if (isLoading) {
     return (
@@ -230,13 +224,12 @@ export default function DashboardPage() {
     { href: "/certificates", icon: Award, label: "Certificates", color: "bg-purple-100 text-purple-600" },
   ]
 
-  const languageArtsProgress = getTopicProgress("language-arts")
 
   const langResultsFromDB = testResults.filter((r) => isLangSubject(r.subject))
   const langBestScore =
     langResultsFromDB.length > 0
       ? Math.max(...langResultsFromDB.map((r) => Number(r.percentage)))
-      : languageArtsProgress.bestScore || 0
+      : 0
 
   const mathResults = testResults.filter((r) => isMathSubject(r.subject))
   const mathBestScore =
@@ -304,6 +297,7 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
       <Header />
+      <LearnerSelector />
 
       <main className="container mx-auto px-4 py-10">
         <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -315,7 +309,7 @@ export default function DashboardPage() {
               <h1 className="text-2xl md:text-3xl font-bold text-slate-800">
                 Welcome back, {user.parentName}!
               </h1>
-              <p className="text-slate-600">Primary student: {user.childName}</p>
+              <p className="text-slate-600">Selected student: {students.find(student => student.id === selectedStudentId)?.fullName || "Choose a student"}</p>
             </div>
           </div>
 

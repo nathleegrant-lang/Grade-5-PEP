@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "incremental": false },
+  "include": [
+    "lib/learner-result-security.ts", "lib/assessment-result-handler.ts",
+    "lib/student-test-results.ts", "lib/student-results.ts", "lib/result-matching.ts",
+    "lib/learner-attempt.ts", "hooks/use-learner-attempt.ts", "components/learner-selector.tsx",
+    "contexts/auth-context.tsx", "app/api/assessment/results/route.ts",
+    "app/api/performance/save-result/route.ts", "app/api/dashboard/results/route.ts",
+    "app/api/admin/reports/route.ts", "app/dashboard/page.tsx", "app/certificates/page.tsx"
+  ],
+  "exclude": ["node_modules", ".next"]
+}

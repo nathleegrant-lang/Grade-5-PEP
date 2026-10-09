@@ -1,5 +1,7 @@
 "use client"
 
+import { useLearnerAttempt } from "@/hooks/use-learner-attempt"
+import { LearnerSelector } from "@/components/learner-selector"
 import { useState, useEffect, useCallback } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
 import Image from "next/image"
@@ -555,6 +557,8 @@ const SECTION_CONFIG = [
 ]
 
 export default function G5MathEasy1MockTest() {
+  const learnerAttempt = useLearnerAttempt()
+
   const { isPremium, user, students } = useAuth()
   const [testStarted, setTestStarted] = useState(false)
   const [testCompleted, setTestCompleted] = useState(false)
@@ -627,17 +631,17 @@ export default function G5MathEasy1MockTest() {
 
     try {
       await saveStudentTestResult({
-        parentId: user.id,
-        studentId: students[0]?.id ?? null,
-        grade: "grade5",
-        subject: "mathematics",
-        testName: "Mathematics Easy 1",
-        difficulty: "easy",
-        score,
-        totalQuestions,
-        percentage,
-        completedAt: completedAtIso,
-      })
+      parentId: user.id,
+      grade: "grade5",
+      subject: "mathematics",
+      testName: "Mathematics Easy 1",
+      difficulty: "easy",
+      score: score,
+      totalQuestions: totalQuestions,
+      percentage: percentage,
+      studentId: learnerAttempt.studentId,
+      completedAt: learnerAttempt.completedAt(),
+    })
     } catch (error) {
       console.error("Could not save student test result:", error)
     } finally {
@@ -657,6 +661,7 @@ export default function G5MathEasy1MockTest() {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
         <Header />
+      <LearnerSelector />
         <main className="container mx-auto px-4 py-10">
           <Link href="/mock-tests/mathematics" className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-6"><ArrowLeft className="h-4 w-4 mr-2" />Back to Mathematics Mock Tests</Link>
           <Card className="max-w-2xl mx-auto shadow-lg">
@@ -696,7 +701,7 @@ export default function G5MathEasy1MockTest() {
                     <li>- The test will submit automatically when time runs out.</li>
                   </ul>
                 </div>
-                <Button onClick={() => setTestStarted(true)} className="w-full bg-slate-700 hover:bg-slate-800 text-lg py-6">Start Test</Button>
+                <Button onClick={() => learnerAttempt.capture() && setTestStarted(true)} className="w-full bg-slate-700 hover:bg-slate-800 text-lg py-6">Start Test</Button>
                 <Link href="/mock-tests/mathematics"><Button variant="outline" className="w-full">Back to Mathematics Mock Tests</Button></Link>
               </div>
             </CardContent>
@@ -711,6 +716,7 @@ export default function G5MathEasy1MockTest() {
     return (
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
         <Header />
+      <LearnerSelector />
         <main className="container mx-auto px-4 py-10">
           <Card className="max-w-3xl mx-auto shadow-lg">
             <CardHeader className="text-center bg-blue-50 rounded-t-lg border-b">
@@ -749,6 +755,7 @@ export default function G5MathEasy1MockTest() {
       <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
         <style jsx global>{`@media print { header, footer, .no-print { display: none !important; } body { background: #ffffff !important; } .report-sheet { box-shadow: none !important; border: none !important; } }`}</style>
         <Header />
+      <LearnerSelector />
         <main className="container mx-auto px-4 py-10">
           <Card className="max-w-5xl mx-auto report-sheet shadow-lg">
             <CardHeader className="bg-white border-b rounded-t-lg">

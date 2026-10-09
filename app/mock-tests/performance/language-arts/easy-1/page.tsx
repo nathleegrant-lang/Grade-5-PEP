@@ -1,5 +1,7 @@
 "use client"
 
+import { useLearnerAttempt } from "@/hooks/use-learner-attempt"
+import { LearnerSelector } from "@/components/learner-selector"
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
@@ -136,6 +138,8 @@ Simple habits can make a big difference. Putting litter in the bin, wiping down 
 A successful cleanliness campaign involves the whole school community — students, teachers, parents, and cleaning staff. When students understand why cleanliness matters and feel responsible for their school environment, they are more likely to take care of it. Schools that run regular campaigns, poster competitions, and class challenges report lasting improvements in their school's appearance and atmosphere.`
 
 export default function PerformanceEasy1Page() {
+  const learnerAttempt = useLearnerAttempt()
+
   const [started, setStarted] = useState(false)
   const [answers, setAnswers] = useState<number[]>([])
   const [submitted, setSubmitted] = useState(false)
@@ -277,6 +281,8 @@ export default function PerformanceEasy1Page() {
         Authorization: `Bearer ${session.access_token}`,
       },
       body: JSON.stringify({
+        studentId: learnerAttempt.studentId,
+        completedAt: learnerAttempt.completedAt(),
         subject: "Language Arts",
         test_name: "Performance Task - Easy 1",
         difficulty: "Easy",
@@ -336,6 +342,7 @@ export default function PerformanceEasy1Page() {
     return (
       <div className="min-h-screen bg-gradient-to-b from-blue-50 to-slate-50">
         <Header />
+      <LearnerSelector />
         <main className="container mx-auto px-4 pb-10 pt-32 lg:pt-10">
           <Link href="/mock-tests/performance/language-arts">
             <Button variant="ghost" className="mb-6">
@@ -383,7 +390,7 @@ export default function PerformanceEasy1Page() {
                 </div>
               </div>
 
-              <Button onClick={() => setStarted(true)} className="w-full bg-blue-700 py-6 text-lg hover:bg-blue-800">
+              <Button onClick={() => learnerAttempt.capture() && setStarted(true)} className="w-full bg-blue-700 py-6 text-lg hover:bg-blue-800">
                 Start Task
               </Button>
             </CardContent>
@@ -398,6 +405,7 @@ export default function PerformanceEasy1Page() {
     return (
       <div className="min-h-screen bg-gradient-to-b from-blue-50 to-slate-50">
         <Header />
+      <LearnerSelector />
         <main className="container mx-auto px-4 pb-20 pt-32 text-center lg:pt-20">
           <div className="mx-auto max-w-sm">
             <div className="mb-6 flex justify-center">
@@ -416,6 +424,7 @@ export default function PerformanceEasy1Page() {
     return (
       <div className="min-h-screen bg-gradient-to-b from-blue-50 to-slate-50">
         <Header />
+      <LearnerSelector />
         <main className="container mx-auto px-4 pb-10 pt-32 lg:pt-10">
           <Card className="mx-auto max-w-4xl border-blue-300 shadow-lg print:border-0 print:shadow-none">
             <CardHeader className="rounded-t-lg bg-white text-center print:rounded-none">
@@ -638,6 +647,7 @@ export default function PerformanceEasy1Page() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-slate-50">
       <Header />
+      <LearnerSelector />
       <main className="container mx-auto px-4 pb-8 pt-32 lg:pt-8">
         <div className="mx-auto max-w-4xl space-y-6">
           <Card className="overflow-hidden rounded-2xl border border-blue-200 bg-white shadow-sm">

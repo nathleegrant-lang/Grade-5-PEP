@@ -16,6 +16,9 @@ interface AiResult {
   percentage: number
 }
 
+import { useLearnerAttempt } from "@/hooks/use-learner-attempt"
+import { LearnerSelector } from "@/components/learner-selector"
+import { savePerformanceTaskResult } from "@/lib/student-test-results"
 import { useState } from "react"
 import Link from "next/link"
 import { Header } from "@/components/header"
@@ -98,6 +101,8 @@ const taskData = {
 }
 
 export default function MathPerfDifficult6Page() {
+  const learnerAttempt = useLearnerAttempt()
+
   // Rule 4: create supabase inside the component
   const supabase = getSupabaseBrowserClient()
 
@@ -147,8 +152,7 @@ export default function MathPerfDifficult6Page() {
       try {
         const { data: { user } } = await supabase.auth.getUser()
         if (user) {
-          await supabase.from("student_test_results").insert({
-            student_id: user.id,
+          await savePerformanceTaskResult({
             subject: "Mathematics",
             test_name: "Performance Task - Difficult 6",
             score: percentage,
@@ -156,7 +160,9 @@ export default function MathPerfDifficult6Page() {
             correct_answers: percentage,
             difficulty: "Difficult",
             category: "performance-task",
-            completed_at: new Date().toISOString(),
+            studentId: learnerAttempt.studentId,
+            parentId: user.id,
+            completed_at: learnerAttempt.completedAt(),
           })
         }
       } catch (saveErr) {
@@ -173,6 +179,7 @@ export default function MathPerfDifficult6Page() {
   if (!started) return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-slate-50">
       <Header />
+      <LearnerSelector />
       <main className="container mx-auto px-4 py-10">
         <Link href="/mock-tests/performance/mathematics">
           <Button variant="ghost" className="mb-6">
@@ -217,7 +224,7 @@ export default function MathPerfDifficult6Page() {
             <div className="rounded-lg border border-slate-200 bg-white p-3 text-sm text-slate-600">
               <strong>Instructions:</strong> Read each part carefully. Show ALL your working clearly. Write your final answer in the answer box. You may use pencil and paper for calculations.
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-blue-700 hover:bg-blue-800 py-6 text-lg">Start Task</Button>
+            <Button onClick={() => learnerAttempt.capture() && setStarted(true)} className="w-full bg-blue-700 hover:bg-blue-800 py-6 text-lg">Start Task</Button>
           </CardContent>
         </Card>
       </main>
@@ -229,6 +236,7 @@ export default function MathPerfDifficult6Page() {
   if (aiLoading) return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-slate-50">
       <Header />
+      <LearnerSelector />
       <main className="container mx-auto px-4 py-20 text-center">
         <div className="mx-auto max-w-sm">
           <div className="mb-6 flex justify-center">
@@ -246,6 +254,7 @@ export default function MathPerfDifficult6Page() {
   if (showResults) return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-slate-50">
       <Header />
+      <LearnerSelector />
       <main className="container mx-auto px-4 py-8">
         <Card className="mx-auto max-w-4xl border-blue-300 shadow-lg">
           <CardHeader className="bg-blue-700 text-center rounded-t-lg">
@@ -364,6 +373,7 @@ export default function MathPerfDifficult6Page() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-slate-50">
       <Header />
+      <LearnerSelector />
       <header className="bg-blue-700 text-white sticky top-0 z-10">
         <div className="container mx-auto px-4 py-3 flex items-center gap-3">
           <Link href="/mock-tests/performance/mathematics" className="p-2 hover:bg-white/10 rounded-lg">

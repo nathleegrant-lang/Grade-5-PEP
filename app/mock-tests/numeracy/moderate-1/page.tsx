@@ -1,5 +1,7 @@
 "use client"
 
+import { useLearnerAttempt } from "@/hooks/use-learner-attempt"
+import { LearnerSelector } from "@/components/learner-selector"
 import { useEffect, useState, useRef } from "react"
 import Link from "next/link"
 import { Header } from "@/components/header"
@@ -24,6 +26,8 @@ const FREE_QUESTIONS_LIMIT = 5
 const questions = [/* KEEP YOUR CURRENT QUESTIONS */]
 
 export default function Page() {
+  const learnerAttempt = useLearnerAttempt()
+
   const { isPremium, user } = useAuth()
 
   const [started, setStarted] = useState(false)
@@ -77,17 +81,18 @@ export default function Page() {
       const completedAtIso = new Date().toISOString()
       try {
         await saveStudentTestResult({
-          parentId: user.id,
-          studentName: user?.childName ?? "Student",
-          grade: "grade5",
-          subject: "Mathematics",
-          testName: "Moderate 1",
-          difficulty: "Moderate",
-          score: s,
-          totalQuestions: qList.length,
-          percentage: getScorePercentage(),
-          completedAt: completedAtIso,
-        })
+      parentId: user.id,
+      studentName: user?.childName ?? "Student",
+      grade: "grade5",
+      subject: "Mathematics",
+      testName: "Moderate 1",
+      difficulty: "Moderate",
+      score: s,
+      totalQuestions: qList.length,
+      percentage: getScorePercentage(),
+      studentId: learnerAttempt.studentId,
+      completedAt: learnerAttempt.completedAt(),
+    })
       } catch {
         hasSavedResult.current = false
       }
@@ -98,27 +103,27 @@ export default function Page() {
 
   if (!started) {
     return (
-      <div className="p-10 text-center">
+      <div className="p-10 text-center"><LearnerSelector />
         {!isPremium && (
           <div className="bg-yellow-100 p-4 mb-4">
             Free preview: 5 questions
           </div>
         )}
-        <Button onClick={() => setStarted(true)}>Start Test</Button>
+        <Button onClick={() => learnerAttempt.capture() && setStarted(true)}>Start Test</Button>
       </div>
     )
   }
 
   if (done) {
     return (
-      <div className="p-10 text-center">
+      <div className="p-10 text-center"><LearnerSelector />
         <h2>{score}/{qList.length}</h2>
       </div>
     )
   }
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
+    <div className="p-6 max-w-4xl mx-auto"><LearnerSelector />
 
       <div className="flex justify-between mb-4">
         <span>{current + 1}/{qList.length}</span>

@@ -8,13 +8,15 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { LearnerSelector } from "@/components/learner-selector"
 import { useAuth } from "@/contexts/auth-context"
 import { getSupabaseBrowserClient } from "@/lib/supabase/client"
-import { fetchCompletedStudentResults, normalizeSubject } from "@/lib/student-results"
+import { fetchLearnerDashboard, normalizeSubject } from "@/lib/student-results"
 import { Award, ArrowLeft, Printer, Star } from "lucide-react"
 
 // ── Type ──────────────────────────────────────────────────────────────────────
 type CertificateRecord = {
+  student_id: string
   id: string
   student_name: string
   subject: string
@@ -116,12 +118,15 @@ function CertificatePrintView({ cert }: { cert: CertificateRecord }) {
 // ── Page ──────────────────────────────────────────────────────────────────────
 export default function CertificatesPage() {
   const router = useRouter()
-  const { user, isAuthenticated, isLoading } = useAuth()
+  const { user, isAuthenticated, isLoading, selectedStudentId } = useAuth()
   const supabase = useMemo(() => getSupabaseBrowserClient(), [])
 
-  const [certificates, setCertificates] = useState<CertificateRecord[]>([])
+  const [loadedCertificates, setCertificates] = useState<CertificateRecord[]>([])
   const [fetching, setFetching] = useState(true)
-  const [selected, setSelected] = useState<CertificateRecord | null>(null)
+  const [loadedSelected, setSelected] = useState<CertificateRecord | null>(null)
+  const [resultStudentId, setResultStudentId] = useState<string | null>(null)
+  const certificates = selectedStudentId && resultStudentId === selectedStudentId ? loadedCertificates : []
+  const selected = loadedSelected?.student_id === selectedStudentId ? loadedSelected : null
   const printRef = useRef<HTMLDivElement>(null)
 
   // ── Auth guard ──────────────────────────────────────────────────────────────
@@ -129,33 +134,26 @@ export default function CertificatesPage() {
     if (!isLoading && !isAuthenticated) router.push("/login")
   }, [isLoading, isAuthenticated, router])
 
-  // ── Fetch all certificates for this parent ──────────────────────────────────
   useEffect(() => {
+    const controller = new AbortController()
+    setResultStudentId(null)
+    setSelected(null)
+    setCertificates([])
     const loadCertificates = async () => {
-      if (!user) return
       setFetching(true)
-
-      const results = await fetchCompletedStudentResults(supabase, user.id)
-      const certs = results
-        .filter((r) => Number(r.percentage) >= 80)
-        .map((r) => ({
-          id: r.id,
-          student_name: "Student",
-          subject: r.subject,
-          test_name: r.test_name,
-          score: r.score,
-          total_questions: r.total_questions,
-          percentage: r.percentage,
-          certificate_title: `${normalizeSubject(r.subject)} Excellence Certificate`,
-          issued_at: r.completed_at,
-        }))
-
-      setCertificates(certs as CertificateRecord[])
-      setFetching(false)
+      try {
+        if (!user || !selectedStudentId) return
+        const data = await fetchLearnerDashboard(supabase, selectedStudentId, controller.signal)
+        if (!controller.signal.aborted) { setResultStudentId(selectedStudentId); setCertificates(data.earnedCertificates) }
+      } catch {
+        if (!controller.signal.aborted) setCertificates([])
+      } finally {
+        if (!controller.signal.aborted) setFetching(false)
+      }
     }
-
     void loadCertificates()
-  }, [supabase, user])
+    return () => controller.abort()
+  }, [supabase, user, selectedStudentId])
 
   // ── Print handler ───────────────────────────────────────────────────────────
   const handlePrint = () => {
@@ -180,6 +178,7 @@ export default function CertificatesPage() {
         {/* Hide header/footer when printing */}
         <div className="print:hidden">
           <Header />
+      <LearnerSelector />
         </div>
 
         <main className="container mx-auto px-4 py-10 max-w-2xl">
@@ -220,6 +219,7 @@ export default function CertificatesPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 to-slate-50">
       <Header />
+      <LearnerSelector />
 
       <main className="container mx-auto px-4 py-10">
         {/* Page title */}

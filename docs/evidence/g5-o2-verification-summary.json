@@ -1,0 +1,53 @@
+{
+  "assignment_id": "G5-LEARNER-UX-001-O2-IMPLEMENT-001",
+  "functional": {
+    "tests": 344,
+    "pass": 344,
+    "fail": 0
+  },
+  "full_historical": {
+    "tests": 362,
+    "pass": 355,
+    "fail": 7,
+    "baseline_failures": [
+      "O1-10 candidate stays inside the authorized static orientation boundary",
+      "O4-N exact six-file boundary excludes Mock Tests, APIs, persistence and assessment banks",
+      "O4-N language-arts callbacks preserve Review topic and clear Choose topic",
+      "O4-N mathematics callbacks preserve Review topic and clear Choose topic",
+      "O4-N science callbacks preserve Review topic and clear Choose topic",
+      "O4-N social-studies callbacks preserve Review topic and clear Choose topic"
+    ],
+    "candidate_failures": [
+      "O1-06 through O1-09 protected mechanics, assessments, entitlement, and database remain unchanged",
+      "O1-10 candidate stays inside the authorized static orientation boundary",
+      "O4-N exact six-file boundary excludes Mock Tests, APIs, persistence and assessment banks",
+      "O4-N language-arts callbacks preserve Review topic and clear Choose topic",
+      "O4-N mathematics callbacks preserve Review topic and clear Choose topic",
+      "O4-N science callbacks preserve Review topic and clear Choose topic",
+      "O4-N social-studies callbacks preserve Review topic and clear Choose topic"
+    ]
+  },
+  "typecheck": {
+    "focused": "PASS",
+    "baseline_errors": 369,
+    "candidate_errors": 367,
+    "introduced": [],
+    "removed": [
+      "app/certificates/page.tsx: error TS2345: Argument of type 'string' is not assignable to parameter of type '{ userId: string; studentId?: string | null | undefined; studentName?: string | null | undefined; }'.",
+      "app/dashboard/page.tsx: error TS2339: Property 'bestScore' does not exist on type 'TopicProgress[]'."
+    ]
+  },
+  "build": {
+    "default": "BLOCKED: external node_modules symlink rejected by Turbopack",
+    "webpack": "BLOCKED: unchanged Nunito Google Fonts unavailable over network"
+  },
+  "census": {
+    "accepted": 225,
+    "reconciled": 225,
+    "assessment_constants_unchanged": 221,
+    "frozen_ux_overlap": []
+  },
+  "independent_qa": "REQUIRED; Development evidence only",
+  "production": "HOLD",
+  "postgresql_rls": "UNVERIFIED; mandatory release gate"
+}

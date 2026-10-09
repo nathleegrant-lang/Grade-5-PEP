@@ -1,5 +1,7 @@
 "use client"
 
+import { useLearnerAttempt } from "@/hooks/use-learner-attempt"
+import { LearnerSelector } from "@/components/learner-selector"
 import { useState, useEffect, useCallback } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
 import Link from "next/link"
@@ -598,6 +600,8 @@ const SECTION_CONFIG = [
 ]
 
 export default function G5ScDiff1MockTest() {
+  const learnerAttempt = useLearnerAttempt()
+
   const { isPremium, user } = useAuth()
   const [started, setStarted]                 = useState(false)
   const [showResults, setShowResults]         = useState(false)
@@ -634,17 +638,18 @@ export default function G5ScDiff1MockTest() {
 
     try {
       await saveStudentTestResult({
-        parentId: user.id,
-        studentName: user?.childName ?? "Student",
-        grade: "grade5",
-        subject: "Science",
-        testName: "Difficult 1",
-        difficulty: "Difficult",
-        score: calcScore(),
-        totalQuestions,
-        percentage: scorePct(),
-        completedAt: new Date().toISOString(),
-      })
+      parentId: user.id,
+      studentName: user?.childName ?? "Student",
+      grade: "grade5",
+      subject: "Science",
+      testName: "Difficult 1",
+      difficulty: "Difficult",
+      score: calcScore(),
+      totalQuestions: totalQuestions,
+      percentage: scorePct(),
+      studentId: learnerAttempt.studentId,
+      completedAt: learnerAttempt.completedAt(),
+    })
     } catch (error) {
       console.error("Failed to save test result:", error)
     }
@@ -685,6 +690,7 @@ export default function G5ScDiff1MockTest() {
   if (!started) return (
     <div className="min-h-screen bg-gradient-to-b from-purple-50 to-slate-50">
       <Header />
+      <LearnerSelector />
       <main className="container mx-auto px-4 py-10">
         <Link href="/mock-tests/science"><Button variant="ghost" className="mb-6"><ArrowLeft className="mr-2 h-4 w-4" />Back to Science Mock Tests</Button></Link>
         <Card className="mx-auto max-w-3xl border-purple-200 shadow-lg">
@@ -720,7 +726,7 @@ export default function G5ScDiff1MockTest() {
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-purple-700">{totalQuestions}</p><p className="text-sm text-slate-600">Questions {!isPremium && "(Preview)"}</p></div>
               <div className="rounded-lg bg-gray-50 p-4"><p className="text-2xl font-bold text-purple-700">60</p><p className="text-sm text-slate-600">Minutes</p></div>
             </div>
-            <Button onClick={() => setStarted(true)} className="w-full bg-purple-700 py-6 text-lg hover:bg-purple-800">Start Test</Button>
+            <Button onClick={() => learnerAttempt.capture() && setStarted(true)} className="w-full bg-purple-700 py-6 text-lg hover:bg-purple-800">Start Test</Button>
           </CardContent>
         </Card>
       </main>
@@ -733,6 +739,7 @@ export default function G5ScDiff1MockTest() {
     return (
       <div className="min-h-screen bg-gradient-to-b from-purple-50 to-slate-50">
         <Header />
+      <LearnerSelector />
         <main className="container mx-auto px-4 py-10">
           <Card className="mx-auto max-w-4xl border-purple-200 shadow-lg">
             <CardHeader className="bg-purple-50 text-center">
@@ -804,6 +811,7 @@ export default function G5ScDiff1MockTest() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-50 to-slate-50">
       <Header />
+      <LearnerSelector />
       <header className="bg-purple-800 text-white sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">

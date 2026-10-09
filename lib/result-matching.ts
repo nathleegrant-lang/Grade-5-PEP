@@ -22,36 +22,12 @@ export function resolveResultStudentMatch(
   const parentId = getString(result, ["parent_id"])
   const studentName = getString(result, ["student_name", "full_name", "name", "student", "learner_name"])
 
-  if (studentId && studentsById.has(studentId)) {
-    const student = studentsById.get(studentId) || {}
-    return {
-      matchedStudentId: studentId,
-      matchedParentId: parentId || getString(student, ["parent_id"]),
-      matchedStudentName: getString(student, ["full_name", "name", "student_name"], studentName),
-    }
+  if (!studentId || !parentId) return null
+  const student = studentsById.get(studentId)
+  if (!student || getString(student, ["parent_id"]) !== parentId || getString(result, ["grade"]) !== "grade5") return null
+  return {
+    matchedStudentId: studentId,
+    matchedParentId: parentId,
+    matchedStudentName: getString(student, ["full_name", "name", "student_name"]),
   }
-
-  if (parentId && studentName) {
-    const byParentAndName = studentsByNameAndParent.get(`${parentId}::${normalizeName(studentName)}`)
-    if (byParentAndName) {
-      return { matchedStudentId: byParentAndName, matchedParentId: parentId, matchedStudentName: studentName }
-    }
-  }
-
-  if (studentName) {
-    for (const [key, sid] of studentsByNameAndParent.entries()) {
-      const [, existingName] = key.split("::")
-      if (existingName === normalizeName(studentName)) {
-        const student = studentsById.get(sid) || {}
-        return {
-          matchedStudentId: sid,
-          matchedParentId: parentId || getString(student, ["parent_id"]),
-          matchedStudentName: studentName,
-        }
-      }
-    }
-  }
-
-  return null
 }
-

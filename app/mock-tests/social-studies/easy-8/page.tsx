@@ -1,5 +1,7 @@
 "use client"
 
+import { useLearnerAttempt } from "@/hooks/use-learner-attempt"
+import { LearnerSelector } from "@/components/learner-selector"
 import { useState, useEffect, useCallback } from "react"
 import { saveStudentTestResult } from "@/lib/student-test-results"
 import Link from "next/link"
@@ -599,6 +601,8 @@ const SECTION_CONFIG = [
 ]
 
 export default function G5SsEasy8MockTest() {
+  const learnerAttempt = useLearnerAttempt()
+
   const { isPremium, user } = useAuth()
   const [started, setStarted]                 = useState(false)
   const [showResults, setShowResults]         = useState(false)
@@ -632,7 +636,7 @@ export default function G5SsEasy8MockTest() {
     setCurrentQuestion(0)
     setTimeLeft(60 * 60)
     setShowResults(false)
-    setStarted(true)
+    learnerAttempt.capture() && setStarted(true)
   }
 
   const calcScore = () => answers.reduce((c, a, i) => i < totalQuestions && a === availableQuestions[i].correctAnswer ? c + 1 : c, 0)
@@ -645,17 +649,18 @@ export default function G5SsEasy8MockTest() {
 
     try {
       await saveStudentTestResult({
-        parentId: user.id,
-        studentName: user?.childName ?? "Student",
-        grade: "grade5",
-        subject: "Social Studies",
-        testName: "Easy 8",
-        difficulty: "Easy",
-        score: calcScore(),
-        totalQuestions,
-        percentage: scorePct(),
-        completedAt: new Date().toISOString(),
-      })
+      parentId: user.id,
+      studentName: user?.childName ?? "Student",
+      grade: "grade5",
+      subject: "Social Studies",
+      testName: "Easy 8",
+      difficulty: "Easy",
+      score: calcScore(),
+      totalQuestions: totalQuestions,
+      percentage: scorePct(),
+      studentId: learnerAttempt.studentId,
+      completedAt: learnerAttempt.completedAt(),
+    })
     } catch (error) {
       console.error("Failed to save test result:", error)
     }
@@ -696,6 +701,7 @@ export default function G5SsEasy8MockTest() {
   if (!started) return (
     <div className="min-h-screen bg-gradient-to-b from-green-50 to-slate-50">
       <Header />
+      <LearnerSelector />
       <main className="container mx-auto px-4 py-10">
         <Link href="/mock-tests/social-studies"><Button variant="ghost" className="mb-6"><ArrowLeft className="mr-2 h-4 w-4" />Back to Social Studies Mock Tests</Button></Link>
         <Card className="mx-auto max-w-3xl border-green-200 shadow-lg">
@@ -744,6 +750,7 @@ export default function G5SsEasy8MockTest() {
     return (
       <div className="min-h-screen bg-gradient-to-b from-green-50 to-slate-50">
         <Header />
+      <LearnerSelector />
         <main className="container mx-auto px-4 py-10">
           <Card className="mx-auto max-w-4xl border-green-200 shadow-lg">
             <CardHeader className="bg-green-50 text-center">
@@ -811,6 +818,7 @@ export default function G5SsEasy8MockTest() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-green-50 to-slate-50">
       <Header />
+      <LearnerSelector />
       <header className="bg-green-800 text-white sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">

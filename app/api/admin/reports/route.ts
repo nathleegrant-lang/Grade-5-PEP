@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { createClient } from "@supabase/supabase-js"
 import { getSupabaseAdminClient } from "@/lib/supabase/admin"
+import { issuedCertificateForResult } from "@/lib/learner-result-security"
 import { getId, getString, resolveResultStudentMatch } from "@/lib/result-matching"
 
 type GenericRow = Record<string, unknown>
@@ -185,7 +186,7 @@ export async function GET(request: NextRequest) {
       const matched = resolveResultStudentMatch(result, studentsById, studentsByNameAndParent)
 
       let resultStudentId =
-        matched?.matchedStudentId || getString(result, ["student_id"])
+        matched?.matchedStudentId || ""
 
       const createdAt = getString(result, [
         "completed_at",
@@ -194,15 +195,8 @@ export async function GET(request: NextRequest) {
         "taken_at",
       ])
 
-      if (resultParentId && parentMap.has(resultParentId)) {
+      if (matched && resultParentId && parentMap.has(resultParentId)) {
         parentMap.get(resultParentId)!.resultsCount += 1
-      }
-
-      if (!resultStudentId && resultParentId) {
-        const studentIdsForParent = studentIdsByParent.get(resultParentId) || []
-        if (studentIdsForParent.length === 1) {
-          resultStudentId = studentIdsForParent[0]
-        }
       }
 
       if (resultStudentId) {
@@ -218,40 +212,14 @@ export async function GET(request: NextRequest) {
       }
     }
 
+    const resultsById = new Map(resultRows.map(row => [getString(row, ["id"]), row]))
     for (const cert of certRows) {
-      const certStudentId = getString(cert, ["student_id"])
-      const certParentId = getString(cert, ["parent_id"])
-      const certStudentName = getString(cert, ["student_name", "name"]).toLowerCase()
-
-      if (certParentId && parentMap.has(certParentId)) {
-        parentMap.get(certParentId)!.certificatesCount += 1
-      }
-
-      let matchedStudentId = certStudentId
-
-      if (!matchedStudentId && certStudentName && certParentId) {
-        matchedStudentId =
-          studentsByNameAndParent.get(`${certParentId}::${certStudentName}`) || ""
-      }
-
-      if (!matchedStudentId && certStudentName) {
-        const candidates = studentIdsByName.get(certStudentName) || []
-        if (candidates.length === 1) matchedStudentId = candidates[0]
-      }
-
-      if (!matchedStudentId && certParentId) {
-        const studentIdsForParent = studentIdsByParent.get(certParentId) || []
-        if (studentIdsForParent.length === 1) {
-          matchedStudentId = studentIdsForParent[0]
-        }
-      }
-
-      if (matchedStudentId) {
-        studentCertCount.set(
-          matchedStudentId,
-          (studentCertCount.get(matchedStudentId) || 0) + 1,
-        )
-      }
+      const matched = resolveResultStudentMatch(cert, studentsById, studentsByNameAndParent)
+      const result = resultsById.get(getString(cert, ["test_result_id"]))
+      if (!matched || !result || !issuedCertificateForResult(cert, result)) continue
+      const parent = parentMap.get(matched.matchedParentId)
+      if (parent) parent.certificatesCount += 1
+      studentCertCount.set(matched.matchedStudentId, (studentCertCount.get(matched.matchedStudentId) || 0) + 1)
     }
 
     for (const parent of parentMap.values()) {

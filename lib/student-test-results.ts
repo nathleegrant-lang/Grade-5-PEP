@@ -1,8 +1,7 @@
 import { getSupabaseBrowserClient } from "@/lib/supabase/client"
-
 export interface SaveStudentTestResultInput {
   parentId: string
-  studentId?: string | null
+  studentId: string
   studentName?: string | null
   grade: "grade5"
   subject: string
@@ -13,102 +12,20 @@ export interface SaveStudentTestResultInput {
   percentage: number
   completedAt: string
 }
-
-const recoveryOperationKeys = new Map<string, string>()
-
-function studentRecoveryOperation(input: SaveStudentTestResultInput, studentName: string) {
-  const operation = [input.parentId, input.subject, input.testName, studentName].join(":")
-  const storageKey = `grade5_student_result_recovery_${operation}`
-  const stored = typeof window === "undefined" ? null : sessionStorage.getItem(storageKey)
-  const idempotencyKey = stored ?? recoveryOperationKeys.get(operation) ?? crypto.randomUUID()
-  recoveryOperationKeys.set(operation, idempotencyKey)
-  if (typeof window !== "undefined") sessionStorage.setItem(storageKey, idempotencyKey)
-  return {
-    idempotencyKey,
-    complete: () => {
-      recoveryOperationKeys.delete(operation)
-      if (typeof window !== "undefined") sessionStorage.removeItem(storageKey)
-    },
-  }
-}
-
-export async function saveStudentTestResult(input: SaveStudentTestResultInput) {
+async function submit(path: string, input: Record<string, unknown>) {
+  if (!input.studentId) throw new Error("Select a student before saving this result.")
   const supabase = getSupabaseBrowserClient()
-
-  let resolvedStudentId = input.studentId ?? null
-  const resolvedStudentName = (input.studentName || "Student").trim() || "Student"
-
-  if (!resolvedStudentId && resolvedStudentName && input.parentId) {
-    const { data: existingStudent } = await supabase
-      .from("students")
-      .select("id")
-      .eq("parent_id", input.parentId)
-      .ilike("full_name", resolvedStudentName)
-      .maybeSingle()
-
-    if (existingStudent?.id) {
-      resolvedStudentId = existingStudent.id
-    } else {
-      const recoveryOperation = studentRecoveryOperation(input, resolvedStudentName)
-      const { data: createdStudent, error: createStudentError } = await supabase
-        .rpc("add_grade5_student", {
-          p_full_name: resolvedStudentName,
-          p_idempotency_key: recoveryOperation.idempotencyKey,
-        })
-        .single<{ id: string }>()
-
-      if (createStudentError) {
-        throw createStudentError
-      }
-
-      recoveryOperation.complete()
-      resolvedStudentId = createdStudent?.id ?? null
-    }
-  }
-
-  const { data: testResult, error } = await supabase
-    .from("student_test_results")
-    .insert({
-      parent_id: input.parentId,
-      student_id: resolvedStudentId,
-      grade: input.grade,
-      subject: input.subject,
-      test_name: input.testName,
-      difficulty: input.difficulty,
-      score: input.score,
-      total_questions: input.totalQuestions,
-      percentage: input.percentage,
-      completed_at: input.completedAt,
-    })
-    .select("id")
-    .single()
-
-  if (error) {
-    throw error
-  }
-
-  const qualifiesForCertificate =
-    input.percentage >= 80 && input.totalQuestions >= 40
-
-  if (qualifiesForCertificate) {
-    const { error: certificateError } = await supabase
-      .from("certificates")
-      .insert({
-        parent_id: input.parentId,
-        student_id: resolvedStudentId,
-        test_result_id: testResult.id,
-        grade: input.grade,
-        student_name: resolvedStudentName,
-        subject: input.subject,
-        test_name: input.testName,
-        score: input.score,
-        total_questions: input.totalQuestions,
-        percentage: input.percentage,
-        issued_at: input.completedAt,
-      })
-
-    if (certificateError) {
-      throw certificateError
-    }
-  }
+  const { data: { session }, error } = await supabase.auth.getSession()
+  if (error || !session?.access_token) throw new Error("Sign in to save this result.")
+  const response = await fetch(path, {
+    method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${session.access_token}` },
+    body: JSON.stringify(input),
+  })
+  const data = await response.json()
+  if (!response.ok) throw new Error(data.error || "Unable to save this result.")
+  if (data.student_id !== input.studentId) throw new Error("Result student mismatch.")
+  return data.result
 }
+export const saveStudentTestResult = (input: SaveStudentTestResultInput) => submit("/api/assessment/results", { ...input })
+export const savePerformanceTaskResult = (input: Record<string, unknown> & { studentId: string; parentId: string }) =>
+  submit("/api/performance/save-result", { ...input, percentage: input.percentage ?? input.score })
